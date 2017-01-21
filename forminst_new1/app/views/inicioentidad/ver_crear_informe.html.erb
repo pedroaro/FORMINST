@@ -1,0 +1,439 @@
+<div class = 'row'>
+  <div class="col-xs-12 col-md-12">
+      <ul class="nav nav-tabs">
+       <li><a href="../inicioentidad/index">Inicio</a></li>
+        <li><%= link_to 'Listar Adecuaciones', :controller => 'inicioentidad', :action => 'listar_adecuaciones' %></li>
+        <li><%= link_to 'Listar Informes', :controller => 'inicioentidad', :action => 'listar_informes' %></li>
+        <li><%= link_to 'Prórroga', :controller => 'inicioentidad', :action => 'prorroga' %></li>
+        <li><a href="../inicioentidad/logout">Cerrar Sesión</a></li>
+      </ul>
+  
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-xs-12 col-md-12 col-md-offset-0">
+    <div class="text-right">
+      <div id = "fechamuestra">
+        <script languaje="JavaScript">
+          fecha();
+        </script> 
+      </div>
+      <%if @nombre%>
+        <div>
+          <h4><b><%=@nombre%></b></h4>
+        </div>
+      <%end%>
+    </div>
+  </div>
+</div>
+
+<div class = 'row'>
+  <div class="col-xs-11 col-xs-offset-1 col-md-12 col-md-offset-0 text-justify">
+    <h1 class="text-left">Crear Informe <%=@nombre_informe%></h1>
+    <h1 class="text-left"> </h1>
+  </div>
+</div>
+<br>
+
+<div class= "row">
+  <div class="col-xs-12 col-md-12 col-lg-12">
+    <%= form_tag({controller: 'informes', action: 'crear_informe'}) do%>
+        <input id="cant_docencia" type="hidden" name="cant_docencia" value="<%=@actividadesadoc.size()%>"/> 
+        <input id="cant_investigacion" type="hidden" name="cant_investigacion" value="<%=@actividadesainv.size()%>"/>
+        <input id="cant_formacion" type="hidden" name="cant_formacion" value="<%=@actividadesafor.size()%>"/> 
+        <input id="cant_extension" type="hidden" name="cant_extension" value="<%=@actividadesaext.size()%>"/> 
+        <input id="cant_otra" type="hidden" name="cant_otra" value="<%=@actividadesaotr.size()%>"/> 
+        <input id="tipoinf" type="hidden" name="tipoinf" value="<%=@tipo_informe%>"/> 
+        <input id="tipoinf" type="hidden" name="numero_informe" value="<%=@numero_informe%>"/> 
+
+        <table class="table table-bordered ">
+          <tbody>
+            <tr></tr>
+            <tr>
+              <td class="text-left" colspan="3"><h5><strong> Actividades a realizar por el instructor:</strong></h5></td>
+            </tr>
+            <tr class='title-table'>
+
+              <td class="text-center"  style='width:30%;'><strong>Actividad Docente Programada</strong></td>
+              <td class="text-center"  style='width:30%;'><strong>Actividad Docente Ejecutada</strong></td>
+              <td class="text-center"  style='width:30%;'><strong>Observaciones</strong></td>
+            </tr>
+              <% @actividadesadoc.each_with_index do |actdoc, i| %>
+                <tr>
+                  <td>
+                    <textarea class="form-control" rows="3" name='<%= @docencia.to_s + actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
+                  </td>
+                  <td>
+                    <textarea class="form-control" rows="3" name='ejecutada<%= actdoc.id.to_s%>' ><%= actdoc.actividad %></textarea>
+                  </td>
+                  <td>
+                    <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' ></textarea>
+                  </td>
+                  <input type="hidden" name="doc<%=i.to_s%>" value='<%= actdoc.id %>'>
+                  
+                </tr>
+              <% end %>
+
+            <tr><td colspan="3"></td></tr>
+  
+            <tr class='title-table'>
+              <td class="text-center"><strong>Actividad de Investigación Programada</strong></td>
+              <td class="text-center"><strong>Actividad de Investigación Ejecutada</strong></td>
+              <td class="text-center"><strong>Observaciones</strong></td>
+            </tr>
+
+            <% @actividadesainv.each_with_index do |actdoc,i| %>
+              <tr>
+                <td>
+                    <textarea class="form-control" rows="3" name='<%= @docencia.to_s + actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
+                  </td>
+                  <td>
+                    <textarea class="form-control" rows="3" name='ejecutada<%= actdoc.id.to_s%>' ><%= actdoc.actividad %></textarea>
+                  </td>
+                  <td>
+                    <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' ></textarea>
+                  </td>
+                  <input type="hidden" name="inv<%=i.to_s%>" value='<%= actdoc.id %>'>
+              </tr>
+              <tr>
+                <td colspan="3"><a class="btn btn-default resultado" rel="<%=i.to_s%>" ><span class="glyphicon glyphicon-plus"></span> Agregar Resultado</a></td>
+              </tr>
+
+              <tr >
+                <td colspan="3"   id="res<%=i.to_s%>" style="display: none;" >
+                  <div class="form-group">
+                    <label for="sel<%=i.to_s%>">Seleccione El tipo de resultado:</label>
+                    <select name="tipo<%=i.to_s%>" onchange="mostrarInputs(this.value,<%=i.to_s%>)" class="form-control" id="sel<%=i.to_s%>" style="width:65%;">
+                      <option>Seleccione un tipo</option>
+                      <option value="1"> Trabajos publicados (Libros, revistas, artículos de prensa, CDs,
+  manuales, publicaciones electrónicas, etc.)</option>
+                      <option value="2">Presentación de ponencias, conferencias y carteles en eventos
+  científicos</option>
+                      <option value="3"> Presentación de informes técnicos</option>
+                      <option value="4">Otros</option>
+                      <option value="5">Asistencia a eventos científicos (Congresos, Seminarios, Coloquios, Jornadas, etc.)</option>
+                      <option value="6">Organización de eventos científicos (Congresos, Seminarios, Coloquios, Jornadas,
+  etc.)</option>
+                      <option value="7"> Dictado de cursos, talleres o seminarios científicos</option>
+                    </select>
+                  </div>
+                
+                <!-- TODAS LAS VARIABLES-->
+
+                <div id="tipos<%=i.to_s%>" class="form-group" style="display: none;" >
+                  <label for="resultado_tipos">Tipo de Trabajo Publicado que desea registrar:</label><br>
+                  <%= select_tag(:tipos, options_for_select(@tipos), { :include_blank => "Seleccione un tipo", :onchange => "mostrarInputsTipos(this.value,"+i.to_s+")", :class => "form-control", :name=> "tipo_publicacion"+i.to_s+""  , :id => "resultado_tipos"+i.to_s+"", :style => "width:20%;" }) %>
+                  
+                </div>
+
+              <div class="row">
+                <div class="col-xs-12 col-md-4 col-lg-4">
+                <div id="titulo<%=i.to_s%>" class="form-group"  style="display: none;" >
+                  <label for="resultado_titulo">Título:</label><br>
+                  <input id="resultado_titulo<%=i.to_s%>" class="form-control" name="titulo<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                  
+                </div>
+                
+                <div id="autor<%=i.to_s%>" class="form-group"  style="display: none;" >
+                  <label for="resultado_autor">Nombre del autor docente encargado:</label><br>
+                  <input id="resultado_autor<%=i.to_s%>" class="form-control" name="autor<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+                  
+                </div>
+                
+                <div id="titulocap<%=i.to_s%>" class="form-group"  style="display: none;" >
+                  <label for="resultado_titulocap">Título del capítulo:</label><br>
+                  <input id="resultado_titulocap<%=i.to_s%>" class="form-control" name="nombre_capitulo<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+                  
+                </div>
+                
+                <div id="autorcap<%=i.to_s%>" class="form-group"  style="display: none;" >
+                  <label for="resultado_autorcap">Nombre del autor del capítulo:</label><br>
+                  <input id="resultado_autorcap<%=i.to_s%>" class="form-control" name="autor_capitulo<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+                  
+                </div>
+                </div>
+                <div class="col-xs-12 col-md-4 col-lg-4">
+
+                <div id="dia<%=i.to_s%>" class="form-group"  style="display: none;" >
+                  <label for="resultado_dia">Día en que se realizó la publicación:</label><br>
+                  <%= select_tag(:dia, options_for_select(@dia), {:include_blank => 'Seleccione un dia', :class => "form-control", :name=> "dia"+i.to_s+"" , :id => "resultado_dia"+i.to_s+"", :style => "width:20%;"}) %>
+                  
+                </div>
+
+
+                <div id="mes<%=i.to_s%>" class="form-group"  style="display: none;">
+                  <label for="resultado_mes">Mes en el que se realizó la publicación:</label><br>
+                  <%= select_tag(:mes, options_for_select(@mes), {:include_blank => 'Seleccione un mes', :class => "form-control", :name=> "mes"+i.to_s+"" , :id => "resultado_mes"+i.to_s+"", :style => "width:30%;"}) %>
+                  
+                </div>
+
+                <div id="ano<%=i.to_s%>" class="form-group"  style="display: none;">
+                  <label for="resultado_ano">Año en que se realizo la publicación, acto o evento:</label><br>
+                  <input id="resultado_ano<%=i.to_s%>" class="form-control" name="ano<%=i.to_s%>" size="4" type="text" style="width:30%;">
+                  
+                </div>
+              
+              
+                
+                <div id="ciudad<%=i.to_s%>" class="form-group"  style="display: none;">
+                  <label for="resultado_ciudad">Ciudad en la que se realizó la publicación, acto o evento:</label><br>
+                  <input id="resultado_ciudad<%=i.to_s%>" class="form-control" name="ciudad<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                  
+                </div>
+
+                <div id="estado<%=i.to_s%>" class="form-group"  style="display: none;">
+                  <label for="resultado_estado">Estado en el que se realizó la publicación, acto o evento:</label><br>
+                  <input id="resultado_estado<%=i.to_s%>" class="form-control" name="estado<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                  
+                </div>
+
+                <div id="pais<%=i.to_s%>" class="form-group"  style="display: none;">
+                  <label for="resultado_pais">País en el que se realizó la publicación, acto o evento:</label><br>
+                  <input id="resultado_pais<%=i.to_s%>" class="form-control" name="pais<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                  
+                </div>
+                </div>
+
+                <div class="col-xs-12 col-md-4 col-lg-4">
+                <div id="org<%=i.to_s%>" class="form-group"  style="display: none;">
+                  <label for="resultado_org">Entidad organizadora:</label><br>
+                  <input id="resultado_org<%=i.to_s%>" class="form-control" name="organizador<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                  
+                </div>
+                
+
+                <div id="duracion<%=i.to_s%>" class="form-group"  style="display: none;">
+                  <label for="resultado_duracion">Duración:</label><br>
+                  <input id="resultado_duracion<%=i.to_s%>" class="form-control" name="duracion<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                  
+                </div>
+                
+                <div id="editor<%=i.to_s%>" class="form-group"  style="display: none;">
+                  <label for="resultado_editor">Editor:</label><br>
+                  <input id="resultado_editor<%=i.to_s%>" class="form-control" name="editor<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                  
+                </div>
+                 
+                <div id="tl<%=i.to_s%>" class="form-group"  style="display: none;">
+                  <label for="resultado_tl">Título del libro al que hace referencia:</label><br>
+                  <input id="resultado_tl<%=i.to_s%>" class="form-control" name="titulo_libro<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                  
+                </div>
+                
+                  <div id="al<%=i.to_s%>" class="form-group"  style="display: none;">
+                  <label for="resultado_al">Autor del libro al que hace referencia:</label><br>
+                  <input id="resultado_al<%=i.to_s%>" class="form-control" name="autor_libro<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                  
+                </div>
+
+                <div id="nr<%=i.to_s%>" class="form-group"  style="display: none;">
+                  <label for="resultado_nombre_revista">Nombre de la revista en donde se encuentra el artículo:</label><br>
+                  <input id="resultado_nr<%=i.to_s%>" class="form-control" name="nombre_revista<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                  
+                </div>
+
+                <div id="np<%=i.to_s%>" class="form-group"  style="display: none;">
+                  <label for="resultado_nombre_periodico">Nombre del periódico:</label><br>
+                  <input id="resultado_np<%=i.to_s%>" class="form-control" name="nombre_periodico<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                  
+                </div>
+                
+                <div id="paginas<%=i.to_s%>" class="form-group"  style="display: none;">
+                  <label for="resultado_paginas">Número de páginas:</label><br>
+                  <input id="resultado_paginas<%=i.to_s%>" class="form-control" name="paginas<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                  
+                </div>
+
+                <div id="na<%=i.to_s%>" class="form-group"  style="display: none;">
+                  <label for="resultado_na">Nombre del acto o evento:</label><br>
+                  <input id="resultado_na<%=i.to_s%>" class="form-control" name="nombre_acto<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                  
+                </div>
+                
+                <div id="nombre_pw<%=i.to_s%>" class="form-group"  style="display: none;">
+                  <label for="resultado_nombre_paginaw">Nombre de la página web:</label><br>
+                  <input id="resultado_nombre_pw<%=i.to_s%>" class="form-control" name="nombre_paginaw<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                  
+                </div>
+                
+                  <div id="sitio_pw<%=i.to_s%>" class="form-group"  style="display: none;">
+                  <label for="resultado_sitio_paginaw">Sitio de la página web:</label><br>
+                  <input id="resultado_sitio_pw<%=i.to_s%>" class="form-control" name="sitio_paginaw<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                  
+                </div>
+                
+                <div id="url<%=i.to_s%>" class="form-group"  style="display: none;">
+                  <label for="resultado_url">Url:</label><br>
+                  <input id="resultado_url<%=i.to_s%>" class="form-control" name="url<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                  
+                </div>
+                </div>
+
+
+
+              </div>
+
+                <a class="btn btn-default eliminar_resultado" rel="<%=i.to_s%>"><span class="glyphicon glyphicon-trash" ></span> Eliminar Resultado</a>
+
+                  <br>
+                </td>
+              </tr>
+            <% end %>
+
+            
+            
+            <tr><td colspan="3"></td></tr>
+
+            <tr class='title-table'>
+              <td class="text-center"><strong>Actividad de Formación Programada</strong></td>
+              <td class="text-center"><strong>Actividad de Formación Ejecutada</strong></td>
+              <td class="text-center"><strong>Observaciones</strong></td>
+            </tr>
+            <% @actividadesafor.each_with_index do |actdoc,i| %>
+              <tr>
+                <td>
+                    <textarea class="form-control" rows="3" name='<%= @docencia.to_s + actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
+                  </td>
+                  <td>
+                    <textarea class="form-control" rows="3" name='ejecutada<%= actdoc.id.to_s%>' ><%= actdoc.actividad %></textarea>
+                  </td>
+                  <td>
+                    <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' ></textarea>
+                  </td>
+                  <input type="hidden" name="for<%=i.to_s%>" value='<%= actdoc.id %>'>
+              </tr>
+            <% end %>
+            <tr>
+              <td colspan="3"><b>Grado de avance en los estudios de postgrado:</b> 
+              <textarea name="postgrado" class="form-control" rows="2" ></textarea>
+              </td>
+            </tr>
+
+            <tr><td colspan="3"></td></tr>
+
+            <tr  class='title-table'>
+              <td class="text-center"><strong>Actividad de Extensión Programada</strong></td>
+              <td class="text-center"><strong>Actividad de Extensión Ejecutada</strong></td>
+              <td class="text-center"><strong>Observaciones</strong></td>
+            </tr>
+            <% @actividadesaext.each_with_index do |actdoc,i| %>
+              <tr>
+                <td>
+                    <textarea class="form-control" rows="3" name='<%= @docencia.to_s + actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
+                  </td>
+                  <td>
+                    <textarea class="form-control" rows="3" name='ejecutada<%= actdoc.id.to_s%>' ><%= actdoc.actividad %></textarea>
+                  </td>
+                  <td>
+                    <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' ></textarea>
+                  </td>
+                  <input type="hidden" name="ext<%=i.to_s%>" value='<%= actdoc.id %>'>
+              </tr>
+            <% end %>
+
+            <tr><td colspan="3"></td></tr>
+
+            <tr  class='title-table'>
+              <td class="text-center" colspan="3"><strong>Otras Actividades</strong></td>
+            </tr>
+            <tr>
+              <td colspan="3"><b>Contempladas en el plan de formación y capacitación:</b></td>
+            </tr>
+            <% @actividadesaotr.each_with_index do |actdoc,i| %>
+              <tr>
+                <td colspan="3">
+                  <textarea class="form-control" rows="3"  name='<%= @otra.to_s + actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
+                </td>
+                <input type="hidden" name="otr<%=i.to_s%>" value='<%= actdoc.id %>'>
+              </tr>
+            <% end %>
+            <tr>
+              <td colspan="3"><b>No contempladas en el plan de formación y capacitación:</b></td>
+            </tr>
+            <tr>
+              <td colspan="3">
+                  <textarea name="no_contemplada"class="form-control" rows="3" ></textarea>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="3"><b>Conclusiones:</b></td>
+            </tr>
+            <tr>
+              <td colspan="3">
+                  <textarea name="conclusiones" class="form-control" rows="3" ></textarea>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="3"><b>Opinión tutor:</b></td>
+            </tr>
+            <tr>
+              <td colspan="3">
+                  <textarea name="opinion" class="form-control" rows="3" ></textarea>
+              </td>
+            </tr>
+        
+
+          </tbody>
+        </table>
+      <div class = 'row'>
+          <center><button type="submit" class="btn btn-forminst btn-lg">Guardar</button></center>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+
+<!--<script type="text/javascript">
+  function eliminar (elemento){
+    $(elemento).parent().html('<a class="btn btn-default resultado"><span class="glyphicon glyphicon-plus"></span> Agregar Resultado</a>');
+  }
+
+</script> -->
+
+<script type="text/javascript">
+
+    $(document).ready(function() {
+
+      $(document).on('click', '.resultado', function(){
+        var params = $(this).attr("rel");
+        $("#res"+params).show()
+        $(this).parent().addClass("resultado"+params)
+        $(this).parent().css({display: "none"})
+
+        });
+
+      $(document).on('click', '.eliminar_resultado', function(){ 
+        var params = $(this).attr("rel");
+        $("#res"+params).css({display: "none"});
+        $(".resultado"+params).show();
+        $("#sel"+params).val("");
+        $("#resultado_tipos"+params).val("");
+        $("#resultado_titulo"+params).val("");
+        $("#resultado_autor"+params).val("");
+        $("#resultado_titulocap"+params).val("");
+        $("#resultado_autorcap"+params).val("");
+        $("#resultado_dia"+params).val("");
+        $("#resultado_mes"+params).val("");
+        $("#resultado_ano"+params).val("");
+        $("#resultado_ciudad"+params).val("");
+        $("#resultado_estado"+params).val("");
+        $("#resultado_pais"+params).val("");
+        $("#resultado_org"+params).val("");
+        $("#resultado_duracion"+params).val("");
+        $("#resultado_editor"+params).val("");
+        $("#resultado_tl"+params).val("");
+        $("#resultado_al").val("");
+        $("#resultado_nr"+params).val("");
+        $("#resultado_np"+params).val("");
+        $("#resultado_paginas"+params).val("");
+        $("#resultado_na"+params).val("");
+        $("#resultado_nombre_pw"+params).val("");
+        $("#resultado_sitio_pw"+params).val("").css({display: "none"});
+        $("#resultado_url"+params).val("").css({display: "none"});
+      }); 
+
+    });
+</script>

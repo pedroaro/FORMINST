@@ -1,0 +1,25 @@
+<%= form_for(@prorroga) do |f| %>
+  <% if @prorroga.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@prorroga.errors.count, "error") %> prohibited this prorroga from being saved:</h2>
+
+      <ul>
+      <% @prorroga.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :id %><br>
+    <%= f.number_field :id %>
+  </div>
+  <div class="field">
+    <%= f.label :planFormacionId %><br>
+    <%= f.number_field :planFormacionId %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Usuarioentidads</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Usuarioid</th>
+      <th>Entidadesid</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @usuarioentidads.each do |usuarioentidad| %>
+      <tr>
+        <td><%= usuarioentidad.id %></td>
+        <td><%= usuarioentidad.usuarioId %></td>
+        <td><%= usuarioentidad.entidadesId %></td>
+        <td><%= link_to 'Show', usuarioentidad %></td>
+        <td><%= link_to 'Edit', edit_usuarioentidad_path(usuarioentidad) %></td>
+        <td><%= link_to 'Destroy', usuarioentidad, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Usuarioentidad', new_usuarioentidad_path %>

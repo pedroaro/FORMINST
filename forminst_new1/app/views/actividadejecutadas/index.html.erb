@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Actividadejecutadas</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Descripcion</th>
+      <th>Fecha</th>
+      <th>Actual</th>
+      <th>Informeactividadid</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @actividadejecutadas.each do |actividadejecutada| %>
+      <tr>
+        <td><%= actividadejecutada.id %></td>
+        <td><%= actividadejecutada.descripcion %></td>
+        <td><%= actividadejecutada.fecha %></td>
+        <td><%= actividadejecutada.actual %></td>
+        <td><%= actividadejecutada.informeActividadId %></td>
+        <td><%= link_to 'Show', actividadejecutada %></td>
+        <td><%= link_to 'Edit', edit_actividadejecutada_path(actividadejecutada) %></td>
+        <td><%= link_to 'Destroy', actividadejecutada, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Actividadejecutada', new_actividadejecutada_path %>

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Id:</strong>
+  <%= @adecuacionactividad.id %>
+</p>
+
+<p>
+  <strong>Adecuacionid:</strong>
+  <%= @adecuacionactividad.adecuacionId %>
+</p>
+
+<p>
+  <strong>Actividadid:</strong>
+  <%= @adecuacionactividad.actividadId %>
+</p>
+
+<p>
+  <strong>Anulada:</strong>
+  <%= @adecuacionactividad.anulada %>
+</p>
+
+<p>
+  <strong>Semestre:</strong>
+  <%= @adecuacionactividad.semestre %>
+</p>
+
+<%= link_to 'Edit', edit_adecuacionactividad_path(@adecuacionactividad) %> |
+<%= link_to 'Back', adecuacionactividads_path %>

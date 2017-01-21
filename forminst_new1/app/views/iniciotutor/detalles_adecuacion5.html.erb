@@ -1,0 +1,492 @@
+
+
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Mensaje de confirmación</h4>
+      </div>
+      <div class="modal-body">
+        <h5>Está seguro que desea enviar la aecuación?.</h5>
+      </div>
+      <div class="modal-footer">
+        <%= link_to "Aceptar", {controller: "iniciotutor", action: "cambiar_estatusA", :adecuacion_id => @adecuacion.id }, class: "btn btn-default" %>
+      
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="myModal2" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Mensaje de notificación</h4>
+      </div>
+      <div class="modal-body">
+        <h5>La adecuación ya fue enviada.</h5>
+      </div>
+      <div class="modal-footer">
+    
+        <button type="button" class="btn btn-default" data-dismiss="modal">Aceptar</button>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+
+<div class="modal fade" id="myModal3" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Mensaje de notificación</h4>
+      </div>
+      <div class="modal-body">
+        <h5>No puede realizar ningún cambio debido a que la adecuación ya fue enviada.</h5>
+      </div>
+      <div class="modal-footer">
+    
+        <button type="button" class="btn btn-default" data-dismiss="modal">Aceptar</button>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+
+<div class = 'row'>
+  <div class="col-xs-12 col-md-12">
+      <ul class="nav nav-tabs">
+        <li><a href="../iniciotutor/index">Inicio</a></li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Adecuación del Plan <span class="caret"></span></a>
+            <ul class="dropdown-menu nav" role="menu">
+              <li></li>
+              <li><%= link_to 'Crear Adecuación', :controller => 'iniciotutor', :action => 'crear_adecuacion', :plan_id => @planformacion, :instructorName => @instructorName %></li>
+              <li ></li>
+              <li><%= link_to 'Listar Adecuaciones', :controller => 'iniciotutor', :action => 'listar_adecuaciones' %></li>
+            </ul>
+        </li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Informes <span class="caret"></span></a>
+            <ul class="dropdown-menu nav" role="menu">
+              <li></li>
+              <li><%= link_to 'Crear Informe', :controller => 'informes', :action => 'ver_crear_informe'%></li>
+              <li><%= link_to 'Listar Informes', :controller => 'informes', :action => 'listar_informes' %></li>
+            </ul>
+        </li>
+        <li><%= link_to 'Prórroga', :controller => 'iniciotutor', :action => 'prorroga' %></li>
+        <li><a href="../iniciotutor/logout">Cerrar Sesión</a></li>
+      </ul>
+  
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12 col-md-12">
+    <div class="btn-group" role="group">
+      <button type="button" class="btn btn-default" onclick = " location.href = 'javascript:history.back(-1);'">Volver</button>
+         <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-default">Enviar</button>
+      <%= link_to "Vista Previa", {controller: "iniciotutor", action: "vista_previa"}, class: "btn btn-default" %>
+      <%= link_to "Generar PDF", {controller: "adecuacions", action: "descargar_pdf"}, class: "btn btn-default" %>
+      <button type="button" class="btn btn-default">Agregar Soporte</button>
+      <button type="button" class="btn btn-default">Ver Soporte</button>
+      <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">
+        Eliminar Adecuación
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12 col-md-12 col-md-offset-0">
+    <div class="text-right">
+      <div id = "fechamuestra">
+        <script languaje="JavaScript">
+          fecha();
+        </script> 
+      </div>
+      <%if @nombre%>
+        <div>
+          <h4><b><%=@nombre%></b></h4>
+        </div>
+      <%end%>
+    </div>
+  </div>
+</div>
+
+<div class = 'row'>
+  <div class="col-xs-11 col-xs-offset-1 col-md-12 col-md-offset-0 text-justify">
+    <h1 class="text-left">Detalles de la Adecuación</h1>
+  </div>
+</div>
+<br>
+<div class = 'row'>
+  <div class = 'col-xs-12 col-md-12 col-lg-12'>
+      <ul class="tabs">
+        <li><%= link_to '1° Semestre', :controller => 'iniciotutor', :action => 'detalles_adecuacion3' %></li>
+        <li><%= link_to '2° Semestre', :controller => 'iniciotutor', :action => 'detalles_adecuacion4' %></li>
+        <li class="activa"><a href="#">3° Semestre</a></li>
+        <li><%= link_to '4° Semestre', :controller => 'iniciotutor', :action => 'detalles_adecuacion6' %></li>
+      </ul>
+  </div>
+</div>
+<div class= "row">
+  <div class="col-xs-12 col-md-12 col-lg-12">
+    <%= form_tag({controller: 'iniciotutor', action: 'ver_detalles_adecuacion'}) do%>
+        <input id="cant_delete" type="hidden" name="cant_delete" value="0"/>
+        <input id="cant_edit" type="hidden" name="cant_edit" value="0"/> 
+        <input id="cant_docencia" type="hidden" name="cant_docencia" value="0"/> 
+        <input id="cant_investigacion" type="hidden" name="cant_investigacion" value="0"/> 
+        <input id="cant_formacion" type="hidden" name="cant_formacion" value="0"/> 
+        <input id="cant_extension" type="hidden" name="cant_extension" value="0"/> 
+        <input id="cant_otra" type="hidden" name="cant_otra" value="0"/> 
+        <input id="semestre" type="hidden" name="semestre" value="3"/> 
+        <table class="table table-bordered table-striped">
+          <tbody>
+            <tr></tr>
+            <tr>
+              <td class="text-left" colspan="2"><h5><strong>4. Actividades a realizar por el instructor</strong></h5></td>
+              
+            </tr>
+            <tr>
+
+              <td class="text-center" colspan="2"><strong>Actividades de Docencia</strong></td>
+              <td class="text-center"  style='width:10%;'><strong>Ver observaciones</strong></td>
+              
+            </tr>
+              <% @actividadesadoc.each_with_index do |actdoc, i| %>
+                <tr>
+                  <td style='width:80%;'>
+                    <textarea class="form-control" rows="2"  name='<%= @docencia+actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
+                    <input type="hidden" name="<%= @iddoc+i.to_s%> " value='<%= actdoc.id %>'>
+                  </td>
+                  <td>
+                    <center>
+
+
+                      <a id = 'button<%= actdoc.id %>' rel='<%= actdoc.id %> <%= actdoc.actividad %>' class="edit_act btn btn-default btn-lg" aria-label="Editar">
+                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                      </a>
+
+
+                      <a id = 'delete<%= actdoc.id %>' rel='<%= actdoc.id %>' class="delete_act btn btn-default btn-lg" aria-label="Eliminar"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                    </center>
+                  </td>
+                  <td >
+                  <%= link_to "Ver obs. ", {:controller => "iniciotutor", :action => "mas_observaciones3", :actividad_id => actdoc.id, :semestre => 3, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-default" %>
+                  </td>
+                </tr>
+              <% end %>
+          <tr id="lastactdoc">
+            <td  colspan="3"><a class="agregar_docencia add btn btn-default"><span class="glyphicon glyphicon-plus"></span> Agregar otra actividad de docencia</a>
+            </td>
+          </tr>
+            <tr>
+
+              <td class="text-center"  colspan="2"><strong>Actividades de Investigación</strong></td>
+              <td class="text-center"  style='width:10%;'><strong>Ver observaciones</strong></td>
+              
+            </tr>
+            <% @actividadesainv.each_with_index do |actdoc,i| %>
+              <tr>
+                <td>
+                  <textarea class="form-control" rows="2"  name='<%= @investigacion+actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
+                </td>
+                <td>
+                  <center>
+                    <a id = 'button<%= actdoc.id %>' rel='<%= actdoc.id %> <%= actdoc.actividad %>' class="edit_act btn btn-default btn-lg" aria-label="Editar">
+                      <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                    </a>
+                     <a id = 'delete<%= actdoc.id %>' rel='<%= actdoc.id %>' class="delete_act btn btn-default btn-lg" aria-label="Eliminar"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                  </center>
+                </td>
+                <td >
+                  <%= link_to "Ver obs. ", {:controller => "iniciotutor", :action => "mas_observaciones3", :actividad_id => actdoc.id, :semestre => 3, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-default" %>
+                </td>
+
+              </tr>
+            <% end %>
+            <tr id="lastactinv">
+              <td  colspan="3"><a class="agregar_investigacion add btn btn-default"><span class="glyphicon glyphicon-plus"></span> Agregar otra actividad de investigación</a>
+              </td>
+            </tr>
+            
+            <tr>
+              <td class="text-center"  colspan="2"><strong>Actividades de Formación</strong></td>
+              <td class="text-center"  style='width:10%;'><strong>Ver observaciones</strong></td>
+              
+            </tr>
+            <% @actividadesafor.each_with_index do |actdoc,i| %>
+              <tr>
+                <td>
+                  <textarea class="form-control" rows="2"  name='<%= @formacion+actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
+                </td>
+                <td>
+                  <center>
+                    <a id = 'button<%= actdoc.id %>' rel='<%= actdoc.id %> <%= actdoc.actividad %>' class="edit_act btn btn-default btn-lg" aria-label="Editar">
+                      <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                    </a>
+                     <a id = 'delete<%= actdoc.id %>' rel='<%= actdoc.id %>' class="delete_act btn btn-default btn-lg" aria-label="Eliminar"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                  </center>
+                </td>
+                <td >
+                  <%= link_to "Ver obs. ", {:controller => "iniciotutor", :action => "mas_observaciones3", :actividad_id => actdoc.id, :semestre => 3, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-default" %>
+                </td>
+              </tr>
+            <% end %>
+
+            <tr id="lastactfor">
+              <td  colspan="3"><a class="agregar_formacion add btn btn-default"><span class="glyphicon glyphicon-plus"></span> Agregar otra actividad de formación</a>
+
+              </td>
+
+              
+            </tr>
+
+            <tr>
+              <td class="text-center" colspan="2"><strong>Actividades de Extensión</strong></td>
+              <td class="text-center"  style='width:10%;'><strong>Ver observaciones</strong></td>
+              
+            </tr>
+            <% @actividadesaext.each_with_index do |actdoc,i| %>
+              <tr>
+                <td>
+                  <textarea class="form-control" rows="2"  name='<%= @extension+actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
+                </td>
+                <td>
+                  <center>
+                    <a id = 'button<%= actdoc.id %>' rel='<%= actdoc.id %> <%= actdoc.actividad %>' class="edit_act btn btn-default btn-lg" aria-label="Editar">
+                      <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                    </a>
+                     <a id = 'delete<%= actdoc.id %>' rel='<%= actdoc.id %>' class="delete_act btn btn-default btn-lg" aria-label="Eliminar"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                  </center>
+                </td>
+                <td >
+                  <%= link_to "Ver obs. ", {:controller => "iniciotutor", :action => "mas_observaciones3", :actividad_id => actdoc.id, :semestre => 3, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-default" %>
+                </td>
+              </tr>
+            <% end %>
+
+            <tr id="lastactext">
+              <td colspan="3"><a class="agregar_extension add btn btn-default"><span class="glyphicon glyphicon-plus"></span> Agregar otra actividad de extensión</a>
+              </td>
+            </tr>
+
+            <tr>
+              <td colspan="2" class="text-center"><strong>Otras Actividades</strong></td>
+              <td class="text-center"  style='width:10%;'><strong>Ver observaciones</strong></td>
+            
+            </tr>
+            <% @actividadesaotr.each_with_index do |actdoc,i| %>
+              <tr>
+                <td>
+                  <textarea class="form-control" rows="2"  name='<%= @otra+actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
+                </td>
+                <td>
+                  <center>
+                    <a id = 'button<%= actdoc.id %>' rel='<%= actdoc.id %> <%= actdoc.actividad %>' class="edit_act btn btn-default btn-lg" aria-label="Editar">
+                      <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                    </a>
+                     <a id = 'delete<%= actdoc.id %>' rel='<%= actdoc.id %>' class="delete_act btn btn-default btn-lg" aria-label="Eliminar"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                  </center>
+                </td>
+                <td >
+                  <%= link_to "Ver obs. ", {:controller => "iniciotutor", :action => "mas_observaciones3", :actividad_id => actdoc.id, :semestre => 3, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-default" %>
+                </td>
+              </tr>
+            <% end %>
+            <tr id="lastactotr">
+              <td colspan="3"><a class="agregar_otra add btn btn-default"><span class="glyphicon glyphicon-plus"></span> Agregar otra actividad</a>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      <div class = 'row'>
+        <%if @bool_enviado == 0 %>
+           <center><button type="submit" class="btn btn-forminst btn-lg">Guardar</button></center>
+        <%else%>
+          <center> <button type="button" data-toggle="modal" data-target="#myModal3" class="btn btn-forminst btn-lg" >Guardar</button></center>
+         
+        <%end%> 
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<div class = 'row'>
+  <div class = 'col-xs-3 col-md-3 col-lg-3'>
+      <button type="button" class="btn btn-forminst" onclick = " location.href = 'javascript:history.back(-1);'">&lt;&lt; Volver</button>
+  </div>
+  <div class = 'col-xs-3 col-md-3 col-lg-3 col-xs-offset-4 col-md-offset-6 col-lg-offset-6'>
+     <%= link_to "Siguiente >>", {controller: "iniciotutor", action: "detalles_adecuacion6"}, class: "btn btn-forminst" %>
+  </div>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h3 class="modal-title" id="myModalLabel">Eliminar Adecuación</h3>
+      </div>
+      <div class="modal-body">
+          <%= form_tag({controller: 'iniciotutor', action: 'eliminar_adecuacion'}) do%>
+            <div class="form-group">
+              <center>
+                <h5><strong>Está seguro que desea eliminar esta adecuación?</strong></h5>
+              </center>
+            </div>
+      </div>
+      <div class="modal-footer">
+          <button type="submit" class="btn btn-forminst">Si</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+      </div>
+      <%end%>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  function eliminar (elemento){
+    $(elemento).parent().parent().parent().remove();
+  }
+</script>
+
+<script type="text/javascript">
+
+    $(document).ready(function() {
+      var cant_delete=0;
+      var cant_edit=0;
+      var cant_docencia=0;
+      var cant_investigacion=0;
+      var cant_formacion=0;
+      var cant_extension=0;
+      var cant_otra=0;
+
+      $(".delete_act").click(function() {
+        var id_act = $(this).attr("rel");
+        $(this).parent().parent().append("<input type='hidden' name='delete"+cant_delete+"' value='"+id_act+"'>")
+        $(this).parent().parent().parent().hide();
+        cant_delete +=1;
+        $("#cant_delete").val(cant_delete);
+      });
+
+      $(".edit_act").click(function() {
+        var params = $(this).attr("rel");
+        var arr= params.split(' ');
+        var id = arr[0];
+        var text_act = arr[1];
+        $("#"+id).prop( "disabled", false );
+        $("#button"+id).prop( "disabled", true );
+        $(this).parent().parent().append("<input type='hidden' name='edit"+cant_edit+"' value='"+id+"'>")
+        cant_edit +=1;
+        $("#cant_edit").val(cant_edit);
+      });
+
+
+      $(".agregar_docencia").click(function() {
+        $("#lastactdoc").before('<tr>\
+                                <td>\
+                                  <textarea class="form-control" rows="2"  name="nuevadoc'+cant_docencia+'" required></textarea>\
+                                </td>\
+                                <td>\
+                                  <center>\
+                                    <button type="button" class="btn btn-default btn-lg" title="Eliminar" onclick = "eliminar(this)">\
+                                      <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>\
+                                    </button>\
+                                  </center>\
+                                </td>\
+                              </tr>');
+          cant_docencia = cant_docencia + 1;
+          console.log(cant_docencia);
+          $("#cant_docencia").val(cant_docencia);
+          
+      });
+
+      $(".agregar_investigacion").click(function() {
+        $("#lastactinv").before('<tr>\
+                                <td>\
+                                  <textarea class="form-control" rows="2"  name="nuevainv'+cant_investigacion+'" required></textarea>\
+                                </td>\
+                                <td>\
+                                  <center>\
+                                    <button type="button" class="btn btn-default btn-lg" title="Eliminar" onclick = "eliminar(this)">\
+                                      <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>\
+                                    </button>\
+                                  </center>\
+                                </td>\
+                              </tr>');
+          cant_investigacion = cant_investigacion + 1;
+          $("#cant_investigacion").val(cant_investigacion);
+          
+      });
+
+      $(".agregar_formacion").click(function() {
+        $("#lastactfor").before('<tr>\
+                                <td>\
+                                  <textarea class="form-control" rows="2"  name="nuevafor'+cant_formacion+'" required></textarea>\
+                                </td>\
+                                <td>\
+                                  <center>\
+                                    <button type="button" class="btn btn-default btn-lg" title="Eliminar" onclick = "eliminar(this)">\
+                                      <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>\
+                                    </button>\
+                                  </center>\
+                                </td>\
+                              </tr>');
+          cant_formacion = cant_formacion + 1;
+          $("#cant_formacion").val(cant_formacion);
+          
+      });
+
+      $(".agregar_extension").click(function() {
+        $("#lastactext").before('<tr>\
+                                <td>\
+                                  <textarea class="form-control" rows="2"  name="nuevaext'+cant_extension+'"></textarea>\
+                                </td>\
+                                <td>\
+                                  <center>\
+                                    <button type="button" class="btn btn-default btn-lg" title="Eliminar" onclick = "eliminar(this)">\
+                                      <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>\
+                                    </button>\
+                                  </center>\
+                                </td>\
+                              </tr>');
+          cant_extension = cant_extension + 1;
+          $("#cant_extension").val(cant_extension);
+          
+      });
+
+      $(".agregar_otra").click(function() {
+        $("#lastactotr").before('<tr>\
+                                <td>\
+                                  <textarea class="form-control" rows="2"  name="nuevaotr'+cant_otra+'"></textarea>\
+                                </td>\
+                                <td>\
+                                  <center>\
+                                    <button type="button" class="btn btn-default btn-lg" title="Eliminar" onclick = "eliminar(this)">\
+                                      <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>\
+                                    </button>\
+                                  </center>\
+                                </td>\
+                              </tr>');
+          cant_otra = cant_otra + 1;
+          $("#cant_otra").val(cant_otra);
+          
+      });
+
+    });
+</script>

@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Adecuacions</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Planformacionid</th>
+      <th>Tutorid</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @adecuacions.each do |adecuacion| %>
+      <tr>
+        <td><%= adecuacion.id %></td>
+        <td><%= adecuacion.PlanFormacionId %></td>
+        <td><%= adecuacion.tutorId %></td>
+        <td><%= link_to 'Show', adecuacion %></td>
+        <td><%= link_to 'Edit', edit_adecuacion_path(adecuacion) %></td>
+        <td><%= link_to 'Destroy', adecuacion, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Adecuacion', new_adecuacion_path %>
