@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Documentoplans</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Planformacionid</th>
+      <th>Archivo</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @documentoplans.each do |documentoplan| %>
+      <tr>
+        <td><%= documentoplan.id %></td>
+        <td><%= documentoplan.planFormacionId %></td>
+        <td><%= documentoplan.archivo %></td>
+        <td><%= link_to 'Show', documentoplan %></td>
+        <td><%= link_to 'Edit', edit_documentoplan_path(documentoplan) %></td>
+        <td><%= link_to 'Destroy', documentoplan, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Documentoplan', new_documentoplan_path %>

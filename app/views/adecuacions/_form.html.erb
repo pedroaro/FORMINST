@@ -1,0 +1,29 @@
+<%= form_for(@adecuacion) do |f| %>
+  <% if @adecuacion.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@adecuacion.errors.count, "error") %> prohibited this adecuacion from being saved:</h2>
+
+      <ul>
+      <% @adecuacion.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :id %><br>
+    <%= f.number_field :id %>
+  </div>
+  <div class="field">
+    <%= f.label :PlanFormacionId %><br>
+    <%= f.number_field :PlanFormacionId %>
+  </div>
+  <div class="field">
+    <%= f.label :tutorId %><br>
+    <%= f.number_field :tutorId %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

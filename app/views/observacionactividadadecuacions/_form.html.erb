@@ -1,0 +1,37 @@
+<%= form_for(@observacionactividadadecuacion) do |f| %>
+  <% if @observacionactividadadecuacion.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@observacionactividadadecuacion.errors.count, "error") %> prohibited this observacionactividadadecuacion from being saved:</h2>
+
+      <ul>
+      <% @observacionactividadadecuacion.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :id %><br>
+    <%= f.number_field :id %>
+  </div>
+  <div class="field">
+    <%= f.label :revisionId %><br>
+    <%= f.number_field :revisionId %>
+  </div>
+  <div class="field">
+    <%= f.label :adecuacionActividadId %><br>
+    <%= f.number_field :adecuacionActividadId %>
+  </div>
+  <div class="field">
+    <%= f.label :observacion %><br>
+    <%= f.text_area :observacion %>
+  </div>
+  <div class="field">
+    <%= f.label :fecha %><br>
+    <%= f.date_select :fecha %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
