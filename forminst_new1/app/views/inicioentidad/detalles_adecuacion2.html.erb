@@ -1,0 +1,223 @@
+
+
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Mensaje de confirmación</h4>
+      </div>
+      <div class="modal-body">
+        <h5>Está seguro que desea enviar la adecuación?.</h5>
+      </div>
+      <div class="modal-footer">
+        <%= link_to "Aceptar", {controller: "iniciotutor", action: "cambiar_estatusA", :adecuacion_id => @adecuacion.id }, class: "btn btn-default" %>
+      
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="myModal2" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Mensaje de notificación</h4>
+      </div>
+      <div class="modal-body">
+        <h5>El adecuación ya fue enviado.</h5>
+      </div>
+      <div class="modal-footer">
+    
+        <button type="button" class="btn btn-default" data-dismiss="modal">Aceptar</button>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+<div class="modal fade" id="myModal4" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Mensaje de confirmación</h4>
+      </div>
+      <div class="modal-body">
+        <h5>Seleccione la acción que desea realizar sobre la adecuación.</h5>
+      </div>
+      <div class="modal-footer">
+      <%= link_to "Aprobar", {controller: "inicioentidad", action: "cambiar_estatusA", :adecuacion_id => @adecuacion.id, :rechazar => 0 }, class: "btn btn-default" %>
+      <%= link_to "Rechazar", {controller: "inicioentidad", action: "cambiar_estatusA", :adecuacion_id => @adecuacion.id, :rechazar => 1 }, class: "btn btn-default" %>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+<div class = 'row'>
+  <div class="col-xs-12 col-md-12">
+      <ul class="nav nav-tabs">
+        <li><a href="../inicioentidad/index">Inicio</a></li>
+        <li><%= link_to 'Listar Adecuaciones', :controller => 'inicioentidad', :action => 'listar_adecuaciones' %></li>
+        <li><%= link_to 'Listar Informes', :controller => 'inicioentidad', :action => 'listar_informes' %></li>
+        <li><%= link_to 'Prórroga', :controller => 'inicioentidad', :action => 'prorroga' %></li>
+        <li><a href="../inicioentidad/logout">Cerrar Sesión</a></li>
+      </ul>
+  
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12 col-md-12">
+    <div class="btn-group" role="group">
+      <button type="button" class="btn btn-default" onclick = " location.href = 'javascript:history.back(-1);'">Volver</button>
+        <%if @bool_enviado == 0 %>
+          <%if session[:entidad_id]==13 %>
+             <button type="button" data-toggle="modal" data-target="#myModal4" class="btn btn-default">Aprobar/Rechazar</button>
+          <%else%>
+            <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-default">Enviar</button>
+          <%end%>
+
+        <%else%>
+            <%if session[:entidad_id]==13 %>
+                <button type="button" data-toggle="modal" data-target="#myModal2" class="btn btn-default">Aprobar/Rechazar</button>
+            <%else%>
+                <button type="button" data-toggle="modal" data-target="#myModal2" class="btn btn-default">Enviar</button>
+            <%end%>
+       
+        <%end%>
+      <%= link_to "Vista Previa", {controller: "inicioentidad", action: "vista_previa"}, class: "btn btn-default" %>
+      <%= link_to "Generar PDF", {controller: "adecuacions", action: "descargar_pdf"}, class: "btn btn-default" %>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12 col-md-12 col-md-offset-0">
+    <div class="text-right">
+      <div id = "fechamuestra">
+        <script languaje="JavaScript">
+          fecha();
+        </script> 
+      </div>
+      <%if @nombre%>
+        <div>
+          <h4><b><%=@nombre%></b></h4>
+        </div>
+      <%end%>
+    </div>
+  </div>
+</div>
+
+<div class = 'row'>
+  <div class="col-xs-11 col-xs-offset-1 col-md-12 col-md-offset-0 text-justify">
+    <h1 class="text-left">Detalles de la Adecuación</h1>
+  </div>
+</div>
+<div class= "row">
+  <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
+      <div class="table-responsive">
+      <table class="table table-bordered table-striped">
+        <tbody>
+          <tr>
+            <td class="text-left"></td>
+          </tr>
+          <tr>
+            <td class="text-left"><h5><strong>2. Datos del Instructor en Formación</strong></h5></td>
+          </tr>
+          <tr>
+            <td class="text-center"><strong>Fecha del Concurso de Oposición</strong></td>
+          </tr>
+          <tr>
+            <td class="text-left"><%= @plan.fecha_inicio %></td>
+          </tr>
+          <tr>
+            <td class="text-center"><strong>Apellidos y Nombres</strong></td>
+          </tr>
+          <tr>
+            <td class="text-left"><%= @persona.nombres+' '+@persona.apellidos %></td>
+          </tr>
+          <tr>
+            <td class="text-center"><strong>Cédula de Identidad</strong></td>
+          </tr>
+          <tr>
+            <td class="text-left"><%= @persona.ci %></td>
+          </tr>
+          <tr>
+            <td class="text-center"><strong>Correo Electrónico</strong></td>
+          </tr>
+          <tr>
+            <td class="text-left"><%= @usuario.user %>@ciens.ucv.ve</td>
+          </tr>
+          <tr>
+            <td class="text-center"><strong>Teléfono Celular</strong></td>
+          </tr>
+          <tr>
+            <td class="text-left"><%= @persona.telefono1 %></td>
+          </tr>
+          <tr>
+            <td class="text-center"><strong>Otro Teléfono</strong></td>
+          </tr>
+          <tr>
+            <td class="text-left"><%= @persona.telefono2 %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class= "row">
+  <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped">
+        <tbody>
+          <tr>
+            <td class="text-center">
+            </td>
+          </tr>
+          <tr>
+            <td class="text-left"><h5><strong>3. Perfil del Instructor en Formación</strong></h5></td>
+          </tr>
+          <tr>
+            <td class="text-center"><strong>Grado de Instrucción</strong></td>
+          </tr>
+          <tr>
+            <td class="text-left"><%= @persona.grado_instruccion %></td>
+          </tr>
+          <tr>
+            <td class="text-center"><strong>Area</strong></td>
+          </tr>
+          <tr>
+            <td class="text-left"><%= @persona.area %></td>
+          </tr>
+          <tr>
+            <td class="text-center"><strong>Subárea</strong></td>
+          </tr>
+          <tr>
+            <td class="text-left"><%= @persona.subarea %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class = 'row'>
+  <div class = 'col-xs-3 col-md-3 col-lg-3'>
+      <%= link_to "<< Volver", {controller: "inicioentidad", action: "ver_detalles_adecuacion"}, class: "btn btn-forminst" %>
+  </div>
+  <div class = 'col-xs-9 col-md-9 col-lg-9 text-right'>
+     <%= link_to "Siguiente >>", {controller: "inicioentidad", action: "detalles_adecuacion3"}, class: "btn btn-forminst" %>
+  </div>
+</div>

@@ -1,0 +1,2 @@
+module InformeactividadsHelper
+end

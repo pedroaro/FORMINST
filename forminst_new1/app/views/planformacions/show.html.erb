@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Id:</strong>
+  <%= @planformacion.id %>
+</p>
+
+<p>
+  <strong>Fechainicio:</strong>
+  <%= @planformacion.fechaInicio %>
+</p>
+
+<p>
+  <strong>Fechafin:</strong>
+  <%= @planformacion.fechaFin %>
+</p>
+
+<p>
+  <strong>Activo:</strong>
+  <%= @planformacion.activo %>
+</p>
+
+<p>
+  <strong>Instructorid:</strong>
+  <%= @planformacion.instructorId %>
+</p>
+
+<p>
+  <strong>Tutorid:</strong>
+  <%= @planformacion.tutorId %>
+</p>
+
+<%= link_to 'Edit', edit_planformacion_path(@planformacion) %> |
+<%= link_to 'Back', planformacions_path %>

@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Tiporesultados</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Tipoactividadid</th>
+      <th>Idpadre</th>
+      <th>Concepto</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tiporesultados.each do |tiporesultado| %>
+      <tr>
+        <td><%= tiporesultado.id %></td>
+        <td><%= tiporesultado.tipoActividadId %></td>
+        <td><%= tiporesultado.idPadre %></td>
+        <td><%= tiporesultado.concepto %></td>
+        <td><%= link_to 'Show', tiporesultado %></td>
+        <td><%= link_to 'Edit', edit_tiporesultado_path(tiporesultado) %></td>
+        <td><%= link_to 'Destroy', tiporesultado, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Tiporesultado', new_tiporesultado_path %>

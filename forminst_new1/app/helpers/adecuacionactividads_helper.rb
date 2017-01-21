@@ -1,0 +1,2 @@
+module AdecuacionactividadsHelper
+end

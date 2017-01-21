@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Id:</strong>
+  <%= @documentoplan.id %>
+</p>
+
+<p>
+  <strong>Planformacionid:</strong>
+  <%= @documentoplan.planFormacionId %>
+</p>
+
+<p>
+  <strong>Archivo:</strong>
+  <%= @documentoplan.archivo %>
+</p>
+
+<%= link_to 'Edit', edit_documentoplan_path(@documentoplan) %> |
+<%= link_to 'Back', documentoplans_path %>

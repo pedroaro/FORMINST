@@ -1,0 +1,85 @@
+<div class = 'row'>
+  <div class="col-xs-12 col-md-12">
+      <ul class="nav nav-tabs">
+        <li><a href="../iniciotutor/index">Inicio</a></li>
+        <li><a href="../iniciotutor/planformacions" class = 'active'>Plan de Formación</a></li>
+        <li><a href="#">Notificaciones</a></li>
+        <li><a href="../iniciotutor/logout">Cerrar Sesión</a></li>
+      </ul>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12 col-md-12">
+    <div class="text-right">
+      <div id = "fechamuestra">
+        <script languaje="JavaScript">
+          fecha();
+        </script> 
+      </div>
+      <%if @nombre%>
+        <div>
+          <h4><b><%=@nombre%></b></h4>
+        </div>
+      <%end%>
+    </div>
+  </div>
+</div>
+<% if @planformacions %>
+  <div class="row">
+  <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
+    <h1>Lista de Planes Formación</h1>
+    <p class="text-justify">Haga click en "Ver detalles" sobre el Plan de Formación correspondiente en caso de que se desee visualizar los detalles del mismo</p>
+  </div>
+</div>
+  
+  <% if notice %>
+    <p id="notice"><%= notice %></p>
+  <% end %>
+
+<div class = 'row'>
+  <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
+  <div class="table-responsive">
+    <table class="table table-hover table-bordered text-center">
+      <thead>
+        <tr>
+          <th class="text-center">Nombre instructor</th>
+          <th class="text-center">Fecha Inicio</th>
+          <th class="text-center">Fecha Fin</th>
+          <th class="text-center">Fecha de Última Modificación</th>
+          <th class="text-center">Detalles</th>
+        </tr>
+      </thead>
+
+      <tbody>
+          <% @planformacions.each_with_index do |planformacion, i| %> 
+              <tr>
+                <td><%= @nombreinstructor[i] %></td>
+                <td><%= planformacion.fecha_inicio %></td>
+                <td><%= planformacion.fecha_fin %></td>
+                <td></td>
+                <td>
+                  <%= form_tag({controller: 'iniciotutor', action: 'ver_detalles_plan'}) do%>
+                    <input type="hidden" name="plan_id" value='<%= planformacion.id %>'>
+                    <button type="submit">Ver Detalles</button>
+                  <%end%>
+                </td>
+                
+                <!--
+                <td><%#= link_to 'Show', planformacion %></td>
+                <td><%#= link_to 'Edit', edit_planformacion_path(planformacion) %></td>
+                <td><%#= link_to 'Destroy', planformacion, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+                -->
+              </tr>
+          <% end %>
+      </tbody>
+    </table>
+    <% else %>
+      <h1>Usted no posee ningun Plan de Formación asociado</h1>
+    <% end %>
+  </div>
+  </div>
+</div>
+   
+<br>
+
+<%#= link_to 'New Planformacion', new_planformacion_path %>

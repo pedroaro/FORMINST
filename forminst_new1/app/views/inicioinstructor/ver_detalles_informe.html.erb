@@ -1,0 +1,145 @@
+<div class = 'row'>
+  <div class="col-xs-12 col-md-12">
+      <ul class="nav nav-tabs">
+        <li><a href="../inicioinstructor/index">Inicio</a></li>
+        <li><a href="../inicioinstructor/listar_adecuaciones">Adecuación del Plan</a></li>
+        <li><a href="../inicioinstructor/listar_informes"  class = 'active'>Informes</a></li>
+        <li><%= link_to 'Prórroga', :controller => 'inicioinstructor', :action => 'prorroga' %></li>
+        <li><a href="../inicioinstructor/logout">Cerrar Sesión</a></li>
+      </ul>
+  
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12 col-md-12">
+    <div class="btn-group" role="group">
+       <%= link_to "Volver", {controller: "inicioinstructor", action: "listar_informes"}, class: "btn btn-default" %>
+      <%= link_to "Vista Previa", {controller: "iniciotutor", action: "vista_previa"}, class: "btn btn-default" %>
+      <%= link_to "Generar PDF", {controller: "adecuacions", action: "descargar_pdf"}, class: "btn btn-default" %>
+      <button type="button" class="btn btn-default">Ver Soporte</button>
+    </div>
+  </div>
+</div>
+
+<div class = 'row'>
+  <div class="col-xs-12 col-md-12">
+    <%if flash[:mensaje]%>
+      <div class="panel panel-warning">
+        <div class="panel-body">
+          <h5><b><%=flash[:mensaje]%></b></h5>
+        </div>
+      </div>
+    <%end%>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12 col-md-12 col-md-offset-0">
+    <div class="text-right">
+      <div id = "fechamuestra">
+        <script languaje="JavaScript">
+          fecha();
+        </script> 
+      </div>
+      <%if @nombre%>
+        <div>
+          <h4><b><%=@nombre%></b></h4>
+        </div>
+      <%end%>
+    </div>
+  </div>
+</div>
+
+<div class = 'row'>
+  <div class="col-xs-11 col-xs-offset-1 col-md-12 col-md-offset-0 text-justify">
+    <h1 class="text-left">Detalles del Informe</h1>
+  </div>
+</div>
+<div class = 'row'>
+  <div class="col-xs-11 col-xs-offset-1 col-md-12 col-md-offset-0 text-center">
+    <h5><strong><%=@nombre_informe%> DE ACTIVIDADES REALIZADAS POR EL INSTRUCTOR DURANTE LA EJECUCIÓN DE SU PLAN DE FORMACIÓN Y CAPACITACIÓN</strong></h5>
+  </div>
+</div>
+<div class = 'row'>
+  <div class="col-xs-11 col-xs-offset-1 col-md-12 col-md-offset-0 text-left">
+    <h5><strong>Estado del Documento: <%=@status.concepto%></strong></h5>
+  </div>
+</div>
+<br/>
+<div class= "row">
+  <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped">
+        <tbody>
+          <tr>
+            <td class="text-center">
+            </td>
+          </tr>
+          <tr>
+            <td class="text-left"><h5><strong>1. Datos del instructor en formación y su tutor:</strong></h5></td>
+          </tr>
+          <tr>
+            <td class="text-center"><strong>Numero del Informe</strong></td>
+          </tr>
+          <tr>
+            <td class="text-left"><%= @informe.numero%></td>
+          </tr>
+          <tr>
+            <td class="text-center"><strong>Fecha de Realización del Informe</strong></td>
+          </tr>
+          <tr>
+            <td class="text-left"><%= @informe.fecha_creacion%></td>
+          </tr>
+          <tr>
+            <td class="text-center"><strong>Apellidos y Nombres del Instructor</strong></td>
+          </tr>
+          <tr>
+            <td class="text-left"><%= session[:nombre_usuario]%></td>
+          </tr>
+          <tr>
+            <td class="text-center"><strong>Cédula de Identidad del Instructor</strong></td>
+          </tr>
+          <tr>
+            <td class="text-left"><%= @instructor.ci%></td>
+          </tr>
+          <tr>
+            <td class="text-center"><strong>Período que comprende el informe</strong></td>
+          </tr>
+          <tr>
+            <td class="text-left">Periodo</td>
+          </tr>
+           <tr>
+            <td class="text-center"><strong>Apellidos y Nombres del Tutor</strong></td>
+          </tr>
+          <tr>
+            <td class="text-left"><%= @tutor.nombres%></td>
+          </tr>
+           <tr>
+            <td class="text-center"><strong>Cédula de Identidad del Tutor</strong></td>
+          </tr>
+          <tr>
+            <td class="text-left"><%= @tutor.ci%></td>
+          </tr>
+           <tr>
+            <td class="text-center"><strong>Escuela o Instituto de Adscripción</strong></td>
+          </tr>
+          <tr>
+            <td class="text-left"><%= @escuela.nombre%></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class = 'row'>
+  <div class = 'col-xs-3 col-md-3 col-lg-3'>
+      <%= link_to "<< Volver", {controller: "inicioinstructor", action: "listar_informes"}, class: "btn btn-forminst" %>
+  </div>
+  <div class = 'col-xs-9 col-md-9 col-lg-9 text-right'>
+     <%= link_to "Siguiente >>", {controller: "inicioinstructor", action: "detalles_informe2"}, class: "btn btn-forminst" %>
+  </div>
+</div>
+
+

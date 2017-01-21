@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Informeactividads</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Informeid</th>
+      <th>Actividadid</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @informeactividads.each do |informeactividad| %>
+      <tr>
+        <td><%= informeactividad.id %></td>
+        <td><%= informeactividad.informeId %></td>
+        <td><%= informeactividad.actividadId %></td>
+        <td><%= link_to 'Show', informeactividad %></td>
+        <td><%= link_to 'Edit', edit_informeactividad_path(informeactividad) %></td>
+        <td><%= link_to 'Destroy', informeactividad, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Informeactividad', new_informeactividad_path %>
