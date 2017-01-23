@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Id:</strong>
+  <%= @actividad.id %>
+</p>
+
+<p>
+  <strong>Tipoactividadid:</strong>
+  <%= @actividad.tipoActividadId %>
+</p>
+
+<p>
+  <strong>Actividad:</strong>
+  <%= @actividad.actividad %>
+</p>
+
+<p>
+  <strong>Anulada:</strong>
+  <%= @actividad.anulada %>
+</p>
+
+<%= link_to 'Edit', edit_actividad_path(@actividad) %> |
+<%= link_to 'Back', actividads_path %>

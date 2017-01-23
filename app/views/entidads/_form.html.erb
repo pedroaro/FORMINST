@@ -1,0 +1,29 @@
+<%= form_for(@entidad) do |f| %>
+  <% if @entidad.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@entidad.errors.count, "error") %> prohibited this entidad from being saved:</h2>
+
+      <ul>
+      <% @entidad.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :id %><br>
+    <%= f.number_field :id %>
+  </div>
+  <div class="field">
+    <%= f.label :nombre %><br>
+    <%= f.text_field :nombre %>
+  </div>
+  <div class="field">
+    <%= f.label :escuelaId %><br>
+    <%= f.number_field :escuelaId %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

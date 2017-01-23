@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: 1
+  actividadId: 1
+  tipoResultadoId: 1
+  concepto: MyText
+
+two:
+  id: 1
+  actividadId: 1
+  tipoResultadoId: 1
+  concepto: MyText

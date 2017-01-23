@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Id:</strong>
+  <%= @resultado.id %>
+</p>
+
+<p>
+  <strong>Actividadid:</strong>
+  <%= @resultado.actividadId %>
+</p>
+
+<p>
+  <strong>Tiporesultadoid:</strong>
+  <%= @resultado.tipoResultadoId %>
+</p>
+
+<p>
+  <strong>Concepto:</strong>
+  <%= @resultado.concepto %>
+</p>
+
+<%= link_to 'Edit', edit_resultado_path(@resultado) %> |
+<%= link_to 'Back', resultados_path %>
