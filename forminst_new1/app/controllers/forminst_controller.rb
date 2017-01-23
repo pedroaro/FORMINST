@@ -27,12 +27,12 @@ class ForminstController < ApplicationController
 
 				puts "****************+SOOOY EL USUARIO activooo"
 				if @usuario
-          tipo=@usuario.tipo
+          #tipo=@usuario.tipo
 					if @usuario.activo==true
 						if @usuario.ldap==true
 							@usuarioe= Usuarioentidad.where(usuario_id: @usuario.id).take
 							@entidad= Entidad.find(@usuarioe.entidad_id)
-							if tipo == "Docente"
+							#if tipo == "Docente"
 								if @entidad.nombre=="tutor"
 									session[:usuario_id] = @usuario.id
 									@persona = Persona.where(usuario_id: session[:usuario_id]).take
@@ -55,24 +55,24 @@ class ForminstController < ApplicationController
 										redirect_to controller:"inicioinstructor", action: "index"
 									end
 								end
-							else
-								if tipo=="Institucional"
-									#ver si es necesario comparar el nombre del ldap con la bd local
-									session[:usuario_id]= @usuario.id
-									session[:tutor]= false
-									session[:instructor]= false
-									session[:entidad]= true
-									session[:entidad_id] = @entidad.id
-									puts (session[:entidad_id])
-									session[:nombre_usuario] = @entidad.nombre
-									puts "El usuario se autentico correctamente y es una entidad"
-									redirect_to controller:"inicioentidad", action: "index"
-								else
-									puts "No soy ni docente ni Institucional"
-									flash[:mensaje] = 'Su contraseña o correo electrónico es incorrecto.'
-									redirect_to controller:"forminst", action: "index"
-								end
-							end
+							#else
+							#	if tipo=="Institucional"
+							#		#ver si es necesario comparar el nombre del ldap con la bd local
+							#		session[:usuario_id]= @usuario.id
+							#		session[:tutor]= false
+							#		session[:instructor]= false
+							#		session[:entidad]= true
+							#		session[:entidad_id] = @entidad.id
+							#		puts (session[:entidad_id])
+							#		session[:nombre_usuario] = @entidad.nombre
+							#		puts "El usuario se autentico correctamente y es una entidad"
+							#		redirect_to controller:"inicioentidad", action: "index"
+							#	else
+							#		puts "No soy ni docente ni Institucional"
+							#		flash[:mensaje] = 'Su contraseña o correo electrónico es incorrecto.'
+							#		redirect_to controller:"forminst", action: "index"
+							#	end
+							#end
 						else
 							puts'--------'
 							puts @usuario.email
