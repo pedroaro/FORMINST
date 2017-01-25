@@ -5,6 +5,8 @@ class InicioController < ApplicationController
 		puts "estoy entrando al index"
 	end
 
+	add_flash_types :danger,:info, :warning, :success
+
 	def autenticar
 		ldap= Net::LDAP.new(:host=>"strix.ciens.ucv.ve",:port=>389, :auth=>{:method=> :simple, :username=>"cn=zaira, dc=ciens, dc=ucv, dc=ve", :password => "1z0cpal"})
 		correo= params[:correo]
