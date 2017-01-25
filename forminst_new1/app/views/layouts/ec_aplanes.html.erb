@@ -38,6 +38,28 @@
 				</div>
 			</div>
 		</div>
+		<%# binding.pry %>
+		<% flash.each do |name,value| %>
+		  <div class='alert alert-<%= name %>'>
+		    <%= value %>
+		  </div>
+		<% end %>
+
+		<%= yield %>
+
+		<div class="row">
+			<div class="col-xs-12 col-md-12">
+				<div id="footer">
+			  		<p>Universidad Central de Venezuela</p>
+			  		<p>Facultad de Ciencias  </p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+</html>
+
 
 		<%= yield %>
 
