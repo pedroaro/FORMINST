@@ -1,5 +1,7 @@
 class ForminstController < ApplicationController
 	require 'net-ldap'
+	require 'pry'
+
 	layout 'ec_aplanes'
 
 	def index
@@ -56,22 +58,22 @@ class ForminstController < ApplicationController
 									end
 								end
 							#else
-							#	if tipo=="Institucional"
-							#		#ver si es necesario comparar el nombre del ldap con la bd local
-							#		session[:usuario_id]= @usuario.id
-							#		session[:tutor]= false
-							#		session[:instructor]= false
-							#		session[:entidad]= true
-							#		session[:entidad_id] = @entidad.id
-							#		puts (session[:entidad_id])
-							#		session[:nombre_usuario] = @entidad.nombre
-							#		puts "El usuario se autentico correctamente y es una entidad"
-							#		redirect_to controller:"inicioentidad", action: "index"
-							#	else
-							#		puts "No soy ni docente ni Institucional"
-							#		flash[:mensaje] = 'Su contraseña o correo electrónico es incorrecto.'
-							#		redirect_to controller:"forminst", action: "index"
-							#	end
+								#if tipo=="Institucional"
+									#ver si es necesario comparar el nombre del ldap con la bd local
+								#	session[:usuario_id]= @usuario.id
+								#	session[:tutor]= false
+								#	session[:instructor]= false
+								#	session[:entidad]= true
+								#	session[:entidad_id] = @entidad.id
+								#	puts (session[:entidad_id])
+								#	session[:nombre_usuario] = @entidad.nombre
+								#	puts "El usuario se autentico correctamente y es una entidad"
+								#	redirect_to controller:"inicioentidad", action: "index"
+								#else
+								#	puts "No soy ni docente ni Institucional"
+								#	flash[:mensaje] = 'Su contraseña o correo electrónico es incorrecto.'
+								#	redirect_to controller:"forminst", action: "index"
+								#end
 							#end
 						else
 							puts'--------'
@@ -99,6 +101,7 @@ class ForminstController < ApplicationController
 											session[:instructor]= true
 											session[:entidad]= false
 											puts "El usuario se autentico correctamente y es un instructor"
+											#flash[:success]= "El usuario se autentico correctamente y es un instructor"
 											redirect_to controller:"inicioinstructor", action: "index"
 										else
 											session[:usuario_id]= @usuario.id
@@ -111,25 +114,25 @@ class ForminstController < ApplicationController
 										end
 									end
 								else
-									flash[:mensaje]="Su usuario o contraseña son incorrectas"
+									flash[:danger]="Su usuario o contraseña son incorrectas"
 									puts "No se autentico debido a que la contraseña es incorrecta"
-									redirect_to controller:"forminst", action: "index"
+									render 'index'
 								end
 							else
-								flash[:mensaje]="Su usuario o contraseña son incorrectas"
+								flash[:danger]="Su usuario o contraseña son incorrectas"
 								puts "No se autentico debido a que el correo es incorrecto"
-								redirect_to controller:"forminst", action: "index"
+								render 'index'
 							end
 						end
 					else
-						flash[:mensaje]= "El usuario no está activo en el sistema"
+						flash[:danger]= "El usuario no está activo en el sistema"
 						puts "El usuario no está activo"
-						redirect_to controller:"forminst", action: "index"
+						render 'index'
 					end
 				else
 					puts "La persona no está registrada en la BD local"
-					flash[:mensaje]= "El usuario o la contraseña son incorrectas"
-					redirect_to controller:"forminst", action: "index"
+					flash[:danger]= "El usuario o la contraseña son incorrectas"
+					render 'index'
 				end
 			else
 				#ESTO LO COLOCARE CABLEADO MIENTRASTANTO
@@ -147,14 +150,14 @@ class ForminstController < ApplicationController
 				##
 
 				puts "La persona no está registrada en el ldap1"
-				flash[:mensaje]= "El usuario o la contraseña son incorrectas"
-				redirect_to controller:"forminst", action: "index"
+				flash[:danger]= "El usuario o la contraseña son incorrectas"
+				render "index"
 				end
 			end
 		else
 			puts "La persona no está registrada en el ldap2"
-			flash[:mensaje]= "El usuario o la contraseña son incorrectas"
-			redirect_to controller:"forminst", action: "index"
+			flash[:danger]= "El usuario o la contraseña son incorrectas"
+			render "index"
 		end
 	end
 
