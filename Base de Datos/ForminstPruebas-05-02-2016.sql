@@ -942,3 +942,12 @@ UNLOCK TABLES;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2016-02-05 14:30:27
+ALTER TABLE usuario ADD tipo varchar(20);
+
+UPDATE usuario 
+SET tipo='Docente'
+WHERE id = '1' or id = '2' or id = '3' or id = '4' or id = '5' or id = '6' or id = '7' or id = '8' or id = '9' or id = '10' or id = '11' or id = '12' or id = '13' or id = '14' or id = '15' or id = '16' or id = '17' or id = '18' or id = '19' or id = '20' or id = '21' or id = '22' or id = '23';
+
+UPDATE usuario 
+SET tipo='Institucional'
+WHERE id = '24' or id = '25' or id = '26' or id = '27' or id = '28' or id = '29' or id = '30' or id = '31' or id = '32' or id = '33' or id = '34' or id = '35' or id = '36';
