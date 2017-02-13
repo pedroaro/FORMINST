@@ -1,0 +1,125 @@
+<div class = 'row'>
+  <div class="col-xs-12 col-md-12">
+      <ul class="nav nav-tabs">
+        <li><a href="../iniciotutor/index">Inicio</a></li>
+        <% if @planformacion %>
+          <li><%= link_to 'Plan de Adecuación', :controller => 'iniciotutor', :action => 'listar_adecuaciones' %></li>
+        <% else %>
+              <li><%= link_to 'Crear Adecuación', :controller => 'iniciotutor', :action => 'crear_adecuacion' %></li>
+        <% end %>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-expanded="false">Informes <span class="caret"></span></a>
+            <ul class="dropdown-menu nav" role="menu">
+              <li></li>
+              <li><%= link_to 'Crear Informe', :controller => 'informes', :action => 'ver_crear_informe'%></li>
+              <li><a href="#" class = 'active'>Listar Informes</a></li>
+            </ul>
+        </li>
+        <li><%= link_to 'Prórroga', :controller => 'iniciotutor', :action => 'prorroga'%></li>
+        <li><a href="../iniciotutor/logout">Cerrar Sesión</a></li>
+      </ul>
+  </div>
+</div>
+
+<div class = 'row'>
+  <div class="col-xs-12 col-md-12">
+    <%if flash[:mensaje]%>
+      <div class="panel panel-warning">
+        <div class="panel-body">
+          <h5><b><%=flash[:mensaje]%></b></h5>
+        </div>
+      </div>
+    <%end%>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12 col-md-12">
+   <div class= "text-left">
+      <%if @nombre%>
+        <div>
+          <span><%= link_to 'Plan Formación', :controller => 'iniciotutor', :action => 'planformacions' %></span>
+          <p style="display:inline"> / </p>
+          <span><%= link_to @instructorName , :controller => 'iniciotutor', :action => 'ver_detalles_plan' %></span>
+          <p style="display:inline"> / Informes </p>
+        </div>
+      <%end%>
+    </div>
+    <div class="text-right">
+      <div id = "fechamuestra">
+        <script languaje="JavaScript">
+          fecha();
+        </script> 
+      </div>
+      <%if @nombre%>
+        <div>
+          <h4><b><%=@nombre%></b></h4>
+        </div>
+      <%end%>
+    </div>
+  </div>
+</div>
+
+<% if @informe %>
+<div class = 'row'>
+  <div class="col-xs-5 col-md-12 text-justify">
+    <h1 class="text-left">Lista de Informes</h1>
+  </div>
+</div>
+<div class = 'row'>
+  <div class="col-xs-12 col-md-12">
+    <p class="text-justify">Haga click en "Ver detalles" sobre el Informe correspondiente en caso de que se desee visualizar los detalles del misma</p>
+    <div class="table-responsive">
+      <table class="table table-hover table-bordered text-center">
+        <thead>
+          <tr>
+            <th class="text-center">Tipo de Informe</th>
+            <th class="text-center">Número de Informe</th>
+            <th class="text-center">Fecha de Creación</th>
+            <th class="text-center">Instructor de Formación</th>
+            <th class="text-center">Estado</th>
+            <th class="text-center">Ultima Modificación</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @informes.each_with_index do |informe, i| %>
+            <tr>
+              <td class = "text-center"><%= @tipos[i] %></td>
+              <td class = "text-center"><%= informe.numero %></td>
+              <td class = "text-center"><%= informe.fecha_creacion %></td>
+              <td class = "text-center"><%= @instructorName %></td>
+              <td class = "text-center"><%= @status[i]%></td>
+              <td class = "text-center"><%= informe.fecha_modificacion %></td>
+              <td class = "text-center">
+              <%= form_tag({controller: 'informes', action: 'ver_detalles_informe'}) do%>
+                <input type="hidden" name="informe_id" value='<%= informe.id %>'>
+                <button type="submit">Ver Detalles</button>
+              <%end%>
+            </td>
+            </tr>
+          <% end %>
+            
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<% else %>
+  <div class = 'row'>
+    <div class="col-xs-5 col-md-12">
+      <h3 class = 'text-center'>No hay Informes</h3>
+    </div>
+  </div>
+  <br>
+<% end %>
+<div class = 'row'>
+  <div class = 'col-xs-12 col-md-12'>
+    <center>
+      <button type="button" class="btn btn-forminst" onclick = " location.href = '../iniciotutor/ver_detalles_plan'">Volver</button>
+    </center>
+  </div>
+</div>
+</br>
+</br>

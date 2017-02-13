@@ -1,0 +1,154 @@
+<div class = 'row'>
+  <div class="col-xs-12 col-md-12">
+      <ul class="nav nav-tabs">
+        <li><a href="../secretarias/index">Inicio</a></li>
+        <li><a href="../secretarias/crearPlanes" class = 'active'>Agregar Tutor</a></li>
+        <li><a href="../secretarias/agregarInstructor" >Agregar Instructor</a></li>
+        <li><a href="../secretarias/logout">Cerrar Sesión</a></li>
+      </ul>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12 col-md-12">
+    <div class="text-right">
+      <div id = "fechamuestra">
+        <script languaje="JavaScript">
+          fecha();
+        </script> 
+      </div>
+      <%if @nombre%>
+        <div>
+          <h4><b><%=@nombre%></b></h4>
+        </div>
+      <%end%>
+    </div>
+  </div>
+</div>
+<div class = 'row'>
+  <div class="col-xs-11 col-xs-offset-1 col-md-12 col-md-offset-0 text-center">
+    <h5><strong>AGREGAR TUTOR</strong></h5>
+  </div>
+</div>
+
+<div class= "row">
+  <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
+      <div class="table-responsive">
+      <table class="table table-bordered table-striped">
+        <tbody>
+          <tr>
+            <td class="text-left"></td>
+          </tr>
+          <tr>
+            <td class="text-left"><h5><strong>1. Datos del Tutor</strong></h5></td>
+          </tr>
+          <tr>
+            <td class="text-center"><strong>Fecha del Concurso de Oposición</strong></td>
+          </tr>
+            <td class="text-center">
+              <input type="FechaConcurso" name="FechaConcurso" class="form-control" required>
+            </td>
+          </tr>
+          <tr>
+            <td class="text-center"><strong>Apellidos y Nombres</strong></td>
+          </tr>
+          <tr> 
+            <td class="text-center">
+              <input type="apellidoYN" name="apellidoYN" class="form-control" required>
+            </td>
+          </tr>
+          <tr>
+            <td class="text-center"><strong>Cédula de Identidad</strong></td>
+          </tr>
+          <tr> 
+            <td class="text-center">
+              <input type="CI" name="CI" class="form-control" required>
+            </td>
+          </tr>
+          <tr>
+            <td class="text-center"><strong>Correo Electrónico</strong></td>
+          </tr>
+          <tr> 
+            <td class="text-center">
+              <input type="text" name="correo" class="form-control" required>
+            </td>
+          </tr>
+          <tr>
+            <td class="text-center"><strong>Teléfono Celular</strong></td>
+          </tr>
+          <tr> 
+            <td class="text-center">
+              <input type="Tlf" name="Tlf" class="form-control" required>
+            </td>
+          </tr>
+          <tr>
+            <td class="text-center"><strong>Otro Teléfono</strong></td>
+          </tr>
+          <tr> 
+            <td class="text-center">
+              <input type="OTlf" name="OTlf" class="form-control" required>
+            </td>
+          </tr>
+          <tr>
+            <td class="text-center"><strong>Escuela o Instituto</strong></td>
+          </tr>
+          <tr> 
+            <td class="text-center">
+              <%= select_tag(:escuelas, options_for_select(@escuelas), {:onchange => "buscarTutor()", :class => "form-control", :style => "width:100%;" }) %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<center><%= button_to 'Guardar', :controller => 'secretarias', :action => 'guarda_instructor' %></center>
+
+<br><br> 
+
+<script type="text/javascript">
+  function buscarTutor(){
+    var escuela = $('#id').val();
+    $.ajax({
+        url: "/secretarias/buscarTutor?escuela="+escuela+"",
+        dataType: "JSON",
+        timeout: 10000,
+        beforeSend: function(){
+           $("#respuesta").html("Cargando...");
+        },
+        error: function(){
+           $("#respuesta").html("Error al intentar buscar el Tutor, por favor intente mas tarde.");
+        },
+        success: function(data){
+          alert(data)
+
+        }
+    })
+  }
+
+    // function buscarTutor2(){
+    // $.ajax({
+    //     url: "/secretarias/buscarTutor",
+    //     dataType: "JSON",
+    //     timeout: 10000,
+    //     beforeSend: function(){
+    //        $("#respuesta").html("Cargando...");
+    //     },
+    //     error: function(){
+    //        $("#respuesta").html("Error al intentar buscar el Tutor, por favor intente mas tarde.");
+    //     },
+    //     success: function(data){
+    //       var cadena = $('#respuesta').val();
+    //       // alert(cadena);
+    //       for (var i = data.length - 1; i >= 0; i--) {
+    //         if (data[i]['nombres'].toLowerCase().indexOf(cadena.toLowerCase()) != -1 || data[i]['apellidos'].toLowerCase().indexOf(cadena.toLowerCase()) != -1) {
+    //           console.log(data[i]['nombres']+' '+data[i]['apellidos']);
+    //         };
+    //       };
+    //       // console.log(JSON.stringify(data));
+    //       // alert(JSON.stringify(data));
+
+    //     }
+    // })
+  }
+</script>

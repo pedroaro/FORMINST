@@ -1,0 +1,66 @@
+<div class = 'row'>
+	<div class="col-xs-12 col-md-12">
+			<ul class="nav nav-tabs">
+				<li><a href="../inicioinstructor/index">Inicio</a></li>
+				<li><a href="../inicioinstructor/listar_adecuaciones">Adecuación del Plan</a></li>
+				<li><a href="../inicioinstructor/listar_informes" >Informes</a></li>
+				<li><a href="../inicioinstructor/prorrogas" class = 'active'>Prorrogas</a></li>
+				<li><a href="../inicioinstructor/logout">Cerrar Sesión</a></li>
+			</ul>
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-xs-12 col-md-12">
+		<div class="text-right">
+			<div id = "fechamuestra">
+				<script languaje="JavaScript">
+					fecha();
+				</script> 
+			</div>
+			<%if @nombre%>
+				<div>
+					<h4><b><%=@nombre%></b></h4>
+				</div>
+			<%end%>
+		</div>
+	</div>
+</div>
+
+<% if @prorroga %>
+<div class = 'row'>
+  <div class="col-xs-5 col-md-12">
+    <div class="table-responsive">
+      <table class="table table-hover table-bordered text-center">
+        <thead>
+          <tr>
+            <th class="text-center">Fecha de Aprobación</th>
+            <th class="text-center">Instructor</th>
+            <th class="text-center">Tiempo de la Prórroga (en Meses)</th>
+          </tr>
+        </thead>
+
+        <tbody>
+            
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<% else %>
+  <div class = 'row'>
+    <div class="col-xs-5 col-md-12">
+      <h3 class = 'text-center'>No hay Prórrogas</h3>
+    </div>
+  </div>
+  <br>
+<% end %>
+
+<div class = 'row'>
+  <div class = 'col-xs-5 col-md-12'>
+    <center>
+      <button type="button" class="btn btn-forminst" onclick = " location.href = '../inicioinstructor/listar_adecuaciones'">Volver</button>
+    </center>
+  </div>
+</div>
+

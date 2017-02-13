@@ -1,0 +1,143 @@
+<div class = 'row'>
+  <div class="col-xs-12 col-md-12">
+      <ul class="nav nav-tabs">
+        <li><a href="../inicioinstructor/index">Inicio</a></li>
+        <li><a href="#" class='active' >Adecuación del Plan</span></a></li>
+        <li><a href="../inicioinstructor/listar_informes">Informes</a></li>
+        <li><a href="../inicioinstructor/prorrogas">Prorrogas</a></li>
+        <li><a href="../inicioinstructor/logout">Cerrar Sesión</a></li>
+      </ul>
+  
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12 col-md-12">
+    <div class="btn-group" role="group">
+      <button type="button" class="btn btn-default" onclick = " location.href = 'javascript:history.back(-1);'">Volver</button>
+      <%= link_to "Vista Previa", {controller: "inicioinstructor", action: "vista_previa"}, class: "btn btn-default" %>
+      <%= link_to "Generar PDF", {controller: "adecuacions", action: "descargar_pdf"}, class: "btn btn-default" %>
+      <button type="button" class="btn btn-default">Ver Soporte</button>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12 col-md-12 col-md-offset-0">
+    <div class="text-right">
+      <div id = "fechamuestra">
+        <script languaje="JavaScript">
+          fecha();
+        </script> 
+      </div>
+      <%if @nombre%>
+        <div>
+          <h4><b><%=@nombre%></b></h4>
+        </div>
+      <%end%>
+    </div>
+  </div>
+</div>
+
+<div class = 'row'>
+  <div class="col-xs-11 col-xs-offset-1 col-md-12 col-md-offset-0 text-justify">
+    <h1 class="text-left">Detalles de la Adecuación</h1>
+  </div>
+</div>
+<div class= "row">
+  <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
+      <div class="table-responsive">
+      <table class="table table-bordered table-striped">
+        <tbody>
+          <tr>
+            <td class="text-left"></td>
+          </tr>
+          <tr>
+            <td class="text-left"><h5><strong>2. Datos del Instructor en Formación</strong></h5></td>
+          </tr>
+          <tr>
+            <td class="text-center"><strong>Fecha del Concurso de Oposición</strong></td>
+          </tr>
+          <tr>
+            <td class="text-left"><%= @plan.fecha_inicio %></td>
+          </tr>
+          <tr>
+            <td class="text-center"><strong>Apellidos y Nombres</strong></td>
+          </tr>
+          <tr>
+            <td class="text-left"><%= session[:nombre_usuario] %></td>
+          </tr>
+          <tr>
+            <td class="text-center"><strong>Cédula de Identidad</strong></td>
+          </tr>
+          <tr>
+            <td class="text-left"><%= @persona.ci %></td>
+          </tr>
+          <tr>
+            <td class="text-center"><strong>Correo Electrónico</strong></td>
+          </tr>
+          <tr>
+            <td class="text-left"><%= @usuario.user %>@ciens.ucv.ve</td>
+          </tr>
+          <tr>
+            <td class="text-center"><strong>Teléfono Celular</strong></td>
+          </tr>
+          <tr>
+            <td class="text-left"><%= @persona.telefono1 %></td>
+          </tr>
+          <tr>
+            <td class="text-center"><strong>Otro Teléfono</strong></td>
+          </tr>
+          <tr>
+            <td class="text-left"><%= @persona.telefono2 %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class= "row">
+  <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped">
+        <tbody>
+          <tr>
+            <td class="text-center">
+            </td>
+          </tr>
+          <tr>
+            <td class="text-left"><h5><strong>3. Perfil del Instructor en Formación</strong></h5></td>
+          </tr>
+          <tr>
+            <td class="text-center"><strong>Grado de Instrucción</strong></td>
+          </tr>
+          <tr>
+            <td class="text-left"><%= @persona.grado_instruccion %></td>
+          </tr>
+          <tr>
+            <td class="text-center"><strong>Area</strong></td>
+          </tr>
+          <tr>
+            <td class="text-left"><%= @persona.area %></td>
+          </tr>
+          <tr>
+            <td class="text-center"><strong>Subárea</strong></td>
+          </tr>
+          <tr>
+            <td class="text-left"><%= @persona.subarea %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class = 'row'>
+  <div class = 'col-xs-3 col-md-3 col-lg-3'>
+      <%= link_to "<< Volver", {controller: "inicioinstructor", action: "ver_detalles_adecuacion"}, class: "btn btn-forminst" %>
+  </div>
+  <div class = 'col-xs-9 col-md-9 col-lg-9 text-right'>
+     <%= link_to "Siguiente >>", {controller: "inicioinstructor", action: "detalles_adecuacion3"}, class: "btn btn-forminst" %>
+  </div>
+</div>
