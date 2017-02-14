@@ -34,12 +34,17 @@ class SecretariasController < ApplicationController
 	def guarda_instructor
 		if session[:usuario_id]	
 			cpusuario = Usuario.new
-			puts "	holaaaaaaaaaaaaaaaa"
-			puts params[:correo]
-			cpusuario.user = params[:acorreo]
-			cpusuario.ldap = 1
+			cpusuario.user = params[:correo]
+			cpusuario.password = params[:CI]
+			cpusuario.ldap = 0
 			cpusuario.activo = 1
 			cpusuario.tipo = "Docente"
+			cpusuario.save
+			cpuentidad = Usuarioentidad.new
+			cpuentidad.usuario_id = cpusuario.id
+			cpuentidad.entidad_id = 19
+			cpuentidad.save
+
 			redirect_to controller:"secretarias", action: "index"
 		else
 			redirect_to controller:"forminst", action: "index"
