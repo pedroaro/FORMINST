@@ -12,5 +12,5 @@
 /db/*.sqlite3-journal
 
 # Ignore all logfiles and tempfiles.
-/log/*.log
-/tmp
+/Etapa_3/forminst_new1/log/*.log
+/Etapa_3/forminst_new1/tmp
