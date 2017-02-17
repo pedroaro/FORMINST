@@ -25,11 +25,25 @@ class SecretariasController < ApplicationController
 			@nombre = session[:nombre_usuario]
 			@personas = Persona.all
 			session[:personas] = @personas.as_json(only: [:usuario_id, :nombres, :apellidos])
-			@escuelas= [['Seleccione una escuela',0], ['Escuela de Biología',1], ['Escuela de Computación',2], ['Escuela de Física',3], ['Escuela de Geoqímica',4], ['Instituto Biología Experimental',5], ['Instituto de Ciencia y Tecnología de Alimentos',6], ['Instituto de Ciencias de la Tierra',7], ['Instituto de Zoología y Ecología Tropical',8], ['Escuela de Matemática',9], ['Escuela de Química',10], ['Consejo de Facultad',11], ['Desconocida',12]] 
-			@uentidad = Usuarioentidad.where(escuela_id: 2, entidad_id: 18).take
-			@tutores = Usuario.find(@uentidad.usuario_id)
-			puts "holaaaaaaaaaaaaaaaa"
-			puts @tutores
+			@escuelas = [['Seleccione una escuela',0], ['Escuela de Biología',1], ['Escuela de Computación',2], ['Escuela de Física',3], ['Escuela de Geoqímica',4], ['Instituto Biología Experimental',5], ['Instituto de Ciencia y Tecnología de Alimentos',6], ['Instituto de Ciencias de la Tierra',7], ['Instituto de Zoología y Ecología Tropical',8], ['Escuela de Matemática',9], ['Escuela de Química',10], ['Consejo de Facultad',11], ['Desconocida',12]] 
+			uentidad = Usuarioentidad.where(escuela_id: 2, entidad_id: 18)
+			cpcontador = 0
+			cpaux = ['var1', 0]
+			@cptutores = []
+
+			uentidad.each do |usuarioentidad|
+				puts "holaaaaaaaaaaaaaaaaaaaaaaaaaa"
+				cppersona = Persona.find_by usuario_id: usuarioentidad.usuario_id
+				@cptutores[cpcontador] = Array.new(2) { |i|  }
+				puts cppersona.nombres
+				@cptutores[cpcontador][0] =  cppersona.nombres
+				puts @cptutores[cpcontador][0]
+				@cptutores[cpcontador][1] = usuarioentidad.usuario_id
+				puts @cptutores[cpcontador][1]
+				puts @cptutores
+				cpcontador = cpcontador + 1
+			end
+
 
 		else
 			redirect_to controller:"forminst", action: "index"
