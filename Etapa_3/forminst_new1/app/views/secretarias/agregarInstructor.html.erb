@@ -173,14 +173,6 @@
             <td class="text-left"><h5><strong>3. Datos de la dependencia</strong></h5></td>
           </tr>
           <tr>
-            <td class="text-center"><strong>Escuela o Instituto</strong></td>
-          </tr>
-          <tr> 
-            <td class="text-center">
-              <%= select_tag(:escuelas, options_for_select(@escuelas), {:onchange => "buscarTutor()", :class => "form-control", :name=> "escuela", :style => "width:100%;" }) %>
-            </td>
-          </tr>
-          <tr>
             <td class="text-center"><strong>Fecha de Realización del Documento</strong></td>
           </tr>
           <tr> 
@@ -227,7 +219,7 @@
           </tr>
           <tr> 
             <td class="text-center">
-              <%= select_tag(:cptutores, options_for_select(@cptutores), {:class => "form-control", :style => "width:100%;" }) %>
+              <%= select_tag(:cptutores, options_for_select(@cptutores), {:class => "form-control", :name=> "JRTutores", :style => "width:100%;" }) %>
             </td>
           </tr>
         </tbody>
@@ -240,50 +232,3 @@
 </form>
 
 <br><br> 
-
-<script type="text/javascript">
-  function buscarTutor(){
-    var escuela = $('#id').val();
-    $.ajax({
-        url: "/secretarias/buscarTutor?escuela="+escuela+"",
-        dataType: "JSON",
-        timeout: 10000,
-        beforeSend: function(){
-           $("#respuesta").html("Cargando...");
-        },
-        error: function(){
-           $("#respuesta").html("Error al intentar buscar el Tutor, por favor intente mas tarde.");
-        },
-        success: function(data){
-          alert(data)
-
-        }
-    })
-  }
-
-    // function buscarTutor2(){
-    // $.ajax({
-    //     url: "/secretarias/buscarTutor",
-    //     dataType: "JSON",
-    //     timeout: 10000,
-    //     beforeSend: function(){
-    //        $("#respuesta").html("Cargando...");
-    //     },
-    //     error: function(){
-    //        $("#respuesta").html("Error al intentar buscar el Tutor, por favor intente mas tarde.");
-    //     },
-    //     success: function(data){
-    //       var cadena = $('#respuesta').val();
-    //       // alert(cadena);
-    //       for (var i = data.length - 1; i >= 0; i--) {
-    //         if (data[i]['nombres'].toLowerCase().indexOf(cadena.toLowerCase()) != -1 || data[i]['apellidos'].toLowerCase().indexOf(cadena.toLowerCase()) != -1) {
-    //           console.log(data[i]['nombres']+' '+data[i]['apellidos']);
-    //         };
-    //       };
-    //       // console.log(JSON.stringify(data));
-    //       // alert(JSON.stringify(data));
-
-    //     }
-    // })
-  }
-</script>
