@@ -53,6 +53,7 @@
           <th class="text-center">Fecha Inicio</th>
           <th class="text-center">Fecha Fin</th>
           <th class="text-center">Fecha de Última Modificación</th>
+          <th class="text-center">Modificar</th>
           <th class="text-center">Detalles</th>
         </tr>
       </thead>
@@ -65,13 +66,19 @@
                 <td><%= planformacion.fecha_fin %></td>
                 <td></td>
                 <td>
+                  <%= form_tag({controller: 'iniciotutor', action: 'detalles_adecuacion3'}) do%>
+                    <input type="hidden" name="plan_id" value='<%= planformacion.id %>'>
+                    <input type="hidden" name="editar" value='si'>
+                    <button type="submit" class="btn btn-forminst-blue">Modificar</button>
+                  <%end%>
+                </td>  
+                <td>
                   <%= form_tag({controller: 'iniciotutor', action: 'ver_detalles_plan'}) do%>
                     <input type="hidden" name="plan_id" value='<%= planformacion.id %>'>
                     <button type="submit" class="btn btn-forminst-blue">Ver Detalles</button>
                   <%end%>
                 </td>
-                
-                <!--
+              <!--
                 <td><%#= link_to 'Show', planformacion %></td>
                 <td><%#= link_to 'Edit', edit_planformacion_path(planformacion) %></td>
                 <td><%#= link_to 'Destroy', planformacion, method: :delete, data: { confirm: 'Are you sure?' } %></td>

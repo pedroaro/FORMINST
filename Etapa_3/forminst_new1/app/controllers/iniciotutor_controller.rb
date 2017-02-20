@@ -78,7 +78,9 @@ class IniciotutorController < ApplicationController
 
 	def listar_adecuaciones
 		if session[:usuario_id]
-			session[:adecuacion_id] = nil
+			if (session[:adecuacion_id]== nil)
+				session[:adecuacion_id] = nil
+			end
 			@persona = Persona.where(usuario_id: session[:usuario_id]).take
 			@nombre = session[:nombre_usuario]
 			@plan = Planformacion.find(session[:plan_id])
@@ -251,6 +253,7 @@ class IniciotutorController < ApplicationController
 			semestre= params[:semestre].to_i
 
 			if params[:adecuacion_id]!=nil
+				puts "hellooo"
 				session[:adecuacion_id]= params[:adecuacion_id]
 			end
 			@adecuacion= Adecuacion.find(session[:adecuacion_id])
@@ -487,6 +490,22 @@ class IniciotutorController < ApplicationController
 	def detalles_adecuacion3
 
 		if session[:usuario_id]
+			if params[:plan_id]
+				session[:editar]= true
+				puts "it's me"
+				@planformacion = Planformacion.find(params[:plan_id])
+				session[:plan_id] = @planformacion.id
+				@instructorName = Persona.where(usuario_id: @planformacion.instructor_id).take.nombres
+				session[:instructorName] = @instructorName
+				@adecuacion = Adecuacion.where(planformacion_id: session[:plan_id]).take
+				session[:adecuacion_id]= @adecuacion.id
+			end
+			if params[:editar] == 'no'
+				session[:editar]= false
+			end
+			puts session[:editar]
+			@adecuacion= Adecuacion.where(planformacion_id: session[:plan_id]).take
+			@adecuaciones = Adecuacion.where(planformacion_id: session[:plan_id])
 			@iddoc= 'id_docencia'
 			@docencia='docencia'
 			@investigacion= 'investigacion'
@@ -495,7 +514,6 @@ class IniciotutorController < ApplicationController
 			@otra= 'otra' 
 			@nombre = session[:nombre_usuario]
 			@instructorName = session[:instructorName]
-			@adecuacion= Adecuacion.find(session[:adecuacion_id])
 			@plan= Planformacion.find(session[:plan_id])
 			@actividadesadoc= []
 			@actividadesainv= []
@@ -557,7 +575,7 @@ class IniciotutorController < ApplicationController
 			@otra= 'otra' 
 			@nombre = session[:nombre_usuario]
 			@instructorName = session[:instructorName]
-			@adecuacion= Adecuacion.find(session[:adecuacion_id])
+			@adecuacion= Adecuacion.where(planformacion_id: session[:plan_id]).take
 			@plan= Planformacion.find(session[:plan_id])
 			@actividadesadoc= []
 			@actividadesainv= []
@@ -620,7 +638,7 @@ class IniciotutorController < ApplicationController
 			@otra= 'otra' 
 			@nombre = session[:nombre_usuario]
 			@instructorName = session[:instructorName]
-			@adecuacion= Adecuacion.find(session[:adecuacion_id])
+			@adecuacion= Adecuacion.where(planformacion_id: session[:plan_id]).take
 			@plan= Planformacion.find(session[:plan_id])
 			@actividadesadoc= []
 			@actividadesainv= []
@@ -682,7 +700,7 @@ class IniciotutorController < ApplicationController
 			@otra= 'otra' 
 			@nombre = session[:nombre_usuario]
 			@instructorName = session[:instructorName]
-			@adecuacion= Adecuacion.find(session[:adecuacion_id])
+			@adecuacion= Adecuacion.where(planformacion_id: session[:plan_id]).take
 			@plan= Planformacion.find(session[:plan_id])
 			@actividadesadoc= []
 			@actividadesainv= []

@@ -7,6 +7,7 @@ class InformesController < ApplicationController
     
     if session[:usuario_id]
       @informes= Informe.where(planformacion_id: session[:plan_id]).all
+      @adecuacion = Adecuacion.where()
       if session[:adecuacion_id]
         @adecuacion= Adecuacion.find(session[:adecuacion_id])
         @actividadesa= []
@@ -418,12 +419,14 @@ class InformesController < ApplicationController
   end
 
   def crear_informe
+
     if session[:usuario_id]
       nombre = session[:nombre_usuario]   
       if not @nombre
         print "NO HAY USUARIO"
       end
       @persona = Persona.where(usuario_id: session[:usuario_id]).take
+
       if session[:plan_id]
         puts "HAY SESION PLAN"
         @planformacion = Planformacion.find(session[:plan_id])
