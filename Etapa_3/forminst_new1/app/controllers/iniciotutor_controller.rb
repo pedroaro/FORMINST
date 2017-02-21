@@ -463,7 +463,7 @@ class IniciotutorController < ApplicationController
 			end
 
 			if @modifique == true
-				flash[:mensaje]= "La adecuación fue modificada y guardada correctamente"
+				flash[:success]= "La adecuación fue modificada y guardada correctamente"
 				redirect_to controller:"iniciotutor", action: "detalles_adecuacion3"
 			end
 			
@@ -922,10 +922,10 @@ class IniciotutorController < ApplicationController
 					i=:otra.to_s+j.to_s;
 					otra = params[i]
 				end
-				flash[:mensaje]= "La adecuación fue creada y guardada correctamente"
+				flash[:success]= "La adecuación fue creada y guardada correctamente"
 				redirect_to controller:"iniciotutor", action: "listar_adecuaciones"
 			else
-				flash[:mensaje]= "La adecuación no fue creada porque ya posee una asociada para este plan de formación"
+				flash[:danger]= "La adecuación no fue creada porque ya posee una asociada para este plan de formación"
 				redirect_to controller:"iniciotutor", action: "listar_adecuaciones"
 			end
 
@@ -940,9 +940,9 @@ class IniciotutorController < ApplicationController
 		@est= EstatusAdecuacion.where(adecuacion_id: @adecuacion.id).take
 		if @est.estatus_id == 6
 			@adecuacion.destroy
-			flash[:mensaje]= "La adecuacion fue eliminada correctamente"
+			flash[:success]= "La adecuacion fue eliminada correctamente"
 		else
-			flash[:mensaje]= "No está permitido eliminar esta adecuación"
+			flash[:danger]= "No está permitido eliminar esta adecuación"
 		end
 		redirect_to controller:"iniciotutor", action: "listar_adecuaciones"
 	end
@@ -1187,9 +1187,9 @@ class IniciotutorController < ApplicationController
 	        end
 
 	        if(cambio_act.estatus_id == 5)
-	        	flash[:mensaje]="La adecuación se ha envíado a consejo de facultad"
+	        	flash[:success]="La adecuación se ha envíado a consejo de facultad"
 	        else
-	        	flash[:mensaje]="La adecuación se ha envíado a comision de investigacion"
+	        	flash[:sucess]="La adecuación se ha envíado a comision de investigacion"
 	        end
      
     
