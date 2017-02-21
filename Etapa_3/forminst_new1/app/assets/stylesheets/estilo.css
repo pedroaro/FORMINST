@@ -538,6 +538,15 @@ background-color: #CCCC99;
   margin: 20px;
 }
 
+
+.btn-forminst-blue{
+  color: #333;
+  background-color: #87CEEB;
+  border-color: #87CEEB;
+  margin: -5px;
+}
+
+
 .btn-forminst:hover,
 .btn-forminst:focus,
 .btn-forminst.focus,
