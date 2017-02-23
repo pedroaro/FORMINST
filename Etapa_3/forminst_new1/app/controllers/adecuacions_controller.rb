@@ -1,7 +1,7 @@
 class AdecuacionsController < ApplicationController
 
-  def generar_pdf(adecuacion) # es función permite generar el documento pdf de la adecuación
-    @adecuacion= Adecuacion.find(adecuacion) # se obtienen la información de la adecuación seleccionada
+  def generar_pdf() # es función permite generar el documento pdf de la adecuación
+    @adecuacion= Adecuacion.find(session[:adecuacion_id]) # se obtienen la información de la adecuación seleccionada
     @planformacion= Planformacion.find(@adecuacion.planformacion_id)
     @id_docente= @planformacion.tutor_id # se obtiene el indicador del ususario al que corresponde la adecuación
     @usertutor= Usuario.find(@id_docente) # se obtiene la información del tutor mediante la base de datos y la variable anterior
@@ -191,40 +191,14 @@ class AdecuacionsController < ApplicationController
 
 ####################################################################################  
   def descargar_pdf # esta función permite la generación y descarga del archivo PDF del documento
+    require 'prawn'
     puts "entre a descargar"
     pdf = Prawn::Document.new
+    pdf.text "Hello It's me"
+    pdf.render_file "example.pdf"
+    #pdf_filename = File.join(Rails.root, "example.pdf")
+    #send_file(pdf_filename, :filename => "example.pdf", :disposition => 'inline', :type => "application/pdf")
 
-    # From: Example Docs (http://prawn.majesticseacreature.com/manual.pdf)
-    # The document grid on Prawn is just a table-like structure with a defined number of rows and columns. 
-    # There are some helpers to create boxes of content based on the grid coordinates.
-    # define_grid accepts the following options: 
-    #  :rows          - Number of rows in the grid 
-    #  :columns       - Number of columns in the grid
-    #  :gutter        - Padding of each cell
-    #  :row_gutter    - Padding between rows
-    #  :column_gutter - Padding between columns
-
-    pdf.define_grid(:columns => 6, :rows => 8, :gutter => 10)
-
-    # Helper method to showcase the positioning of all grid cells
-    pdf.grid.show_all
-    
-    # New blank canvas for another example
-    pdf.start_new_page
-    
-    # The grid only need to be defined once, but since all the examples should be
-    # able to run alone we are repeating it on every example
-    pdf.grid([2,2], [4,4]).bounding_box do
-      pdf.move_down 100
-      pdf.text "We can write text inside grid elements or any other shape"
-    end
-
-    # to help visualize the grid position, show the outline
-    pdf.grid([2,2],[4,4]).show
-
-    # Sends the PDF as inline document with name x.pdf
-    send_data pdf.render, :filename => "x.pdf", :type => "application/pdf", :disposition => 'inline'
-    flash[:success] = "El archivo se ha creado correctamente." #se muestra un mensaje de exito
   end
 
 end
