@@ -948,13 +948,16 @@ class IniciotutorController < ApplicationController
 	end
 
 	def vista_previa
+		@fechaActual = Date.current.to_s
 		@plan= Planformacion.find(session[:plan_id])
+		@fechaConcurso = @plan.fecha_inicio
 		@usere= Usuarioentidad.where(usuario_id: @plan.instructor_id).take
 		@escuela= Escuela.find(@usere.escuela_id)
 		@adecuacion= Adecuacion.where(planformacion_id: @plan.id).take
 		@adscripcion_docencia= @plan.adscripcion_docencia
 		@adscripcion_investigacion= @plan.adscripcion_investigacion
 		@persona= Persona.where(usuario_id: @plan.instructor_id).take
+		@cpinstruccion = @persona.grado_instruccion
 		@user = Usuario.find(@plan.instructor_id)
 
 		@docencia='docencia'
