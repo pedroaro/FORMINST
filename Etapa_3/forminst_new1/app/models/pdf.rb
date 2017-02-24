@@ -1,6 +1,6 @@
 class Pdf 
 # estas funciones permite generar el cuerpo del documento en formato pdf
-	def self.pdf_adecuacion(plan, adecuacion, tutor, instructor, correoi, escuela, pactv_docencia, pactv_investigacion, pactv_extension, pactv_formacion, pactv_otras, sactv_docencia, sactv_investigacion, sactv_extension, sactv_formacion, sactv_otras, tactv_docencia, tactv_investigacion, tactv_extension, tactv_formacion, tactv_otras, cactv_docencia, cactv_investigacion, cactv_extension, cactv_formacion, cactv_otras)
+	def self.pdf_adecuacion(plan, adecuacion, tutor, instructor, correoi, escuela, pactv_docencia, pactv_investigacion, pactv_extension, pactv_formacion, pactv_otras, sactv_docencia, sactv_investigacion, sactv_extension, sactv_formacion, sactv_otras, tactv_docencia, tactv_investigacion, tactv_extension, tactv_formacion, tactv_otras, cactv_docencia, cactv_investigacion, cactv_extension, cactv_formacion, cactv_otras, fechaActual, fechaConcurso)
 	#def self.pdf_adecuacion(adecuacion, tutor, instructor, notificacion, perfil, pactv_docencia, pactv_investigacion, pactv_extension, pactv_formacion, pactv_otras, sactv_docencia, sactv_investigacion, sactv_extension, sactv_formacion, sactv_otras, tactv_docencia, tactv_investigacion, tactv_extension, tactv_formacion, tactv_otras, cactv_docencia, cactv_investigacion, cactv_extension, cactv_formacion, cactv_otras)
 		
 		# se invocan la bibliotecas
@@ -59,7 +59,7 @@ class Pdf
 
 			data1 = [[{:text=>"Escuela o Instituto:", :font_style => :bold}, {:text => escuela.nombre, :align=>:left}],
 					[{:text=>"Área:", :font_style => :bold}, {:text => instructor.area , :align=>:left}], 
-					[{:text=>"Fecha de realización del presente documento:", :font_style => :bold},{:text => adecuacion.fecha_creacion.to_s, :align=>:left}],
+					[{:text=>"Fecha de realización del presente documento:", :font_style => :bold},{:text => fechaActual, :align=>:left}],
 					[{:text=>"Unidad de Adscripción de Docencia:", :font_style => :bold},{:text => plan.adscripcion_docencia,  :align=>:left}],
 					[{:text=>"Unidad de Adscripción de Investigación:", :font_style => :bold},{:text => plan.adscripcion_investigacion,  :align=>:left}]] # datos que se desean en la tabla
 		  
@@ -96,7 +96,7 @@ class Pdf
 			pdf.text("\n")
 			pdf.text("2.- DATOS DEL INSTRUCTOR EN FORMACIÓN:", :style => :bold, :size  => 10)
 			dataa2 = [
-			[{:text=>"Fecha del Concurso de Oposición:", :font_style=>:bold},{:text=> "", :align=>:left}],
+			[{:text=>"Fecha del Concurso de Oposición:", :font_style=>:bold},{:text => fechaConcurso.to_s, :align=>:left}],
 			[{:text=>"Apellidos y Nombres:", :font_style => :bold}, {:text => instructor.apellidos+blanco+instructor.nombres, :align=>:left}],
 			[{:text=>"Cédula de Identidad:", :font_style => :bold}, {:text => instructor.ci.to_s, :align=>:left}],
 			[{:text=>"Correo Electrónico:", :font_style => :bold},{:text => correoi,  :align=>:left}],
@@ -966,21 +966,35 @@ class Pdf
 		end
 		###################
 		
-		nombre_archivo= instructor.ci.to_s+'-'+adecuacion.fecha_creacion.to_s+'-adecuacion.pdf' # nombre del dcouemrnto
+		nombre_archivo= instructor.ci.to_s+'-'+fechaActual+'-adecuacion.pdf' # nombre del dcouemrnto
 		pdf.render_file(nombre_archivo) # creación del docuemnto bajo su nombre
 
 	end
 #########################################################################################################################################################################
-	def self.pdf_informe(informe, adecuacion, tutor, instructor, pactv_docencia, pactv_investigacion, pactv_extension, pactv_otras, pactv_formacion, sactv_docencia, sactv_investigacion, sactv_extension, sactv_otras, sactv_formacion,  tactv_docencia, tactv_investigacion, tactv_extension, tactv_otras, tactv_formacion, cactv_docencia, cactv_investigacion, cactv_extension, cactv_otras, cactv_formacion, info_docencia, info_investigacion, info_extension, info_otras, info_formacion, noplan_a, noplan_na, res_tp, res_ppcc, res_otp, res_aec, res_oec, res_dctsc)
+	def self.pdf_informe(tipo_informe,escuela,informe, adecuacion, tutor, instructor, pactv_docencia, pactv_investigacion, pactv_extension, pactv_formacion, pactv_otras, sactv_docencia, sactv_investigacion, sactv_extension, sactv_otras, sactv_formacion,  tactv_docencia, tactv_investigacion, tactv_extension,tactv_formacion, tactv_otras, cactv_docencia, cactv_investigacion, cactv_extension, cactv_formacion, cactv_otras)
+		info_docencia=""
+		info_investigacion=""
+		info_extension=""
+		info_otras=""
+		info_formacion=""
+		noplan_a=""
+		noplan_na=""
+		res_tp=""
+		res_ppcc=""
+		res_otp=""
+		res_aec=""
+		res_oec=""
+		res_dctsc=""
+
 		# se invocan la bibliotecas
 		require "prawn"
 		require 'prawn/layout'
 
-		pdf=Prawn::Document.new(:background=>"#{RAILS_ROOT}/public/images/fondo.png", :top_margin=> 99, :bottom_margin=>35, :page_size => 'A4') # se coloca la imagen de fondo del documento
+		pdf= Prawn::Document.new(:background=>"#{Rails.root}/app/assets/images/fondo.png", :top_margin=> 99, :bottom_margin=>35, :page_size => 'A4') # se coloca la imagen de fondo del documento
 		
 		pdf.repeat :all do
 			#Encabezado
-			pdf.text_box "UNIVERSIDAD CENTRAL DE VENEZUELA \n FACULTAD DE CIENCIAS\n "+adecuacion.escuela.nombre+"\n\n",:style => :bold, :at => [pdf.bounds.right-490, pdf.bounds.top+59]
+			pdf.text_box "UNIVERSIDAD CENTRAL DE VENEZUELA \n FACULTAD DE CIENCIAS\n "+escuela.nombre.upcase+"\n\n",:style => :bold, :at => [pdf.bounds.right-490, pdf.bounds.top+59]
 		end
 		pdf.repeat :all do
 			#Pie de pagina
@@ -992,7 +1006,7 @@ class Pdf
 		end
 		
 		#titulo del documento
-		pdf.text("INFORME #{informe.tipo.nombre} DE ACTIVIDADES REALIZADAS POR EL INSTRUCTOR DURANTE LA EJECUCIÓN DE SU PLAN DE FORMACIÓN Y CAPACITACIÓN\n\n", :align=>:center, :style => :bold) # titulo del documento
+		pdf.text("INFORME #{tipo_informe.tipo} DE ACTIVIDADES REALIZADAS POR EL INSTRUCTOR DURANTE LA EJECUCIÓN DE SU PLAN DE FORMACIÓN Y CAPACITACIÓN\n\n", :align=>:center, :style => :bold) # titulo del documento
 		
 	################
 	pdf.bounding_box([0,pdf.bounds.top], :width=>350, :height=>675) do # permite establecer el espacio en donde se puede escribir en el docuemnto
@@ -1009,7 +1023,7 @@ class Pdf
 			[{:text=>"Período que comprende el Informe:", :font_style => :bold}, {:text => informe.periodo.to_s, :align=>:left}],
 			[{:text=>"Apellidos y Nombre del Tutor:", :font_style => :bold}, {:text => tutor.nombres, :align=>:left}],
 			[{:text=>"Cédula de Identidad del Tutor:", :font_style => :bold}, {:text => tutor.ci.to_s, :align=>:left}],
-			[{:text=>"Escuela o Instituto de adscripción:", :font_style => :bold}, {:text => adecuacion.escuela.nombre, :align=>:left}]
+			[{:text=>"Escuela o Instituto de adscripción:", :font_style => :bold}, {:text => escuela.nombre, :align=>:left}]
 		  ]# datos que se desean en la tabla
 		  
 			pdf.table data1, # lineas para generar la tabla en el docuemnto

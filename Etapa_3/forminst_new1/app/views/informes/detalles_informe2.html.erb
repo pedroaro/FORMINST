@@ -1079,21 +1079,16 @@
   function eliminar (elemento){
     $(elemento).parent().html('<a class="btn btn-default resultado"><span class="glyphicon glyphicon-plus"></span> Agregar Resultado</a>');
   }
-
 </script> -->
 
 <script type="text/javascript">
-
     $(document).ready(function() {
-
       $(document).on('click', '.resultado', function(){
         var params = $(this).attr("rel");
         $("#res"+params).show()
         $(this).parent().addClass("resultado"+params)
         $(this).parent().css({display: "none"})
-
         });
-
       $(document).on('click', '.eliminar_resultado', function(){ 
         var params = $(this).attr("rel");
         $("#res"+params).css({display: "none"});
@@ -1123,6 +1118,5 @@
         $("#resultado_sitio_pw"+params).val("").css({display: "none"});
         $("#resultado_url"+params).val("").css({display: "none"});
       }); 
-
     });
 </script>

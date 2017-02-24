@@ -3,12 +3,14 @@ class AdecuacionsController < ApplicationController
   def generar_pdf() # es función permite generar el documento pdf de la adecuación
     @adecuacion= Adecuacion.find(session[:adecuacion_id]) # se obtienen la información de la adecuación seleccionada
     @planformacion= Planformacion.find(@adecuacion.planformacion_id)
+    @fechaConcurso = @planformacion.fecha_inicio
     @id_docente= @planformacion.tutor_id # se obtiene el indicador del ususario al que corresponde la adecuación
     @usertutor= Usuario.find(@id_docente) # se obtiene la información del tutor mediante la base de datos y la variable anterior
     @tutor= Persona.where(usuario_id: @id_docente).take
     @id_instructor= @planformacion.instructor_id # se toma el identificador del instructor
     @userinst=Usuario.find(@id_instructor) # se obtienen toda la información del instructor 
     @instructor= Persona.where(usuario_id: @id_instructor).take
+    @fechaActual = Date.current.to_s
     @userentidad= Usuarioentidad.where(usuario_id: @planformacion.instructor_id).take
       if @userentidad.escuela_id == nil
         @userentidad.escuela_id=12
@@ -183,9 +185,9 @@ class AdecuacionsController < ApplicationController
     end
 
     # se llama a la función de "pedf_adecuacion" del modelo "pdf", pasando todas las variables correspondientes
-    Pdf.pdf_adecuacion(@planformacion, @adecuacion, @tutor, @instructor, @correoi, @escuela, @pactv_docencia, @pactv_investigacion, @pactv_extension, @pactv_formacion, @pactv_otras, @sactv_docencia, @sactv_investigacion, @sactv_extension, @sactv_formacion, @sactv_otras, @tactv_docencia, @tactv_investigacion, @tactv_extension, @tactv_formacion, @tactv_otras, @cactv_docencia, @cactv_investigacion, @cactv_extension, @cactv_formacion, @cactv_otras)
-    @nombre_archivo= @instructor.ci.to_s+'-'+@adecuacion.fecha_creacion.to_s+'-adecuacion.pdf' # se arma el nombre del documento 
-
+    Pdf.pdf_adecuacion(@planformacion, @adecuacion, @tutor, @instructor, @correoi, @escuela, @pactv_docencia, @pactv_investigacion, @pactv_extension, @pactv_formacion, @pactv_otras, @sactv_docencia, @sactv_investigacion, @sactv_extension, @sactv_formacion, @sactv_otras, @tactv_docencia, @tactv_investigacion, @tactv_extension, @tactv_formacion, @tactv_otras, @cactv_docencia, @cactv_investigacion, @cactv_extension, @cactv_formacion, @cactv_otras, @fechaActual, @fechaConcurso)
+    @nombre_archivo= @instructor.ci.to_s+'-'+@fechaActual+'-adecuacion.pdf' # se arma el nombre del documento 
+    puts @nombre_archivo
     return @nombre_archivo # se retorna el nombre del archivo
   end
 
