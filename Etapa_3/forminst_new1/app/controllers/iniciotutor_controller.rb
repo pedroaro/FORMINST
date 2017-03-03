@@ -253,7 +253,6 @@ class IniciotutorController < ApplicationController
 			semestre= params[:semestre].to_i
 
 			if params[:adecuacion_id]!=nil
-				puts "hellooo"
 				session[:adecuacion_id]= params[:adecuacion_id]
 			end
 			@adecuacion= Adecuacion.find(session[:adecuacion_id])
@@ -503,7 +502,9 @@ class IniciotutorController < ApplicationController
 			if params[:editar] == 'no'
 				session[:editar]= false
 			end
-			puts session[:editar]
+			if !session[:editar]
+				flash.now[:info]= "Para editar la Adecuación debe seleccionar modificar en Plan Formación"
+			end
 			@adecuacion= Adecuacion.where(planformacion_id: session[:plan_id]).take
 			@adecuaciones = Adecuacion.where(planformacion_id: session[:plan_id])
 			@iddoc= 'id_docencia'
@@ -573,6 +574,9 @@ class IniciotutorController < ApplicationController
 			@formacion= 'formacion'
 			@extension= 'extension'
 			@otra= 'otra' 
+			if !session[:editar]
+				flash.now[:info]= "Para editar la Adecuación debe seleccionar modificar en Plan Formación"
+			end
 			@nombre = session[:nombre_usuario]
 			@instructorName = session[:instructorName]
 			@adecuacion= Adecuacion.where(planformacion_id: session[:plan_id]).take
@@ -645,39 +649,57 @@ class IniciotutorController < ApplicationController
 			@actividadesaext= []
 			@actividadesafor= []
 			@actividadesaotr= []
+			if !session[:editar]
+				flash.now[:info]= "Para editar la Adecuación debe seleccionar modificar en Plan Formación"
+			end
 			@actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 3).all
+			a= false
+			b= false
+			c= false
+			d= false
+			e= false
 			@actividadesa.each do |actade| 
 				@act= Actividad.find(actade.actividad_id)
 				tipo= @act.tipo_actividad_id
 				if tipo==1
-					puts "soy una actividad de docencia"
+					puts "soy una actividad de docenciaaa"
 					puts @act.actividad
 					@actividadesadoc.push(@act)
+					a = true
 				else
 					if tipo==2
 						puts "soy una actividad de investigacion"
 						puts @act.actividad
 						@actividadesainv.push(@act)
+						b = true
 					else
 						if tipo==3
 							puts "soy una actividad de extension"
 							puts @act.actividad
 							@actividadesaext.push(@act)
+							c = true
 						else
 							if tipo==4
 								puts "soy una actividad de formacion"
 								puts @act.actividad
 								@actividadesafor.push(@act)
+								d = true
 							else
 								if tipo==5
 									puts "soy otro tipo de actividad"
 									puts @act.actividad
 									@actividadesaotr.push(@act)
+									e = true
 								end
 							end
 						end
 					end
 				end
+			end
+			if (a == true && b== true && c== true && d== true  && e== true)
+				puts "hahahahhajjj siiii"
+			else 
+				puts "oh nooo"
 			end
 			@bool_enviado = 0
 			estatus_adecuacion = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
@@ -707,32 +729,41 @@ class IniciotutorController < ApplicationController
 			@actividadesaext= []
 			@actividadesafor= []
 			@actividadesaotr= []
+			if !session[:editar]
+				flash.now[:info]= "Para editar la Adecuación debe seleccionar modificar en Plan Formación"
+			end
 			@actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 4).all
+			puts "GyyyGHELLO1"
+			puts @actividadesa
+			if @actividadesa.blank?
+				puts "GGHELLO1"
+			end
 			@actividadesa.each do |actade| 
+				puts "HELLO1"
 				@act= Actividad.find(actade.actividad_id)
 				tipo= @act.tipo_actividad_id
 				if tipo==1
-					puts "soy una actividad de docencia"
+					puts "HELLO1"
 					puts @act.actividad
 					@actividadesadoc.push(@act)
 				else
 					if tipo==2
-						puts "soy una actividad de investigacion"
+						puts "HELLO12"
 						puts @act.actividad
 						@actividadesainv.push(@act)
 					else
 						if tipo==3
-							puts "soy una actividad de extension"
+							puts "HELLO13"
 							puts @act.actividad
 							@actividadesaext.push(@act)
 						else
 							if tipo==4
-								puts "soy una actividad de formacion"
+								puts "HELLO14"
 								puts @act.actividad
 								@actividadesafor.push(@act)
 							else
 								if tipo==5
-									puts "soy otro tipo de actividad"
+									puts "HELLO15"
 									puts @act.actividad
 									@actividadesaotr.push(@act)
 								end
@@ -1132,8 +1163,244 @@ class IniciotutorController < ApplicationController
 	end
 
 	def cambiar_estatusA
-
  		@adecuacion_id = params[:adecuacion_id].to_i
+ 		puts "hhahahahahahjahahaha"
+ 		puts @adecuacion_id
+ 		@actividades1doc= []
+		@actividades1inv= []
+		@actividades1ext= []
+		@actividades1for= []
+		@actividades1otr= []
+		@actividades1= AdecuacionActividad.where(adecuacion_id: @adecuacion_id, semestre: 1).all
+		if @actividades1.blank?
+	        flash[:danger]="No puede enviar la adecuación sin haber llenado todos los semestres"
+	   	   	redirect_to controller:"iniciotutor", action: "detalles_adecuacion3"
+		end
+		a= false
+		b= false
+		c= false
+		d= false
+		e= false
+		@actividades1.each do |actade| 
+			@act= Actividad.find(actade.actividad_id)
+			tipo= @act.tipo_actividad_id
+			if tipo==1
+				puts "soy una actividad de docencia"
+				puts @act.actividad
+				a = true
+			else
+				if tipo==2
+					puts "soy una actividad de investigacion"
+					puts @act.actividad
+					b = true
+				else
+					if tipo==3
+						puts "soy una actividad de extension"
+						puts @act.actividad
+						c = true
+					else
+						if tipo==4
+							puts "soy una actividad de formacion"
+							puts @act.actividad
+							d = true
+						else
+							if tipo==5
+								puts "soy otro tipo de actividad"
+								puts @act.actividad
+								e = true
+							end
+						end
+					end
+				end
+			end
+		end
+		if (a == true && b== true && c== true && d== true  && e== true)
+				puts "hahahahhajjj siiii"
+		else 
+			puts "oh nooo"
+			flash[:danger]="No puede enviar la adecuación sin haber llenado todos los campos"
+   	   		redirect_to controller:"iniciotutor", action: "detalles_adecuacion3"
+		end
+		@actividades2doc= []
+		@actividades2inv= []
+		@actividades2ext= []
+		@actividades2for= []
+		@actividades2otr= []
+		@actividades2= AdecuacionActividad.where(adecuacion_id: @adecuacion_id, semestre: 2).all
+		if @actividades2.blank?
+	        flash[:danger]="No puede enviar la adecuación sin haber llenado todos los semestres"
+	   	   	redirect_to controller:"iniciotutor", action: "detalles_adecuacion3"
+		end
+		a= false
+		b= false
+		c= false
+		d= false
+		e= false
+		@actividades2.each do |actade| 
+			@act= Actividad.find(actade.actividad_id)
+			tipo= @act.tipo_actividad_id
+			if tipo==1
+				puts "soy una actividad de docencia"
+				puts @act.actividad
+				@actividades2doc.push(@act)
+				a = true
+			else
+				if tipo==2
+					puts "soy una actividad de investigacion"
+					puts @act.actividad
+					@actividades2inv.push(@act)
+					b = true
+				else
+					if tipo==3
+						puts "soy una actividad de extension"
+						puts @act.actividad
+						@actividades2ext.push(@act)
+						c = true
+					else
+						if tipo==4
+							puts "soy una actividad de formacion"
+							puts @act.actividad
+							@actividades2for.push(@act)
+							d = true
+						else
+							if tipo==5
+								puts "soy otro tipo de actividad"
+								puts @act.actividad
+								@actividades2otr.push(@act)
+								e = true
+							end
+						end
+					end
+				end
+			end
+		end
+		if (a == true && b== true && c== true && d== true  && e== true)
+				puts "hahahahhajjj siiii"
+			else 
+				puts "oh nooo"
+				flash[:danger]="No puede enviar la adecuación sin haber llenado todos los campos"
+	   	   		redirect_to controller:"iniciotutor", action: "detalles_adecuacion3"
+		end
+		@actividades3doc= []
+		@actividades3inv= []
+		@actividades3ext= []
+		@actividades3for= []
+		@actividades3otr= []
+		@actividades3= AdecuacionActividad.where(adecuacion_id: @adecuacion_id, semestre: 3).all
+		if @actividades3.blank?
+	        flash[:danger]="No puede enviar la adecuación sin haber llenado todos los semestres"
+	   	   	redirect_to controller:"iniciotutor", action: "detalles_adecuacion3"
+		end
+		a= false
+		b= false
+		c= false
+		d= false
+		e= false
+		@actividades3.each do |actade| 
+			@act= Actividad.find(actade.actividad_id)
+			tipo= @act.tipo_actividad_id
+			if tipo==1
+				puts "soy una actividad de docencia"
+				puts @act.actividad
+				@actividades3doc.push(@act)
+				a = true
+			else
+				if tipo==2
+					puts "soy una actividad de investigacion"
+					puts @act.actividad
+					@actividades3inv.push(@act)
+					b = true
+				else
+					if tipo==3
+						puts "soy una actividad de extension"
+						puts @act.actividad
+						@actividades3ext.push(@act)
+						c = true
+					else
+						if tipo==4
+							puts "soy una actividad de formacion"
+							puts @act.actividad
+							@actividades3for.push(@act)
+							d = true
+						else
+							if tipo==5
+								puts "soy otro tipo de actividad"
+								puts @act.actividad
+								@actividades3otr.push(@act)
+								e = true
+							end
+						end
+					end
+				end
+			end
+		end
+		if (a == true && b== true && c== true && d== true  && e== true)
+				puts "hahahahhajjj siiii"
+			else 
+				puts "oh nooo"
+				flash[:danger]="No puede enviar la adecuación sin haber llenado todos los campos"
+	   	   		redirect_to controller:"iniciotutor", action: "detalles_adecuacion3"
+		end
+		@actividades4doc= []
+		@actividades4inv= []
+		@actividades4ext= []
+		@actividades4for= []
+		@actividades4otr= []
+		@actividades4= AdecuacionActividad.where(adecuacion_id: @adecuacion_id, semestre: 4).all
+		if @actividades4.blank?
+	        flash[:danger]="No puede enviar la adecuación sin haber llenado todos los semestres"
+	   	   	redirect_to controller:"iniciotutor", action: "detalles_adecuacion3"
+		end
+		a= false
+		b= false
+		c= false
+		d= false
+		e= false
+		@actividades4.each do |actade| 
+			@act= Actividad.find(actade.actividad_id)
+			tipo= @act.tipo_actividad_id
+			if tipo==1
+				puts "soy una actividad de docencia"
+				puts @act.actividad
+				@actividades4doc.push(@act)
+				a = true
+			else
+				if tipo==2
+					puts "soy una actividad de investigacion"
+					puts @act.actividad
+					@actividades4inv.push(@act)
+					b = true
+				else
+					if tipo==3
+						puts "soy una actividad de extension"
+						puts @act.actividad
+						@actividades4ext.push(@act)
+						c = true
+					else
+						if tipo==4
+							puts "soy una actividad de formacion"
+							puts @act.actividad
+							@actividades4for.push(@act)
+							d = true
+						else
+							if tipo==5
+								puts "soy otro tipo de actividad"
+								puts @act.actividad
+								@actividades4otr.push(@act)
+								e = true
+							end
+						end
+					end
+				end
+			end
+		end
+		if (a == true && b== true && c== true && d== true  && e== true)
+				puts "hahahahhajjj siiii"
+			else 
+				puts "oh nooo"
+				flash[:danger]="No puede enviar la adecuación sin haber llenado todos los campos"
+	   	   		redirect_to controller:"iniciotutor", action: "detalles_adecuacion3"
+		end
 	      	
 	      	cambio_act = EstatusAdecuacion.where(adecuacion_id: @adecuacion_id, actual: 1).take
 	      	cambio_act.actual = 0
@@ -1192,7 +1459,7 @@ class IniciotutorController < ApplicationController
 	        if(cambio_act.estatus_id == 5)
 	        	flash[:success]="La adecuación se ha envíado a consejo de facultad"
 	        else
-	        	flash[:sucess]="La adecuación se ha envíado a comision de investigacion"
+	        	flash[:success]="La adecuación se ha envíado a comision de investigacion"
 	        end
      
     

@@ -960,6 +960,8 @@ class Pdf
 			
 			@archivos= DocumentoPlan.where(planformacion_id: adecuacion.planformacion_id).all
 			@i = @archivos.size
+			puts @i
+			puts "idk what i'm doing"
 			pdf.text("\n")
 			pdf.text("Cantidad de soportes adjuntos:"+ @i.to_s+" \n", :style => :bold, :size  => 10)
 			
@@ -972,19 +974,19 @@ class Pdf
 	end
 #########################################################################################################################################################################
 	def self.pdf_informe(tipo_informe,escuela,informe, adecuacion, tutor, instructor, pactv_docencia, pactv_investigacion, pactv_extension, pactv_formacion, pactv_otras, sactv_docencia, sactv_investigacion, sactv_extension, sactv_otras, sactv_formacion,  tactv_docencia, tactv_investigacion, tactv_extension,tactv_formacion, tactv_otras, cactv_docencia, cactv_investigacion, cactv_extension, cactv_formacion, cactv_otras)
-		info_docencia=""
-		info_investigacion=""
-		info_extension=""
-		info_otras=""
-		info_formacion=""
-		noplan_a=""
-		noplan_na=""
-		res_tp=""
-		res_ppcc=""
-		res_otp=""
-		res_aec=""
-		res_oec=""
-		res_dctsc=""
+		info_docencia=[]
+		info_investigacion=[]
+		info_extension=[]
+		info_otras=[]
+		info_formacion=[]
+		noplan_a=[]
+		noplan_na=[]
+		res_tp=[]
+		res_ppcc=[]
+		res_otp=[]
+		res_aec=[]
+		res_oec=[]
+		res_dctsc=[]
 
 		# se invocan la bibliotecas
 		require "prawn"
@@ -1016,13 +1018,21 @@ class Pdf
 			
 			blanco=' '
 			data1 = [
-			[{:text=>"N° del informe", :font_style => :bold}, {:text => informe.numero_informe.to_s, :align=>:left}],
-			[{:text=>"Fecha de realización del informe:", :font_style => :bold}, {:text => informe.fecha_informe.to_s, :align=>:left}],
-			[{:text=>"Apellidos y Nombres del Instructor:", :font_style => :bold},{:text => instructor.apellidos+blanco+instructor.nombres, :align=>:left}],
+			#[{:text=>"N° del informe", :font_style => :bold}, {:text => informe.numero_informe.to_s, :align=>:left}],
+			[{:text=>"N° del informe", :font_style => :bold}, {:text => "informe.numero_informe.to_s", :align=>:left}],
+			#[{:text=>"Fecha de realización del informe:", :font_style => :bold}, {:text => informe.fecha_informe.to_s, :align=>:left}],
+			[{:text=>"Fecha de realización del informe:", :font_style => :bold}, {:text => "informe.fecha_informe.to_s", :align=>:left}],
+			#[{:text=>"Apellidos y Nombres del Instructor:", :font_style => :bold},{:text => instructor.apellidos+blanco+instructor.nombres, :align=>:left}],
+			[{:text=>"Apellidos y Nombres del Instructor:", :font_style => :bold},{:text => instructor.apellidos+ " " +instructor.nombres, :align=>:left}],
+			#[{:text=>"Cédula de Identidad del Instructor:", :font_style => :bold}, {:text => instructor.ci.to_s, :align=>:left}],
 			[{:text=>"Cédula de Identidad del Instructor:", :font_style => :bold}, {:text => instructor.ci.to_s, :align=>:left}],
-			[{:text=>"Período que comprende el Informe:", :font_style => :bold}, {:text => informe.periodo.to_s, :align=>:left}],
+			#[{:text=>"Período que comprende el Informe:", :font_style => :bold}, {:text => informe.periodo.to_s, :align=>:left}],
+			[{:text=>"Período que comprende el Informe:", :font_style => :bold}, {:text => "informe.periodo.to_s", :align=>:left}],
+			#[{:text=>"Apellidos y Nombre del Tutor:", :font_style => :bold}, {:text => tutor.nombres, :align=>:left}],
 			[{:text=>"Apellidos y Nombre del Tutor:", :font_style => :bold}, {:text => tutor.nombres, :align=>:left}],
+			#[{:text=>"Cédula de Identidad del Tutor:", :font_style => :bold}, {:text => tutor.ci.to_s, :align=>:left}],
 			[{:text=>"Cédula de Identidad del Tutor:", :font_style => :bold}, {:text => tutor.ci.to_s, :align=>:left}],
+			#+[{:text=>"Escuela o Instituto de adscripción:", :font_style => :bold}, {:text => escuela.nombre, :align=>:left}]
 			[{:text=>"Escuela o Instituto de adscripción:", :font_style => :bold}, {:text => escuela.nombre, :align=>:left}]
 		  ]# datos que se desean en la tabla
 		  
@@ -2807,23 +2817,11 @@ class Pdf
 					:align => { 0 => :left, 1 => :left, 2=> :left}
 			end
 			
-			data52=[[{:text=> "5.1.- Grado de avance en los estudios de postgrado:\n", :font_style => :bold}],
-			[{:text=> informe.avance.to_s, :align=>:left}]] # datos que se desean en la tabla
-			
-			pdf.table data52,# lineas para generar la tabla en el docuemnto
-			:border_style => :grid, #:underline_header
-			:font_size  => 8, 
-			:horizontal_padding => 6,
-			:vertical_padding   => 3,
-			:border_width => 0.7, 
-			:column_widths => {0 => 520}, 
-			:position => :left,
-			:align => { 0 => :left}
+			#data52=[[{:text=> "5.1.- Grado de avance en los estudios de postgrado:\n", :font_style => :bold}],
+			#[{:text=> informe.avance.to_s, :align=>:left}]] # datos que se desean en la tabla
 			
 			pdf.text("\n")
-			
-			#apartado 6
-			
+
 			pdf.text("6.- ACTIVIDADES DE EXTENSIÓN:", :style => :bold, :size  => 10)
 			data6 = [[{:text=>"ACTIVIDAD PROGRAMADA",:align=>:center,:font_style => :bold}, {:text =>"ACTIVIDAD EJECUTADA", :align=>:center,:font_style => :bold},{:text =>"OBSERVACIONES", :align=>:center,:font_style => :bold} ]	] # datos que se desean en la tabla
 			
@@ -2994,20 +2992,20 @@ class Pdf
 			punto='. '
 			pdf.text("8.- CONCLUSIONES:", :style => :bold, :size  => 10)
 			
-			if informe.valores_id != nil
-				data10 = [[{:text=> informe.val_conclusion.nombre+punto+informe.conclusion.to_s, :align=> :left}]] # datos que se desean en la tabla
+			#if informe.valores_id != nil
+			#	data10 = [[{:text=> informe.val_conclusion.nombre+punto+informe.conclusion.to_s, :align=> :left}]] # datos que se desean en la tabla
+			#	
+			#	pdf.table data10, # lineas para generar la tabla en el docuemnto
+			#	:border_style => :grid, #:underline_header
+			#	:font_size  => 8, 
+			#	:horizontal_padding => 6,
+			#	:vertical_padding   => 3,
+			#	:border_width => 0.7, 
+			#	:column_widths => { 0 => 520}, 
+			#	:position => :left,
+			#	:align => { 0 => :left}
 				
-				pdf.table data10, # lineas para generar la tabla en el docuemnto
-				:border_style => :grid, #:underline_header
-				:font_size  => 8, 
-				:horizontal_padding => 6,
-				:vertical_padding   => 3,
-				:border_width => 0.7, 
-				:column_widths => { 0 => 520}, 
-				:position => :left,
-				:align => { 0 => :left}
-				
-			else
+			#else
 				data10 = [[{:text=> "", :align=> :left}]] # datos que se desean en la tabla
 				
 				pdf.table data10, # lineas para generar la tabla en el docuemnto
@@ -3019,7 +3017,7 @@ class Pdf
 				:column_widths => { 0 => 520}, 
 				:position => :left,
 				:align => { 0 => :left}
-			end
+			#end
 			
 			pdf.text("\n")
 			
@@ -3027,20 +3025,20 @@ class Pdf
 			
 			pdf.text("9.- OPINIÓN DEL TUTOR:", :style => :bold, :size  => 10)
 			
-			if informe.valortutores_id != nil
-				data11 = [[{:text=> informe.val_tutor.nombre+punto+informe.opinion_tutor.to_s, :align=> :left}]] # datos que se desean en la tabla
-				
-				pdf.table data11, # lineas para generar la tabla en el docuemnto
-				:border_style => :grid, #:underline_header
-				:font_size  => 8, 
-				:horizontal_padding => 6,
-				:vertical_padding   => 3,
-				:border_width => 0.7, 
-				:column_widths => { 0 => 520}, 
-				:position => :left,
-				:align => { 0 => :left}
-				
-			else
+			#if informe.valortutores_id != nil
+			#	data11 = [[{:text=> informe.val_tutor.nombre+punto+informe.opinion_tutor.to_s, :align=> :left}]] # datos que se desean en la tabla
+			#	
+			#	pdf.table data11, # lineas para generar la tabla en el docuemnto
+			#	:border_style => :grid, #:underline_header
+			#	:font_size  => 8, 
+			#	:horizontal_padding => 6,
+			#	:vertical_padding   => 3,
+			#	:border_width => 0.7, 
+			#	:column_widths => { 0 => 520}, 
+			#	:position => :left,
+			#	:align => { 0 => :left}
+			#	
+			#else
 				data11 = [[{:text=> "", :align=> :left}]] # datos que se desean en la tabla
 				
 				pdf.table data11, # lineas para generar la tabla en el docuemnto
@@ -3052,7 +3050,7 @@ class Pdf
 				:column_widths => { 0 => 520}, 
 				:position => :left,
 				:align => { 0 => :left}
-			end
+			#end
 			
 			
 			#FIN DEL INFORME		
@@ -3073,7 +3071,8 @@ class Pdf
 			:position => :left,
 			:align => {0 => :left, 1=> :left}
 			
-			@archivos= Archivo.find(:all, :conditions=>["informes_id=? AND usuarios_id=?", informe.id, informe.usuarios_id])
+
+			@archivos= DocumentoInforme.where(id: informe.id).all
 			@i = @archivos.size
 			pdf.text("\n")
 			pdf.text("Cantidad de soportes adjuntos:"+ @i.to_s+" \n", :style => :bold, :size  => 10)
@@ -3081,11 +3080,7 @@ class Pdf
 			
 		end
 		#####################
-		p '-------------'
-		p info_docencia
-		nombre_archivo= instructor.ci.to_s+'-'+informe.numero_informe+'-informe'+informe.tipodeinformes_id.to_s+'.pdf'
-		pdf.render_file(nombre_archivo)
-		
-
+		nombre_archivo= instructor.ci.to_s+'-informe.pdf' # nombre del dcouemrnto
+		pdf.render_file(nombre_archivo) # creación del docuemnto bajo su nombre
 	end
 end
