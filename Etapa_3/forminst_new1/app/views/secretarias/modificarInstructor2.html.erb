@@ -14,8 +14,8 @@
             <a href="#" class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-expanded="false">Instructor <span class="caret"></span></a>
             <ul class="dropdown-menu nav" role="menu">
               <li></li>
-              <li><a href="#" class = 'active'>Agregar Instructor</a></li>
-              <li><%= link_to 'Modificar Instructor', :controller => 'secretarias', :action => 'modificarInstructor' %></li>
+              <li><%= link_to 'Agregar Instructor', :controller => 'secretarias', :action => 'agregarInstructor'%></li>
+             <li><a href="#" class = 'active'>Modificar Instructor</a></li>
             </ul>
         </li>
         <li><a href="../secretarias/logout">Cerrar Sesión</a></li>
@@ -44,7 +44,7 @@
   </div>
 </div>
 
-<form accept-charset="UTF-8" controller ="secretarias" action="guarda_instructor">
+<form accept-charset="UTF-8" controller ="secretarias" action="guarda_instructor_modificado">
 
 
 <div class= "row">
@@ -248,32 +248,6 @@
       </div>
     </div>
   </div>
-
-<div class= "row">
-  <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
-    <div class="table-responsive">
-      <table class="table table-bordered table-striped">
-        <tbody>
-          <tr>
-            <td class="text-center">
-            </td>
-          </tr>
-          <tr>
-            <td class="text-left"><h5><strong>4. Tutor de Plan de Formación </strong></h5></td>
-          </tr>
-          <tr>
-            <td class="text-center"><strong>Agregar Tutor</strong></td>
-          </tr>
-          <tr> 
-            <td class="text-center">
-              <%= select_tag(:cptutores, options_for_select(@cptutores), {:class => "form-control", :name=> "JRTutores", :style => "width:100%;"}) %>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
 
 <center><input name="commit" type="submit" value="Guardar" /></center>
 </form>

@@ -2,8 +2,22 @@
   <div class="col-xs-12 col-md-12">
       <ul class="nav nav-tabs">
         <li><a href="../secretarias/index" class = 'active'>Inicio</a></li>
-        <li><a href="../secretarias/crearPlanes">Agregar Tutor</a></li>
-        <li><a href="../secretarias/agregarInstructor">Agregar Instructor</a></li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Tutor <span class="caret"></span></a>
+            <ul class="dropdown-menu nav" role="menu">
+              <li></li>
+              <li><%= link_to 'Agregar Tutor', :controller => 'secretarias', :action => 'agregarTutor'%></li>
+              <li><%= link_to 'Modificar Tutor', :controller => 'secretarias', :action => 'modificarTutor' %></li>
+            </ul>
+        </li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Instructor <span class="caret"></span></a>
+            <ul class="dropdown-menu nav" role="menu">
+              <li></li>
+              <li><%= link_to 'Agregar Instructor', :controller => 'secretarias', :action => 'agregarInstructor'%></li>
+              <li><%= link_to 'Modificar Instructor', :controller => 'secretarias', :action => 'modificarInstructor' %></li>
+            </ul>
+        </li>
         <li><a href="../secretarias/logout">Cerrar Sesión</a></li>
       </ul>
   </div>

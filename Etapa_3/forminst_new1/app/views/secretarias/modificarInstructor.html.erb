@@ -1,0 +1,66 @@
+<div class = 'row'>
+  <div class="col-xs-12 col-md-12">
+      <ul class="nav nav-tabs">
+        <li><a href="../secretarias/index">Inicio</a></li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Tutor <span class="caret"></span></a>
+            <ul class="dropdown-menu nav" role="menu">
+              <li></li>
+              <li><%= link_to 'Agregar Tutor', :controller => 'secretarias', :action => 'agregarTutor'%></li>
+              <li><%= link_to 'Modificar Tutor', :controller => 'secretarias', :action => 'modificarTutor' %></li>
+            </ul>
+        </li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-expanded="false">Instructor <span class="caret"></span></a>
+            <ul class="dropdown-menu nav" role="menu">
+              <li></li>
+              <li><%= link_to 'Agregar Instructor', :controller => 'secretarias', :action => 'agregarInstructor'%></li>
+             <li><a href="#" class = 'active'>Modificar Instructor</a></li>
+            </ul>
+        </li>
+        <li><a href="../secretarias/logout">Cerrar Sesión</a></li>
+      </ul>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12 col-md-12">
+    <div class="text-right">
+      <div id = "fechamuestra">
+        <script languaje="JavaScript">
+          fecha();
+        </script> 
+      </div>
+      <%if @nombre%>
+        <div>
+          <h4><b><%=@nombre%></b></h4>
+        </div>
+      <%end%>
+    </div>
+  </div>
+</div>
+
+<form accept-charset="UTF-8" controller ="secretarias" action="modificarInstructor2">
+
+<div class= "row">
+  <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped">
+        <tbody>
+          <tr>
+            <td class="text-center"><strong>Modificar Instructor</strong></td>
+          </tr>
+          <tr> 
+            <td class="text-center">
+              <%= select_tag(:cptutores, options_for_select(@cptutores), {:class => "form-control", :name=> "JRTutores", :style => "width:100%;" }) %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<center><input name="commit" type="submit" value="Siguiente" /></center>
+</form>
+
+<br><br> 
