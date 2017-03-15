@@ -973,20 +973,17 @@ class Pdf
 
 	end
 #########################################################################################################################################################################
-	def self.pdf_informe(tipo_informe,escuela,informe, adecuacion, tutor, instructor, pactv_docencia, pactv_investigacion, pactv_extension, pactv_formacion, pactv_otras, sactv_docencia, sactv_investigacion, sactv_extension, sactv_otras, sactv_formacion,  tactv_docencia, tactv_investigacion, tactv_extension,tactv_formacion, tactv_otras, cactv_docencia, cactv_investigacion, cactv_extension, cactv_formacion, cactv_otras)
-		info_docencia=[]
-		info_investigacion=[]
-		info_extension=[]
-		info_otras=[]
-		info_formacion=[]
+	def self.pdf_informe(tipo_informe,escuela,informe, adecuacion, tutor, instructor, pactv_docencia, pactv_investigacion, pactv_extension, pactv_formacion, pactv_otras, sactv_docencia, sactv_investigacion, sactv_extension, sactv_otras, sactv_formacion,  tactv_docencia, tactv_investigacion, tactv_extension,tactv_formacion, tactv_otras, cactv_docencia, cactv_investigacion, cactv_extension, cactv_formacion, cactv_otras, info_docencia, info_investigacion,info_formacion, info_extension, info_otras,resx,resultados,actividadese,observaciont)
 		noplan_a=[]
 		noplan_na=[]
-		res_tp=[]
+		res_tp=resx
 		res_ppcc=[]
 		res_otp=[]
 		res_aec=[]
 		res_oec=[]
 		res_dctsc=[]
+
+		puts "PDFFF"
 
 		# se invocan la bibliotecas
 		require "prawn"
@@ -1008,7 +1005,8 @@ class Pdf
 		end
 		
 		#titulo del documento
-		pdf.text("INFORME #{tipo_informe.tipo} DE ACTIVIDADES REALIZADAS POR EL INSTRUCTOR DURANTE LA EJECUCIÓN DE SU PLAN DE FORMACIÓN Y CAPACITACIÓN\n\n", :align=>:center, :style => :bold) # titulo del documento
+		ati = tipo_informe.tipo.upcase
+		pdf.text("INFORME #{ati} DE ACTIVIDADES REALIZADAS POR EL INSTRUCTOR DURANTE LA EJECUCIÓN DE SU PLAN DE FORMACIÓN Y CAPACITACIÓN\n\n", :align=>:center, :style => :bold) # titulo del documento
 		
 	################
 	pdf.bounding_box([0,pdf.bounds.top], :width=>350, :height=>675) do # permite establecer el espacio en donde se puede escribir en el docuemnto
@@ -1019,9 +1017,9 @@ class Pdf
 			blanco=' '
 			data1 = [
 			#[{:text=>"N° del informe", :font_style => :bold}, {:text => informe.numero_informe.to_s, :align=>:left}],
-			[{:text=>"N° del informe", :font_style => :bold}, {:text => "informe.numero_informe.to_s", :align=>:left}],
+			[{:text=>"N° del informe", :font_style => :bold}, {:text => informe.numero.to_s, :align=>:left}],
 			#[{:text=>"Fecha de realización del informe:", :font_style => :bold}, {:text => informe.fecha_informe.to_s, :align=>:left}],
-			[{:text=>"Fecha de realización del informe:", :font_style => :bold}, {:text => "informe.fecha_informe.to_s", :align=>:left}],
+			[{:text=>"Fecha de realización del informe:", :font_style => :bold}, {:text => informe.fecha_creacion.to_s, :align=>:left}],
 			#[{:text=>"Apellidos y Nombres del Instructor:", :font_style => :bold},{:text => instructor.apellidos+blanco+instructor.nombres, :align=>:left}],
 			[{:text=>"Apellidos y Nombres del Instructor:", :font_style => :bold},{:text => instructor.apellidos+ " " +instructor.nombres, :align=>:left}],
 			#[{:text=>"Cédula de Identidad del Instructor:", :font_style => :bold}, {:text => instructor.ci.to_s, :align=>:left}],
@@ -1075,7 +1073,7 @@ class Pdf
 			:position => :left,
 			:align => { 0 => :left}
 			
-			if pactv_docencia != []
+			if !pactv_docencia.blank?
 				pactv_docencia.each do |actv|
 					data25 = [[{:text=>  actv.actividad ,  :align=>:left}]]# datos que se desean en la tabla
 					
@@ -1114,7 +1112,7 @@ class Pdf
 					:position => :left,
 					:align => { 0 => :left}
 			
-			if pactv_investigacion != []
+			if !pactv_investigacion.blank?
 				pactv_investigacion.each do |actv|
 					data26= [[{:text=>  actv.actividad , :align=>:left}]]# datos que se desean en la tabla
 					
@@ -1154,7 +1152,7 @@ class Pdf
 					:align => { 0 => :left}
 			
 			
-			if pactv_formacion != []
+			if !pactv_formacion.blank?
 				pactv_formacion.each do |actv|
 					data28=[[{:text=> actv.actividad , :aling=> :left}]]# datos que se desean en la tabla
 						
@@ -1194,7 +1192,7 @@ class Pdf
 					:align => { 0 => :left}
 			
 			
-			if pactv_extension != []
+			if !pactv_extension.blank?
 				pactv_extension.each do |actv|
 					data27=[[{:text=>  actv.actividad , :aling=> :left}]]# datos que se desean en la tabla
 					
@@ -1238,7 +1236,7 @@ class Pdf
 					:align => { 0 => :left}
 			
 			
-			if pactv_otras != []
+			if !pactv_otras.blank?
 				pactv_otras.each do |actv|
 					data29 =[[{:text => actv.actividad , :aling=> :left}]]# datos que se desean en la tabla
 					
@@ -1278,7 +1276,7 @@ class Pdf
 			:position => :left,
 			:align => { 0 => :left}
 			
-			if sactv_docencia != []
+			if !sactv_docencia.blank?
 				sactv_docencia.each do |actv|
 					data211 = [[{:text=>  actv.actividad ,  :align=>:left}]]# datos que se desean en la tabla
 					
@@ -1317,7 +1315,7 @@ class Pdf
 					:position => :left,
 					:align => { 0 => :left}
 			
-			if sactv_investigacion != []
+			if !sactv_investigacion.blank?
 				sactv_investigacion.each do |actv|
 					data212= [[{:text=>  actv.actividad , :align=>:left}]]# datos que se desean en la tabla
 					
@@ -1357,7 +1355,7 @@ class Pdf
 					:position => :left,
 					:align => { 0 => :left}
 			
-			if sactv_formacion != []
+			if !sactv_formacion.blank?
 				sactv_formacion.each do |actv|
 					data214=[[{:text=> actv.actividad , :aling=> :left}]]# datos que se desean en la tabla
 						
@@ -1397,7 +1395,7 @@ class Pdf
 					:position => :left,
 					:align => { 0 => :left}
 			
-			if sactv_extension != []
+			if !sactv_extension.blank?
 				sactv_extension.each do |actv|
 					data213=[[{:text=>  actv.actividad , :aling=> :left}]]# datos que se desean en la tabla
 					
@@ -1441,7 +1439,7 @@ class Pdf
 					:align => { 0 => :left}
 			
 			
-			if sactv_otras != []
+			if !sactv_otras.blank?
 				sactv_otras.each do |actv|
 					data215 =[[{:text => actv.actividad , :aling=> :left}]]# datos que se desean en la tabla
 					
@@ -1482,7 +1480,7 @@ class Pdf
 			:position => :left,
 			:align => { 0 => :left}
 						
-			if tactv_docencia != []
+			if !tactv_docencia.blank?
 				tactv_docencia.each do |actv|
 					data153 = [[{:text=>  actv.actividad ,  :align=>:left}]]# datos que se desean en la tabla
 					
@@ -1520,7 +1518,7 @@ class Pdf
 					:position => :left,
 					:align => { 0 => :left}
 					
-			if tactv_investigacion != []
+			if !tactv_investigacion.blank?
 				tactv_investigacion.each do |actv|
 					data155= [[{:text=>  actv.actividad , :align=>:left}]]# datos que se desean en la tabla
 					
@@ -1559,7 +1557,7 @@ class Pdf
 					:position => :left,
 					:align => { 0 => :left}
 			
-			if tactv_formacion != []
+			if !tactv_formacion.blank?
 				tactv_formacion.each do |actv|
 					data157=[[{:text=> actv.actividad , :aling=> :left}]]# datos que se desean en la tabla
 						
@@ -1600,7 +1598,7 @@ class Pdf
 					:position => :left,
 					:align => { 0 => :left}
 			
-			if tactv_extension != []
+			if !tactv_extension.blank?
 				tactv_extension.each do |actv|
 					data159=[[{:text=>  actv.actividad , :aling=> :left}]]# datos que se desean en la tabla
 					
@@ -1641,7 +1639,7 @@ class Pdf
 					:position => :left,
 					:align => { 0 => :left}
 			
-			if tactv_otras != []
+			if !tactv_otras.blank?
 				tactv_otras.each do |actv|
 					data161 =[[{:text => actv.actividad , :aling=> :left}]]# datos que se desean en la tabla
 					
@@ -1681,7 +1679,7 @@ class Pdf
 			:position => :left,
 			:align => { 0 => :left}
 			
-			if cactv_docencia != []
+			if !cactv_docencia.blank?
 				cactv_docencia.each do |actv|
 					data163 = [[{:text=>  actv.actividad ,  :align=>:left}]]# datos que se desean en la tabla
 					
@@ -1720,7 +1718,7 @@ class Pdf
 					:position => :left,
 					:align => { 0 => :left}
 			
-			if cactv_investigacion != []
+			if !cactv_investigacion.blank?
 				cactv_investigacion.each do |actv|
 					data165= [[{:text=>  actv.actividad , :align=>:left}]] # datos que se desean en la tabla
 					
@@ -1761,7 +1759,7 @@ class Pdf
 					:align => { 0 => :left}
 			
 			
-			if cactv_formacion != []
+			if !cactv_formacion.blank?
 				cactv_formacion.each do |actv|
 					data167=[[{:text=> actv.actividad , :aling=> :left}]] # datos que se desean en la tabla
 						
@@ -1801,7 +1799,7 @@ class Pdf
 					:position => :left,
 					:align => { 0 => :left}
 			
-			if cactv_extension != []
+			if !cactv_extension.blank?
 				cactv_extension.each do |actv|
 					data169=[[{:text=>  actv.actividad , :aling=> :left}]] # datos que se desean en la tabla
 					
@@ -1842,7 +1840,7 @@ class Pdf
 					:position => :left,
 					:align => { 0 => :left}
 			
-			if cactv_otras != []
+			if !cactv_otras.blank?
 				cactv_otras.each do |actv|
 					data171 =[[{:text => actv.actividad , :aling=> :left}]] # datos que se desean en la tabla
 					
@@ -1891,13 +1889,14 @@ class Pdf
 			:position => :left,
 			:align => { 0 => :left, 1 => :left, 2=> :left}
 			
-			if info_docencia != []
+			if !info_docencia.blank?
 				info_docencia.each do |actv|
-					if actv.observaciones != nil
-						data31 = [[{:text=> actv.actividad.to_s, :align=>:left}, {:text => actv.actividad_ejecutada, :align=>:left}, {:text => actv.observaciones, :align=>:left}]] # datos que se desean en la tabla
-					else
-						data31 = [[{:text=> actv.actividad.to_s, :align=>:left}, {:text => actv.actividad_ejecutada, :align=>:left}, {:text => '', :align=>:left}]] # datos que se desean en la tabla
-					end
+					ae = InformeActividad.where(actividad_id: actv.id).take
+					ai = ActividadEjecutada.where(informe_actividad_id: ae.id).take
+        			obs= ObservacionTutor.where(informe_actividad_id: ae.id).take
+
+					data31 = [[{:text=> actv.actividad.to_s, :align=>:left}, {:text => ai.descripcion.to_s, :align=>:left}, {:text => obs.observaciones, :align=>:left}]] # datos que se desean en la tabla
+
 					pdf.table data31, # lineas para generar la tabla en el docuemnto
 					:border_style => :grid, #:underline_header
 					:font_size  => 8,
@@ -1939,13 +1938,12 @@ class Pdf
 			:position => :left,
 			:align => { 0 => :left, 1 => :left, 2=> :left}
 			
-			if info_investigacion != []
+			if !info_investigacion.blank?
 				info_investigacion.each do |actv|
-					if actv.observaciones != nil
-						data41 = [[{:text=> actv.actividad, :align=>:left}, {:text => actv.actividad_ejecutada, :align=>:left}, {:text => actv.observaciones, :align=>:left}]] # datos que se desean en la tabla
-					else
-						data41 = [[{:text=> actv.actividad, :align=>:left}, {:text => actv.actividad_ejecutada, :align=>:left}, {:text => '', :align=>:left}]] # datos que se desean en la tabla
-					end
+					ae = InformeActividad.where(actividad_id: actv.id).take
+					ai = ActividadEjecutada.where(informe_actividad_id: ae.id).take
+        			obs= ObservacionTutor.where(informe_actividad_id: ae.id).take
+					data41 = [[{:text=> actv.actividad, :align=>:left}, {:text => ai.descripcion, :align=>:left}, {:text => obs.observaciones, :align=>:left}]] # datos que se desean en la tabla
 				
 				pdf.table data41, # lineas para generar la tabla en el docuemnto
 				:border_style => :grid, #:underline_header
@@ -1978,9 +1976,8 @@ class Pdf
 			
 				
 				if res_tp != []
-					res_tp.each do |res|
-							
-						if res.tipo_res== 6
+					res = res_tp	
+						if res.tipo_resultado_id== 6
 							if res.dia != nil && res.mes != nil
 						
 								res266=[[{:text=> res.autor+". ("+res.dia.to_s+" de "+res.mes+" de "+res.ano.to_s+"). "+res.nombre_paginaw+". Recuperado de "+res.sitio_paginaw+": "+res.url+".", :align=>:left}]] # datos que se desean en la tabla
@@ -2019,7 +2016,7 @@ class Pdf
 								end
 							end
 						else
-							if res.tipo_res== 5
+							if res.tipo_resultado_id== 5
 								if res.ciudad != "" && res.estado != "" && res.editor != ""
 										res2=[[{:text=> res.autor+". ("+res.ano.to_s+"). "+res.titulo+". "+res.ciudad+", "+res.estado+", "+res.pais+". "+res.editor+".", :align=>:left}]] # datos que se desean en la tabla
 										pdf.table res2,# lineas para generar la tabla en el docuemnto
@@ -2123,7 +2120,7 @@ class Pdf
 									end
 								end
 							else 
-								if res.tipo_res== 4 
+								if res.tipo_resultado_id== 4 
 									if res.editor != "" && res.ciudad != ""
 										res2=[[{:text=> res.autor+". ("+res.ano.to_s+"). "+res.titulo+". "+res.ciudad+", "+res.pais+". "+res.editor+".", :aling=>:left }]] # datos que se desean en la tabla
 										pdf.table res2, # lineas para generar la tabla en el docuemnto
@@ -2174,7 +2171,7 @@ class Pdf
 										end
 									end
 								else 
-									if res.tipo_res== 3
+									if res.tipo_resultado_id== 3
 										res2=[[{:text=> res.autor+". ("+res.dia.to_s+" de "+res.mes+" de "+res.ano.to_s+"). "+res.titulo+". "+res.nombre_periodico+". ("+res.paginas+").", :align=>:left }]] # datos que se desean en la tabla
 										pdf.table res2, # lineas para generar la tabla en el docuemnto
 										:border_style => :grid, #:underline_header
@@ -2186,7 +2183,7 @@ class Pdf
 										:position => :left,
 										:align => { 0 => :left}
 									else
-										if res.tipo_res== 2
+										if res.tipo_resultado_id== 2
 											res2=[[{:text=> res.autor+". ("+res.ano.to_s+"). "+res.titulo+". "+res.nombre_revista+". ("+res.paginas+").", :align=>:left }]] # datos que se desean en la tabla
 											pdf.table res2, # lineas para generar la tabla en el docuemnto
 											:border_style => :grid, #:underline_header
@@ -2198,9 +2195,9 @@ class Pdf
 											:position => :left,
 											:align => { 0 => :left}
 										else
-											if res.tipo_res== 1
+											if res.tipo_resultado_id== 1
 												if res.ciudad != ""
-													res2=[[{:text=> res.autor+". ("+res.ano.to_s+"). "+res.titulo+". "+res.ciudad+", "+res.pais+". "+res.editor+".", :align=>:left }]] # datos que se desean en la tabla
+													res2=[[{:text=> res.autor.to_s+". ("+res.ano.to_s+"). "+res.titulo.to_s+". "+res.ciudad.to_s+", "+res.pais.to_s+". "+res.editor.to_s+".", :align=>:left }]] # datos que se desean en la tabla
 													pdf.table res2, # lineas para generar la tabla en el docuemnto
 													:border_style => :grid, #:underline_header
 													:font_size  => 8, 
@@ -2211,7 +2208,7 @@ class Pdf
 													:position => :left,
 													:align => { 0 => :left}
 												else
-													res2=[[{:text=> res.autor+". ("+res.ano.to_s+"). "+res.titulo+". "+res.pais+". "+res.editor+".", :align=>:left }]] # datos que se desean en la tabla
+													res2=[[{:text=> res.autor.to_s+". ("+res.ano.to_s+"). "+res.titulo.to_s+". "+res.pais.to_s+". "+res.editor.to_s+".", :align=>:left }]] # datos que se desean en la tabla
 													pdf.table res2, # lineas para generar la tabla en el docuemnto
 													:border_style => :grid, #:underline_header
 													:font_size  => 8, 
@@ -2223,7 +2220,7 @@ class Pdf
 													:align => { 0 => :left}
 												end
 											else
-												if res.tipo_res== 7
+												if res.tipo_resultado_id== 7
 													if res.editor != "" && res.ciudad != ""
 														res2=[[{:text=> res.autor_libro+". ("+res.ano.to_s+"). "+res.titulo+". Autor del Capítulo: "+res.autor_capitulo+". Capítulo: "+res.nombre_capitulo+". "+res.ciudad+", "+res.pais+". "+res.editor+". ("+res.paginas+").", :align=>:left }]] # datos que se desean en la tabla
 														pdf.table res2, # lineas para generar la tabla en el docuemnto
@@ -2280,7 +2277,6 @@ class Pdf
 								end 
 							end
 						end
-					end
 				else
 						res2 =[[{:text => "No hubo." , :aling=> :left}]	] # datos que se desean en la tabla
 				
@@ -2774,7 +2770,7 @@ class Pdf
 			#aparatado 5
 			pdf.text("\n")
 			pdf.text("5.- ACTIVIDADES DE FORMACIÓN:", :style => :bold, :size  => 10)
-			data5 = [[{:text=>"ACTIVIDAD PROGRAMADA",:align=>:center,:font_style => :bold}, {:text =>"ACTIVIDAD EJECUTADA", :align=>:center,:font_style => :bold},{:text =>"OBSERVACIONES", :align=>:center,:font_style => :bold} ]	] # datos que se desean en la tabla
+			data5 = [[{:text=>"ACTIVIDAD DE FORMACIÓN PROGRAMADA",:align=>:center,:font_style => :bold}, {:text =>"ACTIVIDAD DE FORMACIÓN EJECUTADA", :align=>:center,:font_style => :bold},{:text =>"OBSERVACIONES", :align=>:center,:font_style => :bold} ]	] # datos que se desean en la tabla
 			
 			pdf.table data5,  # lineas para generar la tabla en el docuemnto
 			:border_style => :grid, #:underline_header
@@ -2786,13 +2782,12 @@ class Pdf
 			:position => :left,
 			:align => { 0 => :left, 1 => :left, 2=> :left}
 			
-			if info_formacion != []
-				info_formacion.each do |actv|
-					if actv.observaciones != nil
-						data51=[[{:text=> actv.actividad, :align=>:left}, {:text => actv.actividad_ejecutada, :align=>:left}, {:text => actv.observaciones, :align=>:left}]	] # datos que se desean en la tabla
-					else
-						data51=[[{:text=> actv.actividad, :align=>:left}, {:text => actv.actividad_ejecutada, :align=>:left}, {:text => '', :align=>:left}]	] # datos que se desean en la tabla
-					end
+			if info_extension != []
+				info_extension.each do |actv|
+					ae = InformeActividad.where(actividad_id: actv.id).take
+					ai = ActividadEjecutada.where(informe_actividad_id: ae.id).take
+        			obs= ObservacionTutor.where(informe_actividad_id: ae.id).take
+					data51=[[{:text=> actv.actividad, :align=>:left}, {:text => ai.descripcion.to_s, :align=>:left}, {:text => obs.observaciones, :align=>:left}]	] # datos que se desean en la tabla
 					pdf.table data51,  # lineas para generar la tabla en el docuemnto
 					:border_style => :grid, #:underline_header
 					:font_size  => 8, 
@@ -2823,7 +2818,7 @@ class Pdf
 			pdf.text("\n")
 
 			pdf.text("6.- ACTIVIDADES DE EXTENSIÓN:", :style => :bold, :size  => 10)
-			data6 = [[{:text=>"ACTIVIDAD PROGRAMADA",:align=>:center,:font_style => :bold}, {:text =>"ACTIVIDAD EJECUTADA", :align=>:center,:font_style => :bold},{:text =>"OBSERVACIONES", :align=>:center,:font_style => :bold} ]	] # datos que se desean en la tabla
+			data6 = [[{:text=>"ACTIVIDAD DE EXTENSIÓN PROGRAMADA",:align=>:center,:font_style => :bold}, {:text =>"ACTIVIDAD DE EXTENSIÓN EJECUTADA", :align=>:center,:font_style => :bold},{:text =>"OBSERVACIONES", :align=>:center,:font_style => :bold} ]	] # datos que se desean en la tabla
 			
 			pdf.table data6,  # lineas para generar la tabla en el docuemnto
 			:border_style => :grid, #:underline_header
@@ -2835,13 +2830,12 @@ class Pdf
 			:position => :left,
 			:align => {0 => :left, 1 => :left, 2=> :left}
 			
-			if info_extension != []
-				info_extension.each do |actv|
-					if actv.observaciones != nil
-						data61=[[{:text=> actv.actividad, :align=>:left}, {:text => actv.actividad_ejecutada, :align=>:left}, {:text => actv.observaciones, :align=>:left}]] # datos que se desean en la tabla
-					else
-						data61=[[{:text=> actv.actividad, :align=>:left}, {:text => actv.actividad_ejecutada, :align=>:left}, {:text => '', :align=>:left}]	] # datos que se desean en la tabla
-					end
+			if info_formacion != []
+				info_formacion.each do |actv|
+					ae = InformeActividad.where(actividad_id: actv.id).take
+					ai = ActividadEjecutada.where(informe_actividad_id: ae.id).take
+        			obs= ObservacionTutor.where(informe_actividad_id: ae.id).take
+					data61=[[{:text=> actv.actividad, :align=>:left}, {:text => ai.descripcion.to_s, :align=>:left}, {:text => obs.observaciones, :align=>:left}]	] # datos que se desean en la tabla
 					pdf.table data61, # lineas para generar la tabla en el docuemnto
 					:border_style => :grid, #:underline_header
 					:font_size  => 8, 
@@ -2992,21 +2986,9 @@ class Pdf
 			punto='. '
 			pdf.text("8.- CONCLUSIONES:", :style => :bold, :size  => 10)
 			
-			#if informe.valores_id != nil
-			#	data10 = [[{:text=> informe.val_conclusion.nombre+punto+informe.conclusion.to_s, :align=> :left}]] # datos que se desean en la tabla
-			#	
-			#	pdf.table data10, # lineas para generar la tabla en el docuemnto
-			#	:border_style => :grid, #:underline_header
-			#	:font_size  => 8, 
-			#	:horizontal_padding => 6,
-			#	:vertical_padding   => 3,
-			#	:border_width => 0.7, 
-			#	:column_widths => { 0 => 520}, 
-			#	:position => :left,
-			#	:align => { 0 => :left}
-				
-			#else
-				data10 = [[{:text=> "", :align=> :left}]] # datos que se desean en la tabla
+
+			if !informe.conclusiones.blank?
+				data10 = [[{:text=> informe.conclusiones.to_s, :align=> :left}]] # datos que se desean en la tabla
 				
 				pdf.table data10, # lineas para generar la tabla en el docuemnto
 				:border_style => :grid, #:underline_header
@@ -3017,7 +2999,20 @@ class Pdf
 				:column_widths => { 0 => 520}, 
 				:position => :left,
 				:align => { 0 => :left}
-			#end
+				
+			else
+				data10 = [[{:text=> " ", :align=> :left}]] # datos que se desean en la tabla
+				
+				pdf.table data10, # lineas para generar la tabla en el docuemnto
+				:border_style => :grid, #:underline_header
+				:font_size  => 8, 
+				:horizontal_padding => 6,
+				:vertical_padding   => 3,
+				:border_width => 0.7, 
+				:column_widths => { 0 => 520}, 
+				:position => :left,
+				:align => { 0 => :left}
+			end
 			
 			pdf.text("\n")
 			
@@ -3025,21 +3020,8 @@ class Pdf
 			
 			pdf.text("9.- OPINIÓN DEL TUTOR:", :style => :bold, :size  => 10)
 			
-			#if informe.valortutores_id != nil
-			#	data11 = [[{:text=> informe.val_tutor.nombre+punto+informe.opinion_tutor.to_s, :align=> :left}]] # datos que se desean en la tabla
-			#	
-			#	pdf.table data11, # lineas para generar la tabla en el docuemnto
-			#	:border_style => :grid, #:underline_header
-			#	:font_size  => 8, 
-			#	:horizontal_padding => 6,
-			#	:vertical_padding   => 3,
-			#	:border_width => 0.7, 
-			#	:column_widths => { 0 => 520}, 
-			#	:position => :left,
-			#	:align => { 0 => :left}
-			#	
-			#else
-				data11 = [[{:text=> "", :align=> :left}]] # datos que se desean en la tabla
+			if !informe.opinion_tutor.blank?
+				data11 = [[{:text=> informe.opinion_tutor.to_s, :align=> :left}]] # datos que se desean en la tabla
 				
 				pdf.table data11, # lineas para generar la tabla en el docuemnto
 				:border_style => :grid, #:underline_header
@@ -3050,7 +3032,20 @@ class Pdf
 				:column_widths => { 0 => 520}, 
 				:position => :left,
 				:align => { 0 => :left}
-			#end
+				
+			else
+				data11 = [[{:text=> " ", :align=> :left}]] # datos que se desean en la tabla
+				
+				pdf.table data11, # lineas para generar la tabla en el docuemnto
+				:border_style => :grid, #:underline_header
+				:font_size  => 8, 
+				:horizontal_padding => 6,
+				:vertical_padding   => 3,
+				:border_width => 0.7, 
+				:column_widths => { 0 => 520}, 
+				:position => :left,
+				:align => { 0 => :left}
+			end
 			
 			
 			#FIN DEL INFORME		

@@ -315,6 +315,10 @@ class IniciotutorController < ApplicationController
 						end
 					end
 					@act.actividad= text
+					@adecuacion.fecha_modificacion = Time.now
+					@plan.fecha_modificacion = Time.now
+					@plan.save
+					@adecuacion.save
 					@act.save
 					j= j+1
 					i=:edit.to_s+j.to_s
@@ -354,6 +358,10 @@ class IniciotutorController < ApplicationController
 					adac.adecuacion_id = @adecuacion.id
 					adac.actividad_id = a.id
 					adac.semestre = semestre
+					@plan.fecha_modificacion = Time.now
+					@plan.save
+					@adecuacion.fecha_modificacion = Time.now
+					@adecuacion.save
 					adac.save
 				end
 				j = j + 1
@@ -379,6 +387,10 @@ class IniciotutorController < ApplicationController
 					adac.adecuacion_id = @adecuacion.id
 					adac.actividad_id = a.id
 					adac.semestre = semestre
+					@plan.fecha_modificacion = Time.now
+					@plan.save
+					@adecuacion.fecha_modificacion = Time.now
+					@adecuacion.save
 					adac.save
 				end
 				j = j + 1
@@ -404,6 +416,10 @@ class IniciotutorController < ApplicationController
 					adac.adecuacion_id = @adecuacion.id
 					adac.actividad_id = a.id
 					adac.semestre = semestre
+					@plan.fecha_modificacion = Time.now
+					@plan.save
+					@adecuacion.fecha_modificacion = Time.now
+					@adecuacion.save
 					adac.save
 				end
 				j = j + 1
@@ -429,6 +445,10 @@ class IniciotutorController < ApplicationController
 					adac.adecuacion_id = @adecuacion.id
 					adac.actividad_id = a.id
 					adac.semestre = semestre
+					@plan.fecha_modificacion = Time.now
+					@plan.save
+					@adecuacion.fecha_modificacion = Time.now
+					@adecuacion.save
 					adac.save
 				end
 				j = j + 1
@@ -454,6 +474,10 @@ class IniciotutorController < ApplicationController
 					adac.adecuacion_id = @adecuacion.id
 					adac.actividad_id = a.id
 					adac.semestre = semestre
+					@plan.fecha_modificacion = Time.now
+					@plan.save
+					@adecuacion.fecha_modificacion = Time.now
+					@adecuacion.save
 					adac.save
 				end
 				j = j + 1
@@ -503,7 +527,7 @@ class IniciotutorController < ApplicationController
 				session[:editar]= false
 			end
 			if !session[:editar]
-				flash.now[:info]= "Para editar la Adecuación debe seleccionar modificar en Plan Formación"
+				flash.now[:info]= "Para editar la Adecuación debe seleccionar Modificar Adecuación"
 			end
 			@adecuacion= Adecuacion.where(planformacion_id: session[:plan_id]).take
 			@adecuaciones = Adecuacion.where(planformacion_id: session[:plan_id])
@@ -575,7 +599,7 @@ class IniciotutorController < ApplicationController
 			@extension= 'extension'
 			@otra= 'otra' 
 			if !session[:editar]
-				flash.now[:info]= "Para editar la Adecuación debe seleccionar modificar en Plan Formación"
+				flash.now[:info]= "Para editar la Adecuación debe seleccionar Modificar Adecuación"
 			end
 			@nombre = session[:nombre_usuario]
 			@instructorName = session[:instructorName]
@@ -650,7 +674,7 @@ class IniciotutorController < ApplicationController
 			@actividadesafor= []
 			@actividadesaotr= []
 			if !session[:editar]
-				flash.now[:info]= "Para editar la Adecuación debe seleccionar modificar en Plan Formación"
+				flash.now[:info]= "Para editar la Adecuación debe seleccionar Modificar Adecuación"
 			end
 			@actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 3).all
 			a= false
@@ -730,7 +754,7 @@ class IniciotutorController < ApplicationController
 			@actividadesafor= []
 			@actividadesaotr= []
 			if !session[:editar]
-				flash.now[:info]= "Para editar la Adecuación debe seleccionar modificar en Plan Formación"
+				flash.now[:info]= "Para editar la Adecuación debe seleccionar Modificar Adecuación"
 			end
 			@actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 4).all
 			puts "GyyyGHELLO1"
@@ -1171,10 +1195,10 @@ class IniciotutorController < ApplicationController
 		@actividades1ext= []
 		@actividades1for= []
 		@actividades1otr= []
+		g=0;
 		@actividades1= AdecuacionActividad.where(adecuacion_id: @adecuacion_id, semestre: 1).all
 		if @actividades1.blank?
-	        flash[:danger]="No puede enviar la adecuación sin haber llenado todos los semestres"
-	   	   	redirect_to controller:"iniciotutor", action: "detalles_adecuacion3"
+	       	g = g + 1
 		end
 		a= false
 		b= false
@@ -1217,9 +1241,9 @@ class IniciotutorController < ApplicationController
 		if (a == true && b== true && c== true && d== true  && e== true)
 				puts "hahahahhajjj siiii"
 		else 
+
 			puts "oh nooo"
-			flash[:danger]="No puede enviar la adecuación sin haber llenado todos los campos"
-   	   		redirect_to controller:"iniciotutor", action: "detalles_adecuacion3"
+			g = g + 1
 		end
 		@actividades2doc= []
 		@actividades2inv= []
@@ -1228,8 +1252,7 @@ class IniciotutorController < ApplicationController
 		@actividades2otr= []
 		@actividades2= AdecuacionActividad.where(adecuacion_id: @adecuacion_id, semestre: 2).all
 		if @actividades2.blank?
-	        flash[:danger]="No puede enviar la adecuación sin haber llenado todos los semestres"
-	   	   	redirect_to controller:"iniciotutor", action: "detalles_adecuacion3"
+			g = g + 1
 		end
 		a= false
 		b= false
@@ -1278,8 +1301,7 @@ class IniciotutorController < ApplicationController
 				puts "hahahahhajjj siiii"
 			else 
 				puts "oh nooo"
-				flash[:danger]="No puede enviar la adecuación sin haber llenado todos los campos"
-	   	   		redirect_to controller:"iniciotutor", action: "detalles_adecuacion3"
+				g = g + 1
 		end
 		@actividades3doc= []
 		@actividades3inv= []
@@ -1288,8 +1310,7 @@ class IniciotutorController < ApplicationController
 		@actividades3otr= []
 		@actividades3= AdecuacionActividad.where(adecuacion_id: @adecuacion_id, semestre: 3).all
 		if @actividades3.blank?
-	        flash[:danger]="No puede enviar la adecuación sin haber llenado todos los semestres"
-	   	   	redirect_to controller:"iniciotutor", action: "detalles_adecuacion3"
+	        g = g + 1
 		end
 		a= false
 		b= false
@@ -1338,8 +1359,7 @@ class IniciotutorController < ApplicationController
 				puts "hahahahhajjj siiii"
 			else 
 				puts "oh nooo"
-				flash[:danger]="No puede enviar la adecuación sin haber llenado todos los campos"
-	   	   		redirect_to controller:"iniciotutor", action: "detalles_adecuacion3"
+				g = g + 1
 		end
 		@actividades4doc= []
 		@actividades4inv= []
@@ -1348,8 +1368,7 @@ class IniciotutorController < ApplicationController
 		@actividades4otr= []
 		@actividades4= AdecuacionActividad.where(adecuacion_id: @adecuacion_id, semestre: 4).all
 		if @actividades4.blank?
-	        flash[:danger]="No puede enviar la adecuación sin haber llenado todos los semestres"
-	   	   	redirect_to controller:"iniciotutor", action: "detalles_adecuacion3"
+	        g = g + 1
 		end
 		a= false
 		b= false
@@ -1398,9 +1417,13 @@ class IniciotutorController < ApplicationController
 				puts "hahahahhajjj siiii"
 			else 
 				puts "oh nooo"
-				flash[:danger]="No puede enviar la adecuación sin haber llenado todos los campos"
-	   	   		redirect_to controller:"iniciotutor", action: "detalles_adecuacion3"
+				g = g + 1
 		end
+
+		if (g != 0)
+			flash[:danger]="No puede enviar la adecuación sin haber llenado todos los semestres"
+	   	   	redirect_to controller:"iniciotutor", action: "detalles_adecuacion3"
+	   	else
 	      	
 	      	cambio_act = EstatusAdecuacion.where(adecuacion_id: @adecuacion_id, actual: 1).take
 	      	cambio_act.actual = 0
@@ -1463,7 +1486,8 @@ class IniciotutorController < ApplicationController
 	        end
      
     
-	   	redirect_to controller:"iniciotutor", action: "listar_adecuaciones"
+	   		redirect_to controller:"iniciotutor", action: "listar_adecuaciones"
+	   end
  	end 
 
 	def mas_observaciones3 #mas obs de actividades del informe
