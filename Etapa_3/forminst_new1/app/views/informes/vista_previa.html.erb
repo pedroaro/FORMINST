@@ -7,13 +7,48 @@
             <a href="#" class="dropdown-toggle active"  data-toggle="dropdown" role="button" aria-expanded="false" >Informes <span class="caret"></span></a>
             <ul class="dropdown-menu nav" role="menu">
               <li></li>
-              <li><%= link_to 'Crear Informe', :controller => 'informes', :action => 'ver_crear_informe'%></li>
+              <li><a href="#" data-toggle="modal" data-target="#selectInforme">
+                Crear Informe
+              </a></li>
               <li><%= link_to 'Listar Informes', :controller => 'informes', :action => 'listar_informes' %></li>
             </ul>
         </li>
         <li><%= link_to 'Prórroga', :controller => 'iniciotutor', :action => 'prorroga' %></li>
         <li><a href="../iniciotutor/logout">Cerrar Sesión</a></li>
       </ul>
+  </div>
+</div>
+
+<div class="modal fade" id="selectInforme" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h3 class="modal-title" id="myModalLabel">Eliminar Informe</h3>
+      </div>
+      <div class="modal-body">
+        <h5>Seleccione el informe a crear</h5>
+      </div>
+      <div class="modal-body">
+        <b>&emsp;&emsp;&emsp;</b>
+        <%= link_to "Informe 1", {controller: "informes", action: "ver_crear_informe", :informe_id => 1 }, class: "btn btn-forminst-blue" %>
+        <b>&emsp;&emsp;&emsp;</b>
+        <%= link_to "Informe 2", {controller: "informes", action: "ver_crear_informe", :informe_id => 2 }, class: "btn btn-forminst-blue" %>
+        <b>&emsp;&emsp;&emsp;</b>
+        <%= link_to "Informe 3", {controller: "informes", action: "ver_crear_informe", :informe_id => 3 }, class: "btn btn-forminst-blue" %>
+        <b>&emsp;&emsp;&emsp;</b>
+        <%= link_to "Informe 4", {controller: "informes", action: "ver_crear_informe", :informe_id => 4 }, class: "btn btn-forminst-blue" %>
+        <p>   </p>
+        <b>&emsp;&emsp;&emsp;</b>
+        <%= link_to "Informe 5", {controller: "informes", action: "ver_crear_informe", :informe_id => 5 }, class: "btn btn-forminst-blue" %>
+        <b>&emsp;&emsp;&emsp;</b>
+        <%= link_to "Informe 6", {controller: "informes", action: "ver_crear_informe", :informe_id => 6 }, class: "btn btn-forminst-blue" %>
+        <b>&emsp;&emsp;&emsp;</b>
+        <%= link_to "Informe 7", {controller: "informes", action: "ver_crear_informe", :informe_id => 7 }, class: "btn btn-forminst-blue" %>
+        <b>&emsp;&emsp;&emsp;</b>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
   </div>
 </div>
 
