@@ -584,6 +584,190 @@
 		end
 	end
 
+	def vista_previa
+		@fechaActual = Date.current.to_s
+		@plan= Planformacion.where(instructor_id: session[:usuario_id]).take
+		@usere= Usuarioentidad.where(usuario_id: @plan.instructor_id).take
+		@fechaConcurso = @plan.fecha_inicio
+		@escuela= Escuela.find(@usere.escuela_id)
+		@adecuacion= Adecuacion.where(planformacion_id: @plan.id).take
+		@adscripcion_docencia= @plan.adscripcion_docencia
+		@adscripcion_investigacion= @plan.adscripcion_investigacion
+		@persona= Persona.where(usuario_id: @plan.instructor_id).take
+		@cpinstruccion = @persona.grado_instruccion
+		@user = Usuario.find(@plan.instructor_id)
+
+		@docencia='docencia'
+		@investigacion= 'investigacion'
+		@formacion= 'formacion'
+		@extension= 'extension'
+		@otra= 'otra' 
+
+		@nombre = session[:nombre_usuario]
+		@instructorName = session[:instructorName]
+
+		@actividades1doc= []
+		@actividades1inv= []
+		@actividades1ext= []
+		@actividades1for= []
+		@actividades1otr= []
+		@actividades1= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 1).all
+		@actividades1.each do |actade| 
+			@act= Actividad.find(actade.actividad_id)
+			tipo= @act.tipo_actividad_id
+			if tipo==1
+				puts "soy una actividad de docencia"
+				puts @act.actividad
+				@actividades1doc.push(@act)
+			else
+				if tipo==2
+					puts "soy una actividad de investigacion"
+					puts @act.actividad
+					@actividades1inv.push(@act)
+				else
+					if tipo==3
+						puts "soy una actividad de extension"
+						puts @act.actividad
+						@actividades1ext.push(@act)
+					else
+						if tipo==4
+							puts "soy una actividad de formacion"
+							puts @act.actividad
+							@actividades1for.push(@act)
+						else
+							if tipo==5
+								puts "soy otro tipo de actividad"
+								puts @act.actividad
+								@actividades1otr.push(@act)
+							end
+						end
+					end
+				end
+			end
+		end
+
+		@actividades2doc= []
+		@actividades2inv= []
+		@actividades2ext= []
+		@actividades2for= []
+		@actividades2otr= []
+		@actividades2= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 2).all
+		@actividades2.each do |actade| 
+			@act= Actividad.find(actade.actividad_id)
+			tipo= @act.tipo_actividad_id
+			if tipo==1
+				puts "soy una actividad de docencia"
+				puts @act.actividad
+				@actividades2doc.push(@act)
+			else
+				if tipo==2
+					puts "soy una actividad de investigacion"
+					puts @act.actividad
+					@actividades2inv.push(@act)
+				else
+					if tipo==3
+						puts "soy una actividad de extension"
+						puts @act.actividad
+						@actividades2ext.push(@act)
+					else
+						if tipo==4
+							puts "soy una actividad de formacion"
+							puts @act.actividad
+							@actividades2for.push(@act)
+						else
+							if tipo==5
+								puts "soy otro tipo de actividad"
+								puts @act.actividad
+								@actividades2otr.push(@act)
+							end
+						end
+					end
+				end
+			end
+		end
+
+		@actividades3doc= []
+		@actividades3inv= []
+		@actividades3ext= []
+		@actividades3for= []
+		@actividades3otr= []
+		@actividades3= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 3).all
+		@actividades3.each do |actade| 
+			@act= Actividad.find(actade.actividad_id)
+			tipo= @act.tipo_actividad_id
+			if tipo==1
+				puts "soy una actividad de docencia"
+				puts @act.actividad
+				@actividades3doc.push(@act)
+			else
+				if tipo==2
+					puts "soy una actividad de investigacion"
+					puts @act.actividad
+					@actividades3inv.push(@act)
+				else
+					if tipo==3
+						puts "soy una actividad de extension"
+						puts @act.actividad
+						@actividades3ext.push(@act)
+					else
+						if tipo==4
+							puts "soy una actividad de formacion"
+							puts @act.actividad
+							@actividades3for.push(@act)
+						else
+							if tipo==5
+								puts "soy otro tipo de actividad"
+								puts @act.actividad
+								@actividades3otr.push(@act)
+							end
+						end
+					end
+				end
+			end
+		end
+
+		@actividades4doc= []
+		@actividades4inv= []
+		@actividades4ext= []
+		@actividades4for= []
+		@actividades4otr= []
+		@actividades4= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 4).all
+		@actividades4.each do |actade| 
+			@act= Actividad.find(actade.actividad_id)
+			tipo= @act.tipo_actividad_id
+			if tipo==1
+				puts "soy una actividad de docencia"
+				puts @act.actividad
+				@actividades4doc.push(@act)
+			else
+				if tipo==2
+					puts "soy una actividad de investigacion"
+					puts @act.actividad
+					@actividades4inv.push(@act)
+				else
+					if tipo==3
+						puts "soy una actividad de extension"
+						puts @act.actividad
+						@actividades4ext.push(@act)
+					else
+						if tipo==4
+							puts "soy una actividad de formacion"
+							puts @act.actividad
+							@actividades4for.push(@act)
+						else
+							if tipo==5
+								puts "soy otro tipo de actividad"
+								puts @act.actividad
+								@actividades4otr.push(@act)
+							end
+						end
+					end
+				end
+			end
+		end
+
+	end
+
 	def ver_detalles_informe
 	    if session[:usuario_id]
 	      @nombre = session[:nombre_usuario]   
@@ -596,6 +780,7 @@
 	        @planformacion = Planformacion.where(instructor_id: session[:usuario_id]).take
 	      else
 	        puts "NO HAY SESION PLAN"
+			session[:plan_id] = Planformacion.where(instructor_id: session[:usuario_id]).take
 	        @planformacion = Planformacion.where(instructor_id: session[:usuario_id]).take
 	      end
 	      if params[:informe_id]!=nil
