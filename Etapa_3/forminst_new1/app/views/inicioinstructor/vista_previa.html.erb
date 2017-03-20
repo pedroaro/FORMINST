@@ -1,20 +1,12 @@
 <div class = 'row'>
   <div class="col-xs-12 col-md-12">
       <ul class="nav nav-tabs">
-        <li><a href="../iniciotutor/index">Inicio</a></li>
-        <li><a href="../iniciotutor/listar_adecuaciones" class = 'active'>Plan de Adecuación</a></li> 
-        <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Informes <span class="caret"></span></a>
-            <ul class="dropdown-menu nav" role="menu">
-              <li></li>
-              <li><%= link_to 'Crear Informe', :controller => 'informes', :action => 'ver_crear_informe'%></li>
-              <li><%= link_to 'Listar Informes', :controller => 'informes', :action => 'listar_informes' %></li>
-            </ul>
-        </li>
-        <li><%= link_to 'Prórroga', :controller => 'iniciotutor', :action => 'prorroga' %></li>
-        <li><a href="../iniciotutor/logout">Cerrar Sesión</a></li>
+        <li><a href="../inicioinstructor/index">Inicio</a></li>
+        <li><a href="#" class='active' >Adecuación del Plan</span></a></li>
+        <li><a href="../inicioinstructor/listar_informes">Informes</a></li>
+        <li><a href="../inicioinstructor/prorrogas">Prorrogas</a></li>
+        <li><a href="../inicioinstructor/logout">Cerrar Sesión</a></li>
       </ul>
-  
   </div>
 </div>
 
@@ -22,14 +14,9 @@
   <div class="col-xs-12 col-md-12">
     <div class="btn-group" role="group">
       <button type="button" class="btn btn-default" onclick = " location.href = 'javascript:history.back(-1);'">Volver</button>
-      <button type="button" class="btn btn-default">Enviar</button>
-      <%= link_to "Vista Previa", {controller: "iniciotutor", action: "vista_previa"}, class: "btn btn-default" %>
-      <%= link_to "Generar PDF", {controller: "adecuacions", action: "descargar_pdf"}, class: "btn btn-default" %>
-      <button type="button" class="btn btn-default">Agregar Soporte</button>
+      <%= link_to "Vista Previa", {controller: "inicioinstructor", action: "vista_previa"}, class: "btn btn-default" %>
+      <%= link_to "Generar PDF", {controller: "adecuacions", action: "generar_pdf"}, class: "btn btn-default" %>
       <button type="button" class="btn btn-default">Ver Soporte</button>
-      <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">
-        Eliminar Adecuación
-      </button>
     </div>
   </div>
 </div>
@@ -37,20 +24,6 @@
 <div class="row">
   <div class="col-xs-12 col-md-12 col-md-offset-0">
     <div class="text-right">
-      <div class= "text-left">
-        <%if @nombre%>
-          <div>
-            <span><%= link_to 'Plan Formación', :controller => 'iniciotutor', :action => 'planformacions' %></span>
-            <p style="display:inline"> / </p>
-            <span><%= link_to session[:instructorName] , :controller => 'iniciotutor', :action => 'ver_detalles_plan' %></span>
-            <p style="display:inline"> / </p>
-            <span><%= link_to 'Adecuación', :controller => 'iniciotutor', :action => 'listar_adecuaciones' %></span>
-            <p style="display:inline"> /  </p>
-            <span><%= link_to 'Detalles', :controller => 'iniciotutor', :action => 'ver_detalles_adecuacion' %></span>
-            <p style="display:inline"> /  Vista Previa </p>
-          </div>
-        <%end%>
-      </div>
       <div id = "fechamuestra">
         <script languaje="JavaScript">
           fecha();
@@ -102,7 +75,7 @@
           </tr>
           <tr>
             <td class="text-left"><b>Fecha de realización del presente documento:</b></td>
-            <td class="text-left"></td>
+            <td class="text-left"><%= @fechaActual %></td>
           </tr>
           <tr>
             <td class="text-left"><b>Unidad de Adscripción de Docencia:</b></td>
@@ -128,11 +101,11 @@
         <tbody>
           <tr>
             <td style="width:20%;" class="text-left"><b>Fecha del Concurso de Oposición:</b></td>
-            <td class="text-left"></td>
+            <td class="text-left"><%= @fechaConcurso %></td>
           </tr>
           <tr>
             <td class="text-left"><b>Apellidos y Nombres:</b></td>
-            <td class="text-left"><%= session[:instructorName] %></td>
+            <td class="text-left"><%= @nombre %></td>
           </tr>
           <tr>
             <td class="text-left"><b>Cédula de Identidad:</b></td>
@@ -166,7 +139,7 @@
         <tbody>
           <tr>
             <td style="width:20%;" class="text-left"><b>Grado de Instrucción:</b></td>
-            <td class="text-left"></td>
+            <td class="text-left"><%=  @cpinstruccion %></td>
           </tr>
           <tr>
             <td class="text-left"><b>Área:</b></td>
