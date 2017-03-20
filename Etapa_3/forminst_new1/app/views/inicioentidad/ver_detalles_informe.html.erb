@@ -166,52 +166,47 @@
           <tr>
             <td class="text-left"><h5><strong>1. Datos del instructor en formación y su tutor:</strong></h5></td>
           </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class= "row">
+  <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped">
+        <tbody>
           <tr>
-            <td class="text-center"><strong>Numero del Informe</strong></td>
+            <td style='width:50%;' class="text-left"><strong>Numero del Informe:</strong></td>
+            <td style='width:50%;' class="text-left"><strong>Fecha de Realización del Informe:</strong></td>
           </tr>
           <tr>
             <td class="text-left"><%= @informe.numero%></td>
-          </tr>
-          <tr>
-            <td class="text-center"><strong>Fecha de Realización del Informe</strong></td>
-          </tr>
-          <tr>
             <td class="text-left"><%= @informe.fecha_creacion%></td>
           </tr>
           <tr>
-            <td class="text-center"><strong>Apellidos y Nombres del Instructor</strong></td>
+            <td style='width:50%;' class="text-left"><strong>Apellidos y Nombres del Instructor:</strong></td>
+            <td style='width:50%;' class="text-left"><strong>Cédula de Identidad del Instructor:</strong></td>
           </tr>
           <tr>
             <td class="text-left"><%= @instructor.nombres%></td>
-          </tr>
-          <tr>
-            <td class="text-center"><strong>Cédula de Identidad del Instructor</strong></td>
-          </tr>
-          <tr>
             <td class="text-left"><%= @instructor.ci%></td>
           </tr>
           <tr>
-            <td class="text-center"><strong>Período que comprende el informe</strong></td>
+            <td style='width:50%;' class="text-left"><strong>Período que comprende el informe:</strong></td>
+            <td style='width:50%;' class="text-left"><strong>Apellidos y Nombres del Tutor:</strong></td>
           </tr>
           <tr>
             <td class="text-left">Periodo</td>
-          </tr>
-           <tr>
-            <td class="text-center"><strong>Apellidos y Nombres del Tutor</strong></td>
-          </tr>
-          <tr>
             <td class="text-left"><%= @persona.nombres%></td>
           </tr>
            <tr>
-            <td class="text-center"><strong>Cédula de Identidad del Tutor</strong></td>
+            <td style='width:50%;' class="text-left"><strong>Cédula de Identidad del Tutor:</strong></td>
+            <td style='width:50%;' class="text-left"><strong>Escuela o Instituto de Adscripción:</strong></td>
           </tr>
           <tr>
             <td class="text-left"><%= @persona.ci%></td>
-          </tr>
-           <tr>
-            <td class="text-center"><strong>Escuela o Instituto de Adscripción</strong></td>
-          </tr>
-          <tr>
             <td class="text-left"><%= @escuela.nombre%></td>
           </tr>
         </tbody>

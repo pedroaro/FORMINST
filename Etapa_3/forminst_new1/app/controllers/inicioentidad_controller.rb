@@ -205,13 +205,7 @@ class InicioentidadController < ApplicationController
 					end
 				end
 			end
-		else
-			redirect_to controller:"forminst", action: "index"
-		end
-	end
 
-	def detalles_adecuacion2
-		if session[:usuario_id]
 			@nombre = session[:nombre_usuario]
 			@adecuacion= Adecuacion.find(session[:adecuacion_id])
 			@plan= Planformacion.find(@adecuacion.planformacion_id)
@@ -225,43 +219,44 @@ class InicioentidadController < ApplicationController
 			end
 			@persona= Persona.where(usuario_id: @plan.instructor_id).take
 			@usuario= Usuario.find(@plan.instructor_id)
-		else
-			redirect_to controller:"forminst", action: "index"
-		end
 
-		@bool_enviado = 0
-		if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12)
-		#Usuario comision
-			estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take #Estatus enviado a comision de investigacioni
-			if(estatusI.estatus_id != 3)
-			@bool_enviado = 1
-			end
-
-		else
-			if (session[:entidad_id] >= 14 && session[:entidad_id] <= 17)
-			#Consejo tecnico
-				estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
-				if(estatusI.estatus_id != 2)
+			@bool_enviado = 0
+			if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12)
+			#Usuario comision
+				estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take #Estatus enviado a comision de investigacioni
+				if(estatusI.estatus_id != 3)
 				@bool_enviado = 1
 				end
+
 			else
-				if (session[:entidad_id] >= 1 && session[:entidad_id] <= 6)
-				#Consejo de escuela
-					estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take 
-					if(estatusI.estatus_id != 8)
-					@bool_enviado = 1 #Estatus enviado a consejo escuela
-					
+				if (session[:entidad_id] >= 14 && session[:entidad_id] <= 17)
+				#Consejo tecnico
+					estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
+					if(estatusI.estatus_id != 2)
+					@bool_enviado = 1
 					end
 				else
-					if (session[:entidad_id] == 13)
-					#Consejo de facultad
-						estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
-						if(estatusI.estatus_id != 4)
-						@bool_enviado = 1
+					if (session[:entidad_id] >= 1 && session[:entidad_id] <= 6)
+					#Consejo de escuela
+						estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take 
+						if(estatusI.estatus_id != 8)
+						@bool_enviado = 1 #Estatus enviado a consejo escuela
+						
 						end
-					end	
+					else
+						if (session[:entidad_id] == 13)
+						#Consejo de facultad
+							estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
+							if(estatusI.estatus_id != 4)
+							@bool_enviado = 1
+							end
+						end	
+					end
 				end
 			end
+
+		else
+			redirect_to controller:"forminst", action: "index"
 		end
 	end
 

@@ -290,6 +290,17 @@ class SecretariasController < ApplicationController
 					cpEstatus_Adecuacion.actual = 1
 					cpEstatus_Adecuacion.save
 
+					cpinstructortutor = Instructortutor.where(instructor_id: cpplanformacion.instructor_id, tutor_id: params[:JRTutores]).take
+					if cpinstructortutor.blank?
+						cpinstructortutor = Instructortutor.new
+						cpinstructortutor.tutor_id = params[:JRTutores]
+						cpinstructortutor.instructor_id = cpplanformacion.instructor_id
+						cpinstructortutor.actual = 1
+					else
+						cpinstructortutor.actual = 1
+					end
+					cpinstructortutor.save
+
 					redirect_to controller:"secretarias", action: "index"
 
 				else
@@ -428,12 +439,64 @@ class SecretariasController < ApplicationController
 
 			if params[:JRTutores].to_s != "0"
 
-
 				$id_tutor_seleccionado = params[:JRTutores]
 				cppersona = Persona.find_by usuario_id: params[:JRTutores]
 				cpusuario = Usuario.find_by id: params[:JRTutores]
 				cpuentidad = Usuarioentidad.find_by usuario_id: params[:JRTutores]
 				cpplanformacion = Planformacion.find_by instructor_id: params[:JRTutores]
+
+				i = 1
+				j = 1
+				nombre = "hola"
+				cpid = 1
+
+				@nombre = session[:nombre_usuario]
+				@personas = Persona.all
+				session[:personas] = @personas.as_json(only: [:usuario_id, :nombres, :apellidos])
+				cpSecretariaID = session[:usuario_id]
+				cpSecretaria = Usuarioentidad.where(usuario_id: cpSecretariaID).take
+				cpSecretariaEscuela = cpSecretaria.escuela_id
+
+				uentidad = Usuarioentidad.where(escuela_id: cpSecretariaEscuela, entidad_id: 18)
+				cpcontador = 0
+				cpaux = ['var1', 0]
+				@cptutores = []
+				@cptutores[cpcontador] = Array.new(2) { |i|  }
+				@cptutores[cpcontador][0] =  "Seleccione un tutor"
+				@cptutores[cpcontador][1] = 0
+				cpcontador = cpcontador + 1
+
+				uentidad.each do |usuarioentidad|
+					if usuarioentidad.usuario_id != cpplanformacion.tutor_id
+						ccppersona = Persona.find_by usuario_id: usuarioentidad.usuario_id
+						@cptutores[cpcontador] = Array.new(2) { |i|  }
+						@cptutores[cpcontador][0] =  ccppersona.nombres
+						@cptutores[cpcontador][1] = usuarioentidad.usuario_id
+						cpcontador = cpcontador + 1
+					end
+				end
+
+				
+
+				while i < cpcontador  do
+					nombre = @cptutores[i][0]
+					cpid = @cptutores[i][1]
+					j = i + 1
+					while j < cpcontador  do
+
+						if @cptutores[j][0] < nombre
+							@cptutores[i][0] = @cptutores[j][0]
+							@cptutores[i][1] = @cptutores[j][1]
+							@cptutores[j][0] = nombre
+							@cptutores[j][1] = cpid
+							nombre = @cptutores[i][0]
+							cpid = @cptutores[i][1]
+						end
+		
+						j +=1
+					end
+					i +=1
+				end
 
 				$cpnombre = cppersona.nombres
 				$cpapellido = cppersona.apellidos
@@ -449,6 +512,7 @@ class SecretariasController < ApplicationController
 				$cpfechaconcurso = cpplanformacion.fecha_inicio
 				$cpuad = cpplanformacion.adscripcion_docencia
 				$cpuai = cpplanformacion.adscripcion_investigacion
+
 
 			else
 
@@ -506,6 +570,31 @@ class SecretariasController < ApplicationController
 			cpplanformacion.fecha_inicio = params[:FechaConcurso]
 			cpplanformacion.adscripcion_docencia = params[:UAD]
 			cpplanformacion.adscripcion_investigacion = params[:UAI]
+			if params[:JRTutores].to_s != "0"
+
+					cpinstructortutor = Instructortutor.where(instructor_id: cpplanformacion.instructor_id, tutor_id: cpplanformacion.tutor_id).take
+
+					cpinstructortutor.actual = 0
+					cpinstructortutor.save
+
+					cpinstructortutor = Instructortutor.where(instructor_id: cpplanformacion.instructor_id, tutor_id: params[:JRTutores]).take
+					if cpinstructortutor.blank?
+						cpinstructortutor = Instructortutor.new
+						cpinstructortutor.tutor_id = params[:JRTutores]
+						cpinstructortutor.instructor_id = cpplanformacion.instructor_id
+						cpinstructortutor.actual = 1
+						cpplanformacion.tutor_id = params[:JRTutores]
+					else
+						cpinstructortutor.actual = 1
+						cpplanformacion.tutor_id = params[:JRTutores]
+					end
+					cpinstructortutor.save
+
+					pacjadecuacion = Adecuacion.where(planformacion_id: cpplanformacion.id).take
+					pacjadecuacion.tutor_id = params[:JRTutores]
+					pacjadecuacion.save
+
+			end
 			cpplanformacion.save
 
 			cpAdecuacion = Adecuacion.find_by planformacion_id: cpplanformacion.id

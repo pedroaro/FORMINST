@@ -142,52 +142,159 @@
   </div>
 </div>
 <br/>
+
 <div class= "row">
-  <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
-    <div class="table-responsive">
-      <table class="table table-bordered table-striped">
-        <tbody>
-          <tr>
-            <td class="text-center">
-            </td>
-          </tr>
-          <tr>
-            <td class="text-left"><h5><strong>1. Datos de la dependencia</strong></h5></td>
-          </tr>
-          <tr>
-            <td class="text-center"><strong>Escuela o Instituto</strong></td>
-          </tr>
-          <tr>
-            <td class="text-left"><%= @escuela.nombre %></td>
-          </tr>
-          <tr>
-            <td class="text-center"><strong>Area</strong></td>
-          </tr>
-          <tr>
-            <td class="text-left"><%= @instructor.area %></td>
-          </tr>
-          <tr>
-            <td class="text-center"><strong>Fecha de Realización del Documento</strong></td>
-          </tr>
-          <tr>
-            <td class="text-left"><%= @adecuacion.fecha_creacion %></td>
-          </tr>
-          <tr>
-            <td class="text-center"><strong>Unidad de Adscripción de Docencia</strong></td>
-          </tr>
-          <tr>
-            <td class="text-left"><%= @plan.adscripcion_docencia %></td>
-          </tr>
-          <tr>
-            <td class="text-center"><strong>Unidad de Adscripción de Investigación</strong></td>
-          </tr>
-          <tr>
-            <td class="text-left"><%= @plan.adscripcion_investigacion %></td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
+        <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+          <tbody>
+            <tr>
+              <td class="text-left"></td>
+            </tr>
+
+            <tr>
+              <td class="text-left"><h5><strong>1. Datos del Instructor en Formación</strong></h5></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
+
+  <div class= "row">
+    <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
+        <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+          <tbody>
+
+            <tr>
+              <td style='width:50%;' class="text-left"><strong>Fecha del Concurso de Oposición:</strong></td>
+              <td style='width:50%;' class="text-left"><strong>Nombre:</strong></td>
+            </tr>
+
+            <tr>
+              <td class="text-left"><%= @plan.fecha_inicio %></td>
+              <td class="text-left"><%= @persona.nombres %></td>
+            </tr>
+
+
+            <tr>
+              <td style='width:50%;' class="text-left"><strong>Apellido:</strong></td>
+              <td style='width:50%;' class="text-left"><strong>Cédula de Identidad:</strong></td>
+            </tr>
+
+            <tr>
+              <td class="text-left"><%= @persona.apellidos %></td>
+              <td class="text-left"><%= @persona.ci %></td>
+            </tr>
+
+            <tr>
+              <td style='width:50%;' class="text-left"><strong>Correo Electrónico:</strong></td>
+              <td style='width:50%;' class="text-left"><strong>Teléfono Celular:</strong></td>
+            </tr>
+
+            <tr>
+              <td class="text-left"><%= @usuario.user %>@ciens.ucv.ve</td>
+              <td class="text-left"><%= @persona.telefono1 %></td>
+            </tr>
+            </tr>
+            <tr>
+              <td class="text-left"><strong>Otro Teléfono:</strong></td>
+            </tr>
+            <tr> 
+              <td class="text-left"><%= @persona.telefono2 %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class= "row">
+    <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
+        <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+          <tbody>
+            <tr>
+              <td class="text-left"></td>
+            </tr>
+
+            <tr>
+              <td class="text-left"><h5><strong>2. Perfil del Instructor en Formación:</strong></h5></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class= "row">
+    <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
+        <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+          <tbody>
+
+            <tr>
+              <td style='width:50%;' class="text-left"><strong>Grado de Instrucción:</strong></td>
+              <td style='width:50%;' class="text-left"><strong>Área:</strong></td>
+            </tr>
+
+            <tr>
+              <td class="text-left"><%= @persona.grado_instruccion %></td>
+              <td class="text-left"><%= @persona.area %></td>
+            </tr>
+            <tr>
+              <td style='width:50%;' class="text-left"><strong>Subárea:</strong></td>
+            </tr>
+            <tr> 
+              <td class="text-left"><%= @persona.subarea %></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+<div class= "row">
+    <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
+        <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+          <tbody>
+            <tr>
+              <td class="text-left"></td>
+            </tr>
+
+            <tr>
+              <td class="text-left"><h5><strong>3. Datos de la dependencia</strong></h5></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class= "row">
+    <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
+        <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+          <tbody>
+
+            <tr>
+              <td style='width:50%;' class="text-left"><strong>Unidad de Adscripción de Investigación:</strong></td>
+              <td style='width:50%;' class="text-left"><strong>Unidad de Adscripción de Docencia:</strong></td>
+            </tr>
+
+            <tr>
+              <td class="text-left"><%= @plan.adscripcion_investigacion %></td>
+              <td class="text-left"><%= @plan.adscripcion_docencia %></td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <div class = 'row'>
@@ -195,6 +302,6 @@
       <%= link_to "<< Volver", {controller: "inicioentidad", action: "listar_adecuaciones"}, class: "btn btn-forminst" %>
   </div>
   <div class = 'col-xs-9 col-md-9 col-lg-9 text-right'>
-     <%= link_to "Siguiente >>", {controller: "inicioentidad", action: "detalles_adecuacion2"}, class: "btn btn-forminst" %>
+     <%= link_to "Siguiente >>", {controller: "inicioentidad", action: "detalles_adecuacion3"}, class: "btn btn-forminst" %>
   </div>
 </div>
