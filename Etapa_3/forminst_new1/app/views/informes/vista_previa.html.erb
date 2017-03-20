@@ -2,9 +2,9 @@
   <div class="col-xs-12 col-md-12">
       <ul class="nav nav-tabs">
         <li><a href="../iniciotutor/index">Inicio</a></li>
-        <li><a href="../iniciotutor/listar_adecuaciones" class = 'active'>Plan de Adecuación</a></li> 
+        <li><a href="../iniciotutor/listar_adecuaciones">Plan de Adecuación</a></li> 
         <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Informes <span class="caret"></span></a>
+            <a href="#" class="dropdown-toggle active"  data-toggle="dropdown" role="button" aria-expanded="false" >Informes <span class="caret"></span></a>
             <ul class="dropdown-menu nav" role="menu">
               <li></li>
               <li><a href="#" data-toggle="modal" data-target="#selectInforme">
@@ -18,7 +18,6 @@
       </ul>
   </div>
 </div>
-
 
 <div class="modal fade" id="selectInforme" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -53,18 +52,67 @@
   </div>
 </div>
 
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Mensaje de confirmación</h4>
+      </div>
+      <div class="modal-body">
+        <h5>Está seguro que desea enviar el informe?.</h5>
+      </div>
+      <div class="modal-footer">
+        <%= link_to "Aceptar", {controller: "informes", action: "cambiar_estatusI", :informe_id => @informe.id }, class: "btn btn-default" %>
+      
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+
+<div class="modal fade" id="myModalEliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h3 class="modal-title" id="myModalLabel">Eliminar Informe</h3>
+      </div>
+      <div class="modal-body">
+          <%= form_tag({controller: 'informes', action: 'eliminar_informe'}) do%>
+            <div class="form-group">
+              <center>
+                <h5><strong>Está seguro que desea eliminar este informe?</strong></h5>
+              </center>
+            </div>
+      </div>
+      <div class="modal-footer">
+          <button type="submit" class="btn btn-forminst">Si</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+      </div>
+      <%end%>
+    </div>
+  </div>
+</div>
 
 <div class="row">
   <div class="col-xs-12 col-md-12">
     <div class="btn-group" role="group">
       <button type="button" class="btn btn-default" onclick = " location.href = 'javascript:history.back(-1);'">Volver</button>
-      <button type="button" class="btn btn-default">Enviar</button>
-      <%= link_to "Vista Previa", {controller: "iniciotutor", action: "vista_previa"}, class: "btn btn-default" %>
-      <%= link_to "Generar PDF", {controller: "adecuacions", action: "generar_pdf"}, class: "btn btn-default" %>
+      <%if @bool_enviado == 0 %>
+       <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-default">Enviar</button>
+      <%else%>
+        <button type="button" data-toggle="modal" data-target="#myModal2" class="btn btn-default">Enviar</button>
+      <%end%>
+      <%= link_to "Vista Previa", {controller: "informes", action: "vista_previa"}, class: "btn btn-default active" %>
+      <%= link_to "Generar PDF", {controller: "informes", action: "generar_pdf"}, class: "btn btn-default" %>
       <button type="button" class="btn btn-default">Agregar Soporte</button>
       <button type="button" class="btn btn-default">Ver Soporte</button>
-      <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">
-        Eliminar Adecuación
+      <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModalEliminar">
+        Eliminar Informe
       </button>
     </div>
   </div>
@@ -74,19 +122,17 @@
   <div class="col-xs-12 col-md-12 col-md-offset-0">
     <div class="text-right">
       <div class= "text-left">
-        <%if @nombre%>
-          <div>
-            <span><%= link_to 'Plan Formación', :controller => 'iniciotutor', :action => 'planformacions' %></span>
-            <p style="display:inline"> / </p>
-            <span><%= link_to session[:instructorName] , :controller => 'iniciotutor', :action => 'ver_detalles_plan' %></span>
-            <p style="display:inline"> / </p>
-            <span><%= link_to 'Adecuación', :controller => 'iniciotutor', :action => 'listar_adecuaciones' %></span>
-            <p style="display:inline"> /  </p>
-            <span><%= link_to 'Detalles', :controller => 'iniciotutor', :action => 'ver_detalles_adecuacion' %></span>
-            <p style="display:inline"> /  Vista Previa </p>
-          </div>
-        <%end%>
-      </div>
+      <%if @nombre%>
+        <div>
+          <span><%= link_to 'Plan Formación', :controller => 'iniciotutor', :action => 'planformacions' %></span>
+          <p style="display:inline"> / </p>
+          <span><%= link_to session[:instructorName] , :controller => 'iniciotutor', :action => 'ver_detalles_plan' %></span>
+          <p style="display:inline"> / </p>
+          <span><%= link_to 'Informes', :controller => 'informes', :action => 'listar_informes' %></span>
+          <p style="display:inline">  /  Vista Previa </p>
+        </div>
+      <%end%>
+    </div>
       <div id = "fechamuestra">
         <script languaje="JavaScript">
           fecha();
@@ -119,72 +165,42 @@
 <br>
 
 
-<p class="text-center"><b>ADECUACIÓN DEL PLAN DE FORMACIÓN Y CAPACITACIÓN DE DOCENTES EN LA CATEGORÍA DE INSTRUCTOR</b></p>
+<p class="text-center"><b>INFORME <%= @TipoSemestre.tipo.upcase %> DE ACTIVIDADES REALIZADAS POR EL INSTRUCTOR DURANTE LA EJECUCIÓN DE SU PLAN DE FORMACIÓN Y CAPACITACIÓN</b></p>
 <br>
 
 <div class= "row">
   <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
       <div class="table-responsive">
-      <b><p>1.- DATOS DE LA DEPENDENCIA</p></b>
-      <table class="table table-black">
+      <b><p>1.-DATOS DEL INSTRUCTOR EN FORMACIÓN Y SU TUTOR:</p></b>
+      <table class="table table-black table-bordered">
         <tbody>
           <tr>
-            <td style="width:20%;" class="text-left"><b>Escuela o Instituto:</b></td>
-            <td class="text-left"><%= @escuela.nombre %></td>
+            <td style="width:25%;" class="text-left"><b>N° del informe</b></td>
+            <td class="text-left"><%= @informe.numero %></td>
           </tr>
           <tr>
-            <td class="text-left"><b>Área:</b></td>
-            <td class="text-left"><%= @persona.area %></td>
+            <td class="text-left"><b>Fecha de realización del informe:</b></td>
+            <td class="text-left"><%= @informe.fecha_creacion %> </td>
           </tr>
           <tr>
-            <td class="text-left"><b>Fecha de realización del presente documento:</b></td>
-            <td class="text-left"> <%= @fechaActual %></td>
+            <td class="text-left"><b>Apellidos y Nombres del Instructor:</b></td>
+            <td class="text-left"> <%=  @persona.apellidos%> <%= @persona.nombres %></td>
           </tr>
           <tr>
-            <td class="text-left"><b>Unidad de Adscripción de Docencia:</b></td>
-            <td class="text-left"><%= @adscripcion_docencia %></td>
-          </tr>
-          <tr>
-            <td class="text-left"><b>Unidad de Adscripción de Investigación:</b></td>
-            <td class="text-left"><%= @adscripcion_investigacion %></td>
-          </tr>
-          
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
-<br>
-
-<div class= "row">
-  <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
-      <div class="table-responsive">
-      <b><p>2.- DATOS DEL INSTRUCTOR EN FORMACIÓN</p></b>
-      <table class="table table-black">
-        <tbody>
-          <tr>
-            <td style="width:20%;" class="text-left"><b>Fecha del Concurso de Oposición:</b></td>
-            <td class="text-left"> <%= @fechaConcurso %> </td>
-          </tr>
-          <tr>
-            <td class="text-left"><b>Apellidos y Nombres:</b></td>
-            <td class="text-left"><%= session[:instructorName] %></td>
-          </tr>
-          <tr>
-            <td class="text-left"><b>Cédula de Identidad:</b></td>
+            <td class="text-left"><b>Cédula de Identidad del Instructor:</b></td>
             <td class="text-left"><%= @persona.ci %></td>
           </tr>
           <tr>
-            <td class="text-left"><b>Correo Electrónico:</b></td>
-            <td class="text-left"><%= @user.user %>@ciens.ucv.ve</td>
+            <td class="text-left"><b>Apellidos y Nombre del Tutor:</b></td>
+            <td class="text-left"> <%=  @tutor.apellidos%> <%= @tutor.nombres %></td>
           </tr>
           <tr>
-            <td class="text-left"><b>Teléfono Celular:</b></td>
-            <td class="text-left"><%= @persona.telefono1 %></td>
+            <td class="text-left"><b>Cédula de Identidad del Tutor:</b></td>
+            <td class="text-left"><%= @tutor.ci %></td>
           </tr>
-           <tr>
-            <td class="text-left"><b>Otro Teléfono:</b></td>
-            <td class="text-left"><%= @persona.telefono2 %></td>
+          <tr>
+            <td class="text-left"><b>Escuela o Instituto de adscripción:</b></td>
+            <td class="text-left"><%= @escuela.nombre %></td>
           </tr>
           
         </tbody>
@@ -197,39 +213,14 @@
 <div class= "row">
   <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
       <div class="table-responsive">
-      <b><p>3.-PERFIL DEL INSTRUCTOR EN FORMACIÓN</p></b>
+      <b><p>2.- PRESENTACIÓN DE PLAN DE FORMACIÓN Y CAPACITACIÓN:</p></b>
       <table class="table table-black">
         <tbody>
           <tr>
-            <td style="width:20%;" class="text-left"><b>Grado de Instrucción:</b></td>
-            <td class="text-left"><%=  @cpinstruccion %></td>
+            <th><b>PRIMER SEMESTRE</b></th>
           </tr>
           <tr>
-            <td class="text-left"><b>Área:</b></td>
-            <td class="text-left"><%= @persona.area %></td>
-          </tr>
-          <tr>
-            <td class="text-left"><b>Subárea:</b></td>
-            <td class="text-left"><%= @persona.subarea %></td>
-          </tr>        
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
-<br>
-
-<div class= "row">
-  <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
-      <div class="table-responsive">
-      <b><p>4.-ACTIVIDADES A REALIZAR POR EL INSTRUCTOR</p></b>
-      <table class="table table-black">
-        <tbody>
-          <tr>
-            <td><b>PRIMER SEMESTRE</b></td>
-          </tr>
-          <tr>
-            <td class="text-left"><b>4.1.- Docencia:</b></td>
+            <th class="text-left"><b>2.1.- Docencia:</b></th>
           </tr>
             <% @actividades1doc.each_with_index do |actdoc, i| %>
               <tr>
@@ -237,7 +228,7 @@
               </tr>
             <% end %>
           <tr>
-            <td class="text-left"><b>4.2.- Investigación:</b></td>
+            <td class="text-left"><b>2.2.- Investigación:</b></td>
           </tr>
             <% @actividades1inv.each_with_index do |actdoc, i| %>
                 <tr>
@@ -245,7 +236,7 @@
                 </tr>
             <% end %>
           <tr>
-            <td class="text-left"><b>4.3.- Formación:</b></td>
+            <td class="text-left"><b>2.3.- Formación:</b></td>
           </tr>
           <% @actividades1for.each_with_index do |actdoc, i| %>
               <tr>
@@ -253,7 +244,7 @@
               </tr>
           <% end %>
           <tr>
-            <td class="text-left"><b>4.4.- Extensión:</b></td>
+            <td class="text-left"><b>2.4.- Extensión:</b></td>
           </tr>
           <% @actividades1ext.each_with_index do |actdoc, i| %>
               <tr>
@@ -261,7 +252,7 @@
               </tr>
           <% end %>
           <tr>
-            <td class="text-left"><b>4.5.- Otras Actividades:</b></td>
+            <td class="text-left"><b>2.5.- Otras Actividades:</b></td>
           </tr>
           <% @actividades1otr.each_with_index do |actdoc, i| %>
               <tr>
@@ -275,7 +266,7 @@
             <td><b>SEGUNDO SEMESTRE</b></td>
             </tr>
           <tr>
-            <td class="text-left"><b>4.1.- Docencia:</b></td>
+            <td class="text-left"><b>2.1.- Docencia:</b></td>
           </tr>
             <% @actividades2doc.each_with_index do |actdoc, i| %>
               <tr>
@@ -283,7 +274,7 @@
               </tr>
             <% end %>
           <tr>
-            <td class="text-left"><b>4.2.- Investigación:</b></td>
+            <td class="text-left"><b>2.2.- Investigación:</b></td>
           </tr>
             <% @actividades2inv.each_with_index do |actdoc, i| %>
                 <tr>
@@ -291,7 +282,7 @@
                 </tr>
             <% end %>
           <tr>
-            <td class="text-left"><b>4.3.- Formación:</b></td>
+            <td class="text-left"><b>2.3.- Formación:</b></td>
           </tr>
           <% @actividades2for.each_with_index do |actdoc, i| %>
               <tr>
@@ -299,7 +290,7 @@
               </tr>
           <% end %>
           <tr>
-            <td class="text-left"><b>4.4.- Extensión:</b></td>
+            <td class="text-left"><b>2.4.- Extensión:</b></td>
           </tr>
           <% @actividades2ext.each_with_index do |actdoc, i| %>
               <tr>
@@ -307,7 +298,7 @@
               </tr>
           <% end %>
           <tr>
-            <td class="text-left"><b>4.5.- Otras Actividades:</b></td>
+            <td class="text-left"><b>2.5.- Otras Actividades:</b></td>
           </tr>
           <% @actividades2otr.each_with_index do |actdoc, i| %>
               <tr>
@@ -320,7 +311,7 @@
             <td><b>TERCER SEMESTRE</b></td>
           </tr>
           <tr>
-            <td class="text-left"><b>4.1.- Docencia:</b></td>
+            <td class="text-left"><b>2.1.- Docencia:</b></td>
           </tr>
             <% @actividades3doc.each_with_index do |actdoc, i| %>
               <tr>
@@ -328,7 +319,7 @@
               </tr>
             <% end %>
           <tr>
-            <td class="text-left"><b>4.2.- Investigación:</b></td>
+            <td class="text-left"><b>2.2.- Investigación:</b></td>
           </tr>
             <% @actividades3inv.each_with_index do |actdoc, i| %>
                 <tr>
@@ -336,7 +327,7 @@
                 </tr>
             <% end %>
           <tr>
-            <td class="text-left"><b>4.3.- Formación:</b></td>
+            <td class="text-left"><b>2.3.- Formación:</b></td>
           </tr>
           <% @actividades3for.each_with_index do |actdoc, i| %>
               <tr>
@@ -344,7 +335,7 @@
               </tr>
           <% end %>
           <tr>
-            <td class="text-left"><b>4.4.- Extensión:</b></td>
+            <td class="text-left"><b>2.4.- Extensión:</b></td>
           </tr>
           <% @actividades3ext.each_with_index do |actdoc, i| %>
               <tr>
@@ -352,7 +343,7 @@
               </tr>
           <% end %>
           <tr>
-            <td class="text-left"><b>4.5.- Otras Actividades:</b></td>
+            <td class="text-left"><b>2.5.- Otras Actividades:</b></td>
           </tr>
           <% @actividades3otr.each_with_index do |actdoc, i| %>
               <tr>
@@ -364,7 +355,7 @@
             <td><b>CUARTO SEMESTRE</b></td>
           </tr>
           <tr>
-            <td class="text-left"><b>4.1.- Docencia:</b></td>
+            <td class="text-left"><b>2.1.- Docencia:</b></td>
           </tr>
             <% @actividades4doc.each_with_index do |actdoc, i| %>
               <tr>
@@ -372,7 +363,7 @@
               </tr>
             <% end %>
           <tr>
-            <td class="text-left"><b>4.2.- Investigación:</b></td>
+            <td class="text-left"><b>2.2.- Investigación:</b></td>
           </tr>
             <% @actividades4inv.each_with_index do |actdoc, i| %>
                 <tr>
@@ -380,7 +371,7 @@
                 </tr>
             <% end %>
           <tr>
-            <td class="text-left"><b>4.3.- Formación:</b></td>
+            <td class="text-left"><b>2.3.- Formación:</b></td>
           </tr>
           <% @actividades4for.each_with_index do |actdoc, i| %>
               <tr>
@@ -388,7 +379,7 @@
               </tr>
           <% end %>
           <tr>
-            <td class="text-left"><b>4.4.- Extensión:</b></td>
+            <td class="text-left"><b>2.4.- Extensión:</b></td>
           </tr>
           <% @actividades4ext.each_with_index do |actdoc, i| %>
               <tr>
@@ -396,7 +387,7 @@
               </tr>
           <% end %>
           <tr>
-            <td class="text-left"><b>4.5.- Otras Actividades:</b></td>
+            <td class="text-left"><b>2.5.- Otras Actividades:</b></td>
           </tr>
           <% @actividades4otr.each_with_index do |actdoc, i| %>
               <tr>
@@ -408,6 +399,99 @@
     </div>
   </div>
 </div>
+
+<br>
+
+<div class= "row">
+  <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
+    <b><p>ACTIVIDADES DESARROLLADAS</p></b>
+    <div class="table-responsive">
+      <b><p>3.- ACTIVIDADES DE DOCENCIA:</p></b>
+      <table class="table table-hover table-bordered text-center">
+        <thead>
+          <tr>
+            <th style="width:35%;" class="text-center">ACTIVIDAD DE DOCENCIA PROGRAMADA</th>
+            <th style="width:35%;" class="text-center">ACTIVIDAD DE DOCENCIA EJECUTADA</th>
+            <th class="text-center">OBSERVACIONES</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @actividadesadoc.each_with_index do |actividadesadoc, i| %> 
+            <tr>
+              <td class="text-center"><%= actividadesadoc.actividad %></td>
+              <td class="text-center">aaa</td>
+              <td class="text-center"></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="table-responsive">
+      <b><p>4.- ACTIVIDADES DE INVESTIGACIÓN:</p></b>
+      <table class="table table-hover table-bordered text-center">
+        <thead>
+          <tr>
+            <th style="width:35%;" class="text-center">ACTIVIDAD DE INVESTIGACIÓN PROGRAMADA</th>
+            <th style="width:35%;" class="text-center">ACTIVIDAD DE INVESTIGACIÓN EJECUTADA</th>
+            <th class="text-center">OBSERVACIONES</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @actividadesainv.each_with_index do |actividadesainv, i| %> 
+            <tr>
+              <td class="text-center"><%= actividadesainv.actividad %></td>
+              <td class="text-center">aaa</td>
+              <td class="text-center"></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="table-responsive">
+      <b><p>5.- ACTIVIDADES DE FORMACIÓN:</p></b>
+      <table class="table table-hover table-bordered text-center">
+        <thead>
+          <tr>
+            <th style="width:35%;" class="text-center">ACTIVIDAD DE FORMACIÓN PROGRAMADA</th>
+            <th style="width:35%;" class="text-center">ACTIVIDAD DE FORMACIÓN EJECUTADA</th>
+            <th class="text-center">OBSERVACIONES</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @actividadesafor.each_with_index do |actividadesafor, i| %> 
+            <tr>
+              <td class="text-center"><%= actividadesafor.actividad %></td>
+              <td class="text-center">aaa</td>
+              <td class="text-center"></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="table-responsive">
+      <b><p>6.- ACTIVIDADES DE EXTENSIÓN:</p></b>
+      <table class="table table-hover table-bordered text-center">
+        <thead>
+          <tr>
+            <th style="width:35%;" class="text-center">ACTIVIDAD DE EXTENSIÓN PROGRAMADA</th>
+            <th style="width:35%;" class="text-center">ACTIVIDAD DE EXTENSIÓN EJECUTADA</th>
+            <th class="text-center">OBSERVACIONES</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @actividadesaext.each_with_index do |actividadesaext, i| %> 
+            <tr>
+              <td class="text-center"><%= actividadesaext.actividad %></td>
+              <td class="text-center">aaa</td>
+              <td class="text-center"></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<br>
 
 <div class= "row">
   <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">

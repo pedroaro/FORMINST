@@ -64,7 +64,7 @@
               <td><%= @nombreinstructor[i] %></td>
               <td><%= planformacion.fecha_inicio %></td>
               <td><%= planformacion.fecha_fin %></td>
-              <td></td>
+              <td><%= planformacion.fecha_modificacion %></td>
               <td>
                 <%= form_tag({controller: 'iniciotutor', action: 'detalles_adecuacion3'}) do%>
                   <input type="hidden" name="plan_id" value='<%= planformacion.id %>'>
