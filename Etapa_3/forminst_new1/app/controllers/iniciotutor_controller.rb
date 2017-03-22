@@ -258,15 +258,14 @@ class IniciotutorController < ApplicationController
 			@persona= Persona.where(usuario_id: @plan.instructor_id).take
 			@usuario= Usuario.find(@plan.instructor_id)
 			semestre= params[:semestre].to_i
-
 			if !params[:adecuacion_id].blank?
 				session[:adecuacion_id]= params[:adecuacion_id]
 				@adecuacion= Adecuacion.find(session[:adecuacion_id])
-			end
-			if session[:adecuacion_id].blank?
+			else
 				@adecuacion= Adecuacion.where(planformacion_id: session[:plan_id]).take
 				session[:adecuacion_id]= @adecuacion.id
 			end
+
 			@plan= Planformacion.find(session[:plan_id])
 			@userentidad= Usuarioentidad.where(usuario_id: @plan.instructor_id).take
 			if @userentidad.escuela_id == nil
@@ -1199,306 +1198,309 @@ class IniciotutorController < ApplicationController
 
 	def cambiar_estatusA
  		@adecuacion_id = params[:adecuacion_id].to_i
- 		puts "hhahahahahahjahahaha"
- 		puts @adecuacion_id
  		@actividades1doc= []
 		@actividades1inv= []
 		@actividades1ext= []
 		@actividades1for= []
 		@actividades1otr= []
 		g=0;
-		@actividades1= AdecuacionActividad.where(adecuacion_id: @adecuacion_id, semestre: 1).all
-		if @actividades1.blank?
-	       	g = g + 1
-		end
-		a= false
-		b= false
-		c= false
-		d= false
-		e= false
-		@actividades1.each do |actade| 
-			@act= Actividad.find(actade.actividad_id)
-			tipo= @act.tipo_actividad_id
-			if tipo==1
-				puts "soy una actividad de docencia"
-				puts @act.actividad
-				a = true
-			else
-				if tipo==2
-					puts "soy una actividad de investigacion"
-					puts @act.actividad
-					b = true
-				else
-					if tipo==3
-						puts "soy una actividad de extension"
-						puts @act.actividad
-						c = true
-					else
-						if tipo==4
-							puts "soy una actividad de formacion"
-							puts @act.actividad
-							d = true
-						else
-							if tipo==5
-								puts "soy otro tipo de actividad"
-								puts @act.actividad
-								e = true
-							end
-						end
-					end
-				end
-			end
-		end
-		if (a == true && b== true && c== true && d== true  && e== true)
-				puts "hahahahhajjj siiii"
-		else 
-
-			puts "oh nooo"
-			g = g + 1
-		end
-		@actividades2doc= []
-		@actividades2inv= []
-		@actividades2ext= []
-		@actividades2for= []
-		@actividades2otr= []
-		@actividades2= AdecuacionActividad.where(adecuacion_id: @adecuacion_id, semestre: 2).all
-		if @actividades2.blank?
-			g = g + 1
-		end
-		a= false
-		b= false
-		c= false
-		d= false
-		e= false
-		@actividades2.each do |actade| 
-			@act= Actividad.find(actade.actividad_id)
-			tipo= @act.tipo_actividad_id
-			if tipo==1
-				puts "soy una actividad de docencia"
-				puts @act.actividad
-				@actividades2doc.push(@act)
-				a = true
-			else
-				if tipo==2
-					puts "soy una actividad de investigacion"
-					puts @act.actividad
-					@actividades2inv.push(@act)
-					b = true
-				else
-					if tipo==3
-						puts "soy una actividad de extension"
-						puts @act.actividad
-						@actividades2ext.push(@act)
-						c = true
-					else
-						if tipo==4
-							puts "soy una actividad de formacion"
-							puts @act.actividad
-							@actividades2for.push(@act)
-							d = true
-						else
-							if tipo==5
-								puts "soy otro tipo de actividad"
-								puts @act.actividad
-								@actividades2otr.push(@act)
-								e = true
-							end
-						end
-					end
-				end
-			end
-		end
-		if (a == true && b== true && c== true && d== true  && e== true)
-				puts "hahahahhajjj siiii"
-			else 
-				puts "oh nooo"
-				g = g + 1
-		end
-		@actividades3doc= []
-		@actividades3inv= []
-		@actividades3ext= []
-		@actividades3for= []
-		@actividades3otr= []
-		@actividades3= AdecuacionActividad.where(adecuacion_id: @adecuacion_id, semestre: 3).all
-		if @actividades3.blank?
-	        g = g + 1
-		end
-		a= false
-		b= false
-		c= false
-		d= false
-		e= false
-		@actividades3.each do |actade| 
-			@act= Actividad.find(actade.actividad_id)
-			tipo= @act.tipo_actividad_id
-			if tipo==1
-				puts "soy una actividad de docencia"
-				puts @act.actividad
-				@actividades3doc.push(@act)
-				a = true
-			else
-				if tipo==2
-					puts "soy una actividad de investigacion"
-					puts @act.actividad
-					@actividades3inv.push(@act)
-					b = true
-				else
-					if tipo==3
-						puts "soy una actividad de extension"
-						puts @act.actividad
-						@actividades3ext.push(@act)
-						c = true
-					else
-						if tipo==4
-							puts "soy una actividad de formacion"
-							puts @act.actividad
-							@actividades3for.push(@act)
-							d = true
-						else
-							if tipo==5
-								puts "soy otro tipo de actividad"
-								puts @act.actividad
-								@actividades3otr.push(@act)
-								e = true
-							end
-						end
-					end
-				end
-			end
-		end
-		if (a == true && b== true && c== true && d== true  && e== true)
-				puts "hahahahhajjj siiii"
-			else 
-				puts "oh nooo"
-				g = g + 1
-		end
-		@actividades4doc= []
-		@actividades4inv= []
-		@actividades4ext= []
-		@actividades4for= []
-		@actividades4otr= []
-		@actividades4= AdecuacionActividad.where(adecuacion_id: @adecuacion_id, semestre: 4).all
-		if @actividades4.blank?
-	        g = g + 1
-		end
-		a= false
-		b= false
-		c= false
-		d= false
-		e= false
-		@actividades4.each do |actade| 
-			@act= Actividad.find(actade.actividad_id)
-			tipo= @act.tipo_actividad_id
-			if tipo==1
-				puts "soy una actividad de docencia"
-				puts @act.actividad
-				@actividades4doc.push(@act)
-				a = true
-			else
-				if tipo==2
-					puts "soy una actividad de investigacion"
-					puts @act.actividad
-					@actividades4inv.push(@act)
-					b = true
-				else
-					if tipo==3
-						puts "soy una actividad de extension"
-						puts @act.actividad
-						@actividades4ext.push(@act)
-						c = true
-					else
-						if tipo==4
-							puts "soy una actividad de formacion"
-							puts @act.actividad
-							@actividades4for.push(@act)
-							d = true
-						else
-							if tipo==5
-								puts "soy otro tipo de actividad"
-								puts @act.actividad
-								@actividades4otr.push(@act)
-								e = true
-							end
-						end
-					end
-				end
-			end
-		end
-		if (a == true && b== true && c== true && d== true  && e== true)
-				puts "hahahahhajjj siiii"
-			else 
-				puts "oh nooo"
-				g = g + 1
-		end
-
-		if (g != 0)
-			flash[:danger]="No puede enviar la adecuación sin haber llenado todos los semestres"
+	    cambio_act = EstatusAdecuacion.where(adecuacion_id: @adecuacion_id, actual: 1).take
+	    if cambio_act != 6
+	    	flash[:info]="Esta adecuación ya habia sido enviada"
 	   	   	redirect_to controller:"iniciotutor", action: "detalles_adecuacion3"
 	   	else
-	      	
-	      	cambio_act = EstatusAdecuacion.where(adecuacion_id: @adecuacion_id, actual: 1).take
-	      	cambio_act.actual = 0
-	      	cambio_act.save
+			@actividades1= AdecuacionActividad.where(adecuacion_id: @adecuacion_id, semestre: 1).all
+			if @actividades1.blank?
+		       	g = g + 1
+			end
+			a= false
+			b= false
+			c= false
+			d= false
+			e= false
+			@actividades1.each do |actade| 
+				@act= Actividad.find(actade.actividad_id)
+				tipo= @act.tipo_actividad_id
+				if tipo==1
+					puts "soy una actividad de docencia"
+					puts @act.actividad
+					a = true
+				else
+					if tipo==2
+						puts "soy una actividad de investigacion"
+						puts @act.actividad
+						b = true
+					else
+						if tipo==3
+							puts "soy una actividad de extension"
+							puts @act.actividad
+							c = true
+						else
+							if tipo==4
+								puts "soy una actividad de formacion"
+								puts @act.actividad
+								d = true
+							else
+								if tipo==5
+									puts "soy otro tipo de actividad"
+									puts @act.actividad
+									e = true
+								end
+							end
+						end
+					end
+				end
+			end
+			if (a == true && b== true && c== true && d== true  && e== true)
+					puts "hahahahhajjj siiii"
+			else 
 
-	        cambio_est = EstatusAdecuacion.new 
-	        cambio_est.adecuacion_id = @adecuacion_id
-	        cambio_est.fecha = Time.now 
+				puts "oh nooo"
+				g = g + 1
+			end
+			@actividades2doc= []
+			@actividades2inv= []
+			@actividades2ext= []
+			@actividades2for= []
+			@actividades2otr= []
+			@actividades2= AdecuacionActividad.where(adecuacion_id: @adecuacion_id, semestre: 2).all
+			if @actividades2.blank?
+				g = g + 1
+			end
+			a= false
+			b= false
+			c= false
+			d= false
+			e= false
+			@actividades2.each do |actade| 
+				@act= Actividad.find(actade.actividad_id)
+				tipo= @act.tipo_actividad_id
+				if tipo==1
+					puts "soy una actividad de docencia"
+					puts @act.actividad
+					@actividades2doc.push(@act)
+					a = true
+				else
+					if tipo==2
+						puts "soy una actividad de investigacion"
+						puts @act.actividad
+						@actividades2inv.push(@act)
+						b = true
+					else
+						if tipo==3
+							puts "soy una actividad de extension"
+							puts @act.actividad
+							@actividades2ext.push(@act)
+							c = true
+						else
+							if tipo==4
+								puts "soy una actividad de formacion"
+								puts @act.actividad
+								@actividades2for.push(@act)
+								d = true
+							else
+								if tipo==5
+									puts "soy otro tipo de actividad"
+									puts @act.actividad
+									@actividades2otr.push(@act)
+									e = true
+								end
+							end
+						end
+					end
+				end
+			end
+			if (a == true && b== true && c== true && d== true  && e== true)
+					puts "hahahahhajjj siiii"
+				else 
+					puts "oh nooo"
+					g = g + 1
+			end
+			@actividades3doc= []
+			@actividades3inv= []
+			@actividades3ext= []
+			@actividades3for= []
+			@actividades3otr= []
+			@actividades3= AdecuacionActividad.where(adecuacion_id: @adecuacion_id, semestre: 3).all
+			if @actividades3.blank?
+		        g = g + 1
+			end
+			a= false
+			b= false
+			c= false
+			d= false
+			e= false
+			@actividades3.each do |actade| 
+				@act= Actividad.find(actade.actividad_id)
+				tipo= @act.tipo_actividad_id
+				if tipo==1
+					puts "soy una actividad de docencia"
+					puts @act.actividad
+					@actividades3doc.push(@act)
+					a = true
+				else
+					if tipo==2
+						puts "soy una actividad de investigacion"
+						puts @act.actividad
+						@actividades3inv.push(@act)
+						b = true
+					else
+						if tipo==3
+							puts "soy una actividad de extension"
+							puts @act.actividad
+							@actividades3ext.push(@act)
+							c = true
+						else
+							if tipo==4
+								puts "soy una actividad de formacion"
+								puts @act.actividad
+								@actividades3for.push(@act)
+								d = true
+							else
+								if tipo==5
+									puts "soy otro tipo de actividad"
+									puts @act.actividad
+									@actividades3otr.push(@act)
+									e = true
+								end
+							end
+						end
+					end
+				end
+			end
+			if (a == true && b== true && c== true && d== true  && e== true)
+					puts "hahahahhajjj siiii"
+				else 
+					puts "oh nooo"
+					g = g + 1
+			end
+			@actividades4doc= []
+			@actividades4inv= []
+			@actividades4ext= []
+			@actividades4for= []
+			@actividades4otr= []
+			@actividades4= AdecuacionActividad.where(adecuacion_id: @adecuacion_id, semestre: 4).all
+			if @actividades4.blank?
+		        g = g + 1
+			end
+			a= false
+			b= false
+			c= false
+			d= false
+			e= false
+			@actividades4.each do |actade| 
+				@act= Actividad.find(actade.actividad_id)
+				tipo= @act.tipo_actividad_id
+				if tipo==1
+					puts "soy una actividad de docencia"
+					puts @act.actividad
+					@actividades4doc.push(@act)
+					a = true
+				else
+					if tipo==2
+						puts "soy una actividad de investigacion"
+						puts @act.actividad
+						@actividades4inv.push(@act)
+						b = true
+					else
+						if tipo==3
+							puts "soy una actividad de extension"
+							puts @act.actividad
+							@actividades4ext.push(@act)
+							c = true
+						else
+							if tipo==4
+								puts "soy una actividad de formacion"
+								puts @act.actividad
+								@actividades4for.push(@act)
+								d = true
+							else
+								if tipo==5
+									puts "soy otro tipo de actividad"
+									puts @act.actividad
+									@actividades4otr.push(@act)
+									e = true
+								end
+							end
+						end
+					end
+				end
+			end
+			if (a == true && b== true && c== true && d== true  && e== true)
+					puts "hahahahhajjj siiii"
+				else 
+					puts "oh nooo"
+					g = g + 1
+			end
 
-	        if(cambio_act.estatus_id == 5)
-	        	cambio_est.estatus_id = 4
-	        else
-	        	cambio_est.estatus_id = 3
-	        end
-	        cambio_est.actual = 1
-	        cambio_est.save
+			if (g != 0)
+				flash[:danger]="No puede enviar la adecuación sin haber llenado todos los semestres"
+		   	   	redirect_to controller:"iniciotutor", action: "detalles_adecuacion3"
+		   	else
+		      	
+		      	cambio_act.actual = 0
+		      	cambio_act.save
 
-	         if cambio_act.estatus_id == 6
+		        cambio_est = EstatusAdecuacion.new 
+		        cambio_est.adecuacion_id = @adecuacion_id
+		        cambio_est.fecha = Time.now 
 
-	          userr= Usuario.where(id: session[:usuario_id]).take
-	          user =Usuarioentidad.where(usuario_id: userr.id).take
-	          if(user.escuela_id == 1)
-	            uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 7).take
-	          else
-	            if(user.escuela_id == 2)
-	              uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 8).take
-	            else
-	              if(user.escuela_id == 3)
-	                uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 9).take
-	              else
-	                if(user.escuela_id == 4)
-	                uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 10).take
-	                else
-	                  if(user.escuela_id == 9)
-	                    uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 11).take
-	                  else
-	                    if(user.escuela_id == 10)
-	                      uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 12).take
-	                    end
-	                  end
-	                end
-	              end
-	            end  
-	          end
-	          remitente = Usuario.where(id: uentidad.usuario_id).take
-	          email = remitente.user + "@ciens.ucv.ve"
-	          ActionCorreo.envio_adecuacion(email).deliver
+		        if(cambio_act.estatus_id == 5)
+		        	cambio_est.estatus_id = 4
+		        else
+		        	cambio_est.estatus_id = 3
+		        end
+		        cambio_est.actual = 1
+		        cambio_est.save
 
-	        else
-	            uentidad = Usuarioentidad.where(entidad_id: 13).take
-	            remitente = Usuario.where(id: uentidad.usuario_id).take
-	            email= remitente.user + "@ciens.ucv.ve"
-	            ActionCorreo.envio_adecuacion(email).deliver
-	        end
+		         if cambio_act.estatus_id == 6
 
-	        if(cambio_act.estatus_id == 5)
-	        	flash[:success]="La adecuación se ha envíado a consejo de facultad"
-	        else
-	        	flash[:success]="La adecuación se ha envíado a comision de investigacion"
-	        end
-     
-    
-	   		redirect_to controller:"iniciotutor", action: "listar_adecuaciones"
-	   end
+		          userr= Usuario.where(id: session[:usuario_id]).take
+		          user =Usuarioentidad.where(usuario_id: userr.id).take
+		          if(user.escuela_id == 1)
+		            uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 7).take
+		          else
+		            if(user.escuela_id == 2)
+		              uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 8).take
+		            else
+		              if(user.escuela_id == 3)
+		                uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 9).take
+		              else
+		                if(user.escuela_id == 4)
+		                uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 10).take
+		                else
+		                  if(user.escuela_id == 9)
+		                    uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 11).take
+		                  else
+		                    if(user.escuela_id == 10)
+		                      uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 12).take
+		                    end
+		                  end
+		                end
+		              end
+		            end  
+		          end
+		          remitente = Usuario.where(id: uentidad.usuario_id).take
+		          email = remitente.user + "@ciens.ucv.ve"
+		          ActionCorreo.envio_adecuacion(email).deliver
+
+		        else
+		            uentidad = Usuarioentidad.where(entidad_id: 13).take
+		            remitente = Usuario.where(id: uentidad.usuario_id).take
+		            email= remitente.user + "@ciens.ucv.ve"
+		            ActionCorreo.envio_adecuacion(email).deliver
+		        end
+
+		        if(cambio_act.estatus_id == 5)
+		        	flash[:success]="La adecuación se ha envíado a consejo de facultad"
+		        else
+		        	flash[:success]="La adecuación se ha envíado a comision de investigacion"
+		        end
+	     
+	    
+		   		redirect_to controller:"iniciotutor", action: "listar_adecuaciones"
+		   end
+		end
  	end 
 
 	def mas_observaciones3 #mas obs de actividades del informe

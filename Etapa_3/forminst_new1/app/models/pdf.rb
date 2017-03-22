@@ -1907,7 +1907,7 @@ class Pdf
 			
 			if !info_docencia.blank?
 				info_docencia.each do |actv|
-					ae = InformeActividad.where(actividad_id: actv.id).take
+					ae = InformeActividad.where(actividad_id: actv.id, informe: informe.id).take
 					ai = ActividadEjecutada.where(informe_actividad_id: ae.id).take
         			obs= ObservacionTutor.where(informe_actividad_id: ae.id).take
         			if !obs.blank?
@@ -1958,7 +1958,7 @@ class Pdf
 			
 			if !info_investigacion.blank?
 				info_investigacion.each do |actv|
-					ae = InformeActividad.where(actividad_id: actv.id).take
+					ae = InformeActividad.where(actividad_id: actv.id, informe: informe.id).take
 					ai = ActividadEjecutada.where(informe_actividad_id: ae.id).take
         			obs= ObservacionTutor.where(informe_actividad_id: ae.id).take
         			if !obs.blank?
@@ -2425,9 +2425,9 @@ class Pdf
 			:position => :left,
 			:align => { 0 => :left, 1 => :left, 2=> :left}
 			
-			if info_extension != []
-				info_extension.each do |actv|
-					ae = InformeActividad.where(actividad_id: actv.id).take
+			if info_formacion != []
+				info_formacion.each do |actv|
+					ae = InformeActividad.where(actividad_id: actv.id, informe: informe.id).take
 					ai = ActividadEjecutada.where(informe_actividad_id: ae.id).take
         			obs= ObservacionTutor.where(informe_actividad_id: ae.id).take
         			if !obs.blank?
@@ -2477,9 +2477,9 @@ class Pdf
 			:position => :left,
 			:align => {0 => :left, 1 => :left, 2=> :left}
 			
-			if info_formacion != []
-				info_formacion.each do |actv|
-					ae = InformeActividad.where(actividad_id: actv.id).take
+			if info_extension != []
+				info_extension.each do |actv|
+					ae = InformeActividad.where(actividad_id: actv.id, informe: informe.id).take
 					ai = ActividadEjecutada.where(informe_actividad_id: ae.id).take
         			obs= ObservacionTutor.where(informe_actividad_id: ae.id).take
         			if !obs.blank?
@@ -2529,9 +2529,13 @@ class Pdf
 			:align => {0 => :left, 1 => :left}
 			if info_otras != []
 				info_otras.each do |actv|
-					ae = InformeActividad.where(actividad_id: actv.id).take
+					ae = InformeActividad.where(actividad_id: actv.id, informe: informe.id).take
 					ai = ActividadEjecutada.where(informe_actividad_id: ae.id).take
-					data71 = [[{:text=> actv.actividad.to_s, :align=>:left}, {:text => ai.descripcion.to_s, :align=>:left}]] # datos que se desean en la tabla
+					if ai
+						data71 = [[{:text=> actv.actividad.to_s, :align=>:left}, {:text => ai.descripcion.to_s, :align=>:left}]] # datos que se desean en la tabla
+					else
+						data71 = [[{:text=> actv.actividad.to_s, :align=>:left}, {:text => "" , :align=>:left}]] # datos que se desean en la tabla
+					end
 					pdf.table data71, # lineas para generar la tabla en el docuemnto
 					:border_style => :grid, #:underline_header
 					:font_size  => 8, 
