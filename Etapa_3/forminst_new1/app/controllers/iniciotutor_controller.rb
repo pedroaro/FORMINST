@@ -250,12 +250,23 @@ class IniciotutorController < ApplicationController
 			@cant_for= params[:cant_formacion]
 			@cant_ext= params[:cant_extension]
 			@cant_otr= params[:cant_otra]
+			@nombre = session[:nombre_usuario]
+			@instructorName = session[:instructorName]
+			@plan= Planformacion.find(session[:plan_id])
+			@userentidad= Usuarioentidad.where(usuario_id: @plan.instructor_id).take
+			@escuela= Escuela.find(@userentidad.escuela_id)
+			@persona= Persona.where(usuario_id: @plan.instructor_id).take
+			@usuario= Usuario.find(@plan.instructor_id)
 			semestre= params[:semestre].to_i
 
-			if params[:adecuacion_id]!=nil
+			if !params[:adecuacion_id].blank?
 				session[:adecuacion_id]= params[:adecuacion_id]
+				@adecuacion= Adecuacion.find(session[:adecuacion_id])
 			end
-			@adecuacion= Adecuacion.find(session[:adecuacion_id])
+			if session[:adecuacion_id].blank?
+				@adecuacion= Adecuacion.where(planformacion_id: session[:plan_id]).take
+				session[:adecuacion_id]= @adecuacion.id
+			end
 			@plan= Planformacion.find(session[:plan_id])
 			@userentidad= Usuarioentidad.where(usuario_id: @plan.instructor_id).take
 			if @userentidad.escuela_id == nil

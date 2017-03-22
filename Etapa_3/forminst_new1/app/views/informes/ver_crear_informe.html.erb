@@ -71,7 +71,7 @@
           <tbody>
             <tr></tr>
             <tr>
-              <td class="text-left" colspan="3"><h5><strong> Actividades a realizar por el instructor:</strong></h5></td>
+              <td class="text-center" colspan="4"><h5><strong> Actividades a realizar por el instructor:</strong></h5></td>
             </tr>
             <tr class='title-table'>
 
@@ -352,43 +352,37 @@
               </tr>
             <% end %>
 
-            <tr><td colspan="3"></td></tr>
-
             <tr  class='title-table'>
-              <td class="text-center" colspan="3"><strong>Otras Actividades</strong></td>
-            </tr>
             <tr>
-              <td colspan="3"><b>Contempladas en el plan de formación y capacitación:</b></td>
+              <td class="text-center" colspan="4"><h5><strong> Otras Actividades:</strong></h5></td>
+            </tr>
+              <td class="text-center" colspan="2"><strong>Contempladas en el plan formación</strong></td>
+              <td class="text-center" colspan="2"><strong>No contempladas en el plan formación</strong></td>
             </tr>
             <% @actividadesaotr.each_with_index do |actdoc,i| %>
               <tr>
-                <td colspan="3">
-                  <textarea class="form-control" rows="3"  name='<%= @otra.to_s + actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
+                <td colspan="2">
+                  <textarea class="form-control" rows="3"  name='otra<%= actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
                 </td>
-                <input type="hidden" name="otr<%=i.to_s%>" value='<%= actdoc.id %>'>
+                <td colspan="2">
+                  <textarea class="form-control" rows="3" name='ejecutada<%= actdoc.id.to_s%>' ><%=  actdoc.actividad%></textarea>
+                </td>
+                <input type="hidden" name="otra<%=i.to_s%>" value='<%= actdoc.id %>'>
               </tr>
             <% end %>
             <tr>
-              <td colspan="3"><b>No contempladas en el plan de formación y capacitación:</b></td>
+              <td colspan="4"><b>Conclusiones:</b></td>
             </tr>
             <tr>
-              <td colspan="3">
-                  <textarea name="no_contemplada" class="form-control" rows="3" ></textarea>
-              </td>
-            </tr>
-            <tr>
-              <td colspan="3"><b>Conclusiones:</b></td>
-            </tr>
-            <tr>
-              <td colspan="3">
+              <td colspan="4">
                   <textarea name="conclusiones" class="form-control" rows="3" ></textarea>
               </td>
             </tr>
             <tr>
-              <td colspan="3"><b>Opinión tutor:</b></td>
+              <td colspan="4"><b>Opinión tutor:</b></td>
             </tr>
             <tr>
-              <td colspan="3">
+              <td colspan="4">
                   <textarea name="opinion" class="form-control" rows="3" ></textarea>
               </td>
             </tr>

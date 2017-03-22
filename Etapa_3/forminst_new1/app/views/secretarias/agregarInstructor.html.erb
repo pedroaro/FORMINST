@@ -80,12 +80,12 @@
               <td class="text-center">
                 <div id="sandbox-container">
                   <div class="input-group date">
-                    <input type="text" class="form-control" name="FechaConcurso" value="<%=$cpfechaconcurso%>" required><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                    <input type="text" class="form-control" name="FechaConcurso" value="<%=$cpfechaconcurso%>" required oninvalid="setCustomValidity('Ingrese una fecha del concurso válida')" onchange="try{setCustomValidity('')}catch(e){}"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
                   </div>
                 </div>
               </td>
               <td class="text-center">
-                <input type="text" name="Nombre" class="form-control" value="<%=$cpnombre%>" required>
+                <input type="text" name="Nombre" class="form-control" value="<%=$cpnombre%>" required oninvalid="setCustomValidity('Ingrese un nombre válido')" onchange="try{setCustomValidity('')}catch(e){}">
               </td>
             </tr>
 
@@ -97,10 +97,10 @@
 
             <tr>
               <td class="text-center">
-                <input type="text" name="Apellido" class="form-control" value="<%=$cpapellido%>" required>
+                <input type="text" name="Apellido" class="form-control" value="<%=$cpapellido%>" required oninvalid="setCustomValidity('Ingrese un apellido válido')" onchange="try{setCustomValidity('')}catch(e){}">
               </td>
               <td class="text-center">
-                <input type="number" name="CI" class="form-control" min="0" step="0" value="<%=$cpci%>" required oninvalid="setCustomValidity('Ingrese un número de cedula valido')" onchange="try{setCustomValidity('')}catch(e){}"> 
+                <input type="number" name="CI" class="form-control" min="0" step="0" value="<%=$cpci%>" required oninvalid="setCustomValidity('Ingrese un número de cedula válido')" onchange="try{setCustomValidity('')}catch(e){}"> 
               </td>
             </tr>
 
@@ -113,13 +113,13 @@
               <td class="text-center">
                 <div id="sandbox-container">
                   <div class="input-group date">
-                    <input type="text" class="form-control" name="FechaNac" value="<%=$cpfechanac%>" required><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                    <input type="text" class="form-control" name="FechaNac" value="<%=$cpfechanac%>" required oninvalid="setCustomValidity('Ingrese una fecha de nacimiento válida')" onchange="try{setCustomValidity('')}catch(e){}"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
                   </div>
                 </div>
               </td>
               </td>
               <td class="text-center">
-                <input type="text" name="Dir" class="form-control" value="<%=$cpdir%>" required>
+                <input type="text" name="Dir" class="form-control" value="<%=$cpdir%>" required oninvalid="setCustomValidity('Ingrese una dirección válida')" onchange="try{setCustomValidity('')}catch(e){}">
               </td>
             </tr>
 
@@ -131,12 +131,12 @@
             <tr>
               <td class="text-center">
                 <div class="input-group">
-                <input type="text" name="correo" class="form-control" value="<%=$cpcorreo%>" required> 
+                <input type="text" name="correo" class="form-control" value="<%=$cpcorreo%>" required oninvalid="setCustomValidity('Ingrese un correo electronico válido')" onchange="try{setCustomValidity('')}catch(e){}"> 
                 <div class="input-group-addon">@ciens.ucv.ve</div>
                 </div>
               </td>
               <td class="text-center">
-                <input type="number" name="Tlf" class="form-control" min="1000000000" max="9999999999" step="0" value="<%=$cptlf%>" required oninvalid="setCustomValidity('Ingrese un número de teléfono valido')" onchange="try{setCustomValidity('')}catch(e){}">
+                <input type="number" name="Tlf" class="form-control" min="1000000000" max="9999999999" step="0" value="<%=$cptlf%>" required oninvalid="setCustomValidity('Ingrese un número de teléfono válido')" onchange="try{setCustomValidity('')}catch(e){}">
               </td>
             </tr>
             </tr>
@@ -145,7 +145,7 @@
             </tr>
             <tr> 
               <td class="text-center">
-                <input type="number" name="OTlf" class="form-control" min="1000000000" max="9999999999" step="0" value="<%=$cpotlf%>" required oninvalid="setCustomValidity('Ingrese un número de teléfono valido')" onchange="try{setCustomValidity('')}catch(e){}">
+                <input type="number" name="OTlf" class="form-control" min="1000000000" max="9999999999" step="0" value="<%=$cpotlf%>" required oninvalid="setCustomValidity('Ingrese un número de teléfono válido')" onchange="try{setCustomValidity('')}catch(e){}">
               </td>
             </tr>
           </tbody>
@@ -180,15 +180,15 @@
 
             <tr>
               <td style='width:50%;' class="text-center"><strong>Grado de Instrucción</strong></td>
-              <td style='width:50%;' class="text-center"><strong>Area</strong></td>
+              <td style='width:50%;' class="text-center"><strong>Área</strong></td>
             </tr>
 
             <tr>
               <td class="text-center">
-                <input type="text" name="GradoI" class="form-control" value="<%=$cpgradoi%>" required>
+                <input type="text" name="GradoI" class="form-control" value="<%=$cpgradoi%>" required oninvalid="setCustomValidity('Ingrese un grado de instrucción válido')" onchange="try{setCustomValidity('')}catch(e){}">
               </td>
               <td class="text-center">
-                <input type="text" name="Area" class="form-control" value="<%=$cparea%>" required>
+                <input type="text" name="Area" class="form-control" value="<%=$cparea%>" required oninvalid="setCustomValidity('Ingrese una área válida')" onchange="try{setCustomValidity('')}catch(e){}">
               </td>
             </tr>
             <tr>
@@ -196,7 +196,7 @@
             </tr>
             <tr> 
               <td class="text-center">
-                <input type="text" name="Subarea" class="form-control" value="<%=$cpsubarea%>" required>
+                <input type="text" name="Subarea" class="form-control" value="<%=$cpsubarea%>" required oninvalid="setCustomValidity('Ingrese una subárea válida')" onchange="try{setCustomValidity('')}catch(e){}">
               </td>
             </tr>
           </tbody>
@@ -236,10 +236,10 @@
 
             <tr>
               <td class="text-center">
-                <input type="text" name="UAI" class="form-control" value="<%=$cpuai%>" required>
+                <input type="text" name="UAI" class="form-control" value="<%=$cpuai%>" required oninvalid="setCustomValidity('Ingrese una unidad de adscripción de investigación válida')" onchange="try{setCustomValidity('')}catch(e){}">
               </td>
               <td class="text-center">
-                <input type="text" name="UAD" class="form-control" value="<%=$cpuad%>" required>
+                <input type="text" name="UAD" class="form-control" value="<%=$cpuad%>" required oninvalid="setCustomValidity('Ingrese una unidad de adscripción de docencia válida')" onchange="try{setCustomValidity('')}catch(e){}">
               </td>
             </tr>
 

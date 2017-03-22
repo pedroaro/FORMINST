@@ -11,9 +11,6 @@ class InformesController < ApplicationController
         flash[:danger]= "Este informe ya fue creado"
         redirect_to controller:"informes", action: "listar_informes"
       else
-        puts "HEllo"
-        puts params[:informe_id]
-        puts session[:plan_id]
         if session[:adecuacion_id]
           @adecuacion= Adecuacion.find(session[:adecuacion_id])
           esta = EstatusAdecuacion.where(adecuacion_id: session[:adecuacion_id], actual: 1).take
@@ -29,13 +26,7 @@ class InformesController < ApplicationController
           @actividadesaext= []
           @actividadesafor= []
           @actividadesaotr= []
-            puts "HEllo2"
-            puts params[:informe_id]
-            puts session[:plan_id]
           if params[:informe_id].to_i == 1
-            puts "HEllo3"
-            puts params[:informe_id]
-            puts session[:plan_id]
             @nombre_informe = "PRIMER SEMESTRAL"
             @tipo_informe=1 
             @numero_informe=1
@@ -565,6 +556,8 @@ def vista_previa
     if (estatus_informe.estatus_id != 6 && estatus_informe.estatus_id != 5)
       @bool_enviado = 1
     end
+    @j = 0
+    @i = 0
     @actividadesa= InformeActividad.where(informe_id: @informe.id).all
     @actividadesadoc= []
     @actividadesainv= []
@@ -574,6 +567,7 @@ def vista_previa
     @resultados= []
     @actividadese= []
     @observaciont= []
+                      puts "HAY OTRAS"
     @actividadesa.each do |actade| 
       if actade.actividad_id == nil #Es el caso que es un resultado no contemplado en el plan de formacion o un avancwe de postgrado
         @res= Resultado.find(actade.resultado_id)
@@ -597,22 +591,15 @@ def vista_previa
         end
         if tipo==1
           @actividadesadoc.push(@act)
-        else
-          if tipo==2
-            @actividadesainv.push(@act)
-          else
-            if tipo==3
-              @actividadesaext.push(@act)
-            else
-              if tipo==4
-                @actividadesafor.push(@act)
-              else
-                if tipo==5
-                  @actividadesaotr.push(@act)
-                end
-              end
-            end
-          end
+        elsif tipo==2
+          @actividadesainv.push(@act)
+        elsif tipo==3
+          @actividadesaext.push(@act)
+        elsif tipo==4
+          @actividadesafor.push(@act)
+        elsif tipo==5
+          puts "HAY OTRAS"
+          @actividadesaotr.push(@act)
         end
       end
     end
@@ -1072,31 +1059,26 @@ def vista_previa
 
       #Comienzan otras actividades contempladas en el plan
       j=0
-      i=:otr.to_s+j.to_s
+      i=:otra.to_s+j.to_s
       @act = params[i].to_i
       while j <  @cant_otr
         ia = InformeActividad.new
         ia.informe_id = informe.id
         ia.actividad_id = @act
         ia.save
+        ejecutada =:ejecutada.to_s+@act.to_s
+        if params[ejecutada]!=nil && params[ejecutada]!=""
+          ae = ActividadEjecutada.new
+          ae.descripcion = params[ejecutada]
+          ae.fecha = Time.now
+          ae.actual = 1
+          ae.informe_actividad_id = ia.id
+          ae.save
+        end
         j= j+1
-        i=:otr.to_s+j.to_s
+        i=:otra.to_s+j.to_s
         @act= params[i].to_i
       end
-
-
-      #Comienza actividades no contempladas
-      if params[:no_contemplada]!=nil && params[:no_contemplada]!=""
-        rp = Resultado.new
-        rp.tipo_resultado_id = 9
-        rp.concepto = params[:no_contemplada]
-        rp.save
-        ia = InformeActividad.new
-        ia.informe_id = informe.id
-        ia.resultado_id = rp.id
-        ia.save
-      end
-
 
       redirect_to controller:"informes", action: "listar_informes"
       flash[:success]= "El informe fue creado y guardado correctamente"
@@ -1249,7 +1231,7 @@ def generar_pdf() # es funciÃ³n permite generar el documento pdf de la adecuaciÃ
             puts @informe.id
             puts "HELLaOOOOO111"
             puts @act.id
-            @resActi= InformeActividad.where(informe_id: @informe.id, actividad_id: @act.id).tak
+            @resActi= InformeActividad.where(informe_id: @informe.id, actividad_id: @act.id).take
             puts "HELLOOOOO"
             if !(@resActi.resultado_id).blank?
               puts @resActi.id
@@ -1775,28 +1757,33 @@ def generar_pdf() # es funciÃ³n permite generar el documento pdf de la adecuaciÃ
         i=:ext.to_s+j.to_s
         @act= params[i].to_i
       end
-
-      #EN ESTA SECCION IRIAN LAS OTRAS ACTIVIDADES CONTEMPLADAS EN EL PLAN HAY QUE VERIFICAR SI ESTAS SE PUEDEN MODIFICAR
-
-
-      #Comienza actividades no contempladas
-      if params[:no_contemplada]!=nil && params[:no_contemplada]!=""
-        if params[:nocont].to_i == -1
-          rp = Resultado.new
-          rp.tipo_resultado_id = 9
-          rp.concepto = params[:no_contemplada]
-          rp.save
-          ia = InformeActividad.new
-          ia.informe_id = @informe.id
-          ia.resultado_id = rp.id
-          ia.save
-        else
-          rp= Resultado.find(params[:nocont].to_i)
-          rp.concepto = params[:no_contemplada]
-          rp.save
+      #Comienzan otras actividades
+      j=0
+      i=:otra.to_s+j.to_s
+      @act = params[i].to_i
+      while j <  @cant_otr
+        ia = InformeActividad.where(informe_id: @informe.id,actividad_id: @act).take
+        ejecutada =:ejecutada.to_s+@act.to_s
+        if params[ejecutada]!=nil && params[ejecutada]!=""
+          puts "jajajajaja"
+          puts ia.id
+          ae = ActividadEjecutada.where(informe_actividad_id: ia.id, actual: 1).take
+          if ae.blank?
+            ae = ActividadEjecutada.new
+            ae.descripcion = params[ejecutada]
+            ae.fecha = Time.now
+            ae.actual = 1
+            ae.informe_actividad_id = ia.id
+            ae.save
+          end
+          ae.descripcion = params[ejecutada]
+          ae.save
         end
+        j= j+1
+        i=:otra.to_s+j.to_s
+        @act= params[i].to_i
       end
-
+      #EN ESTA SECCION IRIAN LAS OTRAS ACTIVIDADES CONTEMPLADAS EN EL PLAN HAY QUE VERIFICAR SI ESTAS SE PUEDEN MODIFICAR
 
 
       flash[:success]="Su informe fue editado exitosamente"
