@@ -419,9 +419,11 @@
           <% @actividadesadoc.each_with_index do |actividadesadoc, i| %> 
             <tr>
               <td class="text-center"><%= actividadesadoc.actividad %></td>
-              <td class="text-center">aaa</td>
-              <td class="text-center"></td>
+              <td class="text-center"><%= @actividadese[@j].descripcion %></td>
+              <td class="text-center"><%= @observaciont[@i] %></td>
             </tr>
+            <% @j= @j +1 %>
+            <% @i= @i +1 %>
           <% end %>
         </tbody>
       </table>
@@ -440,9 +442,11 @@
           <% @actividadesainv.each_with_index do |actividadesainv, i| %> 
             <tr>
               <td class="text-center"><%= actividadesainv.actividad %></td>
-              <td class="text-center">aaa</td>
-              <td class="text-center"></td>
+              <td class="text-center"><%= @actividadese[@j].descripcion %></td>
+              <td class="text-center"><%= @observaciont[@i] %></td>
             </tr>
+            <% @j= @j +1 %>
+            <% @i= @i +1 %>
           <% end %>
         </tbody>
       </table>
@@ -461,9 +465,11 @@
           <% @actividadesafor.each_with_index do |actividadesafor, i| %> 
             <tr>
               <td class="text-center"><%= actividadesafor.actividad %></td>
-              <td class="text-center">aaa</td>
-              <td class="text-center"></td>
+              <td class="text-center"><%= @actividadese[@j].descripcion %></td>
+              <td class="text-center"><%= @observaciont[@i] %></td>
             </tr>
+            <% @j= @j +1 %>
+            <% @i= @i +1 %>
           <% end %>
         </tbody>
       </table>
@@ -482,16 +488,55 @@
           <% @actividadesaext.each_with_index do |actividadesaext, i| %> 
             <tr>
               <td class="text-center"><%= actividadesaext.actividad %></td>
-              <td class="text-center">aaa</td>
-              <td class="text-center"></td>
+              <td class="text-center"><%= @actividadese[@j].descripcion %></td>
+              <td class="text-center"><%= @observaciont[@i] %></td>
+            <% @j= @j +1 %>
+            <% @i= @i +1 %>
             </tr>
           <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="table-responsive">
+      <b><p>7.- OTRAS ACTIVIDADES:</p></b>
+      <table class="table table-hover table-bordered text-center">
+        <thead>
+          <tr>
+            <th style="width:50%;" class="text-center">CONTEMPLADAS EN EL PLAN DE FORMACIÓN Y CAPACITACIÓN:</th>
+            <th style="width:50%;" class="text-center">NO CONTEMPLADAS EN EL PLAN DE FORMACIÓN Y CAPACITACIÓN:</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @actividadesaext.each_with_index do |actividadesaext, i| %> 
+            <tr>
+              <td class="text-center"><%= actividadesaext.actividad %></td>
+              <td class="text-center"><%= @actividadese[@j].descripcion %></td>
+            <% @j= @j +1 %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="table-responsive">
+      <b><p>8.- CONCLUSIONES:</p></b>
+      <table class="table table-hover table-bordered text-center">
+        <tbody>
+         <tr><td class="text-left"> <%= @informe.conclusiones.to_s %></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="table-responsive">
+      <b><p>9.- OPINIÓN DEL TUTOR:</p></b>
+      <table class="table table-hover table-bordered text-center">
+        <tbody>
+         <tr><td class="text-left"> <%= @informe.opinion_tutor.to_s %></td></tr>
         </tbody>
       </table>
     </div>
   </div>
 </div>
 <br>
+
 
 <div class= "row">
   <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
