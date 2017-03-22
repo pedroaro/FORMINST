@@ -510,7 +510,11 @@
           <% @actividadesaext.each_with_index do |actividadesaext, i| %> 
             <tr>
               <td class="text-center"><%= actividadesaext.actividad %></td>
-              <td class="text-center"><%= @actividadese[@j].descripcion %></td>
+              <% if @actividadese[@j] %>
+                <td class="text-center"><%= @actividadese[@j].descripcion %></td>
+              <% else%>
+                <td class="text-center"></td>
+              <% end %>
             <% @j= @j +1 %>
             </tr>
           <% end %>
