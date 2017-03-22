@@ -1391,6 +1391,9 @@ def generar_pdf() # es funci√≥n permite generar el documento pdf de la adecuaci√
     @actividadese= []
     @observaciont= []
     @actividadesa.each do |actade| 
+          puts "JAAAAAAAAAA"
+        puts actade.informe_id
+        puts actade.id
       if actade.actividad_id == nil #Es el caso que es un resultado no contemplado en el plan de formacion o un avancwe de postgrado
         @res= Resultado.find(actade.resultado_id)
         @resultados.push(@res)
