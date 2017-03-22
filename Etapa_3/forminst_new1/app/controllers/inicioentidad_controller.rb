@@ -958,12 +958,57 @@ class InicioentidadController < ApplicationController
     	@actividadesafor= []
     	@actividadesaotr= []
     	@resultados= []
+    	@resultados2= ""
     	@actividadese= []
     	@observaciont= []
     	@revision= Revision.where(informe_id: @informe.id, usuario_id: session[:usuario_id], adecuacion_id: @adecuacion.id, estatus_id: @est.estatus_id).take
     	@actividadesa.each do |actade| 
 	      	if actade.actividad_id == nil #Es el caso que es un resultado no contemplado en el plan de formacion o un avancwe de postgrado
 	        	@res= Resultado.find(actade.resultado_id)
+	        	@cparray = ["a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a"]
+	        	@cparray[0] = @res.titulo
+	        	@cparray[1] = @res.autor
+	        	@cparray[2] = @res.titulo_capitulo
+	        	@cparray[3] = @res.autor_capitulo
+	        	@cparray[4] = @res.dia
+	        	@cparray[5] = @res.mes
+	        	@cparray[6] = @res.ano
+	        	@cparray[7] = @res.ciudad
+	        	@cparray[8] = @res.estado
+	        	@cparray[9] = @res.pais
+	        	@cparray[10] = @res.organizador
+	        	@cparray[11] = @res.duracion
+	        	@cparray[12] = @res.editor
+	        	@cparray[13] = @res.titulo_libro
+	        	@cparray[14] = @res.autor_libro
+	        	@cparray[15] = @res.nombre_revista
+	        	@cparray[16] = @res.nombre_periodico
+	        	@cparray[17] = @res.nombre_acto
+	        	@cparray[18] = @res.paginas
+	        	@cparray[19] = @res.nombre_paginaw
+	        	@cparray[20] = @res.sitio_paginaw
+	        	@cparray[21] = @res.url
+	        	puts "holaaaaaaaaaaaaaa"
+	       		if !@cparray.blank?
+		        	@noemptyarray = @cparray - ["", nil]
+		        	if !@resultados2
+			        	@noemptyarray = @cparray - ["", nil]
+			        	if !@noemptyarray.join(',').blank?
+			        		puts @noemptyarray.join(',')
+				        	@resultados2 = "* " + @noemptyarray
+				        	puts "a"
+				        	puts @resultados2
+				        end
+			        else
+			        	@noemptyarray = @cparray - ["", nil]
+			        	if !@noemptyarray.join(',').blank?
+				        	puts @noemptyarray.join(',')
+				        	@resultados2 = @resultados2 + "\n" + "* " + @noemptyarray.join(',')
+				        	puts "b"
+				        	puts @resultados2
+			        	end
+		        	end
+	        	end
 	        	@resultados.push(@res)
 	        	@actividadese.push("")
 
@@ -983,6 +1028,50 @@ class InicioentidadController < ApplicationController
 		        tipo= @act.tipo_actividad_id
 		        if actade.resultado_id
 		          	@res= Resultado.find(actade.resultado_id)
+		        	@cparray = ["a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a"]
+		        	@cparray[0] = @res.titulo.to_s
+		        	@cparray[1] = @res.autor.to_s
+		        	@cparray[2] = @res.titulo_capitulo.to_s
+		        	@cparray[3] = @res.autor_capitulo.to_s
+		        	@cparray[4] = @res.dia.to_s
+		        	@cparray[5] = @res.mes.to_s
+		        	@cparray[6] = @res.ano.to_s
+		        	@cparray[7] = @res.ciudad.to_s
+		        	@cparray[8] = @res.estado.to_s
+		        	@cparray[9] = @res.pais.to_s
+		        	@cparray[10] = @res.organizador.to_s
+		        	@cparray[11] = @res.duracion.to_s
+		        	@cparray[12] = @res.editor.to_s
+		        	@cparray[13] = @res.titulo_libro.to_s
+		        	@cparray[14] = @res.autor_libro.to_s
+		        	@cparray[15] = @res.nombre_revista.to_s
+		        	@cparray[16] = @res.nombre_periodico.to_s
+		        	@cparray[17] = @res.nombre_acto.to_s
+		        	@cparray[18] = @res.paginas.to_s
+		        	@cparray[19] = @res.nombre_paginaw.to_s
+		        	@cparray[20] = @res.sitio_paginaw.to_s
+		        	@cparray[21] = @res.url.to_s
+		        	puts "holaaaaaaaaaaaaaa"
+		        	if !@cparray.blank?
+		        	@noemptyarray = @cparray - ["", nil]
+			        	if !@resultados2
+				        	@noemptyarray = @cparray - ["", nil]
+				        	if !@noemptyarray.join(',').blank?
+				        		puts @noemptyarray.join(',')
+					        	@resultados2 = "* " + @noemptyarray
+					        	puts "a"
+					        	puts @resultados2
+					        end
+				        else
+				        	@noemptyarray = @cparray - ["", nil]
+				        	if !@noemptyarray.join(',').blank?
+					        	puts @noemptyarray.join(',')
+					        	@resultados2 = @resultados2 + "\n" + "* " + @noemptyarray.join(',')
+					        	puts "b"
+					        	puts @resultados2
+				        	end
+			        	end
+		        	end
 		          	@resultados.push(@res)
 		        else
 		          	@resultados.push(nil)
