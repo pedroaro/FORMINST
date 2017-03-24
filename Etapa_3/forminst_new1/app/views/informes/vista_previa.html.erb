@@ -450,6 +450,75 @@
           <% end %>
         </tbody>
       </table>
+      <table class="table table-black">
+        <tbody>
+          <tr>
+            <th><b>4.1.1.- Trabajos publicados (libros, revistas, artículos de prensa, CDs, manuales, publicaciones electrónicas, etc.):</b></th>
+          </tr>
+          <% if @resultTP %> 
+            <% @resultTP.each_with_index do |resultTP, i| %> 
+              <tr>
+                <td class="text-left"><%= resultTP %></td>
+              </tr>
+            <% end %>
+          <% else %> 
+            <td class="text-left">""</td>
+          <% end %> 
+          <tr>
+            <th><b>4.1.2.- Presentación de ponencias, conferencias y carteles en eventos:</b></th>
+          </tr>
+          <% if @resultPP %> 
+            <% @resultPP.each_with_index do |resultPP, i| %> 
+              <tr>
+                <td class="text-left"><%= resultPP %></td>
+              </tr>
+            <% end %>
+          <% else %> 
+            <td class="text-left">""</td>
+          <% end %> 
+           <tr>
+            <th><b>4.1.3.- Otros:</b></th>
+          </tr>
+          <% if @resultO %> 
+            <% @resultO.each_with_index do |resultO, i| %> 
+              <tr>
+                <td class="text-left"><%= resultO %></td>
+              </tr>
+            <% end %>
+          <% else %> 
+            <td class="text-left">""</td>
+          <% end %>
+          <tr>
+            <th><b>4.1.4.- Asistencia a eventos científicos (Congresos, Seminarios, Coloquios, Jornadas, etc.):</b></th>
+          </tr>
+          <% if @resultAEC %> 
+            <% @resultAEC.each_with_index do |resultAEC, i| %> 
+              <tr>
+                <td class="text-left"><%= resultAEC %></td>
+              </tr>
+            <% end %>
+          <% else %> 
+            <td class="text-left">""</td>
+          <% end %>
+          <tr>
+            <th><b>4.1.5.- Organización de eventos científicos (Congresos, Seminarios, Coloquios, Jornadas, etc.):</b></th>
+          </tr>
+          <% @resultOEC.each_with_index do |resultOEC, i| %> 
+            <tr>
+              <td class="text-left"><%= resultOEC %></td>
+            </tr>
+          <% end %>
+          <tr>
+            <th><b>4.1.6.- Dictado de cursos, talleres o seminarios científicos:</b></th>
+          </tr>
+          <% @resultDCS.each_with_index do |resultDCS, i| %> 
+            <tr>
+              <td class="text-left"><%= resultDCS %></td>
+            </tr>
+          <% end %>
+          <tr>
+        </tbody>
+      </table>
     </div>
     <div class="table-responsive">
       <b><p>5.- ACTIVIDADES DE FORMACIÓN:</p></b>

@@ -974,7 +974,7 @@ class Pdf
 
 	end
 #########################################################################################################################################################################
-	def self.pdf_informe(tipo_informe,escuela,informe, adecuacion, tutor, instructor, pactv_docencia, pactv_investigacion, pactv_extension, pactv_formacion, pactv_otras, sactv_docencia, sactv_investigacion, sactv_extension, sactv_otras, sactv_formacion,  tactv_docencia, tactv_investigacion, tactv_extension,tactv_formacion, tactv_otras, cactv_docencia, cactv_investigacion, cactv_extension, cactv_formacion, cactv_otras, info_docencia, info_investigacion,info_formacion, info_extension, info_otras,resx,resultados,actividadese,observaciont, resultstring)
+	def self.pdf_informe(tipo_informe,escuela,informe, adecuacion, tutor, instructor, pactv_docencia, pactv_investigacion, pactv_extension, pactv_formacion, pactv_otras, sactv_docencia, sactv_investigacion, sactv_extension, sactv_otras, sactv_formacion,  tactv_docencia, tactv_investigacion, tactv_extension,tactv_formacion, tactv_otras, cactv_docencia, cactv_investigacion, cactv_extension, cactv_formacion, cactv_otras, info_docencia, info_investigacion,info_formacion, info_extension, info_otras,resx,resultados,actividadese,observaciont, resultTP, resultPP, resultO, resultAEC, resultOEC, resultDCS)
 		noplan_a=[]
 		noplan_na=[]
 		res_tp=[]
@@ -2002,13 +2002,10 @@ class Pdf
 				:column_widths => { 0 => 520}, 
 				:position => :left,
 				:align => { 0 => :left}
-			
-				
-				if res_tp != []
-					res_tp.each do |res|
-						puts resultstring[aee]
-						res2=[[{:text=> resultstring[aee], :align=>:left }]] # datos que se desean en la tabla
-						aee = aee + 1
+
+				if resultTP != []
+					resultTP.each do |res|
+						res2=[[{:text=> res, :align=>:left }]] # datos que se desean en la tabla
 						pdf.table res2, # lineas para generar la tabla en el docuemnto
 						:border_style => :grid, #:underline_header
 						:font_size  => 8, 
@@ -2046,10 +2043,9 @@ class Pdf
 				:position => :left,
 				:align => { 0 => :left}
 			
-				if res_ppcc !=[]
-					res_ppcc.each do |res|
-						res4 = [[{:text=> resultstring[aee], :align=>:left }]] # datos que se desean en la tabla
-						aee = aee + 1
+				if resultPP !=[]
+					resultPP.each do |res|
+						res4 = [[{:text=> res, :align=>:left }]] # datos que se desean en la tabla
 						pdf.table res4, # lineas para generar la tabla en el docuemnto
 						:border_style => :grid, #:underline_header
 						:font_size  => 8, 
@@ -2087,10 +2083,9 @@ class Pdf
 				:align => { 0 => :left}
 			
 			
-				if res_otp != []
-					res_otp.each do |res|
-						res6 = [[{:text=> resultstring[aee], :align=>:left }]] # datos que se desean en la tabla
-						aee = aee + 1
+				if resultO != []
+					resultO.each do |res|
+						res6 = [[{:text=> res, :align=>:left }]] # datos que se desean en la tabla
 						pdf.table res6, # lineas para generar la tabla en el docuemnto
 						:border_style => :grid, #:underline_header
 						:font_size  => 8, 
@@ -2116,7 +2111,7 @@ class Pdf
 					:align => { 0 => :left}
 				end
 				
-				res7 = [[{:text=> "4.2.- Asistencia a eventos científicos (Congresos, Seminarios, Coloquios, Jornadas, etc.):\n", :font_style => :bold}]] # datos que se desean en la tabla
+				res7 = [[{:text=> "4.1.4.- Asistencia a eventos científicos (Congresos, Seminarios, Coloquios, Jornadas, etc.):\n", :font_style => :bold}]] # datos que se desean en la tabla
 				
 				pdf.table res7, # lineas para generar la tabla en el docuemnto
 				:border_style => :grid, #:underline_header
@@ -2128,10 +2123,9 @@ class Pdf
 				:position => :left,
 				:align => { 0 => :left}
 				
-				if res_aec != []
-					res_aec.each do |res|
-						res8 = [[{:text=> resultstring[aee], :align=>:left }]] # datos que se desean en la tabla
-						aee = aee + 1							
+				if resultAEC != []
+					resultAEC.each do |res|
+						res8 = [[{:text=> res, :align=>:left }]] # datos que se desean en la tabla
 						pdf.table res8, # lineas para generar la tabla en el docuemnto
 						:border_style => :grid, #:underline_header
 						:font_size  => 8, 
@@ -2156,7 +2150,7 @@ class Pdf
 					:align => { 0 => :left}
 				end
 				
-				res9 = [[{:text=> "4.2.- Organización de eventos científicos (Congresos, Seminarios, Coloquios, Jornadas, etc.):\n", :font_style => :bold}]	] # datos que se desean en la tabla
+				res9 = [[{:text=> "4.1.5.- Organización de eventos científicos (Congresos, Seminarios, Coloquios, Jornadas, etc.):\n", :font_style => :bold}]	] # datos que se desean en la tabla
 				
 				pdf.table res9, # lineas para generar la tabla en el docuemnto
 				:border_style => :grid, #:underline_header
@@ -2168,10 +2162,9 @@ class Pdf
 				:position => :left,
 				:align => { 0 => :left}
 				
-				if res_oec != []
-					res_oec.each do |res|
-						res10 = [[{:text=> resultstring[aee], :align=>:left }]] # datos que se desean en la tabla
-						aee = aee + 1
+				if resultOEC != []
+					resultOEC.each do |res|
+						res10 = [[{:text=> res, :align=>:left }]] # datos que se desean en la tabla
 						pdf.table res10, # lineas para generar la tabla en el docuemnto
 						:border_style => :grid, #:underline_header
 						:font_size  => 8, 
@@ -2196,7 +2189,7 @@ class Pdf
 					:align => { 0 => :left}
 				end
 				
-				res11 = [[{:text=> "4.4.- Dictado de cursos, talleres o seminarios científicos:\n", :font_style => :bold}]] # datos que se desean en la tabla
+				res11 = [[{:text=> "4.1.6.- Dictado de cursos, talleres o seminarios científicos:\n", :font_style => :bold}]] # datos que se desean en la tabla
 				
 				pdf.table res11, # lineas para generar la tabla en el docuemnto
 				:border_style => :grid, #:underline_header
@@ -2208,10 +2201,9 @@ class Pdf
 				:position => :left,
 				:align => { 0 => :left}
 				
-				if res_dctsc != []
-					res_dctsc.each do |res|
-						res12= [[{:text=> resultstring[aee], :align=>:left }]] # datos que se desean en la tabla
-						aee = aee + 1
+				if resultDCS != []
+					resultDCS.each do |res|
+						res12= [[{:text=> res, :align=>:left }]] # datos que se desean en la tabla
 						pdf.table res12, # lineas para generar la tabla en el docuemnto
 						:border_style => :grid, #:underline_header
 						:font_size  => 8, 
