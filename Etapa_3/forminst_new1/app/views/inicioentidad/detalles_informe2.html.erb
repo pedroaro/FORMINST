@@ -122,9 +122,6 @@
       
       <%= link_to "Vista Previa", {controller: "iniciotutor", action: "vista_previa"}, class: "btn btn-default" %>
       <%= link_to "Generar PDF", {controller: "adecuacions", action: "descargar_pdf"}, class: "btn btn-default" %>
-      <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">
-        Eliminar Informe
-      </button>
     </div>
   </div>
 </div>
@@ -265,7 +262,7 @@
                              </tr>
                              <tr>
                              <td colspan="4">
-                              <textarea class="form-control" rows="3" disabled ><%= @resultados2 %></textarea>
+                              <textarea class="form-control" rows="3" disabled ><%= @resultados2a[@cp] %></textarea>
                              </td>
                              </tr>
                           </div>
@@ -273,7 +270,7 @@
                       </td>
                      
                     </tr>
-
+                    <% @cp= @cp +1 %>
                 <%end%>
 
                 <% @j= @j +1 %>
@@ -490,349 +487,24 @@
                         <input type="hidden" name="inv<%=i.to_s%>" value='<%= actdoc.id %>'>
                     </tr>
                     <% if @resultados[@j]!= nil %>
-                      <input type="hidden" name="result<%=i.to_s%>" value='<%= @resultados[@j].id %>'>
-                       
-                        <tr>
-                            <div class="row">
-                              <div class="col-xs-12 col-md-12 col-lg-12">
-                              <% if @resultados[@j].tipo_resultado_id==1 %>
-                                    <h3>Trabajo publicado</h3>
-                                    <label>Tipo de Trabajo Publicado:</label>
-                                    <% if @resultados[@j].tipo_publicacion.to_i==1 %>
-                                    <h5>Libros</h5>
-                                       <label>Título:</label>
-                                       <%= @resultados[@j].titulo %><br>
-                                       <label>Autor:</label>
-                                       <%= @resultados[@j].autor %><br>
-                                       <label>Año de Publicación:</label>
-                                       <%= @resultados[@j].ano %><br>
-                                       <label>Ciudad en la que se realizó la publicación:</label>
-                                       <%= @resultados[@j].ciudad %><br>
-                                       <label>País en el que se realizó la publicación:</label>
-                                       <%= @resultados[@j].pais %><br>
-                                       <label>Editor:</label>
-                                       <%= @resultados[@j].editor %><br>
-                                    <%else%>
-                                      <% if @resultados[@j].tipo_publicacion.to_i==2 %>
-                                        <h5>Artículo de Revista</h5>
-                                        <label>Título:</label>
-                                        <%= @resultados[@j].titulo %><br>
-                                        <label>Autor:</label>
-                                        <%= @resultados[@j].autor %><br>
-                                        <label>Año de Publicación:</label>
-                                        <%= @resultados[@j].ano %><br>
-                                        <label>Nombre de la Revista:</label>
-                                        <%= @resultados[@j].nombre_revista %><br>
-                                        <label>Número de páginas:</label>
-                                        <%= @resultados[@j].paginas %><br>
-                                      <%else%>
-                                        <% if @resultados[@j].tipo_publicacion.to_i==3 %>
-                                          <h5>Artículo de Prensa</h5>
-                                          <label>Título:</label>
-                                          <%= @resultados[@j].titulo %><br>
-                                          <label>Nombre del autor docente encargado:</label>
-                                          <%= @resultados[@j].autor %><br>
-                                          <label>Día en que se realizó la publicación:</label>
-                                          <%= @resultados[@j].dia %><br>
-                                          <label>Mes en el que se realizó la publicación:</label>
-                                          <%= @resultados[@j].mes %><br>
-                                          <label>Año de Publicación:</label>
-                                          <%= @resultados[@j].ano %><br>
-                                          <label>Nombre del Periódico:</label>
-                                          <%= @resultados[@j].nombre_periodico %>
-                                          <label>Número de páginas:</label>
-                                          <%= @resultados[@j].paginas %><br>
-                                        <%else%>
-                                          <% if @resultados[@j].tipo_publicacion.to_i==4 %>
-                                            <h5>CD</h5>
-                                            <label>Título:</label><br>
-                                            <%= @resultados[@j].titulo %><br>
-                                            <label>Nombre del autor docente encargado:</label>
-                                            <%= @resultados[@j].autor %><br>
-                                            <label>Año de Publicación:</label>
-                                            <%= @resultados[@j].ano %><br>
-                                            <label>Ciudad en la que se realizó la publicación:</label>
-                                            <%= @resultados[@j].ciudad %><br>
-                                            <label>País en el que se realizó la publicación:</label>
-                                            <%= @resultados[@j].pais %><br>
-                                            <label>Editor:</label>
-                                            <%= @resultados[@j].editor %><br>
-                                          <%else%>
-                                            <% if @resultados[@j].tipo_publicacion.to_i==5 %>
-                                              <h5>Manuales</h5>
-                                              <label>Título:</label>
-                                              <%= @resultados[@j].titulo %><br>
-                                              <label>Nombre del autor docente encargado:</label>
-                                              <%= @resultados[@j].autor %><br>
-                                              <label>Día en que se realizó la publicación:</label>
-                                              <%= @resultados[@j].dia %><br>
-                                              <label>Mes en el que se realizó la publicación:</label>
-                                              <%= @resultados[@j].mes %><br>
-                                              <label>Año de Publicación:</label>
-                                              <%= @resultados[@j].ano %><br>
-                                              <label>Ciudad en la que se realizó la publicación:</label>
-                                              <%= @resultados[@j].ciudad %><br>
-                                              <label>Estado en el que se realizó la publicación:</label>
-                                              <%= @resultados[@j].estado %><br>
-                                              <label>País en el que se realizó la publicación:</label>
-                                              <%= @resultados[@j].pais %><br>
-                                              <label>Editor:</label>
-                                              <%= @resultados[@j].editor %><br>
-                                            <%else%>
-                                              <% if @resultados[@j].tipo_publicacion.to_i==6 %>
-                                                <h5>Publicaciones Electrónicas</h5>
-                                                <label>Nombre del autor docente encargado:</label>
-                                                <%= @resultados[@j].autor %><br>
-                                                <label>Día en que se realizó la publicación:</label>
-                                                <%= @resultados[@j].dia %><br>
-                                                <label>Mes en el que se realizó la publicación:</label>
-                                                <%= @resultados[@j].mes %><br>
-                                                <label>Año de Publicación:</label>
-                                                <%= @resultados[@j].ano %><br>
-                                                <label>Nombre de la página web:</label>
-                                                <%= @resultados[@j].nombre_paginaw %><br>
-                                                <label>Sitio de la página web:</label>
-                                                <%= @resultados[@j].sitio_paginaw %><br>
-                                                <label>URL:</label>
-                                                <%= @resultados[@j].url %><br>
-                                              <%end%>
-                                            <%end%>
-                                          <%end%>
-                                        <%end%>
-                                      <%end%>
-                                    <%end%>
-                              <%else%>
-                                <% if @resultados[@j].tipo_resultado_id==2 %>
-                                  <h3>Presentación de Ponencias, Conferencias y Carteles en Eventos Científicos</h3><br>
-                                  <label>Título:</label>
-                                  <%= @resultados[@j].titulo %><br>
-                                  <label>Nombre del autor docente encargado:</label>
-                                  <%= @resultados[@j].autor %><br>
-                                  <label>Título del Capítulo:</label>
-                                  <%= @resultados[@j].titulo_capitulo %><br>
-                                  <label>Nombre del autor del Capítulo:</label>
-                                  <%= @resultados[@j].autor_capitulo %><br>
-                                  <label>Día en que se realizó la publicación:</label>
-                                  <%= @resultados[@j].dia %><br>
-                                  <label>Mes en el que se realizó la publicación:</label>
-                                  <%= @resultados[@j].mes %><br>
-                                  <label>Año de Publicación:</label>
-                                  <%= @resultados[@j].ano %><br>
-                                  <label>Ciudad en la que se realizó la publicación:</label>
-                                  <%= @resultados[@j].ciudad %><br>
-                                  <label>Editor:</label>
-                                  <%= @resultados[@j].editor %><br>
-                                  <label>Número de páginas:</label>
-                                  <%= @resultados[@j].paginas %><br>
-                                  <label>Nombre del acto o evento:</label>
-                                  <%= @resultados[@j].nombre_acto %><br>
-                                <%else%>
-                                  <% if @resultados[@j].tipo_resultado_id==3 %>
-                                    <h3>Presentación de Informes Técnicos</h3>
-                                    <label>Título:</label>
-                                    <%= @resultados[@j].titulo %><br>
-                                    <label>Nombre del autor docente encargado:</label>
-                                    <%= @resultados[@j].autor %><br>
-                                    <label>Título del Capítulo:</label>
-                                    <%= @resultados[@j].titulo_capitulo %><br>
-                                    <label>Nombre del autor del Capítulo:</label>
-                                    <%= @resultados[@j].autor_capitulo %><br>
-                                    <label>Día en que se realizó la publicación:</label>
-                                    <%= @resultados[@j].dia %><br>
-                                    <label>Mes en el que se realizó la publicación:</label>
-                                    <%= @resultados[@j].mes %><br>
-                                    <label>Año de Publicación:</label>
-                                    <%= @resultados[@j].ano %><br>
-                                    <label>Ciudad en la que se realizó la publicación:</label>
-                                    <%= @resultados[@j].ciudad %><br>
-                                    <label>Estado en el que se realizó la publicación:</label>
-                                    <%= @resultados[@j].estado %><br>
-                                    <label>País en el que se realizó la publicación:</label>
-                                    <%= @resultados[@j].pais %><br>
-                                    <label>Entidad Organizadora:</label>
-                                    <%= @resultados[@j].organizador %><br>
-                                    <label>Duración:</label>
-                                    <%= @resultados[@j].duracion %><br>
-                                    <label>Editor:</label>
-                                    <%= @resultados[@j].editor %><br>
-                                    <label>Número de páginas:</label>
-                                    <%= @resultados[@j].paginas %><br>
-                                    <label>Nombre del acto o evento:</label>
-                                    <%= @resultados[@j].nombre_acto %><br>
-                                  <%else%>
-                                    <% if @resultados[@j].tipo_resultado_id==4 %>
-                                       <tr>
-                                       <td colspan="2">
-                                       <h5>Otros:</h5>
-                                       </td>
-                                       </tr>
-                                       <tr>
-                                       <td colspan="2">
-                                       <p>&emsp;</p>
-                                       <div class= "row">
-                                          <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
-                                            <div class="table-responsive">
-                                            <table align="center" class="table table-bordered table-striped Center-aligns" style='width:80%; margin: 0px auto;'>
-                                              <tbody>
-
-                                                <tr>
-                                                  <td class="text-left"><strong>Titulo: </strong></td>
-                                                  <td class="text-left"><strong>Nombre del autor docente encargado: </strong></td>
-                                                  <td class="text-left"><strong>Día en que se realizó la publicación: </strong></td>
-                                                </tr>
-
-                                                <tr>
-                                                  <td class="text-left">
-                                                    <%= @resultados[@j].dia %><br>
-                                                  </td>
-                                                  <td class="text-left"> 
-                                                    <%= @resultados[@j].titulo %><br>
-                                                  </td>
-                                                  <td class="text-left">
-                                                    <%= @resultados[@j].autor %><br>
-                                                  </td>
-                                                </tr>
-
-
-                                                <tr>
-                                                  <td class="text-left"><strong>Mes en el que se realizó la publicación: </strong></td>
-                                                  <td class="text-left"><strong>Año de Publicación: </strong></td>
-                                                  <td class="text-left"><strong>Ciudad en la que se realizó la publicación: </strong></td>
-                                                </tr>
-
-                                                <tr>
-                                                  <td class="text-left">
-                                                    <%= @resultados[@j].mes %><br>
-                                                  </td>
-                                                  <td class="text-left">
-                                                    <%= @resultados[@j].ano %><br>
-                                                  </td>
-                                                  <td class="text-left">
-                                                    <%= @resultados[@j].ciudad %><br>
-                                                  </td>
-                                                </tr>
-
-                                                <tr>
-                                                  <td class="text-left"><strong>Editor: </strong></td>
-                                                  <td class="text-left"><strong>Número de páginas: </strong></td>
-                                                  <td class="text-left"><strong>Nombre del acto o evento: </strong></td>
-                                                </tr>
-
-                                                <tr>
-                                                  <td class="text-left">
-                                                    <%= @resultados[@j].editor %><br>
-                                                  </td>
-                                                  <td class="text-left">
-                                                    <%= @resultados[@j].paginas %><br>
-                                                  </td>
-                                                  <td class="text-left">
-                                                    <%= @resultados[@j].nombre_acto %><br>
-                                                  </td>
-                                                </tr>
-                                              </tbody>
-                                            </table>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <p>&emsp;</p>
-                                    <%else%>
-                                      <% if @resultados[@j].tipo_resultado_id==5 %>
-                                        <h3>Asistencia a Eventos Científicos</h3>
-                                        <label>Título:</label>
-                                        <%= @resultados[@j].titulo %><br>
-                                        <label>Nombre del autor docente encargado:</label>
-                                        <%= @resultados[@j].autor %><br>
-                                        <label>Título del Capítulo:</label>
-                                        <%= @resultados[@j].titulo_capitulo %><br>
-                                        <label>Nombre del autor del Capítulo:</label>
-                                        <%= @resultados[@j].autor_capitulo %><br>
-                                        <label>Día en que se realizó la publicación:</label>
-                                        <%= @resultados[@j].dia %><br>
-                                        <label>Mes en el que se realizó la publicación:</label>
-                                        <%= @resultados[@j].mes %><br>
-                                        <label>Año de Publicación:</label>
-                                        <%= @resultados[@j].ano %><br>
-                                        <label>Ciudad en la que se realizó la publicación:</label>
-                                        <%= @resultados[@j].ciudad %><br>
-                                        <label>Estado en el que se realizó la publicación:</label>
-                                        <%= @resultados[@j].estado %><br>
-                                        <label>País en el que se realizó la publicación:</label>
-                                        <%= @resultados[@j].pais %><br>
-                                        <label>Nombre del acto o evento:</label>
-                                        <%= @resultados[@j].nombre_acto %><br>
-                                      <%else%>
-                                        <% if @resultados[@j].tipo_resultado_id==6 %>
-                                          <h3>Organización de Eventos Científicos</h3>
-                                          <label>Título:</label>
-                                          <%= @resultados[@j].titulo %><br>
-                                          <label>Nombre del autor docente encargado:</label>
-                                          <%= @resultados[@j].autor %><br>
-                                          <label>Título del Capítulo:</label>
-                                          <%= @resultados[@j].titulo_capitulo %><br>
-                                          <label>Nombre del autor del Capítulo:</label>
-                                          <%= @resultados[@j].autor_capitulo %><br>
-                                          <label>Día en que se realizó la publicación:</label>
-                                          <%= @resultados[@j].dia %><br>
-                                          <label>Mes en el que se realizó la publicación:</label>
-                                          <%= @resultados[@j].mes %><br>
-                                          <label>Año de Publicación:</label>
-                                          <%= @resultados[@j].ano %><br>
-                                          <label>Ciudad en la que se realizó la publicación:</label>
-                                          <%= @resultados[@j].ciudad %><br>
-                                          <label>Estado en el que se realizó la publicación:</label>
-                                          <%= @resultados[@j].estado %><br>
-                                          <label>País en el que se realizó la publicación:</label>
-                                          <%= @resultados[@j].pais %><br>
-                                          <label>Nombre del acto o evento:</label>
-                                          <%= @resultados[@j].nombre_acto %><br>
-                                        <%else%>
-                                          <% if @resultados[@j].tipo_resultado_id==7 %>
-                                            <h3>Dictado de Cursos, Talleres o Seminarios Científicos</h3>
-                                            <label>Título:</label>
-                                            <%= @resultados[@j].titulo %><br>
-                                            <label>Nombre del autor docente encargado:</label>
-                                            <%= @resultados[@j].autor %><br>
-                                            <label>Título del Capítulo:</label>
-                                            <%= @resultados[@j].titulo_capitulo %><br>
-                                            <label>Nombre del autor del Capítulo:</label>
-                                            <%= @resultados[@j].autor_capitulo %><br>
-                                            <label>Día en que se realizó la publicación:</label>
-                                            <%= @resultados[@j].dia %><br>
-                                            <label>Mes en el que se realizó la publicación:</label>
-                                            <%= @resultados[@j].mes %><br>
-                                            <label>Año de Publicación:</label>
-                                            <%= @resultados[@j].ano %><br>
-                                            <label>Ciudad en la que se realizó la publicación:</label>
-                                            <%= @resultados[@j].ciudad %><br>
-                                            <label>Estado en el que se realizó la publicación:</label>
-                                            <%= @resultados[@j].estado %><br>
-                                            <label>País en el que se realizó la publicación:</label>
-                                            <%= @resultados[@j].pais %><br>
-                                            <label>Entidad Organizadora:</label>
-                                            <%= @resultados[@j].organizador %><br>
-                                            <label>Duración:</label>
-                                            <%= @resultados[@j].duracion %><br>
-                                            <label>Editor:</label>
-                                            <%= @resultados[@j].editor %><br>
-                                            <label>Título del libro al que hace referencia:</label>
-                                            <%= @resultados[@j].titulo_libro %><br>
-                                            <label>Autor del libro al que hace referencia:</label>
-                                            <%= @resultados[@j].autor_libro %><br>
-                                            <label>Número de páginas:</label>
-                                            <%= @resultados[@j].paginas %><br>
-                                          <%end%>
-                                        <%end%>
-                                      <%end%>
-                                    <%end%>
-                                  <%end%>
-                                <%end%>
-                              <%end%>
-                              </div>
-                            </div>
-                          </td>
-                         
-                        </tr>
-
+                      <tr>
+                        <div class="row">
+                          <div class="col-xs-12 col-md-12 col-lg-12">
+                             <tr>
+                             <td colspan="4">
+                              <h5>Resultados: </h5>
+                             </td>
+                             </tr>
+                             <tr>
+                             <td colspan="4">
+                              <textarea class="form-control" rows="3" disabled ><%= @resultados2a[@cp] %></textarea>
+                             </td>
+                             </tr>
+                          </div>
+                        </div>
+                      </td>
+                      </tr>
+                      <% @cp= @cp +1 %>
                     <%end%>
 
                     <% @j= @j +1 %>

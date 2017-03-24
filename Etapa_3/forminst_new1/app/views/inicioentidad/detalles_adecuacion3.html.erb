@@ -105,17 +105,9 @@
           <%else%>
             <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-default">Enviar</button>
           <%end%>
-
-        <%else%>
-            <%if session[:entidad_id]==13 %>
-                <button type="button" data-toggle="modal" data-target="#myModal2" class="btn btn-default">Aprobar/Rechazar</button>
-            <%else%>
-                <button type="button" data-toggle="modal" data-target="#myModal2" class="btn btn-default">Enviar</button>
-            <%end%>
-       
         <%end%>
       <%= link_to "Vista Previa", {controller: "inicioentidad", action: "vista_previa"}, class: "btn btn-default" %>
-      <%= link_to "Generar PDF", {controller: "adecuacions", action: "descargar_pdf"}, class: "btn btn-default" %>
+      <%= link_to "Generar PDF", {controller: "adecuacions", action: "generar_pdf"}, class: "btn btn-default" %>
     </div>
   </div>
 </div>
