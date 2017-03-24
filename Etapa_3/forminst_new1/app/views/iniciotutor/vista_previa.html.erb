@@ -205,7 +205,7 @@
           </tr>
           <tr>
             <td class="text-left"><b>Apellidos y Nombres:</b></td>
-            <td class="text-left"><%= session[:instructorName] %></td>
+            <td class="text-left"><%= @persona.apellidos + " " + @persona.nombres %></td>
           </tr>
           <tr>
             <td class="text-left"><b>Cédula de Identidad:</b></td>

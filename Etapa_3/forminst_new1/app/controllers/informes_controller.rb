@@ -1347,6 +1347,27 @@ def generar_pdf() # es funci√≥n permite generar el documento pdf de la adecuaci√
             if !(@resActi.resultado_id).blank?
               puts @resActi.id
               @res= Resultado.find(@resActi.resultado_id)
+            puts "holaaaaaaaaaaaaaa"
+            if !@cparray.blank?
+              @noemptyarray = @cparray - ["", nil]
+              if !@resultados2
+                @noemptyarray = @cparray - ["", nil]
+                if !@noemptyarray.join(',').blank?
+                  puts @noemptyarray.join(',')
+                  @resultados2 = "* " + @noemptyarray
+                  puts "a"
+                  puts @resultados2
+                end
+              else
+                @noemptyarray = @cparray - ["", nil]
+                if !@noemptyarray.join(',').blank?
+                  puts @noemptyarray.join(',')
+                  @resultados2 = @resultados2 + "\n" + "* " + @noemptyarray.join(',')
+                  puts "b"
+                  puts @resultados2
+                end
+              end
+            end
             end
             @aactv_investigacion.push(@act)
           end
@@ -1390,21 +1411,128 @@ def generar_pdf() # es funci√≥n permite generar el documento pdf de la adecuaci√
     @resultados= []
     @actividadese= []
     @observaciont= []
+    @resultstring = []
     @actividadesa.each do |actade| 
-          puts "JAAAAAAAAAA"
-        puts actade.informe_id
-        puts actade.id
+      @resultados2 = ""
       if actade.actividad_id == nil #Es el caso que es un resultado no contemplado en el plan de formacion o un avancwe de postgrado
         @res= Resultado.find(actade.resultado_id)
+        if !@res.blank?
+          @cparray = ["a", "a", "a", "a", "a", "a", "a", "a", "a","a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a"]
+          @cparray[0] = @res.titulo.capitalize
+          @cparray[1] = @res.autor.capitalize
+          @cparray[2] = @res.titulo_capitulo.to_s.capitalize
+          @cparray[3] = @res.autor_capitulo.to_s.capitalize
+          @cparray[4] = @res.dia
+          @cparray[5] = @res.mes
+          @cparray[6] = @res.ano
+          @cparray[7] = @res.ciudad.to_s.capitalize
+          @cparray[8] = @res.estado.to_s.capitalize
+          @cparray[9] = @res.pais.to_s.capitalize
+          @cparray[10] = @res.organizador.to_s.capitalize
+          @cparray[11] = @res.duracion
+          @cparray[12] = @res.editor.to_s.capitalize
+          @cparray[13] = @res.titulo_libro.to_s.capitalize
+          @cparray[14] = @res.autor_libro.to_s.capitalize
+          @cparray[15] = @res.nombre_revista.to_s.capitalize
+          @cparray[16] = @res.nombre_periodico.to_s.capitalize
+          @cparray[17] = @res.nombre_acto.to_s.capitalize
+          @cparray[18] = @res.paginas
+          @cparray[19] = @res.nombre_paginaw
+          @cparray[20] = @res.sitio_paginaw
+          @cparray[21] = @res.url.to_s.capitalize
+          @cparray[22] = @res.ISSN_impreso.to_s.capitalize
+          @cparray[23] = @res.ISSN_electro.to_s.capitalize
+          @cparray[24] = @res.volumen.to_s.capitalize
+          @cparray[25] = @res.edicion.to_s.capitalize
+          @cparray[26] = @res.DOI
+          @cparray[27] = @res.ISBN
+          @cparray[28] = @res.universidad.to_s.capitalize
+          @cparray[29] = @res.MaeDoc.to_s.capitalize
+          @cparray[30] = @res.rango_paginas.to_s.capitalize
+          if !@cparray.blank?
+            @noemptyarray = @cparray - ["", nil]
+            if !@resultados2
+              @noemptyarray = @cparray - ["", nil]
+              if !@noemptyarray.join(',').blank?
+                puts @noemptyarray.join(',')
+                @resultados2 = "* " + @noemptyarray
+                puts "a"
+                puts @resultados2
+              end
+            else
+              @noemptyarray = @cparray - ["", nil]
+              if !@noemptyarray.join(',').blank?
+                puts @noemptyarray.join(', ')
+                @resultados2 = @resultados2 + @noemptyarray.join(', ')
+                puts "b"
+                puts @resultados2
+              end
+            end
+          end
+        end
+        @resultstring.push(@resultados2)
         @resultados.push(@res)
       else
         @act= Actividad.find(actade.actividad_id)
         tipo= @act.tipo_actividad_id
         if actade.resultado_id
           @res= Resultado.find(actade.resultado_id)
-          puts "HHAHAHA"
-          puts @res.titulo 
-          @resultados.push(@res)
+        if !@res.blank?
+          @cparray = ["a", "a", "a", "a", "a", "a", "a", "a", "a","a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a"]
+          @cparray[0] = @res.titulo.capitalize
+          @cparray[1] = @res.autor.capitalize
+          @cparray[2] = @res.titulo_capitulo.to_s.capitalize
+          @cparray[3] = @res.autor_capitulo.to_s.capitalize
+          @cparray[4] = @res.dia
+          @cparray[5] = @res.mes
+          @cparray[6] = @res.ano
+          @cparray[7] = @res.ciudad.to_s.capitalize
+          @cparray[8] = @res.estado.to_s.capitalize
+          @cparray[9] = @res.pais.to_s.capitalize
+          @cparray[10] = @res.organizador.to_s.capitalize
+          @cparray[11] = @res.duracion
+          @cparray[12] = @res.editor.to_s.capitalize
+          @cparray[13] = @res.titulo_libro.to_s.capitalize
+          @cparray[14] = @res.autor_libro.to_s.capitalize
+          @cparray[15] = @res.nombre_revista.to_s.capitalize
+          @cparray[16] = @res.nombre_periodico.to_s.capitalize
+          @cparray[17] = @res.nombre_acto.to_s.capitalize
+          @cparray[18] = @res.paginas
+          @cparray[19] = @res.nombre_paginaw
+          @cparray[20] = @res.sitio_paginaw
+          @cparray[21] = @res.url.to_s.capitalize
+          @cparray[22] = @res.ISSN_impreso.to_s.capitalize
+          @cparray[23] = @res.ISSN_electro.to_s.capitalize
+          @cparray[24] = @res.volumen.to_s.capitalize
+          @cparray[25] = @res.edicion.to_s.capitalize
+          @cparray[26] = @res.DOI
+          @cparray[27] = @res.ISBN
+          @cparray[28] = @res.universidad.to_s.capitalize
+          @cparray[29] = @res.MaeDoc.to_s.capitalize
+          @cparray[30] = @res.rango_paginas.to_s.capitalize
+          if !@cparray.blank?
+            @noemptyarray = @cparray - ["", nil]
+            if !@resultados2
+              @noemptyarray = @cparray - ["", nil]
+              if !@noemptyarray.join(',').blank?
+                puts @noemptyarray.join(',')
+                @resultados2 = "* " + @noemptyarray
+                puts "a"
+                puts @resultados2
+              end
+            else
+              @noemptyarray = @cparray - ["", nil]
+              if !@noemptyarray.join(',').blank?
+                puts @noemptyarray.join(', ')
+                @resultados2 = @resultados2 + @noemptyarray.join(', ')
+                puts "b"
+                puts @resultados2
+              end
+            end
+          end
+        end
+        @resultstring.push(@resultados2)
+        @resultados.push(@res)
         end
         @ae= ActividadEjecutada.where(informe_actividad_id: actade.id).take
         @actividadese.push(@ae)
@@ -1438,7 +1566,7 @@ def generar_pdf() # es funci√≥n permite generar el documento pdf de la adecuaci√
     
     puts "hellooooo"
     # se llama a la funci√≥n de "pedf_adecuacion" del modelo "pdf", pasando todas las variables correspondientes
-    Pdf.pdf_informe(@TipoSemestre, @escuela, @informe, @adecuacion, @tutor, @instructor, @pactv_docencia, @pactv_investigacion, @pactv_extension, @pactv_formacion, @pactv_otras, @sactv_docencia, @sactv_investigacion, @sactv_extension, @sactv_formacion, @sactv_otras, @tactv_docencia, @tactv_investigacion, @tactv_extension, @tactv_formacion, @tactv_otras, @cactv_docencia, @cactv_investigacion, @cactv_extension, @cactv_formacion, @cactv_otras, @actividadesadoc, @actividadesainv, @actividadesafor, @actividadesaext, @actividadesaotr,@res,@resultados,@actividadese,@observaciont)
+    Pdf.pdf_informe(@TipoSemestre, @escuela, @informe, @adecuacion, @tutor, @instructor, @pactv_docencia, @pactv_investigacion, @pactv_extension, @pactv_formacion, @pactv_otras, @sactv_docencia, @sactv_investigacion, @sactv_extension, @sactv_formacion, @sactv_otras, @tactv_docencia, @tactv_investigacion, @tactv_extension, @tactv_formacion, @tactv_otras, @cactv_docencia, @cactv_investigacion, @cactv_extension, @cactv_formacion, @cactv_otras, @actividadesadoc, @actividadesainv, @actividadesafor, @actividadesaext, @actividadesaotr,@res,@resultados,@actividadese,@observaciont,@resultstring)
     @nombre_archivo= @instructor.ci.to_s+'-'+@fechaActual+'-informe.pdf' # se arma el nombre del documento 
     puts @nombre_archivo
     return @nombre_archivo # se retorna el nombre del archivo

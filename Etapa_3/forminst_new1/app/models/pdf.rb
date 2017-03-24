@@ -974,7 +974,7 @@ class Pdf
 
 	end
 #########################################################################################################################################################################
-	def self.pdf_informe(tipo_informe,escuela,informe, adecuacion, tutor, instructor, pactv_docencia, pactv_investigacion, pactv_extension, pactv_formacion, pactv_otras, sactv_docencia, sactv_investigacion, sactv_extension, sactv_otras, sactv_formacion,  tactv_docencia, tactv_investigacion, tactv_extension,tactv_formacion, tactv_otras, cactv_docencia, cactv_investigacion, cactv_extension, cactv_formacion, cactv_otras, info_docencia, info_investigacion,info_formacion, info_extension, info_otras,resx,resultados,actividadese,observaciont)
+	def self.pdf_informe(tipo_informe,escuela,informe, adecuacion, tutor, instructor, pactv_docencia, pactv_investigacion, pactv_extension, pactv_formacion, pactv_otras, sactv_docencia, sactv_investigacion, sactv_extension, sactv_otras, sactv_formacion,  tactv_docencia, tactv_investigacion, tactv_extension,tactv_formacion, tactv_otras, cactv_docencia, cactv_investigacion, cactv_extension, cactv_formacion, cactv_otras, info_docencia, info_investigacion,info_formacion, info_extension, info_otras,resx,resultados,actividadese,observaciont, resultstring)
 		noplan_a=[]
 		noplan_na=[]
 		res_tp=[]
@@ -1955,7 +1955,7 @@ class Pdf
 			:column_widths => { 0 => 173, 1 => 173, 2 => 173}, 
 			:position => :left,
 			:align => { 0 => :left, 1 => :left, 2=> :left}
-			
+			aee = 0
 			if !info_investigacion.blank?
 				info_investigacion.each do |actv|
 					ae = InformeActividad.where(actividad_id: actv.id, informe: informe.id).take
@@ -1989,7 +1989,7 @@ class Pdf
 				:position => :left,
 				:align => { 0 => :left, 1 => :left, 2=> :left}
 			end
-			
+				
 				res1 = [[{:text=> "4.1.- Divulgación de resultados:", :font_style => :bold}],
 					[{:text=> "4.1.1.- Trabajos publicados (libros, revistas, artículos de prensa, CDs, manuales, publicaciones electrónicas, etc.): \n", :font_style => :bold}]] # cuadro final del documento
 			
@@ -2006,17 +2006,9 @@ class Pdf
 				
 				if res_tp != []
 					res_tp.each do |res|
-						if !res.titulo.blank? && !res.autor.blank? && !res.ano.blank? && !res.ciudad.blank? && !res.pais.blank? && !res.editor.blank?
-							res2= [	[{:text=> res.autor.capitalize+", ("+res.ano.to_s+"). Titulo: "+res.titulo.capitalize+", Ciudad: "+res.ciudad.capitalize+", País: "+res.pais.capitalize+", Editor: "+res.editor.capitalize+". ", :align=>:left} ]] # datos que se desean en la tabla
-						elsif !res.titulo.blank? && !res.autor.blank? && !res.ano.blank? && !res.nombre_revista.blank? && !res.paginas.blank?
-							res2= [	[{:text=> res.autor.capitalize+", ("+res.ano.to_s+"). Titulo: "+res.titulo.capitalize+", Revista: "+res.nombre_revista.capitalize+", N° de Paginas: "+res.paginas.to_s+". ", :align=>:left} ]] # datos que se desean en la tabla
-						elsif !res.titulo.blank? && !res.autor.blank? && !res.ano.blank? && !res.dia.blank? && !res.mes.blank? && !res.nombre_periodico.blank? && !res.paginas.blank?
-							res2= [	[{:text=> res.autor.capitalize+", ("+res.dia.to_s+" de "+res.mes+" de "+res.ano.to_s+"). Titulo: "+res.titulo.capitalize+", Periodico: "+res.nombre_revista.capitalize+", N° de Paginas: "+res.paginas.to_s+". ", :align=>:left} ]] # datos que se desean en la tabla
-						elsif !res.titulo.blank? && !res.autor.blank? && !res.ano.blank? && !res.dia.blank? && !res.mes.blank? && !res.ciudad.blank? && !res.pais.blank? && !res.estado.blank? &&!res.editor.blank?
-							res2= [	[{:text=> res.autor.capitalize+", ("+res.dia.to_s+" de "+res.mes+" de "+res.ano.to_s+"). Titulo: "+res.titulo.capitalize+", Ciudad: "+res.ciudad.capitalize+", Estado: "+res.estado.capitalize+", País: "+res.pais.capitalize+", Editor: "+res.editor.capitalize+". ", :align=>:left} ]] # datos que se desean en la tabla
-						else
-							res2=[[{:text=> res.autor.to_s+". ("+res.ano.to_s+"). "+res.titulo.to_s+". "+res.pais.to_s+". "+res.editor.to_s+".", :align=>:left }]] # datos que se desean en la tabla
-						end
+						puts resultstring[aee]
+						res2=[[{:text=> resultstring[aee], :align=>:left }]] # datos que se desean en la tabla
+						aee = aee + 1
 						pdf.table res2, # lineas para generar la tabla en el docuemnto
 						:border_style => :grid, #:underline_header
 						:font_size  => 8, 
@@ -2056,15 +2048,8 @@ class Pdf
 			
 				if res_ppcc !=[]
 					res_ppcc.each do |res|
-						if !res.titulo.blank? && !res.autor.blank? && !res.titulo_capitulo.blank? && !res.autor_capitulo.blank? && !res.dia.blank? && !res.mes.blank? && !res.ano.blank? && !res.ciudad.blank? && !res.editor.blank? && !res.paginas.blank? && !res.nombre_acto.blank?
-							res4= [	[{:text=> res.autor.capitalize+", ("+res.dia.to_s+" de "+res.mes+" de "+res.ano.to_s+"). Titulo: "+res.titulo.capitalize+". Titulo de Capitulo: "+res.titulo_capitulo.capitalize+". Autor de Capitulo: "+res.autor_capitulo.capitalize+", Ciudad: "+res.ciudad.capitalize+", Editor: "+res.editor.capitalize+", N° paginas: "+res.paginas.to_s+", Nombre del Acto: "+res.nombre_acto.capitalize+". ", :align=>:left} ]] # datos que se desean en la tabla
-						end
-						if !res.titulo.blank? && !res.autor.blank? && !res.titulo_capitulo.blank? && !res.autor_capitulo.blank? && res.dia.blank? && !res.mes.blank? && !res.ano.blank? && !res.ciudad.blank? && !res.editor.blank? && !res.paginas.blank? && !res.nombre_acto.blank?
-							res4= [	[{:text=> res.autor.capitalize+", ("+res.mes+" de "+res.ano.to_s+"). Titulo: "+res.titulo.capitalize+". Titulo de Capitulo: "+res.titulo_capitulo.capitalize+". Autor de Capitulo: "+res.autor_capitulo.capitalize+", Ciudad: "+res.ciudad.capitalize+", Editor: "+res.editor.capitalize+", N° paginas: "+res.paginas.to_s+", Nombre del Acto: "+res.nombre_acto.capitalize+". ", :align=>:left} ]] # datos que se desean en la tabla
-						end
-						if !res.titulo.blank? && !res.autor.blank? && !res.titulo_capitulo.blank? && !res.autor_capitulo.blank? && res.dia.blank? && res.mes.blank? && !res.ano.blank? && !res.ciudad.blank? && !res.editor.blank? && !res.paginas.blank? && !res.nombre_acto.blank?
-							res4= [	[{:text=> res.autor.capitalize+", ("+res.ano.to_s+"). Titulo: "+res.titulo.capitalize+". Titulo de Capitulo: "+res.titulo_capitulo.capitalize+".  Autor de Capitulo: "+res.autor_capitulo.capitalize+", Ciudad: "+res.ciudad.capitalize+", Editor: "+res.editor.capitalize+", N° paginas: "+res.paginas.to_s+", Nombre del Acto: "+res.nombre_acto.capitalize+". ", :align=>:left} ]] # datos que se desean en la tabla
-						end
+						res4 = [[{:text=> resultstring[aee], :align=>:left }]] # datos que se desean en la tabla
+						aee = aee + 1
 						pdf.table res4, # lineas para generar la tabla en el docuemnto
 						:border_style => :grid, #:underline_header
 						:font_size  => 8, 
@@ -2104,36 +2089,8 @@ class Pdf
 			
 				if res_otp != []
 					res_otp.each do |res|
-						if !res.ciudad.blank? && !res.estado.blank? && !res.editor.blank?
-							res6= [	[{:text=> res.autor+". ("+res.ano.to_s+"). "+res.titulo+". "+res.ciudad+", "+res.estado+", "+res.pais+". "+res.editor+".", :align=>:left} ]] # datos que se desean en la tabla
-						else 
-							if !res.ciudad.blank? && !res.estado.blank? && res.editor.blank?
-								res6= [	[{:text=> res.autor+". ("+res.ano.to_s+"). "+res.titulo+". "+res.ciudad+", "+res.estado+", "+res.pais+". ", :align=>:left}]	] # datos que se desean en la tabla
-							else
-								if !res.ciudad.blank? && res.estado.blank? && !res.editor.blank?
-									res6= [	[{:text=> res.autor+". ("+res.ano.to_s+"). "+res.titulo+". "+res.ciudad+", "+res.pais.to_s+". "+res.editor+".", :align=>:left}]	] # datos que se desean en la tabla
-								else
-									if res.ciudad.blank? && !res.estado.blank? && !res.editor.blank?
-										res6= [	[{:text=> res.autor+". ("+res.ano.to_s+"). "+res.titulo+". "+res.estado+", "+res.pais+". "+res.editor+".", :align=>:left}]	] # datos que se desean en la tabla
-									else
-										if res.ciudad.blank? && res.estado.blank? && !res.editor.blank?
-											res6= [	[{:text=> res.autor+". ("+res.ano.to_s+"). "+res.titulo+". "+res.pais+". "+res.editor+".", :align=>:left}]	] # datos que se desean en la tabla
-										else
-											if res.ciudad.blank? && !res.estado.blank? && res.editor.blank?
-												res6= [	[{:text=> res.autor+". ("+res.ano.to_s+"). "+res.titulo+". "+res.estado+", "+res.pais+". ", :align=>:left}]	] # datos que se desean en la tabla
-											else
-												if !res.ciudad.blank? && res.estado.blank? && res.editor.blank?
-													res6= [	[{:text=> res.autor+". ("+res.ano.to_s+"). "+res.titulo+". "+res.ciudad+", "+res.pais+". ", :align=>:left}]	] # datos que se desean en la tabla
-												else
-													res6= [	[{:text=> res.autor+". ("+res.ano.to_s+"). "+res.titulo+". "+res.pais+". ", :align=>:left}]	] # datos que se desean en la tabla
-												end
-											end
-										end
-									
-									end
-								end
-							end
-						end
+						res6 = [[{:text=> resultstring[aee], :align=>:left }]] # datos que se desean en la tabla
+						aee = aee + 1
 						pdf.table res6, # lineas para generar la tabla en el docuemnto
 						:border_style => :grid, #:underline_header
 						:font_size  => 8, 
@@ -2173,60 +2130,17 @@ class Pdf
 				
 				if res_aec != []
 					res_aec.each do |res|
-						if res.estado != "" && res.ciudad != ""
-							res8= [	[{:text=> "("+res.ano.to_s+"). "+res.titulo+". "+res.nombre_acto+". "+res.ciudad+", "+res.estado+", "+res.pais+".", :align=>:left} ]] # datos que se desean en la tabla
-							
-							pdf.table res8, # lineas para generar la tabla en el docuemnto
-							:border_style => :grid, #:underline_header
-							:font_size  => 8, 
-							:horizontal_padding => 6,
-							:vertical_padding   => 3,
-							:border_width => 0.7, 
-							:column_widths => { 0 => 520}, 
-							:position => :left,
-							:align => { 0 => :left}
-						else 
-							if res.estado == "" && res.ciudad != ""
-								res8= [	[{:text=> "("+res.ano.to_s+"). "+res.titulo+". "+res.nombre_acto+". "+res.ciudad+", "+res.pais+".", :align=>:left}]	] # datos que se desean en la tabla
-								
-								pdf.table res8, # lineas para generar la tabla en el docuemnto
-								:border_style => :grid, #:underline_header
-								:font_size  => 8, 
-								:horizontal_padding => 6,
-								:vertical_padding   => 3,
-								:border_width => 0.7, 
-								:column_widths => { 0 => 520}, 
-								:position => :left,
-								:align => { 0 => :left}
-							else
-								if res.estado != "" && res.ciudad == ""
-									res8= [	[{:text=> "("+res.ano.to_s+"). "+res.titulo+". "+res.nombre_acto+". "+res.estado+", "+res.pais+".", :align=>:left}]	] # datos que se desean en la tabla
-								
-									pdf.table res8, # lineas para generar la tabla en el docuemnto
-									:border_style => :grid, #:underline_header
-									:font_size  => 8, 
-									:horizontal_padding => 6,
-									:vertical_padding   => 3,
-									:border_width => 0.7, 
-									:column_widths => { 0 => 520}, 
-									:position => :left,
-									:align => { 0 => :left}
-								else
-									res8= [	[{:text=> "("+res.ano.to_s+"). "+res.titulo+". "+res.nombre_acto+". "+res.pais+".", :align=>:left}]	] # datos que se desean en la tabla
-								
-									pdf.table res8, # lineas para generar la tabla en el docuemnto
-									:border_style => :grid, #:underline_header
-									:font_size  => 8, 
-									:horizontal_padding => 6,
-									:vertical_padding   => 3,
-									:border_width => 0.7, 
-									:column_widths => { 0 => 520}, 
-									:position => :left,
-									:align => { 0 => :left}
-								end
-							end
-						end
-						
+						res8 = [[{:text=> resultstring[aee], :align=>:left }]] # datos que se desean en la tabla
+						aee = aee + 1							
+						pdf.table res8, # lineas para generar la tabla en el docuemnto
+						:border_style => :grid, #:underline_header
+						:font_size  => 8, 
+						:horizontal_padding => 6,
+						:vertical_padding   => 3,
+						:border_width => 0.7, 
+						:column_widths => { 0 => 520}, 
+						:position => :left,
+						:align => { 0 => :left}
 					end
 				else
 					res8 =[	[{:text => "No hubo." , :aling=> :left}]] # datos que se desean en la tabla
@@ -2256,60 +2170,17 @@ class Pdf
 				
 				if res_oec != []
 					res_oec.each do |res|
-						if res.estado != "" && res.ciudad != ""
-							res10= [[{:text=> "("+res.ano.to_s+"). "+res.titulo+". "+res.ciudad+", "+res.estado+", "+res.pais+". ", :align=>:left} ]] # datos que se desean en la tabla
-							
-							pdf.table res10, # lineas para generar la tabla en el docuemnto
-							:border_style => :grid, #:underline_header
-							:font_size  => 8, 
-							:horizontal_padding => 6,
-							:vertical_padding   => 3,
-							:border_width => 0.7, 
-							:column_widths => { 0 => 520}, 
-							:position => :left,
-							:align => { 0 => :left}
-						else 
-							if res.estado == "" && res.ciudad != ""
-								res10= [[{:text=> "("+res.ano.to_s+"). "+res.titulo+". "+res.ciudad+", "+res.pais+". ", :align=>:left}]	] # datos que se desean en la tabla
-								
-								pdf.table res10, # lineas para generar la tabla en el docuemnto
-								:border_style => :grid, #:underline_header
-								:font_size  => 8, 
-								:horizontal_padding => 6,
-								:vertical_padding   => 3,
-								:border_width => 0.7, 
-								:column_widths => { 0 => 520}, 
-								:position => :left,
-								:align => { 0 => :left}
-							else
-								if res.estado != "" && res.ciudad == ""
-									res10= [[{:text=> "("+res.ano.to_s+"). "+res.titulo+". "+res.estado+", "+res.pais+". ", :align=>:left}]	] # datos que se desean en la tabla
-								
-									pdf.table res10, # lineas para generar la tabla en el docuemnto
-									:border_style => :grid, #:underline_header
-									:font_size  => 8, 
-									:horizontal_padding => 6,
-									:vertical_padding   => 3,
-									:border_width => 0.7, 
-									:column_widths => { 0 => 520}, 
-									:position => :left,
-									:align => { 0 => :left}
-								else
-									res10= [[{:text=> "("+res.ano.to_s+"). "+res.titulo+". "+res.pais+". ", :align=>:left}]	] # datos que se desean en la tabla
-								
-									pdf.table res10, # lineas para generar la tabla en el docuemnto
-									:border_style => :grid, #:underline_header
-									:font_size  => 8, 
-									:horizontal_padding => 6,
-									:vertical_padding   => 3,
-									:border_width => 0.7, 
-									:column_widths => { 0 => 520}, 
-									:position => :left,
-									:align => { 0 => :left}
-								end
-							end
-						end
-						
+						res10 = [[{:text=> resultstring[aee], :align=>:left }]] # datos que se desean en la tabla
+						aee = aee + 1
+						pdf.table res10, # lineas para generar la tabla en el docuemnto
+						:border_style => :grid, #:underline_header
+						:font_size  => 8, 
+						:horizontal_padding => 6,
+						:vertical_padding   => 3,
+						:border_width => 0.7, 
+						:column_widths => { 0 => 520}, 
+						:position => :left,
+						:align => { 0 => :left}
 					end
 				else
 					res10 =[[{:text => "No hubo." , :aling=> :left}]] # datos que se desean en la tabla
@@ -2339,60 +2210,17 @@ class Pdf
 				
 				if res_dctsc != []
 					res_dctsc.each do |res|
-						if res.estado != "" && res.ciudad != ""
-							res12= [[{:text=> res.autor+". ("+res.ano.to_s+"). "+res.titulo+". "+res.ciudad+", "+res.estado+", "+res.pais+". Organizado por: "+res.organizador+". Duración: "+res.duracion+".", :align=>:left} ]] # datos que se desean en la tabla
-							
-							pdf.table res12, # lineas para generar la tabla en el docuemnto
-							:border_style => :grid, #:underline_header
-							:font_size  => 8, 
-							:horizontal_padding => 6,
-							:vertical_padding   => 3,
-							:border_width => 0.7, 
-							:column_widths => { 0 => 520}, 
-							:position => :left,
-							:align => { 0 => :left}
-						else 
-							if res.estado == "" && res.ciudad != ""
-								res12= [[{:text=> res.autor+". ("+res.ano.to_s+"). "+res.titulo+". "+res.ciudad+", "+res.pais+". Organizado por: "+res.organizador+". Duración: "+res.duracion+".", :align=>:left}]	] # datos que se desean en la tabla
-								
-								pdf.table res12, # lineas para generar la tabla en el docuemnto
-								:border_style => :grid, #:underline_header
-								:font_size  => 8, 
-								:horizontal_padding => 6,
-								:vertical_padding   => 3,
-								:border_width => 0.7, 
-								:column_widths => { 0 => 520}, 
-								:position => :left,
-								:align => { 0 => :left}
-							else
-								if res.estado != "" && res.ciudad == ""
-									res12= [[{:text=> res.autor+". ("+res.ano.to_s+"). "+res.titulo+". "+res.estado+", "+res.pais+". Organizado por: "+res.organizador+". Duración: "+res.duracion+".", :align=>:left}]	] # datos que se desean en la tabla
-								
-									pdf.table res12, # lineas para generar la tabla en el docuemnto
-									:border_style => :grid, #:underline_header
-									:font_size  => 8, 
-									:horizontal_padding => 6,
-									:vertical_padding   => 3,
-									:border_width => 0.7, 
-									:column_widths => { 0 => 520}, 
-									:position => :left,
-									:align => { 0 => :left}
-								else
-									res12= [[{:text=> res.autor+". ("+res.ano.to_s+"). "+res.titulo+". "+res.pais+". Organizado por: "+res.organizador+". Duración: "+res.duracion+".", :align=>:left}]	] # datos que se desean en la tabla
-								
-									pdf.table res12, # lineas para generar la tabla en el docuemnto
-									:border_style => :grid, #:underline_header
-									:font_size  => 8, 
-									:horizontal_padding => 6,
-									:vertical_padding   => 3,
-									:border_width => 0.7, 
-									:column_widths => { 0 => 520}, 
-									:position => :left,
-									:align => { 0 => :left}
-								end
-							end
-						end
-						
+						res12= [[{:text=> resultstring[aee], :align=>:left }]] # datos que se desean en la tabla
+						aee = aee + 1
+						pdf.table res12, # lineas para generar la tabla en el docuemnto
+						:border_style => :grid, #:underline_header
+						:font_size  => 8, 
+						:horizontal_padding => 6,
+						:vertical_padding   => 3,
+						:border_width => 0.7, 
+						:column_widths => { 0 => 520}, 
+						:position => :left,
+						:align => { 0 => :left}
 					end
 				else
 					res12 =[[{:text => "No hubo." , :aling=> :left}]] # datos que se desean en la tabla

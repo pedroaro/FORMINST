@@ -733,7 +733,7 @@ CREATE TABLE `resultado` (
   `concepto` longtext,
   `tipo_publicacion` varchar(255) DEFAULT NULL,
   `titulo` varchar(255) DEFAULT NULL,
-  `autores` varchar(255) DEFAULT NULL,
+  `autor` varchar(255) DEFAULT NULL,
   `titulo_capitulo` varchar(255) DEFAULT NULL,
   `autor_capitulo` varchar(255) DEFAULT NULL,
   `dia` int(11) DEFAULT NULL,

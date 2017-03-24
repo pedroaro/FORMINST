@@ -1205,7 +1205,9 @@ class IniciotutorController < ApplicationController
 		@actividades1otr= []
 		g=0;
 	    cambio_act = EstatusAdecuacion.where(adecuacion_id: @adecuacion_id, actual: 1).take
-	    if cambio_act != 6
+	    puts cambio_act.estatus_id
+	    puts "JAJAA"
+	    if cambio_act.estatus_id != 6
 	    	flash[:info]="Esta adecuación ya habia sido enviada"
 	   	   	redirect_to controller:"iniciotutor", action: "detalles_adecuacion3"
 	   	else
