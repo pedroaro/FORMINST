@@ -820,7 +820,6 @@ class IniciotutorController < ApplicationController
 
 	def guardar_adecuacion
 		if session[:usuario_id]
-
 			semestre = params[:semestre].to_i
 			cant_docencia = params[:cant_docencia]
 			cant_investigacion = params[:cant_investigacion]
@@ -833,8 +832,11 @@ class IniciotutorController < ApplicationController
 			@idtutor = session[:usuario_id]
 			@planformacion = Planformacion.find(session[:plan_id])
 			@ade= Adecuacion.where(planformacion_id: @planformacion.id).take
-
-			if @ade == nil
+			cambio_act = EstatusAdecuacion.where(adecuacion_id: @ade.id, actual: 1).take
+			if cambio_act.estatus_id != 6
+				flash[:danger]= "La adecuación no puede ser modificada"
+				redirect_to controller:"iniciotutor", action: "listar_adecuaciones"
+			elsif @ade == nil
 
 				ad= Adecuacion.new
 				ad.planformacion_id = @planformacion.id
@@ -1002,9 +1004,15 @@ class IniciotutorController < ApplicationController
 
 	def eliminar_adecuacion
 		@adecuacion= Adecuacion.find(session[:adecuacion_id])
-		@est= EstatusAdecuacion.where(adecuacion_id: @adecuacion.id).take
+		puts "asdasdasd"
+		@est= EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
 		if @est.estatus_id == 6
-			@adecuacion.destroy
+			@actividadAde = AdecuacionActividad.where(adecuacion_id: @adecuacion.id).all
+			@actividadAde.each do |actade| 
+				@elimi = Actividad.where(id: actade.actividad_id).take
+				@elimi.destroy
+				actade.destroy
+			end
 			flash[:success]= "La adecuacion fue eliminada correctamente"
 		else
 			flash[:danger]= "No está permitido eliminar esta adecuación"
@@ -1209,7 +1217,7 @@ class IniciotutorController < ApplicationController
 	    puts "JAJAA"
 	    if cambio_act.estatus_id != 6
 	    	flash[:info]="Esta adecuación ya habia sido enviada"
-	   	   	redirect_to controller:"iniciotutor", action: "detalles_adecuacion3"
+	   	   	redirect_to controller:"iniciotutor", action: "listar_adecuaciones"
 	   	else
 			@actividades1= AdecuacionActividad.where(adecuacion_id: @adecuacion_id, semestre: 1).all
 			if @actividades1.blank?

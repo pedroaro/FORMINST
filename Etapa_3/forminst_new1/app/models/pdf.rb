@@ -2472,8 +2472,9 @@ class Pdf
 			
 			
 		end
-		#####################
-		nombre_archivo= instructor.ci.to_s+'-informe.pdf' # nombre del dcouemrnto
+		#####################+
+		fechaActual = Date.current.to_s
+   		nombre_archivo= instructor.ci.to_s+'-'+fechaActual+'-informe.pdf' # se arma el nombre del documento 
 		pdf.render_file(nombre_archivo) # creación del docuemnto bajo su nombre
 	end
 end
