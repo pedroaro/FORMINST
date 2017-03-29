@@ -8,7 +8,9 @@
         <h4 class="modal-title">Mensaje de confirmación</h4>
       </div>
       <div class="modal-body">
-        <h5>Está seguro que desea enviar la adecuación?.</h5>
+      <center>
+        <h5>¿Está seguro que desea enviar esta adecuación?</h5>
+      </center>
       </div>
       <div class="modal-footer">
         <%= link_to "Aceptar", {controller: "iniciotutor", action: "cambiar_estatusA", :adecuacion_id => @adecuacion.id }, class: "btn btn-default" %>
@@ -20,7 +22,27 @@
   </div>
 </div>
 
-
+<div class="modal fade" id="myModalEliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h3 class="modal-title" id="myModalLabel">Eliminar Adecuación</h3>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <center>
+            <h5>¿Está seguro que desea eliminar esta adecuación?</h5>
+          </center>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <%= link_to "Aceptar", {controller: "iniciotutor", action: "eliminar_adecuacion" }, class: "btn btn-default" %>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="modal fade" id="myModal2" role="dialog">
   <div class="modal-dialog">
@@ -131,7 +153,7 @@
             <%= link_to "Generar PDF", {controller: "adecuacions", action: "generar_pdf"}, class: "btn btn-default" %>
             <button type="button" class="btn btn-default">Agregar Soporte</button>
             <button type="button" class="btn btn-default">Ver Soporte</button>
-            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">Eliminar Adecuación</button>
+            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModalEliminar">Eliminar Adecuación</button>
             <button type="submit" class="btn btn-forminst-blue">Modificar Adecuación</button>
           </div>
         <%end%>
@@ -143,7 +165,7 @@
           <%= link_to "Generar PDF", {controller: "adecuacions", action: "generar_pdf"}, class: "btn btn-default" %>
           <button type="button" class="btn btn-default">Agregar Soporte</button>
           <button type="button" class="btn btn-default">Ver Soporte</button>
-          <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">Eliminar Adecuación</button>
+          <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModalEliminar">Eliminar Adecuación</button>
         </div>
       <%end%>
   </div>

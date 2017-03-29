@@ -15,8 +15,8 @@
   <div class="col-xs-12 col-md-12">
     <div class="btn-group" role="group">
        <%= link_to "Volver", {controller: "inicioinstructor", action: "ver_detalles_informe"}, class: "btn btn-default" %>
-      <%= link_to "Vista Previa", {controller: "inicioinstructor", action: "vista_previa"}, class: "btn btn-default" %>
-      <%= link_to "Generar PDF", {controller: "adecuacions", action: "descargar_pdf"}, class: "btn btn-default" %>
+      <%= link_to "Vista Previa", {controller: "inicioinstructor", action: "vista_previa1"}, class: "btn btn-default" %>
+      <%= link_to "Generar PDF", {controller: "informes", action: "generar_pdf"}, class: "btn btn-default" %>
       <button type="button" class="btn btn-default">Ver Soporte</button>
     </div>
   </div>
@@ -436,22 +436,6 @@
               </tr>
               <% @j= @j +1 %>
             <% end %>
-            <tr>
-              <td colspan="3"><b>Grado de avance en los estudios de postgrado:</b>
-               <% if @resultados[@j]!= nil %>
-                  <%if @resultados[@j].tipo_resultado_id == 8 %>
-                    <input type="hidden" name="postg" value='<%= @resultados[@j].id %>'>
-                    <textarea name="postgrado"class="form-control" rows="2"disabled ><%= @resultados[@j].concepto %></textarea>
-                  <%else%>
-                      <input type="hidden" name="postg" value='-1'>
-                      <textarea name="postgrado" class="form-control" rows="2" disabled></textarea>
-                  <%end%>
-                <%else%>
-                      <input type="hidden" name="postg" value='-1'>
-                      <textarea name="postgrado" class="form-control" rows="2" disabled></textarea>
-                <%end%>
-              </td>
-            </tr>
 
             <tr><td colspan="3"></td></tr>
 
@@ -485,31 +469,21 @@
                   <textarea class="form-control" rows="3"  name='otra<%= actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
                 </td>
               </tr>
-              <% @j= @j +1 %>
             <% end %>
             <tr>
               <td colspan="3"><b>No contempladas en el plan de formación y capacitación:</b></td>
             </tr>
             <tr>
-              <% @j=@j+1 %>
-              <% if @resultados[@j]!= nil %>
-                <%if @resultados[@j].tipo_resultado_id == 9 %>
-                  <td colspan="3">
-                      <input type="hidden" name="nocont" value='<%= @resultados[@j].id %>'>
-                      <textarea name="no_contemplada"class="form-control" rows="3" disabled><%= @resultados[@j].concepto %></textarea>
-                  </td>
-                <%else%>
-                  <td colspan="3">
-                      <input type="hidden" name="nocont" value='-1'>
-                      <textarea name="no_contemplada"class="form-control" rows="3" disabled></textarea>
-                  </td>
-                <%end%>
+              <% if @actividadese[@j]!= nil %>
+                <td colspan="3">
+                  <textarea name="no_contemplada"class="form-control" rows="3" disabled><%= @actividadese[@j].descripcion %></textarea>
+                </td>
               <%else%>
-                  <td colspan="3">
-                      <input type="hidden" name="nocont" value='-1'>
-                      <textarea name="no_contemplada"class="form-control" rows="3" disabled></textarea>
-                  </td>
+                <td colspan="3">
+                  <textarea name="no_contemplada"class="form-control" rows="3" disabled></textarea>
+                </td>
               <%end%>
+              <% @j=@j+1 %>
             </tr>
             <tr>
               <td colspan="3"><b>Conclusiones:</b></td>

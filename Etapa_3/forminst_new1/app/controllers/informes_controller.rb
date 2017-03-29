@@ -254,7 +254,7 @@ class InformesController < ApplicationController
 
   def eliminar_informe
     @informe= Informe.find(session[:informe_id])
-    @est= EstatusInforme.where(informe_id: @informe.id).take
+    @est= EstatusInforme.where(informe_id: @informe.id, actual: 1).take
     if @est.estatus_id == 6
       @informe.destroy
       flash[:success]= "El informe fue eliminado correctamente"
@@ -567,44 +567,185 @@ def vista_previa
     @resultados= []
     @actividadese= []
     @observaciont= []
-                      puts "HAY OTRAS"
+    @resultTP = []
+    @resultPP = []
+    @resultPIT = []
+    @resultO = []
+    @resultAEC = []
+    @resultOEC = []
+    @resultDCS = []
     @actividadesa.each do |actade| 
+      @resultados2 = ""
       if actade.actividad_id == nil #Es el caso que es un resultado no contemplado en el plan de formacion o un avancwe de postgrado
         @res= Resultado.find(actade.resultado_id)
+        if !@res.blank?
+          @cparray = ["a", "a", "a", "a", "a", "a", "a", "a", "a","a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a"]
+          @cparray[0] = @res.titulo.capitalize
+          @cparray[1] = @res.autor.capitalize
+          @cparray[2] = @res.titulo_capitulo.to_s.capitalize
+          @cparray[3] = @res.autor_capitulo.to_s.capitalize
+          @cparray[4] = @res.dia
+          @cparray[5] = @res.mes
+          @cparray[6] = @res.ano
+          @cparray[7] = @res.ciudad.to_s.capitalize
+          @cparray[8] = @res.estado.to_s.capitalize
+          @cparray[9] = @res.pais.to_s.capitalize
+          @cparray[10] = @res.organizador.to_s.capitalize
+          @cparray[11] = @res.duracion
+          @cparray[12] = @res.editor.to_s.capitalize
+          @cparray[13] = @res.titulo_libro.to_s.capitalize
+          @cparray[14] = @res.autor_libro.to_s.capitalize
+          @cparray[15] = @res.nombre_revista.to_s.capitalize
+          @cparray[16] = @res.nombre_periodico.to_s.capitalize
+          @cparray[17] = @res.nombre_acto.to_s.capitalize
+          @cparray[18] = @res.paginas
+          @cparray[19] = @res.nombre_paginaw
+          @cparray[20] = @res.sitio_paginaw
+          @cparray[21] = @res.url.to_s.capitalize
+          @cparray[22] = @res.ISSN_impreso.to_s.capitalize
+          @cparray[23] = @res.ISSN_electro.to_s.capitalize
+          @cparray[24] = @res.volumen.to_s.capitalize
+          @cparray[25] = @res.edicion.to_s.capitalize
+          @cparray[26] = @res.DOI
+          @cparray[27] = @res.ISBN
+          @cparray[28] = @res.universidad.to_s.capitalize
+          @cparray[29] = @res.MaeDoc.to_s.capitalize
+          @cparray[30] = @res.rango_paginas.to_s.capitalize
+          if !@cparray.blank?
+            @noemptyarray = @cparray - ["", nil]
+            if !@resultados2
+              @noemptyarray = @cparray - ["", nil]
+              if !@noemptyarray.join(',').blank?
+                puts @noemptyarray.join(',')
+                @resultados2 = "* " + @noemptyarray
+                puts "a"
+                puts @resultados2
+              end
+            else
+              @noemptyarray = @cparray - ["", nil]
+              if !@noemptyarray.join(',').blank?
+                puts @noemptyarray.join(', ')
+                @resultados2 = @resultados2 + @noemptyarray.join(', ')
+                puts "b"
+                puts @resultados2
+              end
+            end
+          end
+        end
+        if @res.tipo_resultado_id == 1
+        @resultTP.push(@resultados2)
+        elsif @res.tipo_resultado_id == 2
+        @resultPP.push(@resultados2)
+        elsif @res.tipo_resultado_id == 3
+        @resultPIT.push(@resultados2)
+        elsif @res.tipo_resultado_id == 4
+        @resultO.push(@resultados2)
+        elsif @res.tipo_resultado_id == 5
+        @resultAEC.push(@resultados2)
+        elsif @res.tipo_resultado_id == 6
+        @resultOEC.push(@resultados2)
+        elsif @res.tipo_resultado_id == 7
+        @resultDCS.push(@resultados2)
+        end
         @resultados.push(@res)
       else
         @act= Actividad.find(actade.actividad_id)
         tipo= @act.tipo_actividad_id
         if actade.resultado_id
           @res= Resultado.find(actade.resultado_id)
-          @resultados.push(@res)
-        else
-          @resultados.push(nil)
+        if !@res.blank?
+          @cparray = ["a", "a", "a", "a", "a", "a", "a", "a", "a","a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a"]
+          @cparray[0] = @res.titulo.capitalize
+          @cparray[1] = @res.autor.capitalize
+          @cparray[2] = @res.titulo_capitulo.to_s.capitalize
+          @cparray[3] = @res.autor_capitulo.to_s.capitalize
+          @cparray[4] = @res.dia
+          @cparray[5] = @res.mes
+          @cparray[6] = @res.ano
+          @cparray[7] = @res.ciudad.to_s.capitalize
+          @cparray[8] = @res.estado.to_s.capitalize
+          @cparray[9] = @res.pais.to_s.capitalize
+          @cparray[10] = @res.organizador.to_s.capitalize
+          @cparray[11] = @res.duracion
+          @cparray[12] = @res.editor.to_s.capitalize
+          @cparray[13] = @res.titulo_libro.to_s.capitalize
+          @cparray[14] = @res.autor_libro.to_s.capitalize
+          @cparray[15] = @res.nombre_revista.to_s.capitalize
+          @cparray[16] = @res.nombre_periodico.to_s.capitalize
+          @cparray[17] = @res.nombre_acto.to_s.capitalize
+          @cparray[18] = @res.paginas
+          @cparray[19] = @res.nombre_paginaw
+          @cparray[20] = @res.sitio_paginaw
+          @cparray[21] = @res.url.to_s.capitalize
+          @cparray[22] = @res.ISSN_impreso.to_s.capitalize
+          @cparray[23] = @res.ISSN_electro.to_s.capitalize
+          @cparray[24] = @res.volumen.to_s.capitalize
+          @cparray[25] = @res.edicion.to_s.capitalize
+          @cparray[26] = @res.DOI
+          @cparray[27] = @res.ISBN
+          @cparray[28] = @res.universidad.to_s.capitalize
+          @cparray[29] = @res.MaeDoc.to_s.capitalize
+          @cparray[30] = @res.rango_paginas.to_s.capitalize
+          if !@cparray.blank?
+            @noemptyarray = @cparray - ["", nil]
+            if !@resultados2
+              @noemptyarray = @cparray - ["", nil]
+              if !@noemptyarray.join(',').blank?
+                puts @noemptyarray.join(',')
+                @resultados2 = "* " + @noemptyarray
+                puts "a"
+                puts @resultados2
+              end
+            else
+              @noemptyarray = @cparray - ["", nil]
+              if !@noemptyarray.join(',').blank?
+                puts @noemptyarray.join(', ')
+                @resultados2 = @resultados2 + @noemptyarray.join(', ')
+                puts "b"
+                puts @resultados2
+              end
+            end
+          end
         end
-        @ae= ActividadEjecutada.where(informe_actividad_id: actade.id).take
-        @actividadese.push(@ae)
-        @obs= ObservacionTutor.where(informe_actividad_id: actade.id).take
-        if @obs==nil
-          @observaciont.push("")
-        else
-          @observaciont.push(@obs.observaciones)
+        if @res.tipo_resultado_id == 1
+        @resultTP.push(@resultados2)
+        elsif @res.tipo_resultado_id == 2
+        @resultPP.push(@resultados2)
+        elsif @res.tipo_resultado_id == 3
+        @resultPIT.push(@resultados2)
+        elsif @res.tipo_resultado_id == 4
+        @resultO.push(@resultados2)
+        elsif @res.tipo_resultado_id == 5
+        @resultAEC.push(@resultados2)
+        elsif @res.tipo_resultado_id == 6
+        @resultOEC.push(@resultados2)
+        elsif @res.tipo_resultado_id == 7
+        @resultDCS.push(@resultados2)
         end
-        if tipo==1
-          @actividadesadoc.push(@act)
-        elsif tipo==2
-          @actividadesainv.push(@act)
-        elsif tipo==3
-          @actividadesaext.push(@act)
-        elsif tipo==4
-          @actividadesafor.push(@act)
-        elsif tipo==5
-          puts "HAY OTRAS"
-          @actividadesaotr.push(@act)
-        end
+        @resultados.push(@res)
+      end
+      @ae= ActividadEjecutada.where(informe_actividad_id: actade.id).take
+      @actividadese.push(@ae)
+      @obs= ObservacionTutor.where(informe_actividad_id: actade.id).take
+      if @obs==nil
+        @observaciont.push("")
+      else
+        @observaciont.push(@obs.observaciones)
+      end
+      if tipo==1
+        @actividadesadoc.push(@act)
+      elsif tipo==2
+        @actividadesainv.push(@act)
+      elsif tipo==3
+        @actividadesaext.push(@act)
+      elsif tipo==4
+        @actividadesafor.push(@act)
+      elsif tipo==5
+        @actividadesaotr.push(@act)
       end
     end
-
   end
+end
 
   def ver_detalles_informe
 
@@ -1105,24 +1246,13 @@ def generar_pdf() # es funciÃ³n permite generar el documento pdf de la adecuaciÃ
     @instructor= Persona.where(usuario_id: @id_instructor).take
     @fechaActual = Date.current.to_s
     @userentidad= Usuarioentidad.where(usuario_id: @planformacion.instructor_id).take
-      if @userentidad.escuela_id == nil
-        @userentidad.escuela_id=12
-        @userentidad.save
-        @escuela= Escuela.where(id: @userentidad.escuela_id).take
-      else
-        @escuela= Escuela.where(id: @userentidad.escuela_id).take
-      end
-
-
-
-
-
-      ###DEBES DE ACOMODAR LOS RESULTADOSSSSS
-
-
-
-
-
+    if @userentidad.escuela_id == nil
+      @userentidad.escuela_id=12
+      @userentidad.save
+      @escuela= Escuela.where(id: @userentidad.escuela_id).take
+    else
+      @escuela= Escuela.where(id: @userentidad.escuela_id).take
+    end
 
     @res = []
     @resActi = []
@@ -1411,7 +1541,13 @@ def generar_pdf() # es funciÃ³n permite generar el documento pdf de la adecuaciÃ
     @resultados= []
     @actividadese= []
     @observaciont= []
-    @resultstring = []
+    @resultTP = []
+    @resultPP = []
+    @resultPIT = []
+    @resultO = []
+    @resultAEC = []
+    @resultOEC = []
+    @resultDCS = []
     @actividadesa.each do |actade| 
       @resultados2 = ""
       if actade.actividad_id == nil #Es el caso que es un resultado no contemplado en el plan de formacion o un avancwe de postgrado
@@ -1470,7 +1606,21 @@ def generar_pdf() # es funciÃ³n permite generar el documento pdf de la adecuaciÃ
             end
           end
         end
-        @resultstring.push(@resultados2)
+        if @res.tipo_resultado_id == 1
+        @resultTP.push(@resultados2)
+        elsif @res.tipo_resultado_id == 2
+        @resultPP.push(@resultados2)
+        elsif @res.tipo_resultado_id == 3
+        @resultPIT.push(@resultados2)
+        elsif @res.tipo_resultado_id == 4
+        @resultO.push(@resultados2)
+        elsif @res.tipo_resultado_id == 5
+        @resultAEC.push(@resultados2)
+        elsif @res.tipo_resultado_id == 6
+        @resultOEC.push(@resultados2)
+        elsif @res.tipo_resultado_id == 7
+        @resultDCS.push(@resultados2)
+        end
         @resultados.push(@res)
       else
         @act= Actividad.find(actade.actividad_id)
@@ -1531,7 +1681,21 @@ def generar_pdf() # es funciÃ³n permite generar el documento pdf de la adecuaciÃ
             end
           end
         end
-        @resultstring.push(@resultados2)
+        if @res.tipo_resultado_id == 1
+        @resultTP.push(@resultados2)
+        elsif @res.tipo_resultado_id == 2
+        @resultPP.push(@resultados2)
+        elsif @res.tipo_resultado_id == 3
+        @resultPIT.push(@resultados2)
+        elsif @res.tipo_resultado_id == 4
+        @resultO.push(@resultados2)
+        elsif @res.tipo_resultado_id == 5
+        @resultAEC.push(@resultados2)
+        elsif @res.tipo_resultado_id == 6
+        @resultOEC.push(@resultados2)
+        elsif @res.tipo_resultado_id == 7
+        @resultDCS.push(@resultados2)
+        end
         @resultados.push(@res)
         end
         @ae= ActividadEjecutada.where(informe_actividad_id: actade.id).take
@@ -1544,31 +1708,29 @@ def generar_pdf() # es funciÃ³n permite generar el documento pdf de la adecuaciÃ
         end
         if tipo==1
           @actividadesadoc.push(@act)
-        else
-          if tipo==2
-            @actividadesainv.push(@act)
-          else
-            if tipo==3
-              @actividadesaext.push(@act)
-            else
-              if tipo==4
-                @actividadesafor.push(@act)
-              else
-                if tipo==5
-                  @actividadesaotr.push(@act)
-                end
-              end
-            end
-          end
+        elsif tipo==2
+          @actividadesainv.push(@act)
+        elsif tipo==3
+          @actividadesaext.push(@act)
+        elsif tipo==4
+          @actividadesafor.push(@act)
+        elsif tipo==5
+          @actividadesaotr.push(@act)
         end
       end
     end
     
     puts "hellooooo"
     # se llama a la funciÃ³n de "pedf_adecuacion" del modelo "pdf", pasando todas las variables correspondientes
-    Pdf.pdf_informe(@TipoSemestre, @escuela, @informe, @adecuacion, @tutor, @instructor, @pactv_docencia, @pactv_investigacion, @pactv_extension, @pactv_formacion, @pactv_otras, @sactv_docencia, @sactv_investigacion, @sactv_extension, @sactv_formacion, @sactv_otras, @tactv_docencia, @tactv_investigacion, @tactv_extension, @tactv_formacion, @tactv_otras, @cactv_docencia, @cactv_investigacion, @cactv_extension, @cactv_formacion, @cactv_otras, @actividadesadoc, @actividadesainv, @actividadesafor, @actividadesaext, @actividadesaotr,@res,@resultados,@actividadese,@observaciont,@resultstring)
+    Pdf.pdf_informe(@TipoSemestre, @escuela, @informe, @adecuacion, @tutor, @instructor, @pactv_docencia, @pactv_investigacion, @pactv_extension, @pactv_formacion, @pactv_otras, @sactv_docencia, @sactv_investigacion, @sactv_extension, @sactv_formacion, @sactv_otras, @tactv_docencia, @tactv_investigacion, @tactv_extension, @tactv_formacion, @tactv_otras, @cactv_docencia, @cactv_investigacion, @cactv_extension, @cactv_formacion, @cactv_otras, @actividadesadoc, @actividadesainv, @actividadesafor, @actividadesaext, @actividadesaotr,@res,@resultados,@actividadese,@observaciont,@resultTP,@resultPP,@resultO,@resultAEC,@resultOEC,@resultDCS)
     @nombre_archivo= @instructor.ci.to_s+'-'+@fechaActual+'-informe.pdf' # se arma el nombre del documento 
     puts @nombre_archivo
+    act = "#{Rails.root}/" + @nombre_archivo
+    send_file(
+      act,
+      filename: @nombre_archivo,
+      type: "application/pdf"
+    )
     return @nombre_archivo # se retorna el nombre del archivo
   end
 
@@ -1992,70 +2154,72 @@ def generar_pdf() # es funciÃ³n permite generar el documento pdf de la adecuaciÃ
 
 
   def cambiar_estatusI
+    @informe_id = params[:informe_id].to_i
+    cambio_act = EstatusInforme.where(informe_id: @informe_id, actual: 1).take
+    cambio_act.actual = 0
+    cambio_act.save
 
-  @informe_id = params[:informe_id].to_i
-
-        cambio_act = EstatusInforme.where(informe_id: @informe_id, actual: 1).take
-        cambio_act.actual = 0
-        cambio_act.save
-
-        cambio_est = EstatusInforme.new 
-        cambio_est.informe_id = @informe_id
-        cambio_est.fecha = Time.now 
-        if cambio_act.estatus_id == 5     
-          cambio_est.estatus_id = 4
+    cambio_est = EstatusInforme.new 
+    cambio_est.informe_id = @informe_id
+    cambio_est.fecha = Time.now 
+    if cambio_act.estatus_id == 5     
+      cambio_est.estatus_id = 4
+    else
+      cambio_est.estatus_id = 3
+    end
+    axu2 = Usuario.where(session[:usuario_id]).take
+    axu3 = Usuarioentidad.where(session[:usuario_id]).take        #CAso aaprobado
+    if(axu3.entidad_id == 18 && cambio_act.estatus_id != 6)
+      flash[:info]="El informe ya habia sido enviado"
+    else
+      cambio_est.actual = 1
+      cambio_est.save
+      if cambio_act.estatus_id == 6
+        userr= Usuario.where(id: session[:usuario_id]).take
+        user =Usuarioentidad.where(usuario_id: userr.id).take
+        if(user.escuela_id == 1)
+          uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 7).take
         else
-          cambio_est.estatus_id = 3
-        end
-
-        cambio_est.actual = 1
-        cambio_est.save
-
-        if cambio_act.estatus_id == 6
-
-          userr= Usuario.where(id: session[:usuario_id]).take
-          user =Usuarioentidad.where(usuario_id: userr.id).take
-          if(user.escuela_id == 1)
-            uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 7).take
+          if(user.escuela_id == 2)
+            uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 8).take
           else
-            if(user.escuela_id == 2)
-              uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 8).take
+            if(user.escuela_id == 3)
+              uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 9).take
             else
-              if(user.escuela_id == 3)
-                uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 9).take
+              if(user.escuela_id == 4)
+              uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 10).take
               else
-                if(user.escuela_id == 4)
-                uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 10).take
+                if(user.escuela_id == 9)
+                  uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 11).take
                 else
-                  if(user.escuela_id == 9)
-                    uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 11).take
-                  else
-                    if(user.escuela_id == 10)
-                      uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 12).take
-                    end
+                  if(user.escuela_id == 10)
+                    uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 12).take
                   end
                 end
               end
-            end  
-          end
+            end
+          end  
+        end
+        remitente = Usuario.where(id: uentidad.usuario_id).take
+        email = remitente.user + "@ciens.ucv.ve"
+        ActionCorreo.envio_informe(email).deliver
+
+      else
+          uentidad = Usuarioentidad.where(entidad_id: 13).take        #CAso aaprobado
           remitente = Usuario.where(id: uentidad.usuario_id).take
-          email = remitente.user + "@ciens.ucv.ve"
+          email= remitente.user + "@ciens.ucv.ve"
           ActionCorreo.envio_informe(email).deliver
+      end
 
-        else
-            uentidad = Usuarioentidad.where(entidad_id: 13).take
-            remitente = Usuario.where(id: uentidad.usuario_id).take
-            email= remitente.user + "@ciens.ucv.ve"
-            ActionCorreo.envio_informe(email).deliver
-        end
 
-        if cambio_act.estatus_id == 5
-          flash[:success]="El informe se ha envÃ­ado a consejo de facultad"
-        else
-          flash[:success]="El informe se ha envÃ­ado a comision de investigacion"
-        end
 
-      redirect_to controller:"informes", action: "listar_informes"
+      if cambio_act.estatus_id == 5
+        flash[:success]="El informe se ha envÃ­ado a consejo de facultad"
+      else
+        flash[:success]="El informe se ha envÃ­ado a comision de investigacion"
+      end
+    end
+    redirect_to controller:"informes", action: "listar_informes"
   end
 
   def mas_observaciones
