@@ -998,7 +998,7 @@ class InicioentidadController < ApplicationController
 			        	@noemptyarray = @cparray - ["", nil]
 			        	if !@noemptyarray.join(',').blank?
 			        		puts @noemptyarray.join(',')
-				        	@resultados2 = "* " + @noemptyarray
+				        	@resultados2 = @noemptyarray.join(',')
 				        	puts "a"
 				        	puts @resultados2
 				        end
@@ -1006,7 +1006,7 @@ class InicioentidadController < ApplicationController
 			        	@noemptyarray = @cparray - ["", nil]
 			        	if !@noemptyarray.join(',').blank?
 				        	puts @noemptyarray.join(',')
-				        	@resultados2 = @resultados2 + "\n" + "* " + @noemptyarray.join(',')
+				        	@resultados2 = @noemptyarray.join(',')
 				        	puts "b"
 				        	puts @resultados2
 			        	end
@@ -1062,7 +1062,7 @@ class InicioentidadController < ApplicationController
 				        	@noemptyarray = @cparray - ["", nil]
 				        	if !@noemptyarray.join(',').blank?
 				        		puts @noemptyarray.join(',')
-					        	@resultados2 = "* " + @noemptyarray
+					        	@resultados2 = @noemptyarray.join(',')
 					        	puts "a"
 					        	puts @resultados2
 					        end
@@ -1070,7 +1070,7 @@ class InicioentidadController < ApplicationController
 				        	@noemptyarray = @cparray - ["", nil]
 				        	if !@noemptyarray.join(',').blank?
 					        	puts @noemptyarray.join(',')
-					        	@resultados2 = @resultados2 + "\n" + "* " + @noemptyarray.join(',')
+					        	@resultados2 = @noemptyarray.join(',')
 					        	puts "b"
 					        	puts @resultados2
 				        	end
