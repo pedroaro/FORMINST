@@ -2156,68 +2156,68 @@ def generar_pdf() # es función permite generar el documento pdf de la adecuaci�
   def cambiar_estatusI
     @informe_id = params[:informe_id].to_i
     cambio_act = EstatusInforme.where(informe_id: @informe_id, actual: 1).take
-    cambio_act.actual = 0
-    cambio_act.save
-
     cambio_est = EstatusInforme.new 
     cambio_est.informe_id = @informe_id
     cambio_est.fecha = Time.now 
-    if cambio_act.estatus_id == 5     
-      cambio_est.estatus_id = 4
-    else
-      cambio_est.estatus_id = 3
+    error = 0
+    informesAdecuacion = Informe.where(id: @informe_id).take
+    informesAdecuaciones = Informe.where(planformacion_id: session[:plan_id]).all
+    contador = 0
+    if informesAdecuacion.numero != 1
+      maxinforme = informesAdecuacion.numero.to_i - 1
+      for i in 1..maxinforme
+        informesAdecuaciones.each do |inf|
+          estatusInf = EstatusInforme.where(informe_id: inf.id, actual: 1 ).take
+          if (estatusInf.estatus_id != 6 && inf.numero == i)
+            contador = contador + 1
+          end
+        end
+      end
+      if (contador != maxinforme)
+        error = error + 1
+      end
     end
-    axu2 = Usuario.where(session[:usuario_id]).take
-    axu3 = Usuarioentidad.where(session[:usuario_id]).take        #CAso aaprobado
-    if(axu3.entidad_id == 18 && cambio_act.estatus_id != 6)
-      flash[:info]="El informe ya habia sido enviado"
-    else
+
+    if cambio_act.estatus_id == 6 && error == 0
+      cambio_est = EstatusInforme.new 
+      cambio_est.informe_id = @informe_id
+      cambio_est.fecha = Time.now 
+      cambio_est.estatus_id = 3
       cambio_est.actual = 1
       cambio_est.save
-      if cambio_act.estatus_id == 6
-        userr= Usuario.where(id: session[:usuario_id]).take
-        user =Usuarioentidad.where(usuario_id: userr.id).take
-        if(user.escuela_id == 1)
-          uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 7).take
+      cambio_act.actual = 0
+      cambio_act.save
+      userr= Usuario.where(id: session[:usuario_id]).take
+      user =Usuarioentidad.where(usuario_id: userr.id).take
+      if(user.escuela_id == 1)
+        uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 7).take
+      else
+        if(user.escuela_id == 2)
+          uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 8).take
         else
-          if(user.escuela_id == 2)
-            uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 8).take
+          if(user.escuela_id == 3)
+            uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 9).take
           else
-            if(user.escuela_id == 3)
-              uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 9).take
+            if(user.escuela_id == 4)
+            uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 10).take
             else
-              if(user.escuela_id == 4)
-              uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 10).take
+              if(user.escuela_id == 9)
+                uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 11).take
               else
-                if(user.escuela_id == 9)
-                  uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 11).take
-                else
-                  if(user.escuela_id == 10)
-                    uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 12).take
-                  end
+                if(user.escuela_id == 10)
+                  uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 12).take
                 end
               end
             end
-          end  
-        end
-        remitente = Usuario.where(id: uentidad.usuario_id).take
-        email = remitente.user + "@ciens.ucv.ve"
-        ActionCorreo.envio_informe(email).deliver
-
-      else
-          uentidad = Usuarioentidad.where(entidad_id: 13).take        #CAso aaprobado
-          remitente = Usuario.where(id: uentidad.usuario_id).take
-          email= remitente.user + "@ciens.ucv.ve"
-          ActionCorreo.envio_informe(email).deliver
+          end
+        end  
       end
-
-
-
-      if cambio_act.estatus_id == 5
-        flash[:success]="El informe se ha envíado a consejo de facultad"
-      else
-        flash[:success]="El informe se ha envíado a comision de investigacion"
-      end
+      remitente = Usuario.where(id: uentidad.usuario_id).take
+      email = remitente.user + "@ciens.ucv.ve"
+      ActionCorreo.envio_informe(email).deliver
+      flash[:success]="El informe se ha envíado a comision de investigacion"
+    else
+        flash[:info]="Debe enviar los informes en orden"
     end
     redirect_to controller:"informes", action: "listar_informes"
   end
