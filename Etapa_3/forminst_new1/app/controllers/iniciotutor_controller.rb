@@ -1407,23 +1407,40 @@ class IniciotutorController < ApplicationController
 				flash[:danger]="No puede enviar la adecuación sin haber llenado todos los semestres"
 		   	   	redirect_to controller:"iniciotutor", action: "detalles_adecuacion3"
 		   	else
-		      	
-		      	cambio_act.actual = 0
+		       	cambio_act.actual = 0
 		      	cambio_act.save
-
 		        cambio_est = EstatusAdecuacion.new 
+				plan = Planformacion.find(session[:plan_id])
+	        	puts plan.instructor_id
 		        cambio_est.adecuacion_id = @adecuacion_id
 		        cambio_est.fecha = Time.now 
-
-		        if(cambio_act.estatus_id == 5)
-		        	cambio_est.estatus_id = 4
-		        else
-		        	cambio_est.estatus_id = 3
-		        end
+				notific = Notificacion.new
+		        notific.instructor_id = plan.instructor_id
+		        notific.tutor_id = session[:usuario_id]
+		        notific.adecuacion_id = session[:adecuacion_id]
+		        notific.informe_id = nil
+		        notific.actual = 1
+		        puts "JAJAJA"
+		        person = Persona.where(usuario_id: plan.instructor_id).take
+		        notificacionfecha = Date.current.to_s 
+	        	notific.mensaje = "[" + notificacionfecha + "] La adecuación de "+ person.nombres.to_s.capitalize + " " + person.apellidos.to_s.capitalize + " se ha enviado a comision de investigacion."
+	        	notific.save
+	        	notific2 = Notificacion.new
+		        notific2.instructor_id = plan.instructor_id
+		        notific2.tutor_id = session[:usuario_id]
+		        notific2.adecuacion_id = session[:adecuacion_id]
+		        notific2.informe_id = nil
+		        notific2.actual = 2
+		        notificacionfecha = Date.current.to_s 
+	        	notific2.mensaje = "[" + notificacionfecha + "] Su adecuación se ha enviado a comisión de investigación."
+	        	notific2.save
+	        	puts notific.mensaje
+		        notific.save
+		        cambio_est.estatus_id = 3 #Enviado a comision de investigacion
 		        cambio_est.actual = 1
 		        cambio_est.save
 
-		         if cambio_act.estatus_id == 6
+		        if cambio_act.estatus_id == 6
 
 		          userr= Usuario.where(id: session[:usuario_id]).take
 		          user =Usuarioentidad.where(usuario_id: userr.id).take
@@ -1462,9 +1479,9 @@ class IniciotutorController < ApplicationController
 		        end
 
 		        if(cambio_act.estatus_id == 5)
-		        	flash[:success]="La adecuación se ha envíado a consejo de facultad"
+		        	flash[:success]="La adecuación se ha enviado a consejo de facultad"
 		        else
-		        	flash[:success]="La adecuación se ha envíado a comision de investigacion"
+		        	flash[:success]="La adecuación se ha enviado a comision de investigacion"
 		        end
 	     
 	    
@@ -1522,5 +1539,40 @@ class IniciotutorController < ApplicationController
 			
 	end
 
+	def borrar_notificaciones #mas obs de actividades del informe
+		if session[:usuario_id]
+			@noti= params[:noti]
+			puts "lalalala"
+			puts @noti
+    		@planformacions = Planformacion.where(tutor_id: session[:usuario_id])
+    		notaeliminar = Notificacion.where(id: @noti ).take
+    		if notaeliminar.blank?
+    			flash[:danger] = "Ha ocurrido un error al eliminar (notificaion no existente)"
+    		else
+    			notaeliminar.destroy
+    		end
+			redirect_to controller:"iniciotutor", action: "notificaciones"
+		else
+			redirect_to controller:"forminst", action: "index"
+		end
+	end
 
+
+	def notificaciones #mas obs de actividades del informe
+		if session[:usuario_id]
+    		@planformacions = Planformacion.where(tutor_id: session[:usuario_id])
+    		@notificaciones1= []
+    		@planformacions.each do |planformacions|
+				@adecuacion = Adecuacion.where(planformacion_id: planformacions.id).take
+    			@notificaciones = Notificacion.where(adecuacion_id: @adecuacion.id, tutor_id: session[:usuario_id]).all
+				@notificaciones.each do |notificaciones|
+					if notificaciones.actual == 1					#Caso de notificaciones del tutor
+						@notificaciones1.push(notificaciones)
+					end
+				end
+			end
+		else
+			redirect_to controller:"forminst", action: "index"
+		end
+	end
 end

@@ -447,6 +447,35 @@ INSERT INTO `informe_actividad` VALUES (163,1,47,NULL),(164,1,51,NULL),(165,1,59
 /*!40000 ALTER TABLE `informe_actividad` ENABLE KEYS */;
 UNLOCK TABLES;
 
+
+--
+-- Table structure for table `notificacion`
+--
+
+DROP TABLE IF EXISTS `notificacion`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `notificacion` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `instructor_id` int(11) DEFAULT NULL,
+  `tutor_id` int(11) DEFAULT NULL,
+  `adecuacion_id` int(11) DEFAULT NULL,
+  `informe_id` int(11) DEFAULT NULL,
+  `actual` int(11) DEFAULT NULL,
+  `mensaje` longtext,
+  PRIMARY KEY (`id`),
+  KEY `notificacioninstructor` (`instructor_id`),
+  KEY `notificaciontutor` (`tutor_id`),
+  KEY `notificacionadecuacion` (`adecuacion_id`),
+  KEY `notificacioninforme` (`informe_id`),
+  CONSTRAINT `notificacioninstructor` FOREIGN KEY (`instructor_id`) REFERENCES `usuario` (`id`),
+  CONSTRAINT `notificaciontutor` FOREIGN KEY (`tutor_id`) REFERENCES `usuario` (`id`),
+  CONSTRAINT `notificacionadecuacion` FOREIGN KEY (`adecuacion_id`) REFERENCES `adecuacion` (`id`),
+  CONSTRAINT `notificacioninforme` FOREIGN KEY (`informe_id`) REFERENCES `informe` (`id`)
+
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
 --
 -- Table structure for table `instructortutor`
 --

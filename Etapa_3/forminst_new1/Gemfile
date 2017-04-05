@@ -24,6 +24,8 @@ gem 'mysql2', '~> 0.3.18'
 
 gem 'bootstrap-datepicker-rails', :require => 'bootstrap-datepicker-rails', :git => 'git://github.com/Nerian/bootstrap-datepicker-rails.git'
 
+gem 'paperclip', '~> 5.0.0'
+
 gem 'prawn', '0.8.4'
 gem 'prawn-layout'
 
