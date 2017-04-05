@@ -6,8 +6,15 @@
 			session[:adecuacion_id] = nil
 			session[:plan_id] = nil
 			session[:instructorName] = nil
-			
 			@nombre = session[:nombre_usuario]
+      @notificaciones1= []
+      @notificaciones = Notificacion.where(instructor_id: session[:usuario_id]).all
+      @notificaciones.each do |notificaciones|
+        puts notificaciones.actual
+        if notificaciones.actual == 2        #Caso de notificaciones del tutor
+          @notificaciones1.push(notificaciones)
+        end
+      end
 		else
 			redirect_to controller:"forminst", action: "index"
 		end
@@ -1292,5 +1299,21 @@ end
     @mes= ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
     @dia= [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]
     @tipos= [['Libros',1], ['Artículo de Revista',2], ['Artículo de Prensa',3], ['CD',4], ['Manuales',5], ['Publicaciones Electrónicas',6]]
-  	end
+  end
+
+  def borrar_notificaciones #mas obs de actividades del informe
+    if session[:usuario_id]
+      @noti= params[:noti]
+      notaeliminar = Notificacion.where(id: @noti ).take
+      if notaeliminar.blank?
+        flash[:danger] = "Ha ocurrido un error al eliminar (notificaion no existente)"
+      else
+        notaeliminar.destroy
+      end
+      redirect_to controller:"iniciotutor", action: "notificaciones"
+    else
+      redirect_to controller:"forminst", action: "index"
+    end
+  end
+
 end
