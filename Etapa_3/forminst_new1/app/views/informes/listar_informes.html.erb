@@ -3,7 +3,7 @@
       <ul class="nav nav-tabs">
         <li><a href="../iniciotutor/index">Inicio</a></li>
         <% if @planformacion %>
-          <li><%= link_to 'Plan de Adecuación', :controller => 'iniciotutor', :action => 'listar_adecuaciones' %></li>
+          <li><%= link_to 'Plan de Planformación', :controller => 'iniciotutor', :action => 'planformacions' %></li>
         <% else %>
               <li><%= link_to 'Crear Adecuación', :controller => 'iniciotutor', :action => 'crear_adecuacion' %></li>
         <% end %>

@@ -3,7 +3,7 @@
       <ul class="nav nav-tabs">
         <li><a href="../iniciotutor/index">Inicio</a></li>
         <% if @planformacion %>
-          <li><%= link_to 'Plan de Adecuación', :controller => 'iniciotutor', :action => 'listar_adecuaciones' %></li>
+          <li><%= link_to 'Plan de Formación', :controller => 'iniciotutor', :action => 'planformacions' %></li>
         <% else %>
               <li><%= link_to 'Crear Adecuación', :controller => 'iniciotutor', :action => 'crear_adecuacion' %></li>
         <% end %>
@@ -204,58 +204,42 @@
       <table class="table table-bordered table-striped">
         <tbody>
           <tr>
-            <td class="text-center">
+            <td  colspan="2" class="text-left">
             </td>
           </tr>
           <tr>
-            <td class="text-left"><h5><strong>1. Datos del instructor en formación y su tutor:</strong></h5></td>
+            <td colspan="2" class="text-left"><h5><strong>1. Datos del instructor en formación y su tutor:</strong></h5></td>
           </tr>
           <tr>
-            <td class="text-center"><strong>Numero del Informe</strong></td>
+            <td class="text-left"><strong>Numero del Informe: </strong></td>
+            <td class="text-left"><strong>Fecha de Realización del Informe: </strong></td>
           </tr>
           <tr>
             <td class="text-left"><%= @informe.numero%></td>
-          </tr>
-          <tr>
-            <td class="text-center"><strong>Fecha de Realización del Informe</strong></td>
-          </tr>
-          <tr>
             <td class="text-left"><%= @informe.fecha_creacion%></td>
           </tr>
           <tr>
-            <td class="text-center"><strong>Apellidos y Nombres del Instructor</strong></td>
+            <td class="text-left"><strong>Apellidos y Nombres del Instructor: </strong></td>
+            <td class="text-left"><strong>Cédula de Identidad del Instructor: </strong></td>
           </tr>
           <tr>
             <td class="text-left"><%= session[:instructorName]%></td>
-          </tr>
-          <tr>
-            <td class="text-center"><strong>Cédula de Identidad del Instructor</strong></td>
-          </tr>
-          <tr>
             <td class="text-left"><%= @instructor.ci%></td>
           </tr>
           <tr>
-            <td class="text-center"><strong>Período que comprende el informe</strong></td>
+            <td class="text-left"><strong>Período que comprende el informe: </strong></td>
+            <td class="text-left"><strong>Apellidos y Nombres del Tutor: </strong></td>
           </tr>
           <tr>
             <td class="text-left">Periodo</td>
-          </tr>
-           <tr>
-            <td class="text-center"><strong>Apellidos y Nombres del Tutor</strong></td>
-          </tr>
-          <tr>
             <td class="text-left"><%= @persona.nombres%></td>
           </tr>
            <tr>
-            <td class="text-center"><strong>Cédula de Identidad del Tutor</strong></td>
+            <td class="text-left"><strong>Cédula de Identidad del Tutor: </strong></td>
+            <td class="text-left"><strong>Escuela o Instituto de Adscripción: </strong></td>
           </tr>
           <tr>
             <td class="text-left"><%= @persona.ci%></td>
-          </tr>
-           <tr>
-            <td class="text-center"><strong>Escuela o Instituto de Adscripción</strong></td>
-          </tr>
-          <tr>
             <td class="text-left"><%= @escuela.nombre%></td>
           </tr>
         </tbody>
@@ -266,7 +250,7 @@
 
 <div class = 'row'>
   <div class = 'col-xs-3 col-md-3 col-lg-3'>
-      <button type="button" class="btn btn-forminst" onclick = " location.href = 'javascript:history.back(-1);'">&lt;&lt; Volver</button>
+      <%= link_to "<< Volver", {controller: "informes", action: "listar_informes"}, class: "btn btn-forminst" %>
   </div>
   <div class = 'col-xs-9 col-md-9 col-lg-9 text-right'>
      <%= link_to "Siguiente >>", {controller: "informes", action: "detalles_informe2"}, class: "btn btn-forminst" %>

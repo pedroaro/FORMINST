@@ -52,7 +52,8 @@
             <th class="text-center">Nombre instructor</th>
             <th class="text-center">Fecha Inicio</th>
             <th class="text-center">Fecha Fin</th>
-            <th class="text-center">Fecha de Última Modificación</th>
+            <th class="text-center">Fecha de Última <br> Modificación</th>
+            <th class="text-center">Estatus</th>
             <th class="text-center">Modificar</th>
             <th class="text-center">Detalles</th>
           </tr>
@@ -65,15 +66,28 @@
               <td><%= planformacion.fecha_inicio %></td>
               <td><%= planformacion.fecha_fin %></td>
               <td><%= planformacion.fecha_modificacion %></td>
+              <td><%= @status[i] %></td>
               <td>
-                <%= form_tag({controller: 'iniciotutor', action: 'detalles_adecuacion3'}) do%>
-                  <input type="hidden" name="plan_id" value='<%= planformacion.id %>'>
-                  <input type="hidden" name="editar" value='si'>
-                  <button type="submit" class="btn btn-forminst-blue">Modificar</button>
-                <%end%>
+                <% if @cpenviado[i] == 0%>
+
+                  <%= form_tag({controller: 'iniciotutor', action: 'detalles_adecuacion3'}) do%>
+                    <input type="hidden" name="plan_id" value='<%= planformacion.id %>'>
+                    <input type="hidden" name="editar" value='si'>
+                    <button type="submit" class="btn btn-forminst-blue">Modificar</button>
+                  <%end%>
+
+                <% else %>
+
+                  <%= form_tag({controller: 'iniciotutor', action: 'detalles_adecuacion3'}) do%>
+                    <input type="hidden" name="plan_id" value='<%= planformacion.id %>'>
+                    <input type="hidden" name="editar" value='si'>
+                    <button type="submit" class="btn btn-forminst-blue" disabled>Modificar</button>
+                  <%end%>
+
+                <% end %>
               </td>  
               <td>
-                <%= form_tag({controller: 'iniciotutor', action: 'ver_detalles_plan'}) do%>
+                <%= form_tag({controller: 'iniciotutor', action: 'ver_detalles_adecuacion'}) do%>
                   <input type="hidden" name="plan_id" value='<%= planformacion.id %>'>
                   <button type="submit" class="btn btn-forminst-blue">Ver Detalles</button>
                 <%end%>

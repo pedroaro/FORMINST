@@ -28,97 +28,53 @@ class IniciotutorController < ApplicationController
 			session[:adecuacion_id] = nil
 			@persona = Persona.where(usuario_id: session[:usuario_id]).take
     		@planformacions = Planformacion.where(tutor_id: session[:usuario_id])
-    		@nombreinstructor= []
+    		@nombreinstructor = []
+			@status = []
+			@cpenviado = []
 			@planformacions.each do |plan|
 				puts "entre al for each"
 				@person= Persona.where(usuario_id: plan.instructor_id).take
 				puts "deberia colocar en el arreglo el nombre"
 				puts @person.nombres
 				@nombreinstructor.push(@person.nombres)
-			end
-			puts "soy el tamano del arreglo de nombre"
-			puts @nombreinstructor.size()
-			@nombre = session[:nombre_usuario]
-			if not @nombre
-				print "NO HAY USUARIO"
-			end
-		else
-			redirect_to controller:"forminst", action: "index"
-		end
-	end
 
-	def ver_detalles_plan
-		if session[:usuario_id]
-			session[:adecuacion_id] = nil
-			@persona = Persona.where(usuario_id: session[:usuario_id]).take
-			@nombre = session[:nombre_usuario]
-			if params[:plan_id]
-				puts "HAY SESION PLAN"
-				@planformacion = Planformacion.find(params[:plan_id])
-				session[:plan_id] = @planformacion.id
-			else
-				puts "NO HAY SESION PLAN"
-				@planformacion = Planformacion.find(session[:plan_id])
-				session[:plan_id] = @planformacion.id
-			end
-			@instructorName = Persona.where(usuario_id: @planformacion.instructor_id).take.nombres
-			session[:instructorName] = @instructorName
-
-
-			@fechaInicio = @planformacion.fecha_inicio
-			@fechaFin = @planformacion.fecha_fin
-
-			if not @nombre
-				print "NO HAY USUARIO"
-			end
-		else
-			redirect_to controller:"forminst", action: "index"
-		end
-	end 
-
-	def listar_adecuaciones
-		if session[:usuario_id]
-			if (session[:adecuacion_id]== nil)
-				session[:adecuacion_id] = nil
-			end
-			@persona = Persona.where(usuario_id: session[:usuario_id]).take
-			@nombre = session[:nombre_usuario]
-			@plan = Planformacion.find(session[:plan_id])
-			@name = session[:instructorName]
-			@status= []
-
-			#@adecuaciones = Adecuacion.find(:all, :conditions => ["planformacion_id = ?",@planformacion], :order=> "id DESC") #(DESPUES VEMOS COMO ES ESTO DEL PAGINATE).paginate(:page => params[:page], :per_page => 10) # se buscan todas las adecuaciones correspondientes al usuario y se paginan de 10 en 10 
-			@adecuaciones = Adecuacion.where(planformacion_id: session[:plan_id])
-			@adecuacion = Adecuacion.where(planformacion_id: session[:plan_id]).take
-			
-			@adecuaciones.each do |adecuacion| 
+				adecuacion = Adecuacion.where(planformacion_id: plan.id).take
 				@est= EstatusAdecuacion.where(adecuacion_id: adecuacion.id, actual: 1).take
 				if @est.estatus_id == 1
 					@status.push("APROBADO POR CONSEJO DE FACULTAD")
+					@cpenviado.push(1)
 				else 
 					if @est.estatus_id == 2
 						@status.push("ENVIADO A CONSEJO TECNICO")
+						@cpenviado.push(1)
 					else
 						if @est.estatus_id == 3
 							@status.push("ENVIADO A COMISIÓN DE INVESTIGACIÓN")
+							@cpenviado.push(1)
 						else
 							if @est.estatus_id == 4
 								@status.push("ENVIADO A CONSEJO DE FACULTAD")
+								@cpenviado.push(1)
 							else
 								if @est.estatus_id == 5
 									@status.push("APROBADO CON OBSERVACIONES POR CONSEJO DE FACULTAD")
+									@cpenviado.push(1)
 								else
 									if @est.estatus_id == 6
 										@status.push("GUARDADO")
+										@cpenviado.push(0)
 									else
 										if @est.estatus_id == 7
 											@status.push("EN REVISIÓN MENOR POR COMISIÓN DE INVESTIGACIÓN")
+											@cpenviado.push(1)
 										else
 											if @est.estatus_id == 8
 												@status.push("ENVIADO A CONSEJO DE ESCUELA")
+												@cpenviado.push(1)
 											else
 												if @est.estatus_id == 9
 													@status.push("RECHAZADO POR CONSEJO DE FACULTAD")
+													@cpenviado.push(1)
 												end
 											end
 										end
@@ -127,10 +83,11 @@ class IniciotutorController < ApplicationController
 							end
 						end
 					end
-				end								
+				end		
 			end
-			#find(:all, :conditions => ["planformacion_id = ?", @planformacion]) #(DESPUES VEMOS COMO ES ESTO DEL PAGINATE).paginate(:page => params[:page], :per_page => 10) # se buscan todas las adecuaciones correspondientes al usuario y se paginan de 10 en 10 
-			# esto de arriba no se como funciona pero estaba en el forminst de antes							
+			puts "soy el tamano del arreglo de nombre"
+			puts @nombreinstructor.size()
+			@nombre = session[:nombre_usuario]
 			if not @nombre
 				print "NO HAY USUARIO"
 			end
@@ -240,6 +197,9 @@ class IniciotutorController < ApplicationController
 
 	def ver_detalles_adecuacion
 		if session[:usuario_id]
+			if !params[:plan_id].blank?
+				session[:plan_id] = params[:plan_id]
+			end
 			@nombre = session[:nombre_usuario]
 			@instructorName = session[:instructorName]
 			@modifique=false
@@ -254,7 +214,7 @@ class IniciotutorController < ApplicationController
 			@instructorName = session[:instructorName]
 			@plan= Planformacion.find(session[:plan_id])
 			@userentidad= Usuarioentidad.where(usuario_id: @plan.instructor_id).take
-			@escuela= Escuela.find(@userentidad.escuela_id)
+			@escuela= Escuela.where(id: @userentidad.escuela_id).take
 			@persona= Persona.where(usuario_id: @plan.instructor_id).take
 			@usuario= Usuario.find(@plan.instructor_id)
 			semestre= params[:semestre].to_i
