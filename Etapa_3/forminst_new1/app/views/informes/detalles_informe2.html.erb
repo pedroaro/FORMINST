@@ -608,146 +608,947 @@
                 </div>
 
               <div class="row">
-                <div class="col-xs-12 col-md-4 col-lg-4">
-                <div id="titulo<%=i.to_s%>" class="form-group"  style="display: none;" >
-                  <label for="resultado_titulo">Título:</label><br>
-                  <input id="resultado_titulo<%=i.to_s%>" class="form-control" name="titulo<%=i.to_s%>" size="30" type="text" style="width:70%;">
+
+                <div id="cplibroa<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;" >
+
+                    <div class="form-group">
+                      <label for="resultado_titulo">Título: <br/>&nbsp;</label><br>
+                      <p>
+
+                      <input id="resultado_titulo<%=i.to_s%>" class="form-control" name="titulo<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                      
+                    </div>
+                    
+                    <div class="form-group">
+                      <label for="resultado_autor">Nombre del autor docente encargado: <br/>&nbsp;</label><br>
+                      <input id="resultado_autor<%=i.to_s%>" class="form-control" name="autor<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+                      
+                    </div>
+
+                </div>
+
+                <div id="cplibrob<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4"  style="display: none;">
+
+                  <div class="form-group">
+                    <label for="resultado_ano">Año en que se realizo la publicación, acto o evento:</label><br>
+                    <input id="resultado_ano<%=i.to_s%>" class="form-control" name="ano<%=i.to_s%>" size="4" type="text" style="width:30%;">
+                    
+                  </div>
+                
+                
+                  
+                  <div class="form-group">
+                    <label for="resultado_ciudad">Ciudad en la que se realizó la publicación, acto o evento:</label><br>
+                    <input id="resultado_ciudad<%=i.to_s%>" class="form-control" name="ciudad<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+
+                </div>
+
+                <div id="cplibroc<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4"  style="display: none;">
+
+                  <div class="form-group">
+                    <label for="resultado_pais">País en el que se realizó la publicación, acto o evento:</label><br>
+                    <input id="resultado_pais<%=i.to_s%>" class="form-control" name="pais<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_editor">Editor: <br/>&nbsp;</label><br>
+                    <input id="resultado_editor<%=i.to_s%>" class="form-control" name="editor<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+
+                </div>
+
+
+
+
+
+
+                <div id="cprevistaa<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+
+                  <div class="form-group">
+                    <label for="resultado_titulo">Título: <br/>&nbsp;</label><br>
+                    <input id="resultado_titulo<%=i.to_s%>" class="form-control" name="titulo<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+
+                  <div class="form-group">
+                    <label for="resultado_nombre_revista">Nombre de la revista en donde se encuentra el artículo:</label><br>
+                    <input id="resultado_nr<%=i.to_s%>" class="form-control" name="nombre_revista<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+
+                </div>
+
+                <div id="cprevistab<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+                  
+                  <div class="form-group">
+                    <label for="resultado_autorcap">Nombre del autor del capítulo: <br/>&nbsp;</label><br>
+                    <input id="resultado_autorcap<%=i.to_s%>" class="form-control" name="autor_capitulo<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+                    
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_autor">Nombre del autor docente encargado: <br/>&nbsp;</label><br>
+                    <input id="resultado_autor<%=i.to_s%>" class="form-control" name="autor<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+                    
+                  </div>
+
+                </div>
+
+                <div id="cprevistac<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+
+                  <div class="form-group">
+                    <label for="resultado_ano">Año en que se realizo la publicación, acto o evento:</label><br>
+                    <input id="resultado_ano<%=i.to_s%>" class="form-control" name="ano<%=i.to_s%>" size="4" type="text" style="width:30%;">
+                    
+                  </div>
                   
                 </div>
-                
-                <div id="autor<%=i.to_s%>" class="form-group"  style="display: none;" >
-                  <label for="resultado_autor">Nombre del autor docente encargado:</label><br>
-                  <input id="resultado_autor<%=i.to_s%>" class="form-control" name="autor<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+
+
+
+
+
+
+                <div id="cpprensaa<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+
+                  <div class="form-group">
+                    <label for="resultado_titulo">Título:  <br/>&nbsp;</label><br>
+                    <input id="resultado_titulo<%=i.to_s%>" class="form-control" name="titulo<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_autor">Nombre del autor docente encargado: <br/>&nbsp;</label><br>
+                    <input id="resultado_autor<%=i.to_s%>" class="form-control" name="autor<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+                    
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_paginas">Número de páginas:</label><br>
+                    <input id="resultado_paginas<%=i.to_s%>" class="form-control" name="paginas<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+
+                </div>
+
+                <div id="cpprensab<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+
+                  <div class="form-group">
+                    <label for="resultado_dia">Día en que se realizó la publicación: <br/>&nbsp;</label><br>
+                    <%= select_tag(:dia, options_for_select(@dia), {:include_blank => 'Seleccione un dia', :class => "form-control", :name=> "dia"+i.to_s+"" , :id => "resultado_dia"+i.to_s+"", :style => "width:20%;"}) %>
+                    
+                  </div>
+
+
+                  <div class="form-group">
+                    <label for="resultado_mes">Mes en el que se realizó la publicación:  <br/>&nbsp;</label><br>
+                    <%= select_tag(:mes, options_for_select(@mes), {:include_blank => 'Seleccione un mes', :class => "form-control", :name=> "mes"+i.to_s+"" , :id => "resultado_mes"+i.to_s+"", :style => "width:30%;"}) %>
+                    
+                  </div>
+
+                </div>
+
+                <div id="cpprensac<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+
+                  <div class="form-group">
+                    <label for="resultado_ano">Año en que se realizo la publicación, acto o evento:</label><br>
+                    <input id="resultado_ano<%=i.to_s%>" class="form-control" name="ano<%=i.to_s%>" size="4" type="text" style="width:30%;">
+                    
+                  </div>
+
+                  <div class="form-group">
+                    <label for="resultado_nombre_periodico">Nombre del periódico: <br/>&nbsp;</label><br>
+                    <input id="resultado_np<%=i.to_s%>" class="form-control" name="nombre_periodico<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
                   
                 </div>
+
+
+
+
+
+
+                <div id="cpcda<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+
+                  <div class="form-group">
+                    <label for="resultado_titulo">Título: <br/>&nbsp;</label><br>
+                    <input id="resultado_titulo<%=i.to_s%>" class="form-control" name="titulo<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_autor">Nombre del autor docente encargado: <br/>&nbsp;</label><br>
+                    <input id="resultado_autor<%=i.to_s%>" class="form-control" name="autor<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+                    
+                  </div>
+
+                </div>
+
+                <div id="cpcdb<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+
+                  <div class="form-group">
+                    <label for="resultado_ano">Año en que se realizo la publicación, acto o evento:</label><br>
+                    <input id="resultado_ano<%=i.to_s%>" class="form-control" name="ano<%=i.to_s%>" size="4" type="text" style="width:30%;">
+                    
+                  </div>
                 
-                <div id="titulocap<%=i.to_s%>" class="form-group"  style="display: none;" >
-                  <label for="resultado_titulocap">Título del capítulo:</label><br>
-                  <input id="resultado_titulocap<%=i.to_s%>" class="form-control" name="nombre_capitulo<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+                
+                  
+                  <div class="form-group">
+                    <label for="resultado_ciudad">Ciudad en la que se realizó la publicación, acto o evento:</label><br>
+                    <input id="resultado_ciudad<%=i.to_s%>" class="form-control" name="ciudad<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+
+                </div>
+
+                <div id="cpcdc<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+                  
+                  <div class="form-group">
+                    <label for="resultado_pais">País en el que se realizó la publicación, acto o evento:</label><br>
+                    <input id="resultado_pais<%=i.to_s%>" class="form-control" name="pais<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_editor">Editor: <br/>&nbsp;</label><br>
+                    <input id="resultado_editor<%=i.to_s%>" class="form-control" name="editor<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                  
+                </div>
+
+
+
+
+
+
+
+                <div id="cpmanualesa<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;" >
+
+                  <div class="form-group">
+                    <label for="resultado_titulo">Título:</label><br>
+                    <input id="resultado_titulo<%=i.to_s%>" class="form-control" name="titulo<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_autor">Nombre del autor docente encargado:</label><br>
+                    <input id="resultado_autor<%=i.to_s%>" class="form-control" name="autor<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+                    
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_titulocap">Título del capítulo: <br/>&nbsp;</label><br>
+                    <input id="resultado_titulocap<%=i.to_s%>" class="form-control" name="nombre_capitulo<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+                     
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_autorcap">Nombre del autor del capítulo: <br/>&nbsp;</label><br>
+                    <input id="resultado_autorcap<%=i.to_s%>" class="form-control" name="autor_capitulo<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+                    
+                  </div>
+
+                </div>
+
+                <div id="cpmanualesb<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;" >
+
+                  <div class="form-group">
+                    <label for="resultado_dia">Día en que se realizó la publicación:</label><br>
+                    <%= select_tag(:dia, options_for_select(@dia), {:include_blank => 'Seleccione un dia', :class => "form-control", :name=> "dia"+i.to_s+"" , :id => "resultado_dia"+i.to_s+"", :style => "width:20%;"}) %>
+                    
+                  </div>
+
+
+                  <div class="form-group">
+                    <label for="resultado_mes">Mes en el que se realizó la publicación:</label><br>
+                    <%= select_tag(:mes, options_for_select(@mes), {:include_blank => 'Seleccione un mes', :class => "form-control", :name=> "mes"+i.to_s+"" , :id => "resultado_mes"+i.to_s+"", :style => "width:30%;"}) %>
+                    
+                  </div>
+
+                  <div class="form-group">
+                    <label for="resultado_ano">Año en que se realizo la publicación, acto o evento:</label><br>
+                    <input id="resultado_ano<%=i.to_s%>" class="form-control" name="ano<%=i.to_s%>" size="4" type="text" style="width:30%;">
+                    
+                  </div>
+                
+                
+                  
+                  <div class="form-group">
+                    <label for="resultado_ciudad">Ciudad en la que se realizó la publicación, acto o evento:</label><br>
+                    <input id="resultado_ciudad<%=i.to_s%>" class="form-control" name="ciudad<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+
+                </div>
+
+                <div id="cpmanualesc<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+                  
+                  <div class="form-group">
+                    <label for="resultado_editor">Editor:</label><br>
+                    <input id="resultado_editor<%=i.to_s%>" class="form-control" name="editor<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_paginas">Número de páginas:</label><br>
+                    <input id="resultado_paginas<%=i.to_s%>" class="form-control" name="paginas<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+
+                  <div class="form-group">
+                    <label for="resultado_na">Nombre del acto o evento: <br/>&nbsp;</label><br>
+                    <input id="resultado_na<%=i.to_s%>" class="form-control" name="nombre_acto<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                  
+                </div>
+
+
+
+
+
+
+                <div id="cppelectronicasa<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+                  
+                  <div class="form-group">
+                    <label for="resultado_autor">Nombre del autor docente encargado: </label><br>
+                    <input id="resultado_autor<%=i.to_s%>" class="form-control" name="autor<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+                    
+                  </div>
+
+                  <div class="form-group">
+                    <label for="resultado_ano">Año en que se realizo la publicación, acto o evento:</label><br>
+                    <input id="resultado_ano<%=i.to_s%>" class="form-control" name="ano<%=i.to_s%>" size="4" type="text" style="width:30%;">
+                    
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_url">Url:</label><br>
+                    <input id="resultado_url<%=i.to_s%>" class="form-control" name="url<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+
+                </div>
+
+                <div id="cppelectronicasb<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+
+                  <div class="form-group">
+                    <label for="resultado_dia">Día en que se realizó la publicación:</label><br>
+                    <%= select_tag(:dia, options_for_select(@dia), {:include_blank => 'Seleccione un dia', :class => "form-control", :name=> "dia"+i.to_s+"" , :id => "resultado_dia"+i.to_s+"", :style => "width:20%;"}) %>
+                    
+                  </div>
+
+
+                  <div class="form-group">
+                    <label for="resultado_mes">Mes en el que se realizó la publicación: <br/>&nbsp;</label><br>
+                    <%= select_tag(:mes, options_for_select(@mes), {:include_blank => 'Seleccione un mes', :class => "form-control", :name=> "mes"+i.to_s+"" , :id => "resultado_mes"+i.to_s+"", :style => "width:30%;"}) %>
+                    
+                  </div>
+
+                </div>
+
+                <div id="cppelectronicasc<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+                  
+                  <div class="form-group">
+                    <label for="resultado_nombre_paginaw">Nombre de la página web:</label><br>
+                    <input id="resultado_nombre_pw<%=i.to_s%>" class="form-control" name="nombre_paginaw<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                  
+                    <div class="form-group">
+                    <label for="resultado_sitio_paginaw">Sitio de la página web: <br/>&nbsp;</label><br>
+                    <input id="resultado_sitio_pw<%=i.to_s%>" class="form-control" name="sitio_paginaw<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                  
+                </div>
+
+
+
+
+
+
+
+
+
+                <div id="cppresentacionpa<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+
+                  <div class="form-group">
+                    <label for="resultado_titulo">Título:</label><br>
+                    <input id="resultado_titulo<%=i.to_s%>" class="form-control" name="titulo<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_autor">Nombre del autor docente encargado:</label><br>
+                    <input id="resultado_autor<%=i.to_s%>" class="form-control" name="autor<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+                    
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_titulocap">Título del capítulo: <br/>&nbsp;</label><br>
+                    <input id="resultado_titulocap<%=i.to_s%>" class="form-control" name="nombre_capitulo<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+                     
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_autorcap">Nombre del autor del capítulo: <br/>&nbsp;</label><br>
+                    <input id="resultado_autorcap<%=i.to_s%>" class="form-control" name="autor_capitulo<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+                    
+                  </div>
+
+                </div>
+
+                <div id="cppresentacionpb<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+
+                  <div class="form-group">
+                    <label for="resultado_dia">Día en que se realizó la publicación:</label><br>
+                    <%= select_tag(:dia, options_for_select(@dia), {:include_blank => 'Seleccione un dia', :class => "form-control", :name=> "dia"+i.to_s+"" , :id => "resultado_dia"+i.to_s+"", :style => "width:20%;"}) %>
+                    
+                  </div>
+
+
+                  <div class="form-group">
+                    <label for="resultado_mes">Mes en el que se realizó la publicación:</label><br>
+                    <%= select_tag(:mes, options_for_select(@mes), {:include_blank => 'Seleccione un mes', :class => "form-control", :name=> "mes"+i.to_s+"" , :id => "resultado_mes"+i.to_s+"", :style => "width:30%;"}) %>
+                    
+                  </div>
+
+                  <div class="form-group">
+                    <label for="resultado_ano">Año en que se realizo la publicación, acto o evento:</label><br>
+                    <input id="resultado_ano<%=i.to_s%>" class="form-control" name="ano<%=i.to_s%>" size="4" type="text" style="width:30%;">
+                    
+                  </div>
+                
+                
+                  
+                  <div class="form-group">
+                    <label for="resultado_ciudad">Ciudad en la que se realizó la publicación, acto o evento:</label><br>
+                    <input id="resultado_ciudad<%=i.to_s%>" class="form-control" name="ciudad<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+
+                </div>
+
+                <div id="cppresentacionpc<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+                  
+                  <div class="form-group">
+                    <label for="resultado_editor">Editor:</label><br>
+                    <input id="resultado_editor<%=i.to_s%>" class="form-control" name="editor<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_paginas">Número de páginas:</label><br>
+                    <input id="resultado_paginas<%=i.to_s%>" class="form-control" name="paginas<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+
+                  <div class="form-group">
+                    <label for="resultado_na">Nombre del acto o evento: <br/>&nbsp;</label><br>
+                    <input id="resultado_na<%=i.to_s%>" class="form-control" name="nombre_acto<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                  
+                </div>
+
+
+
+
+
+
+
+
+                <div id="cppresentacionia<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+
+                  <div class="form-group">
+                    <label for="resultado_titulo">Título:</label><br>
+                    <input id="resultado_titulo<%=i.to_s%>" class="form-control" name="titulo<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_autor">Nombre del autor docente encargado:</label><br>
+                    <input id="resultado_autor<%=i.to_s%>" class="form-control" name="autor<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+                    
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_titulocap">Título del capítulo: <br/>&nbsp;</label><br>
+                    <input id="resultado_titulocap<%=i.to_s%>" class="form-control" name="nombre_capitulo<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+                     
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_autorcap">Nombre del autor del capítulo: <br/>&nbsp;</label><br>
+                    <input id="resultado_autorcap<%=i.to_s%>" class="form-control" name="autor_capitulo<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+                    
+                  </div>
+
+                  <div class="form-group">
+                    <label for="resultado_pais">País en el que se realizó la publicación, acto o evento:</label><br>
+                    <input id="resultado_pais<%=i.to_s%>" class="form-control" name="pais<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+
+                </div>
+
+                <div id="cppresentacionib<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+
+                  <div class="form-group">
+                    <label for="resultado_dia">Día en que se realizó la publicación:</label><br>
+                    <%= select_tag(:dia, options_for_select(@dia), {:include_blank => 'Seleccione un dia', :class => "form-control", :name=> "dia"+i.to_s+"" , :id => "resultado_dia"+i.to_s+"", :style => "width:20%;"}) %>
+                    
+                  </div>
+
+
+                  <div class="form-group">
+                    <label for="resultado_mes">Mes en el que se realizó la publicación:</label><br>
+                    <%= select_tag(:mes, options_for_select(@mes), {:include_blank => 'Seleccione un mes', :class => "form-control", :name=> "mes"+i.to_s+"" , :id => "resultado_mes"+i.to_s+"", :style => "width:30%;"}) %>
+                    
+                  </div>
+
+                  <div class="form-group">
+                    <label for="resultado_ano">Año en que se realizo la publicación, acto o evento:</label><br>
+                    <input id="resultado_ano<%=i.to_s%>" class="form-control" name="ano<%=i.to_s%>" size="4" type="text" style="width:30%;">
+                    
+                  </div>
+                
+                
+                  
+                  <div class="form-group">
+                    <label for="resultado_ciudad">Ciudad en la que se realizó la publicación, acto o evento:</label><br>
+                    <input id="resultado_ciudad<%=i.to_s%>" class="form-control" name="ciudad<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+
+                  <div class="form-group">
+                    <label for="resultado_estado">Estado en el que se realizó la publicación, acto o evento:</label><br>
+                    <input id="resultado_estado<%=i.to_s%>" class="form-control" name="estado<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+
+                </div>
+
+                <div id="cppresentacionic<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+
+                  <div class="form-group">
+                    <label for="resultado_org">Entidad organizadora:</label><br>
+                    <input id="resultado_org<%=i.to_s%>" class="form-control" name="organizador<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                  
+
+                  <div class="form-group">
+                    <label for="resultado_duracion">Duración:</label><br>
+                    <input id="resultado_duracion<%=i.to_s%>" class="form-control" name="duracion<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_editor">Editor: <br/>&nbsp;</label><br>
+                    <input id="resultado_editor<%=i.to_s%>" class="form-control" name="editor<%=i.to_s%>" size="30" type="text" style="width:70%;">
+
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_paginas">Número de páginas: <br/>&nbsp;</label><br>
+                    <input id="resultado_paginas<%=i.to_s%>" class="form-control" name="paginas<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+
+                  <div class="form-group">
+                    <label for="resultado_na">Nombre del acto o evento: <br/>&nbsp;</label><br>
+                    <input id="resultado_na<%=i.to_s%>" class="form-control" name="nombre_acto<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                  
+                </div>
+
+
+
+
+
+
+
+                <div id="cpotroa<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+
+                  <div class="form-group">
+                    <label for="resultado_titulo">Título:</label><br>
+                    <input id="resultado_titulo<%=i.to_s%>" class="form-control" name="titulo<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_autor">Nombre del autor docente encargado:</label><br>
+                    <input id="resultado_autor<%=i.to_s%>" class="form-control" name="autor<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+                    
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_ciudad">Ciudad en la que se realizó la publicación, acto o evento:</label><br>
+                    <input id="resultado_ciudad<%=i.to_s%>" class="form-control" name="ciudad<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+
+                </div>
+
+                <div id="cpotrob<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4"  style="display: none;">
+
+                  <div class="form-group">
+                    <label for="resultado_dia">Día en que se realizó la publicación:</label><br>
+                    <%= select_tag(:dia, options_for_select(@dia), {:include_blank => 'Seleccione un dia', :class => "form-control", :name=> "dia"+i.to_s+"" , :id => "resultado_dia"+i.to_s+"", :style => "width:20%;"}) %>
+                    
+                  </div>
+
+
+                  <div class="form-group">
+                    <label for="resultado_mes">Mes en el que se realizó la publicación:</label><br>
+                    <%= select_tag(:mes, options_for_select(@mes), {:include_blank => 'Seleccione un mes', :class => "form-control", :name=> "mes"+i.to_s+"" , :id => "resultado_mes"+i.to_s+"", :style => "width:30%;"}) %>
+                    
+                  </div>
+
+                  <div class="form-group">
+                    <label for="resultado_ano">Año en que se realizo la publicación, acto o evento:</label><br>
+                    <input id="resultado_ano<%=i.to_s%>" class="form-control" name="ano<%=i.to_s%>" size="4" type="text" style="width:30%;">
+                    
+                  </div>
+
+                </div>
+
+                <div id="cpotroc<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+                  
+                  <div class="form-group">
+                    <label for="resultado_editor">Editor:</label><br>
+                    <input id="resultado_editor<%=i.to_s%>" class="form-control" name="editor<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_paginas">Número de páginas:</label><br>
+                    <input id="resultado_paginas<%=i.to_s%>" class="form-control" name="paginas<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+
+                  <div class="form-group">
+                    <label for="resultado_na">Nombre del acto o evento:  <br/>&nbsp;</label><br>
+                    <input id="resultado_na<%=i.to_s%>" class="form-control" name="nombre_acto<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                  
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+                <div id="cpasistenciaea<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+
+                  <div class="form-group">
+                    <label for="resultado_titulo">Título:</label><br>
+                    <input id="resultado_titulo<%=i.to_s%>" class="form-control" name="titulo<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_autor">Nombre del autor docente encargado: <br/>&nbsp;</label><br>
+                    <input id="resultado_autor<%=i.to_s%>" class="form-control" name="autor<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+                    
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_titulocap">Título del capítulo: <br/>&nbsp;</label><br>
+                    <input id="resultado_titulocap<%=i.to_s%>" class="form-control" name="nombre_capitulo<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+                     
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_autorcap">Nombre del autor del capítulo: <br/>&nbsp;</label><br>
+                    <input id="resultado_autorcap<%=i.to_s%>" class="form-control" name="autor_capitulo<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+                    
+                  </div>
+
+                </div>
+
+                <div id="cpasistenciaeb<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+
+                  <div class="form-group">
+                    <label for="resultado_dia">Día en que se realizó la publicación:</label><br>
+                    <%= select_tag(:dia, options_for_select(@dia), {:include_blank => 'Seleccione un dia', :class => "form-control", :name=> "dia"+i.to_s+"" , :id => "resultado_dia"+i.to_s+"", :style => "width:20%;"}) %>
+                    
+                  </div>
+
+
+                  <div class="form-group">
+                    <label for="resultado_mes">Mes en el que se realizó la publicación: <br/>&nbsp;</label><br>
+                    <%= select_tag(:mes, options_for_select(@mes), {:include_blank => 'Seleccione un mes', :class => "form-control", :name=> "mes"+i.to_s+"" , :id => "resultado_mes"+i.to_s+"", :style => "width:30%;"}) %>
+                    
+                  </div>
+
+                  <div class="form-group">
+                    <label for="resultado_ano">Año en que se realizo la publicación, acto o evento:</label><br>
+                    <input id="resultado_ano<%=i.to_s%>" class="form-control" name="ano<%=i.to_s%>" size="4" type="text" style="width:30%;">
+                    
+                  </div>
+                
+                
+                  
+                  <div class="form-group">
+                    <label for="resultado_ciudad">Ciudad en la que se realizó la publicación, acto o evento:</label><br>
+                    <input id="resultado_ciudad<%=i.to_s%>" class="form-control" name="ciudad<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+
+                </div>
+
+                <div id="cpasistenciaec<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+
+                  <div class="form-group">
+                    <label for="resultado_na">Nombre del acto o evento:</label><br>
+                    <input id="resultado_na<%=i.to_s%>" class="form-control" name="nombre_acto<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+
+                  <div class="form-group">
+                    <label for="resultado_estado">Estado en el que se realizó la publicación, acto o evento:</label><br>
+                    <input id="resultado_estado<%=i.to_s%>" class="form-control" name="estado<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+
+                  <div class="form-group">
+                    <label for="resultado_pais">País en el que se realizó la publicación, acto o evento:</label><br>
+                    <input id="resultado_pais<%=i.to_s%>" class="form-control" name="pais<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                  
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+                <div id="cporganizaionea<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+
+                  <div class="form-group">
+                    <label for="resultado_titulo">Título:</label><br>
+                    <input id="resultado_titulo<%=i.to_s%>" class="form-control" name="titulo<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_autor">Nombre del autor docente encargado: <br/>&nbsp;</label><br>
+                    <input id="resultado_autor<%=i.to_s%>" class="form-control" name="autor<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+                    
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_titulocap">Título del capítulo: <br/>&nbsp;</label><br>
+                    <input id="resultado_titulocap<%=i.to_s%>" class="form-control" name="nombre_capitulo<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+                     
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_autorcap">Nombre del autor del capítulo: <br/>&nbsp;</label><br>
+                    <input id="resultado_autorcap<%=i.to_s%>" class="form-control" name="autor_capitulo<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+                    
+                  </div>
+
+                </div>
+
+                <div id="cporganizaioneb<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+
+                  <div class="form-group">
+                    <label for="resultado_dia">Día en que se realizó la publicación:</label><br>
+                    <%= select_tag(:dia, options_for_select(@dia), {:include_blank => 'Seleccione un dia', :class => "form-control", :name=> "dia"+i.to_s+"" , :id => "resultado_dia"+i.to_s+"", :style => "width:20%;"}) %>
+                    
+                  </div>
+
+
+                  <div class="form-group">
+                    <label for="resultado_mes">Mes en el que se realizó la publicación: <br/>&nbsp;</label><br>
+                    <%= select_tag(:mes, options_for_select(@mes), {:include_blank => 'Seleccione un mes', :class => "form-control", :name=> "mes"+i.to_s+"" , :id => "resultado_mes"+i.to_s+"", :style => "width:30%;"}) %>
+                    
+                  </div>
+
+                  <div class="form-group">
+                    <label for="resultado_ano">Año en que se realizo la publicación, acto o evento:</label><br>
+                    <input id="resultado_ano<%=i.to_s%>" class="form-control" name="ano<%=i.to_s%>" size="4" type="text" style="width:30%;">
+                    
+                  </div>
+                
+                
+                  
+                  <div class="form-group">
+                    <label for="resultado_ciudad">Ciudad en la que se realizó la publicación, acto o evento:</label><br>
+                    <input id="resultado_ciudad<%=i.to_s%>" class="form-control" name="ciudad<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+
+                </div>
+
+                <div id="cporganizaionec<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+
+                  <div class="form-group">
+                    <label for="resultado_na">Nombre del acto o evento:</label><br>
+                    <input id="resultado_na<%=i.to_s%>" class="form-control" name="nombre_acto<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+
+                  <div class="form-group">
+                    <label for="resultado_estado">Estado en el que se realizó la publicación, acto o evento:</label><br>
+                    <input id="resultado_estado<%=i.to_s%>" class="form-control" name="estado<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+
+                  <div class="form-group">
+                    <label for="resultado_pais">País en el que se realizó la publicación, acto o evento:</label><br>
+                    <input id="resultado_pais<%=i.to_s%>" class="form-control" name="pais<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                  
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <div id="cpdictadoca<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+
+                  <div class="form-group">
+                    <label for="resultado_titulo">Título:</label><br>
+                    <input id="resultado_titulo<%=i.to_s%>" class="form-control" name="titulo<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_autor">Nombre del autor docente encargado:</label><br>
+                    <input id="resultado_autor<%=i.to_s%>" class="form-control" name="autor<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+                    
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_titulocap">Título del capítulo: <br/>&nbsp;</label><br>
+                    <input id="resultado_titulocap<%=i.to_s%>" class="form-control" name="nombre_capitulo<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+                     
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_autorcap">Nombre del autor del capítulo: <br/>&nbsp;</label><br>
+                    <input id="resultado_autorcap<%=i.to_s%>" class="form-control" name="autor_capitulo<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+                    
+                  </div>
+
+                  <div class="form-group">
+                    <label for="resultado_pais">País en el que se realizó la publicación, acto o evento:</label><br>
+                    <input id="resultado_pais<%=i.to_s%>" class="form-control" name="pais<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_paginas">Número de páginas: <br/>&nbsp;</label><br>
+                    <input id="resultado_paginas<%=i.to_s%>" class="form-control" name="paginas<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+
+                </div>
+
+                <div id="cpdictadocb<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+
+                  <div class="form-group">
+                    <label for="resultado_dia">Día en que se realizó la publicación:</label><br>
+                    <%= select_tag(:dia, options_for_select(@dia), {:include_blank => 'Seleccione un dia', :class => "form-control", :name=> "dia"+i.to_s+"" , :id => "resultado_dia"+i.to_s+"", :style => "width:20%;"}) %>
+                    
+                  </div>
+
+
+                  <div class="form-group">
+                    <label for="resultado_mes">Mes en el que se realizó la publicación:</label><br>
+                    <%= select_tag(:mes, options_for_select(@mes), {:include_blank => 'Seleccione un mes', :class => "form-control", :name=> "mes"+i.to_s+"" , :id => "resultado_mes"+i.to_s+"", :style => "width:30%;"}) %>
+                    
+                  </div>
+
+                  <div class="form-group">
+                    <label for="resultado_ano">Año en que se realizo la publicación, acto o evento:</label><br>
+                    <input id="resultado_ano<%=i.to_s%>" class="form-control" name="ano<%=i.to_s%>" size="4" type="text" style="width:30%;">
+                    
+                  </div>
+                
+                
+                  
+                  <div class="form-group">
+                    <label for="resultado_ciudad">Ciudad en la que se realizó la publicación, acto o evento:</label><br>
+                    <input id="resultado_ciudad<%=i.to_s%>" class="form-control" name="ciudad<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+
+                  <div class="form-group">
+                    <label for="resultado_estado">Estado en el que se realizó la publicación, acto o evento:</label><br>
+                    <input id="resultado_estado<%=i.to_s%>" class="form-control" name="estado<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+
+                </div>
+
+                <div id="cpdictadocc<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+
+                  <div class="form-group">
+                    <label for="resultado_org">Entidad organizadora:</label><br>
+                    <input id="resultado_org<%=i.to_s%>" class="form-control" name="organizador<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                  
+
+                  <div class="form-group">
+                    <label for="resultado_duracion">Duración:</label><br>
+                    <input id="resultado_duracion<%=i.to_s%>" class="form-control" name="duracion<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_editor">Editor: <br/>&nbsp;</label><br>
+                    <input id="resultado_editor<%=i.to_s%>" class="form-control" name="editor<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
                    
-                </div>
-                
-                <div id="autorcap<%=i.to_s%>" class="form-group"  style="display: none;" >
-                  <label for="resultado_autorcap">Nombre del autor del capítulo:</label><br>
-                  <input id="resultado_autorcap<%=i.to_s%>" class="form-control" name="autor_capitulo<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+                  <div class="form-group">
+                    <label for="resultado_tl">Título del libro al que hace referencia: <br/>&nbsp;</label><br>
+                    <input id="resultado_tl<%=i.to_s%>" class="form-control" name="titulo_libro<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
                   
-                </div>
-                </div>
-                <div class="col-xs-12 col-md-4 col-lg-4">
-
-                <div id="dia<%=i.to_s%>" class="form-group"  style="display: none;" >
-                  <label for="resultado_dia">Día en que se realizó la publicación:</label><br>
-                  <%= select_tag(:dia, options_for_select(@dia), {:include_blank => 'Seleccione un dia', :class => "form-control", :name=> "dia"+i.to_s+"" , :id => "resultado_dia"+i.to_s+"", :style => "width:20%;"}) %>
+                  <div class="form-group">
+                    <label for="resultado_al">Autor del libro al que hace referencia: <br/>&nbsp;</label><br>
+                    <input id="resultado_al<%=i.to_s%>" class="form-control" name="autor_libro<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
                   
-                </div>
-
-
-                <div id="mes<%=i.to_s%>" class="form-group"  style="display: none;">
-                  <label for="resultado_mes">Mes en el que se realizó la publicación:</label><br>
-                  <%= select_tag(:mes, options_for_select(@mes), {:include_blank => 'Seleccione un mes', :class => "form-control", :name=> "mes"+i.to_s+"" , :id => "resultado_mes"+i.to_s+"", :style => "width:30%;"}) %>
-                  
-                </div>
-
-                <div id="ano<%=i.to_s%>" class="form-group"  style="display: none;">
-                  <label for="resultado_ano">Año en que se realizo la publicación, acto o evento:</label><br>
-                  <input id="resultado_ano<%=i.to_s%>" class="form-control" name="ano<%=i.to_s%>" size="4" type="text" style="width:30%;">
-                  
-                </div>
-              
-              
-                
-                <div id="ciudad<%=i.to_s%>" class="form-group"  style="display: none;">
-                  <label for="resultado_ciudad">Ciudad en la que se realizó la publicación, acto o evento:</label><br>
-                  <input id="resultado_ciudad<%=i.to_s%>" class="form-control" name="ciudad<%=i.to_s%>" size="30" type="text" style="width:70%;">
-                  
-                </div>
-
-                <div id="estado<%=i.to_s%>" class="form-group"  style="display: none;">
-                  <label for="resultado_estado">Estado en el que se realizó la publicación, acto o evento:</label><br>
-                  <input id="resultado_estado<%=i.to_s%>" class="form-control" name="estado<%=i.to_s%>" size="30" type="text" style="width:70%;">
-                  
-                </div>
-
-                <div id="pais<%=i.to_s%>" class="form-group"  style="display: none;">
-                  <label for="resultado_pais">País en el que se realizó la publicación, acto o evento:</label><br>
-                  <input id="resultado_pais<%=i.to_s%>" class="form-control" name="pais<%=i.to_s%>" size="30" type="text" style="width:70%;">
-                  
-                </div>
-                </div>
-
-                <div class="col-xs-12 col-md-4 col-lg-4">
-                <div id="org<%=i.to_s%>" class="form-group"  style="display: none;">
-                  <label for="resultado_org">Entidad organizadora:</label><br>
-                  <input id="resultado_org<%=i.to_s%>" class="form-control" name="organizador<%=i.to_s%>" size="30" type="text" style="width:70%;">
-                  
-                </div>
-                
-
-                <div id="duracion<%=i.to_s%>" class="form-group"  style="display: none;">
-                  <label for="resultado_duracion">Duración:</label><br>
-                  <input id="resultado_duracion<%=i.to_s%>" class="form-control" name="duracion<%=i.to_s%>" size="30" type="text" style="width:70%;">
-                  
-                </div>
-                
-                <div id="editor<%=i.to_s%>" class="form-group"  style="display: none;">
-                  <label for="resultado_editor">Editor:</label><br>
-                  <input id="resultado_editor<%=i.to_s%>" class="form-control" name="editor<%=i.to_s%>" size="30" type="text" style="width:70%;">
-                  
-                </div>
-                 
-                <div id="tl<%=i.to_s%>" class="form-group"  style="display: none;">
-                  <label for="resultado_tl">Título del libro al que hace referencia:</label><br>
-                  <input id="resultado_tl<%=i.to_s%>" class="form-control" name="titulo_libro<%=i.to_s%>" size="30" type="text" style="width:70%;">
-                  
-                </div>
-                
-                  <div id="al<%=i.to_s%>" class="form-group"  style="display: none;">
-                  <label for="resultado_al">Autor del libro al que hace referencia:</label><br>
-                  <input id="resultado_al<%=i.to_s%>" class="form-control" name="autor_libro<%=i.to_s%>" size="30" type="text" style="width:70%;">
-                  
-                </div>
-
-                <div id="nr<%=i.to_s%>" class="form-group"  style="display: none;">
-                  <label for="resultado_nombre_revista">Nombre de la revista en donde se encuentra el artículo:</label><br>
-                  <input id="resultado_nr<%=i.to_s%>" class="form-control" name="nombre_revista<%=i.to_s%>" size="30" type="text" style="width:70%;">
-                  
-                </div>
-
-                <div id="np<%=i.to_s%>" class="form-group"  style="display: none;">
-                  <label for="resultado_nombre_periodico">Nombre del periódico:</label><br>
-                  <input id="resultado_np<%=i.to_s%>" class="form-control" name="nombre_periodico<%=i.to_s%>" size="30" type="text" style="width:70%;">
-                  
-                </div>
-                
-                <div id="paginas<%=i.to_s%>" class="form-group"  style="display: none;">
-                  <label for="resultado_paginas">Número de páginas:</label><br>
-                  <input id="resultado_paginas<%=i.to_s%>" class="form-control" name="paginas<%=i.to_s%>" size="30" type="text" style="width:70%;">
-                  
-                </div>
-
-                <div id="na<%=i.to_s%>" class="form-group"  style="display: none;">
-                  <label for="resultado_na">Nombre del acto o evento:</label><br>
-                  <input id="resultado_na<%=i.to_s%>" class="form-control" name="nombre_acto<%=i.to_s%>" size="30" type="text" style="width:70%;">
-                  
-                </div>
-                
-                <div id="nombre_pw<%=i.to_s%>" class="form-group"  style="display: none;">
-                  <label for="resultado_nombre_paginaw">Nombre de la página web:</label><br>
-                  <input id="resultado_nombre_pw<%=i.to_s%>" class="form-control" name="nombre_paginaw<%=i.to_s%>" size="30" type="text" style="width:70%;">
-                  
-                </div>
-                
-                  <div id="sitio_pw<%=i.to_s%>" class="form-group"  style="display: none;">
-                  <label for="resultado_sitio_paginaw">Sitio de la página web:</label><br>
-                  <input id="resultado_sitio_pw<%=i.to_s%>" class="form-control" name="sitio_paginaw<%=i.to_s%>" size="30" type="text" style="width:70%;">
-                  
-                </div>
-                
-                <div id="url<%=i.to_s%>" class="form-group"  style="display: none;">
-                  <label for="resultado_url">Url:</label><br>
-                  <input id="resultado_url<%=i.to_s%>" class="form-control" name="url<%=i.to_s%>" size="30" type="text" style="width:70%;">
-                  
-                </div>
                 </div>
 
 
@@ -793,149 +1594,952 @@
                   
                 </div>
 
+
+
+
+
               <div class="row">
-                <div class="col-xs-12 col-md-4 col-lg-4">
-                <div id="titulo<%=i.to_s%>" class="form-group"  style="display: none;" >
-                  <label for="resultado_titulo">Título:</label><br>
-                  <input id="resultado_titulo<%=i.to_s%>" class="form-control" name="titulo<%=i.to_s%>" size="30" type="text" style="width:70%;">
-                  
+                <div id="cplibroa<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;" >
+
+                    <div class="form-group">
+                      <label for="resultado_titulo">Título: <br/>&nbsp;</label><br>
+                      <p>
+
+                      <input id="resultado_titulo<%=i.to_s%>" class="form-control" name="titulo<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                      
+                    </div>
+                    
+                    <div class="form-group">
+                      <label for="resultado_autor">Nombre del autor docente encargado: <br/>&nbsp;</label><br>
+                      <input id="resultado_autor<%=i.to_s%>" class="form-control" name="autor<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+                      
+                    </div>
+
                 </div>
+
+                <div id="cplibrob<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4"  style="display: none;">
+
+                  <div class="form-group">
+                    <label for="resultado_ano">Año en que se realizo la publicación, acto o evento:</label><br>
+                    <input id="resultado_ano<%=i.to_s%>" class="form-control" name="ano<%=i.to_s%>" size="4" type="text" style="width:30%;">
+                    
+                  </div>
                 
-                <div id="autor<%=i.to_s%>" class="form-group"  style="display: none;" >
-                  <label for="resultado_autor">Nombre del autor docente encargado:</label><br>
-                  <input id="resultado_autor<%=i.to_s%>" class="form-control" name="autor<%=i.to_s%>" size="30" type="text"  style="width:70%;">
-                  
-                </div>
                 
-                <div id="titulocap<%=i.to_s%>" class="form-group"  style="display: none;" >
-                  <label for="resultado_titulocap">Título del capítulo:</label><br>
-                  <input id="resultado_titulocap<%=i.to_s%>" class="form-control" name="nombre_capitulo<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+                  
+                  <div class="form-group">
+                    <label for="resultado_ciudad">Ciudad en la que se realizó la publicación, acto o evento:</label><br>
+                    <input id="resultado_ciudad<%=i.to_s%>" class="form-control" name="ciudad<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+
+                </div>
+
+                <div id="cplibroc<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4"  style="display: none;">
+
+                  <div class="form-group">
+                    <label for="resultado_pais">País en el que se realizó la publicación, acto o evento:</label><br>
+                    <input id="resultado_pais<%=i.to_s%>" class="form-control" name="pais<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_editor">Editor: <br/>&nbsp;</label><br>
+                    <input id="resultado_editor<%=i.to_s%>" class="form-control" name="editor<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+
+                </div>
+
+
+
+
+
+
+                <div id="cprevistaa<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+
+                  <div class="form-group">
+                    <label for="resultado_titulo">Título: <br/>&nbsp;</label><br>
+                    <input id="resultado_titulo<%=i.to_s%>" class="form-control" name="titulo<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+
+                  <div class="form-group">
+                    <label for="resultado_nombre_revista">Nombre de la revista en donde se encuentra el artículo:</label><br>
+                    <input id="resultado_nr<%=i.to_s%>" class="form-control" name="nombre_revista<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+
+                </div>
+
+                <div id="cprevistab<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+                  
+                  <div class="form-group">
+                    <label for="resultado_autorcap">Nombre del autor del capítulo: <br/>&nbsp;</label><br>
+                    <input id="resultado_autorcap<%=i.to_s%>" class="form-control" name="autor_capitulo<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+                    
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_autor">Nombre del autor docente encargado: <br/>&nbsp;</label><br>
+                    <input id="resultado_autor<%=i.to_s%>" class="form-control" name="autor<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+                    
+                  </div>
+
+                </div>
+
+                <div id="cprevistac<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+
+                  <div class="form-group">
+                    <label for="resultado_ano">Año en que se realizo la publicación, acto o evento:</label><br>
+                    <input id="resultado_ano<%=i.to_s%>" class="form-control" name="ano<%=i.to_s%>" size="4" type="text" style="width:30%;">
+                    
+                  </div>
                   
                 </div>
+
+
+
+
+
+
+                <div id="cpprensaa<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+
+                  <div class="form-group">
+                    <label for="resultado_titulo">Título:  <br/>&nbsp;</label><br>
+                    <input id="resultado_titulo<%=i.to_s%>" class="form-control" name="titulo<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_autor">Nombre del autor docente encargado: <br/>&nbsp;</label><br>
+                    <input id="resultado_autor<%=i.to_s%>" class="form-control" name="autor<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+                    
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_paginas">Número de páginas:</label><br>
+                    <input id="resultado_paginas<%=i.to_s%>" class="form-control" name="paginas<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+
+                </div>
+
+                <div id="cpprensab<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+
+                  <div class="form-group">
+                    <label for="resultado_dia">Día en que se realizó la publicación: <br/>&nbsp;</label><br>
+                    <%= select_tag(:dia, options_for_select(@dia), {:include_blank => 'Seleccione un dia', :class => "form-control", :name=> "dia"+i.to_s+"" , :id => "resultado_dia"+i.to_s+"", :style => "width:20%;"}) %>
+                    
+                  </div>
+
+
+                  <div class="form-group">
+                    <label for="resultado_mes">Mes en el que se realizó la publicación:  <br/>&nbsp;</label><br>
+                    <%= select_tag(:mes, options_for_select(@mes), {:include_blank => 'Seleccione un mes', :class => "form-control", :name=> "mes"+i.to_s+"" , :id => "resultado_mes"+i.to_s+"", :style => "width:30%;"}) %>
+                    
+                  </div>
+
+                </div>
+
+                <div id="cpprensac<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+
+                  <div class="form-group">
+                    <label for="resultado_ano">Año en que se realizo la publicación, acto o evento:</label><br>
+                    <input id="resultado_ano<%=i.to_s%>" class="form-control" name="ano<%=i.to_s%>" size="4" type="text" style="width:30%;">
+                    
+                  </div>
+
+                  <div class="form-group">
+                    <label for="resultado_nombre_periodico">Nombre del periódico: <br/>&nbsp;</label><br>
+                    <input id="resultado_np<%=i.to_s%>" class="form-control" name="nombre_periodico<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                  
+                </div>
+
+
+
+
+
+
+                <div id="cpcda<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+
+                  <div class="form-group">
+                    <label for="resultado_titulo">Título: <br/>&nbsp;</label><br>
+                    <input id="resultado_titulo<%=i.to_s%>" class="form-control" name="titulo<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_autor">Nombre del autor docente encargado: <br/>&nbsp;</label><br>
+                    <input id="resultado_autor<%=i.to_s%>" class="form-control" name="autor<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+                    
+                  </div>
+
+                </div>
+
+                <div id="cpcdb<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+
+                  <div class="form-group">
+                    <label for="resultado_ano">Año en que se realizo la publicación, acto o evento:</label><br>
+                    <input id="resultado_ano<%=i.to_s%>" class="form-control" name="ano<%=i.to_s%>" size="4" type="text" style="width:30%;">
+                    
+                  </div>
                 
-                <div id="autorcap<%=i.to_s%>" class="form-group"  style="display: none;" >
-                  <label for="resultado_autorcap">Nombre del autor del capítulo:</label><br>
-                  <input id="resultado_autorcap<%=i.to_s%>" class="form-control" name="autor_capitulo<%=i.to_s%>" size="30" type="text"  style="width:70%;">
-                  
-                </div>
-                </div>
-                <div class="col-xs-12 col-md-4 col-lg-4">
-
-                <div id="dia<%=i.to_s%>" class="form-group"  style="display: none;" >
-                  <label for="resultado_dia">Día en que se realizó la publicación:</label><br>
-                  <%= select_tag(:dia, options_for_select(@dia), {:include_blank => 'Seleccione un dia', :class => "form-control", :name=> "dia"+i.to_s+"" , :id => "resultado_dia"+i.to_s+"", :style => "width:20%;"}) %>
-                  
-                </div>
-
-
-                <div id="mes<%=i.to_s%>" class="form-group"  style="display: none;">
-                  <label for="resultado_mes">Mes en el que se realizó la publicación:</label><br>
-                  <%= select_tag(:mes, options_for_select(@mes), {:include_blank => 'Seleccione un mes', :class => "form-control", :name=> "mes"+i.to_s+"" , :id => "resultado_mes"+i.to_s+"", :style => "width:30%;"}) %>
-                  
-                </div>
-
-                <div id="ano<%=i.to_s%>" class="form-group"  style="display: none;">
-                  <label for="resultado_ano">Año en que se realizo la publicación, acto o evento:</label><br>
-                  <input id="resultado_ano<%=i.to_s%>" class="form-control" name="ano<%=i.to_s%>" size="4" type="text" style="width:30%;">
-                  
-                </div>
-              
-              
                 
-                <div id="ciudad<%=i.to_s%>" class="form-group"  style="display: none;">
-                  <label for="resultado_ciudad">Ciudad en la que se realizó la publicación, acto o evento:</label><br>
-                  <input id="resultado_ciudad<%=i.to_s%>" class="form-control" name="ciudad<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                  
+                  <div class="form-group">
+                    <label for="resultado_ciudad">Ciudad en la que se realizó la publicación, acto o evento:</label><br>
+                    <input id="resultado_ciudad<%=i.to_s%>" class="form-control" name="ciudad<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+
+                </div>
+
+                <div id="cpcdc<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+                  
+                  <div class="form-group">
+                    <label for="resultado_pais">País en el que se realizó la publicación, acto o evento:</label><br>
+                    <input id="resultado_pais<%=i.to_s%>" class="form-control" name="pais<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_editor">Editor: <br/>&nbsp;</label><br>
+                    <input id="resultado_editor<%=i.to_s%>" class="form-control" name="editor<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
                   
                 </div>
 
-                <div id="estado<%=i.to_s%>" class="form-group"  style="display: none;">
-                  <label for="resultado_estado">Estado en el que se realizó la publicación, acto o evento:</label><br>
-                  <input id="resultado_estado<%=i.to_s%>" class="form-control" name="estado<%=i.to_s%>" size="30" type="text" style="width:70%;">
+
+
+
+
+
+
+                <div id="cpmanualesa<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;" >
+
+                  <div class="form-group">
+                    <label for="resultado_titulo">Título:</label><br>
+                    <input id="resultado_titulo<%=i.to_s%>" class="form-control" name="titulo<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
                   
+                  <div class="form-group">
+                    <label for="resultado_autor">Nombre del autor docente encargado:</label><br>
+                    <input id="resultado_autor<%=i.to_s%>" class="form-control" name="autor<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+                    
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_titulocap">Título del capítulo: <br/>&nbsp;</label><br>
+                    <input id="resultado_titulocap<%=i.to_s%>" class="form-control" name="nombre_capitulo<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+                     
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_autorcap">Nombre del autor del capítulo: <br/>&nbsp;</label><br>
+                    <input id="resultado_autorcap<%=i.to_s%>" class="form-control" name="autor_capitulo<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+                    
+                  </div>
+
                 </div>
 
-                <div id="pais<%=i.to_s%>" class="form-group"  style="display: none;">
-                  <label for="resultado_pais">País en el que se realizó la publicación, acto o evento:</label><br>
-                  <input id="resultado_pais<%=i.to_s%>" class="form-control" name="pais<%=i.to_s%>" size="30" type="text" style="width:70%;">
-                  
-                </div>
-                </div>
+                <div id="cpmanualesb<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;" >
 
-                <div class="col-xs-12 col-md-4 col-lg-4">
-                <div id="org<%=i.to_s%>" class="form-group"  style="display: none;">
-                  <label for="resultado_org">Entidad organizadora:</label><br>
-                  <input id="resultado_org<%=i.to_s%>" class="form-control" name="organizador<%=i.to_s%>" size="30" type="text" style="width:70%;">
-                  
-                </div>
+                  <div class="form-group">
+                    <label for="resultado_dia">Día en que se realizó la publicación:</label><br>
+                    <%= select_tag(:dia, options_for_select(@dia), {:include_blank => 'Seleccione un dia', :class => "form-control", :name=> "dia"+i.to_s+"" , :id => "resultado_dia"+i.to_s+"", :style => "width:20%;"}) %>
+                    
+                  </div>
+
+
+                  <div class="form-group">
+                    <label for="resultado_mes">Mes en el que se realizó la publicación:</label><br>
+                    <%= select_tag(:mes, options_for_select(@mes), {:include_blank => 'Seleccione un mes', :class => "form-control", :name=> "mes"+i.to_s+"" , :id => "resultado_mes"+i.to_s+"", :style => "width:30%;"}) %>
+                    
+                  </div>
+
+                  <div class="form-group">
+                    <label for="resultado_ano">Año en que se realizo la publicación, acto o evento:</label><br>
+                    <input id="resultado_ano<%=i.to_s%>" class="form-control" name="ano<%=i.to_s%>" size="4" type="text" style="width:30%;">
+                    
+                  </div>
                 
+                
+                  
+                  <div class="form-group">
+                    <label for="resultado_ciudad">Ciudad en la que se realizó la publicación, acto o evento:</label><br>
+                    <input id="resultado_ciudad<%=i.to_s%>" class="form-control" name="ciudad<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
 
-                <div id="duracion<%=i.to_s%>" class="form-group"  style="display: none;">
-                  <label for="resultado_duracion">Duración:</label><br>
-                  <input id="resultado_duracion<%=i.to_s%>" class="form-control" name="duracion<%=i.to_s%>" size="30" type="text" style="width:70%;">
-                  
-                </div>
-                
-                <div id="editor<%=i.to_s%>" class="form-group"  style="display: none;">
-                  <label for="resultado_editor">Editor:</label><br>
-                  <input id="resultado_editor<%=i.to_s%>" class="form-control" name="editor<%=i.to_s%>" size="30" type="text" style="width:70%;">
-                  
-                </div>
-                 
-                <div id="tl<%=i.to_s%>" class="form-group"  style="display: none;">
-                  <label for="resultado_tl">Título del libro al que hace referencia:</label><br>
-                  <input id="resultado_tl<%=i.to_s%>" class="form-control" name="titulo_libro<%=i.to_s%>" size="30" type="text" style="width:70%;">
-                  
-                </div>
-                
-                  <div id="al<%=i.to_s%>" class="form-group"  style="display: none;">
-                  <label for="resultado_al">Autor del libro al que hace referencia:</label><br>
-                  <input id="resultado_al<%=i.to_s%>" class="form-control" name="autor_libro<%=i.to_s%>" size="30" type="text" style="width:70%;">
-                  
                 </div>
 
-                <div id="nr<%=i.to_s%>" class="form-group"  style="display: none;">
-                  <label for="resultado_nombre_revista">Nombre de la revista en donde se encuentra el artículo:</label><br>
-                  <input id="resultado_nr<%=i.to_s%>" class="form-control" name="nombre_revista<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                <div id="cpmanualesc<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
                   
-                </div>
+                  <div class="form-group">
+                    <label for="resultado_editor">Editor:</label><br>
+                    <input id="resultado_editor<%=i.to_s%>" class="form-control" name="editor<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_paginas">Número de páginas:</label><br>
+                    <input id="resultado_paginas<%=i.to_s%>" class="form-control" name="paginas<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
 
-                <div id="np<%=i.to_s%>" class="form-group"  style="display: none;">
-                  <label for="resultado_nombre_periodico">Nombre del periódico:</label><br>
-                  <input id="resultado_np<%=i.to_s%>" class="form-control" name="nombre_periodico<%=i.to_s%>" size="30" type="text" style="width:70%;">
-                  
-                </div>
-                
-                <div id="paginas<%=i.to_s%>" class="form-group"  style="display: none;">
-                  <label for="resultado_paginas">Número de páginas:</label><br>
-                  <input id="resultado_paginas<%=i.to_s%>" class="form-control" name="paginas<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                  <div class="form-group">
+                    <label for="resultado_na">Nombre del acto o evento: <br/>&nbsp;</label><br>
+                    <input id="resultado_na<%=i.to_s%>" class="form-control" name="nombre_acto<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
                   
                 </div>
 
-                <div id="na<%=i.to_s%>" class="form-group"  style="display: none;">
-                  <label for="resultado_na">Nombre del acto o evento:</label><br>
-                  <input id="resultado_na<%=i.to_s%>" class="form-control" name="nombre_acto<%=i.to_s%>" size="30" type="text" style="width:70%;">
+
+
+
+
+
+                <div id="cppelectronicasa<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
                   
-                </div>
-                
-                <div id="nombre_pw<%=i.to_s%>" class="form-group"  style="display: none;">
-                  <label for="resultado_nombre_paginaw">Nombre de la página web:</label><br>
-                  <input id="resultado_nombre_pw<%=i.to_s%>" class="form-control" name="nombre_paginaw<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                  <div class="form-group">
+                    <label for="resultado_autor">Nombre del autor docente encargado: </label><br>
+                    <input id="resultado_autor<%=i.to_s%>" class="form-control" name="autor<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+                    
+                  </div>
+
+                  <div class="form-group">
+                    <label for="resultado_ano">Año en que se realizo la publicación, acto o evento:</label><br>
+                    <input id="resultado_ano<%=i.to_s%>" class="form-control" name="ano<%=i.to_s%>" size="4" type="text" style="width:30%;">
+                    
+                  </div>
                   
-                </div>
-                
-                  <div id="sitio_pw<%=i.to_s%>" class="form-group"  style="display: none;">
-                  <label for="resultado_sitio_paginaw">Sitio de la página web:</label><br>
-                  <input id="resultado_sitio_pw<%=i.to_s%>" class="form-control" name="sitio_paginaw<%=i.to_s%>" size="30" type="text" style="width:70%;">
-                  
-                </div>
-                
-                <div id="url<%=i.to_s%>" class="form-group"  style="display: none;">
-                  <label for="resultado_url">Url:</label><br>
-                  <input id="resultado_url<%=i.to_s%>" class="form-control" name="url<%=i.to_s%>" size="30" type="text" style="width:70%;">
-                  
-                </div>
+                  <div class="form-group">
+                    <label for="resultado_url">Url:</label><br>
+                    <input id="resultado_url<%=i.to_s%>" class="form-control" name="url<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+
                 </div>
 
+                <div id="cppelectronicasb<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+
+                  <div class="form-group">
+                    <label for="resultado_dia">Día en que se realizó la publicación:</label><br>
+                    <%= select_tag(:dia, options_for_select(@dia), {:include_blank => 'Seleccione un dia', :class => "form-control", :name=> "dia"+i.to_s+"" , :id => "resultado_dia"+i.to_s+"", :style => "width:20%;"}) %>
+                    
+                  </div>
+
+
+                  <div class="form-group">
+                    <label for="resultado_mes">Mes en el que se realizó la publicación: <br/>&nbsp;</label><br>
+                    <%= select_tag(:mes, options_for_select(@mes), {:include_blank => 'Seleccione un mes', :class => "form-control", :name=> "mes"+i.to_s+"" , :id => "resultado_mes"+i.to_s+"", :style => "width:30%;"}) %>
+                    
+                  </div>
+
+                </div>
+
+                <div id="cppelectronicasc<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+                  
+                  <div class="form-group">
+                    <label for="resultado_nombre_paginaw">Nombre de la página web:</label><br>
+                    <input id="resultado_nombre_pw<%=i.to_s%>" class="form-control" name="nombre_paginaw<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                  
+                    <div class="form-group">
+                    <label for="resultado_sitio_paginaw">Sitio de la página web: <br/>&nbsp;</label><br>
+                    <input id="resultado_sitio_pw<%=i.to_s%>" class="form-control" name="sitio_paginaw<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                  
+                </div>
+
+
+
+
+
+
+
+
+
+                <div id="cppresentacionpa<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+
+                  <div class="form-group">
+                    <label for="resultado_titulo">Título:</label><br>
+                    <input id="resultado_titulo<%=i.to_s%>" class="form-control" name="titulo<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_autor">Nombre del autor docente encargado:</label><br>
+                    <input id="resultado_autor<%=i.to_s%>" class="form-control" name="autor<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+                    
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_titulocap">Título del capítulo: <br/>&nbsp;</label><br>
+                    <input id="resultado_titulocap<%=i.to_s%>" class="form-control" name="nombre_capitulo<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+                     
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_autorcap">Nombre del autor del capítulo: <br/>&nbsp;</label><br>
+                    <input id="resultado_autorcap<%=i.to_s%>" class="form-control" name="autor_capitulo<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+                    
+                  </div>
+
+                </div>
+
+                <div id="cppresentacionpb<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+
+                  <div class="form-group">
+                    <label for="resultado_dia">Día en que se realizó la publicación:</label><br>
+                    <%= select_tag(:dia, options_for_select(@dia), {:include_blank => 'Seleccione un dia', :class => "form-control", :name=> "dia"+i.to_s+"" , :id => "resultado_dia"+i.to_s+"", :style => "width:20%;"}) %>
+                    
+                  </div>
+
+
+                  <div class="form-group">
+                    <label for="resultado_mes">Mes en el que se realizó la publicación:</label><br>
+                    <%= select_tag(:mes, options_for_select(@mes), {:include_blank => 'Seleccione un mes', :class => "form-control", :name=> "mes"+i.to_s+"" , :id => "resultado_mes"+i.to_s+"", :style => "width:30%;"}) %>
+                    
+                  </div>
+
+                  <div class="form-group">
+                    <label for="resultado_ano">Año en que se realizo la publicación, acto o evento:</label><br>
+                    <input id="resultado_ano<%=i.to_s%>" class="form-control" name="ano<%=i.to_s%>" size="4" type="text" style="width:30%;">
+                    
+                  </div>
+                
+                
+                  
+                  <div class="form-group">
+                    <label for="resultado_ciudad">Ciudad en la que se realizó la publicación, acto o evento:</label><br>
+                    <input id="resultado_ciudad<%=i.to_s%>" class="form-control" name="ciudad<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+
+                </div>
+
+                <div id="cppresentacionpc<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+                  
+                  <div class="form-group">
+                    <label for="resultado_editor">Editor:</label><br>
+                    <input id="resultado_editor<%=i.to_s%>" class="form-control" name="editor<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_paginas">Número de páginas:</label><br>
+                    <input id="resultado_paginas<%=i.to_s%>" class="form-control" name="paginas<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+
+                  <div class="form-group">
+                    <label for="resultado_na">Nombre del acto o evento: <br/>&nbsp;</label><br>
+                    <input id="resultado_na<%=i.to_s%>" class="form-control" name="nombre_acto<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                  
+                </div>
+
+
+
+
+
+
+
+
+                <div id="cppresentacionia<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+
+                  <div class="form-group">
+                    <label for="resultado_titulo">Título:</label><br>
+                    <input id="resultado_titulo<%=i.to_s%>" class="form-control" name="titulo<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_autor">Nombre del autor docente encargado:</label><br>
+                    <input id="resultado_autor<%=i.to_s%>" class="form-control" name="autor<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+                    
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_titulocap">Título del capítulo: <br/>&nbsp;</label><br>
+                    <input id="resultado_titulocap<%=i.to_s%>" class="form-control" name="nombre_capitulo<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+                     
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_autorcap">Nombre del autor del capítulo: <br/>&nbsp;</label><br>
+                    <input id="resultado_autorcap<%=i.to_s%>" class="form-control" name="autor_capitulo<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+                    
+                  </div>
+
+                  <div class="form-group">
+                    <label for="resultado_pais">País en el que se realizó la publicación, acto o evento:</label><br>
+                    <input id="resultado_pais<%=i.to_s%>" class="form-control" name="pais<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+
+                </div>
+
+                <div id="cppresentacionib<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+
+                  <div class="form-group">
+                    <label for="resultado_dia">Día en que se realizó la publicación:</label><br>
+                    <%= select_tag(:dia, options_for_select(@dia), {:include_blank => 'Seleccione un dia', :class => "form-control", :name=> "dia"+i.to_s+"" , :id => "resultado_dia"+i.to_s+"", :style => "width:20%;"}) %>
+                    
+                  </div>
+
+
+                  <div class="form-group">
+                    <label for="resultado_mes">Mes en el que se realizó la publicación:</label><br>
+                    <%= select_tag(:mes, options_for_select(@mes), {:include_blank => 'Seleccione un mes', :class => "form-control", :name=> "mes"+i.to_s+"" , :id => "resultado_mes"+i.to_s+"", :style => "width:30%;"}) %>
+                    
+                  </div>
+
+                  <div class="form-group">
+                    <label for="resultado_ano">Año en que se realizo la publicación, acto o evento:</label><br>
+                    <input id="resultado_ano<%=i.to_s%>" class="form-control" name="ano<%=i.to_s%>" size="4" type="text" style="width:30%;">
+                    
+                  </div>
+                
+                
+                  
+                  <div class="form-group">
+                    <label for="resultado_ciudad">Ciudad en la que se realizó la publicación, acto o evento:</label><br>
+                    <input id="resultado_ciudad<%=i.to_s%>" class="form-control" name="ciudad<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+
+                  <div class="form-group">
+                    <label for="resultado_estado">Estado en el que se realizó la publicación, acto o evento:</label><br>
+                    <input id="resultado_estado<%=i.to_s%>" class="form-control" name="estado<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+
+                </div>
+
+                <div id="cppresentacionic<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+
+                  <div class="form-group">
+                    <label for="resultado_org">Entidad organizadora:</label><br>
+                    <input id="resultado_org<%=i.to_s%>" class="form-control" name="organizador<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                  
+
+                  <div class="form-group">
+                    <label for="resultado_duracion">Duración:</label><br>
+                    <input id="resultado_duracion<%=i.to_s%>" class="form-control" name="duracion<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_editor">Editor: <br/>&nbsp;</label><br>
+                    <input id="resultado_editor<%=i.to_s%>" class="form-control" name="editor<%=i.to_s%>" size="30" type="text" style="width:70%;">
+
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_paginas">Número de páginas: <br/>&nbsp;</label><br>
+                    <input id="resultado_paginas<%=i.to_s%>" class="form-control" name="paginas<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+
+                  <div class="form-group">
+                    <label for="resultado_na">Nombre del acto o evento: <br/>&nbsp;</label><br>
+                    <input id="resultado_na<%=i.to_s%>" class="form-control" name="nombre_acto<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                  
+                </div>
+
+
+
+
+
+
+
+                <div id="cpotroa<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+
+                  <div class="form-group">
+                    <label for="resultado_titulo">Título:</label><br>
+                    <input id="resultado_titulo<%=i.to_s%>" class="form-control" name="titulo<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_autor">Nombre del autor docente encargado:</label><br>
+                    <input id="resultado_autor<%=i.to_s%>" class="form-control" name="autor<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+                    
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_ciudad">Ciudad en la que se realizó la publicación, acto o evento:</label><br>
+                    <input id="resultado_ciudad<%=i.to_s%>" class="form-control" name="ciudad<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+
+                </div>
+
+                <div id="cpotrob<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4"  style="display: none;">
+
+                  <div class="form-group">
+                    <label for="resultado_dia">Día en que se realizó la publicación:</label><br>
+                    <%= select_tag(:dia, options_for_select(@dia), {:include_blank => 'Seleccione un dia', :class => "form-control", :name=> "dia"+i.to_s+"" , :id => "resultado_dia"+i.to_s+"", :style => "width:20%;"}) %>
+                    
+                  </div>
+
+
+                  <div class="form-group">
+                    <label for="resultado_mes">Mes en el que se realizó la publicación:</label><br>
+                    <%= select_tag(:mes, options_for_select(@mes), {:include_blank => 'Seleccione un mes', :class => "form-control", :name=> "mes"+i.to_s+"" , :id => "resultado_mes"+i.to_s+"", :style => "width:30%;"}) %>
+                    
+                  </div>
+
+                  <div class="form-group">
+                    <label for="resultado_ano">Año en que se realizo la publicación, acto o evento:</label><br>
+                    <input id="resultado_ano<%=i.to_s%>" class="form-control" name="ano<%=i.to_s%>" size="4" type="text" style="width:30%;">
+                    
+                  </div>
+
+                </div>
+
+                <div id="cpotroc<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+                  
+                  <div class="form-group">
+                    <label for="resultado_editor">Editor:</label><br>
+                    <input id="resultado_editor<%=i.to_s%>" class="form-control" name="editor<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_paginas">Número de páginas:</label><br>
+                    <input id="resultado_paginas<%=i.to_s%>" class="form-control" name="paginas<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+
+                  <div class="form-group">
+                    <label for="resultado_na">Nombre del acto o evento:  <br/>&nbsp;</label><br>
+                    <input id="resultado_na<%=i.to_s%>" class="form-control" name="nombre_acto<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                  
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+                <div id="cpasistenciaea<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+
+                  <div class="form-group">
+                    <label for="resultado_titulo">Título:</label><br>
+                    <input id="resultado_titulo<%=i.to_s%>" class="form-control" name="titulo<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_autor">Nombre del autor docente encargado: <br/>&nbsp;</label><br>
+                    <input id="resultado_autor<%=i.to_s%>" class="form-control" name="autor<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+                    
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_titulocap">Título del capítulo: <br/>&nbsp;</label><br>
+                    <input id="resultado_titulocap<%=i.to_s%>" class="form-control" name="nombre_capitulo<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+                     
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_autorcap">Nombre del autor del capítulo: <br/>&nbsp;</label><br>
+                    <input id="resultado_autorcap<%=i.to_s%>" class="form-control" name="autor_capitulo<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+                    
+                  </div>
+
+                </div>
+
+                <div id="cpasistenciaeb<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+
+                  <div class="form-group">
+                    <label for="resultado_dia">Día en que se realizó la publicación:</label><br>
+                    <%= select_tag(:dia, options_for_select(@dia), {:include_blank => 'Seleccione un dia', :class => "form-control", :name=> "dia"+i.to_s+"" , :id => "resultado_dia"+i.to_s+"", :style => "width:20%;"}) %>
+                    
+                  </div>
+
+
+                  <div class="form-group">
+                    <label for="resultado_mes">Mes en el que se realizó la publicación: <br/>&nbsp;</label><br>
+                    <%= select_tag(:mes, options_for_select(@mes), {:include_blank => 'Seleccione un mes', :class => "form-control", :name=> "mes"+i.to_s+"" , :id => "resultado_mes"+i.to_s+"", :style => "width:30%;"}) %>
+                    
+                  </div>
+
+                  <div class="form-group">
+                    <label for="resultado_ano">Año en que se realizo la publicación, acto o evento:</label><br>
+                    <input id="resultado_ano<%=i.to_s%>" class="form-control" name="ano<%=i.to_s%>" size="4" type="text" style="width:30%;">
+                    
+                  </div>
+                
+                
+                  
+                  <div class="form-group">
+                    <label for="resultado_ciudad">Ciudad en la que se realizó la publicación, acto o evento:</label><br>
+                    <input id="resultado_ciudad<%=i.to_s%>" class="form-control" name="ciudad<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+
+                </div>
+
+                <div id="cpasistenciaec<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+
+                  <div class="form-group">
+                    <label for="resultado_na">Nombre del acto o evento:</label><br>
+                    <input id="resultado_na<%=i.to_s%>" class="form-control" name="nombre_acto<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+
+                  <div class="form-group">
+                    <label for="resultado_estado">Estado en el que se realizó la publicación, acto o evento:</label><br>
+                    <input id="resultado_estado<%=i.to_s%>" class="form-control" name="estado<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+
+                  <div class="form-group">
+                    <label for="resultado_pais">País en el que se realizó la publicación, acto o evento:</label><br>
+                    <input id="resultado_pais<%=i.to_s%>" class="form-control" name="pais<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                  
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+                <div id="cporganizaionea<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+
+                  <div class="form-group">
+                    <label for="resultado_titulo">Título:</label><br>
+                    <input id="resultado_titulo<%=i.to_s%>" class="form-control" name="titulo<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_autor">Nombre del autor docente encargado: <br/>&nbsp;</label><br>
+                    <input id="resultado_autor<%=i.to_s%>" class="form-control" name="autor<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+                    
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_titulocap">Título del capítulo: <br/>&nbsp;</label><br>
+                    <input id="resultado_titulocap<%=i.to_s%>" class="form-control" name="nombre_capitulo<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+                     
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_autorcap">Nombre del autor del capítulo: <br/>&nbsp;</label><br>
+                    <input id="resultado_autorcap<%=i.to_s%>" class="form-control" name="autor_capitulo<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+                    
+                  </div>
+
+                </div>
+
+                <div id="cporganizaioneb<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+
+                  <div class="form-group">
+                    <label for="resultado_dia">Día en que se realizó la publicación:</label><br>
+                    <%= select_tag(:dia, options_for_select(@dia), {:include_blank => 'Seleccione un dia', :class => "form-control", :name=> "dia"+i.to_s+"" , :id => "resultado_dia"+i.to_s+"", :style => "width:20%;"}) %>
+                    
+                  </div>
+
+
+                  <div class="form-group">
+                    <label for="resultado_mes">Mes en el que se realizó la publicación: <br/>&nbsp;</label><br>
+                    <%= select_tag(:mes, options_for_select(@mes), {:include_blank => 'Seleccione un mes', :class => "form-control", :name=> "mes"+i.to_s+"" , :id => "resultado_mes"+i.to_s+"", :style => "width:30%;"}) %>
+                    
+                  </div>
+
+                  <div class="form-group">
+                    <label for="resultado_ano">Año en que se realizo la publicación, acto o evento:</label><br>
+                    <input id="resultado_ano<%=i.to_s%>" class="form-control" name="ano<%=i.to_s%>" size="4" type="text" style="width:30%;">
+                    
+                  </div>
+                
+                
+                  
+                  <div class="form-group">
+                    <label for="resultado_ciudad">Ciudad en la que se realizó la publicación, acto o evento:</label><br>
+                    <input id="resultado_ciudad<%=i.to_s%>" class="form-control" name="ciudad<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+
+                </div>
+
+                <div id="cporganizaionec<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+
+                  <div class="form-group">
+                    <label for="resultado_na">Nombre del acto o evento:</label><br>
+                    <input id="resultado_na<%=i.to_s%>" class="form-control" name="nombre_acto<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+
+                  <div class="form-group">
+                    <label for="resultado_estado">Estado en el que se realizó la publicación, acto o evento:</label><br>
+                    <input id="resultado_estado<%=i.to_s%>" class="form-control" name="estado<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+
+                  <div class="form-group">
+                    <label for="resultado_pais">País en el que se realizó la publicación, acto o evento:</label><br>
+                    <input id="resultado_pais<%=i.to_s%>" class="form-control" name="pais<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                  
+                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                <div id="cpdictadoca<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+
+                  <div class="form-group">
+                    <label for="resultado_titulo">Título:</label><br>
+                    <input id="resultado_titulo<%=i.to_s%>" class="form-control" name="titulo<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_autor">Nombre del autor docente encargado:</label><br>
+                    <input id="resultado_autor<%=i.to_s%>" class="form-control" name="autor<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+                    
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_titulocap">Título del capítulo: <br/>&nbsp;</label><br>
+                    <input id="resultado_titulocap<%=i.to_s%>" class="form-control" name="nombre_capitulo<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+                     
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_autorcap">Nombre del autor del capítulo: <br/>&nbsp;</label><br>
+                    <input id="resultado_autorcap<%=i.to_s%>" class="form-control" name="autor_capitulo<%=i.to_s%>" size="30" type="text"  style="width:70%;">
+                    
+                  </div>
+
+                  <div class="form-group">
+                    <label for="resultado_pais">País en el que se realizó la publicación, acto o evento:</label><br>
+                    <input id="resultado_pais<%=i.to_s%>" class="form-control" name="pais<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_paginas">Número de páginas: <br/>&nbsp;</label><br>
+                    <input id="resultado_paginas<%=i.to_s%>" class="form-control" name="paginas<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+
+                </div>
+
+                <div id="cpdictadocb<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+
+                  <div class="form-group">
+                    <label for="resultado_dia">Día en que se realizó la publicación:</label><br>
+                    <%= select_tag(:dia, options_for_select(@dia), {:include_blank => 'Seleccione un dia', :class => "form-control", :name=> "dia"+i.to_s+"" , :id => "resultado_dia"+i.to_s+"", :style => "width:20%;"}) %>
+                    
+                  </div>
+
+
+                  <div class="form-group">
+                    <label for="resultado_mes">Mes en el que se realizó la publicación:</label><br>
+                    <%= select_tag(:mes, options_for_select(@mes), {:include_blank => 'Seleccione un mes', :class => "form-control", :name=> "mes"+i.to_s+"" , :id => "resultado_mes"+i.to_s+"", :style => "width:30%;"}) %>
+                    
+                  </div>
+
+                  <div class="form-group">
+                    <label for="resultado_ano">Año en que se realizo la publicación, acto o evento:</label><br>
+                    <input id="resultado_ano<%=i.to_s%>" class="form-control" name="ano<%=i.to_s%>" size="4" type="text" style="width:30%;">
+                    
+                  </div>
+                
+                
+                  
+                  <div class="form-group">
+                    <label for="resultado_ciudad">Ciudad en la que se realizó la publicación, acto o evento:</label><br>
+                    <input id="resultado_ciudad<%=i.to_s%>" class="form-control" name="ciudad<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+
+                  <div class="form-group">
+                    <label for="resultado_estado">Estado en el que se realizó la publicación, acto o evento:</label><br>
+                    <input id="resultado_estado<%=i.to_s%>" class="form-control" name="estado<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+
+                </div>
+
+                <div id="cpdictadocc<%=i.to_s%>" class="col-xs-12 col-md-4 col-lg-4" style="display: none;">
+
+                  <div class="form-group">
+                    <label for="resultado_org">Entidad organizadora:</label><br>
+                    <input id="resultado_org<%=i.to_s%>" class="form-control" name="organizador<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                  
+
+                  <div class="form-group">
+                    <label for="resultado_duracion">Duración:</label><br>
+                    <input id="resultado_duracion<%=i.to_s%>" class="form-control" name="duracion<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_editor">Editor: <br/>&nbsp;</label><br>
+                    <input id="resultado_editor<%=i.to_s%>" class="form-control" name="editor<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                   
+                  <div class="form-group">
+                    <label for="resultado_tl">Título del libro al que hace referencia: <br/>&nbsp;</label><br>
+                    <input id="resultado_tl<%=i.to_s%>" class="form-control" name="titulo_libro<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="resultado_al">Autor del libro al que hace referencia: <br/>&nbsp;</label><br>
+                    <input id="resultado_al<%=i.to_s%>" class="form-control" name="autor_libro<%=i.to_s%>" size="30" type="text" style="width:70%;">
+                    
+                  </div>
+                  
+                </div>
 
 
               </div>
