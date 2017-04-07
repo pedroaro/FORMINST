@@ -17,8 +17,8 @@ class InformesController < ApplicationController
           puts "crear informe"
           puts esta.estatus_id
           if esta.estatus_id == 6 
-            flash[:warning]= "La adecuación debe ser enviada/aproabada para poder crear algun informe"
-            redirect_to controller:"iniciotutor", action: "listar_adecuaciones"
+            flash[:danger]= "La adecuación debe ser enviada/aproabada para poder crear algun informe"
+            redirect_to controller:"informes", action: "listar_informes"
           end
           @actividadesa= []
           @actividadesadoc= []
@@ -243,8 +243,8 @@ class InformesController < ApplicationController
           @dia= [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]
           @tipos= [['Libros',1], ['Artículo de Revista',2], ['Artículo de Prensa',3], ['CD',4], ['Manuales',5], ['Publicaciones Electrónicas',6]]
         else
-          flash[:warning]= "Seleccione una adecuación para que pueda crear un informe"
-          redirect_to controller:"iniciotutor", action: "listar_adecuaciones"
+          flash[:warning]= "Error, no hay sesion de adecuacion"
+          redirect_to controller:"iniciotutor", action: "ver_detalles_adecuacion"
         end
       end
     else

@@ -152,7 +152,7 @@ class IniciotutorController < ApplicationController
 				end
 			else
 				flash[:danger]= "No puede crear la adecuación porque ya posee una asociada para este plan de formación"
-				redirect_to controller:"iniciotutor", action: "listar_adecuaciones"
+				redirect_to controller:"iniciotutor", action: "ver_detalles_adecuacion"
 			end
 		else
 			redirect_to controller:"forminst", action: "index"
@@ -209,6 +209,9 @@ class IniciotutorController < ApplicationController
 				session[:plan_id] = params[:plan_id]
 			end
 			@nombre = session[:nombre_usuario]
+			@planformacion = Planformacion.find(session[:plan_id])
+			@instructorName = Persona.where(usuario_id: @planformacion.instructor_id).take.nombres
+			session[:instructorName] = @instructorName
 			@instructorName = session[:instructorName]
 			@modifique=false
 			@cant_delete= params[:cant_delete]
@@ -803,7 +806,7 @@ class IniciotutorController < ApplicationController
 			cambio_act = EstatusAdecuacion.where(adecuacion_id: @ade.id, actual: 1).take
 			if cambio_act.estatus_id != 6
 				flash[:danger]= "La adecuación no puede ser modificada"
-				redirect_to controller:"iniciotutor", action: "listar_adecuaciones"
+				redirect_to controller:"iniciotutor", action: "ver_detalles_adecuacion"
 			elsif @ade == nil
 
 				ad= Adecuacion.new
@@ -958,10 +961,10 @@ class IniciotutorController < ApplicationController
 					otra = params[i]
 				end
 				flash[:success]= "La adecuación fue creada y guardada correctamente"
-				redirect_to controller:"iniciotutor", action: "listar_adecuaciones"
+				redirect_to controller:"iniciotutor", action: "ver_detalles_adecuacion"
 			else
 				flash[:danger]= "La adecuación no fue creada porque ya posee una asociada para este plan de formación"
-				redirect_to controller:"iniciotutor", action: "listar_adecuaciones"
+				redirect_to controller:"iniciotutor", action: "ver_detalles_adecuacion"
 			end
 
 		else
@@ -985,7 +988,7 @@ class IniciotutorController < ApplicationController
 		else
 			flash[:danger]= "No está permitido eliminar esta adecuación"
 		end
-		redirect_to controller:"iniciotutor", action: "listar_adecuaciones"
+		redirect_to controller:"iniciotutor", action: "ver_detalles_adecuacion"
 	end
 
 	def vista_previa
@@ -1185,7 +1188,7 @@ class IniciotutorController < ApplicationController
 	    puts "JAJAA"
 	    if cambio_act.estatus_id != 6
 	    	flash[:info]="Esta adecuación ya habia sido enviada"
-	   	   	redirect_to controller:"iniciotutor", action: "listar_adecuaciones"
+	   	   	redirect_to controller:"iniciotutor", action: "planformacions"
 	   	else
 			@actividades1= AdecuacionActividad.where(adecuacion_id: @adecuacion_id, semestre: 1).all
 			if @actividades1.blank?
@@ -1500,7 +1503,7 @@ class IniciotutorController < ApplicationController
 		        end
 	     
 	    
-		   		redirect_to controller:"iniciotutor", action: "listar_adecuaciones"
+		   		redirect_to controller:"iniciotutor", action: "planformacions"
 		   end
 		end
  	end 

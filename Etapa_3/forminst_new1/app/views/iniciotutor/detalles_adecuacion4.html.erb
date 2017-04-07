@@ -180,17 +180,15 @@
     <div class= "text-left">
       <%if @nombre%>
         <div>
-          <span><%= link_to 'Plan Formación', :controller => 'iniciotutor', :action => 'planformacions' %></span>
+         <span><%= link_to 'Plan Formación', :controller => 'iniciotutor', :action => 'planformacions' %></span>
           <p style="display:inline"> / </p>
           <%if !session[:editar]%> 
-            <span><%= link_to session[:instructorName] , :controller => 'iniciotutor', :action => 'ver_detalles_plan' %></span>
-            <p style="display:inline"> / </p>
-            <span><%= link_to 'Adecuación', :controller => 'iniciotutor', :action => 'listar_adecuaciones' %></span>
-            <p style="display:inline"> /  Detalles 2do Semestre </p>
+            <span><%= link_to session[:instructorName] , :controller => 'iniciotutor', :action => 'ver_detalles_adecuacion' %></span>
+            <p style="display:inline"> /  Detalles 2do Semestre  </p>
           <%else %>
-            <span><%= link_to session[:instructorName] , :controller => 'iniciotutor', :action => 'ver_detalles_plan' %></span>
+            <span><%= link_to session[:instructorName] , :controller => 'iniciotutor', :action => 'ver_detalles_adecuacion' %></span>
             <p style="display:inline"> / Modificar 2do Semestre </p>
-          <%end%>   
+          <%end%>    
         </div>
       <%end%>
     </div>

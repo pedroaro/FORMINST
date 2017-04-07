@@ -185,12 +185,10 @@
           <span><%= link_to 'Plan Formación', :controller => 'iniciotutor', :action => 'planformacions' %></span>
           <p style="display:inline"> / </p>
           <%if !session[:editar]%> 
-            <span><%= link_to session[:instructorName] , :controller => 'iniciotutor', :action => 'ver_detalles_plan' %></span>
-            <p style="display:inline"> / </p>
-            <span><%= link_to 'Adecuación', :controller => 'iniciotutor', :action => 'listar_adecuaciones' %></span>
+            <span><%= link_to session[:instructorName] , :controller => 'iniciotutor', :action => 'ver_detalles_adecuacion' %></span>
             <p style="display:inline"> /  Detalles 4to Semestre  </p>
           <%else %>
-            <span><%= link_to session[:instructorName] , :controller => 'iniciotutor', :action => 'ver_detalles_plan' %></span>
+            <span><%= link_to session[:instructorName] , :controller => 'iniciotutor', :action => 'ver_detalles_adecuacion' %></span>
             <p style="display:inline"> / Modificar 4to Semestre </p>
           <%end%>   
         </div>

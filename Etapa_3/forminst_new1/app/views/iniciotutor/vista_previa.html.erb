@@ -2,7 +2,7 @@
   <div class="col-xs-12 col-md-12">
       <ul class="nav nav-tabs">
         <li><a href="../iniciotutor/index">Inicio</a></li>
-        <li><a href="../iniciotutor/listar_adecuaciones" class = 'active'>Plan de Adecuación</a></li> 
+        <li><a href="../iniciotutor/planformacions" class='active'>Plan de Formación</a></li>
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Informes <span class="caret"></span></a>
             <ul class="dropdown-menu nav" role="menu">
@@ -164,11 +164,7 @@
           <div>
             <span><%= link_to 'Plan Formación', :controller => 'iniciotutor', :action => 'planformacions' %></span>
             <p style="display:inline"> / </p>
-            <span><%= link_to session[:instructorName] , :controller => 'iniciotutor', :action => 'ver_detalles_plan' %></span>
-            <p style="display:inline"> / </p>
-            <span><%= link_to 'Adecuación', :controller => 'iniciotutor', :action => 'listar_adecuaciones' %></span>
-            <p style="display:inline"> /  </p>
-            <span><%= link_to 'Detalles', :controller => 'iniciotutor', :action => 'ver_detalles_adecuacion' %></span>
+            <span><%= link_to session[:instructorName] , :controller => 'iniciotutor', :action => 'ver_detalles_adecuacion' %></span>
             <p style="display:inline"> /  Vista Previa </p>
           </div>
         <%end%>
