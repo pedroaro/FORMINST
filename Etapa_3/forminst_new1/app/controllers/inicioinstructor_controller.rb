@@ -11,7 +11,7 @@
       @notificaciones = Notificacion.where(instructor_id: session[:usuario_id]).all
       @notificaciones.each do |notificaciones|
         puts notificaciones.actual
-        if notificaciones.actual == 2        #Caso de notificaciones del tutor
+        if notificaciones.actual == 2        #Caso de notificaciones del instructor
           @notificaciones1.push(notificaciones)
         end
       end
@@ -1306,11 +1306,11 @@ end
       @noti= params[:noti]
       notaeliminar = Notificacion.where(id: @noti ).take
       if notaeliminar.blank?
-        flash[:danger] = "Ha ocurrido un error al eliminar (notificaion no existente)"
+          flash[:danger] = "Ha ocurrido un error al eliminar (notificacion no existente)"
       else
         notaeliminar.destroy
       end
-      redirect_to controller:"iniciotutor", action: "notificaciones"
+      redirect_to controller:"inicioinstructor", action: "index"
     else
       redirect_to controller:"forminst", action: "index"
     end

@@ -8,9 +8,37 @@ class InicioentidadController < ApplicationController
 			session[:instructorName] = nil
 
 			@nombre = session[:nombre_usuario]
+			print "NO HAY USUARIO"
+			puts session[:entidad_id]
 			if not @nombre
 				print "NO HAY USUARIO"
 			end
+			@usu=Usuarioentidad.where(entidad_id: session[:entidad_id]).take
+			@entidad_escuela_id= @usu.escuela_id
+			@notificaciones1= []
+		    if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12)					#Caso de Comision de Investigación
+		    	@notificaciones = Notificacion.where(actual: 3).all
+		    	@notificaciones.each do |notificaciones|
+			    	@tutor_escuela = Usuarioentidad.where(usuario_id: notificaciones.tutor_id).take
+			    	puts @tutor_escuela.escuela_id
+			    	puts @entidad_escuela_id
+			    	puts notificaciones.actual
+			    	if (@tutor_escuela.escuela_id == @entidad_escuela_id) #Caso de notificaciones del Comision de investigación 
+			        	@notificaciones1.push(notificaciones)
+			        end
+		    	end
+		    elsif (session[:entidad_id] >= 1 && session[:entidad_id] <= 6)
+		    	@notificaciones = Notificacion.where(actual: 4).all
+		    	@notificaciones.each do |notificaciones|
+			    	@tutor_escuela = Usuarioentidad.where(usuario_id: notificaciones.tutor_id).take
+			    	puts @tutor_escuela.escuela_id
+			    	puts @entidad_escuela_id
+			    	puts notificaciones.actual
+			    	if (@tutor_escuela.escuela_id == @entidad_escuela_id) #Caso de notificaciones del Comision de investigación 
+			        	@notificaciones1.push(notificaciones)
+			        end
+		    	end
+		    end			
 		else
 			redirect_to controller:"forminst", action: "index"
 		end
@@ -1367,7 +1395,7 @@ class InicioentidadController < ApplicationController
 			       	end
 			    end
 
-	      	flash[:mensaje]="Se han creado y/o modificado las observaciones satisfactoriamente"
+	      	flash[:success]="Se han creado y/o modificado las observaciones satisfactoriamente"
 	      	redirect_to controller:"inicioentidad", action: "detalles_informe2"
  		end
  	end
@@ -1736,7 +1764,7 @@ class InicioentidadController < ApplicationController
 
 	      
 
-	      	flash[:mensaje]="Se han creado y/o modificado las observaciones satisfactoriamente"
+	      	flash[:success]="Se han creado y/o modificado las observaciones satisfactoriamente"
 
 	      	if(@semestre == 1)
 	      			redirect_to controller:"inicioentidad", action: "detalles_adecuacion3"
@@ -1881,7 +1909,7 @@ class InicioentidadController < ApplicationController
 		          remitente = Usuario.where(id: uentidad.usuario_id).take
 		          email = remitente.user + "@ciens.ucv.ve"
 		          ActionCorreo.envio_informe(email).deliver
-		          flash[:mensaje]="El informe se ha envíado a consejo de escuela"
+		          flash[:success]="El informe se ha envíado a consejo de escuela"
 
 		
 			else
@@ -1906,7 +1934,7 @@ class InicioentidadController < ApplicationController
 			            email= remitente.user + "@ciens.ucv.ve"
 			            ActionCorreo.envio_informe(email).deliver
 
-						flash[:mensaje]="El informe se ha envíado a consejo de facultad"
+						flash[:success]="El informe se ha envíado a consejo de facultad"
 					else
 						if (session[:entidad_id] == 13)
 
@@ -1951,12 +1979,12 @@ class InicioentidadController < ApplicationController
 			            	ActionCorreo.envio_informe(email).deliver
 
 							if(rechazar == 1)
-								flash[:mensaje]="El informe ha sido rechazado por consejo de facultad"
+								flash[:info]="El informe ha sido rechazado por consejo de facultad"
 							else
 								if bool_observaciones == 1 
-									flash[:mensaje]="El informe ha sido aprobado con observaciones por consejo de facultad"
+									flash[:info]="El informe ha sido aprobado con observaciones por consejo de facultad"
 								else
-										flash[:mensaje]="El informe ha sido aprobado por consejo de facultad"	
+										flash[:info]="El informe ha sido aprobado por consejo de facultad"	
 								end
 							end
 						end	
@@ -2166,6 +2194,35 @@ class InicioentidadController < ApplicationController
 				cambio_est.estatus_id = 8
 				cambio_est.actual = 1
 				cambio_est.save
+				cambio_est.fecha = Time.now 
+				plan= Planformacion.find(session[:plan_id])
+				notific = Notificacion.new
+		        notific.instructor_id = plan.instructor_id
+		        notific.tutor_id = plan.tutor_id
+		        notific.adecuacion_id = session[:adecuacion_id]
+		        notific.informe_id = nil
+		        notific.actual = 1
+		        puts "JAJAJA"
+		        person = Persona.where(usuario_id: plan.instructor_id).take
+		        notificacionfecha = Date.current.to_s 
+	        	notific.mensaje = "[" + notificacionfecha + "] La adecuación de "+ person.nombres.to_s.capitalize + " " + person.apellidos.to_s.capitalize + " ha sido aprobada por Comisión de Investigación y fue enviada a Consejo de Escuela."
+	        	notific.save
+	        	notific2 = Notificacion.new
+		        notific2.instructor_id = plan.instructor_id
+		        notific2.tutor_id = plan.tutor_id
+		        notific2.adecuacion_id = session[:adecuacion_id]
+		        notific2.informe_id = nil
+		        notific2.actual = 2
+	        	notific2.mensaje = "[" + notificacionfecha + "] Su adecuación ha sido aprobada por Comisión de Investigación y fue enviada a Consejo de Escuela"
+	        	notific2.save
+	        	notific3 = Notificacion.new
+		        notific3.instructor_id = plan.instructor_id
+		        notific3.tutor_id = plan.tutor_id
+		        notific3.adecuacion_id = session[:adecuacion_id]
+		        notific3.informe_id = nil
+		        notific3.actual = 4		#Consejo de Escuela
+	        	notific3.mensaje = "[" + notificacionfecha + "] Se ha recibido una nueva Adecuación: "+ person.nombres.to_s.capitalize + " " + person.apellidos.to_s.capitalize + ", favor aprobar y enviar a la siguiente entidad."
+	        	notific3.save
 
 				 user =Usuarioentidad.where(entidad_id: session[:entidad_id]).take
 		          if(user.escuela_id == 1)
@@ -2195,7 +2252,7 @@ class InicioentidadController < ApplicationController
 		          email = remitente.user + "@ciens.ucv.ve"
 		          ActionCorreo.envio_adecuacion(email).deliver
 
-				flash[:mensaje]="La adecuación se ha envíado a consejo de escuela"
+				flash[:success]="La adecuación se ha envíado a consejo de escuela"
 
 		
 			else
@@ -2215,13 +2272,41 @@ class InicioentidadController < ApplicationController
 						cambio_est.estatus_id = 4
 						cambio_est.actual = 1
 						cambio_est.save
+						cambio_est.fecha = Time.now 
+						plan= Planformacion.find(session[:plan_id])
+						notific = Notificacion.new
+				        notific.instructor_id = plan.instructor_id
+				        notific.tutor_id = plan.tutor_id
+				        notific.adecuacion_id = session[:adecuacion_id]
+				        notific.informe_id = nil
+				        notific.actual = 1
+				        person = Persona.where(usuario_id: plan.instructor_id).take
+				        notificacionfecha = Date.current.to_s 
+			        	notific.mensaje = "[" + notificacionfecha + "] La adecuación de "+ person.nombres.to_s.capitalize + " " + person.apellidos.to_s.capitalize + " ha sido aprobada por Consejo de Escuela y fue enviada a Consejo de Facultad."
+			        	notific.save
+			        	notific2 = Notificacion.new
+				        notific2.instructor_id = plan.instructor_id
+				        notific2.tutor_id = plan.tutor_id
+				        notific2.adecuacion_id = session[:adecuacion_id]
+				        notific2.informe_id = nil
+				        notific2.actual = 2
+			        	notific2.mensaje = "[" + notificacionfecha + "] Su adecuación ha sido aprobada por Consejo de Escuela y fue enviada a Consejo de Facultad"
+			        	notific2.save
+			        	notific3 = Notificacion.new
+				        notific3.instructor_id = plan.instructor_id
+				        notific3.tutor_id = plan.tutor_id
+				        notific3.adecuacion_id = session[:adecuacion_id]
+				        notific3.informe_id = nil
+				        notific3.actual = 5		#Consejo de Escuela
+			        	notific3.mensaje = "[" + notificacionfecha + "] Se ha recibido una nueva Adecuación: "+ person.nombres.to_s.capitalize + " " + person.apellidos.to_s.capitalize + ", Revisar."
+			        	notific3.save
 
 						uentidad = Usuarioentidad.where(entidad_id: 13).take
 			            remitente = Usuario.where(id: uentidad.usuario_id).take
 			            email= remitente.user + "@ciens.ucv.ve"
 			            ActionCorreo.envio_adecuacion(email).deliver
 
-						flash[:mensaje]="La adecuación se ha envíado a consejo de facultad"
+						flash[:success]="La adecuación se ha envíado a consejo de facultad"
 					else
 						if (session[:entidad_id] == 13)
 
@@ -2263,12 +2348,12 @@ class InicioentidadController < ApplicationController
 			            	ActionCorreo.envio_adecuacion(email).deliver
 
 							if(rechazar == 1)
-								flash[:mensaje]="La adecuación ha sido rechazada por consejo de facultad"
+								flash[:info]="La adecuación ha sido rechazada por consejo de facultad"
 							else
 								if bool_observaciones == 1 
-									flash[:mensaje]="La adecuación ha sido aprobada con observaciones por consejo de facultad"
+									flash[:info]="La adecuación ha sido aprobada con observaciones por consejo de facultad"
 								else
-									flash[:mensaje]="La adecuación ha sido aprobada por consejo de facultad"	
+									flash[:info]="La adecuación ha sido aprobada por consejo de facultad"	
 								end
 							end
 						end	
@@ -2278,5 +2363,20 @@ class InicioentidadController < ApplicationController
 	 redirect_to controller:"inicioentidad", action: "listar_adecuaciones"
 	end 
 
+	def borrar_notificaciones #mas obs de actividades del informe
+		if session[:usuario_id]
+			@noti= params[:noti]
+			puts @noti
+    		notaeliminar = Notificacion.where(id: @noti ).take
+    		if notaeliminar.blank?
+    			flash[:danger] = "Ha ocurrido un error al eliminar (notificacion no existente)"
+    		else
+    			notaeliminar.destroy
+    		end
+			redirect_to controller:"inicioentidad", action: "index"
+		else
+			redirect_to controller:"forminst", action: "index"
+		end
+	end
 
 end

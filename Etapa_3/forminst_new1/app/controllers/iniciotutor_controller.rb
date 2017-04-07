@@ -12,6 +12,14 @@ class IniciotutorController < ApplicationController
 			if not @nombre
 				print "NO HAY USUARIO"
 			end
+			@notificaciones1= []
+		    @notificaciones = Notificacion.where(tutor_id: session[:usuario_id]).all
+		    @notificaciones.each do |notificaciones|
+		        puts notificaciones.actual
+		        if notificaciones.actual == 1        #Caso de notificaciones del tutor
+		        	@notificaciones1.push(notificaciones)
+		        end
+		    end
 		else
 			redirect_to controller:"forminst", action: "index"
 		end
@@ -1471,9 +1479,16 @@ class IniciotutorController < ApplicationController
 		        notific2.adecuacion_id = session[:adecuacion_id]
 		        notific2.informe_id = nil
 		        notific2.actual = 2
-		        notificacionfecha = Date.current.to_s 
 	        	notific2.mensaje = "[" + notificacionfecha + "] Su adecuación se ha enviado a comisión de investigación."
 	        	notific2.save
+	        	notific3 = Notificacion.new
+		        notific3.instructor_id = plan.instructor_id
+		        notific3.tutor_id = session[:usuario_id]
+		        notific3.adecuacion_id = session[:adecuacion_id]
+		        notific3.informe_id = nil
+		        notific3.actual = 3		#Comisión de investigación
+	        	notific3.mensaje = "[" + notificacionfecha + "] Se ha recibido una nueva Adecuación: "+ person.nombres.to_s.capitalize + " " + person.apellidos.to_s.capitalize + ", favor aprobar y enviar a la siguiente entidad."
+	        	notific3.save
 	        	puts notific.mensaje
 		        notific.save
 		        cambio_est.estatus_id = 3 #Enviado a comision de investigacion
@@ -1584,10 +1599,9 @@ class IniciotutorController < ApplicationController
 			@noti= params[:noti]
 			puts "lalalala"
 			puts @noti
-    		@planformacions = Planformacion.where(tutor_id: session[:usuario_id])
     		notaeliminar = Notificacion.where(id: @noti ).take
     		if notaeliminar.blank?
-    			flash[:danger] = "Ha ocurrido un error al eliminar (notificaion no existente)"
+    			flash[:danger] = "Ha ocurrido un error al eliminar (notificacion no existente)"
     		else
     			notaeliminar.destroy
     		end
@@ -1597,6 +1611,22 @@ class IniciotutorController < ApplicationController
 		end
 	end
 
+	def borrar_notificaciones1 #mas obs de actividades del informe
+		if session[:usuario_id]
+			@noti= params[:noti]
+			puts "lalalala"
+			puts @noti
+    		notaeliminar = Notificacion.where(id: @noti ).take
+    		if notaeliminar.blank?
+    			flash[:danger] = "Ha ocurrido un error al eliminar (notificacion no existente)"
+    		else
+    			notaeliminar.destroy
+    		end
+			redirect_to controller:"iniciotutor", action: "index"
+		else
+			redirect_to controller:"forminst", action: "index"
+		end
+	end
 
 	def notificaciones #mas obs de actividades del informe
 		if session[:usuario_id]
