@@ -924,7 +924,7 @@ class InicioentidadController < ApplicationController
 	      	@status= TipoEstatus.find(@estatus.estatus_id)
 	      	@userentidad=Usuarioentidad.where(entidad_id: session[:entidad_id]).take
 			@escuela= Escuela.find(@userentidad.escuela_id)
-	      	session[:nombre_informe] = @nombre_informe
+	      	session[:nombre_informe] = @nombre_informe.downcase.split.map(&:capitalize).join(' ')		##Capitalize every first word of the string
 	      	session[:status_informe] = @status.concepto
 
 	    else
@@ -1865,133 +1865,188 @@ class InicioentidadController < ApplicationController
 	end
 
 	def cambiar_estatusI
+		@informe_id = params[:informe_id].to_i
+		rechazar = params[:rechazar].to_i
+		informeAct = Informe.where(id: @informe_id).take
+		session[:plan_id] = informeAct.planformacion_id
+		adec = Adecuacion.where(planformacion_id: informeAct.planformacion_id).take
+		session[:adecuacion_id] = adec.id
+		if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12)
+			cambio_act = EstatusInforme.where(informe_id: @informe_id, actual: 1).take
+	      	cambio_act.actual = 0
+	      	cambio_act.save
+			cambio_est = EstatusInforme.new 
+			cambio_est.informe_id = @informe_id
+			cambio_est.fecha = Time.now 
+			cambio_est.estatus_id = 8
+			cambio_est.actual = 1
+			cambio_est.save
+			plan = Planformacion.find(session[:plan_id])
+			cambio_est.fecha = Time.now 
+			notific = Notificacion.new
+			notific.instructor_id = plan.instructor_id
+			notific.tutor_id = informeAct.tutor_id
+			notific.adecuacion_id = session[:adecuacion_id]
+			notific.informe_id = @informe_id
+			notific.actual = 1
+			person = Persona.where(usuario_id: plan.instructor_id).take
+			notificacionfecha = Date.current.to_s 
+			notific.mensaje = "[" + notificacionfecha + "] El " + session[:nombre_informe] + " de " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " ha sido aprobado por Comisión de Investigación y fue enviada a Consejo de Escuela."
+			notific.save
+			notific2 = Notificacion.new
+			notific2.instructor_id = plan.instructor_id
+			notific2.tutor_id = informeAct.tutor_id
+			notific2.adecuacion_id = session[:adecuacion_id]
+			notific2.informe_id = @informe_id
+			notific2.actual = 2
+			notific2.mensaje = "[" + notificacionfecha + "] El " + session[:nombre_informe] + " ha sido aprobado por Comisión de Investigación y fue enviada a Consejo de Escuela."
+			notific2.save
+			notific3 = Notificacion.new
+			notific3.instructor_id = plan.instructor_id
+			notific3.tutor_id = informeAct.tutor_id
+			notific3.adecuacion_id = session[:adecuacion_id]
+			notific3.informe_id = @informe_id
+			notific3.actual = 4   #Consejo de Escuela
+			notific3.mensaje = "[" + notificacionfecha + "] Ha recibido un nuevo Informe: ' " + session[:nombre_informe]+ " ' de " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + ", favor aprobar y enviar a la siguiente entidad."
+			notific3.save
+	          user =Usuarioentidad.where(entidad_id: session[:entidad_id]).take
+	          if(user.escuela_id == 1)
+	            uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 1).take
+	          else
+	            if(user.escuela_id == 2)
+	              uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 2).take
+	            else
+	              if(user.escuela_id == 3)
+	                uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 3).take
+	              else
+	                if(user.escuela_id == 4)
+	                uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 4).take
+	                else
+	                  if(user.escuela_id == 9)
+	                    uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 5).take
+	                  else
+	                    if(user.escuela_id == 10)
+	                      uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 6).take
+	                    end
+	                  end
+	                end
+	              end
+	            end  
+	          end
+	          remitente = Usuario.where(id: uentidad.usuario_id).take
+	          email = remitente.user + "@ciens.ucv.ve"
+	          ActionCorreo.envio_informe(email).deliver
+	          flash[:success]="El informe se ha envíado a consejo de escuela"
 
-	@informe_id = params[:informe_id].to_i
-	rechazar = params[:rechazar].to_i
 
-	if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12)
-			#Usuario comision
+		else
+			if (session[:entidad_id] >= 14 && session[:entidad_id] <= 17)
+			#Consejo tecnico
 
-				cambio_act = EstatusInforme.where(informe_id: @informe_id, actual: 1).take
-		      	cambio_act.actual = 0
-		      	cambio_act.save
-				cambio_est = EstatusInforme.new 
-				cambio_est.informe_id = @informe_id
-				cambio_est.fecha = Time.now 
-				cambio_est.estatus_id = 8
-				cambio_est.actual = 1
-				cambio_est.save
-			 
-		          user =Usuarioentidad.where(entidad_id: session[:entidad_id]).take
-		          if(user.escuela_id == 1)
-		            uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 1).take
-		          else
-		            if(user.escuela_id == 2)
-		              uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 2).take
-		            else
-		              if(user.escuela_id == 3)
-		                uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 3).take
-		              else
-		                if(user.escuela_id == 4)
-		                uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 4).take
-		                else
-		                  if(user.escuela_id == 9)
-		                    uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 5).take
-		                  else
-		                    if(user.escuela_id == 10)
-		                      uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 6).take
-		                    end
-		                  end
-		                end
-		              end
-		            end  
-		          end
-		          remitente = Usuario.where(id: uentidad.usuario_id).take
-		          email = remitente.user + "@ciens.ucv.ve"
-		          ActionCorreo.envio_informe(email).deliver
-		          flash[:success]="El informe se ha envíado a consejo de escuela"
-
-		
 			else
-				if (session[:entidad_id] >= 14 && session[:entidad_id] <= 17)
-				#Consejo tecnico
-		
+				if (session[:entidad_id] >= 1 && session[:entidad_id] <= 6)
+				#Consejo de escuela
+					cambio_act = EstatusInforme.where(informe_id: @informe_id, actual: 1).take
+			      	cambio_act.actual = 0
+			      	cambio_act.save
+					cambio_est = EstatusInforme.new 
+					cambio_est.informe_id = @informe_id
+					cambio_est.fecha = Time.now 
+					cambio_est.estatus_id = 4
+					cambio_est.actual = 1
+					cambio_est.save
+					plan = Planformacion.find(session[:plan_id])
+					cambio_est.fecha = Time.now 
+					notific = Notificacion.new
+					notific.instructor_id = plan.instructor_id
+					notific.tutor_id = informeAct.tutor_id
+					notific.adecuacion_id = session[:adecuacion_id]
+					notific.informe_id = @informe_id
+					notific.actual = 1
+					person = Persona.where(usuario_id: plan.instructor_id).take
+					notificacionfecha = Date.current.to_s 
+					notific.mensaje = "[" + notificacionfecha + "] El " + session[:nombre_informe] + " de " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " ha sido aprobado por Consejo de Escuela y fue enviada a Consejo de Facultad."
+					notific.save
+					notific2 = Notificacion.new
+					notific2.instructor_id = plan.instructor_id
+					notific2.tutor_id = informeAct.tutor_id
+					notific2.adecuacion_id = session[:adecuacion_id]
+					notific2.informe_id = @informe_id
+					notific2.actual = 2
+					notific2.mensaje = "[" + notificacionfecha + "] El " + session[:nombre_informe] + " ha sido aprobado por Consejo de Escuela y fue enviada a Consejo de Facultad."
+					notific2.save
+					notific3 = Notificacion.new
+					notific3.instructor_id = plan.instructor_id
+					notific3.tutor_id = informeAct.tutor_id
+					notific3.adecuacion_id = session[:adecuacion_id]
+					notific3.informe_id = @informe_id
+					notific3.actual = 5   #Consejo de Facultad
+					notific3.mensaje = "[" + notificacionfecha + "] Ha recibido un nuevo Informe: ' " + session[:nombre_informe]+ " ' de " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + ", favor aprobar y enviar a la siguiente entidad."
+					notific3.save
+
+					uentidad = Usuarioentidad.where(entidad_id: 13).take
+		            remitente = Usuario.where(id: uentidad.usuario_id).take
+		            email= remitente.user + "@ciens.ucv.ve"
+		            ActionCorreo.envio_informe(email).deliver
+
+					flash[:success]="El informe se ha envíado a consejo de facultad"
 				else
-					if (session[:entidad_id] >= 1 && session[:entidad_id] <= 6)
-					#Consejo de escuela
+					if (session[:entidad_id] == 13)
+
+						bool_observaciones= 0
+						acts_informe = InformeActividad.where(informe_id: @informe_id)
+						
+						acts_informe.each do |act_informe|
+							obsvs_act = ObservacionActividadInforme.where(informe_actividad_id: act_informe.id)
+
+							obsvs_act.each do |obsv_act|
+								if obsv_act.observaciones != ''
+									bool_observaciones= 1
+								end
+							end
+						end
+						
+						#Consejo de facultad
 						cambio_act = EstatusInforme.where(informe_id: @informe_id, actual: 1).take
 				      	cambio_act.actual = 0
 				      	cambio_act.save
-						cambio_est = EstatusInforme.new 
+
+				      	cambio_est = EstatusInforme.new 
 						cambio_est.informe_id = @informe_id
-						cambio_est.fecha = Time.now 
-						cambio_est.estatus_id = 4
+						cambio_est.fecha = Time.now
+						if(rechazar == 1)
+							cambio_est.estatus_id = 9
+						else 
+							if bool_observaciones == 1 
+								cambio_est.estatus_id = 5
+							else
+								cambio_est.estatus_id = 1
+							end
+						end
+
 						cambio_est.actual = 1
 						cambio_est.save
 
-						uentidad = Usuarioentidad.where(entidad_id: 13).take
-			            remitente = Usuario.where(id: uentidad.usuario_id).take
-			            email= remitente.user + "@ciens.ucv.ve"
-			            ActionCorreo.envio_informe(email).deliver
+						
+						inf = Informe.where(id: @informe_id).take
+		            	remitente = Usuario.where(id: inf.tutor_id).take
+		            	email= remitente.user + "@ciens.ucv.ve"
+		            	ActionCorreo.envio_informe(email).deliver
 
-						flash[:success]="El informe se ha envíado a consejo de facultad"
-					else
-						if (session[:entidad_id] == 13)
-
-							bool_observaciones= 0
-							acts_informe = InformeActividad.where(informe_id: @informe_id)
-							
-							acts_informe.each do |act_informe|
-								obsvs_act = ObservacionActividadInforme.where(informe_actividad_id: act_informe.id)
-
-								obsvs_act.each do |obsv_act|
-									if obsv_act.observaciones != ''
-										bool_observaciones= 1
-									end
-								end
-							end
-							
-							#Consejo de facultad
-							cambio_act = EstatusInforme.where(informe_id: @informe_id, actual: 1).take
-					      	cambio_act.actual = 0
-					      	cambio_act.save
-
-					      	cambio_est = EstatusInforme.new 
-							cambio_est.informe_id = @informe_id
-							cambio_est.fecha = Time.now
-							if(rechazar == 1)
-								cambio_est.estatus_id = 9
-							else 
-								if bool_observaciones == 1 
-									cambio_est.estatus_id = 5
-								else
-									cambio_est.estatus_id = 1
-								end
-							end
-
-							cambio_est.actual = 1
-							cambio_est.save
-
-							
-							inf = Informe.where(id: @informe_id).take
-			            	remitente = Usuario.where(id: inf.tutor_id).take
-			            	email= remitente.user + "@ciens.ucv.ve"
-			            	ActionCorreo.envio_informe(email).deliver
-
-							if(rechazar == 1)
-								flash[:info]="El informe ha sido rechazado por consejo de facultad"
+						if(rechazar == 1)
+							flash[:info]="El informe ha sido rechazado por consejo de facultad"
+						else
+							if bool_observaciones == 1 
+								flash[:info]="El informe ha sido aprobado con observaciones por consejo de facultad"
 							else
-								if bool_observaciones == 1 
-									flash[:info]="El informe ha sido aprobado con observaciones por consejo de facultad"
-								else
-										flash[:info]="El informe ha sido aprobado por consejo de facultad"	
-								end
+								flash[:info]="El informe ha sido aprobado por consejo de facultad"	
 							end
-						end	
-					end
+						end
+					end	
 				end
 			end
-	 redirect_to controller:"inicioentidad", action: "listar_informes"
+		end
+		redirect_to controller:"inicioentidad", action: "listar_informes"
 	end 
 
 	def vista_previa
@@ -2205,7 +2260,7 @@ class InicioentidadController < ApplicationController
 		        puts "JAJAJA"
 		        person = Persona.where(usuario_id: plan.instructor_id).take
 		        notificacionfecha = Date.current.to_s 
-	        	notific.mensaje = "[" + notificacionfecha + "] La adecuación de "+ person.nombres.to_s.capitalize + " " + person.apellidos.to_s.capitalize + " ha sido aprobada por Comisión de Investigación y fue enviada a Consejo de Escuela."
+	        	notific.mensaje = "[" + notificacionfecha + "] La adecuación de "+ person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " ha sido aprobada por Comisión de Investigación y fue enviada a Consejo de Escuela."
 	        	notific.save
 	        	notific2 = Notificacion.new
 		        notific2.instructor_id = plan.instructor_id
@@ -2221,7 +2276,7 @@ class InicioentidadController < ApplicationController
 		        notific3.adecuacion_id = session[:adecuacion_id]
 		        notific3.informe_id = nil
 		        notific3.actual = 4		#Consejo de Escuela
-	        	notific3.mensaje = "[" + notificacionfecha + "] Se ha recibido una nueva Adecuación: "+ person.nombres.to_s.capitalize + " " + person.apellidos.to_s.capitalize + ", favor aprobar y enviar a la siguiente entidad."
+	        	notific3.mensaje = "[" + notificacionfecha + "] Se ha recibido una nueva Adecuación: "+ person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + ", favor aprobar y enviar a la siguiente entidad."
 	        	notific3.save
 
 				 user =Usuarioentidad.where(entidad_id: session[:entidad_id]).take
@@ -2282,7 +2337,7 @@ class InicioentidadController < ApplicationController
 				        notific.actual = 1
 				        person = Persona.where(usuario_id: plan.instructor_id).take
 				        notificacionfecha = Date.current.to_s 
-			        	notific.mensaje = "[" + notificacionfecha + "] La adecuación de "+ person.nombres.to_s.capitalize + " " + person.apellidos.to_s.capitalize + " ha sido aprobada por Consejo de Escuela y fue enviada a Consejo de Facultad."
+			        	notific.mensaje = "[" + notificacionfecha + "] La adecuación de "+ person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " ha sido aprobada por Consejo de Escuela y fue enviada a Consejo de Facultad."
 			        	notific.save
 			        	notific2 = Notificacion.new
 				        notific2.instructor_id = plan.instructor_id
@@ -2298,7 +2353,7 @@ class InicioentidadController < ApplicationController
 				        notific3.adecuacion_id = session[:adecuacion_id]
 				        notific3.informe_id = nil
 				        notific3.actual = 5		#Consejo de Escuela
-			        	notific3.mensaje = "[" + notificacionfecha + "] Se ha recibido una nueva Adecuación: "+ person.nombres.to_s.capitalize + " " + person.apellidos.to_s.capitalize + ", Revisar."
+			        	notific3.mensaje = "[" + notificacionfecha + "] Se ha recibido una nueva Adecuación: "+ person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + ", Revisar."
 			        	notific3.save
 
 						uentidad = Usuarioentidad.where(entidad_id: 13).take

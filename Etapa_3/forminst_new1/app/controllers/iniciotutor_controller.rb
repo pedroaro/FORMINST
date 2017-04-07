@@ -1434,7 +1434,7 @@ class IniciotutorController < ApplicationController
 		        puts "JAJAJA"
 		        person = Persona.where(usuario_id: plan.instructor_id).take
 		        notificacionfecha = Date.current.to_s 
-	        	notific.mensaje = "[" + notificacionfecha + "] La adecuación de "+ person.nombres.to_s.capitalize + " " + person.apellidos.to_s.capitalize + " se ha enviado a comision de investigacion."
+	        	notific.mensaje = "[" + notificacionfecha + "] La adecuación de "+ person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " se ha enviado a comisión de investigación."
 	        	notific.save
 	        	notific2 = Notificacion.new
 		        notific2.instructor_id = plan.instructor_id
@@ -1450,7 +1450,7 @@ class IniciotutorController < ApplicationController
 		        notific3.adecuacion_id = session[:adecuacion_id]
 		        notific3.informe_id = nil
 		        notific3.actual = 3		#Comisión de investigación
-	        	notific3.mensaje = "[" + notificacionfecha + "] Se ha recibido una nueva Adecuación: "+ person.nombres.to_s.capitalize + " " + person.apellidos.to_s.capitalize + ", favor aprobar y enviar a la siguiente entidad."
+	        	notific3.mensaje = "[" + notificacionfecha + "] Se ha recibido una nueva Adecuación: "+ person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + ", favor aprobar y enviar a la siguiente entidad."
 	        	notific3.save
 	        	puts notific.mensaje
 		        notific.save
@@ -1595,13 +1595,10 @@ class IniciotutorController < ApplicationController
 		if session[:usuario_id]
     		@planformacions = Planformacion.where(tutor_id: session[:usuario_id])
     		@notificaciones1= []
-    		@planformacions.each do |planformacions|
-				@adecuacion = Adecuacion.where(planformacion_id: planformacions.id).take
-    			@notificaciones = Notificacion.where(adecuacion_id: @adecuacion.id, tutor_id: session[:usuario_id]).all
-				@notificaciones.each do |notificaciones|
-					if notificaciones.actual == 1					#Caso de notificaciones del tutor
-						@notificaciones1.push(notificaciones)
-					end
+			@notificaciones = Notificacion.where( tutor_id: session[:usuario_id]).all
+			@notificaciones.each do |notificaciones|
+				if notificaciones.actual == 1					#Caso de notificaciones del tutor
+					@notificaciones1.push(notificaciones)
 				end
 			end
 		else

@@ -774,32 +774,28 @@ end
       @informe= Informe.find(session[:informe_id])
       @estatus= EstatusInforme.where(informe_id: @informe.id, actual: 1).take
       @status= TipoEstatus.find(@estatus.estatus_id)
-      if @informe.numero == 1
-        @nombre_informe= "PRIMER INFORME "
+      if (@informe.numero == 1 || @informe.numero == 3)
+        @nombre_informe= "Primer Informe "
         session[:numero_informe]=1
-      else
-        if @informe.numero == 2
-          @nombre_informe= "SEGUNDO INFORME "
-          session[:numero_informe]=2
-        else
-          if @informe.numero == 4
-            @nombre_informe= "TERCER INFORME "
-            session[:numero_informe]=4
-          else                                                                                                                                                                                                                                                                    
-            @nombre_informe= "CUARTO INFORME "
-            session[:numero_informe]=5
-          end
-        end
+      elsif (@informe.numero == 2 || @informe.numero == 6)
+        @nombre_informe= "Segundo Informe "
+        session[:numero_informe]=2
+      elsif @informe.numero == 4
+        @nombre_informe= "Tercer Informe "
+        session[:numero_informe]=4
+      elsif @informe.numero == 5                                                                                                                                                                                                                                                                    
+        @nombre_informe= "Cuarto Informe "
+        session[:numero_informe]=5
       end
 
 
       if @informe.tipo_id == 1
-        @nombre_informe= @nombre_informe+"SEMESTRAL"
+        @nombre_informe= @nombre_informe+"Semestral"
       else
         if @informe.tipo_id == 2
-          @nombre_informe= @nombre_informe+"ANUAL"
+          @nombre_informe= @nombre_informe+"Anual"
         else
-          @nombre_informe= @nombre_informe+"FINAL"
+          @nombre_informe= "Informe Final"
         end
       end
 
@@ -2100,34 +2096,20 @@ def generar_pdf() # es función permite generar el documento pdf de la adecuaci�
         si = EstatusInforme.where(informe_id: inf.id, actual: 1).take
         if(si.estatus_id==1)
           @st = "APROBADO POR CONSEJO DE FACULTAD"
-        else
-          if(si.estatus_id==2)
-            @st = "ENVIADO A CONSEJO TÉCNICO"
-          else
-            if(si.estatus_id==3)
-              @st = "ENVIADO A COMISION DE INVESTIGACIÓN"
-            else
-              if(si.estatus_id==4)
-                @st = "ENVIADO A CONSEJO DE FACULTAD"
-              else
-                if(si.estatus_id==5)
-                  @st = "APROBADO CON OBSERVACIONES POR CONSEJO DE FACULTAD"
-                else
-                  if(si.estatus_id==6)
-                   @st = "GUARDADO"
-                  else
-                    if(si.estatus_id==8)
-                      @st = "ENVIADO A CONSEJO DE ESCUELA"
-                    else
-                      if(si.estatus_id==9)
-                        @st = "RECHAZADO POR CONSEJO DE FACULTAD"
-                      end
-                    end
-                  end
-                end
-              end
-            end
-          end
+        elsif(si.estatus_id==2)
+          @st = "ENVIADO A CONSEJO TÉCNICO"
+        elsif(si.estatus_id==3)
+          @st = "ENVIADO A COMISION DE INVESTIGACIÓN"
+        elsif(si.estatus_id==4)
+          @st = "ENVIADO A CONSEJO DE FACULTAD"
+        elsif(si.estatus_id==5)
+          @st = "APROBADO CON OBSERVACIONES POR CONSEJO DE FACULTAD"
+        elsif(si.estatus_id==6)
+         @st = "GUARDADO"
+        elsif(si.estatus_id==8)
+          @st = "ENVIADO A CONSEJO DE ESCUELA"
+        elsif(si.estatus_id==9)
+          @st = "RECHAZADO POR CONSEJO DE FACULTAD"
         end
         @status.push(@st)
 
@@ -2187,6 +2169,35 @@ def generar_pdf() # es función permite generar el documento pdf de la adecuaci�
       cambio_est.save
       cambio_act.actual = 0
       cambio_act.save
+      plan = Planformacion.find(session[:plan_id])
+      cambio_est.fecha = Time.now 
+      notific = Notificacion.new
+      notific.instructor_id = plan.instructor_id
+      notific.tutor_id = session[:usuario_id]
+      notific.adecuacion_id = session[:adecuacion_id]
+      notific.informe_id = @informe_id
+      notific.actual = 1
+      puts "JAJAJA"
+      person = Persona.where(usuario_id: plan.instructor_id).take
+      notificacionfecha = Date.current.to_s 
+      notific.mensaje = "[" + notificacionfecha + "] El " + session[:nombre_informe] + " de " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " se ha enviado a comisión de investigación."
+      notific.save
+      notific2 = Notificacion.new
+      notific2.instructor_id = plan.instructor_id
+      notific2.tutor_id = session[:usuario_id]
+      notific2.adecuacion_id = session[:adecuacion_id]
+      notific2.informe_id = @informe_id
+      notific2.actual = 2
+      notific2.mensaje = "[" + notificacionfecha + "] Se ha enviado el " + session[:nombre_informe] + " a comisión de investigación."
+      notific2.save
+      notific3 = Notificacion.new
+      notific3.instructor_id = plan.instructor_id
+      notific3.tutor_id = session[:usuario_id]
+      notific3.adecuacion_id = session[:adecuacion_id]
+      notific3.informe_id = @informe_id
+      notific3.actual = 3   #Comisión de investigación
+      notific3.mensaje = "[" + notificacionfecha + "] Ha recibido un nuevo Informe: ' " + session[:nombre_informe]+ " ' de " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + ", favor aprobar y enviar a la siguiente entidad."
+      notific3.save
       userr= Usuario.where(id: session[:usuario_id]).take
       user =Usuarioentidad.where(usuario_id: userr.id).take
       if(user.escuela_id == 1)
