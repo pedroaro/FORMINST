@@ -205,6 +205,7 @@ class IniciotutorController < ApplicationController
 
 	def ver_detalles_adecuacion
 		if session[:usuario_id]
+			session[:informe_id] = nil
 			if !params[:plan_id].blank?
 				session[:plan_id] = params[:plan_id]
 			end

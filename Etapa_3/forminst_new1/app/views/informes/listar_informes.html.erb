@@ -89,6 +89,7 @@
       <%if @nombre%>
         <div>
           <h4><b><%=@nombre%></b></h4>
+        <%= link_to "Agregar pdf", {controller: "documents", action: "index", :informe_id => 7 }, class: "btn btn-forminst-blue" %>
         </div>
       <%end%>
     </div>
