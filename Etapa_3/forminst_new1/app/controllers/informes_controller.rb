@@ -253,13 +253,27 @@ class InformesController < ApplicationController
   end
 
   def eliminar_informe
-    @informe= Informe.find(session[:informe_id])
-    @est= EstatusInforme.where(informe_id: @informe.id, actual: 1).take
-    if @est.estatus_id == 6
-      @informe.destroy
-      flash[:success]= "El informe fue eliminado correctamente"
+    if !session[:informe_id].blank?
+      @informe= Informe.find(session[:informe_id])
+      @est= EstatusInforme.where(informe_id: @informe.id, actual: 1).take
+      if @est.estatus_id == 6
+        @documents = Document.where(adecuacion_id: session[:adecuacion_id], informe_id: session[:informe_id]).all
+        @documents.each do |documents| 
+          documents.destroy
+        end
+        @informesAct = InformeActividad.where(informe_id: session[:informe_id]).all
+        @informesAct.each do |informeAct| 
+          @actividadEjec= ActividadEjecutada.where(informe_actividad_id: informeAct.id).take
+          @actividadEjec.destroy
+          informeAct.destroy
+        end
+        @informe.destroy
+        flash[:success]= "El informe fue eliminado correctamente"
+      else
+        flash[:danger]= "No está permitido eliminar este informe"
+      end
     else
-      flash[:danger]= "No está permitido eliminar este informe"
+      flash[:info]= "Seleccione un informe"
     end
     redirect_to controller:"informes", action: "listar_informes"
   end
@@ -278,86 +292,92 @@ class InformesController < ApplicationController
         puts "NO HAY SESION PLAN"
         @planformacion = Planformacion.find(session[:plan_id])
       end
-    @informe= Informe.find(session[:informe_id])
-    @estatus= EstatusInforme.where(informe_id: @informe.id, actual: 1).take
-    @status= TipoEstatus.find(@estatus.estatus_id)
-    @est= EstatusInforme.where(informe_id: @informe.id).take
-    @modificar= false
-    if @est.estatus_id == 6
-      @modificar=true
-    end
-    @docencia= "docencia"
-    @j= 0
-    @k=0
-    @actividadesa= InformeActividad.where(informe_id: @informe.id).all
-    @actividadesadoc= []
-    @actividadesainv= []
-    @actividadesaext= []
-    @actividadesafor= []
-    @actividadesaotr= []
-    @resultados= []
-    @actividadese= []
-    @observaciont= []
-    @actividadesa.each do |actade| 
-      if actade.actividad_id == nil #Es el caso que es un resultado no contemplado en el plan de formacion o un avancwe de postgrado
-        @res= Resultado.find(actade.resultado_id)
-        @resultados.push(@res)
-      else
-        @act= Actividad.find(actade.actividad_id)
-        tipo= @act.tipo_actividad_id
-        if actade.resultado_id
-          @res= Resultado.find(actade.resultado_id)
-          @resultados.push(@res)
-        else
-          @resultados.push(nil)
+      if session[:informe_id]
+        @informe= Informe.find(session[:informe_id])
+        @estatus= EstatusInforme.where(informe_id: @informe.id, actual: 1).take
+        @status= TipoEstatus.find(@estatus.estatus_id)
+        @est= EstatusInforme.where(informe_id: @informe.id).take
+        @modificar= false
+        if @est.estatus_id == 6
+          @modificar=true
         end
-        @ae= ActividadEjecutada.where(informe_actividad_id: actade.id).take
-        @actividadese.push(@ae)
-        @obs= ObservacionTutor.where(informe_actividad_id: actade.id).take
-        if @obs==nil
-          @observaciont.push("")
-        else
-          @observaciont.push(@obs.observaciones)
-        end
-        if tipo==1
-          @actividadesadoc.push(@act)
-        else
-          if tipo==2
-            @actividadesainv.push(@act)
+        @docencia= "docencia"
+        @j= 0
+        @k=0
+        @actividadesa= InformeActividad.where(informe_id: @informe.id).all
+        @actividadesadoc= []
+        @actividadesainv= []
+        @actividadesaext= []
+        @actividadesafor= []
+        @actividadesaotr= []
+        @resultados= []
+        @actividadese= []
+        @observaciont= []
+        @actividadesa.each do |actade| 
+          if actade.actividad_id == nil #Es el caso que es un resultado no contemplado en el plan de formacion o un avancwe de postgrado
+            @res= Resultado.find(actade.resultado_id)
+            @resultados.push(@res)
           else
-            if tipo==3
-              @actividadesaext.push(@act)
+            @act= Actividad.find(actade.actividad_id)
+            tipo= @act.tipo_actividad_id
+            if actade.resultado_id
+              @res= Resultado.find(actade.resultado_id)
+              @resultados.push(@res)
             else
-              if tipo==4
-                @actividadesafor.push(@act)
+              @resultados.push(nil)
+            end
+            @ae= ActividadEjecutada.where(informe_actividad_id: actade.id).take
+            @actividadese.push(@ae)
+            @obs= ObservacionTutor.where(informe_actividad_id: actade.id).take
+            if @obs==nil
+              @observaciont.push("")
+            else
+              @observaciont.push(@obs.observaciones)
+            end
+            if tipo==1
+              @actividadesadoc.push(@act)
+            else
+              if tipo==2
+                @actividadesainv.push(@act)
               else
-                if tipo==5
-                  @actividadesaotr.push(@act)
+                if tipo==3
+                  @actividadesaext.push(@act)
+                else
+                  if tipo==4
+                    @actividadesafor.push(@act)
+                  else
+                    if tipo==5
+                      @actividadesaotr.push(@act)
+                    end
+                  end
                 end
               end
             end
           end
         end
+
+        @bool_enviado = 0
+        estatus_informe = EstatusInforme.where(informe_id: @informe.id, actual: 1).take
+
+
+        if (estatus_informe.estatus_id != 6 && estatus_informe.estatus_id != 5)
+          @bool_enviado = 1
+        end
+
+        @mes = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
+        @dia= [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]
+        @tipos= [['Libros',1], ['Artículo de Revista o Journals',2], ['Artículo de Prensa',3], ['CD',4], ['Manuales',5], ['Publicaciones Electrónicas',6]]
+      else
+        flash[:warning]= "Error, no hay sesion de adecuacion"
+        redirect_to controller:"iniciotutor", action: "ver_detalles_adecuacion"
       end
-    end
-
-    @bool_enviado = 0
-    estatus_informe = EstatusInforme.where(informe_id: @informe.id, actual: 1).take
-
-
-    if (estatus_informe.estatus_id != 6 && estatus_informe.estatus_id != 5)
-      @bool_enviado = 1
-    end
-
-    @mes = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
-    @dia= [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]
-    @tipos= [['Libros',1], ['Artículo de Revista o Journals',2], ['Artículo de Prensa',3], ['CD',4], ['Manuales',5], ['Publicaciones Electrónicas',6]]
     else
      redirect_to controller:"forminst", action: "index"
     end
   end
 
 def vista_previa
+  if session[:informe_id]
     @informe= Informe.find(session[:informe_id])
     @TipoSemestre=TipoInforme.where(id: @informe.tipo_id).take
     @fechaActual = Date.current.to_s
@@ -745,6 +765,10 @@ def vista_previa
       end
     end
   end
+  else
+    flash[:info]= "Seleccione un informe"
+    redirect_to controller:"informes", action: "listar_informes"
+  end
 end
 
   def ver_detalles_informe
@@ -767,52 +791,58 @@ end
         puts "HAY SESION PLAN"
         session[:informe_id] = params[:informe_id]
       end
-      puts "Informe"
-      puts session[:informe_id]
 
-      @instructor = Persona.where(usuario_id: @planformacion.instructor_id).take
-      @informe= Informe.find(session[:informe_id])
-      @estatus= EstatusInforme.where(informe_id: @informe.id, actual: 1).take
-      @status= TipoEstatus.find(@estatus.estatus_id)
-      if (@informe.numero == 1 || @informe.numero == 3)
-        @nombre_informe= "Primer Informe "
-        session[:numero_informe]=1
-      elsif (@informe.numero == 2 || @informe.numero == 6)
-        @nombre_informe= "Segundo Informe "
-        session[:numero_informe]=2
-      elsif @informe.numero == 4
-        @nombre_informe= "Tercer Informe "
-        session[:numero_informe]=4
-      elsif @informe.numero == 5                                                                                                                                                                                                                                                                    
-        @nombre_informe= "Cuarto Informe "
-        session[:numero_informe]=5
-      end
+      if session[:informe_id]
+        puts "Informe"
+        puts session[:informe_id]
 
-
-      if @informe.tipo_id == 1
-        @nombre_informe= @nombre_informe+"Semestral"
-      else
-        if @informe.tipo_id == 2
-          @nombre_informe= @nombre_informe+"Anual"
-        else
-          @nombre_informe= "Informe Final"
+        @instructor = Persona.where(usuario_id: @planformacion.instructor_id).take
+        @informe= Informe.find(session[:informe_id])
+        @estatus= EstatusInforme.where(informe_id: @informe.id, actual: 1).take
+        @status= TipoEstatus.find(@estatus.estatus_id)
+        if (@informe.numero == 1 || @informe.numero == 3)
+          @nombre_informe= "Primer Informe "
+          session[:numero_informe]=1
+        elsif (@informe.numero == 2 || @informe.numero == 6)
+          @nombre_informe= "Segundo Informe "
+          session[:numero_informe]=2
+        elsif @informe.numero == 4
+          @nombre_informe= "Tercer Informe "
+          session[:numero_informe]=4
+        elsif @informe.numero == 5                                                                                                                                                                                                                                                                    
+          @nombre_informe= "Cuarto Informe "
+          session[:numero_informe]=5
         end
-      end
 
-  
-      @userentidad= Usuarioentidad.where(usuario_id: @planformacion.instructor_id).take
-      @entidad= Entidad.find(@userentidad.entidad_id)
-      puts "entidaaaaaaaaaad"
-      puts @entidad
-      @escuela= Escuela.find(@userentidad.escuela_id)
-      session[:nombre_informe] = @nombre_informe
-      session[:status_informe] = @status.concepto
 
-      @bool_enviado = 0
-      estatus_informe = EstatusInforme.where(informe_id: @informe.id, actual: 1).take
+        if @informe.tipo_id == 1
+          @nombre_informe= @nombre_informe+"Semestral"
+        else
+          if @informe.tipo_id == 2
+            @nombre_informe= @nombre_informe+"Anual"
+          else
+            @nombre_informe= "Informe Final"
+          end
+        end
 
-      if (estatus_informe.estatus_id != 6 && estatus_informe.estatus_id != 5)
-        @bool_enviado = 1
+    
+        @userentidad= Usuarioentidad.where(usuario_id: @planformacion.instructor_id).take
+        @entidad= Entidad.find(@userentidad.entidad_id)
+        puts "entidaaaaaaaaaad"
+        puts @entidad
+        @escuela= Escuela.find(@userentidad.escuela_id)
+        session[:nombre_informe] = @nombre_informe
+        session[:status_informe] = @status.concepto
+
+        @bool_enviado = 0
+        estatus_informe = EstatusInforme.where(informe_id: @informe.id, actual: 1).take
+
+        if (estatus_informe.estatus_id != 6 && estatus_informe.estatus_id != 5)
+          @bool_enviado = 1
+        end
+      else
+        flash[:info]= "Seleccione un informe"
+        redirect_to controller:"informes", action: "listar_informes"
       end
     else
       redirect_to controller:"forminst", action: "index"

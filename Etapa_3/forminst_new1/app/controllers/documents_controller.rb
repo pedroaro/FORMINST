@@ -5,7 +5,13 @@ class DocumentsController < ApplicationController
   # GET /documents
   # GET /documents.json
   def index
-    @documents = Document.all
+    @plan = Planformacion.where(id: session[:plan_id]).take
+    @documents = []
+    if !session[:informe_id].blank?
+      @documents = Document.where(adecuacion_id: session[:adecuacion_id], informe_id: session[:informe_id]).all
+    else
+      @documents = Document.where(adecuacion_id: session[:adecuacion_id], informe_id: nil).all
+    end
   end
 
   # GET /documents/1
@@ -37,8 +43,8 @@ class DocumentsController < ApplicationController
     @document.informe_id = session[:informe_id]
     respond_to do |format|
       if @document.save
-        format.html { redirect_to @document, notice: 'Document was successfully created.' }
-        format.json { render :show, status: :created, location: @document }
+        flash[:success]="El documento se ha subido con exito"
+        format.html { redirect_to documents_url }
       else
         format.html { render :new }
         format.json { render json: @document.errors, status: :unprocessable_entity }
@@ -65,7 +71,8 @@ class DocumentsController < ApplicationController
   def destroy
     @document.destroy
     respond_to do |format|
-      format.html { redirect_to documents_url, notice: 'Document was successfully destroyed.' }
+      flash[:success]="El documento fue borrado con exito"
+      format.html { redirect_to documents_url }
       format.json { head :no_content }
     end
   end

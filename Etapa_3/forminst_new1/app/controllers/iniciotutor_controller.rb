@@ -979,12 +979,17 @@ class IniciotutorController < ApplicationController
 		puts "asdasdasd"
 		@est= EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
 		if @est.estatus_id == 6
+      		@documents = Document.where(adecuacion_id: session[:adecuacion_id]).all
 			@actividadAde = AdecuacionActividad.where(adecuacion_id: @adecuacion.id).all
 			@actividadAde.each do |actade| 
 				@elimi = Actividad.where(id: actade.actividad_id).take
 				@elimi.destroy
 				actade.destroy
 			end
+			@documents.each do |documents| 
+				documents.destroy
+			end
+
 			flash[:success]= "La adecuacion fue eliminada correctamente"
 		else
 			flash[:danger]= "No está permitido eliminar esta adecuación"

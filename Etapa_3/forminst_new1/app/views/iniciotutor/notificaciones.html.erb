@@ -48,7 +48,7 @@
 	        </thead>
 	        <tbody>
 	        	<% if !@notificaciones1.blank? %>
-		          <% @notificaciones1.each_with_index do |notificaciones1| %> 
+		          <% @notificaciones1.reverse_each.each_with_index do |notificaciones1| %> 
 					<%= form_tag({controller: 'iniciotutor', action: 'borrar_notificaciones'}) do%>
 					<input id="noti" type="hidden" name="noti" value='<%= notificaciones1.id %>'/>
 		            <tr>

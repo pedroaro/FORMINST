@@ -75,7 +75,7 @@
         <div>
           <span><%= link_to 'Plan Formación', :controller => 'iniciotutor', :action => 'planformacions' %></span>
           <p style="display:inline"> / </p>
-          <span><%= link_to @instructorName , :controller => 'iniciotutor', :action => 'ver_detalles_plan' %></span>
+          <span><%= link_to @instructorName , :controller => 'iniciotutor', :action => 'ver_detalles_adecuacion' %></span>
           <p style="display:inline"> / Informes </p>
         </div>
       <%end%>
@@ -89,7 +89,6 @@
       <%if @nombre%>
         <div>
           <h4><b><%=@nombre%></b></h4>
-        <%= link_to "Agregar pdf", {controller: "documents", action: "index", :informe_id => 7 }, class: "btn btn-forminst-blue" %>
         </div>
       <%end%>
     </div>
