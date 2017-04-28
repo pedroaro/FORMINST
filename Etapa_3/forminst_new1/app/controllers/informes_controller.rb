@@ -292,48 +292,6 @@ class InformesController < ApplicationController
         puts "NO HAY SESION PLAN"
         @planformacion = Planformacion.find(session[:plan_id])
       end
-<<<<<<< HEAD
-    @informe= Informe.find(session[:informe_id])
-    @estatus= EstatusInforme.where(informe_id: @informe.id, actual: 1).take
-    @status= TipoEstatus.find(@estatus.estatus_id)
-    @est= EstatusInforme.where(informe_id: @informe.id).take
-    @modificar= false
-    if @est.estatus_id == 6
-      @modificar=true
-    end
-    @docencia= "docencia"
-    @j= 0
-    @k=0
-    @actividadesa= InformeActividad.where(informe_id: @informe.id).all
-    @actividadesadoc= []
-    @actividadesainv= []
-    @actividadesaext= []
-    @actividadesafor= []
-    @actividadesaotr= []
-    @resultados= []
-    @actividadese= []
-    @observaciont= []
-    @actividadesa.each do |actade| 
-      if actade.actividad_id == nil #Es el caso que es un resultado no contemplado en el plan de formacion o un avancwe de postgrado
-        @res= Resultado.where(informe_actividad_id: actade.id)
-        @resultados.push(@res)
-      else
-        @act= Actividad.find(actade.actividad_id)
-        tipo= @act.tipo_actividad_id
-        if actade.resultado_id
-          @res= Resultado.where(informe_actividad_id: actade.id)
-          @resultados.push(@res)
-        else
-          @resultados.push(nil)
-        end
-        @ae= ActividadEjecutada.where(informe_actividad_id: actade.id).take
-        @actividadese.push(@ae)
-        @obs= ObservacionTutor.where(informe_actividad_id: actade.id).take
-        if @obs==nil
-          @observaciont.push("")
-        else
-          @observaciont.push(@obs.observaciones)
-=======
       if session[:informe_id]
         @informe= Informe.find(session[:informe_id])
         @estatus= EstatusInforme.where(informe_id: @informe.id, actual: 1).take
@@ -342,7 +300,6 @@ class InformesController < ApplicationController
         @modificar= false
         if @est.estatus_id == 6
           @modificar=true
->>>>>>> c9a52724a65dfa4fd81ece3369cbfb5e342fa731
         end
         @docencia= "docencia"
         @j= 0
@@ -358,17 +315,13 @@ class InformesController < ApplicationController
         @observaciont= []
         @actividadesa.each do |actade| 
           if actade.actividad_id == nil #Es el caso que es un resultado no contemplado en el plan de formacion o un avancwe de postgrado
-            @res= Resultado.find(actade.resultado_id)
+            @res= Resultado.where(informe_actividad_id: actade.id).all
             @resultados.push(@res)
           else
             @act= Actividad.find(actade.actividad_id)
             tipo= @act.tipo_actividad_id
-            if actade.resultado_id
-              @res= Resultado.find(actade.resultado_id)
-              @resultados.push(@res)
-            else
-              @resultados.push(nil)
-            end
+            @res= Resultado.where(informe_actividad_id: actade.id).all
+            @resultados.push(@res)
             @ae= ActividadEjecutada.where(informe_actividad_id: actade.id).take
             @actividadese.push(@ae)
             @obs= ObservacionTutor.where(informe_actividad_id: actade.id).take
@@ -835,34 +788,6 @@ end
         session[:informe_id] = params[:informe_id]
       end
 
-<<<<<<< HEAD
-      @instructor = Persona.where(usuario_id: @planformacion.instructor_id).take
-      @informe= Informe.find(session[:informe_id])
-      @estatus= EstatusInforme.where(informe_id: @informe.id, actual: 1).take
-      @status= TipoEstatus.find(@estatus.estatus_id)
-      if (@informe.numero == 1 || @informe.numero == 3)
-        @nombre_informe= "Primer Informe "
-        session[:numero_informe]=1
-      elsif (@informe.numero == 2 || @informe.numero == 6)
-        @nombre_informe= "Segundo Informe "
-        session[:numero_informe]=2
-      elsif @informe.numero == 4
-        @nombre_informe= "Tercer Informe "
-        session[:numero_informe]=4
-      elsif @informe.numero == 5                                                                                                                                                                                                                                                                    
-        @nombre_informe= "Cuarto Informe "
-        session[:numero_informe]=5
-      end
-
-
-      if @informe.tipo_id == 1
-        @nombre_informe= @nombre_informe+"Semestral"
-      else
-        if @informe.tipo_id == 2
-          @nombre_informe= @nombre_informe+"Anual"
-        else
-          @nombre_informe= "Informe Final"
-=======
       if session[:informe_id]
         puts "Informe"
         puts session[:informe_id]
@@ -894,7 +819,6 @@ end
           else
             @nombre_informe= "Informe Final"
           end
->>>>>>> c9a52724a65dfa4fd81ece3369cbfb5e342fa731
         end
 
     
@@ -1911,8 +1835,7 @@ def generar_pdf() # es funci√≥n permite generar el documento pdf de la adecuaci√
                   oa.save
             end
 
-
-         ia.save
+          ia.save
      
         
 
@@ -1952,7 +1875,6 @@ def generar_pdf() # es funci√≥n permite generar el documento pdf de la adecuaci√
           @volumen = nil
           @edicion = nil
           @issni = nil
-          @revista = nil
           @issne = nil
           @doi = nil
           @nombre = nil 
@@ -1991,7 +1913,7 @@ def generar_pdf() # es funci√≥n permite generar el documento pdf de la adecuaci√
               @volumen = params[:bvolumen.to_s+cpi.to_s+j.to_s]
               @edicion = params[:bnedicion.to_s+cpi.to_s+j.to_s]
               @issni = params[:bissnimpre.to_s+cpi.to_s+j.to_s]
-              @revista = params[:brevista.to_s+cpi.to_s+j.to_s]
+              @nombre_revista = params[:brevista.to_s+cpi.to_s+j.to_s]
               @issne = params[:bissnelec.to_s+cpi.to_s+j.to_s]
               @doi = params[:bdoi.to_s+cpi.to_s+j.to_s]
 
@@ -2159,7 +2081,7 @@ def generar_pdf() # es funci√≥n permite generar el documento pdf de la adecuaci√
             r.tipo_publicacion = @tipo_publicacion
             r.titulo = @titulo
             r.autor = @autor
-            r.titulo_capitulo = @nombre_capitulo
+            r.nombre_capitulo = @nombre_capitulo
             r.autor_capitulo = @autor_capitulo
             r.dia = @dia
             r.mes =@mes
@@ -2178,10 +2100,21 @@ def generar_pdf() # es funci√≥n permite generar el documento pdf de la adecuaci√
             r.nombre_acto = @nombre_acto
             r.nombre_paginaw = @nombre_paginaw
             r.sitio_paginaw = @sitio_paginaw
-            r.informe_actividad_id = ia.id
+            r.infoafiliaion = @infoafiliaion
+            r.cptipo = @cptipo
+            r.nombre = @nombre
+            r.ISSN_impreso = @issni
+            r.ISSN_electro = @issne
+            r.volumen = @volumen
+            r.edicion = @edicion
+            r.DOI = @doi
+            r.ISBN = @isbm
+            r.universidad = @universidad
             r.url = @url
+            r.informe_actividad_id = ia.id
             r.save
-          	cpi = cpi+1
+
+          cpi = cpi+1
 
         end
 

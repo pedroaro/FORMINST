@@ -5,5 +5,4 @@ class Informeactividad < ActiveRecord::Base
 	has_many :actividadejecutada
 	has_many :observaciontutor
 	belongs_to :actividad
-	has_many :resultado
 end
