@@ -102,9 +102,9 @@
       <%end%>
       <%= link_to "Vista Previa", {controller: "informes", action: "vista_previa"}, class: "btn btn-default active" %>
       <%= link_to "Generar PDF", {controller: "informes", action: "generar_pdf"}, class: "btn btn-default" %>
-      <button type="button" class="btn btn-default">Agregar Soporte</button>
-      <button type="button" class="btn btn-default">Ver Soporte</button>
-      <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModalEliminar">
+      <%= link_to "Agregar Soporte", {controller: "documents", action: "new"}, class: "btn btn-default" %>
+      <%= link_to "Ver Soporte", {controller: "documents", action: "index"}, class: "btn btn-default" %>
+      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModalEliminar">
         Eliminar Informe
       </button>
     </div>
@@ -119,7 +119,7 @@
         <div>
           <span><%= link_to 'Plan Formación', :controller => 'iniciotutor', :action => 'planformacions' %></span>
           <p style="display:inline"> / </p>
-          <span><%= link_to session[:instructorName] , :controller => 'iniciotutor', :action => 'ver_detalles_plan' %></span>
+          <span><%= link_to session[:instructorName] , :controller => 'iniciotutor', :action => 'ver_detalles_adecuacion' %></span>
           <p style="display:inline"> / </p>
           <span><%= link_to 'Informes', :controller => 'informes', :action => 'listar_informes' %></span>
           <p style="display:inline">  /  Vista Previa </p>

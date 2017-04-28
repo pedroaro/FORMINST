@@ -42,6 +42,7 @@
 <% if @informe %>
 <div class = 'row'>
   <div class="col-xs-12 col-md-12">
+    <h1>Listar Informes</h1>
     <p class="text-justify">Haga click en "Ver detalles" sobre el Informe correspondiente en caso de que se desee visualizar los detalles del misma</p>
     <div class="table-responsive">
       <table class="table table-hover table-bordered text-center">
@@ -52,7 +53,7 @@
             <th class="text-center">Fecha de Creación</th>
             <th class="text-center">Estado</th>
             <th class="text-center">Ultima Modificación</th>
-            <th></th>
+            <th class="text-center">Detalles</th>
           </tr>
         </thead>
 
@@ -62,7 +63,7 @@
               <td class = "text-center"><%= @tipos[i] %></td>
               <td class = "text-center"><%= informe.numero %></td>
               <td class = "text-center"><%= informe.fecha_creacion %></td>
-              <td class = "text-center">Guardado</td>
+              <td class = "text-center"><%=@status[i]%></td>
               <td class = "text-center"><%= informe.fecha_modificacion %></td>
               <td class = "text-center">
               <%= form_tag({controller: 'inicioinstructor', action: 'ver_detalles_informe'}) do%>
@@ -72,7 +73,6 @@
             </td>
             </tr>
           <% end %>
-            
         </tbody>
       </table>
     </div>

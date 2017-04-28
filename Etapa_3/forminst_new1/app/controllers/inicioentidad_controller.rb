@@ -8,9 +8,39 @@ class InicioentidadController < ApplicationController
 			session[:instructorName] = nil
 
 			@nombre = session[:nombre_usuario]
+			print "NO HAY USUARIO"
+			puts session[:entidad_id]
 			if not @nombre
 				print "NO HAY USUARIO"
 			end
+			@usu=Usuarioentidad.where(entidad_id: session[:entidad_id]).take
+			@entidad_escuela_id= @usu.escuela_id
+			@notificaciones1= []
+		    if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12)					#Caso de Comision de Investigación
+		    	@notificaciones = Notificacion.where(actual: 3).all
+		    	@notificaciones.each do |notificaciones|
+			    	@tutor_escuela = Usuarioentidad.where(usuario_id: notificaciones.tutor_id).take
+			    	puts @tutor_escuela.escuela_id
+			    	puts @entidad_escuela_id
+			    	puts notificaciones.actual
+			    	if (@tutor_escuela.escuela_id == @entidad_escuela_id) #Caso de notificaciones del Comision de investigación 
+			        	@notificaciones1.push(notificaciones)
+			        end
+		    	end
+		    elsif (session[:entidad_id] >= 1 && session[:entidad_id] <= 6)
+		    	@notificaciones = Notificacion.where(actual: 4).all
+		    	@notificaciones.each do |notificaciones|
+			    	@tutor_escuela = Usuarioentidad.where(usuario_id: notificaciones.tutor_id).take
+			    	puts @tutor_escuela.escuela_id
+			    	puts @entidad_escuela_id
+			    	puts notificaciones.actual
+			    	if (@tutor_escuela.escuela_id == @entidad_escuela_id) #Caso de notificaciones del Comision de investigación 
+			        	@notificaciones1.push(notificaciones)
+			        end
+		    	end
+		    elsif (session[:entidad_id] == 13)
+		    	@notificaciones1 = Notificacion.where(actual: 5).all
+		    end			
 		else
 			redirect_to controller:"forminst", action: "index"
 		end
@@ -19,6 +49,88 @@ class InicioentidadController < ApplicationController
 	def logout
 		reset_session
 		redirect_to controller: "forminst", action: "index"
+	end
+
+
+  	def ver_soporte
+	    @plan = Planformacion.where(id: session[:plan_id]).take
+	    @documents = []
+	    if !session[:informe_id].blank?
+	    	adec = Adecuacion.where(planformacion_id: session[:plan_id]).take
+	    	session[:adecuacion_id] = adec.id
+	      	@documents = Document.where(adecuacion_id: session[:adecuacion_id], informe_id: session[:informe_id]).all
+			@bool_enviado = 0
+			if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12)
+			#Usuario comision
+				estatusI = EstatusInforme.where(informe_id: session[:informe_id], actual: 1).take #Estatus enviado a comision de investigacioni
+				if(estatusI.estatus_id != 3)
+				@bool_enviado = 1
+				end
+
+			else
+				if (session[:entidad_id] >= 14 && session[:entidad_id] <= 17)
+				#Consejo tecnico
+					estatusI = EstatusInforme.where(informe_id: session[:informe_id], actual: 1).take
+					if(estatusI.estatus_id != 2)
+					@bool_enviado = 1
+					end
+				else
+					if (session[:entidad_id] >= 1 && session[:entidad_id] <= 6)
+					#Consejo de escuela
+						estatusI = EstatusInforme.where(informe_id: session[:informe_id], actual: 1).take 
+						if(estatusI.estatus_id != 8)
+						@bool_enviado = 1 #Estatus enviado a consejo escuela
+						
+						end
+					else
+						if (session[:entidad_id] == 13)
+						#Consejo de facultad
+							estatusI = EstatusInforme.where(informe_id: session[:informe_id], actual: 1).take
+							if(estatusI.estatus_id != 4)
+							@bool_enviado = 1
+							end
+						end	
+					end
+				end
+			end		    
+		else
+	      @documents = Document.where(adecuacion_id: session[:adecuacion_id], informe_id: nil).all
+	      @bool_enviado = 0
+			if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12)
+			#Usuario comision
+				estatusI = EstatusAdecuacion.where(adecuacion_id: session[:adecuacion_id], actual: 1).take #Estatus enviado a comision de investigacioni
+				if(estatusI.estatus_id != 3)
+				@bool_enviado = 1
+				end
+
+			else
+				if (session[:entidad_id] >= 14 && session[:entidad_id] <= 17)
+				#Consejo tecnico
+					estatusI = EstatusAdecuacion.where(adecuacion_id: session[:adecuacion_id], actual: 1).take
+					if(estatusI.estatus_id != 2)
+					@bool_enviado = 1
+					end
+				else
+					if (session[:entidad_id] >= 1 && session[:entidad_id] <= 6)
+					#Consejo de escuela
+						estatusI = EstatusAdecuacion.where(adecuacion_id: session[:adecuacion_id], actual: 1).take 
+						if(estatusI.estatus_id != 8)
+						@bool_enviado = 1 #Estatus enviado a consejo escuela
+						
+						end
+					else
+						if (session[:entidad_id] == 13)
+						#Consejo de facultad
+							estatusI = EstatusAdecuacion.where(adecuacion_id: session[:adecuacion_id], actual: 1).take
+							if(estatusI.estatus_id != 4)
+							@bool_enviado = 1
+							end
+						end	
+					end
+				end
+			end
+	    end
+
 	end
 
 	def listar_adecuaciones
@@ -146,6 +258,7 @@ class InicioentidadController < ApplicationController
 		if session[:usuario_id]
 			@nombre = session[:nombre_usuario]
 			@modifique=false
+			session[:informe_id] = nil
 			@cant_delete= params[:cant_delete]
 			@cant_edit= params[:cant_edit]
 			@cant_doc= params[:cant_docencia]
@@ -263,6 +376,7 @@ class InicioentidadController < ApplicationController
 
 	def detalles_adecuacion3
 		if session[:usuario_id]
+			session[:informe_id] = nil
 			@semestre = 1
 			@iddoc= 'id_docencia'
 			@docencia='docencia'
@@ -373,6 +487,7 @@ class InicioentidadController < ApplicationController
 	def detalles_adecuacion4
 		if session[:usuario_id]
 			@semestre = 2
+			session[:informe_id] = nil
 			@iddoc= 'id_docencia'
 			@docencia='docencia'
 			@investigacion= 'investigacion'
@@ -482,6 +597,7 @@ class InicioentidadController < ApplicationController
 	def detalles_adecuacion5
 		if session[:usuario_id]
 			@semestre = 3
+			session[:informe_id] = nil
 			@iddoc= 'id_docencia'
 			@docencia='docencia'
 			@investigacion= 'investigacion'
@@ -591,6 +707,7 @@ class InicioentidadController < ApplicationController
 	def detalles_adecuacion6
 		if session[:usuario_id]
 			@semestre = 4
+			session[:informe_id] = nil
 			@iddoc= 'id_docencia'
 			@docencia='docencia'
 			@investigacion= 'investigacion'
@@ -851,54 +968,59 @@ class InicioentidadController < ApplicationController
 	      	if params[:informe_id]!=nil
 	        	session[:informe_id]= params[:informe_id]
 	      	end
-	      	@informe= Informe.find(session[:informe_id])
-	      	@est= EstatusInforme.where(informe_id: @informe.id, actual: 1).take
-    		@status= TipoEstatus.find(@est.estatus_id)
-	      	@planformacion = Planformacion.find(@informe.planformacion_id)
-	      	@persona = Persona.where(usuario_id: @planformacion.tutor_id).take
-	      	@instructor = Persona.where(usuario_id: @planformacion.instructor_id).take
-	      	puts @planformacion.tutor_id
-			puts @planformacion.instructor_id
-			puts @planformacion.tutor_id
-			puts @planformacion.instructor_id
-			puts @planformacion.tutor_id
-			puts @planformacion.instructor_id
+	      	if !session[:informe_id].blank?
+		      	@informe= Informe.find(session[:informe_id])
+		      	session[:plan_id] = @informe.planformacion_id
+		      	@est= EstatusInforme.where(informe_id: @informe.id, actual: 1).take
+	    		@status= TipoEstatus.find(@est.estatus_id)
+		      	@planformacion = Planformacion.find(@informe.planformacion_id)
+		      	@persona = Persona.where(usuario_id: @planformacion.tutor_id).take
+		      	@instructor = Persona.where(usuario_id: @planformacion.instructor_id).take
+		      	puts @planformacion.tutor_id
+				puts @planformacion.instructor_id
+				puts @planformacion.tutor_id
+				puts @planformacion.instructor_id
+				puts @planformacion.tutor_id
+				puts @planformacion.instructor_id
 
-	      	if @informe.numero == 1
-	        	@nombre_informe= "PRIMER INFORME "
-	        	session[:numero_informe]=1
-	      	else
-	        	if @informe.numero == 2
-	         	 @nombre_informe= "SEGUNDO INFORME "
-	          	session[:numero_informe]=2
-	        	else
-	          	if @informe.numero == 3
-	            	@nombre_informe= "TERCER INFORME "
-	            	session[:numero_informe]=3
-	          	else                                                        
-	            	@nombre_informe= "CUARTO INFORME "
-	            	session[:numero_informe]=4
-	          	end
-	        	end
-	      	end
+		      	if @informe.numero == 1
+		        	@nombre_informe= "PRIMER INFORME "
+		        	session[:numero_informe]=1
+		      	else
+		        	if @informe.numero == 2
+		         	 @nombre_informe= "SEGUNDO INFORME "
+		          	session[:numero_informe]=2
+		        	else
+		          	if @informe.numero == 3
+		            	@nombre_informe= "TERCER INFORME "
+		            	session[:numero_informe]=3
+		          	else                                                        
+		            	@nombre_informe= "CUARTO INFORME "
+		            	session[:numero_informe]=4
+		          	end
+		        	end
+		      	end
 
-	      	if @informe.tipo_id == 1
-	        	@nombre_informe= @nombre_informe+"SEMESTRAL"
-	      	else
-	        	if @informe.tipo_id == 2
-	          		@nombre_informe= @nombre_informe+"ANUAL"
-	        	else
-	          		@nombre_informe= @nombre_informe+"FINAL"
-	        	end
-	      	end
+		      	if @informe.tipo_id == 1
+		        	@nombre_informe= @nombre_informe+"SEMESTRAL"
+		      	else
+		        	if @informe.tipo_id == 2
+		          		@nombre_informe= @nombre_informe+"ANUAL"
+		        	else
+		          		@nombre_informe= @nombre_informe+"FINAL"
+		        	end
+		      	end
 
-	      	@estatus= EstatusInforme.where(informe_id: @informe.id, actual: 1).take
-	      	@status= TipoEstatus.find(@estatus.estatus_id)
-	      	@userentidad=Usuarioentidad.where(entidad_id: session[:entidad_id]).take
-			@escuela= Escuela.find(@userentidad.escuela_id)
-	      	session[:nombre_informe] = @nombre_informe
-	      	session[:status_informe] = @status.concepto
-
+		      	@estatus= EstatusInforme.where(informe_id: @informe.id, actual: 1).take
+		      	@status= TipoEstatus.find(@estatus.estatus_id)
+		      	@userentidad=Usuarioentidad.where(entidad_id: session[:entidad_id]).take
+				@escuela= Escuela.find(@userentidad.escuela_id)
+		      	session[:nombre_informe] = @nombre_informe.downcase.split.map(&:capitalize).join(' ')		##Capitalize every first word of the string
+		      	session[:status_informe] = @status.concepto
+		    else
+			    flash[:info]= "Seleccione un informe"
+			    redirect_to controller:"inicioentidad", action: "listar_informes"
+			end	
 	    else
 	      redirect_to controller:"forminst", action: "index"
 	    end
@@ -940,124 +1062,62 @@ class InicioentidadController < ApplicationController
 	end
 
 	def detalles_informe2
-		@nombre = session[:nombre_usuario]
-    	@informe= Informe.find(session[:informe_id])
-    	@est= EstatusInforme.where(informe_id: @informe.id, actual: 1).take
-    	@status= TipoEstatus.find(@est.estatus_id)
-    	@adecuacion = Adecuacion.where(planformacion_id: @informe.planformacion_id).take
-    	@modificar= false
-    	if @est.estatus_id == 6
-    	  @modificar=true
-    	end
-    	@docencia= "docencia"
-    	@cp=0
-    	@j= 0
-    	@k=0
-    	@actividadesa= InformeActividad.where(informe_id: @informe.id).all
-    	@actividadesadoc= []
-    	@actividadesainv= []
-    	@actividadesaext= []
-    	@actividadesafor= []
-    	@actividadesaotr= []
-    	@resultados= []
-    	@resultados2= ""
-    	@resultados2a= []
-    	@actividadese= []
-    	@observaciont= []
-    	@revision= Revision.where(informe_id: @informe.id, usuario_id: session[:usuario_id], adecuacion_id: @adecuacion.id, estatus_id: @est.estatus_id).take
-    	@actividadesa.each do |actade| 
-	      	if actade.actividad_id == nil #Es el caso que es un resultado no contemplado en el plan de formacion o un avancwe de postgrado
-	        	@res= Resultado.find(actade.resultado_id)
-	        	@cparray = ["a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a"]
-	        	@cparray[0] = @res.titulo
-	        	@cparray[1] = @res.autor
-	        	@cparray[2] = @res.titulo_capitulo
-	        	@cparray[3] = @res.autor_capitulo
-	        	@cparray[4] = @res.dia
-	        	@cparray[5] = @res.mes
-	        	@cparray[6] = @res.ano
-	        	@cparray[7] = @res.ciudad
-	        	@cparray[8] = @res.estado
-	        	@cparray[9] = @res.pais
-	        	@cparray[10] = @res.organizador
-	        	@cparray[11] = @res.duracion
-	        	@cparray[12] = @res.editor
-	        	@cparray[13] = @res.titulo_libro
-	        	@cparray[14] = @res.autor_libro
-	        	@cparray[15] = @res.nombre_revista
-	        	@cparray[16] = @res.nombre_periodico
-	        	@cparray[17] = @res.nombre_acto
-	        	@cparray[18] = @res.paginas
-	        	@cparray[19] = @res.nombre_paginaw
-	        	@cparray[20] = @res.sitio_paginaw
-	        	@cparray[21] = @res.url
-	        	puts "holaaaaaaaaaaaaaa"
-	       		if !@cparray.blank?
-		        	@noemptyarray = @cparray - ["", nil]
-		        	if !@resultados2
-			        	@noemptyarray = @cparray - ["", nil]
-			        	if !@noemptyarray.join(',').blank?
-			        		puts @noemptyarray.join(',')
-				        	@resultados2 = @noemptyarray.join(',')
-				        	puts "a"
-				        	puts @resultados2
-				        end
-			        else
-			        	@noemptyarray = @cparray - ["", nil]
-			        	if !@noemptyarray.join(',').blank?
-				        	puts @noemptyarray.join(',')
-				        	@resultados2 = @noemptyarray.join(',')
-				        	puts "b"
-				        	puts @resultados2
-			        	end
-		        	end
-		        	@resultados2a.push(@resultados2)
-	        	end
-	        	@resultados.push(@res)
-	        	@actividadese.push("")
-
-	        	if @revision == nil || @revision == ""
-		        	@obs=nil
-		        else
-		        	@obs= ObservacionActividadInforme.where(informe_actividad_id: actade.id, revision_id: @revision.id).take
-		        end	        
-		        if @obs==nil
-		          	@observaciont.push("")
-		        else
-		          	@observaciont.push(@obs.observaciones)
-		        end
-
-	     	else
-		        @act= Actividad.find(actade.actividad_id)
-		        tipo= @act.tipo_actividad_id
-		        if actade.resultado_id
-		          	@res= Resultado.find(actade.resultado_id)
+		if !session[:informe_id].blank?
+			@nombre = session[:nombre_usuario]
+	    	@informe= Informe.find(session[:informe_id])
+		    session[:plan_id] = @informe.planformacion_id
+	    	@est= EstatusInforme.where(informe_id: @informe.id, actual: 1).take
+	    	@status= TipoEstatus.find(@est.estatus_id)
+	    	@adecuacion = Adecuacion.where(planformacion_id: @informe.planformacion_id).take
+	    	@modificar= false
+	    	if @est.estatus_id == 6
+	    	  @modificar=true
+	    	end
+	    	@docencia= "docencia"
+	    	@cp=0
+	    	@j= 0
+	    	@k=0
+	    	@actividadesa= InformeActividad.where(informe_id: @informe.id).all
+	    	@actividadesadoc= []
+	    	@actividadesainv= []
+	    	@actividadesaext= []
+	    	@actividadesafor= []
+	    	@actividadesaotr= []
+	    	@resultados= []
+	    	@resultados2= ""
+	    	@resultados2a= []
+	    	@actividadese= []
+	    	@observaciont= []
+	    	@revision= Revision.where(informe_id: @informe.id, usuario_id: session[:usuario_id], adecuacion_id: @adecuacion.id, estatus_id: @est.estatus_id).take
+	    	@actividadesa.each do |actade| 
+		      	if actade.actividad_id == nil #Es el caso que es un resultado no contemplado en el plan de formacion o un avancwe de postgrado
+		        	@res= Resultado.find(actade.resultado_id)
 		        	@cparray = ["a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a"]
-		        	@cparray[0] = @res.titulo.to_s
-		        	@cparray[1] = @res.autor.to_s
-		        	@cparray[2] = @res.titulo_capitulo.to_s
-		        	@cparray[3] = @res.autor_capitulo.to_s
-		        	@cparray[4] = @res.dia.to_s
-		        	@cparray[5] = @res.mes.to_s
-		        	@cparray[6] = @res.ano.to_s
-		        	@cparray[7] = @res.ciudad.to_s
-		        	@cparray[8] = @res.estado.to_s
-		        	@cparray[9] = @res.pais.to_s
-		        	@cparray[10] = @res.organizador.to_s
-		        	@cparray[11] = @res.duracion.to_s
-		        	@cparray[12] = @res.editor.to_s
-		        	@cparray[13] = @res.titulo_libro.to_s
-		        	@cparray[14] = @res.autor_libro.to_s
-		        	@cparray[15] = @res.nombre_revista.to_s
-		        	@cparray[16] = @res.nombre_periodico.to_s
-		        	@cparray[17] = @res.nombre_acto.to_s
-		        	@cparray[18] = @res.paginas.to_s
-		        	@cparray[19] = @res.nombre_paginaw.to_s
-		        	@cparray[20] = @res.sitio_paginaw.to_s
-		        	@cparray[21] = @res.url.to_s
+		        	@cparray[0] = @res.titulo
+		        	@cparray[1] = @res.autor
+		        	@cparray[2] = @res.titulo_capitulo
+		        	@cparray[3] = @res.autor_capitulo
+		        	@cparray[4] = @res.dia
+		        	@cparray[5] = @res.mes
+		        	@cparray[6] = @res.ano
+		        	@cparray[7] = @res.ciudad
+		        	@cparray[8] = @res.estado
+		        	@cparray[9] = @res.pais
+		        	@cparray[10] = @res.organizador
+		        	@cparray[11] = @res.duracion
+		        	@cparray[12] = @res.editor
+		        	@cparray[13] = @res.titulo_libro
+		        	@cparray[14] = @res.autor_libro
+		        	@cparray[15] = @res.nombre_revista
+		        	@cparray[16] = @res.nombre_periodico
+		        	@cparray[17] = @res.nombre_acto
+		        	@cparray[18] = @res.paginas
+		        	@cparray[19] = @res.nombre_paginaw
+		        	@cparray[20] = @res.sitio_paginaw
+		        	@cparray[21] = @res.url
 		        	puts "holaaaaaaaaaaaaaa"
-		        	if !@cparray.blank?
-		        		@noemptyarray = @cparray - ["", nil]
+		       		if !@cparray.blank?
+			        	@noemptyarray = @cparray - ["", nil]
 			        	if !@resultados2
 				        	@noemptyarray = @cparray - ["", nil]
 				        	if !@noemptyarray.join(',').blank?
@@ -1075,87 +1135,550 @@ class InicioentidadController < ApplicationController
 					        	puts @resultados2
 				        	end
 			        	end
-			       		@resultados2a.push(@resultados2)
+			        	@resultados2a.push(@resultados2)
 		        	end
-		          	@resultados.push(@res)
-		        else
-		          	@resultados.push(nil)
-		        end
-		        @ae= ActividadEjecutada.where(informe_actividad_id: actade.id).take
-		        if @ae==nil || @ae== ""
-		        	
+		        	@resultados.push(@res)
 		        	@actividadese.push("")
-		        else
-		        	@actividadese.push(@ae)
-		        end
 
-		        if @revision == nil || @revision == ""
-		        	@obs=nil
-		        else
-		        	@obs= ObservacionActividadInforme.where(informe_actividad_id: actade.id, revision_id: @revision.id).take
-		        end
+		        	if @revision == nil || @revision == ""
+			        	@obs=nil
+			        else
+			        	@obs= ObservacionActividadInforme.where(informe_actividad_id: actade.id, revision_id: @revision.id).take
+			        end	        
+			        if @obs==nil
+			          	@observaciont.push("")
+			        else
+			          	@observaciont.push(@obs.observaciones)
+			        end
 
-		        if @obs==nil
-		          	@observaciont.push("")
-		        else
-		          	@observaciont.push(@obs.observaciones)
-		        end
-		        if tipo==1
-		          	@actividadesadoc.push(@act)
-		        else
-		          	if tipo==2
-		            	@actividadesainv.push(@act)
-		          	else
-			            if tipo==3
-			              	@actividadesaext.push(@act)
-			            else
-		              		if tipo==4
-		               			@actividadesafor.push(@act)
-		              		else
-		                		if tipo==5
-		                  			@actividadesaotr.push(@act)
-		                		end
-		             		end
-		            	end
-		          	end
-		        end
-      		end
-    	end
-    	 @bool_enviado = 0
-		if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12)
-		#Usuario comision
-			estatusI = EstatusInforme.where(informe_id: @informe.id, actual: 1).take #Estatus enviado a comision de investigacioni
-			if(estatusI.estatus_id != 3)
-			@bool_enviado = 1
-			end
+		     	else
+			        @act= Actividad.find(actade.actividad_id)
+			        tipo= @act.tipo_actividad_id
+			        if actade.resultado_id
+			          	@res= Resultado.find(actade.resultado_id)
+			        	@cparray = ["a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a"]
+			        	@cparray[0] = @res.titulo.to_s
+			        	@cparray[1] = @res.autor.to_s
+			        	@cparray[2] = @res.titulo_capitulo.to_s
+			        	@cparray[3] = @res.autor_capitulo.to_s
+			        	@cparray[4] = @res.dia.to_s
+			        	@cparray[5] = @res.mes.to_s
+			        	@cparray[6] = @res.ano.to_s
+			        	@cparray[7] = @res.ciudad.to_s
+			        	@cparray[8] = @res.estado.to_s
+			        	@cparray[9] = @res.pais.to_s
+			        	@cparray[10] = @res.organizador.to_s
+			        	@cparray[11] = @res.duracion.to_s
+			        	@cparray[12] = @res.editor.to_s
+			        	@cparray[13] = @res.titulo_libro.to_s
+			        	@cparray[14] = @res.autor_libro.to_s
+			        	@cparray[15] = @res.nombre_revista.to_s
+			        	@cparray[16] = @res.nombre_periodico.to_s
+			        	@cparray[17] = @res.nombre_acto.to_s
+			        	@cparray[18] = @res.paginas.to_s
+			        	@cparray[19] = @res.nombre_paginaw.to_s
+			        	@cparray[20] = @res.sitio_paginaw.to_s
+			        	@cparray[21] = @res.url.to_s
+			        	puts "holaaaaaaaaaaaaaa"
+			        	if !@cparray.blank?
+			        		@noemptyarray = @cparray - ["", nil]
+				        	if !@resultados2
+					        	@noemptyarray = @cparray - ["", nil]
+					        	if !@noemptyarray.join(',').blank?
+					        		puts @noemptyarray.join(',')
+						        	@resultados2 = @noemptyarray.join(',')
+						        	puts "a"
+						        	puts @resultados2
+						        end
+					        else
+					        	@noemptyarray = @cparray - ["", nil]
+					        	if !@noemptyarray.join(',').blank?
+						        	puts @noemptyarray.join(',')
+						        	@resultados2 = @noemptyarray.join(',')
+						        	puts "b"
+						        	puts @resultados2
+					        	end
+				        	end
+				       		@resultados2a.push(@resultados2)
+			        	end
+			          	@resultados.push(@res)
+			        else
+			          	@resultados.push(nil)
+			        end
+			        @ae= ActividadEjecutada.where(informe_actividad_id: actade.id).take
+			        if @ae==nil || @ae== ""
+			        	
+			        	@actividadese.push("")
+			        else
+			        	@actividadese.push(@ae)
+			        end
 
-		else
-			if (session[:entidad_id] >= 14 && session[:entidad_id] <= 17)
-			#Consejo tecnico
-				estatusI = EstatusInforme.where(informe_id: @informe.id, actual: 1).take
-				if(estatusI.estatus_id != 2)
+			        if @revision == nil || @revision == ""
+			        	@obs=nil
+			        else
+			        	@obs= ObservacionActividadInforme.where(informe_actividad_id: actade.id, revision_id: @revision.id).take
+			        end
+
+			        if @obs==nil
+			          	@observaciont.push("")
+			        else
+			          	@observaciont.push(@obs.observaciones)
+			        end
+			        if tipo==1
+			          	@actividadesadoc.push(@act)
+			        else
+			          	if tipo==2
+			            	@actividadesainv.push(@act)
+			          	else
+				            if tipo==3
+				              	@actividadesaext.push(@act)
+				            else
+			              		if tipo==4
+			               			@actividadesafor.push(@act)
+			              		else
+			                		if tipo==5
+			                  			@actividadesaotr.push(@act)
+			                		end
+			             		end
+			            	end
+			          	end
+			        end
+	      		end
+	    	end
+	    	 @bool_enviado = 0
+			if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12)
+			#Usuario comision
+				estatusI = EstatusInforme.where(informe_id: @informe.id, actual: 1).take #Estatus enviado a comision de investigacioni
+				if(estatusI.estatus_id != 3)
 				@bool_enviado = 1
 				end
+
 			else
-				if (session[:entidad_id] >= 1 && session[:entidad_id] <= 6)
-				#Consejo de escuela
-					estatusI = EstatusInforme.where(informe_id: @informe.id, actual: 1).take 
-					if(estatusI.estatus_id != 8)
-					@bool_enviado = 1 #Estatus enviado a consejo escuela
-					
+				if (session[:entidad_id] >= 14 && session[:entidad_id] <= 17)
+				#Consejo tecnico
+					estatusI = EstatusInforme.where(informe_id: @informe.id, actual: 1).take
+					if(estatusI.estatus_id != 2)
+					@bool_enviado = 1
 					end
 				else
-					if (session[:entidad_id] == 13)
-					#Consejo de facultad
-						estatusI = EstatusInforme.where(informe_id: @informe.id, actual: 1).take
-						if(estatusI.estatus_id != 4)
-						@bool_enviado = 1
+					if (session[:entidad_id] >= 1 && session[:entidad_id] <= 6)
+					#Consejo de escuela
+						estatusI = EstatusInforme.where(informe_id: @informe.id, actual: 1).take 
+						if(estatusI.estatus_id != 8)
+						@bool_enviado = 1 #Estatus enviado a consejo escuela
+						
 						end
-					end	
+					else
+						if (session[:entidad_id] == 13)
+						#Consejo de facultad
+							estatusI = EstatusInforme.where(informe_id: @informe.id, actual: 1).take
+							if(estatusI.estatus_id != 4)
+							@bool_enviado = 1
+							end
+						end	
+					end
 				end
 			end
-		end
+		else
+		    flash[:info]= "Seleccione un informe"
+		    redirect_to controller:"inicioentidad", action: "listar_informes"
+		end	
  	end
+
+	def vista_previa1  
+	  if !session[:informe_id].blank?
+	    @informe= Informe.find(session[:informe_id])
+	    @TipoSemestre=TipoInforme.where(id: @informe.tipo_id).take
+	    @fechaActual = Date.current.to_s
+	    @plan= Planformacion.find(session[:plan_id])
+	    @fechaConcurso = @plan.fecha_inicio
+	    @usere= Usuarioentidad.where(usuario_id: @plan.instructor_id).take
+	    @escuela= Escuela.find(@usere.escuela_id)
+	    @adecuacion= Adecuacion.where(planformacion_id: @plan.id).take
+	    @adscripcion_docencia= @plan.adscripcion_docencia
+	    @adscripcion_investigacion= @plan.adscripcion_investigacion
+	    @persona= Persona.where(usuario_id: @plan.instructor_id).take
+	    @cpinstruccion = @persona.grado_instruccion
+	    @user = Usuario.find(@plan.instructor_id)
+	    @tutor = Persona.where(usuario_id: @plan.tutor_id).take
+
+	    @docencia='docencia'
+	    @investigacion= 'investigacion'
+	    @formacion= 'formacion'
+	    @extension= 'extension'
+	    @otra= 'otra' 
+
+	    @nombre = session[:nombre_usuario]
+	    @instructorName = session[:instructorName]
+
+
+	    @actividades1doc= []
+	    @actividades1inv= []
+	    @actividades1ext= []
+	    @actividades1for= []
+	    @actividades1otr= []
+
+	    @actividades1= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 1).all
+	    @actividades1.each do |actade| 
+	      @act= Actividad.find(actade.actividad_id)
+	      tipo= @act.tipo_actividad_id
+	      if tipo==1
+	        puts "soy una actividad de docencia"
+	        puts @act.actividad
+	        @actividades1doc.push(@act)
+	      else
+	        if tipo==2
+	          puts "soy una actividad de investigacion"
+	          if @informe.numero == 1
+	            @resActi= InformeActividad.where(informe_id: @informe.id, actividad_id: @act.id).take
+	            puts "HELLOOOOO"
+	            if !(@resActi.resultado_id).blank?
+	              puts @resActi.id
+	              @res= Resultado.find(@resActi.resultado_id)
+	            end
+	          end
+	          @actividades1inv.push(@act)
+	        else
+	          if tipo==3
+	            puts "soy una actividad de extension"
+	            puts @act.actividad
+	            @actividades1ext.push(@act)
+	          else
+	            if tipo==4
+	              puts "soy una actividad de formacion"
+	              puts @act.actividad
+	              @actividades1for.push(@act)
+	            else
+	              if tipo==5
+	                puts "soy otro tipo de actividad"
+	                puts @act.actividad
+	                @actividades1otr.push(@act)
+	              end
+	            end
+	          end
+	        end
+	      end
+	    end
+	    @actividades2doc= []
+	    @actividades2inv= []
+	    @actividades2ext= []
+	    @actividades2for= []
+	    @actividades2otr= []
+	    @actividades2= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 2).all
+	    @actividades2.each do |actade| 
+	    @act= Actividad.find(actade.actividad_id)
+	    tipo= @act.tipo_actividad_id
+	      if tipo==1
+	        puts "soy una actividad de docencia"
+	        puts @act.actividad
+	        @actividades2doc.push(@act)
+	      else
+	        if tipo==2
+	          puts "soy una actividad de investigacion"
+	          puts @act.actividad
+	          @actividades2inv.push(@act)
+	        else
+	          if tipo==3
+	            puts "soy una actividad de extension"
+	            puts @act.actividad
+	            @actividades2ext.push(@act)
+	          else
+	            if tipo==4
+	              puts "soy una actividad de formacion"
+	              puts @act.actividad
+	              @actividades2for.push(@act)
+	            else
+	              if tipo==5
+	                puts "soy otro tipo de actividad"
+	                puts @act.actividad
+	                @actividades2otr.push(@act)
+	              end
+	            end
+	          end
+	        end
+	      end
+	    end
+
+
+	    @actividades3doc= []
+	    @actividades3inv= []
+	    @actividades3ext= []
+	    @actividades3for= []
+	    @actividades3otr= []
+	    @actividades3= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 3).all
+	    @actividades3.each do |actade| 
+	      @act= Actividad.find(actade.actividad_id)
+	      tipo= @act.tipo_actividad_id
+	      if tipo==1
+	        puts "soy una actividad de docencia"
+	        puts @act.actividad
+	        @actividades3doc.push(@act)
+	      else
+	        if tipo==2
+	          puts "soy una actividad de investigacion"
+	          puts @act.actividad
+	          @actividades3inv.push(@act)
+	        else
+	          if tipo==3
+	            puts "soy una actividad de extension"
+	            puts @act.actividad
+	            @actividades3ext.push(@act)
+	          else
+	            if tipo==4
+	              puts "soy una actividad de formacion"
+	              puts @act.actividad
+	              @actividades3for.push(@act)
+	            else
+	              if tipo==5
+	                puts "soy otro tipo de actividad"
+	                puts @act.actividad
+	                @actividades3otr.push(@act)
+	              end
+	            end
+	          end
+	        end
+	      end
+	    end
+
+
+	    @actividades4doc= []
+	    @actividades4inv= []
+	    @actividades4ext= []
+	    @actividades4for= []
+	    @actividades4otr= []
+	    @actividades4= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 4).all
+	    @actividades4.each do |actade| 
+	      @act= Actividad.find(actade.actividad_id)
+	      tipo= @act.tipo_actividad_id
+	      if tipo==1
+	        puts "soy una actividad de docencia"
+	        puts @act.actividad
+	        @actividades4doc.push(@act)
+	      else
+	        if tipo==2
+	          puts "soy una actividad de investigacion"
+	          puts @act.actividad
+	          @actividades4inv.push(@act)
+	        else
+	          if tipo==3
+	            puts "soy una actividad de extension"
+	            puts @act.actividad
+	            @actividades4ext.push(@act)
+	          else
+	            if tipo==4
+	              puts "soy una actividad de formacion"
+	              puts @act.actividad
+	              @actividades4for.push(@act)
+	            else
+	              if tipo==5
+	                puts "soy otro tipo de actividad"
+	                puts @act.actividad
+	                @actividades4otr.push(@act)
+	              end
+	            end
+	          end
+	        end
+	      end
+	    end
+	    @bool_enviado = 0
+	    estatus_informe = EstatusInforme.where(informe_id: @informe.id, actual: 1).take
+	    if (estatus_informe.estatus_id != 6 && estatus_informe.estatus_id != 5)
+	      @bool_enviado = 1
+	    end
+	    @j = 0
+	    @i = 0
+	    @actividadesa= InformeActividad.where(informe_id: @informe.id).all
+	    @actividadesadoc= []
+	    @actividadesainv= []
+	    @actividadesaext= []
+	    @actividadesafor= []
+	    @actividadesaotr= []
+	    @resultados= []
+	    @actividadese= []
+	    @observaciont= []
+	    @resultTP = []
+	    @resultPP = []
+	    @resultPIT = []
+	    @resultO = []
+	    @resultAEC = []
+	    @resultOEC = []
+	    @resultDCS = []
+	    @actividadesa.each do |actade| 
+	      @resultados2 = ""
+	      if actade.actividad_id == nil #Es el caso que es un resultado no contemplado en el plan de formacion o un avancwe de postgrado
+	        @res= Resultado.find(actade.resultado_id)
+	        if !@res.blank?
+	          @cparray = ["a", "a", "a", "a", "a", "a", "a", "a", "a","a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a"]
+	          @cparray[0] = @res.titulo.capitalize
+	          @cparray[1] = @res.autor.capitalize
+	          @cparray[2] = @res.titulo_capitulo.to_s.capitalize
+	          @cparray[3] = @res.autor_capitulo.to_s.capitalize
+	          @cparray[4] = @res.dia
+	          @cparray[5] = @res.mes
+	          @cparray[6] = @res.ano
+	          @cparray[7] = @res.ciudad.to_s.capitalize
+	          @cparray[8] = @res.estado.to_s.capitalize
+	          @cparray[9] = @res.pais.to_s.capitalize
+	          @cparray[10] = @res.organizador.to_s.capitalize
+	          @cparray[11] = @res.duracion
+	          @cparray[12] = @res.editor.to_s.capitalize
+	          @cparray[13] = @res.titulo_libro.to_s.capitalize
+	          @cparray[14] = @res.autor_libro.to_s.capitalize
+	          @cparray[15] = @res.nombre_revista.to_s.capitalize
+	          @cparray[16] = @res.nombre_periodico.to_s.capitalize
+	          @cparray[17] = @res.nombre_acto.to_s.capitalize
+	          @cparray[18] = @res.paginas
+	          @cparray[19] = @res.nombre_paginaw
+	          @cparray[20] = @res.sitio_paginaw
+	          @cparray[21] = @res.url.to_s.capitalize
+	          @cparray[22] = @res.ISSN_impreso.to_s.capitalize
+	          @cparray[23] = @res.ISSN_electro.to_s.capitalize
+	          @cparray[24] = @res.volumen.to_s.capitalize
+	          @cparray[25] = @res.edicion.to_s.capitalize
+	          @cparray[26] = @res.DOI
+	          @cparray[27] = @res.ISBN
+	          @cparray[28] = @res.universidad.to_s.capitalize
+	          @cparray[29] = @res.MaeDoc.to_s.capitalize
+	          @cparray[30] = @res.rango_paginas.to_s.capitalize
+	          if !@cparray.blank?
+	            @noemptyarray = @cparray - ["", nil]
+	            if !@resultados2
+	              @noemptyarray = @cparray - ["", nil]
+	              if !@noemptyarray.join(',').blank?
+	                puts @noemptyarray.join(',')
+	                @resultados2 = "* " + @noemptyarray
+	                puts "a"
+	                puts @resultados2
+	              end
+	            else
+	              @noemptyarray = @cparray - ["", nil]
+	              if !@noemptyarray.join(',').blank?
+	                puts @noemptyarray.join(', ')
+	                @resultados2 = @resultados2 + @noemptyarray.join(', ')
+	                puts "b"
+	                puts @resultados2
+	              end
+	            end
+	          end
+	        end
+	        if @res.tipo_resultado_id == 1
+	        @resultTP.push(@resultados2)
+	        elsif @res.tipo_resultado_id == 2
+	        @resultPP.push(@resultados2)
+	        elsif @res.tipo_resultado_id == 3
+	        @resultPIT.push(@resultados2)
+	        elsif @res.tipo_resultado_id == 4
+	        @resultO.push(@resultados2)
+	        elsif @res.tipo_resultado_id == 5
+	        @resultAEC.push(@resultados2)
+	        elsif @res.tipo_resultado_id == 6
+	        @resultOEC.push(@resultados2)
+	        elsif @res.tipo_resultado_id == 7
+	        @resultDCS.push(@resultados2)
+	        end
+	        @resultados.push(@res)
+	      else
+	        @act= Actividad.find(actade.actividad_id)
+	        tipo= @act.tipo_actividad_id
+	        if actade.resultado_id
+	          @res= Resultado.find(actade.resultado_id)
+	          if !@res.blank?
+	            @cparray = ["a", "a", "a", "a", "a", "a", "a", "a", "a","a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a"]
+	            @cparray[0] = @res.titulo.capitalize
+	            @cparray[1] = @res.autor.capitalize
+	            @cparray[2] = @res.titulo_capitulo.to_s.capitalize
+	            @cparray[3] = @res.autor_capitulo.to_s.capitalize
+	            @cparray[4] = @res.dia
+	            @cparray[5] = @res.mes
+	            @cparray[6] = @res.ano
+	            @cparray[7] = @res.ciudad.to_s.capitalize
+	            @cparray[8] = @res.estado.to_s.capitalize
+	            @cparray[9] = @res.pais.to_s.capitalize
+	            @cparray[10] = @res.organizador.to_s.capitalize
+	            @cparray[11] = @res.duracion
+	            @cparray[12] = @res.editor.to_s.capitalize
+	            @cparray[13] = @res.titulo_libro.to_s.capitalize
+	            @cparray[14] = @res.autor_libro.to_s.capitalize
+	            @cparray[15] = @res.nombre_revista.to_s.capitalize
+	            @cparray[16] = @res.nombre_periodico.to_s.capitalize
+	            @cparray[17] = @res.nombre_acto.to_s.capitalize
+	            @cparray[18] = @res.paginas
+	            @cparray[19] = @res.nombre_paginaw
+	            @cparray[20] = @res.sitio_paginaw
+	            @cparray[21] = @res.url.to_s.capitalize
+	            @cparray[22] = @res.ISSN_impreso.to_s.capitalize
+	            @cparray[23] = @res.ISSN_electro.to_s.capitalize
+	            @cparray[24] = @res.volumen.to_s.capitalize
+	            @cparray[25] = @res.edicion.to_s.capitalize
+	            @cparray[26] = @res.DOI
+	            @cparray[27] = @res.ISBN
+	            @cparray[28] = @res.universidad.to_s.capitalize
+	            @cparray[29] = @res.MaeDoc.to_s.capitalize
+	            @cparray[30] = @res.rango_paginas.to_s.capitalize
+	            if !@cparray.blank?
+	              @noemptyarray = @cparray - ["", nil]
+	              if !@resultados2
+	                @noemptyarray = @cparray - ["", nil]
+	                if !@noemptyarray.join(',').blank?
+	                  puts @noemptyarray.join(',')
+	                  @resultados2 = "* " + @noemptyarray
+	                  puts "a"
+	                  puts @resultados2
+	                end
+	              else
+	                @noemptyarray = @cparray - ["", nil]
+	                if !@noemptyarray.join(',').blank?
+	                  puts @noemptyarray.join(', ')
+	                  @resultados2 = @resultados2 + @noemptyarray.join(', ')
+	                  puts "b"
+	                  puts @resultados2
+	                end
+	              end
+	            end
+	          end
+	          if @res.tipo_resultado_id == 1
+	          @resultTP.push(@resultados2)
+	          elsif @res.tipo_resultado_id == 2
+	          @resultPP.push(@resultados2)
+	          elsif @res.tipo_resultado_id == 3
+	          @resultPIT.push(@resultados2)
+	          elsif @res.tipo_resultado_id == 4
+	          @resultO.push(@resultados2)
+	          elsif @res.tipo_resultado_id == 5
+	          @resultAEC.push(@resultados2)
+	          elsif @res.tipo_resultado_id == 6
+	          @resultOEC.push(@resultados2)
+	          elsif @res.tipo_resultado_id == 7
+	          @resultDCS.push(@resultados2)
+	          end
+	          @resultados.push(@res)
+	        end
+	        @ae= ActividadEjecutada.where(informe_actividad_id: actade.id).take
+	        @actividadese.push(@ae)
+	        @obs= ObservacionTutor.where(informe_actividad_id: actade.id).take
+	        if @obs==nil
+	          @observaciont.push("")
+	        else
+	          @observaciont.push(@obs.observaciones)
+	        end
+	        if tipo==1
+	          @actividadesadoc.push(@act)
+	        elsif tipo==2
+	          @actividadesainv.push(@act)
+	        elsif tipo==3
+	          @actividadesaext.push(@act)
+	        elsif tipo==4
+	          @actividadesafor.push(@act)
+	        elsif tipo==5
+	          @actividadesaotr.push(@act)
+	        end
+	      end
+	    end
+	  else
+	    flash[:info]="Selecciona un informe"
+	    redirect_to controller: "inicioentidad", action: "listar_informes"
+	  end
+	end
 
  	def guardar_observaciones
  		if session[:usuario_id]
@@ -1367,7 +1890,7 @@ class InicioentidadController < ApplicationController
 			       	end
 			    end
 
-	      	flash[:mensaje]="Se han creado y/o modificado las observaciones satisfactoriamente"
+	      	flash[:success]="Se han creado y/o modificado las observaciones satisfactoriamente"
 	      	redirect_to controller:"inicioentidad", action: "detalles_informe2"
  		end
  	end
@@ -1423,47 +1946,47 @@ class InicioentidadController < ApplicationController
 			end
 		end
 
-			@obs_t= ObservacionTutor.where(informe_actividad_id: ia.id).take
-			
-			if(@obs_t != nil && @obs_t != "")
-				@obs_tutor = @obs_t.observaciones
-				@booltutor = 1
+		@obs_t= ObservacionTutor.where(informe_actividad_id: ia.id).take
+		
+		if(@obs_t != nil && @obs_t != "")
+			@obs_tutor = @obs_t.observaciones
+			@booltutor = 1
+		end
+
+		@bool_enviado = 0
+		if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12)
+		#Usuario comision
+			estatusI = EstatusInforme.where(informe_id: @informe_id, actual: 1).take #Estatus enviado a comision de investigacioni
+			if(estatusI.estatus_id != 3)
+			@bool_enviado = 1
 			end
 
-			@bool_enviado = 0
-			if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12)
-			#Usuario comision
-				estatusI = EstatusInforme.where(informe_id: @informe_id, actual: 1).take #Estatus enviado a comision de investigacioni
-				if(estatusI.estatus_id != 3)
+		else
+			if (session[:entidad_id] >= 14 && session[:entidad_id] <= 17)
+			#Consejo tecnico
+				estatusI = EstatusInforme.where(informe_id: @informe_id, actual: 1).take
+				if(estatusI.estatus_id != 2)
 				@bool_enviado = 1
 				end
-
 			else
-				if (session[:entidad_id] >= 14 && session[:entidad_id] <= 17)
-				#Consejo tecnico
-					estatusI = EstatusInforme.where(informe_id: @informe_id, actual: 1).take
-					if(estatusI.estatus_id != 2)
-					@bool_enviado = 1
+				if (session[:entidad_id] >= 1 && session[:entidad_id] <= 6)
+				#Consejo de escuela
+					estatusI = EstatusInforme.where(informe_id: @informe_id, actual: 1).take 
+					if(estatusI.estatus_id != 8)
+					@bool_enviado = 1 #Estatus enviado a consejo escuela
+					
 					end
 				else
-					if (session[:entidad_id] >= 1 && session[:entidad_id] <= 6)
-					#Consejo de escuela
-						estatusI = EstatusInforme.where(informe_id: @informe_id, actual: 1).take 
-						if(estatusI.estatus_id != 8)
-						@bool_enviado = 1 #Estatus enviado a consejo escuela
-						
+					if (session[:entidad_id] == 13)
+					#Consejo de facultad
+						estatusI = EstatusInforme.where(informe_id: @informe_id, actual: 1).take
+						if(estatusI.estatus_id != 4)
+						@bool_enviado = 1
 						end
-					else
-						if (session[:entidad_id] == 13)
-						#Consejo de facultad
-							estatusI = EstatusInforme.where(informe_id: @informe_id, actual: 1).take
-							if(estatusI.estatus_id != 4)
-							@bool_enviado = 1
-							end
-						end	
-					end
+					end	
 				end
-			end	
+			end
+		end	
 	end
 
 	def mas_observaciones2
@@ -1736,7 +2259,7 @@ class InicioentidadController < ApplicationController
 
 	      
 
-	      	flash[:mensaje]="Se han creado y/o modificado las observaciones satisfactoriamente"
+	      	flash[:success]="Se han creado y/o modificado las observaciones satisfactoriamente"
 
 	      	if(@semestre == 1)
 	      			redirect_to controller:"inicioentidad", action: "detalles_adecuacion3"
@@ -1837,133 +2360,243 @@ class InicioentidadController < ApplicationController
 	end
 
 	def cambiar_estatusI
+		@informe_id = params[:informe_id].to_i
+		rechazar = params[:rechazar].to_i
+		informeAct = Informe.where(id: @informe_id).take
+		session[:plan_id] = informeAct.planformacion_id
+		adec = Adecuacion.where(planformacion_id: informeAct.planformacion_id).take
+		session[:adecuacion_id] = adec.id
+		if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12)
+			cambio_act = EstatusInforme.where(informe_id: @informe_id, actual: 1).take
+	      	cambio_act.actual = 0
+	      	cambio_act.save
+			cambio_est = EstatusInforme.new 
+			cambio_est.informe_id = @informe_id
+			cambio_est.fecha = Time.now 
+			cambio_est.estatus_id = 8
+			cambio_est.actual = 1
+			cambio_est.save
+			plan = Planformacion.find(session[:plan_id])
+			cambio_est.fecha = Time.now 
+			notific = Notificacion.new
+			notific.instructor_id = plan.instructor_id
+			notific.tutor_id = informeAct.tutor_id
+			notific.adecuacion_id = session[:adecuacion_id]
+			notific.informe_id = @informe_id
+			notific.actual = 1
+			person = Persona.where(usuario_id: plan.instructor_id).take
+			notificacionfecha = Date.current.to_s 
+			notific.mensaje = "[" + notificacionfecha + "] El " + session[:nombre_informe] + " de " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " ha sido aprobado por Comisión de Investigación y fue enviada a Consejo de Escuela."
+			notific.save
+			notific2 = Notificacion.new
+			notific2.instructor_id = plan.instructor_id
+			notific2.tutor_id = informeAct.tutor_id
+			notific2.adecuacion_id = session[:adecuacion_id]
+			notific2.informe_id = @informe_id
+			notific2.actual = 2
+			notific2.mensaje = "[" + notificacionfecha + "] El " + session[:nombre_informe] + " ha sido aprobado por Comisión de Investigación y fue enviada a Consejo de Escuela."
+			notific2.save
+			notific3 = Notificacion.new
+			notific3.instructor_id = plan.instructor_id
+			notific3.tutor_id = informeAct.tutor_id
+			notific3.adecuacion_id = session[:adecuacion_id]
+			notific3.informe_id = @informe_id
+			notific3.actual = 4   #Consejo de Escuela
+			notific3.mensaje = "[" + notificacionfecha + "] Ha recibido un nuevo Informe: ' " + session[:nombre_informe]+ " ' de " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + ", favor aprobar y enviar a la siguiente entidad."
+			notific3.save
+	          user =Usuarioentidad.where(entidad_id: session[:entidad_id]).take
+	          if(user.escuela_id == 1)
+	            uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 1).take
+	          else
+	            if(user.escuela_id == 2)
+	              uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 2).take
+	            else
+	              if(user.escuela_id == 3)
+	                uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 3).take
+	              else
+	                if(user.escuela_id == 4)
+	                uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 4).take
+	                else
+	                  if(user.escuela_id == 9)
+	                    uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 5).take
+	                  else
+	                    if(user.escuela_id == 10)
+	                      uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 6).take
+	                    end
+	                  end
+	                end
+	              end
+	            end  
+	          end
+	          remitente = Usuario.where(id: uentidad.usuario_id).take
+	          email = remitente.user + "@ciens.ucv.ve"
+	          ActionCorreo.envio_informe(email).deliver
+	          flash[:success]="El informe se ha envíado a consejo de escuela"
 
-	@informe_id = params[:informe_id].to_i
-	rechazar = params[:rechazar].to_i
 
-	if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12)
-			#Usuario comision
+		else
+			if (session[:entidad_id] >= 14 && session[:entidad_id] <= 17)
+			#Consejo tecnico
 
-				cambio_act = EstatusInforme.where(informe_id: @informe_id, actual: 1).take
-		      	cambio_act.actual = 0
-		      	cambio_act.save
-				cambio_est = EstatusInforme.new 
-				cambio_est.informe_id = @informe_id
-				cambio_est.fecha = Time.now 
-				cambio_est.estatus_id = 8
-				cambio_est.actual = 1
-				cambio_est.save
-			 
-		          user =Usuarioentidad.where(entidad_id: session[:entidad_id]).take
-		          if(user.escuela_id == 1)
-		            uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 1).take
-		          else
-		            if(user.escuela_id == 2)
-		              uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 2).take
-		            else
-		              if(user.escuela_id == 3)
-		                uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 3).take
-		              else
-		                if(user.escuela_id == 4)
-		                uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 4).take
-		                else
-		                  if(user.escuela_id == 9)
-		                    uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 5).take
-		                  else
-		                    if(user.escuela_id == 10)
-		                      uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 6).take
-		                    end
-		                  end
-		                end
-		              end
-		            end  
-		          end
-		          remitente = Usuario.where(id: uentidad.usuario_id).take
-		          email = remitente.user + "@ciens.ucv.ve"
-		          ActionCorreo.envio_informe(email).deliver
-		          flash[:mensaje]="El informe se ha envíado a consejo de escuela"
-
-		
 			else
-				if (session[:entidad_id] >= 14 && session[:entidad_id] <= 17)
-				#Consejo tecnico
-		
+				if (session[:entidad_id] >= 1 && session[:entidad_id] <= 6)
+				#Consejo de escuela
+					cambio_act = EstatusInforme.where(informe_id: @informe_id, actual: 1).take
+			      	cambio_act.actual = 0
+			      	cambio_act.save
+					cambio_est = EstatusInforme.new 
+					cambio_est.informe_id = @informe_id
+					cambio_est.fecha = Time.now 
+					cambio_est.estatus_id = 4
+					cambio_est.actual = 1
+					cambio_est.save
+					plan = Planformacion.find(session[:plan_id])
+					cambio_est.fecha = Time.now 
+					notific = Notificacion.new
+					notific.instructor_id = plan.instructor_id
+					notific.tutor_id = informeAct.tutor_id
+					notific.adecuacion_id = session[:adecuacion_id]
+					notific.informe_id = @informe_id
+					notific.actual = 1
+					person = Persona.where(usuario_id: plan.instructor_id).take
+					notificacionfecha = Date.current.to_s 
+					notific.mensaje = "[" + notificacionfecha + "] El " + session[:nombre_informe] + " de " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " ha sido aprobado por Consejo de Escuela y fue enviada a Consejo de Facultad."
+					notific.save
+					notific2 = Notificacion.new
+					notific2.instructor_id = plan.instructor_id
+					notific2.tutor_id = informeAct.tutor_id
+					notific2.adecuacion_id = session[:adecuacion_id]
+					notific2.informe_id = @informe_id
+					notific2.actual = 2
+					notific2.mensaje = "[" + notificacionfecha + "] El " + session[:nombre_informe] + " ha sido aprobado por Consejo de Escuela y fue enviada a Consejo de Facultad."
+					notific2.save
+					notific3 = Notificacion.new
+					notific3.instructor_id = plan.instructor_id
+					notific3.tutor_id = informeAct.tutor_id
+					notific3.adecuacion_id = session[:adecuacion_id]
+					notific3.informe_id = @informe_id
+					notific3.actual = 5   #Consejo de Facultad
+					notific3.mensaje = "[" + notificacionfecha + "] Ha recibido un nuevo Informe: ' " + session[:nombre_informe]+ " ' de " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + ", favor aprobar y enviar a la siguiente entidad."
+					notific3.save
+
+					uentidad = Usuarioentidad.where(entidad_id: 13).take
+		            remitente = Usuario.where(id: uentidad.usuario_id).take
+		            email= remitente.user + "@ciens.ucv.ve"
+		            ActionCorreo.envio_informe(email).deliver
+
+					flash[:success]="El informe se ha envíado a consejo de facultad"
 				else
-					if (session[:entidad_id] >= 1 && session[:entidad_id] <= 6)
-					#Consejo de escuela
+					if (session[:entidad_id] == 13)
+
+						bool_observaciones= 0
+						acts_informe = InformeActividad.where(informe_id: @informe_id)
+						
+						acts_informe.each do |act_informe|
+							obsvs_act = ObservacionActividadInforme.where(informe_actividad_id: act_informe.id)
+
+							obsvs_act.each do |obsv_act|
+								if obsv_act.observaciones != ''
+									bool_observaciones= 1
+								end
+							end
+						end
+						
+						#Consejo de facultad
 						cambio_act = EstatusInforme.where(informe_id: @informe_id, actual: 1).take
 				      	cambio_act.actual = 0
 				      	cambio_act.save
-						cambio_est = EstatusInforme.new 
+
+				      	cambio_est = EstatusInforme.new 
 						cambio_est.informe_id = @informe_id
-						cambio_est.fecha = Time.now 
-						cambio_est.estatus_id = 4
+						cambio_est.fecha = Time.now
+						if(rechazar == 1)
+							cambio_est.estatus_id = 9
+						else 
+							if bool_observaciones == 1 
+								cambio_est.estatus_id = 5
+							else
+								cambio_est.estatus_id = 1
+							end
+						end
+
 						cambio_est.actual = 1
 						cambio_est.save
 
-						uentidad = Usuarioentidad.where(entidad_id: 13).take
-			            remitente = Usuario.where(id: uentidad.usuario_id).take
-			            email= remitente.user + "@ciens.ucv.ve"
-			            ActionCorreo.envio_informe(email).deliver
-
-						flash[:mensaje]="El informe se ha envíado a consejo de facultad"
-					else
-						if (session[:entidad_id] == 13)
-
-							bool_observaciones= 0
-							acts_informe = InformeActividad.where(informe_id: @informe_id)
-							
-							acts_informe.each do |act_informe|
-								obsvs_act = ObservacionActividadInforme.where(informe_actividad_id: act_informe.id)
-
-								obsvs_act.each do |obsv_act|
-									if obsv_act.observaciones != ''
-										bool_observaciones= 1
-									end
-								end
-							end
-							
-							#Consejo de facultad
-							cambio_act = EstatusInforme.where(informe_id: @informe_id, actual: 1).take
-					      	cambio_act.actual = 0
-					      	cambio_act.save
-
-					      	cambio_est = EstatusInforme.new 
-							cambio_est.informe_id = @informe_id
-							cambio_est.fecha = Time.now
-							if(rechazar == 1)
-								cambio_est.estatus_id = 9
-							else 
-								if bool_observaciones == 1 
-									cambio_est.estatus_id = 5
-								else
-									cambio_est.estatus_id = 1
-								end
-							end
-
-							cambio_est.actual = 1
-							cambio_est.save
-
-							
-							inf = Informe.where(id: @informe_id).take
-			            	remitente = Usuario.where(id: inf.tutor_id).take
-			            	email= remitente.user + "@ciens.ucv.ve"
-			            	ActionCorreo.envio_informe(email).deliver
-
-							if(rechazar == 1)
-								flash[:mensaje]="El informe ha sido rechazado por consejo de facultad"
+						
+						inf = Informe.where(id: @informe_id).take
+		            	remitente = Usuario.where(id: inf.tutor_id).take
+		            	email= remitente.user + "@ciens.ucv.ve"
+		            	ActionCorreo.envio_informe(email).deliver
+						cambio_est.fecha = Time.now 
+						plan = Planformacion.find(session[:plan_id])
+						if(rechazar == 1)
+							flash[:info]="El informe ha sido rechazado por consejo de facultad"
+							notific = Notificacion.new
+							notific.instructor_id = plan.instructor_id
+							notific.tutor_id = informeAct.tutor_id
+							notific.adecuacion_id = session[:adecuacion_id]
+							notific.informe_id = @informe_id
+							notific.actual = 1
+							person = Persona.where(usuario_id: plan.instructor_id).take
+							notificacionfecha = Date.current.to_s 
+							notific.mensaje = "[" + notificacionfecha + "] El " + session[:nombre_informe] + " de " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " ha sido rechazado por Consejo de Facultad."
+							notific.save
+							notific2 = Notificacion.new
+							notific2.instructor_id = plan.instructor_id
+							notific2.tutor_id = informeAct.tutor_id
+							notific2.adecuacion_id = session[:adecuacion_id]
+							notific2.informe_id = @informe_id
+							notific2.actual = 2
+							notific2.mensaje = "[" + notificacionfecha + "] El " + session[:nombre_informe] + " ha sido rechazado por Consejo de Facultad."
+							notific2.save					
+						else
+							if bool_observaciones == 1 
+								flash[:info]="El informe ha sido aprobado con observaciones por consejo de facultad"
+								notific = Notificacion.new
+								notific.instructor_id = plan.instructor_id
+								notific.tutor_id = informeAct.tutor_id
+								notific.adecuacion_id = session[:adecuacion_id]
+								notific.informe_id = @informe_id
+								notific.actual = 1
+								person = Persona.where(usuario_id: plan.instructor_id).take
+								notificacionfecha = Date.current.to_s 
+								notific.mensaje = "[" + notificacionfecha + "] El " + session[:nombre_informe] + " de " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " ha sido aprobado con observaciones por Consejo de Facultad."
+								notific.save
+								notific2 = Notificacion.new
+								notific2.instructor_id = plan.instructor_id
+								notific2.tutor_id = informeAct.tutor_id
+								notific2.adecuacion_id = session[:adecuacion_id]
+								notific2.informe_id = @informe_id
+								notific2.actual = 2
+								notific2.mensaje = "[" + notificacionfecha + "] El " + session[:nombre_informe] + " ha sido aprobado con observaciones por Consejo de Facultad."
+								notific2.save								
 							else
-								if bool_observaciones == 1 
-									flash[:mensaje]="El informe ha sido aprobado con observaciones por consejo de facultad"
-								else
-										flash[:mensaje]="El informe ha sido aprobado por consejo de facultad"	
-								end
+								flash[:info]="El informe ha sido aprobado por consejo de facultad"
+								notific = Notificacion.new
+								notific.instructor_id = plan.instructor_id
+								notific.tutor_id = informeAct.tutor_id
+								notific.adecuacion_id = session[:adecuacion_id]
+								notific.informe_id = @informe_id
+								notific.actual = 1
+								person = Persona.where(usuario_id: plan.instructor_id).take
+								notificacionfecha = Date.current.to_s 
+								notific.mensaje = "[" + notificacionfecha + "] ¡Felicitaciones! El " + session[:nombre_informe] + " de " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " ha sido aprobado por Consejo de Facultad."
+								notific.save
+								notific2 = Notificacion.new
+								notific2.instructor_id = plan.instructor_id
+								notific2.tutor_id = informeAct.tutor_id
+								notific2.adecuacion_id = session[:adecuacion_id]
+								notific2.informe_id = @informe_id
+								notific2.actual = 2
+								notific2.mensaje = "[" + notificacionfecha + "] ¡Felicitaciones! El " + session[:nombre_informe] + " ha sido aprobado por Consejo de Facultad."
+								notific2.save			
 							end
-						end	
-					end
+						end
+					end	
 				end
 			end
-	 redirect_to controller:"inicioentidad", action: "listar_informes"
+		end
+		redirect_to controller:"inicioentidad", action: "listar_informes"
 	end 
 
 	def vista_previa
@@ -2151,132 +2784,253 @@ class InicioentidadController < ApplicationController
 	end
 
 	def cambiar_estatusA
+		@adecuacion_id = params[:adecuacion_id].to_i
+		rechazar = params[:rechazar].to_i
+		if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12)
+		#Usuario comision
+			cambio_act = EstatusAdecuacion.where(adecuacion_id: @adecuacion_id, actual: 1).take
+	  		cambio_act.actual = 0
+	  		cambio_act.save
+			cambio_est = EstatusAdecuacion.new 
+			cambio_est.adecuacion_id = @adecuacion_id
+			cambio_est.fecha = Time.now 
+			cambio_est.estatus_id = 8
+			cambio_est.actual = 1
+			cambio_est.save
+			cambio_est.fecha = Time.now 
+			plan= Planformacion.find(session[:plan_id])
+			notific = Notificacion.new
+	        notific.instructor_id = plan.instructor_id
+	        notific.tutor_id = plan.tutor_id
+	        notific.adecuacion_id = session[:adecuacion_id]
+	        notific.informe_id = nil
+	        notific.actual = 1
+	        person = Persona.where(usuario_id: plan.instructor_id).take
+	        notificacionfecha = Date.current.to_s 
+	    	notific.mensaje = "[" + notificacionfecha + "] La adecuación de "+ person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " ha sido aprobada por Comisión de Investigación y fue enviada a Consejo de Escuela."
+	    	notific.save
+	    	notific2 = Notificacion.new
+	        notific2.instructor_id = plan.instructor_id
+	        notific2.tutor_id = plan.tutor_id
+	        notific2.adecuacion_id = session[:adecuacion_id]
+	        notific2.informe_id = nil
+	        notific2.actual = 2
+	    	notific2.mensaje = "[" + notificacionfecha + "] Su adecuación ha sido aprobada por Comisión de Investigación y fue enviada a Consejo de Escuela"
+	    	notific2.save
+	    	notific3 = Notificacion.new
+	        notific3.instructor_id = plan.instructor_id
+	        notific3.tutor_id = plan.tutor_id
+	        notific3.adecuacion_id = session[:adecuacion_id]
+	        notific3.informe_id = nil
+	        notific3.actual = 4		#Consejo de Escuela
+	    	notific3.mensaje = "[" + notificacionfecha + "] Se ha recibido una nueva Adecuación: "+ person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + ", favor aprobar y enviar a la siguiente entidad."
+	    	notific3.save
 
-	@adecuacion_id = params[:adecuacion_id].to_i
-	rechazar = params[:rechazar].to_i
+			 user =Usuarioentidad.where(entidad_id: session[:entidad_id]).take
+	          if(user.escuela_id == 1)
+	            uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 1).take
+	          else
+	            if(user.escuela_id == 2)
+	              uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 2).take
+	            else
+	              if(user.escuela_id == 3)
+	                uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 3).take
+	              else
+	                if(user.escuela_id == 4)
+	                uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 4).take
+	                else
+	                  if(user.escuela_id == 9)
+	                    uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 5).take
+	                  else
+	                    if(user.escuela_id == 10)
+	                      uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 6).take
+	                    end
+	                  end
+	                end
+	              end
+	            end  
+	          end
+	          remitente = Usuario.where(id: uentidad.usuario_id).take
+	          email = remitente.user + "@ciens.ucv.ve"
+	          ActionCorreo.envio_adecuacion(email).deliver
 
-	if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12)
-			#Usuario comision
-				cambio_act = EstatusAdecuacion.where(adecuacion_id: @adecuacion_id, actual: 1).take
-	      		cambio_act.actual = 0
-	      		cambio_act.save
-				cambio_est = EstatusAdecuacion.new 
-				cambio_est.adecuacion_id = @adecuacion_id
-				cambio_est.fecha = Time.now 
-				cambio_est.estatus_id = 8
-				cambio_est.actual = 1
-				cambio_est.save
+			flash[:success]="La adecuación se ha envíado a consejo de escuela"
 
-				 user =Usuarioentidad.where(entidad_id: session[:entidad_id]).take
-		          if(user.escuela_id == 1)
-		            uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 1).take
-		          else
-		            if(user.escuela_id == 2)
-		              uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 2).take
-		            else
-		              if(user.escuela_id == 3)
-		                uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 3).take
-		              else
-		                if(user.escuela_id == 4)
-		                uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 4).take
-		                else
-		                  if(user.escuela_id == 9)
-		                    uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 5).take
-		                  else
-		                    if(user.escuela_id == 10)
-		                      uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 6).take
-		                    end
-		                  end
-		                end
-		              end
-		            end  
-		          end
-		          remitente = Usuario.where(id: uentidad.usuario_id).take
-		          email = remitente.user + "@ciens.ucv.ve"
-		          ActionCorreo.envio_adecuacion(email).deliver
 
-				flash[:mensaje]="La adecuación se ha envíado a consejo de escuela"
+		else
+			if (session[:entidad_id] >= 14 && session[:entidad_id] <= 17)
+			#Consejo tecnico
 
-		
 			else
-				if (session[:entidad_id] >= 14 && session[:entidad_id] <= 17)
-				#Consejo tecnico
-		
-				else
-					if (session[:entidad_id] >= 1 && session[:entidad_id] <= 6)
-					#Consejo de escuela
+				if (session[:entidad_id] >= 1 && session[:entidad_id] <= 6)
+				#Consejo de escuela
 
-						cambio_act = EstatusAdecuacion.where(adecuacion_id: @adecuacion_id, actual: 1).take
-	      				cambio_act.actual = 0
-	      				cambio_act.save
-						cambio_est = EstatusAdecuacion.new 
-						cambio_est.adecuacion_id = @adecuacion_id
-						cambio_est.fecha = Time.now 
-						cambio_est.estatus_id = 4
-						cambio_est.actual = 1
-						cambio_est.save
+					cambio_act = EstatusAdecuacion.where(adecuacion_id: @adecuacion_id, actual: 1).take
+	  				cambio_act.actual = 0
+	  				cambio_act.save
+					cambio_est = EstatusAdecuacion.new 
+					cambio_est.adecuacion_id = @adecuacion_id
+					cambio_est.fecha = Time.now 
+					cambio_est.estatus_id = 4
+					cambio_est.actual = 1
+					cambio_est.save
+					cambio_est.fecha = Time.now 
+					plan= Planformacion.find(session[:plan_id])
+					notific = Notificacion.new
+			        notific.instructor_id = plan.instructor_id
+			        notific.tutor_id = plan.tutor_id
+			        notific.adecuacion_id = session[:adecuacion_id]
+			        notific.informe_id = nil
+			        notific.actual = 1
+			        person = Persona.where(usuario_id: plan.instructor_id).take
+			        notificacionfecha = Date.current.to_s 
+		        	notific.mensaje = "[" + notificacionfecha + "] La adecuación de "+ person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " ha sido aprobada por Consejo de Escuela y fue enviada a Consejo de Facultad."
+		        	notific.save
+		        	notific2 = Notificacion.new
+			        notific2.instructor_id = plan.instructor_id
+			        notific2.tutor_id = plan.tutor_id
+			        notific2.adecuacion_id = session[:adecuacion_id]
+			        notific2.informe_id = nil
+			        notific2.actual = 2
+		        	notific2.mensaje = "[" + notificacionfecha + "] Su adecuación ha sido aprobada por Consejo de Escuela y fue enviada a Consejo de Facultad"
+		        	notific2.save
+		        	notific3 = Notificacion.new
+			        notific3.instructor_id = plan.instructor_id
+			        notific3.tutor_id = plan.tutor_id
+			        notific3.adecuacion_id = session[:adecuacion_id]
+			        notific3.informe_id = nil
+			        notific3.actual = 5		#Consejo de Facultad
+		        	notific3.mensaje = "[" + notificacionfecha + "] Se ha recibido una nueva Adecuación: "+ person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + ", Revisar."
+		        	notific3.save
 
-						uentidad = Usuarioentidad.where(entidad_id: 13).take
-			            remitente = Usuario.where(id: uentidad.usuario_id).take
-			            email= remitente.user + "@ciens.ucv.ve"
-			            ActionCorreo.envio_adecuacion(email).deliver
+					uentidad = Usuarioentidad.where(entidad_id: 13).take
+		            remitente = Usuario.where(id: uentidad.usuario_id).take
+		            email= remitente.user + "@ciens.ucv.ve"
+		            ActionCorreo.envio_adecuacion(email).deliver
 
-						flash[:mensaje]="La adecuación se ha envíado a consejo de facultad"
+					flash[:success]="La adecuación se ha envíado a consejo de facultad"
+				elsif (session[:entidad_id] == 13)
+					bool_observaciones= 0
+						acts_adecuacion = AdecuacionActividad.where(adecuacion_id: @adecuacion_id)
+						
+						acts_adecuacion.each do |act_adecuacion|
+							obsvs_act = ObservacionActividadAdecuacion.where(adecuacionactividad_id: act_adecuacion.id)
+
+							obsvs_act.each do |obsv_act|
+								if obsv_act.observaciones != ''
+									bool_observaciones= 1
+								end
+							end
+						end
+
+					#Consejo de facultad
+					cambio_act = EstatusAdecuacion.where(adecuacion_id: @adecuacion_id, actual: 1).take
+	  				cambio_act.actual = 0
+	  				cambio_act.save	
+					cambio_est = EstatusAdecuacion.new 
+					cambio_est.adecuacion_id = @adecuacion_id
+					cambio_est.fecha = Time.now 
+					if(rechazar == 1)
+						cambio_est.estatus_id = 9
+					else 
+						if bool_observaciones == 1 
+							cambio_est.estatus_id = 5
+						else
+							cambio_est.estatus_id = 1
+						end
+					end
+					cambio_est.actual = 1
+					cambio_est.save
+					
+					adec = Adecuacion.where(id: @adecuacion_id).take
+	            	remitente = Usuario.where(id: adec.tutor_id).take
+	            	email= remitente.user + "@ciens.ucv.ve"
+	            	ActionCorreo.envio_adecuacion(email).deliver
+					cambio_est.fecha = Time.now 
+					plan= Planformacion.find(session[:plan_id])
+					if(rechazar == 1)
+						flash[:info]="La adecuación ha sido rechazada por consejo de facultad"
+						notific = Notificacion.new
+				        notific.instructor_id = plan.instructor_id
+				        notific.tutor_id = plan.tutor_id
+				        notific.adecuacion_id = session[:adecuacion_id]
+				        notific.informe_id = nil
+				        notific.actual = 1
+				        person = Persona.where(usuario_id: plan.instructor_id).take
+				        notificacionfecha = Date.current.to_s 
+			        	notific.mensaje = "[" + notificacionfecha + "] La adecuación de "+ person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " ha sido rechazada por Consejo de Facultad."
+			        	notific.save
+			        	notific2 = Notificacion.new
+				        notific2.instructor_id = plan.instructor_id
+				        notific2.tutor_id = plan.tutor_id
+				        notific2.adecuacion_id = session[:adecuacion_id]
+				        notific2.informe_id = nil
+				        notific2.actual = 2
+			        	notific2.mensaje = "[" + notificacionfecha + "] Su adecuación ha sido rechazada por Consejo de Facultad."
+			        	notific2.save
 					else
-						if (session[:entidad_id] == 13)
-
-							bool_observaciones= 0
-								acts_adecuacion = AdecuacionActividad.where(adecuacion_id: @adecuacion_id)
-								
-								acts_adecuacion.each do |act_adecuacion|
-									obsvs_act = ObservacionActividadAdecuacion.where(adecuacionactividad_id: act_adecuacion.id)
-
-									obsvs_act.each do |obsv_act|
-										if obsv_act.observaciones != ''
-											bool_observaciones= 1
-										end
-									end
-								end
-
-							#Consejo de facultad
-							cambio_act = EstatusAdecuacion.where(adecuacion_id: @adecuacion_id, actual: 1).take
-		      				cambio_act.actual = 0
-		      				cambio_act.save	
-							cambio_est = EstatusAdecuacion.new 
-							cambio_est.adecuacion_id = @adecuacion_id
-							cambio_est.fecha = Time.now 
-							if(rechazar == 1)
-								cambio_est.estatus_id = 9
-							else 
-								if bool_observaciones == 1 
-									cambio_est.estatus_id = 5
-								else
-									cambio_est.estatus_id = 1
-								end
-							end
-							cambio_est.actual = 1
-							cambio_est.save
-							
-							adec = Adecuacion.where(id: @adecuacion_id).take
-			            	remitente = Usuario.where(id: adec.tutor_id).take
-			            	email= remitente.user + "@ciens.ucv.ve"
-			            	ActionCorreo.envio_adecuacion(email).deliver
-
-							if(rechazar == 1)
-								flash[:mensaje]="La adecuación ha sido rechazada por consejo de facultad"
-							else
-								if bool_observaciones == 1 
-									flash[:mensaje]="La adecuación ha sido aprobada con observaciones por consejo de facultad"
-								else
-									flash[:mensaje]="La adecuación ha sido aprobada por consejo de facultad"	
-								end
-							end
-						end	
+						if bool_observaciones == 1 
+							flash[:info]="La adecuación ha sido aprobada con observaciones por consejo de facultad"
+							notific = Notificacion.new
+					        notific.instructor_id = plan.instructor_id
+					        notific.tutor_id = plan.tutor_id
+					        notific.adecuacion_id = session[:adecuacion_id]
+					        notific.informe_id = nil
+					        notific.actual = 1
+					        person = Persona.where(usuario_id: plan.instructor_id).take
+					        notificacionfecha = Date.current.to_s 
+				        	notific.mensaje = "[" + notificacionfecha + "] La adecuación de "+ person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " ha sido aprobada con Observaciones por Consejo de Facultad."
+				        	notific.save
+				        	notific2 = Notificacion.new
+					        notific2.instructor_id = plan.instructor_id
+					        notific2.tutor_id = plan.tutor_id
+					        notific2.adecuacion_id = session[:adecuacion_id]
+					        notific2.informe_id = nil
+					        notific2.actual = 2
+				        	notific2.mensaje = "[" + notificacionfecha + "] Su adecuación ha sido aprobada con Observaciones por Consejo de Facultad."
+				        	notific2.save						
+				        else
+							flash[:info]="La adecuación ha sido aprobada por consejo de facultad"
+							notific = Notificacion.new
+					        notific.instructor_id = plan.instructor_id
+					        notific.tutor_id = plan.tutor_id
+					        notific.adecuacion_id = session[:adecuacion_id]
+					        notific.informe_id = nil
+					        notific.actual = 1
+					        person = Persona.where(usuario_id: plan.instructor_id).take
+					        notificacionfecha = Date.current.to_s 
+				        	notific.mensaje = "[" + notificacionfecha + "] ¡Felicitaciones! La adecuación de "+ person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " ha sido aprobada por Consejo de Facultad."
+				        	notific.save
+				        	notific2 = Notificacion.new
+					        notific2.instructor_id = plan.instructor_id
+					        notific2.tutor_id = plan.tutor_id
+					        notific2.adecuacion_id = session[:adecuacion_id]
+					        notific2.informe_id = nil
+					        notific2.actual = 2
+				        	notific2.mensaje = "[" + notificacionfecha + "] ¡Felicitaciones! Su adecuación ha sido aprobada por Consejo de Facultad."
+				        	notific2.save						
+				        end
 					end
 				end
 			end
+		end
 	 redirect_to controller:"inicioentidad", action: "listar_adecuaciones"
 	end 
 
+	def borrar_notificaciones #mas obs de actividades del informe
+		if session[:usuario_id]
+			@noti= params[:noti]
+			puts @noti
+    		notaeliminar = Notificacion.where(id: @noti ).take
+    		if notaeliminar.blank?
+    			flash[:danger] = "Ha ocurrido un error al eliminar (notificacion no existente)"
+    		else
+    			notaeliminar.destroy
+    		end
+			redirect_to controller:"inicioentidad", action: "index"
+		else
+			redirect_to controller:"forminst", action: "index"
+		end
+	end
 
 end

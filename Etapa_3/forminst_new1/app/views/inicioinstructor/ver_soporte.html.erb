@@ -1,0 +1,77 @@
+<div class = 'row'>
+  <div class="col-xs-12 col-md-12">
+      <ul class="nav nav-tabs">
+        <li><a href="../inicioinstructor/index">Inicio</a></li>
+        <%if session[:informe_id]%> 
+          <li><a href="../inicioinstructor/listar_adecuaciones">Adecuación del Plan</a></li>
+          <li><a href="../inicioinstructor/listar_informes"  class = 'active'>Informes</a></li>
+        <%else %>
+          <li><a href="../inicioinstructor/listar_adecuaciones" class='active'>Adecuación del Plan</a></li>
+          <li><a href="../inicioinstructor/listar_informes" >Informes</a></li>
+        <%end%>
+        <li><a href="../inicioinstructor/prorrogas">Prorrogas</a></li>
+        <li><a href="../inicioinstructor/logout">Cerrar Sesión</a></li>
+      </ul>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12 col-md-12">
+    <div class="btn-group" role="group">
+       <%= link_to "Volver", {controller: "inicioinstructor", action: "listar_informes"}, class: "btn btn-default" %>
+      <%= link_to "Vista Previa", {controller: "inicioinstructor", action: "vista_previa1"}, class: "btn btn-default" %>
+      <%= link_to "Generar PDF", {controller: "informes", action: "generar_pdf"}, class: "btn btn-default" %>
+      <button type="button" class="btn btn-default active">Ver Soportes</button>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12 col-md-12 col-md-offset-0">
+    <div class="text-right">
+      <div id = "fechamuestra">
+        <script languaje="JavaScript">
+          fecha();
+        </script> 
+      </div>
+      <%if session[:nombre_usuario]%>
+        <div>
+          <h4><b><%=session[:nombre_usuario]%></b></h4>
+        </div>
+      <%end%>
+    </div>
+  </div>
+</div>
+
+<h1>Listado de Documentos</h1>
+
+
+<% if !@documents.blank? %>
+  <div class="table-responsive">
+    <table class="table table-hover table-bordered text-center">
+      <thead>
+        <tr>
+          <th class="text-center">Nombre del Archivo</th>
+          <th class="text-center">Descargar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @documents.each do |document| %>
+          <tr>
+            <td class = "text-center"><%= document.filename %></td>
+            <td class = "text-center" ><%= button_to 'Descargar', document, method: :get , class: "btn btn-info"%></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <br></br>
+  <%if session[:informe_id]%> 
+    <h2 class="text-center">No hay documentos adjuntos a este Informe</h2>
+  <%else %>
+    <h2 class="text-center">No hay documentos adjuntos a esta Adecuación</h2>
+  <%end%>
+  <br></br>
+<% end %>
+<br></br>

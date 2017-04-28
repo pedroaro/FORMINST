@@ -1,0 +1,12 @@
+<%= form_for(@document) do |f| %>
+	<div class="row">
+	    <div class="col-xs-5 col-md-5">  
+	    	<div class="field">
+	    		<%= f.file_field :file %>
+	  		</div>
+	  		<div class="actions">
+				<%= f.submit "Subir Archivo", class: "btn btn-info" %>
+			</div>
+	  	</div>
+	</div>
+<% end %>

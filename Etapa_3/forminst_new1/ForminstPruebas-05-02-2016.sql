@@ -135,6 +135,32 @@ INSERT INTO `adecuacion_actividad` VALUES (1,1,47,0,1),(2,1,48,0,2),(3,1,49,0,3)
 /*!40000 ALTER TABLE `adecuacion_actividad` ENABLE KEYS */;
 UNLOCK TABLES;
 
+DROP TABLE IF EXISTS `document`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `document` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `filename` varchar(255) DEFAULT NULL,
+  `content_type` varchar(255) DEFAULT NULL,
+  `file_contents` BLOB DEFAULT NULL,
+  `created_at` datetime  NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `instructor_id` int(11) DEFAULT NULL,
+  `tutor_id` int(11) DEFAULT NULL,
+  `adecuacion_id` int(11) DEFAULT NULL,
+  `informe_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `documentinstructor` (`instructor_id`),
+  KEY `documenttutor` (`tutor_id`),
+  KEY `documentadecuacion` (`adecuacion_id`),
+  KEY `documentinforme` (`informe_id`),
+  CONSTRAINT `documentinstructor` FOREIGN KEY (`instructor_id`) REFERENCES `usuario` (`id`),
+  CONSTRAINT `documenttutor` FOREIGN KEY (`tutor_id`) REFERENCES `usuario` (`id`),
+  CONSTRAINT `documentadecuacion` FOREIGN KEY (`adecuacion_id`) REFERENCES `adecuacion` (`id`),
+  CONSTRAINT `documentinforme` FOREIGN KEY (`informe_id`) REFERENCES `informe` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
 --
 -- Table structure for table `documento`
 --
@@ -965,7 +991,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,'zairap.yepez',1,1,NULL,NULL,'Docente'),(2,'tdivasta',1,1,NULL,NULL,'Docente'),(3,'comisioninv.computacion',1,1,NULL,NULL,'Docente'),(4,'marisela.dominguez',1,1,NULL,NULL,'Docente'),(5,'comisioninv.matematica',1,1,NULL,NULL,'Docente'),(6,'consejo.matematica',1,1,NULL,NULL,'Docente'),(7,'seconfac',1,1,NULL,NULL,'Docente'),(8,'consejo.computacion',1,1,NULL,NULL,'Docente'),(9,'consultace.matematica',1,1,NULL,NULL,'Docente'),(10,'renny.hernandez',1,1,NULL,NULL,'Docente'),(11,'manuel.maia',1,1,NULL,NULL,'Docente'),(12,'ezoppi',1,1,NULL,NULL,'Docente'),(13,'consultaci.computacion',1,1,NULL,NULL,'Docente'),(14,'vleguiza',1,1,NULL,NULL,'Docente'),(15,'consultaci.matematica',1,1,NULL,NULL,'Docente'),(16,'mariela.castillo',1,1,NULL,NULL,'Docente'),(17,'tomas_guardia',1,1,NULL,NULL,'Docente'),(18,'consulta.seconfac',1,1,NULL,NULL,'Docente'),(19,'asilva',1,1,NULL,NULL,'Docente'),(20,'curbina',1,1,NULL,NULL,'Docente'),(21,'consultace.computacion',1,1,NULL,NULL,'Docente'),(22,'myloa.morgado',1,1,NULL,NULL,'Docente'),(23,'irene.santos',1,1,NULL,NULL,'Docente'),(24,'rhadames.carmona',1,1,NULL,NULL,'Docente'),(25,'ivan.flores',1,1,NULL,NULL,'Docente'),(26,'kenyer.aguiar',1,1,NULL,NULL,'Docente'),(27,'ruben.torres',1,1,NULL,NULL,'Docente'),(28,'daniela.torrealba',1,1,NULL,NULL,'Docente'),(29,'natalia.ortega',1,1,NULL,NULL,'Docente'),(30,'myloa.morgado',1,1,NULL,NULL,'Docente'),(31,'alfonso.garmendia',1,1,NULL,NULL,'Docente'),(32,'francisco.sans',1,1,NULL,NULL,'Docente'),(34,'jefferson.santiago',0,1,'4659589','jefferson.santiago','Docente'),(35,'consejo.facultad',1,1,NULL,NULL,'Docente'),(36,'secretaria.uno',0,1,'secretaria','secretaria.uno','Secretaria');
+INSERT INTO `usuario` VALUES (1,'zairap.yepez',1,1,NULL,NULL,'Docente'),(2,'tdivasta',1,1,NULL,NULL,'Docente'),(3,'comisioninv.computacion',1,1,NULL,NULL,'Institucional'),(4,'marisela.dominguez',1,1,NULL,NULL,'Docente'),(5,'comisioninv.matematica',1,1,NULL,NULL,'Institucional'),(6,'consejo.matematica',1,1,NULL,NULL,'Institucional'),(7,'seconfac',1,1,NULL,NULL,'Docente'),(8,'consejo.computacion',1,1,NULL,NULL,'Institucional'),(9,'consultace.matematica',1,1,NULL,NULL,'Institucional'),(10,'renny.hernandez',1,1,NULL,NULL,'Docente'),(11,'manuel.maia',1,1,NULL,NULL,'Docente'),(12,'ezoppi',1,1,NULL,NULL,'Docente'),(13,'consultaci.computacion',1,1,NULL,NULL,'Docente'),(14,'vleguiza',1,1,NULL,NULL,'Docente'),(15,'consultaci.matematica',1,1,NULL,NULL,'Docente'),(16,'mariela.castillo',1,1,NULL,NULL,'Docente'),(17,'tomas_guardia',1,1,NULL,NULL,'Docente'),(18,'consulta.seconfac',1,1,NULL,NULL,'Docente'),(19,'asilva',1,1,NULL,NULL,'Docente'),(20,'curbina',1,1,NULL,NULL,'Docente'),(21,'consultace.computacion',1,1,NULL,NULL,'Docente'),(22,'myloa.morgado',1,1,NULL,NULL,'Docente'),(23,'irene.santos',1,1,NULL,NULL,'Docente'),(24,'rhadames.carmona',1,1,NULL,NULL,'Docente'),(25,'ivan.flores',1,1,NULL,NULL,'Docente'),(26,'kenyer.aguiar',1,1,NULL,NULL,'Docente'),(27,'ruben.torres',1,1,NULL,NULL,'Docente'),(28,'daniela.torrealba',1,1,NULL,NULL,'Docente'),(29,'natalia.ortega',1,1,NULL,NULL,'Docente'),(30,'myloa.morgado',1,1,NULL,NULL,'Docente'),(31,'alfonso.garmendia',1,1,NULL,NULL,'Docente'),(32,'francisco.sans',1,1,NULL,NULL,'Docente'),(34,'jefferson.santiago',0,1,'4659589','jefferson.santiago','Docente'),(35,'consejo.facultad',1,1,NULL,NULL,'Docente'),(36,'secretaria.uno',0,1,'secretaria','secretaria.uno','Secretaria');
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 

@@ -309,7 +309,7 @@ class SecretariasController < ApplicationController
 			        notific.informe_id = nil
 			        notific.actual = 1
 			        notificacionfecha = Date.current.to_s 
-		        	notific.mensaje = "[" + notificacionfecha + "] Se le ha asignado el Plan formación de " + cppersona.nombres.capitalize + " " + cppersona.apellidos.capitalize + ", recuerde crear la adecuación correspondiente y enviarla."
+		        	notific.mensaje = "[" + notificacionfecha + "] Se le ha asignado el Plan formación de " + cppersona.nombres.to_s.split.map(&:capitalize).join(' ') + " " + cppersona.apellidos.to_s.split.map(&:capitalize).join(' ') + ", recuerde crear la adecuación correspondiente y enviarla."
 		        	notific.save
 		        	notific2 = Notificacion.new
 			        notific2.instructor_id = cpusuario.id
@@ -318,11 +318,11 @@ class SecretariasController < ApplicationController
 			        notific2.informe_id = nil
 			        notific2.actual = 2
 			        notificacionfecha = Date.current.to_s 
-		        	notific2.mensaje = "[" + notificacionfecha + "] Se le ha asignado a  " + profe.nombres.to_s.capitalize + " " + profe.apellidos.to_s.capitalize + " como tutor de su Plan de formación."
+		        	notific2.mensaje = "[" + notificacionfecha + "] Se le ha asignado a  " + cppersona.nombres.to_s.split.map(&:capitalize).join(' ') + " " + cppersona.apellidos.to_s.split.map(&:capitalize).join(' ') + " como tutor de su Plan de formación."
 		        	notific2.save
 		        	puts notific2.mensaje
 		        	puts notific.mensaje
-		        	flash[:success] = "Se ha creado el instructor " + cppersona.nombres.capitalize + " " + cppersona.apellidos.capitalize + " de manera exitosa"
+		        	flash[:success] = "Se ha creado el instructor " + cppersona.nombres.to_s.split.map(&:capitalize).join(' ') + " " + cppersona.apellidos.to_s.split.map(&:capitalize).join(' ') + " de manera exitosa"
 					redirect_to controller:"secretarias", action: "index"
 
 				else

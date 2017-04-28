@@ -153,9 +153,9 @@
             <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-default">Enviar</button>
             <%= link_to "Vista Previa", {controller: "iniciotutor", action: "vista_previa"}, class: "btn btn-default" %>
             <%= link_to "Generar PDF", {controller: "adecuacions", action: "generar_pdf"}, class: "btn btn-default" %>
-            <button type="button" class="btn btn-default">Agregar Soporte</button>
-            <button type="button" class="btn btn-default">Ver Soporte</button>
-            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModalEliminar">Eliminar Adecuación</button>
+            <%= link_to "Agregar Soporte", {controller: "documents", action: "new"}, class: "btn btn-default" %>
+            <%= link_to "Ver Soporte", {controller: "documents", action: "index"}, class: "btn btn-default" %>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModalEliminar">Eliminar Adecuación</button>
             <% if @bool_enviado == 0%>
               <button type="submit" class="btn btn-forminst-blue">Modificar Adecuación</button>
             <% else%>
@@ -169,9 +169,9 @@
           <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-default">Enviar</button>
           <%= link_to "Vista Previa", {controller: "iniciotutor", action: "vista_previa"}, class: "btn btn-default" %>
           <%= link_to "Generar PDF", {controller: "adecuacions", action: "generar_pdf"}, class: "btn btn-default" %>
-          <button type="button" class="btn btn-default">Agregar Soporte</button>
-          <button type="button" class="btn btn-default">Ver Soporte</button>
-          <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModalEliminar">Eliminar Adecuación</button>
+          <%= link_to "Agregar Soporte", {controller: "documents", action: "new"}, class: "btn btn-default" %>
+          <%= link_to "Ver Soporte", {controller: "documents", action: "index"}, class: "btn btn-default" %>
+          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModalEliminar">Eliminar Adecuación</button>
         </div>
       <%end%>
   </div>
@@ -185,12 +185,10 @@
           <span><%= link_to 'Plan Formación', :controller => 'iniciotutor', :action => 'planformacions' %></span>
           <p style="display:inline"> / </p>
           <%if !session[:editar]%> 
-            <span><%= link_to session[:instructorName] , :controller => 'iniciotutor', :action => 'ver_detalles_plan' %></span>
-            <p style="display:inline"> / </p>
-            <span><%= link_to 'Adecuación', :controller => 'iniciotutor', :action => 'listar_adecuaciones' %></span>
+            <span><%= link_to session[:instructorName] , :controller => 'iniciotutor', :action => 'ver_detalles_adecuacion' %></span>
             <p style="display:inline"> /  Detalles 4to Semestre  </p>
           <%else %>
-            <span><%= link_to session[:instructorName] , :controller => 'iniciotutor', :action => 'ver_detalles_plan' %></span>
+            <span><%= link_to session[:instructorName] , :controller => 'iniciotutor', :action => 'ver_detalles_adecuacion' %></span>
             <p style="display:inline"> / Modificar 4to Semestre </p>
           <%end%>   
         </div>
