@@ -311,17 +311,158 @@ class InformesController < ApplicationController
         @actividadesafor= []
         @actividadesaotr= []
         @resultados= []
+        @resultados2= ""
+        @resultados2a= []
+        @resultados2b= []
         @actividadese= []
         @observaciont= []
+
+        @bool_enviado = 0
+        if (@estatus.estatus_id != 6 && @estatus.estatus_id != 5)
+          @bool_enviado = 1
+        end
+
         @actividadesa.each do |actade| 
           if actade.actividad_id == nil #Es el caso que es un resultado no contemplado en el plan de formacion o un avancwe de postgrado
-            @res= Resultado.where(informe_actividad_id: actade.id).all
-            @resultados.push(@res)
+            if @bool_enviado == 0
+              @res= Resultado.where(informe_actividad_id: actade.id).all
+              @resultados.push(@res)
+            else
+              if @resultados2b != []
+                @resultados2b= Array.new(0) { |i|  }
+              end
+              @res= Resultado.where(informe_actividad_id: actade.id).all
+              @resultados.push(@res)
+              @res.each do |cpresultado| 
+                @cparray = ["a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a"]
+                @cparray[0] = cpresultado.titulo
+                @cparray[1] = cpresultado.autor
+                @cparray[2] = cpresultado.nombre_capitulo
+                @cparray[3] = cpresultado.autor_capitulo
+                @cparray[4] = cpresultado.dia
+                @cparray[5] = cpresultado.mes
+                @cparray[6] = cpresultado.ano
+                @cparray[7] = cpresultado.ciudad
+                @cparray[8] = cpresultado.estado
+                @cparray[9] = cpresultado.pais
+                @cparray[10] = cpresultado.organizador
+                @cparray[11] = cpresultado.duracion
+                @cparray[12] = cpresultado.editor
+                @cparray[13] = cpresultado.titulo_libro
+                @cparray[14] = cpresultado.autor_libro
+                @cparray[15] = cpresultado.nombre_revista
+                @cparray[16] = cpresultado.nombre_periodico
+                @cparray[17] = cpresultado.nombre_acto
+                @cparray[18] = cpresultado.paginas
+                @cparray[19] = cpresultado.nombre_paginaw
+                @cparray[20] = cpresultado.sitio_paginaw
+                @cparray[21] = cpresultado.infoafiliaion
+                @cparray[22] = cpresultado.cptipo
+                @cparray[23] = cpresultado.nombre
+                @cparray[24] = cpresultado.ISSN_impreso
+                @cparray[25] = cpresultado.ISSN_electro
+                @cparray[26] = cpresultado.volumen
+                @cparray[27] = cpresultado.edicion
+                @cparray[28] = cpresultado.DOI
+                @cparray[29] = cpresultado.ISBN
+                @cparray[30] = cpresultado.universidad
+                @cparray[31] = cpresultado.url
+                puts "holaaaaaaaaaaaaaa"
+                if !@cparray.blank?
+                  @noemptyarray = @cparray - ["", nil]
+                  if !@resultados2
+                    @noemptyarray = @cparray - ["", nil]
+                    if !@noemptyarray.join(',').blank?
+                      puts @noemptyarray.join(',')
+                      @resultados2 = @noemptyarray.join(',')
+                      puts "a"
+                      puts @resultados2
+                    end
+                  else
+                    @noemptyarray = @cparray - ["", nil]
+                    if !@noemptyarray.join(',').blank?
+                      puts @noemptyarray.join(',')
+                      @resultados2 = @noemptyarray.join(',')
+                      puts "b"
+                      puts @resultados2
+                    end
+                  end
+                  @resultados2b.push(@resultados2)
+                end
+              end
+              @resultados2a.push(@resultados2b)
+            end
           else
             @act= Actividad.find(actade.actividad_id)
             tipo= @act.tipo_actividad_id
-            @res= Resultado.where(informe_actividad_id: actade.id).all
-            @resultados.push(@res)
+            if @bool_enviado == 0
+              @res= Resultado.where(informe_actividad_id: actade.id).all
+              @resultados.push(@res)
+            else
+              if @resultados2b != []
+                @resultados2b= Array.new(0) { |i|  }
+              end
+              @res= Resultado.where(informe_actividad_id: actade.id).all
+              @resultados.push(@res)
+              @res.each do |cpresultado| 
+                @cparray = ["a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a"]
+                @cparray[0] = cpresultado.titulo
+                @cparray[1] = cpresultado.autor
+                @cparray[2] = cpresultado.nombre_capitulo
+                @cparray[3] = cpresultado.autor_capitulo
+                @cparray[4] = cpresultado.dia
+                @cparray[5] = cpresultado.mes
+                @cparray[6] = cpresultado.ano
+                @cparray[7] = cpresultado.ciudad
+                @cparray[8] = cpresultado.estado
+                @cparray[9] = cpresultado.pais
+                @cparray[10] = cpresultado.organizador
+                @cparray[11] = cpresultado.duracion
+                @cparray[12] = cpresultado.editor
+                @cparray[13] = cpresultado.titulo_libro
+                @cparray[14] = cpresultado.autor_libro
+                @cparray[15] = cpresultado.nombre_revista
+                @cparray[16] = cpresultado.nombre_periodico
+                @cparray[17] = cpresultado.nombre_acto
+                @cparray[18] = cpresultado.paginas
+                @cparray[19] = cpresultado.nombre_paginaw
+                @cparray[20] = cpresultado.sitio_paginaw
+                @cparray[21] = cpresultado.infoafiliaion
+                @cparray[22] = cpresultado.cptipo
+                @cparray[23] = cpresultado.nombre
+                @cparray[24] = cpresultado.ISSN_impreso
+                @cparray[25] = cpresultado.ISSN_electro
+                @cparray[26] = cpresultado.volumen
+                @cparray[27] = cpresultado.edicion
+                @cparray[28] = cpresultado.DOI
+                @cparray[29] = cpresultado.ISBN
+                @cparray[30] = cpresultado.universidad
+                @cparray[31] = cpresultado.url
+                puts "holaaaaaaaaaaaaaa"
+                if !@cparray.blank?
+                  @noemptyarray = @cparray - ["", nil]
+                  if !@resultados2
+                    @noemptyarray = @cparray - ["", nil]
+                    if !@noemptyarray.join(',').blank?
+                      puts @noemptyarray.join(',')
+                      @resultados2 = @noemptyarray.join(',')
+                      puts "a"
+                      puts @resultados2
+                    end
+                  else
+                    @noemptyarray = @cparray - ["", nil]
+                    if !@noemptyarray.join(',').blank?
+                      puts @noemptyarray.join(',')
+                      @resultados2 = @noemptyarray.join(',')
+                      puts "b"
+                      puts @resultados2
+                    end
+                  end
+                  @resultados2b.push(@resultados2)
+                end
+              end
+              @resultados2a.push(@resultados2b)
+            end
             @ae= ActividadEjecutada.where(informe_actividad_id: actade.id).take
             @actividadese.push(@ae)
             @obs= ObservacionTutor.where(informe_actividad_id: actade.id).take
@@ -351,18 +492,6 @@ class InformesController < ApplicationController
             end
           end
         end
-
-        @bool_enviado = 0
-        estatus_informe = EstatusInforme.where(informe_id: @informe.id, actual: 1).take
-
-
-        if (estatus_informe.estatus_id != 6 && estatus_informe.estatus_id != 5)
-          @bool_enviado = 1
-        end
-
-        @mes = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
-        @dia= [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]
-        @tipos= [['Libros',1], ['Artículo de Revista o Journals',2], ['Artículo de Prensa',3], ['CD',4], ['Manuales',5], ['Publicaciones Electrónicas',6]]
       else
         flash[:warning]= "Error, no hay sesion de adecuacion"
         redirect_to controller:"iniciotutor", action: "ver_detalles_adecuacion"
@@ -1843,7 +1972,15 @@ def generar_pdf() # es función permite generar el documento pdf de la adecuaci�
         
 
       #Actualizará los resultados
+
       cpi = 1;
+      cpres= Resultado.where(informe_actividad_id: ia.id).all
+      if !cpres.blank?
+	    cpres.each do |cpresp| 
+	   		cpres.destroy
+		end
+	  end
+     
 
         while (!params[:tipo.to_s+cpi.to_s+j.to_s].blank?)
 

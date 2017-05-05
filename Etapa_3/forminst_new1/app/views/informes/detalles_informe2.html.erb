@@ -294,12 +294,12 @@
 
                   <tr>
                   <td colspan="4">
+                  <% cpcont = 1 %>
                   <table id="cpResultados" class="table table-bordered" style='width:300%;'> 
                   <tbody>
-                    <% cpcont = 1 %>
                     <% if !@resultados[@j].blank? %>
                       <% @resultados[@j].each do |cjResultado|  %>
-                        <tr>
+                        <tr id="cpfila<%=cpcont.to_s%><%=i.to_s%>">
                         <td>
                           <div id="cpseleccion<%=cpcont.to_s%><%=i.to_s%>" class="form-group"> 
                           <label>Seleccione El tipo de resultado:</label> 
@@ -389,8 +389,8 @@
                               </td> 
                               <td style="border-top: none;"> 
                               </td> 
-                              </tr> 
-                              <tr style="border-top: none;"> 
+                            </tr> 
+                            <tr style="border-top: none;"> 
                               <td style="border-top: none;"> 
                                 <input id="aresultado_editor<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="aeditor<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" value="<%=cjResultado.editor.to_s%>" style="width:70%;"> 
                               </td> 
@@ -422,20 +422,19 @@
                               </td> 
                               <td style="border-top: none;"> 
                                 <select id="bresultado_mes<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="bmes<%=cpcont.to_s%><%=i.to_s%>" style="width:35%;"> 
-                                <option> 
-                                </option> 
-                                <option value="enero">Enero</option> 
-                                <option value="febrero">Febrero</option> 
-                                <option value="marzo">Marzo</option> 
-                                <option value="abril">Abril</option> 
-                                <option value="mayo">Mayo</option> 
-                                <option value="junio">Junio</option> 
-                                <option value="julio">Julio</option> 
-                                <option value="Agosto">Agosto</option> 
-                                <option value="septiembre">Septiembre</option> 
-                                <option value="octubre">Octubre</option> 
-                                <option value="noviembre">Noviembre</option> 
-                                <option value="diciembre">Diciembre</option> 
+                                <option> </option> 
+                                <option value="enero" <% if cjResultado.mes.to_s == "enero" %> selected="selected" <%end%> >Enero</option> 
+                                <option value="febrero" <% if cjResultado.mes.to_s == "febrero" %> selected="selected" <%end%> >Febrero</option> 
+                                <option value="marzo" <% if cjResultado.mes.to_s == "marzo" %> selected="selected" <%end%> >Marzo</option> 
+                                <option value="abril" <% if cjResultado.mes.to_s == "abril" %> selected="selected" <%end%> >Abril</option> 
+                                <option value="mayo" <% if cjResultado.mes.to_s == "mayo" %> selected="selected" <%end%> >Mayo</option> 
+                                <option value="junio" <% if cjResultado.mes.to_s == "junio" %> selected="selected" <%end%> >Junio</option> 
+                                <option value="julio" <% if cjResultado.mes.to_s == "julio" %> selected="selected" <%end%> >Julio</option> 
+                                <option value="Agosto" <% if cjResultado.mes.to_s == "Agosto" %> selected="selected" <%end%> >Agosto</option> 
+                                <option value="septiembre" <% if cjResultado.mes.to_s == "septiembre" %> selected="selected" <%end%> >Septiembre</option> 
+                                <option value="octubre" <% if cjResultado.mes.to_s == "octubre" %> selected="selected" <%end%> >Octubre</option> 
+                                <option value="noviembre" <% if cjResultado.mes.to_s == "noviembre" %> selected="selected" <%end%> >Noviembre</option> 
+                                <option value="diciembre" <% if cjResultado.mes.to_s == "diciembre" %> selected="selected" <%end%> >Diciembre</option> 
                                 </select> 
                               </td> 
 
@@ -574,39 +573,38 @@
                               </td> 
                               <td style="border-top: none;"> 
                                 <select id="cresultado_dia<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="cdia<%=cpcont.to_s%><%=i.to_s%>" style="width:20%;"> 
-                                  <option> 
-                                  </option> 
-                                  <option value="1">1</option> 
-                                  <option value="2">2</option> 
-                                  <option value="3">3</option> 
-                                  <option value="4">4</option> 
-                                  <option value="5">5</option> 
-                                  <option value="6">6</option> 
-                                  <option value="7">7</option> 
-                                  <option value="8">8</option> 
-                                  <option value="9">9</option> 
-                                  <option value="10">10</option> 
-                                  <option value="11">11</option> 
-                                  <option value="12">12</option> 
-                                  <option value="13">13</option> 
-                                  <option value="14">14</option> 
-                                  <option value="15">15</option> 
-                                  <option value="16">16</option> 
-                                  <option value="17">17</option> 
-                                  <option value="18">18</option> 
-                                  <option value="19">19</option> 
-                                  <option value="20">20</option> 
-                                  <option value="21">21</option> 
-                                  <option value="22">22</option> 
-                                  <option value="23">23</option> 
-                                  <option value="24">24</option> 
-                                  <option value="25">25</option> 
-                                  <option value="26">26</option> 
-                                  <option value="27">27</option> 
-                                  <option value="28">28</option> 
-                                  <option value="29">29</option> 
-                                  <option value="30">30</option> 
-                                  <option value="31">31</option> 
+                                  <option> </option> 
+                                  <option value="1" <% if cjResultado.dia.to_s == "1" %> selected="selected" <%end%> >1</option> 
+                                  <option value="2" <% if cjResultado.dia.to_s == "2" %> selected="selected" <%end%> >2</option> 
+                                  <option value="3" <% if cjResultado.dia.to_s == "3" %> selected="selected" <%end%> >3</option> 
+                                  <option value="4"  <% if cjResultado.dia.to_s == "4" %> selected="selected" <%end%> >4</option> 
+                                  <option value="5" <% if cjResultado.dia.to_s == "5" %> selected="selected" <%end%> >5</option> 
+                                  <option value="6" <% if cjResultado.dia.to_s == "6" %> selected="selected" <%end%> >6</option> 
+                                  <option value="7" <% if cjResultado.dia.to_s == "7" %> selected="selected" <%end%> >7</option> 
+                                  <option value="8" <% if cjResultado.dia.to_s == "8" %> selected="selected" <%end%> >8</option> 
+                                  <option value="9" <% if cjResultado.dia.to_s == "9" %> selected="selected" <%end%> >9</option> 
+                                  <option value="10" <% if cjResultado.dia.to_s == "10" %> selected="selected" <%end%> >10</option> 
+                                  <option value="11" <% if cjResultado.dia.to_s == "11" %> selected="selected" <%end%> >11</option> 
+                                  <option value="12" <% if cjResultado.dia.to_s == "12" %> selected="selected" <%end%> >12</option> 
+                                  <option value="13" <% if cjResultado.dia.to_s == "13" %> selected="selected" <%end%> >13</option> 
+                                  <option value="14" <% if cjResultado.dia.to_s == "14" %> selected="selected" <%end%> >14</option> 
+                                  <option value="15" <% if cjResultado.dia.to_s == "15" %> selected="selected" <%end%> >15</option> 
+                                  <option value="16" <% if cjResultado.dia.to_s == "16" %> selected="selected" <%end%> >16</option> 
+                                  <option value="17" <% if cjResultado.dia.to_s == "17" %> selected="selected" <%end%> >17</option> 
+                                  <option value="18" <% if cjResultado.dia.to_s == "18" %> selected="selected" <%end%> >18</option> 
+                                  <option value="19" <% if cjResultado.dia.to_s == "19" %> selected="selected" <%end%> >19</option> 
+                                  <option value="20" <% if cjResultado.dia.to_s == "20" %> selected="selected" <%end%> >20</option> 
+                                  <option value="21" <% if cjResultado.dia.to_s == "21" %> selected="selected" <%end%> >21</option> 
+                                  <option value="22" <% if cjResultado.dia.to_s == "22" %> selected="selected" <%end%> >22</option> 
+                                  <option value="23" <% if cjResultado.dia.to_s == "23" %> selected="selected" <%end%> >23</option> 
+                                  <option value="24" <% if cjResultado.dia.to_s == "24" %> selected="selected" <%end%> >24</option> 
+                                  <option value="25" <% if cjResultado.dia.to_s == "25" %> selected="selected" <%end%> >25</option> 
+                                  <option value="26" <% if cjResultado.dia.to_s == "26" %> selected="selected" <%end%> >26</option> 
+                                  <option value="27" <% if cjResultado.dia.to_s == "27" %> selected="selected" <%end%> >27</option> 
+                                  <option value="28" <% if cjResultado.dia.to_s == "28" %> selected="selected" <%end%> >28</option> 
+                                  <option value="29" <% if cjResultado.dia.to_s == "29" %> selected="selected" <%end%> >29</option> 
+                                  <option value="30" <% if cjResultado.dia.to_s == "30" %> selected="selected" <%end%> >30</option> 
+                                  <option value="31" <% if cjResultado.dia.to_s == "31" %> selected="selected" <%end%> >31</option> 
                                 </select> 
                               </td> 
                               <td style="border-top: none;"> 
@@ -631,18 +629,18 @@
                               <td style="border-top: none;"> 
                                 <select id="cresultado_mes<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="cmes<%=cpcont.to_s%><%=i.to_s%>" style="width:35%;"> 
                                   <option> </option> 
-                                  <option value="enero">Enero</option> 
-                                  <option value="febrero">Febrero</option> 
-                                  <option value="marzo">Marzo</option> 
-                                  <option value="abril">Abril</option> 
-                                  <option value="mayo">Mayo</option> 
-                                  <option value="junio">Junio</option> 
-                                  <option value="julio">Julio</option> 
-                                  <option value="Agosto">Agosto</option>  
-                                  <option value="septiembre">Septiembre</option> 
-                                  <option value="octubre">Octubre</option> 
-                                  <option value="noviembre">Noviembre</option> 
-                                  <option value="diciembre">Diciembre</option> 
+                                  <option value="enero" <% if cjResultado.mes.to_s == "enero" %> selected="selected" <%end%> >Enero</option> 
+                                  <option value="febrero" <% if cjResultado.mes.to_s == "febrero" %> selected="selected" <%end%> >Febrero</option> 
+                                  <option value="marzo" <% if cjResultado.mes.to_s == "marzo" %> selected="selected" <%end%> >Marzo</option> 
+                                  <option value="abril" <% if cjResultado.mes.to_s == "abril" %> selected="selected" <%end%> >Abril</option> 
+                                  <option value="mayo" <% if cjResultado.mes.to_s == "mayo" %> selected="selected" <%end%> >Mayo</option> 
+                                  <option value="junio" <% if cjResultado.mes.to_s == "junio" %> selected="selected" <%end%> >Junio</option> 
+                                  <option value="julio" <% if cjResultado.mes.to_s == "julio" %> selected="selected" <%end%> >Julio</option> 
+                                  <option value="Agosto" <% if cjResultado.mes.to_s == "Agosto" %> selected="selected" <%end%> >Agosto</option> 
+                                  <option value="septiembre" <% if cjResultado.mes.to_s == "septiembre" %> selected="selected" <%end%> >Septiembre</option> 
+                                  <option value="octubre" <% if cjResultado.mes.to_s == "octubre" %> selected="selected" <%end%> >Octubre</option> 
+                                  <option value="noviembre" <% if cjResultado.mes.to_s == "noviembre" %> selected="selected" <%end%> >Noviembre</option> 
+                                  <option value="diciembre" <% if cjResultado.mes.to_s == "diciembre" %> selected="selected" <%end%> >Diciembre</option>
                                 </select> 
                               </td> 
                               <td style="border-top: none;"> 
@@ -757,18 +755,18 @@
                               <td style="border-top: none;"> 
                                 <select id="eresultado_mes<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="emes<%=cpcont.to_s%><%=i.to_s%>" style="width:35%;"> 
                                   <option> </option> 
-                                  <option value="enero">Enero</option> 
-                                  <option value="febrero">Febrero</option> 
-                                  <option value="marzo">Marzo</option> 
-                                  <option value="abril">Abril</option> 
-                                  <option value="mayo">Mayo</option> 
-                                  <option value="junio">Junio</option> 
-                                  <option value="julio">Julio</option> 
-                                  <option value="Agosto">Agosto</option> 
-                                  <option value="septiembre">Septiembre</option> 
-                                  <option value="octubre">Octubre</option> 
-                                  <option value="noviembre">Noviembre</option> 
-                                  <option value="diciembre">Diciembre</option> 
+                                  <option value="enero" <% if cjResultado.mes.to_s == "enero" %> selected="selected" <%end%> >Enero</option> 
+                                  <option value="febrero" <% if cjResultado.mes.to_s == "febrero" %> selected="selected" <%end%> >Febrero</option> 
+                                  <option value="marzo" <% if cjResultado.mes.to_s == "marzo" %> selected="selected" <%end%> >Marzo</option> 
+                                  <option value="abril" <% if cjResultado.mes.to_s == "abril" %> selected="selected" <%end%> >Abril</option> 
+                                  <option value="mayo" <% if cjResultado.mes.to_s == "mayo" %> selected="selected" <%end%> >Mayo</option> 
+                                  <option value="junio" <% if cjResultado.mes.to_s == "junio" %> selected="selected" <%end%> >Junio</option> 
+                                  <option value="julio" <% if cjResultado.mes.to_s == "julio" %> selected="selected" <%end%> >Julio</option> 
+                                  <option value="Agosto" <% if cjResultado.mes.to_s == "Agosto" %> selected="selected" <%end%> >Agosto</option> 
+                                  <option value="septiembre" <% if cjResultado.mes.to_s == "septiembre" %> selected="selected" <%end%> >Septiembre</option> 
+                                  <option value="octubre" <% if cjResultado.mes.to_s == "octubre" %> selected="selected" <%end%> >Octubre</option> 
+                                  <option value="noviembre" <% if cjResultado.mes.to_s == "noviembre" %> selected="selected" <%end%> >Noviembre</option> 
+                                  <option value="diciembre" <% if cjResultado.mes.to_s == "diciembre" %> selected="selected" <%end%> >Diciembre</option>
                                 </select> 
                               </td> 
                               <td style="border-top: none;"> 
@@ -859,18 +857,18 @@
                               <td style="border-top: none;"> 
                                 <select id="fresultado_mes<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="fmes<%=cpcont.to_s%><%=i.to_s%>" style="width:35%;"> 
                                   <option> </option> 
-                                  <option value="enero">Enero</option> 
-                                  <option value="febrero">Febrero</option> 
-                                  <option value="marzo">Marzo</option> 
-                                  <option value="abril">Abril</option> 
-                                  <option value="mayo">Mayo</option> 
-                                  <option value="junio">Junio</option> 
-                                  <option value="julio">Julio</option> 
-                                  <option value="Agosto">Agosto</option> 
-                                  <option value="septiembre">Septiembre</option> 
-                                  <option value="octubre">Octubre</option> 
-                                  <option value="noviembre">Noviembre</option> 
-                                  <option value="diciembre">Diciembre</option> 
+                                  <option value="enero" <% if cjResultado.mes.to_s == "enero" %> selected="selected" <%end%> >Enero</option> 
+                                  <option value="febrero" <% if cjResultado.mes.to_s == "febrero" %> selected="selected" <%end%> >Febrero</option> 
+                                  <option value="marzo" <% if cjResultado.mes.to_s == "marzo" %> selected="selected" <%end%> >Marzo</option> 
+                                  <option value="abril" <% if cjResultado.mes.to_s == "abril" %> selected="selected" <%end%> >Abril</option> 
+                                  <option value="mayo" <% if cjResultado.mes.to_s == "mayo" %> selected="selected" <%end%> >Mayo</option> 
+                                  <option value="junio" <% if cjResultado.mes.to_s == "junio" %> selected="selected" <%end%> >Junio</option> 
+                                  <option value="julio" <% if cjResultado.mes.to_s == "julio" %> selected="selected" <%end%> >Julio</option> 
+                                  <option value="Agosto" <% if cjResultado.mes.to_s == "Agosto" %> selected="selected" <%end%> >Agosto</option> 
+                                  <option value="septiembre" <% if cjResultado.mes.to_s == "septiembre" %> selected="selected" <%end%> >Septiembre</option> 
+                                  <option value="octubre" <% if cjResultado.mes.to_s == "octubre" %> selected="selected" <%end%> >Octubre</option> 
+                                  <option value="noviembre" <% if cjResultado.mes.to_s == "noviembre" %> selected="selected" <%end%> >Noviembre</option> 
+                                  <option value="diciembre" <% if cjResultado.mes.to_s == "diciembre" %> selected="selected" <%end%> >Diciembre</option> 
                                 </select> 
                               </td> 
                               <td style="border-top: none;"> 
@@ -926,18 +924,18 @@
                               <td style="border-top: none;"> 
                                 <select id="gresultado_mes<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="gmes<%=cpcont.to_s%><%=i.to_s%>" style="width:35%;"> 
                                   <option> </option> 
-                                  <option value="enero">Enero</option> 
-                                  <option value="febrero">Febrero</option> 
-                                  <option value="marzo">Marzo</option> 
-                                  <option value="abril">Abril</option> 
-                                  <option value="mayo">Mayo</option> 
-                                  <option value="junio">Junio</option> 
-                                  <option value="julio">Julio</option> 
-                                  <option value="Agosto">Agosto</option> 
-                                  <option value="septiembre">Septiembre</option> 
-                                  <option value="octubre">Octubre</option> 
-                                  <option value="noviembre">Noviembre</option> 
-                                  <option value="diciembre">Diciembre</option> 
+                                  <option value="enero" <% if cjResultado.mes.to_s == "enero" %> selected="selected" <%end%> >Enero</option> 
+                                  <option value="febrero" <% if cjResultado.mes.to_s == "febrero" %> selected="selected" <%end%> >Febrero</option> 
+                                  <option value="marzo" <% if cjResultado.mes.to_s == "marzo" %> selected="selected" <%end%> >Marzo</option> 
+                                  <option value="abril" <% if cjResultado.mes.to_s == "abril" %> selected="selected" <%end%> >Abril</option> 
+                                  <option value="mayo" <% if cjResultado.mes.to_s == "mayo" %> selected="selected" <%end%> >Mayo</option> 
+                                  <option value="junio" <% if cjResultado.mes.to_s == "junio" %> selected="selected" <%end%> >Junio</option> 
+                                  <option value="julio" <% if cjResultado.mes.to_s == "julio" %> selected="selected" <%end%> >Julio</option> 
+                                  <option value="Agosto" <% if cjResultado.mes.to_s == "Agosto" %> selected="selected" <%end%> >Agosto</option> 
+                                  <option value="septiembre" <% if cjResultado.mes.to_s == "septiembre" %> selected="selected" <%end%> >Septiembre</option> 
+                                  <option value="octubre" <% if cjResultado.mes.to_s == "octubre" %> selected="selected" <%end%> >Octubre</option> 
+                                  <option value="noviembre" <% if cjResultado.mes.to_s == "noviembre" %> selected="selected" <%end%> >Noviembre</option> 
+                                  <option value="diciembre" <% if cjResultado.mes.to_s == "diciembre" %> selected="selected" <%end%> >Diciembre</option>
                                 </select> 
                               </td> 
                             </tr>
@@ -954,7 +952,7 @@
                             </tr> 
                             <tr style="border-top: none;"> 
                               <td style="border-top: none;"> 
-                                <select id="gresultado_tipotesis<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="gtipotesis<%=cpcont.to_s%><%=i.to_s%>" value="<%=cjResultado.tipo.to_s%>" style="width:35%;"> 
+                                <select id="gresultado_tipotesis<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="gtipotesis<%=cpcont.to_s%><%=i.to_s%>" value="<%=cjResultado.cptipo.to_s%>" style="width:35%;"> 
                                   <option> </option> 
                                   <option value="enero">Maestría</option> 
                                   <option value="febrero">Doctorado</option> 
@@ -1011,18 +1009,18 @@
                               <td style="border-top: none;"> 
                                 <select id="hresultado_mes<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="hmes<%=cpcont.to_s%><%=i.to_s%>" style="width:35%;"> 
                                   <option> </option> 
-                                  <option value="enero">Enero</option> 
-                                  <option value="febrero">Febrero</option> 
-                                  <option value="marzo">Marzo</option> 
-                                  <option value="abril">Abril</option> 
-                                  <option value="mayo">Mayo</option> 
-                                  <option value="junio">Junio</option>
-                                  <option value="julio">Julio</option> 
-                                  <option value="Agosto">Agosto</option> 
-                                  <option value="septiembre">Septiembre</option> 
-                                  <option value="octubre">Octubre</option> 
-                                  <option value="noviembre">Noviembre</option> 
-                                  <option value="diciembre">Diciembre</option> 
+                                  <option value="enero" <% if cjResultado.mes.to_s == "enero" %> selected="selected" <%end%> >Enero</option> 
+                                  <option value="febrero" <% if cjResultado.mes.to_s == "febrero" %> selected="selected" <%end%> >Febrero</option> 
+                                  <option value="marzo" <% if cjResultado.mes.to_s == "marzo" %> selected="selected" <%end%> >Marzo</option> 
+                                  <option value="abril" <% if cjResultado.mes.to_s == "abril" %> selected="selected" <%end%> >Abril</option> 
+                                  <option value="mayo" <% if cjResultado.mes.to_s == "mayo" %> selected="selected" <%end%> >Mayo</option> 
+                                  <option value="junio" <% if cjResultado.mes.to_s == "junio" %> selected="selected" <%end%> >Junio</option> 
+                                  <option value="julio" <% if cjResultado.mes.to_s == "julio" %> selected="selected" <%end%> >Julio</option> 
+                                  <option value="Agosto" <% if cjResultado.mes.to_s == "Agosto" %> selected="selected" <%end%> >Agosto</option> 
+                                  <option value="septiembre" <% if cjResultado.mes.to_s == "septiembre" %> selected="selected" <%end%> >Septiembre</option> 
+                                  <option value="octubre" <% if cjResultado.mes.to_s == "octubre" %> selected="selected" <%end%> >Octubre</option> 
+                                  <option value="noviembre" <% if cjResultado.mes.to_s == "noviembre" %> selected="selected" <%end%> >Noviembre</option> 
+                                  <option value="diciembre" <% if cjResultado.mes.to_s == "diciembre" %> selected="selected" <%end%> >Diciembre</option>
                                 </select>
                               </td> 
                               <td style="border-top: none;"> 
@@ -1122,39 +1120,39 @@
                                 <input id="jresultado_editor<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="jeditor<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" value="<%=cjResultado.editor.to_s%>" style="width:70%;"> 
                               </td> 
                               <td style="border-top: none;"> 
-                                <select id="jresultado_dia<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="jdia<%=cpcont.to_s%><%=i.to_s%>" value="<%=cjResultado.dia.to_s%>" style="width:20%;"> 
+                                <select id="jresultado_dia<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="jdia<%=cpcont.to_s%><%=i.to_s%>" style="width:20%;"> 
                                   <option> </option> 
-                                  <option value="1">1</option> 
-                                  <option value="2">2</option> 
-                                  <option value="3">3</option> 
-                                  <option value="4">4</option> 
-                                  <option value="5">5</option> 
-                                  <option value="6">6</option> 
-                                  <option value="7">7</option> 
-                                  <option value="8">8</option> 
-                                  <option value="9">9</option> 
-                                  <option value="10">10</option> 
-                                  <option value="11">11</option> 
-                                  <option value="12">12</option> 
-                                  <option value="13">13</option> 
-                                  <option value="14">14</option> 
-                                  <option value="15">15</option> 
-                                  <option value="16">16</option> 
-                                  <option value="17">17</option> 
-                                  <option value="18">18</option> 
-                                  <option value="19">19</option> 
-                                  <option value="20">20</option> 
-                                  <option value="21">21</option> 
-                                  <option value="22">22</option> 
-                                  <option value="23">23</option> 
-                                  <option value="24">24</option> 
-                                  <option value="25">25</option> 
-                                  <option value="26">26</option> 
-                                  <option value="27">27</option> 
-                                  <option value="28">28</option> 
-                                  <option value="29">29</option> 
-                                  <option value="30">30</option> 
-                                  <option value="31">31</option> 
+                                  <option value="1" <% if cjResultado.dia.to_s == "1" %> selected="selected" <%end%> >1</option> 
+                                  <option value="2" <% if cjResultado.dia.to_s == "2" %> selected="selected" <%end%> >2</option> 
+                                  <option value="3" <% if cjResultado.dia.to_s == "3" %> selected="selected" <%end%> >3</option> 
+                                  <option value="4"  <% if cjResultado.dia.to_s == "4" %> selected="selected" <%end%> >4</option> 
+                                  <option value="5" <% if cjResultado.dia.to_s == "5" %> selected="selected" <%end%> >5</option> 
+                                  <option value="6" <% if cjResultado.dia.to_s == "6" %> selected="selected" <%end%> >6</option> 
+                                  <option value="7" <% if cjResultado.dia.to_s == "7" %> selected="selected" <%end%> >7</option> 
+                                  <option value="8" <% if cjResultado.dia.to_s == "8" %> selected="selected" <%end%> >8</option> 
+                                  <option value="9" <% if cjResultado.dia.to_s == "9" %> selected="selected" <%end%> >9</option> 
+                                  <option value="10" <% if cjResultado.dia.to_s == "10" %> selected="selected" <%end%> >10</option> 
+                                  <option value="11" <% if cjResultado.dia.to_s == "11" %> selected="selected" <%end%> >11</option> 
+                                  <option value="12" <% if cjResultado.dia.to_s == "12" %> selected="selected" <%end%> >12</option> 
+                                  <option value="13" <% if cjResultado.dia.to_s == "13" %> selected="selected" <%end%> >13</option> 
+                                  <option value="14" <% if cjResultado.dia.to_s == "14" %> selected="selected" <%end%> >14</option> 
+                                  <option value="15" <% if cjResultado.dia.to_s == "15" %> selected="selected" <%end%> >15</option> 
+                                  <option value="16" <% if cjResultado.dia.to_s == "16" %> selected="selected" <%end%> >16</option> 
+                                  <option value="17" <% if cjResultado.dia.to_s == "17" %> selected="selected" <%end%> >17</option> 
+                                  <option value="18" <% if cjResultado.dia.to_s == "18" %> selected="selected" <%end%> >18</option> 
+                                  <option value="19" <% if cjResultado.dia.to_s == "19" %> selected="selected" <%end%> >19</option> 
+                                  <option value="20" <% if cjResultado.dia.to_s == "20" %> selected="selected" <%end%> >20</option> 
+                                  <option value="21" <% if cjResultado.dia.to_s == "21" %> selected="selected" <%end%> >21</option> 
+                                  <option value="22" <% if cjResultado.dia.to_s == "22" %> selected="selected" <%end%> >22</option> 
+                                  <option value="23" <% if cjResultado.dia.to_s == "23" %> selected="selected" <%end%> >23</option> 
+                                  <option value="24" <% if cjResultado.dia.to_s == "24" %> selected="selected" <%end%> >24</option> 
+                                  <option value="25" <% if cjResultado.dia.to_s == "25" %> selected="selected" <%end%> >25</option> 
+                                  <option value="26" <% if cjResultado.dia.to_s == "26" %> selected="selected" <%end%> >26</option> 
+                                  <option value="27" <% if cjResultado.dia.to_s == "27" %> selected="selected" <%end%> >27</option> 
+                                  <option value="28" <% if cjResultado.dia.to_s == "28" %> selected="selected" <%end%> >28</option> 
+                                  <option value="29" <% if cjResultado.dia.to_s == "29" %> selected="selected" <%end%> >29</option> 
+                                  <option value="30" <% if cjResultado.dia.to_s == "30" %> selected="selected" <%end%> >30</option> 
+                                  <option value="31" <% if cjResultado.dia.to_s == "31" %> selected="selected" <%end%> >31</option>  
                                 </select> 
                               </td> 
                             </tr> 
@@ -1171,26 +1169,26 @@
                             </tr> 
                             <tr style="border-top: none;"> 
                               <td style="border-top: none;"> 
-                                <input id="jresultado_titulocapitulo<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="jtitulocapitulo<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" style="width:70%;"> 
+                                <input id="jresultado_titulocapitulo<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="jtitulocapitulo<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" value="<%=cjResultado.nombre_capitulo.to_s%>" style="width:70%;"> 
                               </td> 
                               <td style="border-top: none;"> 
-                                <input id="jresultado_numpag<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="jnumpag<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" style="width:70%;"> 
+                                <input id="jresultado_numpag<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="jnumpag<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" value="<%=cjResultado.paginas.to_s%>" style="width:70%;"> 
                               </td> 
                               <td style="border-top: none;"> 
                                 <select id="jresultado_mes<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="jmes<%=cpcont.to_s%><%=i.to_s%>" style="width:35%;"> 
                                   <option> </option> 
-                                  <option value="enero">Enero</option> 
-                                  <option value="febrero">Febrero</option> 
-                                  <option value="marzo">Marzo</option> 
-                                  <option value="abril">Abril</option> 
-                                  <option value="mayo">Mayo</option> 
-                                  <option value="junio">Junio</option> 
-                                  <option value="julio">Julio</option> 
-                                  <option value="Agosto">Agosto</option> 
-                                  <option value="septiembre">Septiembre</option> 
-                                  <option value="octubre">Octubre</option> 
-                                  <option value="noviembre">Noviembre</option> 
-                                  <option value="diciembre">Diciembre</option> 
+                                  <option value="enero" <% if cjResultado.mes.to_s == "enero" %> selected="selected" <%end%> >Enero</option> 
+                                  <option value="febrero" <% if cjResultado.mes.to_s == "febrero" %> selected="selected" <%end%> >Febrero</option> 
+                                  <option value="marzo" <% if cjResultado.mes.to_s == "marzo" %> selected="selected" <%end%> >Marzo</option> 
+                                  <option value="abril" <% if cjResultado.mes.to_s == "abril" %> selected="selected" <%end%> >Abril</option> 
+                                  <option value="mayo" <% if cjResultado.mes.to_s == "mayo" %> selected="selected" <%end%> >Mayo</option> 
+                                  <option value="junio" <% if cjResultado.mes.to_s == "junio" %> selected="selected" <%end%> >Junio</option> 
+                                  <option value="julio" <% if cjResultado.mes.to_s == "julio" %> selected="selected" <%end%> >Julio</option> 
+                                  <option value="Agosto" <% if cjResultado.mes.to_s == "Agosto" %> selected="selected" <%end%> >Agosto</option> 
+                                  <option value="septiembre" <% if cjResultado.mes.to_s == "septiembre" %> selected="selected" <%end%> >Septiembre</option> 
+                                  <option value="octubre" <% if cjResultado.mes.to_s == "octubre" %> selected="selected" <%end%> >Octubre</option> 
+                                  <option value="noviembre" <% if cjResultado.mes.to_s == "noviembre" %> selected="selected" <%end%> >Noviembre</option> 
+                                  <option value="diciembre" <% if cjResultado.mes.to_s == "diciembre" %> selected="selected" <%end%> >Diciembre</option> 
                                 </select> 
                               </td> 
                             </tr> 
@@ -1207,13 +1205,13 @@
                             </tr> 
                             <tr style="border-top: none;"> 
                               <td style="border-top: none;"> 
-                                <input id="jresultado_autordoc<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="jautordoc<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text"  style="width:70%;"> 
+                                <input id="jresultado_autordoc<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="jautordoc<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text"  value="<%=cjResultado.autor.to_s%>" style="width:70%;"> 
                               </td> 
                               <td style="border-top: none;"> 
-                                <input id="jresultado_nombreact<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="jnombreact<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" style="width:70%;"> 
+                                <input id="jresultado_nombreact<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="jnombreact<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" value="<%=cjResultado.nombre_acto.to_s%>" style="width:70%;"> 
                               </td> 
                               <td style="border-top: none;"> 
-                                <input id="jresultado_ano<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="jano<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" style="width:70%;"> 
+                                <input id="jresultado_ano<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="jano<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" value="<%=cjResultado.ano.to_s%>" style="width:70%;"> 
                               </td> 
                             </tr> 
                             <tr style="border-top: none;"> 
@@ -1228,10 +1226,10 @@
                             </tr> 
                             <tr style="border-top: none;"> 
                               <td style="border-top: none;"> 
-                                <input id="jresultado_autorcap<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="jautorcap<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text"  style="width:70%;"> 
+                                <input id="jresultado_autorcap<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="jautorcap<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text"  value="<%=cjResultado.autor_capitulo.to_s%>" style="width:70%;"> 
                               </td> 
                               <td style="border-top: none;"> 
-                                <input id="jresultado_ciudad<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="jciudad<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" style="width:70%;"> 
+                                <input id="jresultado_ciudad<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="jciudad<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" value="<%=cjResultado.ciudad.to_s%>" style="width:70%;"> 
                               </td> 
                               <td style="border-top: none;"> 
                               </td> 
@@ -1253,13 +1251,13 @@
                             </tr> 
                             <tr style="border-top: none;"> 
                               <td style="border-top: none;"> 
-                                <input id="kresultado_titulo<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="ktitulo<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" style="width:70%;"> 
+                                <input id="kresultado_titulo<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="ktitulo<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" value="<%=cjResultado.titulo.to_s%>" style="width:70%;"> 
                               </td> 
                               <td style="border-top: none;"> 
-                                <input id="kresultado_editor<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="keditor<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" style="width:70%;"> 
+                                <input id="kresultado_editor<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="keditor<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" value="<%=cjResultado.editor.to_s%>" style="width:70%;"> 
                               </td> 
                               <td style="border-top: none;"> 
-                                <input id="kresultado_estado<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="kestado<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text"  style="width:70%;"> 
+                                <input id="kresultado_estado<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="kestado<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text"  value="<%=cjResultado.estado.to_s%>" style="width:70%;"> 
                               </td> 
                             </tr> 
                             <tr style="border-top: none;"> 
@@ -1275,13 +1273,13 @@
                             </tr> 
                             <tr style="border-top: none;"> 
                               <td style="border-top: none;"> 
-                                <input id="kresultado_titulocapitulo<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="ktitulocapitulo<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text"  style="width:70%;"> 
+                                <input id="kresultado_titulocapitulo<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="ktitulocapitulo<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text"  value="<%=cjResultado.nombre_capitulo.to_s%>" style="width:70%;"> 
                               </td> 
                               <td style="border-top: none;"> 
-                                <input id="kresultado_endidadorg<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="kentidadorg<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" style="width:70%;"> 
+                                <input id="kresultado_endidadorg<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="kentidadorg<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" value="<%=cjResultado.organizador.to_s%>" style="width:70%;"> 
                               </td> 
                               <td style="border-top: none;"> 
-                                <input id="kresultado_pais<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="kpais<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" style="width:70%;"> 
+                                <input id="kresultado_pais<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="kpais<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" value="<%=cjResultado.pais.to_s%>" style="width:70%;"> 
                               </td> 
                             </tr> 
                             <tr style="border-top: none;"> 
@@ -1297,45 +1295,45 @@
                             </tr> 
                             <tr style="border-top: none;"> 
                               <td style="border-top: none;"> 
-                                <input id="kresultado_autordoc<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="kautordoc<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text"  style="width:70%;"> 
+                                <input id="kresultado_autordoc<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="kautordoc<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text"  value="<%=cjResultado.autor.to_s%>" style="width:70%;"> 
                               </td> 
                               <td style="border-top: none;"> 
-                                <input id="kresultado_nombreact<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="knombreact<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" style="width:70%;"> 
+                                <input id="kresultado_nombreact<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="knombreact<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" value="<%=cjResultado.nombre_acto.to_s%>" style="width:70%;"> 
                               </td> 
                               <td style="border-top: none;"> 
                                 <select id="kresultado_dia<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="kdia<%=cpcont.to_s%><%=i.to_s%>" style="width:20%;"> 
                                   <option> </option> 
-                                  <option value="1">1</option> 
-                                  <option value="2">2</option> 
-                                  <option value="3">3</option> 
-                                  <option value="4">4</option> 
-                                  <option value="5">5</option> 
-                                  <option value="6">6</option> 
-                                  <option value="7">7</option> 
-                                  <option value="8">8</option> 
-                                  <option value="9">9</option> 
-                                  <option value="10">10</option> 
-                                  <option value="11">11</option> 
-                                  <option value="12">12</option> 
-                                  <option value="13">13</option> 
-                                  <option value="14">14</option> 
-                                  <option value="15">15</option> 
-                                  <option value="16">16</option> 
-                                  <option value="17">17</option> 
-                                  <option value="18">18</option> 
-                                  <option value="19">19</option> 
-                                  <option value="20">20</option> 
-                                  <option value="21">21</option> 
-                                  <option value="22">22</option> 
-                                  <option value="23">23</option> 
-                                  <option value="24">24</option> 
-                                  <option value="25">25</option> 
-                                  <option value="26">26</option> 
-                                  <option value="27">27</option> 
-                                  <option value="28">28</option> 
-                                  <option value="29">29</option> 
-                                  <option value="30">30</option> 
-                                  <option value="31">31</option> 
+                                  <option value="1" <% if cjResultado.dia.to_s == "1" %> selected="selected" <%end%> >1</option> 
+                                  <option value="2" <% if cjResultado.dia.to_s == "2" %> selected="selected" <%end%> >2</option> 
+                                  <option value="3" <% if cjResultado.dia.to_s == "3" %> selected="selected" <%end%> >3</option> 
+                                  <option value="4"  <% if cjResultado.dia.to_s == "4" %> selected="selected" <%end%> >4</option> 
+                                  <option value="5" <% if cjResultado.dia.to_s == "5" %> selected="selected" <%end%> >5</option> 
+                                  <option value="6" <% if cjResultado.dia.to_s == "6" %> selected="selected" <%end%> >6</option> 
+                                  <option value="7" <% if cjResultado.dia.to_s == "7" %> selected="selected" <%end%> >7</option> 
+                                  <option value="8" <% if cjResultado.dia.to_s == "8" %> selected="selected" <%end%> >8</option> 
+                                  <option value="9" <% if cjResultado.dia.to_s == "9" %> selected="selected" <%end%> >9</option> 
+                                  <option value="10" <% if cjResultado.dia.to_s == "10" %> selected="selected" <%end%> >10</option> 
+                                  <option value="11" <% if cjResultado.dia.to_s == "11" %> selected="selected" <%end%> >11</option> 
+                                  <option value="12" <% if cjResultado.dia.to_s == "12" %> selected="selected" <%end%> >12</option> 
+                                  <option value="13" <% if cjResultado.dia.to_s == "13" %> selected="selected" <%end%> >13</option> 
+                                  <option value="14" <% if cjResultado.dia.to_s == "14" %> selected="selected" <%end%> >14</option> 
+                                  <option value="15" <% if cjResultado.dia.to_s == "15" %> selected="selected" <%end%> >15</option> 
+                                  <option value="16" <% if cjResultado.dia.to_s == "16" %> selected="selected" <%end%> >16</option> 
+                                  <option value="17" <% if cjResultado.dia.to_s == "17" %> selected="selected" <%end%> >17</option> 
+                                  <option value="18" <% if cjResultado.dia.to_s == "18" %> selected="selected" <%end%> >18</option> 
+                                  <option value="19" <% if cjResultado.dia.to_s == "19" %> selected="selected" <%end%> >19</option> 
+                                  <option value="20" <% if cjResultado.dia.to_s == "20" %> selected="selected" <%end%> >20</option> 
+                                  <option value="21" <% if cjResultado.dia.to_s == "21" %> selected="selected" <%end%> >21</option> 
+                                  <option value="22" <% if cjResultado.dia.to_s == "22" %> selected="selected" <%end%> >22</option> 
+                                  <option value="23" <% if cjResultado.dia.to_s == "23" %> selected="selected" <%end%> >23</option> 
+                                  <option value="24" <% if cjResultado.dia.to_s == "24" %> selected="selected" <%end%> >24</option> 
+                                  <option value="25" <% if cjResultado.dia.to_s == "25" %> selected="selected" <%end%> >25</option> 
+                                  <option value="26" <% if cjResultado.dia.to_s == "26" %> selected="selected" <%end%> >26</option> 
+                                  <option value="27" <% if cjResultado.dia.to_s == "27" %> selected="selected" <%end%> >27</option> 
+                                  <option value="28" <% if cjResultado.dia.to_s == "28" %> selected="selected" <%end%> >28</option> 
+                                  <option value="29" <% if cjResultado.dia.to_s == "29" %> selected="selected" <%end%> >29</option> 
+                                  <option value="30" <% if cjResultado.dia.to_s == "30" %> selected="selected" <%end%> >30</option> 
+                                  <option value="31" <% if cjResultado.dia.to_s == "31" %> selected="selected" <%end%> >31</option> 
                                 </select> 
                               </td> 
                             </tr> 
@@ -1352,26 +1350,26 @@
                             </tr> 
                             <tr style="border-top: none;"> 
                               <td style="border-top: none;"> 
-                                <input id="kresultado_autorcap<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="kautorcap<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text"  style="width:70%;"> 
+                                <input id="kresultado_autorcap<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="kautorcap<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text"  value="<%=cjResultado.autor_capitulo.to_s%>" style="width:70%;"> 
                               </td> 
                               <td style="border-top: none;"> 
-                                <input id="kresultado_numpag<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="knumpag<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" style="width:70%;"> 
+                                <input id="kresultado_numpag<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="knumpag<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" value="<%=cjResultado.paginas.to_s%>" style="width:70%;"> 
                               </td> 
                               <td style="border-top: none;"> 
                                 <select id="kresultado_mes<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="kmes<%=cpcont.to_s%><%=i.to_s%>" style="width:35%;"> 
                                   <option> </option> 
-                                  <option value="enero">Enero</option> 
-                                  <option value="febrero">Febrero</option> 
-                                  <option value="marzo">Marzo</option> 
-                                  <option value="abril">Abril</option> 
-                                  <option value="mayo">Mayo</option> 
-                                  <option value="junio">Junio</option> 
-                                  <option value="julio">Julio</option> 
-                                  <option value="Agosto">Agosto</option> 
-                                  <option value="septiembre">Septiembre</option> 
-                                  <option value="octubre">Octubre</option> 
-                                  <option value="noviembre">Noviembre</option> 
-                                  <option value="diciembre">Diciembre</option> 
+                                  <option value="enero" <% if cjResultado.mes.to_s == "enero" %> selected="selected" <%end%> >Enero</option> 
+                                  <option value="febrero" <% if cjResultado.mes.to_s == "febrero" %> selected="selected" <%end%> >Febrero</option> 
+                                  <option value="marzo" <% if cjResultado.mes.to_s == "marzo" %> selected="selected" <%end%> >Marzo</option> 
+                                  <option value="abril" <% if cjResultado.mes.to_s == "abril" %> selected="selected" <%end%> >Abril</option> 
+                                  <option value="mayo" <% if cjResultado.mes.to_s == "mayo" %> selected="selected" <%end%> >Mayo</option> 
+                                  <option value="junio" <% if cjResultado.mes.to_s == "junio" %> selected="selected" <%end%> >Junio</option> 
+                                  <option value="julio" <% if cjResultado.mes.to_s == "julio" %> selected="selected" <%end%> >Julio</option> 
+                                  <option value="Agosto" <% if cjResultado.mes.to_s == "Agosto" %> selected="selected" <%end%> >Agosto</option> 
+                                  <option value="septiembre" <% if cjResultado.mes.to_s == "septiembre" %> selected="selected" <%end%> >Septiembre</option> 
+                                  <option value="octubre" <% if cjResultado.mes.to_s == "octubre" %> selected="selected" <%end%> >Octubre</option> 
+                                  <option value="noviembre" <% if cjResultado.mes.to_s == "noviembre" %> selected="selected" <%end%> >Noviembre</option> 
+                                  <option value="diciembre" <% if cjResultado.mes.to_s == "diciembre" %> selected="selected" <%end%> >Diciembre</option>
                                 </select> 
                               </td> 
                             </tr> 
@@ -1387,10 +1385,10 @@
                             </tr> 
                             <tr style="border-top: none;"> 
                               <td style="border-top: none;"> 
-                                <input id="kresultado_ciudad<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="kciudad<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" style="width:70%;"> 
+                                <input id="kresultado_ciudad<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="kciudad<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" value="<%=cjResultado.ciudad.to_s%>" style="width:70%;"> 
                               </td> 
                               <td style="border-top: none;"> 
-                                <input id="kresultado_ano<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="kano<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" style="width:70%;"> 
+                                <input id="kresultado_ano<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="kano<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" value="<%=cjResultado.ano.to_s%>" style="width:70%;"> 
                               </td> 
                               <td style="border-top: none;">  
                               </td> 
@@ -1412,26 +1410,26 @@
                             </tr> 
                             <tr style="border-top: none;"> 
                               <td style="border-top: none;"> 
-                                <input id="lresultado_titulo<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="ltitulo<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" style="width:70%;"> 
+                                <input id="lresultado_titulo<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="ltitulo<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" value="<%=cjResultado.titulo.to_s%>" style="width:70%;"> 
                               </td> 
                               <td style="border-top: none;"> 
-                                <input id="lresultado_numpag<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="lnumpag<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" style="width:70%;"> 
+                                <input id="lresultado_numpag<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="lnumpag<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" value="<%=cjResultado.paginas.to_s%>" style="width:70%;"> 
                               </td> 
                               <td style="border-top: none;"> 
                                 <select id="lresultado_mes<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="lmes<%=cpcont.to_s%><%=i.to_s%>" style="width:35%;"> 
                                   <option> </option> 
-                                  <option value="enero">Enero</option> 
-                                  <option value="febrero">Febrero</option> 
-                                  <option value="marzo">Marzo</option> 
-                                  <option value="abril">Abril</option> 
-                                  <option value="mayo">Mayo</option> 
-                                  <option value="junio">Junio</option> 
-                                  <option value="julio">Julio</option> 
-                                  <option value="Agosto">Agosto</option> 
-                                  <option value="septiembre">Septiembre</option> 
-                                  <option value="octubre">Octubre</option> 
-                                  <option value="noviembre">Noviembre</option> 
-                                  <option value="diciembre">Diciembre</option> 
+                                  <option value="enero" <% if cjResultado.mes.to_s == "enero" %> selected="selected" <%end%> >Enero</option> 
+                                  <option value="febrero" <% if cjResultado.mes.to_s == "febrero" %> selected="selected" <%end%> >Febrero</option> 
+                                  <option value="marzo" <% if cjResultado.mes.to_s == "marzo" %> selected="selected" <%end%> >Marzo</option> 
+                                  <option value="abril" <% if cjResultado.mes.to_s == "abril" %> selected="selected" <%end%> >Abril</option> 
+                                  <option value="mayo" <% if cjResultado.mes.to_s == "mayo" %> selected="selected" <%end%> >Mayo</option> 
+                                  <option value="junio" <% if cjResultado.mes.to_s == "junio" %> selected="selected" <%end%> >Junio</option> 
+                                  <option value="julio" <% if cjResultado.mes.to_s == "julio" %> selected="selected" <%end%> >Julio</option> 
+                                  <option value="Agosto" <% if cjResultado.mes.to_s == "Agosto" %> selected="selected" <%end%> >Agosto</option> 
+                                  <option value="septiembre" <% if cjResultado.mes.to_s == "septiembre" %> selected="selected" <%end%> >Septiembre</option> 
+                                  <option value="octubre" <% if cjResultado.mes.to_s == "octubre" %> selected="selected" <%end%> >Octubre</option> 
+                                  <option value="noviembre" <% if cjResultado.mes.to_s == "noviembre" %> selected="selected" <%end%> >Noviembre</option> 
+                                  <option value="diciembre" <% if cjResultado.mes.to_s == "diciembre" %> selected="selected" <%end%> >Diciembre</option> 
                                 </select> 
                               </td> 
                             </tr> 
@@ -1448,13 +1446,13 @@
                             </tr> 
                             <tr style="border-top: none;"> 
                               <td style="border-top: none;"> 
-                                <input id="lresultado_autor<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="lautor<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text"  style="width:70%;"> 
+                                <input id="lresultado_autor<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="lautor<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text"  value="<%=cjResultado.autor.to_s%>" style="width:70%;"> 
                               </td> 
                               <td style="border-top: none;"> 
-                                <input id="lresultado_nomacto<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="lnomacto<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" style="width:70%;"> 
+                                <input id="lresultado_nomacto<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="lnomacto<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" value="<%=cjResultado.nombre_acto.to_s%>" style="width:70%;"> 
                               </td> 
                               <td style="border-top: none;"> 
-                                <input id="lresultado_año<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="laño<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" style="width:70%;"> 
+                                <input id="lresultado_año<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="laño<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" value="<%=cjResultado.ano.to_s%>" style="width:70%;"> 
                               </td> 
                             </tr> 
                             <tr style="border-top: none;"> 
@@ -1470,46 +1468,46 @@
                             </tr> 
                             <tr style="border-top: none;"> 
                               <td style="border-top: none;">
-                                <input id="lresultado_editor<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="leditor<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text"  style="width:70%;"> 
+                                <input id="lresultado_editor<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="leditor<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text"  value="<%=cjResultado.editor.to_s%>" style="width:70%;"> 
                               </td> 
                               <td style="border-top: none;"> 
                                 <select id="lresultado_dia<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="ldia<%=cpcont.to_s%><%=i.to_s%>" style="width:20%;"> 
                                   <option> </option> 
-                                  <option value="1">1</option> 
-                                  <option value="2">2</option> 
-                                  <option value="3">3</option> 
-                                  <option value="4">4</option> 
-                                  <option value="5">5</option> 
-                                  <option value="6">6</option> 
-                                  <option value="7">7</option> 
-                                  <option value="8">8</option> 
-                                  <option value="9">9</option> 
-                                  <option value="10">10</option> 
-                                  <option value="11">11</option> 
-                                  <option value="12">12</option> 
-                                  <option value="13">13</option> 
-                                  <option value="14">14</option> 
-                                  <option value="15">15</option> 
-                                  <option value="16">16</option> 
-                                  <option value="17">17</option> 
-                                  <option value="18">18</option> 
-                                  <option value="19">19</option> 
-                                  <option value="20">20</option> 
-                                  <option value="21">21</option> 
-                                  <option value="22">22</option> 
-                                  <option value="23">23</option> 
-                                  <option value="24">24</option> 
-                                  <option value="25">25</option> 
-                                  <option value="26">26</option> 
-                                  <option value="27">27</option> 
-                                  <option value="28">28</option> 
-                                  <option value="29">29</option> 
-                                  <option value="30">30</option> 
-                                  <option value="31">31</option> 
+                                  <option value="1" <% if cjResultado.dia.to_s == "1" %> selected="selected" <%end%> >1</option> 
+                                  <option value="2" <% if cjResultado.dia.to_s == "2" %> selected="selected" <%end%> >2</option> 
+                                  <option value="3" <% if cjResultado.dia.to_s == "3" %> selected="selected" <%end%> >3</option> 
+                                  <option value="4"  <% if cjResultado.dia.to_s == "4" %> selected="selected" <%end%> >4</option> 
+                                  <option value="5" <% if cjResultado.dia.to_s == "5" %> selected="selected" <%end%> >5</option> 
+                                  <option value="6" <% if cjResultado.dia.to_s == "6" %> selected="selected" <%end%> >6</option> 
+                                  <option value="7" <% if cjResultado.dia.to_s == "7" %> selected="selected" <%end%> >7</option> 
+                                  <option value="8" <% if cjResultado.dia.to_s == "8" %> selected="selected" <%end%> >8</option> 
+                                  <option value="9" <% if cjResultado.dia.to_s == "9" %> selected="selected" <%end%> >9</option> 
+                                  <option value="10" <% if cjResultado.dia.to_s == "10" %> selected="selected" <%end%> >10</option> 
+                                  <option value="11" <% if cjResultado.dia.to_s == "11" %> selected="selected" <%end%> >11</option> 
+                                  <option value="12" <% if cjResultado.dia.to_s == "12" %> selected="selected" <%end%> >12</option> 
+                                  <option value="13" <% if cjResultado.dia.to_s == "13" %> selected="selected" <%end%> >13</option> 
+                                  <option value="14" <% if cjResultado.dia.to_s == "14" %> selected="selected" <%end%> >14</option> 
+                                  <option value="15" <% if cjResultado.dia.to_s == "15" %> selected="selected" <%end%> >15</option> 
+                                  <option value="16" <% if cjResultado.dia.to_s == "16" %> selected="selected" <%end%> >16</option> 
+                                  <option value="17" <% if cjResultado.dia.to_s == "17" %> selected="selected" <%end%> >17</option> 
+                                  <option value="18" <% if cjResultado.dia.to_s == "18" %> selected="selected" <%end%> >18</option> 
+                                  <option value="19" <% if cjResultado.dia.to_s == "19" %> selected="selected" <%end%> >19</option> 
+                                  <option value="20" <% if cjResultado.dia.to_s == "20" %> selected="selected" <%end%> >20</option> 
+                                  <option value="21" <% if cjResultado.dia.to_s == "21" %> selected="selected" <%end%> >21</option> 
+                                  <option value="22" <% if cjResultado.dia.to_s == "22" %> selected="selected" <%end%> >22</option> 
+                                  <option value="23" <% if cjResultado.dia.to_s == "23" %> selected="selected" <%end%> >23</option> 
+                                  <option value="24" <% if cjResultado.dia.to_s == "24" %> selected="selected" <%end%> >24</option> 
+                                  <option value="25" <% if cjResultado.dia.to_s == "25" %> selected="selected" <%end%> >25</option> 
+                                  <option value="26" <% if cjResultado.dia.to_s == "26" %> selected="selected" <%end%> >26</option> 
+                                  <option value="27" <% if cjResultado.dia.to_s == "27" %> selected="selected" <%end%> >27</option> 
+                                  <option value="28" <% if cjResultado.dia.to_s == "28" %> selected="selected" <%end%> >28</option> 
+                                  <option value="29" <% if cjResultado.dia.to_s == "29" %> selected="selected" <%end%> >29</option> 
+                                  <option value="30" <% if cjResultado.dia.to_s == "30" %> selected="selected" <%end%> >30</option> 
+                                  <option value="31" <% if cjResultado.dia.to_s == "31" %> selected="selected" <%end%> >31</option> 
                                 </select> 
                               </td> 
                               <td style="border-top: none;"> 
-                                <input id="lresultado_ciudad<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="lciudad<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" style="width:70%;"> 
+                                <input id="lresultado_ciudad<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="lciudad<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" value="<%=cjResultado.ciudad.to_s%>" style="width:70%;"> 
                               </td> 
                             </tr> 
                           </tbody> 
@@ -1529,45 +1527,45 @@
                             </tr> 
                             <tr style="border-top: none;"> 
                               <td style="border-top: none;"> 
-                                <input id="mresultado_titulo<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="mtitulo<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" style="width:70%;"> 
+                                <input id="mresultado_titulo<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="mtitulo<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" value="<%=cjResultado.titulo.to_s%>" style="width:70%;"> 
                               </td> 
                               <td style="border-top: none;"> 
-                                <input id="mresultado_nombreacto<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="mnombreacto<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" style="width:70%;"> 
+                                <input id="mresultado_nombreacto<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="mnombreacto<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" value="<%=cjResultado.nombre_acto.to_s%>" style="width:70%;"> 
                               </td> 
                               <td style="border-top: none;"> 
                                 <select id="mresultado_dia<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="mdia<%=cpcont.to_s%><%=i.to_s%>" style="width:20%;"> 
                                   <option> </option> 
-                                  <option value="1">1</option> 
-                                  <option value="2">2</option> 
-                                  <option value="3">3</option> 
-                                  <option value="4">4</option> 
-                                  <option value="5">5</option> 
-                                  <option value="6">6</option> 
-                                  <option value="7">7</option> 
-                                  <option value="8">8</option> 
-                                  <option value="9">9</option> 
-                                  <option value="10">10</option> 
-                                  <option value="11">11</option> 
-                                  <option value="12">12</option> 
-                                  <option value="13">13</option> 
-                                  <option value="14">14</option> 
-                                  <option value="15">15</option> 
-                                  <option value="16">16</option> 
-                                  <option value="17">17</option> 
-                                  <option value="18">18</option> 
-                                  <option value="19">19</option> 
-                                  <option value="20">20</option> 
-                                  <option value="21">21</option> 
-                                  <option value="22">22</option> 
-                                  <option value="23">23</option> 
-                                  <option value="24">24</option> 
-                                  <option value="25">25</option> 
-                                  <option value="26">26</option> 
-                                  <option value="27">27</option> 
-                                  <option value="28">28</option> 
-                                  <option value="29">29</option> 
-                                  <option value="30">30</option> 
-                                  <option value="31">31</option> 
+                                  <option value="1" <% if cjResultado.dia.to_s == "1" %> selected="selected" <%end%> >1</option> 
+                                  <option value="2" <% if cjResultado.dia.to_s == "2" %> selected="selected" <%end%> >2</option> 
+                                  <option value="3" <% if cjResultado.dia.to_s == "3" %> selected="selected" <%end%> >3</option> 
+                                  <option value="4"  <% if cjResultado.dia.to_s == "4" %> selected="selected" <%end%> >4</option> 
+                                  <option value="5" <% if cjResultado.dia.to_s == "5" %> selected="selected" <%end%> >5</option> 
+                                  <option value="6" <% if cjResultado.dia.to_s == "6" %> selected="selected" <%end%> >6</option> 
+                                  <option value="7" <% if cjResultado.dia.to_s == "7" %> selected="selected" <%end%> >7</option> 
+                                  <option value="8" <% if cjResultado.dia.to_s == "8" %> selected="selected" <%end%> >8</option> 
+                                  <option value="9" <% if cjResultado.dia.to_s == "9" %> selected="selected" <%end%> >9</option> 
+                                  <option value="10" <% if cjResultado.dia.to_s == "10" %> selected="selected" <%end%> >10</option> 
+                                  <option value="11" <% if cjResultado.dia.to_s == "11" %> selected="selected" <%end%> >11</option> 
+                                  <option value="12" <% if cjResultado.dia.to_s == "12" %> selected="selected" <%end%> >12</option> 
+                                  <option value="13" <% if cjResultado.dia.to_s == "13" %> selected="selected" <%end%> >13</option> 
+                                  <option value="14" <% if cjResultado.dia.to_s == "14" %> selected="selected" <%end%> >14</option> 
+                                  <option value="15" <% if cjResultado.dia.to_s == "15" %> selected="selected" <%end%> >15</option> 
+                                  <option value="16" <% if cjResultado.dia.to_s == "16" %> selected="selected" <%end%> >16</option> 
+                                  <option value="17" <% if cjResultado.dia.to_s == "17" %> selected="selected" <%end%> >17</option> 
+                                  <option value="18" <% if cjResultado.dia.to_s == "18" %> selected="selected" <%end%> >18</option> 
+                                  <option value="19" <% if cjResultado.dia.to_s == "19" %> selected="selected" <%end%> >19</option> 
+                                  <option value="20" <% if cjResultado.dia.to_s == "20" %> selected="selected" <%end%> >20</option> 
+                                  <option value="21" <% if cjResultado.dia.to_s == "21" %> selected="selected" <%end%> >21</option> 
+                                  <option value="22" <% if cjResultado.dia.to_s == "22" %> selected="selected" <%end%> >22</option> 
+                                  <option value="23" <% if cjResultado.dia.to_s == "23" %> selected="selected" <%end%> >23</option> 
+                                  <option value="24" <% if cjResultado.dia.to_s == "24" %> selected="selected" <%end%> >24</option> 
+                                  <option value="25" <% if cjResultado.dia.to_s == "25" %> selected="selected" <%end%> >25</option> 
+                                  <option value="26" <% if cjResultado.dia.to_s == "26" %> selected="selected" <%end%> >26</option> 
+                                  <option value="27" <% if cjResultado.dia.to_s == "27" %> selected="selected" <%end%> >27</option> 
+                                  <option value="28" <% if cjResultado.dia.to_s == "28" %> selected="selected" <%end%> >28</option> 
+                                  <option value="29" <% if cjResultado.dia.to_s == "29" %> selected="selected" <%end%> >29</option> 
+                                  <option value="30" <% if cjResultado.dia.to_s == "30" %> selected="selected" <%end%> >30</option> 
+                                  <option value="31" <% if cjResultado.dia.to_s == "31" %> selected="selected" <%end%> >31</option> 
                                 </select> 
                               </td> 
                             </tr> 
@@ -1584,26 +1582,26 @@
                             </tr> 
                             <tr style="border-top: none;"> 
                               <td style="border-top: none;"> 
-                                <input id="mresultado_autordoc<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="mautordoc<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text"  style="width:70%;"> 
+                                <input id="mresultado_autordoc<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="mautordoc<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text"  value="<%=cjResultado.autor.to_s%>" style="width:70%;"> 
                               </td> 
                               <td style="border-top: none;"> 
-                                <input id="mresultado_ciudad<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="mciudad<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" style="width:70%;"> 
+                                <input id="mresultado_ciudad<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="mciudad<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" value="<%=cjResultado.ciudad.to_s%>" style="width:70%;"> 
                               </td> 
                               <td style="border-top: none;"> 
                                 <select id="mresultado_mes<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="mmes<%=cpcont.to_s%><%=i.to_s%>" style="width:35%;"> 
                                   <option> </option> 
-                                  <option value="enero">Enero</option> 
-                                  <option value="febrero">Febrero</option> 
-                                  <option value="marzo">Marzo</option> 
-                                  <option value="abril">Abril</option> 
-                                  <option value="mayo">Mayo</option> 
-                                  <option value="junio">Junio</option> 
-                                  <option value="julio">Julio</option> 
-                                  <option value="Agosto">Agosto</option> 
-                                  <option value="septiembre">Septiembre</option> 
-                                  <option value="octubre">Octubre</option> 
-                                  <option value="noviembre">Noviembre</option> 
-                                  <option value="diciembre">Diciembre</option> 
+                                  <option value="enero" <% if cjResultado.mes.to_s == "enero" %> selected="selected" <%end%> >Enero</option> 
+                                  <option value="febrero" <% if cjResultado.mes.to_s == "febrero" %> selected="selected" <%end%> >Febrero</option> 
+                                  <option value="marzo" <% if cjResultado.mes.to_s == "marzo" %> selected="selected" <%end%> >Marzo</option> 
+                                  <option value="abril" <% if cjResultado.mes.to_s == "abril" %> selected="selected" <%end%> >Abril</option> 
+                                  <option value="mayo" <% if cjResultado.mes.to_s == "mayo" %> selected="selected" <%end%> >Mayo</option> 
+                                  <option value="junio" <% if cjResultado.mes.to_s == "junio" %> selected="selected" <%end%> >Junio</option> 
+                                  <option value="julio" <% if cjResultado.mes.to_s == "julio" %> selected="selected" <%end%> >Julio</option> 
+                                  <option value="Agosto" <% if cjResultado.mes.to_s == "Agosto" %> selected="selected" <%end%> >Agosto</option> 
+                                  <option value="septiembre" <% if cjResultado.mes.to_s == "septiembre" %> selected="selected" <%end%> >Septiembre</option> 
+                                  <option value="octubre" <% if cjResultado.mes.to_s == "octubre" %> selected="selected" <%end%> >Octubre</option> 
+                                  <option value="noviembre" <% if cjResultado.mes.to_s == "noviembre" %> selected="selected" <%end%> >Noviembre</option> 
+                                  <option value="diciembre" <% if cjResultado.mes.to_s == "diciembre" %> selected="selected" <%end%> >Diciembre</option> 
                                 </select> 
                               </td> 
                             </tr> 
@@ -1620,13 +1618,13 @@
                             </tr> 
                             <tr style="border-top: none;"> 
                               <td style="border-top: none;"> 
-                                <input id="mresultado_titulocapitulo<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="mtitulocapitulo<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text"  style="width:70%;"> 
+                                <input id="mresultado_titulocapitulo<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="mtitulocapitulo<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text"  value="<%=cjResultado.nombre_capitulo.to_s%>" style="width:70%;"> 
                               </td> 
                               <td style="border-top: none;"> 
-                                <input id="mresultado_estado<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="mestado<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" style="width:70%;"> 
+                                <input id="mresultado_estado<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="mestado<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" value="<%=cjResultado.estado.to_s%>" style="width:70%;"> 
                               </td> 
                               <td style="border-top: none;"> 
-                                <input id="mresultado_ano<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="mano<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" style="width:70%;"> 
+                                <input id="mresultado_ano<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="mano<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" value="<%=cjResultado.ano.to_s%>" style="width:70%;"> 
                               </td> 
                             </tr> 
                             <tr style="border-top: none;"> 
@@ -1641,10 +1639,10 @@
                             </tr> 
                             <tr style="border-top: none;"> 
                               <td style="border-top: none;"> 
-                                <input id="mresultado_nombreautor<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="mnombreautor<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text"  style="width:70%;"> 
+                                <input id="mresultado_nombreautor<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="mnombreautor<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text"  value="<%=cjResultado.autor_capitulo.to_s%>" style="width:70%;"> 
                               </td> 
                               <td style="border-top: none;"> 
-                                <input id="mresultado_pais<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="mpais<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" style="width:70%;"> 
+                                <input id="mresultado_pais<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="mpais<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" value="<%=cjResultado.pais.to_s%>" style="width:70%;"> 
                               </td> 
                               <td style="border-top: none;"> 
                               </td>
@@ -1666,45 +1664,45 @@
                             </tr> 
                             <tr style="border-top: none;"> 
                               <td style="border-top: none;"> 
-                                <input id="nresultado_titulo<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="ntitulo<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" style="width:70%;"> 
+                                <input id="nresultado_titulo<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="ntitulo<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" value="<%=cjResultado.titulo.to_s%>" style="width:70%;"> 
                               </td> 
                               <td style="border-top: none;"> 
-                                <input id="nresultado_nombreacto<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="nnombreacto<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" style="width:70%;"> 
+                                <input id="nresultado_nombreacto<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="nnombreacto<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" value="<%=cjResultado.nombre_acto.to_s%>" style="width:70%;"> 
                               </td> 
                               <td style="border-top: none;"> 
                                 <select id="nresultado_dia<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="ndia<%=cpcont.to_s%><%=i.to_s%>" style="width:20%;"> 
                                   <option> </option> 
-                                  <option value="1">1</option> 
-                                  <option value="2">2</option> 
-                                  <option value="3">3</option> 
-                                  <option value="4">4</option> 
-                                  <option value="5">5</option> 
-                                  <option value="6">6</option> 
-                                  <option value="7">7</option> 
-                                  <option value="8">8</option> 
-                                  <option value="9">9</option> 
-                                  <option value="10">10</option> 
-                                  <option value="11">11</option> 
-                                  <option value="12">12</option> 
-                                  <option value="13">13</option> 
-                                  <option value="14">14</option> 
-                                  <option value="15">15</option> 
-                                  <option value="16">16</option> 
-                                  <option value="17">17</option> 
-                                  <option value="18">18</option> 
-                                  <option value="19">19</option> 
-                                  <option value="20">20</option> 
-                                  <option value="21">21</option> 
-                                  <option value="22">22</option> 
-                                  <option value="23">23</option> 
-                                  <option value="24">24</option> 
-                                  <option value="25">25</option> 
-                                  <option value="26">26</option> 
-                                  <option value="27">27</option> 
-                                  <option value="28">28</option> 
-                                  <option value="29">29</option> 
-                                  <option value="30">30</option> 
-                                  <option value="31">31</option> 
+                                  <option value="1" <% if cjResultado.dia.to_s == "1" %> selected="selected" <%end%> >1</option> 
+                                  <option value="2" <% if cjResultado.dia.to_s == "2" %> selected="selected" <%end%> >2</option> 
+                                  <option value="3" <% if cjResultado.dia.to_s == "3" %> selected="selected" <%end%> >3</option> 
+                                  <option value="4"  <% if cjResultado.dia.to_s == "4" %> selected="selected" <%end%> >4</option> 
+                                  <option value="5" <% if cjResultado.dia.to_s == "5" %> selected="selected" <%end%> >5</option> 
+                                  <option value="6" <% if cjResultado.dia.to_s == "6" %> selected="selected" <%end%> >6</option> 
+                                  <option value="7" <% if cjResultado.dia.to_s == "7" %> selected="selected" <%end%> >7</option> 
+                                  <option value="8" <% if cjResultado.dia.to_s == "8" %> selected="selected" <%end%> >8</option> 
+                                  <option value="9" <% if cjResultado.dia.to_s == "9" %> selected="selected" <%end%> >9</option> 
+                                  <option value="10" <% if cjResultado.dia.to_s == "10" %> selected="selected" <%end%> >10</option> 
+                                  <option value="11" <% if cjResultado.dia.to_s == "11" %> selected="selected" <%end%> >11</option> 
+                                  <option value="12" <% if cjResultado.dia.to_s == "12" %> selected="selected" <%end%> >12</option> 
+                                  <option value="13" <% if cjResultado.dia.to_s == "13" %> selected="selected" <%end%> >13</option> 
+                                  <option value="14" <% if cjResultado.dia.to_s == "14" %> selected="selected" <%end%> >14</option> 
+                                  <option value="15" <% if cjResultado.dia.to_s == "15" %> selected="selected" <%end%> >15</option> 
+                                  <option value="16" <% if cjResultado.dia.to_s == "16" %> selected="selected" <%end%> >16</option> 
+                                  <option value="17" <% if cjResultado.dia.to_s == "17" %> selected="selected" <%end%> >17</option> 
+                                  <option value="18" <% if cjResultado.dia.to_s == "18" %> selected="selected" <%end%> >18</option> 
+                                  <option value="19" <% if cjResultado.dia.to_s == "19" %> selected="selected" <%end%> >19</option> 
+                                  <option value="20" <% if cjResultado.dia.to_s == "20" %> selected="selected" <%end%> >20</option> 
+                                  <option value="21" <% if cjResultado.dia.to_s == "21" %> selected="selected" <%end%> >21</option> 
+                                  <option value="22" <% if cjResultado.dia.to_s == "22" %> selected="selected" <%end%> >22</option> 
+                                  <option value="23" <% if cjResultado.dia.to_s == "23" %> selected="selected" <%end%> >23</option> 
+                                  <option value="24" <% if cjResultado.dia.to_s == "24" %> selected="selected" <%end%> >24</option> 
+                                  <option value="25" <% if cjResultado.dia.to_s == "25" %> selected="selected" <%end%> >25</option> 
+                                  <option value="26" <% if cjResultado.dia.to_s == "26" %> selected="selected" <%end%> >26</option> 
+                                  <option value="27" <% if cjResultado.dia.to_s == "27" %> selected="selected" <%end%> >27</option> 
+                                  <option value="28" <% if cjResultado.dia.to_s == "28" %> selected="selected" <%end%> >28</option> 
+                                  <option value="29" <% if cjResultado.dia.to_s == "29" %> selected="selected" <%end%> >29</option> 
+                                  <option value="30" <% if cjResultado.dia.to_s == "30" %> selected="selected" <%end%> >30</option> 
+                                  <option value="31" <% if cjResultado.dia.to_s == "31" %> selected="selected" <%end%> >31</option> 
                                 </select> 
                               </td> 
                             </tr> 
@@ -1721,26 +1719,26 @@
                             </tr> 
                             <tr style="border-top: none;"> 
                               <td style="border-top: none;"> 
-                                <input id="nresultado_autordoc<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="nautordoc<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text"  style="width:70%;"> 
+                                <input id="nresultado_autordoc<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="nautordoc<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" value="<%=cjResultado.autor.to_s%>" style="width:70%;"> 
                               </td> 
                               <td style="border-top: none;"> 
-                                <input id="nresultado_ciudad<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="nciudad<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" style="width:70%;"> 
+                                <input id="nresultado_ciudad<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="nciudad<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" value="<%=cjResultado.ciudad.to_s%>" style="width:70%;"> 
                               </td> 
                               <td style="border-top: none;"> 
                                 <select id="nresultado_mes<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="nmes<%=cpcont.to_s%><%=i.to_s%>" style="width:35%;"> 
                                   <option> </option> 
-                                  <option value="enero">Enero</option> 
-                                  <option value="febrero">Febrero</option>
-                                  <option value="marzo">Marzo</option> 
-                                  <option value="abril">Abril</option> 
-                                  <option value="mayo">Mayo</option> 
-                                  <option value="junio">Junio</option> 
-                                  <option value="julio">Julio</option> 
-                                  <option value="Agosto">Agosto</option>
-                                  <option value="septiembre">Septiembre</option> 
-                                  <option value="octubre">Octubre</option> 
-                                  <option value="noviembre">Noviembre</option> 
-                                  <option value="diciembre">Diciembre</option> 
+                                  <option value="enero" <% if cjResultado.mes.to_s == "enero" %> selected="selected" <%end%> >Enero</option> 
+                                  <option value="febrero" <% if cjResultado.mes.to_s == "febrero" %> selected="selected" <%end%> >Febrero</option> 
+                                  <option value="marzo" <% if cjResultado.mes.to_s == "marzo" %> selected="selected" <%end%> >Marzo</option> 
+                                  <option value="abril" <% if cjResultado.mes.to_s == "abril" %> selected="selected" <%end%> >Abril</option> 
+                                  <option value="mayo" <% if cjResultado.mes.to_s == "mayo" %> selected="selected" <%end%> >Mayo</option> 
+                                  <option value="junio" <% if cjResultado.mes.to_s == "junio" %> selected="selected" <%end%> >Junio</option> 
+                                  <option value="julio" <% if cjResultado.mes.to_s == "julio" %> selected="selected" <%end%> >Julio</option> 
+                                  <option value="Agosto" <% if cjResultado.mes.to_s == "Agosto" %> selected="selected" <%end%> >Agosto</option> 
+                                  <option value="septiembre" <% if cjResultado.mes.to_s == "septiembre" %> selected="selected" <%end%> >Septiembre</option> 
+                                  <option value="octubre" <% if cjResultado.mes.to_s == "octubre" %> selected="selected" <%end%> >Octubre</option> 
+                                  <option value="noviembre" <% if cjResultado.mes.to_s == "noviembre" %> selected="selected" <%end%> >Noviembre</option> 
+                                  <option value="diciembre" <% if cjResultado.mes.to_s == "diciembre" %> selected="selected" <%end%> >Diciembre</option>
                                 </select> 
                               </td> 
                             </tr> 
@@ -1757,13 +1755,13 @@
                             </tr> 
                             <tr style="border-top: none;"> 
                               <td style="border-top: none;"> 
-                                <input id="nresultado_titulocapitulo<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="ntitulocapitulo<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text"  style="width:70%;"> 
+                                <input id="nresultado_titulocapitulo<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="ntitulocapitulo<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text"  value="<%=cjResultado.nombre_capitulo.to_s%>" style="width:70%;"> 
                               </td> 
                               <td style="border-top: none;"> 
-                                <input id="nresultado_estado<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="nestado<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" style="width:70%;"> 
+                                <input id="nresultado_estado<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="nestado<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" value="<%=cjResultado.estado.to_s%>" style="width:70%;"> 
                               </td> 
                               <td style="border-top: none;"> 
-                                <input id="nresultado_ano<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="nano<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" style="width:70%;"> 
+                                <input id="nresultado_ano<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="nano<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" value="<%=cjResultado.ano.to_s%>" style="width:70%;"> 
                               </td> 
                             </tr> 
                             <tr style="border-top: none;"> 
@@ -1778,10 +1776,10 @@
                             </tr> 
                             <tr style="border-top: none;"> 
                               <td style="border-top: none;"> 
-                                <input id="nresultado_nombreautor<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="nnombreautor<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text"  style="width:70%;"> 
+                                <input id="nresultado_nombreautor<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="nnombreautor<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text"  value="<%=cjResultado.autor_capitulo.to_s%>" style="width:70%;"> 
                               </td> 
                               <td style="border-top: none;"> 
-                                <input id="nresultado_pais<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="npais<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" style="width:70%;"> 
+                                <input id="nresultado_pais<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="npais<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" value="<%=cjResultado.pais.to_s%>" style="width:70%;"> 
                               </td> 
                               <td style="border-top: none;"> 
                               </td> 
@@ -1803,13 +1801,13 @@
                             </tr> 
                             <tr style="border-top: none;"> 
                               <td style="border-top: none;"> 
-                                <input id="oresultado_titulo<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="otitulo<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" style="width:70%;"> 
+                                <input id="oresultado_titulo<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="otitulo<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" value="<%=cjResultado.titulo.to_s%>" style="width:70%;"> 
                               </td> 
                               <td style="border-top: none;"> 
-                                <input id="oresultado_editor<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="oeditor<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" style="width:70%;"> 
+                                <input id="oresultado_editor<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="oeditor<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" value="<%=cjResultado.editor.to_s%>" style="width:70%;"> 
                               </td> 
                               <td style="border-top: none;"> 
-                                <input id="oresultado_ano<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="oano<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text"  style="width:70%;"> 
+                                <input id="oresultado_ano<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="oano<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text"  value="<%=cjResultado.ano.to_s%>" style="width:70%;"> 
                               </td> 
                             </tr> 
                             <tr style="border-top: none;"> 
@@ -1825,13 +1823,13 @@
                             </tr> 
                             <tr style="border-top: none;"> 
                               <td style="border-top: none;"> 
-                                <input id="oresultado_autordoc<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="oautordoc<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text"  style="width:70%;"> 
+                                <input id="oresultado_autordoc<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="oautordoc<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text"  value="<%=cjResultado.autor.to_s%>" style="width:70%;"> 
                               </td> 
                               <td style="border-top: none;"> 
-                                <input id="oresultado_entidadorg<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="oentidadorg<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" style="width:70%;"> 
+                                <input id="oresultado_entidadorg<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="oentidadorg<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" value="<%=cjResultado.organizador.to_s%>" style="width:70%;"> 
                               </td> 
                               <td style="border-top: none;"> 
-                                <input id="oresultado_ciudad<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="ociudad<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" style="width:70%;"> 
+                                <input id="oresultado_ciudad<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="ociudad<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" value="<%=cjResultado.ciudad.to_s%>" style="width:70%;"> 
                               </td> 
                             </tr> 
                             <tr style="border-top: none;"> 
@@ -1846,13 +1844,13 @@
                             </tr> 
                             <tr style="border-top: none;"> 
                               <td style="border-top: none;"> 
-                                <input id="oresultado_titulocap<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="otitulocap<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text"  style="width:70%;"> 
+                                <input id="oresultado_titulocap<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="otitulocap<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text"  value="<%=cjResultado.nombre_capitulo.to_s%>" style="width:70%;"> 
                               </td> 
                               <td style="border-top: none;"> 
-                                <input id="oresultado_duracion<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="oduracion<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" style="width:70%;"> 
+                                <input id="oresultado_duracion<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="oduracion<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" value="<%=cjResultado.duracion.to_s%>" style="width:70%;"> 
                               </td> 
                               <td style="border-top: none;"> 
-                                <input id="oresultado_estado<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="oestado<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" style="width:70%;"> 
+                                <input id="oresultado_estado<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="oestado<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" value="<%=cjResultado.estado.to_s%>" style="width:70%;"> 
                               </td> 
                             </tr> 
                             <tr style="border-top: none;"> 
@@ -1868,13 +1866,13 @@
                             </tr> 
                             <tr style="border-top: none;"> 
                               <td style="border-top: none;"> 
-                                <input id="oresultado_autorcap<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="oautorcap<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text"  style="width:70%;"> 
+                                <input id="oresultado_autorcap<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="oautorcap<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text"  value="<%=cjResultado.autor_capitulo.to_s%>" style="width:70%;"> 
                               </td> 
                               <td style="border-top: none;"> 
-                                <input id="oresultado_numpag<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="onumpag<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" style="width:70%;"> 
+                                <input id="oresultado_numpag<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="onumpag<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" value="<%=cjResultado.paginas.to_s%>" style="width:70%;"> 
                               </td> 
                               <td style="border-top: none;"> 
-                                <input id="oresultado_pais<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="opais<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" style="width:70%;"> 
+                                <input id="oresultado_pais<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="opais<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" value="<%=cjResultado.pais.to_s%>" style="width:70%;"> 
                               </td> 
                             </tr> 
                             <tr style="border-top: none;"> 
@@ -1889,42 +1887,42 @@
                             </tr> 
                             <tr style="border-top: none;"> 
                               <td style="border-top: none;"> 
-                                <input id="oresultado_titulolib<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="otitulolib<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text"  style="width:70%;"> 
+                                <input id="oresultado_titulolib<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="otitulolib<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" value="<%=cjResultado.titulo_libro.to_s%>" style="width:70%;"> 
                               </td> 
                               <td style="border-top: none;"> 
                                 <select id="oresultado_dia<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="odia<%=cpcont.to_s%><%=i.to_s%>" style="width:20%;"> 
                                   <option> </option> 
-                                  <option value="1">1</option> 
-                                  <option value="2">2</option> 
-                                  <option value="3">3</option> 
-                                  <option value="4">4</option> 
-                                  <option value="5">5</option> 
-                                  <option value="6">6</option> 
-                                  <option value="7">7</option> 
-                                  <option value="8">8</option> 
-                                  <option value="9">9</option> 
-                                  <option value="10">10</option> 
-                                  <option value="11">11</option> 
-                                  <option value="12">12</option> 
-                                  <option value="13">13</option> 
-                                  <option value="14">14</option> 
-                                  <option value="15">15</option> 
-                                  <option value="16">16</option> 
-                                  <option value="17">17</option> 
-                                  <option value="18">18</option> 
-                                  <option value="19">19</option> 
-                                  <option value="20">20</option> 
-                                  <option value="21">21</option> 
-                                  <option value="22">22</option> 
-                                  <option value="23">23</option> 
-                                  <option value="24">24</option> 
-                                  <option value="25">25</option> 
-                                  <option value="26">26</option> 
-                                  <option value="27">27</option> 
-                                  <option value="28">28</option> 
-                                  <option value="29">29</option> 
-                                  <option value="30">30</option> 
-                                  <option value="31">31</option> 
+                                  <option value="1" <% if cjResultado.dia.to_s == "1" %> selected="selected" <%end%> >1</option> 
+                                  <option value="2" <% if cjResultado.dia.to_s == "2" %> selected="selected" <%end%> >2</option> 
+                                  <option value="3" <% if cjResultado.dia.to_s == "3" %> selected="selected" <%end%> >3</option> 
+                                  <option value="4"  <% if cjResultado.dia.to_s == "4" %> selected="selected" <%end%> >4</option> 
+                                  <option value="5" <% if cjResultado.dia.to_s == "5" %> selected="selected" <%end%> >5</option> 
+                                  <option value="6" <% if cjResultado.dia.to_s == "6" %> selected="selected" <%end%> >6</option> 
+                                  <option value="7" <% if cjResultado.dia.to_s == "7" %> selected="selected" <%end%> >7</option> 
+                                  <option value="8" <% if cjResultado.dia.to_s == "8" %> selected="selected" <%end%> >8</option> 
+                                  <option value="9" <% if cjResultado.dia.to_s == "9" %> selected="selected" <%end%> >9</option> 
+                                  <option value="10" <% if cjResultado.dia.to_s == "10" %> selected="selected" <%end%> >10</option> 
+                                  <option value="11" <% if cjResultado.dia.to_s == "11" %> selected="selected" <%end%> >11</option> 
+                                  <option value="12" <% if cjResultado.dia.to_s == "12" %> selected="selected" <%end%> >12</option> 
+                                  <option value="13" <% if cjResultado.dia.to_s == "13" %> selected="selected" <%end%> >13</option> 
+                                  <option value="14" <% if cjResultado.dia.to_s == "14" %> selected="selected" <%end%> >14</option> 
+                                  <option value="15" <% if cjResultado.dia.to_s == "15" %> selected="selected" <%end%> >15</option> 
+                                  <option value="16" <% if cjResultado.dia.to_s == "16" %> selected="selected" <%end%> >16</option> 
+                                  <option value="17" <% if cjResultado.dia.to_s == "17" %> selected="selected" <%end%> >17</option> 
+                                  <option value="18" <% if cjResultado.dia.to_s == "18" %> selected="selected" <%end%> >18</option> 
+                                  <option value="19" <% if cjResultado.dia.to_s == "19" %> selected="selected" <%end%> >19</option> 
+                                  <option value="20" <% if cjResultado.dia.to_s == "20" %> selected="selected" <%end%> >20</option> 
+                                  <option value="21" <% if cjResultado.dia.to_s == "21" %> selected="selected" <%end%> >21</option> 
+                                  <option value="22" <% if cjResultado.dia.to_s == "22" %> selected="selected" <%end%> >22</option> 
+                                  <option value="23" <% if cjResultado.dia.to_s == "23" %> selected="selected" <%end%> >23</option> 
+                                  <option value="24" <% if cjResultado.dia.to_s == "24" %> selected="selected" <%end%> >24</option> 
+                                  <option value="25" <% if cjResultado.dia.to_s == "25" %> selected="selected" <%end%> >25</option> 
+                                  <option value="26" <% if cjResultado.dia.to_s == "26" %> selected="selected" <%end%> >26</option> 
+                                  <option value="27" <% if cjResultado.dia.to_s == "27" %> selected="selected" <%end%> >27</option> 
+                                  <option value="28" <% if cjResultado.dia.to_s == "28" %> selected="selected" <%end%> >28</option> 
+                                  <option value="29" <% if cjResultado.dia.to_s == "29" %> selected="selected" <%end%> >29</option> 
+                                  <option value="30" <% if cjResultado.dia.to_s == "30" %> selected="selected" <%end%> >30</option> 
+                                  <option value="31" <% if cjResultado.dia.to_s == "31" %> selected="selected" <%end%> >31</option> 
                                 </select> 
                               </td> 
                               <td style="border-top: none;"> 
@@ -1942,23 +1940,23 @@
                             </tr> 
                             <tr style="border-top: none;"> 
                               <td style="border-top: none;"> 
-                                <input id="oresultado_autorref<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="oautorref<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text"  style="width:70%;"> 
+                                <input id="oresultado_autorref<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="oautorref<%=cpcont.to_s%><%=i.to_s%>" size="30" type="text" value="<%=cjResultado.autor_libro.to_s%>" style="width:70%;"> 
                               </td> 
                               <td style="border-top: none;">  
                                 <select id="oresultado_mes<%=cpcont.to_s%><%=i.to_s%>" class="form-control" name="omes<%=cpcont.to_s%><%=i.to_s%>" style="width:35%;"> 
                                   <option> </option> 
-                                  <option value="enero">Enero</option> 
-                                  <option value="febrero">Febrero</option> 
-                                  <option value="marzo">Marzo</option> 
-                                  <option value="abril">Abril</option> 
-                                  <option value="mayo">Mayo</option> 
-                                  <option value="junio">Junio</option> 
-                                  <option value="julio">Julio</option> 
-                                  <option value="Agosto">Agosto</option> 
-                                  <option value="septiembre">Septiembre</option> 
-                                  <option value="octubre">Octubre</option> 
-                                  <option value="noviembre">Noviembre</option> 
-                                  <option value="diciembre">Diciembre</option> 
+                                  <option value="enero" <% if cjResultado.mes.to_s == "enero" %> selected="selected" <%end%> >Enero</option> 
+                                  <option value="febrero" <% if cjResultado.mes.to_s == "febrero" %> selected="selected" <%end%> >Febrero</option> 
+                                  <option value="marzo" <% if cjResultado.mes.to_s == "marzo" %> selected="selected" <%end%> >Marzo</option> 
+                                  <option value="abril" <% if cjResultado.mes.to_s == "abril" %> selected="selected" <%end%> >Abril</option> 
+                                  <option value="mayo" <% if cjResultado.mes.to_s == "mayo" %> selected="selected" <%end%> >Mayo</option> 
+                                  <option value="junio" <% if cjResultado.mes.to_s == "junio" %> selected="selected" <%end%> >Junio</option> 
+                                  <option value="julio" <% if cjResultado.mes.to_s == "julio" %> selected="selected" <%end%> >Julio</option> 
+                                  <option value="Agosto" <% if cjResultado.mes.to_s == "Agosto" %> selected="selected" <%end%> >Agosto</option> 
+                                  <option value="septiembre" <% if cjResultado.mes.to_s == "septiembre" %> selected="selected" <%end%> >Septiembre</option> 
+                                  <option value="octubre" <% if cjResultado.mes.to_s == "octubre" %> selected="selected" <%end%> >Octubre</option> 
+                                  <option value="noviembre" <% if cjResultado.mes.to_s == "noviembre" %> selected="selected" <%end%> >Noviembre</option> 
+                                  <option value="diciembre" <% if cjResultado.mes.to_s == "diciembre" %> selected="selected" <%end%> >Diciembre</option> 
                                 </select> 
                               </td> 
                               <td style="border-top: none;"> 
@@ -1967,16 +1965,16 @@
                           </tbody> 
                           </table> 
                           </div> 
-                          <br/> <a id="cpeliminar'+ params +'" class="btn btn-default eliminar_resultado" rel="<%=i.to_s%>" rel2="<%=cpcont.to_s%>"><span class="glyphicon glyphicon-trash" ></span> Eliminar Resultado</a> <br>
+                          <br/> <a id="cpeliminar<%=i.to_s%>" class="btn btn-default eliminar_resultado" rel="<%=i.to_s%>" rel2="<%=cpcont.to_s%>"><span class="glyphicon glyphicon-trash" ></span> Eliminar Resultado</a> <br>
+                          <script languaje="JavaScript">
+                            mostrarInputs(<%=cjResultado.tipo_resultado_id.to_s%>, <%=i.to_s%> , <%=cpcont.to_s%>);
+                          </script>
+                          <script languaje="JavaScript">
+                            mostrarInputsTipos(<%=cjResultado.tipo_publicacion.to_s%>, <%=i.to_s%> , <%=cpcont.to_s%>);
+                          </script>
+                          <% cpcont = cpcont + 1 %>
                         </td>
                         </tr>
-                        <script languaje="JavaScript">
-                          mostrarInputs(<%=cjResultado.tipo_resultado_id.to_s%>, <%=i.to_s%> , <%=cpcont.to_s%>);
-                        </script>
-                        <script languaje="JavaScript">
-                          mostrarInputsTipos(<%=cjResultado.tipo_publicacion.to_s%>, <%=i.to_s%> , <%=cpcont.to_s%>);
-                        </script>
-                        <% cpcont = cpcont + 1 %>
                       <%end%>
                     <%end%>
                     <tr>
@@ -2168,9 +2166,31 @@
                     <input type="hidden" name="inv<%=i.to_s%>" value='<%= actdoc.id %>'>
                 </tr>
                 <% if !@resultados[@j].blank? %>
-
-                mostrar los resultados----------------------------------------------------------------------------------
-
+                  <tr>
+                    <td>
+                      <div class="row">
+                        <div class="col-xs-12 col-md-12 col-lg-12">
+                           <tr>
+                           <td colspan="4">
+                            <h5>Resultados: </h5>
+                           </td>
+                           </tr>
+                           <tr>
+                           <td colspan="4">
+                           <div class="well">
+                           <% @resultados2a[@j].each_with_index do |cpresultados| %>
+                             <span class="pull-left glyphicon glyphicon-ok" aria-hidden="true">
+                             </span>
+                             &nbsp; <%= cpresultados %>  
+                             <br>
+                           <% end %>
+                           </div>
+                           </td>
+                           </tr>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
                 <%end%>
               <%end%> 
               
@@ -2436,7 +2456,7 @@
           document.getElementById("kresultado_autorcap" + i + params).value=document.getElementById("kresultado_autorcap" + j + params).value;
           document.getElementById("kresultado_numpag" + i + params).value=document.getElementById("kresultado_numpag" + j + params).value;
           document.getElementById("kresultado_mes" + i + params).selectedIndex = document.getElementById("kresultado_mes" + j + params).selectedIndex;
-          document.getElementById("kresultado_nombreacto" + i + params).value=document.getElementById("kresultado_nombreacto" + j + params).value;
+          document.getElementById("kresultado_nombreact" + i + params).value=document.getElementById("kresultado_nombreact" + j + params).value;
           document.getElementById("kresultado_ciudad" + i + params).value=document.getElementById("kresultado_ciudad" + j + params).value;
           document.getElementById("kresultado_ano" + i + params).value=document.getElementById("kresultado_ano" + j + params).value;
           document.getElementById("lresultado_titulo" + i + params).value=document.getElementById("lresultado_titulo" + j + params).value;

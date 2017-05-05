@@ -251,8 +251,8 @@
                     <input type="hidden" name="inv<%=i.to_s%>" value='<%= actdoc.id %>'>
                 </tr>
                 <% if @resultados[@j]!= nil %>
-                   
                     <tr>
+                      <td>
                         <div class="row">
                           <div class="col-xs-12 col-md-12 col-lg-12">
                              <tr>
@@ -263,19 +263,19 @@
                              <tr>
                              <td colspan="4">
                              <div class="well">
-                             <span class="pull-left glyphicon glyphicon-ok" aria-hidden="true">
-                             </span>
-                             &nbsp; <%= @resultados2a[@cp] %>  
-                             <br>
+                             <% @resultados2a[@j].each_with_index do |cpresultados| %>
+                               <span class="pull-left glyphicon glyphicon-ok" aria-hidden="true">
+                               </span>
+                               &nbsp; <%= cpresultados %>  
+                               <br>
+                             <% end %>
                              </div>
                              </td>
                              </tr>
                           </div>
                         </div>
                       </td>
-                     
                     </tr>
-                    <% @cp= @cp +1 %>
                 <%end%>
 
                 <% @j= @j +1 %>
@@ -348,7 +348,7 @@
               
               <tr>
                 
-                 <% if @resultados[@j]!= nil %>
+                <% if @resultados[@j]!= nil %>
           
                     <%if @resultados[@j].tipo_resultado_id == 8 %>
                       <td colspan="2"><textarea name="postgrado"class="form-control" rows="2" disabled ><%= @resultados[@j].concepto %></textarea>
@@ -406,25 +406,6 @@
                 <td class="text-center"  style='width:10%;'><strong>Mas observaciones</strong></td>
               </tr>
               <tr>
-                <% if @resultados[@j]!= nil %>
-                  <%if @resultados[@j].tipo_resultado_id == 9 %>
-                    <td colspan="2">
-                        <textarea name="no_contemplada" class="form-control" rows="3" disabled><%= @resultados[@j].concepto %></textarea>
-                    </td>
-                    <td>
-                        <textarea class="form-control" rows="3" name='observacionNoCon' ><%= @observaciont[@j] %></textarea>
-                    </td>
-                    
-                    <td>
-                       <%= link_to "Más obs. ", {:controller => "inicioentidad", :action => "mas_observaciones2", :resultado_id => @resultados[@j].id, :informe_id => @informe.id }, class: "pad add btn btn-default" %>
-                    </td>
-                    
-                    <input type="hidden" name="noConRest" value='<%= @resultados[@j].id %>'>
-
-                  <%end%>
-                
-                <%end%>
-                <% @j=@j+1 %>
               </tr>
               <tr>
                 <td colspan="4"><b>Conclusiones:</b></td>
@@ -503,10 +484,12 @@
                              <tr>
                              <td colspan="4">
                              <div class="well">
-                             <span class="pull-left glyphicon glyphicon-ok" aria-hidden="true">
-                             </span>
-                             &nbsp; <%= @resultados2a[@cp] %>  
-                             <br>
+                             <% @resultados2a[@j].each_with_index do |cpresultados| %>
+                               <span class="pull-left glyphicon glyphicon-ok" aria-hidden="true">
+                               </span>
+                               &nbsp; <%= cpresultados %>  
+                               <br>
+                             <% end %>
                              </div>
                              </td>
                              </tr>
@@ -514,7 +497,6 @@
                         </div>
                       </td>
                       </tr>
-                      <% @cp= @cp +1 %>
                     <%end%>
 
                     <% @j= @j +1 %>
