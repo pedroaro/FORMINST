@@ -311,20 +311,157 @@ class InformesController < ApplicationController
         @actividadesafor= []
         @actividadesaotr= []
         @resultados= []
+        @resultados2= ""
+        @resultados2a= []
+        @resultados2b= []
         @actividadese= []
         @observaciont= []
+
+        @bool_enviado = 0
+        if (@estatus.estatus_id != 6 && @estatus.estatus_id != 5)
+          @bool_enviado = 1
+        end
+
         @actividadesa.each do |actade| 
           if actade.actividad_id == nil #Es el caso que es un resultado no contemplado en el plan de formacion o un avancwe de postgrado
-            @res= Resultado.find(actade.resultado_id)
-            @resultados.push(@res)
+            if @bool_enviado == 0
+              @res= Resultado.where(informe_actividad_id: actade.id).all
+              @resultados.push(@res)
+            else
+              if @resultados2b != []
+                @resultados2b= Array.new(0) { |i|  }
+              end
+              @res= Resultado.where(informe_actividad_id: actade.id).all
+              @resultados.push(@res)
+              @res.each do |cpresultado| 
+                @cparray = ["a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a"]
+                @cparray[0] = cpresultado.titulo
+                @cparray[1] = cpresultado.autor
+                @cparray[2] = cpresultado.nombre_capitulo
+                @cparray[3] = cpresultado.autor_capitulo
+                @cparray[4] = cpresultado.dia
+                @cparray[5] = cpresultado.mes
+                @cparray[6] = cpresultado.ano
+                @cparray[7] = cpresultado.ciudad
+                @cparray[8] = cpresultado.estado
+                @cparray[9] = cpresultado.pais
+                @cparray[10] = cpresultado.organizador
+                @cparray[11] = cpresultado.duracion
+                @cparray[12] = cpresultado.editor
+                @cparray[13] = cpresultado.titulo_libro
+                @cparray[14] = cpresultado.autor_libro
+                @cparray[15] = cpresultado.nombre_revista
+                @cparray[16] = cpresultado.nombre_periodico
+                @cparray[17] = cpresultado.nombre_acto
+                @cparray[18] = cpresultado.paginas
+                @cparray[19] = cpresultado.nombre_paginaw
+                @cparray[20] = cpresultado.sitio_paginaw
+                @cparray[21] = cpresultado.infoafiliaion
+                @cparray[22] = cpresultado.cptipo
+                @cparray[23] = cpresultado.nombre
+                @cparray[24] = cpresultado.ISSN_impreso
+                @cparray[25] = cpresultado.ISSN_electro
+                @cparray[26] = cpresultado.volumen
+                @cparray[27] = cpresultado.edicion
+                @cparray[28] = cpresultado.DOI
+                @cparray[29] = cpresultado.ISBN
+                @cparray[30] = cpresultado.universidad
+                @cparray[31] = cpresultado.url
+                puts "holaaaaaaaaaaaaaa"
+                if !@cparray.blank?
+                  @noemptyarray = @cparray - ["", nil]
+                  if !@resultados2
+                    @noemptyarray = @cparray - ["", nil]
+                    if !@noemptyarray.join(',').blank?
+                      puts @noemptyarray.join(',')
+                      @resultados2 = @noemptyarray.join(',')
+                      puts "a"
+                      puts @resultados2
+                    end
+                  else
+                    @noemptyarray = @cparray - ["", nil]
+                    if !@noemptyarray.join(',').blank?
+                      puts @noemptyarray.join(',')
+                      @resultados2 = @noemptyarray.join(',')
+                      puts "b"
+                      puts @resultados2
+                    end
+                  end
+                  @resultados2b.push(@resultados2)
+                end
+              end
+              @resultados2a.push(@resultados2b)
+            end
           else
             @act= Actividad.find(actade.actividad_id)
             tipo= @act.tipo_actividad_id
-            if actade.resultado_id
-              @res= Resultado.find(actade.resultado_id)
+            if @bool_enviado == 0
+              @res= Resultado.where(informe_actividad_id: actade.id).all
               @resultados.push(@res)
             else
-              @resultados.push(nil)
+              if @resultados2b != []
+                @resultados2b= Array.new(0) { |i|  }
+              end
+              @res= Resultado.where(informe_actividad_id: actade.id).all
+              @resultados.push(@res)
+              @res.each do |cpresultado| 
+                @cparray = ["a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a"]
+                @cparray[0] = cpresultado.titulo
+                @cparray[1] = cpresultado.autor
+                @cparray[2] = cpresultado.nombre_capitulo
+                @cparray[3] = cpresultado.autor_capitulo
+                @cparray[4] = cpresultado.dia
+                @cparray[5] = cpresultado.mes
+                @cparray[6] = cpresultado.ano
+                @cparray[7] = cpresultado.ciudad
+                @cparray[8] = cpresultado.estado
+                @cparray[9] = cpresultado.pais
+                @cparray[10] = cpresultado.organizador
+                @cparray[11] = cpresultado.duracion
+                @cparray[12] = cpresultado.editor
+                @cparray[13] = cpresultado.titulo_libro
+                @cparray[14] = cpresultado.autor_libro
+                @cparray[15] = cpresultado.nombre_revista
+                @cparray[16] = cpresultado.nombre_periodico
+                @cparray[17] = cpresultado.nombre_acto
+                @cparray[18] = cpresultado.paginas
+                @cparray[19] = cpresultado.nombre_paginaw
+                @cparray[20] = cpresultado.sitio_paginaw
+                @cparray[21] = cpresultado.infoafiliaion
+                @cparray[22] = cpresultado.cptipo
+                @cparray[23] = cpresultado.nombre
+                @cparray[24] = cpresultado.ISSN_impreso
+                @cparray[25] = cpresultado.ISSN_electro
+                @cparray[26] = cpresultado.volumen
+                @cparray[27] = cpresultado.edicion
+                @cparray[28] = cpresultado.DOI
+                @cparray[29] = cpresultado.ISBN
+                @cparray[30] = cpresultado.universidad
+                @cparray[31] = cpresultado.url
+                puts "holaaaaaaaaaaaaaa"
+                if !@cparray.blank?
+                  @noemptyarray = @cparray - ["", nil]
+                  if !@resultados2
+                    @noemptyarray = @cparray - ["", nil]
+                    if !@noemptyarray.join(',').blank?
+                      puts @noemptyarray.join(',')
+                      @resultados2 = @noemptyarray.join(',')
+                      puts "a"
+                      puts @resultados2
+                    end
+                  else
+                    @noemptyarray = @cparray - ["", nil]
+                    if !@noemptyarray.join(',').blank?
+                      puts @noemptyarray.join(',')
+                      @resultados2 = @noemptyarray.join(',')
+                      puts "b"
+                      puts @resultados2
+                    end
+                  end
+                  @resultados2b.push(@resultados2)
+                end
+              end
+              @resultados2a.push(@resultados2b)
             end
             @ae= ActividadEjecutada.where(informe_actividad_id: actade.id).take
             @actividadese.push(@ae)
@@ -355,18 +492,6 @@ class InformesController < ApplicationController
             end
           end
         end
-
-        @bool_enviado = 0
-        estatus_informe = EstatusInforme.where(informe_id: @informe.id, actual: 1).take
-
-
-        if (estatus_informe.estatus_id != 6 && estatus_informe.estatus_id != 5)
-          @bool_enviado = 1
-        end
-
-        @mes = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
-        @dia= [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]
-        @tipos= [['Libros',1], ['Artículo de Revista o Journals',2], ['Artículo de Prensa',3], ['CD',4], ['Manuales',5], ['Publicaciones Electrónicas',6]]
       else
         flash[:warning]= "Error, no hay sesion de adecuacion"
         redirect_to controller:"iniciotutor", action: "ver_detalles_adecuacion"
@@ -1838,6 +1963,8 @@ def generar_pdf() # es función permite generar el documento pdf de la adecuaci�
                oa.observaciones = params[observacion]
                   oa.save
             end
+
+          ia.save
      
         
 
@@ -1846,147 +1973,294 @@ def generar_pdf() # es función permite generar el documento pdf de la adecuaci�
 
       #Actualizará los resultados
 
-        @tipo = params[:tipo.to_s+j.to_s].to_i
-        @tipo_publicacion = params[:tipo_publicacion.to_s+j.to_s].to_i
-        @titulo = params[:titulo.to_s+j.to_s]
-        @autor = params[:autor.to_s+j.to_s]
-        @nombre_capitulo = params[:nombre_capitulo.to_s+j.to_s]
-        @autor_capitulo = params[:autor_capitulo.to_s+j.to_s]
-        @dia = params[:dia.to_s+j.to_s].to_i
-        @mes = params[:mes.to_s+j.to_s]
-        @ano = params[:ano.to_s+j.to_s].to_i
-        @ciudad = params[:ciudad.to_s+j.to_s]
-        @estado = params[:estado.to_s+j.to_s]
-        @pais = params[:pais.to_s+j.to_s]
-        @organizador = params[:organizador.to_s+j.to_s]
-        @duracion = params[:duracion.to_s+j.to_s]
-        @editor = params[:editor.to_s+j.to_s]
-        @titulo_libro = params[:titulo_libro.to_s+j.to_s]
-        @autor_libro = params[:autor_libro.to_s+j.to_s]
-        @nombre_revista = params[:nombre_revista.to_s+j.to_s]
-        @nombre_periodico = params[:nombre_periodico.to_s+j.to_s]
-        @paginas = params[:paginas.to_s+j.to_s]
-        @nombre_acto = params[:nombre_acto.to_s+j.to_s]
-        @nombre_paginaw = params[:nombre_paginaw.to_s+j.to_s]
-        @sitio_paginaw = params[:sitio_paginaw.to_s+j.to_s]
-        @url = params[:url.to_s+j.to_s]
+      cpi = 1;
+      cpres= Resultado.where(informe_actividad_id: ia.id).all
+      if !cpres.blank?
+	    cpres.each do |cpresp| 
+	   		cpres.destroy
+		end
+	  end
+     
 
-        if @tipo!=nil && @tipo!="" && @tipo!=0
+        while (!params[:tipo.to_s+cpi.to_s+j.to_s].blank?)
 
-          if @result!= -1
-            r= Resultado.find(@result)
-          else
+          @tipo = params[:tipo.to_s+cpi.to_s+j.to_s].to_i
+          @tipo_publicacion = nil
+          @titulo = nil
+          @autor = nil
+          @nombre_capitulo = nil
+          @autor_capitulo = nil
+          @dia = nil
+          @mes = nil
+          @ano = nil
+          @ciudad = nil
+          @estado = nil
+          @pais = nil
+          @organizador = nil
+          @duracion = nil
+          @editor = nil
+          @titulo_libro = nil
+          @autor_libro = nil
+          @nombre_revista = nil
+          @nombre_periodico = nil
+          @paginas = nil
+          @nombre_acto = nil
+          @nombre_paginaw = nil
+          @sitio_paginaw = nil
+          @url = nil
+          @isbm = nil
+          @volumen = nil
+          @edicion = nil
+          @issni = nil
+          @issne = nil
+          @doi = nil
+          @nombre = nil 
+          @infoafiliaion = nil
+          @universidad = nil
+          @cptipo = nil
+
+          # trabajos publicados
+          if (@tipo == 1) 
+            @tipo_publicacion = params[:resultado_tipos.to_s+cpi.to_s+j.to_s].to_i
+            puts "holaaaaaaaaaaaaaaaaaaaaaa"
+            puts @tipo_publicacion
+
+            # libro
+            if (@tipo_publicacion == 1) 
+              @titulo = params[:atitulo.to_s+cpi.to_s+j.to_s]
+              @ciudad = params[:aciudad.to_s+cpi.to_s+j.to_s]
+              @url = params[:aURL.to_s+cpi.to_s+j.to_s]
+              @autor = params[:aautor.to_s+cpi.to_s+j.to_s]
+              @pais = params[:apais.to_s+cpi.to_s+j.to_s]
+              @isbm = params[:aISBM.to_s+cpi.to_s+j.to_s]
+              @editor = params[:aeditor.to_s+cpi.to_s+j.to_s]
+              @ano = params[:aano.to_s+cpi.to_s+j.to_s]
+
+            # articulo de revista o journals
+            elsif (@tipo_publicacion == 2)
+              @titulo = params[:btitulo.to_s+cpi.to_s+j.to_s]
+              @autor = params[:bautor.to_s+cpi.to_s+j.to_s]
+              @mes = params[:bmes.to_s+cpi.to_s+j.to_s]
+              @ano = params[:bano.to_s+cpi.to_s+j.to_s]
+              @ciudad = params[:bciudad.to_s+cpi.to_s+j.to_s]
+              @estado = params[:bestado.to_s+cpi.to_s+j.to_s]
+              @pais = params[:bpais.to_s+cpi.to_s+j.to_s]
+              @paginas = params[:bnumpaginas.to_s+cpi.to_s+j.to_s]
+              @url = params[:burl.to_s+cpi.to_s+j.to_s]
+              @volumen = params[:bvolumen.to_s+cpi.to_s+j.to_s]
+              @edicion = params[:bnedicion.to_s+cpi.to_s+j.to_s]
+              @issni = params[:bissnimpre.to_s+cpi.to_s+j.to_s]
+              @nombre_revista = params[:brevista.to_s+cpi.to_s+j.to_s]
+              @issne = params[:bissnelec.to_s+cpi.to_s+j.to_s]
+              @doi = params[:bdoi.to_s+cpi.to_s+j.to_s]
+
+            # articulo de prensa
+            elsif (@tipo_publicacion == 3)
+              @titulo = params[:ctitulo.to_s+cpi.to_s+j.to_s]
+              @autor = params[:cautor.to_s+cpi.to_s+j.to_s]
+              @dia = params[:cdia.to_s+cpi.to_s+j.to_s]
+              @mes = params[:cmes.to_s+cpi.to_s+j.to_s]
+              @ano = params[:cano.to_s+cpi.to_s+j.to_s]
+              @pais = params[:cpais.to_s+cpi.to_s+j.to_s]
+              @nombre_periodico = params[:cnomperi.to_s+cpi.to_s+j.to_s]
+              @paginas = params[:cnumpag.to_s+cpi.to_s+j.to_s]
+              @url = params[:curl.to_s+cpi.to_s+j.to_s]
+
+            # cd
+            elsif (@tipo_publicacion == 4)
+              @titulo = params[:dtitulo.to_s+cpi.to_s+j.to_s]
+              @autor = params[:dautor.to_s+cpi.to_s+j.to_s]
+              @ano = params[:daño.to_s+cpi.to_s+j.to_s]
+              @ciudad = params[:dciudad.to_s+cpi.to_s+j.to_s]
+              @pais = params[:dpais.to_s+cpi.to_s+j.to_s]
+              @editor = params[:deditor.to_s+cpi.to_s+j.to_s]
+
+            #manuales
+            elsif (@tipo_publicacion == 5)
+              @titulo = params[:etitulo.to_s+cpi.to_s+j.to_s]
+              @autor = params[:eautor.to_s+cpi.to_s+j.to_s]
+              @mes = params[:emes.to_s+cpi.to_s+j.to_s]
+              @ano = params[:eano.to_s+cpi.to_s+j.to_s]
+              @ciudad = params[:eciudad.to_s+cpi.to_s+j.to_s]
+              @pais = params[:epais.to_s+cpi.to_s+j.to_s]
+              @editor = params[:eeditor.to_s+cpi.to_s+j.to_s]
+
+            #publicaciones electronicas
+            elsif (@tipo_publicacion == 6)
+              @titulo = params[:ftitulo.to_s+cpi.to_s+j.to_s]
+              @autor = params[:fautor.to_s+cpi.to_s+j.to_s]
+              @nombre = params[:fnombre.to_s+cpi.to_s+j.to_s]
+              @mes = params[:fmes.to_s+cpi.to_s+j.to_s]
+              @ano = params[:fano.to_s+cpi.to_s+j.to_s]
+              @nombre_paginaw = params[:fnompagweb.to_s+cpi.to_s+j.to_s]
+              @sitio_paginaw = params[:fsitioweb.to_s+cpi.to_s+j.to_s]
+              @url = params[:furl.to_s+cpi.to_s+j.to_s]
+              @isbm = params[:fisbn.to_s+cpi.to_s+j.to_s]
+              @doi = params[:fdoi.to_s+cpi.to_s+j.to_s]
+
+            #tesis
+            elsif (@tipo_publicacion == 7)
+              @titulo = params[:gtitulo.to_s+cpi.to_s+j.to_s]
+              @autor = params[:gautor.to_s+cpi.to_s+j.to_s]
+              @mes = params[:gmes.to_s+cpi.to_s+j.to_s]
+              @ano = params[:gano.to_s+cpi.to_s+j.to_s]
+              @ciudad = params[:gciudad.to_s+cpi.to_s+j.to_s]
+              @pais = params[:gpais.to_s+cpi.to_s+j.to_s]
+              @infoafiliaion = params[:ginfoafiliacion.to_s+cpi.to_s+j.to_s]
+              @universidad = params[:guniversidad.to_s+cpi.to_s+j.to_s]
+              @cptipo = params[:gtipotesis.to_s+cpi.to_s+j.to_s]
+
+            #acta de conferencia
+            elsif  (@tipo_publicacion == 8)
+              @titulo = params[:htitulo.to_s+cpi.to_s+j.to_s]
+              @autor = params[:hautor.to_s+cpi.to_s+j.to_s]
+              @mes = params[:hmes.to_s+cpi.to_s+j.to_s]
+              @ano = params[:hano.to_s+cpi.to_s+j.to_s]
+              @paginas = params[:hpaginas.to_s+cpi.to_s+j.to_s]
+              @isbm = params[:hisbm.to_s+cpi.to_s+j.to_s]
+              @issni = params[:hissn.to_s+cpi.to_s+j.to_s]
+              @doi = params[:hdoi.to_s+cpi.to_s+j.to_s]
+              @nombre = params[:hnombreconf.to_s+cpi.to_s+j.to_s] 
+
+            #capitulo de un libro
+            elsif  (@tipo_publicacion == 9)
+              @nombre_capitulo = params[:ititulocapitulo.to_s+cpi.to_s+j.to_s]
+              @autor = params[:iautor.to_s+cpi.to_s+j.to_s]
+              @ano = params[:iano.to_s+cpi.to_s+j.to_s]
+              @titulo_libro = params[:ititulolibro.to_s+cpi.to_s+j.to_s]
+              @paginas = params[:ipaginas.to_s+cpi.to_s+j.to_s]
+              @isbm = params[:iisbn.to_s+cpi.to_s+j.to_s]
+
+            end
+
+          #presentación de potencias
+          elsif (@tipo == 2)
+            @titulo = params[:jtitulo.to_s+cpi.to_s+j.to_s]
+            @autor = params[:jautordoc.to_s+cpi.to_s+j.to_s]
+            @nombre_capitulo = params[:jtitulocapitulo.to_s+cpi.to_s+j.to_s]
+            @autor_capitulo = params[:jautorcap.to_s+cpi.to_s+j.to_s]
+            @dia = params[:jdia.to_s+cpi.to_s+j.to_s]
+            @mes = params[:jmes.to_s+cpi.to_s+j.to_s]
+            @ano = params[:jano.to_s+cpi.to_s+j.to_s]
+            @ciudad = params[:jciudad.to_s+cpi.to_s+j.to_s]
+            @editor = params[:jeditor.to_s+cpi.to_s+j.to_s]
+            @paginas = params[:jnumpag.to_s+cpi.to_s+j.to_s]
+            @nombre = params[:jnombreact.to_s+cpi.to_s+j.to_s]
+
+          #presentación informes tecnicos
+          elsif (@tipo == 3)
+            @titulo = params[:ktitulo.to_s+cpi.to_s+j.to_s]
+            @autor = params[:kautordoc.to_s+cpi.to_s+j.to_s]
+            @nombre_capitulo = params[:ktitulocapitulo.to_s+cpi.to_s+j.to_s]
+            @autor_capitulo = params[:kautorcap.to_s+cpi.to_s+j.to_s]
+            @dia = params[:kdia.to_s+cpi.to_s+j.to_s]
+            @mes = params[:kmes.to_s+cpi.to_s+j.to_s]
+            @ano = params[:kano.to_s+cpi.to_s+j.to_s]
+            @ciudad = params[:kciudad.to_s+cpi.to_s+j.to_s]
+            @estado = params[:kestado.to_s+cpi.to_s+j.to_s]
+            @pais = params[:kpais.to_s+cpi.to_s+j.to_s]
+            @organizador = params[:kentidadorg.to_s+cpi.to_s+j.to_s]
+            @editor = params[:keditor.to_s+cpi.to_s+j.to_s]
+            @paginas = params[:knumpag.to_s+cpi.to_s+j.to_s]
+            @nombre_acto = params[:knombreact.to_s+cpi.to_s+j.to_s]
+
+          #otro
+          elsif (@tipo == 4)
+            @titulo = params[:ltitulo.to_s+cpi.to_s+j.to_s]
+            @autor = params[:lautor.to_s+cpi.to_s+j.to_s]
+            @dia = params[:ldia.to_s+cpi.to_s+j.to_s]
+            @mes = params[:lmes.to_s+cpi.to_s+j.to_s]
+            @ano = params[:laño.to_s+cpi.to_s+j.to_s]
+            @ciudad = params[:lciudad.to_s+cpi.to_s+j.to_s]
+            @editor = params[:leditor.to_s+cpi.to_s+j.to_s]
+            @paginas = params[:lnumpag.to_s+cpi.to_s+j.to_s]
+            @nombre_acto = params[:lnomacto.to_s+cpi.to_s+j.to_s]
+          
+          #asistencia y organización de eventos cientificos
+          elsif (@tipo == 5 || @tipo == 6)
+            @titulo = params[:ntitulo.to_s+cpi.to_s+j.to_s]
+            @autor = params[:nautordoc.to_s+cpi.to_s+j.to_s]
+            @nombre_capitulo = params[:ntitulocapitulo.to_s+cpi.to_s+j.to_s]
+            @autor_capitulo = params[:nnombreautor.to_s+cpi.to_s+j.to_s]
+            @dia = params[:ndia.to_s+cpi.to_s+j.to_s]
+            @mes = params[:nmes.to_s+cpi.to_s+j.to_s]
+            @ano = params[:nano.to_s+cpi.to_s+j.to_s]
+            @ciudad = params[:nciudad.to_s+cpi.to_s+j.to_s]
+            @estado = params[:nestado.to_s+cpi.to_s+j.to_s]
+            @pais = params[:npais.to_s+cpi.to_s+j.to_s]
+            @nombre_acto = params[:nnombreacto.to_s+cpi.to_s+j.to_s]
+          
+          #dictado de cursos, talleres, etc
+          elsif (@tipo == 7)
+            @titulo = params[:otitulo.to_s+cpi.to_s+j.to_s]
+            @autor = params[:oautordoc.to_s+cpi.to_s+j.to_s]
+            @nombre_capitulo = params[:otitulocap.to_s+cpi.to_s+j.to_s]
+            @autor_capitulo = params[:oautorcap.to_s+cpi.to_s+j.to_s]
+            @dia = params[:odia.to_s+cpi.to_s+j.to_s]
+            @mes = params[:omes.to_s+cpi.to_s+j.to_s]
+            @ano = params[:oano.to_s+cpi.to_s+j.to_s]
+            @ciudad = params[:ociudad.to_s+cpi.to_s+j.to_s]
+            @estado = params[:oestado.to_s+cpi.to_s+j.to_s]
+            @pais = params[:opais.to_s+cpi.to_s+j.to_s]
+            @organizador = params[:oentidadorg.to_s+cpi.to_s+j.to_s]
+            @duracion = params[:oduracion.to_s+cpi.to_s+j.to_s]
+            @editor = params[:oeditor.to_s+cpi.to_s+j.to_s]
+            @titulo_libro = params[:otitulolib.to_s+cpi.to_s+j.to_s]
+            @autor_libro = params[:oautorref.to_s+cpi.to_s+j.to_s]
+            @paginas = params[:onumpag.to_s+cpi.to_s+j.to_s]
+
+
+          end
+
+
             r = Resultado.new 
             r.tipo_resultado_id = @tipo
-          end
-
-          r.tipo_resultado_id = @tipo
-
-          if @tipo == 1
             r.tipo_publicacion = @tipo_publicacion
-          end
-
-          if @titulo!=nil && @titulo!=""
             r.titulo = @titulo
-          end
-
-          if @autor!=nil && @autor!=""
             r.autor = @autor
-          end
-
-          if @nombre_capitulo!=nil &&  @nombre_capitulo!=""
-            r.titulo_capitulo = @nombre_capitulo
-          end
-
-          if @autor_capitulo!=nil && @autor_capitulo!=""
+            r.nombre_capitulo = @nombre_capitulo
             r.autor_capitulo = @autor_capitulo
-          end
-
-          if @dia!=nil &&  @dia!=""
             r.dia = @dia
-          end
-
-          if @mes!=nil && @mes!=""
             r.mes =@mes
-          end
-
-          if @ano!=nil && @ano!=""
             r.ano = @ano
-          end
-
-          if @ciudad!=nil && @ciudad!=""
             r.ciudad = @ciudad
-          end
-
-          if @estado!=nil && @estado!=""
             r.estado = @estado
-          end
-
-          if @pais!=nil && @pais!=""
             r.pais = @pais
-          end
-
-          if @organizador!=nil && @organizador!=""
             r.organizador = @organizador
-          end
-
-          if @duracion!=nil && @duracion!=""
             r.duracion = @duracion
-          end
-
-          if @editor!=nil && @editor!=""
             r.editor = @editor
-          end
-
-          if @titulo_libro!=nil && @titulo_libro!=""
             r.titulo_libro = @titulo_libro
-          end
-
-          if @autor_libro!=nil && @autor_libro!=""
             r.autor_libro = @autor_libro
-          end
-
-          if @nombre_revista!=nil && @nombre_revista!=""
             r.nombre_revista = @nombre_revista
-          end
-
-          if @nombre_periodico!=nil && @nombre_periodico!=""
             r.nombre_periodico = @nombre_periodico
-          end
-
-          if @paginas!=nil && @paginas!=""
             r.paginas = @paginas
-          end
-
-          if @nombre_acto!=nil && @nombre_acto!=""
             r.nombre_acto = @nombre_acto
-          end
-
-          if @nombre_paginaw!=nil && @nombre_paginaw!=""
             r.nombre_paginaw = @nombre_paginaw
-          end
-
-          if @sitio_paginaw!=nil && @sitio_paginaw!=""
             r.sitio_paginaw = @sitio_paginaw
-          end
-
-          if @url!=nil && @url!=""
+            r.infoafiliaion = @infoafiliaion
+            r.cptipo = @cptipo
+            r.nombre = @nombre
+            r.ISSN_impreso = @issni
+            r.ISSN_electro = @issne
+            r.volumen = @volumen
+            r.edicion = @edicion
+            r.DOI = @doi
+            r.ISBN = @isbm
+            r.universidad = @universidad
             r.url = @url
-          end
-         
-          r.save
+            r.informe_actividad_id = ia.id
+            r.save
 
-          if @result== -1
-            ia.resultado_id = r.id 
-            ia.save
-          end
+          cpi = cpi+1
+
         end
 
-        j=j+1
-        k=:result.to_s+j.to_s
-        @result= params[k].to_i
-        i=:inv.to_s+j.to_s
-        @act= params[i].to_i
+          j=j+1
+          k=:result.to_s+j.to_s
+          @result= params[k].to_i
+          i=:inv.to_s+j.to_s
+          @act= params[i].to_i
+
       end
 
       #Comienza actividades de formación
