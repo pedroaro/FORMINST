@@ -4,7 +4,8 @@
 	def index
 		if session[:usuario_id]
 			session[:adecuacion_id] = nil
-			session[:plan_id] = nil
+      plan = Planformacion.where(instructor_id: session[:usuario_id]).take
+			session[:plan_id] = plan.id
 			session[:instructorName] = nil
       session[:informe_id] = nil
 			@nombre = session[:nombre_usuario]
