@@ -121,7 +121,9 @@
         <%end%>
       
       <%= link_to "Vista Previa", {controller: "iniciotutor", action: "vista_previa"}, class: "btn btn-default" %>
-      <%= link_to "Generar PDF", {controller: "adecuacions", action: "descargar_pdf"}, class: "btn btn-default" %>
+      <%= link_to "Generar PDF", {controller: "adecuacions", action: "descargar_pdf"},target: :_blank, class: "btn btn-default" %>
+      <%= link_to "Ver Soportes", {controller: "inicioentidad", action: "ver_soporte"}, class: "btn btn-default" %>
+
     </div>
   </div>
 </div>
