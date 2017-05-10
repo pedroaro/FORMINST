@@ -318,7 +318,7 @@ class SecretariasController < ApplicationController
 			        notific2.informe_id = nil
 			        notific2.actual = 2
 			        notificacionfecha = Date.current.to_s 
-		        	notific2.mensaje = "[" + notificacionfecha + "] Se le ha asignado a  " + cppersona.nombres.to_s.split.map(&:capitalize).join(' ') + " " + cppersona.apellidos.to_s.split.map(&:capitalize).join(' ') + " como tutor de su Plan de formación."
+		        	notific2.mensaje = "[" + notificacionfecha + "] Se le ha asignado a  " + profe.nombres.to_s.split.map(&:capitalize).join(' ') + " " + profe.apellidos.to_s.split.map(&:capitalize).join(' ') + " como tutor de su Plan de formación."
 		        	notific2.save
 		        	puts notific2.mensaje
 		        	puts notific.mensaje

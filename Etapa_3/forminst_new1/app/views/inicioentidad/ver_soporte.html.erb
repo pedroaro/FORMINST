@@ -161,8 +161,13 @@
             <button type="button" class="btn btn-default disabled">Enviar</button>
           <%end%>
         <%end%>
-      <%= link_to "Vista Previa", {controller: "inicioentidad", action: "vista_previa"}, class: "btn btn-default" %>
-      <%= link_to "Generar PDF", {controller: "adecuacions", action: "generar_pdf"}, class: "btn btn-default" %>
+      <%if session[:informe_id]%> 
+        <%= link_to "Vista Previa", {controller: "inicioentidad", action: "vista_previa1"}, class: "btn btn-default" %>
+        <%= link_to "Generar PDF", {controller: "informes", action: "generar_pdf"},target: :_blank, class: "btn btn-default" %>
+      <%else%>
+        <%= link_to "Vista Previa", {controller: "inicioentidad", action: "vista_previa"}, class: "btn btn-default" %>
+        <%= link_to "Generar PDF", {controller: "adecuacions", action: "generar_pdf"},target: :_blank, class: "btn btn-default" %>
+      <%end%> 
       <%= link_to "Ver Soportes", {controller: "inicioentidad", action: "ver_soporte"}, class: "btn btn-default active" %>
     </div>
   </div>
