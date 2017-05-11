@@ -477,21 +477,6 @@ class IniciotutorController < ApplicationController
 		end
 	end
 
-	def detalles_adecuacion2
-		if session[:usuario_id]
-			@nombre = session[:nombre_usuario]
-			@instructorName = session[:instructorName]
-			@adecuacion= Adecuacion.find(session[:adecuacion_id])
-			@plan= Planformacion.find(session[:plan_id])
-			@userentidad= Usuarioentidad.where(usuario_id: @plan.instructor_id).take
-			@escuela= Escuela.find(@userentidad.escuela_id)
-			@persona= Persona.where(usuario_id: @plan.instructor_id).take
-			@usuario= Usuario.find(@plan.instructor_id)
-		else
-			redirect_to controller:"forminst", action: "index"
-		end
-	end
-
 	def detalles_adecuacion3
 
 		if session[:usuario_id]

@@ -569,6 +569,8 @@ end
 			@entidad= Entidad.find(@userentidad.entidad_id)
 			@escuela= Escuela.where(id: @userentidad.escuela_id).take
 			@tutor = Persona.where(usuario_id: @adecuacion.tutor_id).take
+      @usuario = Usuario.where(id: session[:usuario_id]).take
+      @persona = Persona.where(usuario_id: session[:usuario_id]).take
 
 			puts "-------"
 			puts @tutor
@@ -773,22 +775,6 @@ end
 				redirect_to controller:"iniciotutor", action: "detalles_adecuacion3"
 			end
 			
-		else
-			redirect_to controller:"forminst", action: "index"
-		end
-	end
-
-	def detalles_adecuacion2
-		if session[:usuario_id]
-			@nombre = session[:nombre_usuario]
-      session[:informe_id] = nil
-			@adecuacion= Adecuacion.find(session[:adecuacion_id])
-			@plan = Planformacion.where(instructor_id: session[:usuario_id]).take
-			@userentidad= Usuarioentidad.where(usuario_id: session[:usuario_id]).take
-			@entidad= Entidad.find(@userentidad.entidad_id)
-			@escuela= Escuela.where(id: @userentidad.escuela_id).take
-			@persona= Persona.where(usuario_id: session[:usuario_id]).take
-			@usuario= Usuario.find(session[:usuario_id])
 		else
 			redirect_to controller:"forminst", action: "index"
 		end
@@ -1283,6 +1269,10 @@ end
 
 	def detalles_informe2
     if !session[:informe_id].blank?
+      @nombre = session[:nombre_usuario]   
+        if not @nombre
+          print "NO HAY USUARIO"
+        end
       @informe= Informe.find(session[:informe_id])
       @est= EstatusInforme.where(informe_id: @informe.id).take
       @modificar= false
@@ -1299,21 +1289,142 @@ end
       @actividadesafor= []
       @actividadesaotr= []
       @resultados= []
+      @resultados2= ""
+      @resultados2a= []
+      @resultados2b= []
       @actividadese= []
       @observaciont= []
       @actividadesa.each do |actade| 
         if actade.actividad_id == nil #Es el caso que es un resultado no contemplado en el plan de formacion o un avancwe de postgrado
-          @res= Resultado.find(actade.resultado_id)
+          if @resultados2b != []
+            @resultados2b= Array.new(0) { |i|  }
+          end
+          @res= Resultado.where(informe_actividad_id: actade.id).all
           @resultados.push(@res)
+          @res.each do |cpresultado| 
+            @cparray = ["a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a"]
+            @cparray[0] = cpresultado.titulo
+            @cparray[1] = cpresultado.autor
+            @cparray[2] = cpresultado.nombre_capitulo
+            @cparray[3] = cpresultado.autor_capitulo
+            @cparray[4] = cpresultado.dia
+            @cparray[5] = cpresultado.mes
+            @cparray[6] = cpresultado.ano
+            @cparray[7] = cpresultado.ciudad
+            @cparray[8] = cpresultado.estado
+            @cparray[9] = cpresultado.pais
+            @cparray[10] = cpresultado.organizador
+            @cparray[11] = cpresultado.duracion
+            @cparray[12] = cpresultado.editor
+            @cparray[13] = cpresultado.titulo_libro
+            @cparray[14] = cpresultado.autor_libro
+            @cparray[15] = cpresultado.nombre_revista
+            @cparray[16] = cpresultado.nombre_periodico
+            @cparray[17] = cpresultado.nombre_acto
+            @cparray[18] = cpresultado.paginas
+            @cparray[19] = cpresultado.nombre_paginaw
+            @cparray[20] = cpresultado.sitio_paginaw
+            @cparray[21] = cpresultado.infoafiliaion
+            @cparray[22] = cpresultado.cptipo
+            @cparray[23] = cpresultado.nombre
+            @cparray[24] = cpresultado.ISSN_impreso
+            @cparray[25] = cpresultado.ISSN_electro
+            @cparray[26] = cpresultado.volumen
+            @cparray[27] = cpresultado.edicion
+            @cparray[28] = cpresultado.DOI
+            @cparray[29] = cpresultado.ISBN
+            @cparray[30] = cpresultado.universidad
+            @cparray[31] = cpresultado.url
+            puts "holaaaaaaaaaaaaaa"
+            if !@cparray.blank?
+              @noemptyarray = @cparray - ["", nil]
+              if !@resultados2
+                @noemptyarray = @cparray - ["", nil]
+                if !@noemptyarray.join(',').blank?
+                  puts @noemptyarray.join(',')
+                  @resultados2 = @noemptyarray.join(',')
+                  puts "a"
+                  puts @resultados2
+                end
+              else
+                @noemptyarray = @cparray - ["", nil]
+                if !@noemptyarray.join(',').blank?
+                  puts @noemptyarray.join(',')
+                  @resultados2 = @noemptyarray.join(',')
+                  puts "b"
+                  puts @resultados2
+                end
+              end
+              @resultados2b.push(@resultados2)
+            end
+          end
+          @resultados2a.push(@resultados2b)
         else
           @act= Actividad.find(actade.actividad_id)
           tipo= @act.tipo_actividad_id
-          if actade.resultado_id
-            @res= Resultado.find(actade.resultado_id)
-            @resultados.push(@res)
-          else
-            @resultados.push(nil)
+          if @resultados2b != []
+            @resultados2b= Array.new(0) { |i|  }
           end
+          @res= Resultado.where(informe_actividad_id: actade.id).all
+          @resultados.push(@res)
+          @res.each do |cpresultado| 
+            @cparray = ["a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a"]
+            @cparray[0] = cpresultado.titulo
+            @cparray[1] = cpresultado.autor
+            @cparray[2] = cpresultado.nombre_capitulo
+            @cparray[3] = cpresultado.autor_capitulo
+            @cparray[4] = cpresultado.dia
+            @cparray[5] = cpresultado.mes
+            @cparray[6] = cpresultado.ano
+            @cparray[7] = cpresultado.ciudad
+            @cparray[8] = cpresultado.estado
+            @cparray[9] = cpresultado.pais
+            @cparray[10] = cpresultado.organizador
+            @cparray[11] = cpresultado.duracion
+            @cparray[12] = cpresultado.editor
+            @cparray[13] = cpresultado.titulo_libro
+            @cparray[14] = cpresultado.autor_libro
+            @cparray[15] = cpresultado.nombre_revista
+            @cparray[16] = cpresultado.nombre_periodico
+            @cparray[17] = cpresultado.nombre_acto
+            @cparray[18] = cpresultado.paginas
+            @cparray[19] = cpresultado.nombre_paginaw
+            @cparray[20] = cpresultado.sitio_paginaw
+            @cparray[21] = cpresultado.infoafiliaion
+            @cparray[22] = cpresultado.cptipo
+            @cparray[23] = cpresultado.nombre
+            @cparray[24] = cpresultado.ISSN_impreso
+            @cparray[25] = cpresultado.ISSN_electro
+            @cparray[26] = cpresultado.volumen
+            @cparray[27] = cpresultado.edicion
+            @cparray[28] = cpresultado.DOI
+            @cparray[29] = cpresultado.ISBN
+            @cparray[30] = cpresultado.universidad
+            @cparray[31] = cpresultado.url
+            puts "holaaaaaaaaaaaaaa"
+            if !@cparray.blank?
+              @noemptyarray = @cparray - ["", nil]
+              if !@resultados2
+                @noemptyarray = @cparray - ["", nil]
+                if !@noemptyarray.join(',').blank?
+                  puts @noemptyarray.join(',')
+                  @resultados2 = @noemptyarray.join(',')
+                  puts "a"
+                  puts @resultados2
+                end
+              else
+                @noemptyarray = @cparray - ["", nil]
+                if !@noemptyarray.join(',').blank?
+                  puts @noemptyarray.join(',')
+                  @resultados2 = @noemptyarray.join(',')
+                  puts "b"
+                  puts @resultados2
+                end
+              end
+              @resultados2b.push(@resultados2)
+            end
+          end
+          @resultados2a.push(@resultados2b)
           @ae= ActividadEjecutada.where(informe_actividad_id: actade.id).take
           @actividadese.push(@ae)
           @obs= ObservacionTutor.where(informe_actividad_id: actade.id).take
@@ -1343,9 +1454,6 @@ end
           end
         end
       end
-      @mes= ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
-      @dia= [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]
-      @tipos= [['Libros',1], ['Artículo de Revista',2], ['Artículo de Prensa',3], ['CD',4], ['Manuales',5], ['Publicaciones Electrónicas',6]]
     else
           flash[:info]="Selecciona un informe"
           redirect_to controller: "inicioinstructor", action: "listar_informes"

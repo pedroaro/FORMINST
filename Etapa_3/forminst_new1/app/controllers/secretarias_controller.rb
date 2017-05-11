@@ -233,6 +233,10 @@ class SecretariasController < ApplicationController
 			if haceralgo == "Si"	
 
 				if params[:JRTutores].to_s != "0"
+					cpelAno = params[:FechaConcurso][0..3]
+					cpanoIncrementado = cpelAno.to_i + 2
+					cpGuardar = cpanoIncrementado.to_s + params[:FechaConcurso][4..params[:FechaConcurso].mb_chars.length]
+					puts cpGuardar
 
 					cpSecretariaID = session[:usuario_id]
 					cpSecretaria = Usuarioentidad.where(usuario_id: cpSecretariaID).take
@@ -270,6 +274,7 @@ class SecretariasController < ApplicationController
 
 					cpplanformacion = Planformacion.new
 					cpplanformacion.fecha_inicio = params[:FechaConcurso]
+					cpplanformacion.fecha_fin = cpGuardar
 					cpplanformacion.activo = 1
 					cpplanformacion.instructor_id = cpusuario.id
 					cpplanformacion.tutor_id = params[:JRTutores]
@@ -281,6 +286,7 @@ class SecretariasController < ApplicationController
 					cpAdecuacion.planformacion_id = cpplanformacion.id
 					cpAdecuacion.tutor_id = cpplanformacion.tutor_id
 					cpAdecuacion.fecha_creacion = cpplanformacion.fecha_inicio
+					cpAdecuacion.fecha_modificacion = cpplanformacion.fecha_inicio
 					cpAdecuacion.save
 
 					cpEstatus_Adecuacion = EstatusAdecuacion.new
