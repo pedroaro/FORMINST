@@ -16,7 +16,7 @@
     <div class="btn-group" role="group">
        <%= link_to "Volver", {controller: "inicioinstructor", action: "ver_detalles_informe"}, class: "btn btn-default" %>
       <%= link_to "Vista Previa", {controller: "inicioinstructor", action: "vista_previa1"}, class: "btn btn-default" %>
-      <%= link_to "Generar PDF", {controller: "informes", action: "generar_pdf"}, class: "btn btn-default" %>
+      <%= link_to "Generar PDF", {controller: "informes", action: "generar_pdf"},target: :_blank, class: "btn btn-default" %>
       <%= link_to "Ver Soportes", {controller: "inicioinstructor", action: "ver_soporte"}, class: "btn btn-default" %>
     </div>
   </div>
