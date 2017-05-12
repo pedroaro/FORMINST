@@ -56,7 +56,8 @@
     </div>
   </div>
 </div>
-<% if @planformacions %>
+
+<% if !@planformacions.blank? %>
   <div class="row">
     <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
       <h1>Lista de Planes Formación</h1>
@@ -130,7 +131,9 @@
     </div>
   </div>
 <% else %>
-      <h1>Usted no posee ningun Plan de Formación asociado</h1>
+  <h2>No hay Plan Formación asociado</h2>
+  <h5>Usted no posee ningun Plan de Formación asociado, espere a que se le sea asignado alguno.</h5>
+  <br>
 <% end %>
    
 <br>

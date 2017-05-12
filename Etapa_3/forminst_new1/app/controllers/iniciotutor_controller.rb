@@ -1425,7 +1425,11 @@ class IniciotutorController < ApplicationController
 		        puts "JAJAJA"
 		        person = Persona.where(usuario_id: plan.instructor_id).take
 		        notificacionfecha = Date.current.to_s 
-	        	notific.mensaje = "[" + notificacionfecha + "] La adecuación de "+ person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " se ha enviado a comisión de investigación."
+		        if cambio_act.estatus_id == 6
+	        		notific.mensaje = "[" + notificacionfecha + "] La adecuación de "+ person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " se ha enviado a comisión de investigación."
+	        	else
+	        		notific.mensaje = "[" + notificacionfecha + "] La adecuación de "+ person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " se ha enviado a Consejo de Facultad."
+	        	end
 	        	notific.save
 	        	notific2 = Notificacion.new
 		        notific2.instructor_id = plan.instructor_id
@@ -1433,15 +1437,24 @@ class IniciotutorController < ApplicationController
 		        notific2.adecuacion_id = session[:adecuacion_id]
 		        notific2.informe_id = nil
 		        notific2.actual = 2
-	        	notific2.mensaje = "[" + notificacionfecha + "] Su adecuación se ha enviado a comisión de investigación."
+	        	if cambio_act.estatus_id == 6
+	        		notific2.mensaje = "[" + notificacionfecha + "] Su adecuación se ha enviado a comisión de investigación."
+	        	else
+	        		notific2.mensaje = "[" + notificacionfecha + "] Su adecuación se ha enviado a Consejo de Facultad."
+	        	end
 	        	notific2.save
 	        	notific3 = Notificacion.new
 		        notific3.instructor_id = plan.instructor_id
 		        notific3.tutor_id = session[:usuario_id]
 		        notific3.adecuacion_id = session[:adecuacion_id]
 		        notific3.informe_id = nil
-		        notific3.actual = 3		#Comisión de investigación
-	        	notific3.mensaje = "[" + notificacionfecha + "] Se ha recibido una nueva Adecuación: "+ person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + ", favor aprobar y enviar a la siguiente entidad."
+	        	if cambio_act.estatus_id == 6
+					notific3.actual = 3		#Comisión de investigación
+	        		notific3.mensaje = "[" + notificacionfecha + "] Se ha recibido una nueva Adecuación: "+ person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + ", favor aprobar y enviar a la siguiente entidad."
+	        	else
+					notific3.actual = 5		#Consejo de facultad
+	        		notific3.mensaje = "[" + notificacionfecha + "] Se ha recibido una nueva Adecuación: "+ person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + ", revisar."
+	        	end
 	        	notific3.save
 	        	puts notific.mensaje
 		        notific.save
@@ -1476,15 +1489,20 @@ class IniciotutorController < ApplicationController
 		              end
 		            end  
 		          end
-		          remitente = Usuario.where(id: uentidad.usuario_id).take
-		          email = remitente.user + "@ciens.ucv.ve"
-		          ActionCorreo.envio_adecuacion(email).deliver
-
+					remitente3 = Usuario.where(id: session[:usuario_id]).take
+					ActionCorreo.envio_adecuacion(remitente3, notific.mensaje,2).deliver
+					remitente2 = Usuario.where(id: plan.instructor_id).take
+					ActionCorreo.envio_adecuacion(remitente2, notific2.mensaje,1).deliver
+					remitente = Usuario.where(id: uentidad.usuario_id).take
+					ActionCorreo.envio_adecuacion(remitente, notific3.mensaje,0).deliver
 		        else
-		            uentidad = Usuarioentidad.where(entidad_id: 13).take
-		            remitente = Usuario.where(id: uentidad.usuario_id).take
-		            email= remitente.user + "@ciens.ucv.ve"
-		            ActionCorreo.envio_adecuacion(email).deliver
+		        	uentidad = Usuarioentidad.where(entidad_id: 13).take
+		        	remitente3 = Usuario.where(id: session[:usuario_id]).take
+					ActionCorreo.envio_adecuacion(remitente3, notific.mensaje,2).deliver
+					remitente2 = Usuario.where(id: plan.instructor_id).take
+					ActionCorreo.envio_adecuacion(remitente2, notific2.mensaje,1).deliver
+					remitente = Usuario.where(id: uentidad.usuario_id).take
+					ActionCorreo.envio_adecuacion(remitente, notific3.mensaje,0).deliver
 		        end
 
 		        if(cambio_act.estatus_id == 5)
@@ -1492,8 +1510,6 @@ class IniciotutorController < ApplicationController
 		        else
 		        	flash[:success]="La adecuación se ha enviado a comision de investigacion"
 		        end
-	     
-	    
 		   		redirect_to controller:"iniciotutor", action: "planformacions"
 		   end
 		end

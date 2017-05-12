@@ -8,7 +8,11 @@
 		  <tr>
 		    <table width="100%" border="0" cellspacing="0" cellpadding="0">
 		      <tr>
-		        <td colspan="2" align="left" valign="top" bgcolor="#2a2a2a" style="background-color:#2a2a2a; padding:10px; font-family:Georgia, 'Times New Roman', Times, serif; color:#43c1d7; font-size:20px;">Ha recibido un nuevo informe</td>
+		        <% if @id == 0 %>
+		        	<td colspan="2" align="left" valign="top" bgcolor="#2a2a2a" style="background-color:#2a2a2a; padding:10px; font-family:Georgia, 'Times New Roman', Times, serif; color:#43c1d7; font-size:20px;">Ha recibido un nuevo informe</td>
+		        <% else %>
+		        	<td colspan="2" align="left" valign="top" bgcolor="#2a2a2a" style="background-color:#2a2a2a; padding:10px; font-family:Georgia, 'Times New Roman', Times, serif; color:#43c1d7; font-size:20px;">Ha recibido una notificación de Informe</td>
+		        <% end %>
 		      </tr>
 		      <tr>
 		        <td width="1000" align="center" valign="top" style="padding:12px; background-color:#ffffff;" bgcolor="#ffffff;"><table width="100%" border="0" cellspacing="0" cellpadding="4" style="margin-bottom:20px;">

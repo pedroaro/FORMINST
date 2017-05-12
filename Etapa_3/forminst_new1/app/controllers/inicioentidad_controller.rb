@@ -978,22 +978,18 @@ end
 				puts @planformacion.tutor_id
 				puts @planformacion.instructor_id
 
-		      	if @informe.numero == 1
+		      	if (@informe.numero == 1 || @informe.numero == 3)
 		        	@nombre_informe= "PRIMER INFORME "
 		        	session[:numero_informe]=1
-		      	else
-		        	if @informe.numero == 2
-		         	 @nombre_informe= "SEGUNDO INFORME "
+		      	elsif (@informe.numero == 2 || @informe.numero == 6)
+		         	@nombre_informe= "SEGUNDO INFORME "
 		          	session[:numero_informe]=2
-		        	else
-		          	if @informe.numero == 3
-		            	@nombre_informe= "TERCER INFORME "
-		            	session[:numero_informe]=3
-		          	else                                                        
-		            	@nombre_informe= "CUARTO INFORME "
-		            	session[:numero_informe]=4
-		          	end
-		        	end
+		        elsif @informe.numero == 4
+	            	@nombre_informe= "TERCER INFORME "
+	            	session[:numero_informe]=4
+				elsif @informe.numero == 5
+	            	@nombre_informe= "CUARTO INFORME "
+	            	session[:numero_informe]=5
 		      	end
 
 		      	if @informe.tipo_id == 1
@@ -2426,9 +2422,12 @@ end
 	              end
 	            end  
 	          end
-	          remitente = Usuario.where(id: uentidad.usuario_id).take
-	          email = remitente.user + "@ciens.ucv.ve"
-	          ActionCorreo.envio_informe(email).deliver
+	          remitente3 = Usuario.where(id: informeAct.tutor_id).take
+		      ActionCorreo.envio_informe(remitente3, notific.mensaje,2).deliver
+		      remitente2 = Usuario.where(id: plan.instructor_id).take
+		      ActionCorreo.envio_informe(remitente2, notific2.mensaje,1).deliver
+		      remitente = Usuario.where(id: uentidad.usuario_id).take
+		      ActionCorreo.envio_informe(remitente, notific3.mensaje,0).deliver
 	          flash[:success]="El informe se ha envíado a consejo de escuela"
 
 
@@ -2474,14 +2473,16 @@ end
 					notific3.adecuacion_id = session[:adecuacion_id]
 					notific3.informe_id = @informe_id
 					notific3.actual = 5   #Consejo de Facultad
-					notific3.mensaje = "[" + notificacionfecha + "] Ha recibido un nuevo Informe: ' " + session[:nombre_informe]+ " ' de " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + ", favor aprobar y enviar a la siguiente entidad."
+					notific3.mensaje = "[" + notificacionfecha + "] Ha recibido un nuevo Informe: ' " + session[:nombre_informe]+ " ' de " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + ", revisar."
 					notific3.save
 
 					uentidad = Usuarioentidad.where(entidad_id: 13).take
-		            remitente = Usuario.where(id: uentidad.usuario_id).take
-		            email= remitente.user + "@ciens.ucv.ve"
-		            ActionCorreo.envio_informe(email).deliver
-
+					remitente3 = Usuario.where(id: informeAct.tutor_id).take
+					ActionCorreo.envio_informe(remitente3, notific.mensaje,2).deliver
+					remitente2 = Usuario.where(id: plan.instructor_id).take
+					ActionCorreo.envio_informe(remitente2, notific2.mensaje,1).deliver
+					remitente = Usuario.where(id: uentidad.usuario_id).take
+					ActionCorreo.envio_informe(remitente, notific3.mensaje,0).deliver
 					flash[:success]="El informe se ha envíado a consejo de facultad"
 				else
 					if (session[:entidad_id] == 13)
@@ -2546,7 +2547,11 @@ end
 							notific2.informe_id = @informe_id
 							notific2.actual = 2
 							notific2.mensaje = "[" + notificacionfecha + "] El " + session[:nombre_informe] + " ha sido rechazado por Consejo de Facultad."
-							notific2.save					
+							notific2.save
+							remitente3 = Usuario.where(id: informeAct.tutor_id).take
+							ActionCorreo.envio_informe(remitente3, notific.mensaje,2).deliver
+							remitente2 = Usuario.where(id: plan.instructor_id).take
+							ActionCorreo.envio_informe(remitente2, notific2.mensaje,1).deliver
 						else
 							if bool_observaciones == 1 
 								flash[:info]="El informe ha sido aprobado con observaciones por consejo de facultad"
@@ -2567,7 +2572,11 @@ end
 								notific2.informe_id = @informe_id
 								notific2.actual = 2
 								notific2.mensaje = "[" + notificacionfecha + "] El " + session[:nombre_informe] + " ha sido aprobado con observaciones por Consejo de Facultad."
-								notific2.save								
+								notific2.save
+								remitente3 = Usuario.where(id: informeAct.tutor_id).take
+								ActionCorreo.envio_informe(remitente3, notific.mensaje,2).deliver
+								remitente2 = Usuario.where(id: plan.instructor_id).take
+								ActionCorreo.envio_informe(remitente2, notific2.mensaje,1).deliver
 							else
 								flash[:info]="El informe ha sido aprobado por consejo de facultad"
 								notific = Notificacion.new
@@ -2587,7 +2596,11 @@ end
 								notific2.informe_id = @informe_id
 								notific2.actual = 2
 								notific2.mensaje = "[" + notificacionfecha + "] ¡Felicitaciones! El " + session[:nombre_informe] + " ha sido aprobado por Consejo de Facultad."
-								notific2.save			
+								notific2.save	
+								remitente3 = Usuario.where(id: informeAct.tutor_id).take
+								ActionCorreo.envio_informe(remitente3, notific.mensaje,2).deliver
+								remitente2 = Usuario.where(id: plan.instructor_id).take
+								ActionCorreo.envio_informe(remitente2, notific2.mensaje,1).deliver
 							end
 						end
 					end	
@@ -2851,9 +2864,12 @@ end
 		              end
 		            end  
 		          end
-		          remitente = Usuario.where(id: uentidad.usuario_id).take
-		          email = remitente.user + "@ciens.ucv.ve"
-		          ActionCorreo.envio_adecuacion(email).deliver
+					remitente3 = Usuario.where(id: plan.tutor_id).take
+					ActionCorreo.envio_adecuacion(remitente3, notific.mensaje,2).deliver
+					remitente2 = Usuario.where(id: plan.instructor_id).take
+					ActionCorreo.envio_adecuacion(remitente2, notific2.mensaje,1).deliver
+					remitente = Usuario.where(id: uentidad.usuario_id).take
+					ActionCorreo.envio_adecuacion(remitente, notific3.mensaje,0).deliver
 
 				flash[:success]="La adecuación se ha envíado a consejo de escuela"
 
@@ -2903,11 +2919,13 @@ end
 				        notific3.actual = 5		#Consejo de Escuela
 			        	notific3.mensaje = "[" + notificacionfecha + "] Se ha recibido una nueva Adecuación: "+ person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + ", Revisar."
 			        	notific3.save
-
-						uentidad = Usuarioentidad.where(entidad_id: 13).take
-			            remitente = Usuario.where(id: uentidad.usuario_id).take
-			            email= remitente.user + "@ciens.ucv.ve"
-			            ActionCorreo.envio_adecuacion(email).deliver
+			       		uentidad = Usuarioentidad.where(entidad_id: 13).take
+						remitente3 = Usuario.where(id: plan.tutor_id).take
+						ActionCorreo.envio_adecuacion(remitente3, notific.mensaje,2).deliver
+						remitente2 = Usuario.where(id: plan.instructor_id).take
+						ActionCorreo.envio_adecuacion(remitente2, notific2.mensaje,1).deliver
+						remitente = Usuario.where(id: uentidad.usuario_id).take
+						ActionCorreo.envio_adecuacion(remitente, notific3.mensaje,0).deliver
 
 						flash[:success]="La adecuación se ha envíado a consejo de facultad"
 					else
@@ -2946,17 +2964,80 @@ end
 							cambio_est.save
 							
 							adec = Adecuacion.where(id: @adecuacion_id).take
-			            	remitente = Usuario.where(id: adec.tutor_id).take
-			            	email= remitente.user + "@ciens.ucv.ve"
-			            	ActionCorreo.envio_adecuacion(email).deliver
-
+							plan = Planformacion.where(id: adec.plan_id).take
 							if(rechazar == 1)
 								flash[:info]="La adecuación ha sido rechazada por consejo de facultad"
+								notific = Notificacion.new
+						        notific.instructor_id = plan.instructor_id
+						        notific.tutor_id = plan.tutor_id
+						        notific.adecuacion_id = session[:adecuacion_id]
+						        notific.informe_id = nil
+						        notific.actual = 1
+						        person = Persona.where(usuario_id: plan.instructor_id).take
+						        notificacionfecha = Date.current.to_s 
+								notific.mensaje = "[" + notificacionfecha + "] La adecuación de " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " ha sido rechazada por Consejo de Facultad."
+								notific.save
+								notific2 = Notificacion.new
+						        notific2.instructor_id = plan.instructor_id
+						        notific2.tutor_id = plan.tutor_id
+						        notific2.adecuacion_id = session[:adecuacion_id]
+						        notific2.informe_id = nil
+						        notific2.actual = 2
+								notific2.mensaje = "[" + notificacionfecha + "] Su adecuación ha sido rechazada por Consejo de Facultad."
+								notific2.save
+								remitente3 = Usuario.where(id: adec.tutor_id).take	
+								ActionCorreo.envio_adecuacion(remitente3, notific.mensaje,2).deliver		##CORREO AL TUTOR
+								remitente2 = Usuario.where(id: plan.instructor_id).take
+								ActionCorreo.envio_adecuacion(remitente2, notific2.mensaje,1).deliver		##CORREO AL INSTRUCTOR
 							else
 								if bool_observaciones == 1 
 									flash[:info]="La adecuación ha sido aprobada con observaciones por consejo de facultad"
+									notific = Notificacion.new
+							        notific.instructor_id = plan.instructor_id
+							        notific.tutor_id = plan.tutor_id
+							        notific.adecuacion_id = session[:adecuacion_id]
+							        notific.informe_id = nil
+							        notific.actual = 1
+							        person = Persona.where(usuario_id: plan.instructor_id).take
+							        notificacionfecha = Date.current.to_s 
+									notific.mensaje = "[" + notificacionfecha + "] La adecuación de " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " ha sido aprobada con observaciones por Consejo de Facultad."
+									notific.save
+									notific2 = Notificacion.new
+							        notific2.instructor_id = plan.instructor_id
+							        notific2.tutor_id = plan.tutor_id
+							        notific2.adecuacion_id = session[:adecuacion_id]
+							        notific2.informe_id = nil
+							        notific2.actual = 2
+									notific2.mensaje = "[" + notificacionfecha + "] Su adecuación ha sido aprobado con observaciones por Consejo de Facultad."
+									notific2.save
+									remitente3 = Usuario.where(id: adec.tutor_id).take	
+									ActionCorreo.envio_adecuacion(remitente3, notific.mensaje,2).deliver		##CORREO AL TUTOR
+									remitente2 = Usuario.where(id: plan.instructor_id).take
+									ActionCorreo.envio_adecuacion(remitente2, notific2.mensaje,1).deliver		##CORREO AL INSTRUCTOR
 								else
-									flash[:info]="La adecuación ha sido aprobada por consejo de facultad"	
+									flash[:info]="El informe ha sido aprobado por consejo de facultad"
+									notific = Notificacion.new
+							        notific.instructor_id = plan.instructor_id
+							        notific.tutor_id = plan.tutor_id
+							        notific.adecuacion_id = session[:adecuacion_id]
+							        notific.informe_id = nil
+							        notific.actual = 1
+							        person = Persona.where(usuario_id: plan.instructor_id).take
+							        notificacionfecha = Date.current.to_s 
+									notific.mensaje = "[" + notificacionfecha + "] ¡Felicitaciones! La adecuación de " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " ha sido aprobada por Consejo de Facultad."
+									notific.save
+									notific2 = Notificacion.new
+							        notific2.instructor_id = plan.instructor_id
+							        notific2.tutor_id = plan.tutor_id
+							        notific2.adecuacion_id = session[:adecuacion_id]
+							        notific2.informe_id = nil
+							        notific2.actual = 2
+									notific2.mensaje = "[" + notificacionfecha + "] ¡Felicitaciones! Su adecuación ha sido aprobada por Consejo de Facultad."
+									notific2.save	
+									remitente3 = Usuario.where(id: adec.tutor_id).take	
+									ActionCorreo.envio_adecuacion(remitente3, notific.mensaje,2).deliver		##CORREO AL TUTOR
+									remitente2 = Usuario.where(id: plan.instructor_id).take
+									ActionCorreo.envio_adecuacion(remitente2, notific2.mensaje,1).deliver		##CORREO AL INSTRUCTOR
 								end
 							end
 						end	

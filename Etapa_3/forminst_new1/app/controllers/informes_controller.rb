@@ -2502,7 +2502,6 @@ def generar_pdf() # es función permite generar el documento pdf de la adecuaci�
       notific3.informe_id = @informe_id
       notific3.actual = 3   #Comisión de investigación
       notific3.mensaje = "[" + notificacionfecha + "] Ha recibido un nuevo Informe: ' " + session[:nombre_informe]+ " ' de " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + ", favor aprobar y enviar a la siguiente entidad."
-      aux = "[" + notificacionfecha + "] Ha recibido un nuevo Informe: ' " + session[:nombre_informe]+ " ' de " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + ", favor aprobar y enviar a la siguiente entidad."
       notific3.save
       userr= Usuario.where(id: session[:usuario_id]).take
       user =Usuarioentidad.where(usuario_id: userr.id).take
@@ -2529,8 +2528,12 @@ def generar_pdf() # es función permite generar el documento pdf de la adecuaci�
           end
         end  
       end
+      remitente3 = Usuario.where(id: session[:usuario_id]).take
+      ActionCorreo.envio_informe(remitente3, notific.mensaje,2).deliver
+      remitente2 = Usuario.where(id: plan.instructor_id).take
+      ActionCorreo.envio_informe(remitente2, notific2.mensaje,1).deliver
       remitente = Usuario.where(id: uentidad.usuario_id).take
-      ActionCorreo.envio_informe_a_entidad(remitente, aux).deliver
+      ActionCorreo.envio_informe(remitente, notific3.mensaje,0).deliver
       flash[:success]="El informe se ha envíado a comision de investigacion"
     else
         flash[:info]="Debe enviar los informes en orden"
