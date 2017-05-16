@@ -4,7 +4,7 @@ class ActionCorreo < ActionMailer::Base
   	def envio_informe(remitente, mensaje, id) ##ID :: 0 = ENTIDAD, 1 = INSTRUCTOR, 2 T= TUTOR
   		@id = id
   		@mensaje = mensaje
-  		email = remitente.user + "@ciens.ucv.ve"
+  		email = remitente.user + "@gmail.com"
   		@email= email
 		@user_email = 'forminst.ciens@gmail.com'
 		if id == 0		##ENTIDAD
@@ -17,7 +17,7 @@ class ActionCorreo < ActionMailer::Base
 	def envio_adecuacion(remitente, mensaje, id)
   		@id = id
   		@mensaje = mensaje
-  		email = remitente.user + "@ciens.ucv.ve"
+  		email = remitente.user + "@gmail.com"
   		@email= email
 		@user_email = 'forminst.ciens@gmail.com'
 		if id == 0		##ENTIDAD
@@ -30,7 +30,7 @@ class ActionCorreo < ActionMailer::Base
 	def creacion_de_instructor(remitente, mensaje, id)
   		@id = id
   		@mensaje = mensaje
-  		email = remitente.user + "@ciens.ucv.ve"
+  		email = remitente.user + "@gmail.com"
   		@email= email
 		@user_email = 'forminst.ciens@gmail.com'
 		if id == 0		##INSTRUCTOR
@@ -42,7 +42,7 @@ class ActionCorreo < ActionMailer::Base
 
 	def creacion_de_tutor(remitente, mensaje)
   		@mensaje = mensaje
-  		email = remitente.user + "@ciens.ucv.ve"
+  		email = remitente.user + "@gmail.com"
   		@email= email
 		@user_email = 'forminst.ciens@gmail.com'
 		mail(to: [@user_email,@email], subject: '¡Bienvenido a FORMINST!')

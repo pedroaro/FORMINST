@@ -88,19 +88,9 @@
 <br/>
 <div class= "row">
   <div class="col-xs-12 col-md-12 col-lg-12">
-    <%= form_tag({controller: 'inicioentidad', action: 'guardar_observaciones'}) do%>
-        <input id="cant_docencia" type="hidden" name="cant_docencia" value="<%=@actividadesadoc.size()%>"/> 
-        <input id="cant_investigacion" type="hidden" name="cant_investigacion" value="<%=@actividadesainv.size()%>"/>
-        <input id="cant_formacion" type="hidden" name="cant_formacion" value="<%=@actividadesafor.size()%>"/> 
-        <input id="cant_extension" type="hidden" name="cant_extension" value="<%=@actividadesaext.size()%>"/> 
-        <input id="cant_otra" type="hidden" name="cant_otra" value="<%=@actividadesaotr.size()%>"/> 
-        <input id="cant_otra" type="hidden" name="cant_otra" value="<%=@actividadesaotr.size()%>"/> 
-        <input id="tipoinf" type="hidden" name="tipoinf" value="<%=@tipo_informe%>"/> 
-        <input id="numeroinf" type="hidden" name="numero_informe" value="<%=@numero_informe%>"/> 
+    <%= form_tag({controller: 'informes', action: 'actualizar_informe'}) do%>
 
-              <h4><strong> Actividades a realizar por el instructor:</h4>
-
-              <table class="table table-bordered ">
+          <table id="cprtabla" class="table table-bordered ">
             <tbody>
               <tr></tr>
               <tr>
@@ -158,6 +148,9 @@
                     </td>
                     <input type="hidden" name="inv<%=i.to_s%>" value='<%= actdoc.id %>'>
                 </tr>
+
+                <input type="hidden" name="result<%=i.to_s%>" value='-1'>
+                <% cpcont = 1 %>
                 <% if !@resultados[@j].blank? %>
                   <tr>
                     <td>
@@ -185,7 +178,10 @@
                     </td>
                   </tr>
                 <%end%>
-              <%end%> 
+                <% @j= @j +1 %>
+              <% end %>
+
+              
               
               <tr><td colspan="3"></td></tr>
 
@@ -241,16 +237,14 @@
                  <% @j= @j +1 %>
               <% end %>
 
+              <tr  class='title-table'>
+              <tr>
+                <td class="text-center" colspan="4"><h5><strong> Otras Actividades:</strong></h5></td>
+              </tr>
+                <td class="text-center" colspan="2"><strong>Contempladas en el plan formación</strong></td>
+                <td class="text-center" colspan="2"><strong>No contempladas en el plan formación</strong></td>
+              </tr>
               <% @actividadesaotr.each_with_index do |actdoc,i| %>
-                <% if i==0 %>
-                  <tr  class='title-table'>
-                  <tr>
-                    <td class="text-center" colspan="4"><h5><strong> Otras Actividades:</strong></h5></td>
-                  </tr>
-                    <td class="text-center" colspan="2"><strong>Contempladas en el plan formación</strong></td>
-                    <td class="text-center" colspan="2"><strong>No contempladas en el plan formación</strong></td>
-                  </tr>
-                <% end %>
                 <tr>
                   <td colspan="2">
                     <textarea class="form-control" rows="3"  name='otra<%= actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
@@ -292,56 +286,4 @@
     <% end %>
   </div>
 </div>
-
-
-<!--<script type="text/javascript">
-  function eliminar (elemento){
-    $(elemento).parent().html('<a class="btn btn-default resultado"><span class="glyphicon glyphicon-plus"></span> Agregar Resultado</a>');
-  }
-
-</script> -->
-    
-<script type="text/javascript">
-
-    $(document).ready(function() {
-
-      $(document).on('click', '.resultado', function(){
-        var params = $(this).attr("rel");
-        $("#res"+params).show()
-        $(this).parent().addClass("resultado"+params)
-        $(this).parent().css({display: "none"})
-
-        });
-
-      $(document).on('click', '.eliminar_resultado', function(){ 
-        var params = $(this).attr("rel");
-        $("#res"+params).css({display: "none"});
-        $(".resultado"+params).show();
-        $("#sel"+params).val("");
-        $("#resultado_tipos"+params).val("");
-        $("#resultado_titulo"+params).val("");
-        $("#resultado_autor"+params).val("");
-        $("#resultado_titulocap"+params).val("");
-        $("#resultado_autorcap"+params).val("");
-        $("#resultado_dia"+params).val("");
-        $("#resultado_mes"+params).val("");
-        $("#resultado_ano"+params).val("");
-        $("#resultado_ciudad"+params).val("");
-        $("#resultado_estado"+params).val("");
-        $("#resultado_pais"+params).val("");
-        $("#resultado_org"+params).val("");
-        $("#resultado_duracion"+params).val("");
-        $("#resultado_editor"+params).val("");
-        $("#resultado_tl"+params).val("");
-        $("#resultado_al").val("");
-        $("#resultado_nr"+params).val("");
-        $("#resultado_np"+params).val("");
-        $("#resultado_paginas"+params).val("");
-        $("#resultado_na"+params).val("");
-        $("#resultado_nombre_pw"+params).val("");
-        $("#resultado_sitio_pw"+params).val("").css({display: "none"});
-        $("#resultado_url"+params).val("").css({display: "none"});
-      }); 
-
-    });
-</script>
+  
