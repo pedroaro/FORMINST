@@ -2,7 +2,7 @@ class InicioentidadController < ApplicationController
 	layout 'ly_inicio_entidad'
 
 	def index
-		if session[:usuario_id]
+		if session[:usuario_id] && session[:entidad]= true
 			session[:adecuacion_id] = nil
 			session[:plan_id] = nil
 			session[:instructorName] = nil
@@ -52,7 +52,7 @@ class InicioentidadController < ApplicationController
 	end
 
 	def listar_adecuaciones
-		if session[:usuario_id]
+		if session[:usuario_id] && session[:entidad]= true
 			session[:adecuacion_id]=nil
 				@nombre = session[:nombre_usuario]
 				@usu=Usuarioentidad.where(entidad_id: session[:entidad_id]).take
@@ -251,7 +251,7 @@ def ver_soporte
 end
 
 	def ver_detalles_adecuacion
-		if session[:usuario_id]
+		if session[:usuario_id] && session[:entidad]= true
 			@nombre = session[:nombre_usuario]
 			@modifique=false
 			session[:informe_id] = nil
@@ -371,7 +371,7 @@ end
 	end
 
 	def detalles_adecuacion3
-		if session[:usuario_id]
+		if session[:usuario_id] && session[:entidad]= true
 			@semestre = 1
 			@iddoc= 'id_docencia'
 			@docencia='docencia'
@@ -481,7 +481,7 @@ end
 	end
 
 	def detalles_adecuacion4
-		if session[:usuario_id]
+		if session[:usuario_id] && session[:entidad]= true
 			@semestre = 2
 			@iddoc= 'id_docencia'
 			session[:informe_id] = nil
@@ -591,7 +591,7 @@ end
 	end
 
 	def detalles_adecuacion5
-		if session[:usuario_id]
+		if session[:usuario_id] && session[:entidad]= true
 			@semestre = 3
 			@iddoc= 'id_docencia'
 			@docencia='docencia'
@@ -701,7 +701,7 @@ end
 	end
 
 	def detalles_adecuacion6
-		if session[:usuario_id]
+		if session[:usuario_id] && session[:entidad]= true
 			@semestre = 4
 			@iddoc= 'id_docencia'
 			session[:informe_id] = nil
@@ -813,7 +813,7 @@ end
 	
 
 	def listar_informes
-	    if session[:usuario_id]
+	    if session[:usuario_id] && session[:entidad]= true
 	    	session[:informe_id]=nil
 	    	@nombre = session[:nombre_usuario]
 			@usu=Usuarioentidad.where(entidad_id: session[:entidad_id]).take
@@ -958,7 +958,7 @@ end
     	end
   	end
 	def ver_detalles_informe
-	    if session[:usuario_id]
+	    if session[:usuario_id] && session[:entidad]= true
 	      	@nombre = session[:nombre_usuario]
 	      	if params[:informe_id]!=nil
 	        	session[:informe_id]= params[:informe_id]
@@ -1707,7 +1707,7 @@ end
 	end
 
  	def guardar_observaciones
- 		if session[:usuario_id]
+ 		if session[:usuario_id] && session[:entidad]= true
  
  			@informe = Informe.find(session[:informe_id])
  			@adecuacion = Adecuacion.where(planformacion_id: @informe.planformacion_id).take
@@ -2099,7 +2099,7 @@ end
 
 
 	def guardar_observaciones2
- 		if session[:usuario_id]
+ 		if session[:usuario_id] && session[:entidad]= true
  			@semestre = params[:semestre].to_i
  			@vista_adecuacion = @semestre + 2
 		    @adecuacion= Adecuacion.find(session[:adecuacion_id])
@@ -3079,7 +3079,7 @@ end
 	end 
 
 	def borrar_notificaciones #mas obs de actividades del informe
-		if session[:usuario_id]
+		if session[:usuario_id] && session[:entidad]= true
 			@noti= params[:noti]
 			puts @noti
     		notaeliminar = Notificacion.where(id: @noti ).take

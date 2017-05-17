@@ -2,7 +2,7 @@
 	layout 'ly_inicio_entidad'
 
 	def index
-		if session[:usuario_id]
+		if session[:usuario_id] && session[:instructor]= true
 			session[:adecuacion_id] = nil
       plan = Planformacion.where(instructor_id: session[:usuario_id]).take
 			session[:plan_id] = plan.id
@@ -33,7 +33,7 @@
   end
 
 	def listar_adecuaciones
-		if session[:usuario_id]
+		if session[:usuario_id] && session[:instructor]= true
 			@nombre = session[:nombre_usuario]
 
 			@plan_formacion = Planformacion.where(instructor_id: session[:usuario_id]).take
@@ -58,7 +58,7 @@
 	end
 
 	def prorrogas
-		if session[:usuario_id]
+		if session[:usuario_id] && session[:instructor]= true
 	      @persona = Persona.where(usuario_id: session[:usuario_id]).take
 	      @nombre = session[:nombre_usuario]
 	      @planformacion = Planformacion.where(instructor_id: session[:usuario_id]).take
@@ -490,7 +490,7 @@ def vista_previa1
 end
 
 	def listar_informes
-	    if session[:usuario_id]
+	    if session[:usuario_id] && session[:instructor]= true
 
 	      @persona = Persona.where(usuario_id: session[:usuario_id]).take
 	      @nombre = session[:nombre_usuario]
@@ -549,7 +549,7 @@ end
 	end
 
 	def ver_detalles_adecuacion
-		if session[:usuario_id]
+		if session[:usuario_id] && session[:instructor]= true
 			@nombre = session[:nombre_usuario]
 			@instructorName = session[:nombre_usuario]
 			@modifique=false
@@ -785,7 +785,7 @@ end
 	end
 
 	def detalles_adecuacion3
-		if session[:usuario_id]
+		if session[:usuario_id] && session[:instructor]= true
       session[:informe_id] = nil
 			@iddoc= 'id_docencia'
 			@docencia='docencia'
@@ -842,7 +842,7 @@ end
 	end
 
 	def detalles_adecuacion4
-		if session[:usuario_id]
+		if session[:usuario_id] && session[:instructor]= true
 			@iddoc= 'id_docencia'
       session[:informe_id] = nil
 			@docencia='docencia'
@@ -899,7 +899,7 @@ end
 	end
 
 	def detalles_adecuacion5
-		if session[:usuario_id]
+		if session[:usuario_id] && session[:instructor]= true
       session[:informe_id] = nil
 			@iddoc= 'id_docencia'
 			@docencia='docencia'
@@ -956,7 +956,7 @@ end
 	end
 
 	def detalles_adecuacion6
-		if session[:usuario_id]
+		if session[:usuario_id] && session[:instructor]= true
       session[:informe_id] = nil
 			@iddoc= 'id_docencia'
 			@docencia='docencia'
@@ -1198,7 +1198,7 @@ end
 	end
 
 	def ver_detalles_informe
-	    if session[:usuario_id]
+	    if session[:usuario_id] && session[:instructor]= true
 	      @nombre = session[:nombre_usuario]   
 	      if not @nombre
 	        print "NO HAY USUARIO"
@@ -1465,7 +1465,7 @@ end
   end
 
   def borrar_notificaciones #mas obs de actividades del informe
-    if session[:usuario_id]
+    if session[:usuario_id] && session[:instructor]= true
       @noti= params[:noti]
       notaeliminar = Notificacion.where(id: @noti ).take
       if notaeliminar.blank?

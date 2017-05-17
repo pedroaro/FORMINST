@@ -5,7 +5,7 @@ class InformesController < ApplicationController
     @ejecutada = 'ejecutada'
     @observacion = 'observacion'
     
-    if session[:usuario_id]
+    if session[:usuario_id] && session[:tutor]
       @informes= Informe.where(planformacion_id: session[:plan_id],numero: params[:informe_id]).take
       if !@informes.blank?
         flash[:danger]= "Este informe ya fue creado"
@@ -279,7 +279,7 @@ class InformesController < ApplicationController
   end
 
   def detalles_informe2
-    if session[:usuario_id]
+    if session[:usuario_id] && session[:tutor]
       @nombre = session[:nombre_usuario]   
       if not @nombre
         print "NO HAY USUARIO"
@@ -502,7 +502,7 @@ class InformesController < ApplicationController
   end
 
 def vista_previa
-  if session[:informe_id]
+  if session[:informe_id] && session[:tutor]
     @informe= Informe.find(session[:informe_id])
     @TipoSemestre=TipoInforme.where(id: @informe.tipo_id).take
     @fechaActual = Date.current.to_s
@@ -901,7 +901,7 @@ end
 
   def ver_detalles_informe
 
-    if session[:usuario_id]
+    if session[:usuario_id] && session[:tutor]
       @nombre = session[:nombre_usuario]   
       if not @nombre
         print "NO HAY USUARIO"
@@ -979,7 +979,7 @@ end
 
   def crear_informe
 
-    if session[:usuario_id]
+    if session[:usuario_id] && session[:tutor]
       nombre = session[:nombre_usuario]   
       if not @nombre
         print "NO HAY USUARIO"
@@ -2513,7 +2513,7 @@ def generar_pdf() # es funciÃ³n permite generar el documento pdf de la adecuaciÃ
   end
 
   def listar_informes
-    if session[:usuario_id]
+    if session[:usuario_id]  && session[:tutor]
       @persona = Persona.where(usuario_id: session[:usuario_id]).take
       @nombre = session[:nombre_usuario]
       @planformacion = session[:plan_id]
