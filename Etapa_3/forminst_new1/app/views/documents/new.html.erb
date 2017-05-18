@@ -208,9 +208,9 @@
 		    <%= link_to "Vista Previa", {controller: "iniciotutor", action: "vista_previa"}, class: "btn btn-default" %>
       <%end%> 
       <%if session[:informe_id]%> 
-        <%= link_to "Generar PDF", {controller: "informes", action: "generar_pdf"}, class: "btn btn-default" %>
+        <%= link_to "Generar PDF", {controller: "informes", action: "generar_pdf"},target: :_blank, class: "btn btn-default" %>
       <%else%> 
-        <%= link_to "Generar PDF", {controller: "adecuacions", action: "generar_pdf"}, class: "btn btn-default" %>
+        <%= link_to "Generar PDF", {controller: "adecuacions", action: "generar_pdf"},target: :_blank, class: "btn btn-default" %>
       <%end%> 
   		<%= link_to "Agregar Soporte", {controller: "documents", action: "new"}, class: "btn btn-default active" %>
   		<%= link_to "Ver Soporte", {controller: "documents", action: "index"}, class: "btn btn-default" %>
