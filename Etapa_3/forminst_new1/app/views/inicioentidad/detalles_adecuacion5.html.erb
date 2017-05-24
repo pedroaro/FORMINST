@@ -70,8 +70,9 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Mensaje de confirmación</h4>
       </div>
-      <div class="modal-body">
-        <h5>Seleccione la acción que desea realizar sobre la adecuación.</h5>
+      <div class="modal-body text-center">
+        <h5 center>Seleccione la acción que desea realizar sobre la adecuación</h5>
+        <h9> (Si agrego observaciones, se enviará como "Aprobado con Observaciones" y debe ser corregido por el tutor encargado)</h9>
       </div>
       <div class="modal-footer">
       <%= link_to "Aprobar", {controller: "inicioentidad", action: "cambiar_estatusA", :adecuacion_id => @adecuacion.id, :rechazar => 0 }, class: "btn btn-default" %>

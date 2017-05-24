@@ -125,7 +125,7 @@
         <h4 class="modal-title">Mensaje de confirmación</h4>
       </div>
       <div class="modal-body">
-        <h5>Seleccione la acción que desea realizar sobre la adecuación.</h5>
+        <h5>Seleccione la acción que desea realizar sobre la adecuación (Si agrego observaciones, se enviará como "Aprobado con Observaciones" y debe ser corregido por el tutor encargado)</h5>
       </div>
       <div class="modal-footer">
       <%= link_to "Aprobar", {controller: "inicioentidad", action: "cambiar_estatusA", :adecuacion_id => session[:adecuacion_id], :rechazar => 0 }, class: "btn btn-default" %>

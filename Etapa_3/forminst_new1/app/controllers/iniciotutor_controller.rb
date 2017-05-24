@@ -66,7 +66,7 @@ class IniciotutorController < ApplicationController
 							else
 								if @est.estatus_id == 5
 									@status.push("APROBADO CON OBSERVACIONES POR CONSEJO DE FACULTAD")
-									@cpenviado.push(1)
+									@cpenviado.push(0)
 								else
 									if @est.estatus_id == 6
 										@status.push("GUARDADO")
@@ -82,7 +82,7 @@ class IniciotutorController < ApplicationController
 											else
 												if @est.estatus_id == 9
 													@status.push("RECHAZADO POR CONSEJO DE FACULTAD")
-													@cpenviado.push(1)
+													@cpenviado.push(0)
 												end
 											end
 										end
@@ -490,13 +490,14 @@ class IniciotutorController < ApplicationController
 				@adecuacion = Adecuacion.where(planformacion_id: session[:plan_id]).take
 				session[:adecuacion_id]= @adecuacion.id
 			end
-			if params[:editar] == 'no'
+			@adecuacion = Adecuacion.where(planformacion_id: session[:plan_id]).take
+			if params[:editar] == 'no' 
 				session[:editar]= false
 			end
-			if !session[:editar]
+			@est= EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
+			if !session[:editar] && (@est.estatus_id == 9 || @est.estatus_id == 6 || @est.estatus_id == 5)
 				flash.now[:info]= "Para editar la Adecuación debe seleccionar Modificar Adecuación"
 			end
-			@adecuacion= Adecuacion.where(planformacion_id: session[:plan_id]).take
 			@adecuaciones = Adecuacion.where(planformacion_id: session[:plan_id])
 			@iddoc= 'id_docencia'
 			@docencia='docencia'
@@ -549,7 +550,7 @@ class IniciotutorController < ApplicationController
 			@bool_enviado = 0
 			estatus_adecuacion = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
 
-			if (estatus_adecuacion.estatus_id != 6 && estatus_adecuacion.estatus_id != 5)
+			if (estatus_adecuacion.estatus_id != 6 && estatus_adecuacion.estatus_id != 5 && estatus_adecuacion.estatus_id != 9)
 				@bool_enviado = 1
 			end
 		else
@@ -565,12 +566,13 @@ class IniciotutorController < ApplicationController
 			@formacion= 'formacion'
 			@extension= 'extension'
 			@otra= 'otra' 
-			if !session[:editar]
+			@adecuacion = Adecuacion.where(planformacion_id: session[:plan_id]).take
+			@est= EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
+			if !session[:editar] && (@est.estatus_id == 9 || @est.estatus_id == 6 || @est.estatus_id == 5)
 				flash.now[:info]= "Para editar la Adecuación debe seleccionar Modificar Adecuación"
 			end
 			@nombre = session[:nombre_usuario]
 			@instructorName = session[:instructorName]
-			@adecuacion= Adecuacion.where(planformacion_id: session[:plan_id]).take
 			@plan= Planformacion.find(session[:plan_id])
 			@actividadesadoc= []
 			@actividadesainv= []
@@ -614,7 +616,7 @@ class IniciotutorController < ApplicationController
 			@bool_enviado = 0
 			estatus_adecuacion = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
 
-			if (estatus_adecuacion.estatus_id != 6 && estatus_adecuacion.estatus_id != 5)
+			if (estatus_adecuacion.estatus_id != 6 && estatus_adecuacion.estatus_id != 5 && estatus_adecuacion.estatus_id != 9)
 				@bool_enviado = 1
 			end
 
@@ -633,14 +635,15 @@ class IniciotutorController < ApplicationController
 			@otra= 'otra' 
 			@nombre = session[:nombre_usuario]
 			@instructorName = session[:instructorName]
-			@adecuacion= Adecuacion.where(planformacion_id: session[:plan_id]).take
 			@plan= Planformacion.find(session[:plan_id])
 			@actividadesadoc= []
 			@actividadesainv= []
 			@actividadesaext= []
 			@actividadesafor= []
 			@actividadesaotr= []
-			if !session[:editar]
+			@adecuacion = Adecuacion.where(planformacion_id: session[:plan_id]).take
+			@est= EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
+			if !session[:editar] && (@est.estatus_id == 9 || @est.estatus_id == 6 || @est.estatus_id == 5)
 				flash.now[:info]= "Para editar la Adecuación debe seleccionar Modificar Adecuación"
 			end
 			@actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 3).all
@@ -695,7 +698,7 @@ class IniciotutorController < ApplicationController
 			@bool_enviado = 0
 			estatus_adecuacion = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
 
-			if (estatus_adecuacion.estatus_id != 6 && estatus_adecuacion.estatus_id != 5)
+			if (estatus_adecuacion.estatus_id != 6 && estatus_adecuacion.estatus_id != 5 && estatus_adecuacion.estatus_id != 9)
 				@bool_enviado = 1
 			end
 		else
@@ -713,14 +716,15 @@ class IniciotutorController < ApplicationController
 			@otra= 'otra' 
 			@nombre = session[:nombre_usuario]
 			@instructorName = session[:instructorName]
-			@adecuacion= Adecuacion.where(planformacion_id: session[:plan_id]).take
 			@plan= Planformacion.find(session[:plan_id])
 			@actividadesadoc= []
 			@actividadesainv= []
 			@actividadesaext= []
 			@actividadesafor= []
 			@actividadesaotr= []
-			if !session[:editar]
+			@adecuacion = Adecuacion.where(planformacion_id: session[:plan_id]).take
+			@est= EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
+			if !session[:editar] && (@est.estatus_id == 9 || @est.estatus_id == 6 || @est.estatus_id == 5)
 				flash.now[:info]= "Para editar la Adecuación debe seleccionar Modificar Adecuación"
 			end
 			@actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 4).all
@@ -766,7 +770,7 @@ class IniciotutorController < ApplicationController
 			@bool_enviado = 0
 			estatus_adecuacion = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
 
-			if (estatus_adecuacion.estatus_id != 6 && estatus_adecuacion.estatus_id != 5)
+			if (estatus_adecuacion.estatus_id != 6 && estatus_adecuacion.estatus_id != 5 && estatus_adecuacion.estatus_id != 9)
 				@bool_enviado = 1
 			end
 		else
@@ -1186,7 +1190,8 @@ class IniciotutorController < ApplicationController
 		    cambio_act = EstatusAdecuacion.where(adecuacion_id: @adecuacion_id, actual: 1).take
 		    puts cambio_act.estatus_id
 		    puts "JAJAA"
-		    if cambio_act.estatus_id != 6
+
+			if (cambio_act.estatus_id != 6 && cambio_act.estatus_id != 5 && cambio_act.estatus_id != 9)
 		    	flash[:info]="Esta adecuación ya habia sido enviada"
 		   	   	redirect_to controller:"iniciotutor", action: "planformacions"
 		   	else
@@ -1475,14 +1480,9 @@ class IniciotutorController < ApplicationController
 			        notific.adecuacion_id = session[:adecuacion_id]
 			        notific.informe_id = nil
 			        notific.actual = 1
-			        puts "JAJAJA"
 			        person = Persona.where(usuario_id: plan.instructor_id).take
 			        notificacionfecha = Date.current.to_s 
-			        if cambio_act.estatus_id == 6
-		        		notific.mensaje = "[" + notificacionfecha + "] La adecuación de "+ person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " se ha enviado a comisión de investigación."
-		        	else
-		        		notific.mensaje = "[" + notificacionfecha + "] La adecuación de "+ person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " se ha enviado a Consejo de Facultad."
-		        	end
+		        	notific.mensaje = "[" + notificacionfecha + "] La adecuación de "+ person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " se ha enviado a comisión de investigación."
 		        	notific.save
 		        	notific2 = Notificacion.new
 			        notific2.instructor_id = plan.instructor_id
@@ -1490,24 +1490,15 @@ class IniciotutorController < ApplicationController
 			        notific2.adecuacion_id = session[:adecuacion_id]
 			        notific2.informe_id = nil
 			        notific2.actual = 2
-		        	if cambio_act.estatus_id == 6
-		        		notific2.mensaje = "[" + notificacionfecha + "] Su adecuación se ha enviado a comisión de investigación."
-		        	else
-		        		notific2.mensaje = "[" + notificacionfecha + "] Su adecuación se ha enviado a Consejo de Facultad."
-		        	end
+		        	notific2.mensaje = "[" + notificacionfecha + "] Su adecuación se ha enviado a comisión de investigación."
 		        	notific2.save
 		        	notific3 = Notificacion.new
 			        notific3.instructor_id = plan.instructor_id
 			        notific3.tutor_id = session[:usuario_id]
 			        notific3.adecuacion_id = session[:adecuacion_id]
 			        notific3.informe_id = nil
-		        	if cambio_act.estatus_id == 6
-						notific3.actual = 3		#Comisión de investigación
-		        		notific3.mensaje = "[" + notificacionfecha + "] Se ha recibido una nueva Adecuación: "+ person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + ", favor aprobar y enviar a la siguiente entidad."
-		        	else
-						notific3.actual = 5		#Consejo de facultad
-		        		notific3.mensaje = "[" + notificacionfecha + "] Se ha recibido una nueva Adecuación: "+ person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + ", revisar."
-		        	end
+					notific3.actual = 3		#Comisión de investigación
+	        		notific3.mensaje = "[" + notificacionfecha + "] Se ha recibido una nueva Adecuación: "+ person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + ", favor aprobar y enviar a la siguiente entidad."
 		        	notific3.save
 		        	puts notific.mensaje
 			        notific.save
@@ -1515,8 +1506,7 @@ class IniciotutorController < ApplicationController
 			        cambio_est.actual = 1
 			        cambio_est.save
 
-			        if cambio_act.estatus_id == 6
-
+			        if (cambio_act.estatus_id == 9 || cambio_act.estatus_id == 6 || cambio_act.estatus_id == 5)
 			          userr= Usuario.where(id: session[:usuario_id]).take
 			          user =Usuarioentidad.where(usuario_id: userr.id).take
 			          if(user.escuela_id == 1)

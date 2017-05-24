@@ -6,7 +6,7 @@ class InicioentidadController < ApplicationController
 			session[:adecuacion_id] = nil
 			session[:plan_id] = nil
 			session[:instructorName] = nil
-
+			session[:informe_id]=nil
 			@nombre = session[:nombre_usuario]
 			print "NO HAY USUARIO"
 			puts session[:entidad_id]
@@ -52,7 +52,8 @@ class InicioentidadController < ApplicationController
 	end
 
 	def listar_adecuaciones
-		if session[:usuario_id] && session[:entidad]= true
+		if session[:usuario_id] && session[:entidad]== true
+			session[:informe_id]=nil
 			session[:adecuacion_id]=nil
 				@nombre = session[:nombre_usuario]
 				@usu=Usuarioentidad.where(entidad_id: session[:entidad_id]).take
@@ -1700,6 +1701,40 @@ end
 	        @actividadesaotr.push(@act)
 	      end
 	    end
+	    @bool_enviado = 0
+		if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12)
+		#Usuario comision
+			estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take #Estatus enviado a comision de investigacioni
+			if(estatusI.estatus_id != 3)
+			@bool_enviado = 1
+			end
+
+		else
+			if (session[:entidad_id] >= 14 && session[:entidad_id] <= 17)
+			#Consejo tecnico
+				estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
+				if(estatusI.estatus_id != 2)
+				@bool_enviado = 1
+				end
+			else
+				if (session[:entidad_id] >= 1 && session[:entidad_id] <= 6)
+				#Consejo de escuela
+					estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take 
+					if(estatusI.estatus_id != 8)
+					@bool_enviado = 1 #Estatus enviado a consejo escuela
+					
+					end
+				else
+					if (session[:entidad_id] == 13)
+					#Consejo de facultad
+						estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
+						if(estatusI.estatus_id != 4)
+						@bool_enviado = 1
+						end
+					end	
+				end
+			end
+		end
 		else
 			flash[:info]="Selecciona un informe"
 			redirect_to controller: "inicioentidad", action: "listar_informes"
@@ -2153,6 +2188,7 @@ end
 				          	oa.adecuacionactividad_id = aa.id
 				          	oa.revision_id =  revision.id
 				          	oa.observaciones = params[observacion]
+				          	oa.actual = 1
 				          	oa.save
 				        else
 				       		oa.observaciones = params[observacion]
@@ -2182,6 +2218,7 @@ end
 				          	oa.adecuacionactividad_id = aa.id
 				          	oa.revision_id =  revision.id
 				          	oa.observaciones = params[observacion]
+				          	oa.actual = 1
 				          	oa.save
 				        else
 				       		oa.observaciones = params[observacion]
@@ -2208,6 +2245,7 @@ end
 				          	oa.adecuacionactividad_id = aa.id
 				          	oa.revision_id =  revision.id
 				          	oa.observaciones = params[observacion]
+				          	oa.actual = 1
 				          	oa.save
 				        else
 				       		oa.observaciones = params[observacion]
@@ -2231,9 +2269,6 @@ end
 
 		      		observacion =:observacion.to_s+@act.to_s
 
-		     
-
-		        
 		      			oa= ObservacionActividadAdecuacion.where(adecuacionactividad_id: aa, revision_id: revision.id).take
 
 		          		if(oa == nil || oa =="")
@@ -2241,6 +2276,7 @@ end
 				          	oa.adecuacionactividad_id = aa.id
 				          	oa.revision_id =  revision.id
 				          	oa.observaciones = params[observacion]
+				          	oa.actual = 1
 				          	oa.save
 				        else
 				       		oa.observaciones = params[observacion]
@@ -2271,6 +2307,7 @@ end
 				          	oa.adecuacionactividad_id = aa.id
 				          	oa.revision_id =  revision.id
 				          	oa.observaciones = params[observacion]
+				          	oa.actual = 1
 				          	oa.save
 				        else
 				       		oa.observaciones = params[observacion]
@@ -2642,6 +2679,7 @@ end
 	end 
 	
 	def vista_previa
+		session[:informe_id]=nil
 		@fechaActual = Date.current.to_s
 		@plan= Planformacion.find(session[:plan_id])
 		@fechaConcurso = @plan.fecha_inicio
@@ -2822,7 +2860,40 @@ end
 				end
 			end
 		end
+		@bool_enviado = 0
+		if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12)
+		#Usuario comision
+			estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take #Estatus enviado a comision de investigacioni
+			if(estatusI.estatus_id != 3)
+			@bool_enviado = 1
+			end
 
+		else
+			if (session[:entidad_id] >= 14 && session[:entidad_id] <= 17)
+			#Consejo tecnico
+				estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
+				if(estatusI.estatus_id != 2)
+				@bool_enviado = 1
+				end
+			else
+				if (session[:entidad_id] >= 1 && session[:entidad_id] <= 6)
+				#Consejo de escuela
+					estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take 
+					if(estatusI.estatus_id != 8)
+					@bool_enviado = 1 #Estatus enviado a consejo escuela
+					
+					end
+				else
+					if (session[:entidad_id] == 13)
+					#Consejo de facultad
+						estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
+						if(estatusI.estatus_id != 4)
+						@bool_enviado = 1
+						end
+					end	
+				end
+			end
+		end
 	end
 
 	def cambiar_estatusA
@@ -2842,6 +2913,16 @@ end
 				cambio_est.actual = 1
 				cambio_est.save
 				cambio_est.fecha = Time.now 
+				adac = AdecuacionActividad.where(adecuacion_id: @adecuacion_id).all
+				adac.each do |adaa|
+					oa = ObservacionActividadAdecuacion.where(adecuacionactividad_id: adaa.id, actual: 1).all
+					oa.each do |oaa|
+						oaa.fecha = Time.now 
+						oaa.actual = 0
+						oaa.save
+					end
+				end
+
 				plan= Planformacion.find(session[:plan_id])
 				notific = Notificacion.new
 		        notific.instructor_id = plan.instructor_id
@@ -2912,7 +2993,15 @@ end
 				else
 					if (session[:entidad_id] >= 1 && session[:entidad_id] <= 6)
 					#Consejo de escuela
-
+						adac = AdecuacionActividad.where(adecuacion_id: @adecuacion_id).all
+						adac.each do |adaa|
+							oa = ObservacionActividadAdecuacion.where(adecuacionactividad_id: adaa.id, actual: 1).all
+							oa.each do |oaa|
+								oaa.fecha = Time.now 
+								oaa.actual = 0
+								oaa.save
+							end
+						end
 						cambio_act = EstatusAdecuacion.where(adecuacion_id: @adecuacion_id, actual: 1).take
 	      				cambio_act.actual = 0
 	      				cambio_act.save
@@ -2963,17 +3052,16 @@ end
 						if (session[:entidad_id] == 13)
 
 							bool_observaciones= 0
-								acts_adecuacion = AdecuacionActividad.where(adecuacion_id: @adecuacion_id)
-								
-								acts_adecuacion.each do |act_adecuacion|
-									obsvs_act = ObservacionActividadAdecuacion.where(adecuacionactividad_id: act_adecuacion.id)
+							acts_adecuacion = AdecuacionActividad.where(adecuacion_id: @adecuacion_id)
 
-									obsvs_act.each do |obsv_act|
-										if obsv_act.observaciones != ''
-											bool_observaciones= 1
-										end
+							acts_adecuacion.each do |act_adecuacion|
+								obsvs_act = ObservacionActividadAdecuacion.where(adecuacionactividad_id: act_adecuacion.id, actual: 1)
+								obsvs_act.each do |obsv_act|
+									if obsv_act.observaciones != ''
+										bool_observaciones = 1
 									end
 								end
+							end
 
 							#Consejo de facultad
 							cambio_act = EstatusAdecuacion.where(adecuacion_id: @adecuacion_id, actual: 1).take
@@ -2995,7 +3083,7 @@ end
 							cambio_est.save
 							
 							adec = Adecuacion.where(id: @adecuacion_id).take
-							plan = Planformacion.where(id: adec.plan_id).take
+							plan = Planformacion.where(id: adec.planformacion_id).take
 							if(rechazar == 1)
 								flash[:info]="La adecuación ha sido rechazada por consejo de facultad"
 								notific = Notificacion.new
@@ -3069,6 +3157,15 @@ end
 									ActionCorreo.envio_adecuacion(remitente3, notific.mensaje,2).deliver		##CORREO AL TUTOR
 									remitente2 = Usuario.where(id: plan.instructor_id).take
 									ActionCorreo.envio_adecuacion(remitente2, notific2.mensaje,1).deliver		##CORREO AL INSTRUCTOR
+								end
+							end
+							adac = AdecuacionActividad.where(adecuacion_id: @adecuacion_id).all
+							adac.each do |adaa|
+								oa = ObservacionActividadAdecuacion.where(adecuacionactividad_id: adaa.id, actual: 1).all
+								oa.each do |oaa|
+									oaa.fecha = Time.now 
+									oaa.actual = 0
+									oaa.save
 								end
 							end
 						end	
