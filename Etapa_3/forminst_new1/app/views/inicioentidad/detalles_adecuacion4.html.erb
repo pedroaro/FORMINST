@@ -106,7 +106,9 @@
           <%end%>
         <%end%>
       <%= link_to "Vista Previa", {controller: "inicioentidad", action: "vista_previa"}, class: "btn btn-default" %>
-      <%= link_to "Generar PDF", {controller: "adecuacions", action: "generar_pdf"}, class: "btn btn-default" %>
+      <%= link_to "Generar PDF", {controller: "adecuacions", action: "generar_pdf"},target: :_blank, class: "btn btn-default" %>
+      <%= link_to "Ver Soportes", {controller: "inicioentidad", action: "ver_soporte"}, class: "btn btn-default" %>
+
     </div>
   </div>
 </div>
@@ -115,9 +117,34 @@
   <div class="col-xs-12 col-md-12 col-md-offset-0">
     <div class="text-right">
       <div id = "fechamuestra">
-        <script languaje="JavaScript">
-          fecha();
-        </script> 
+        <h3> <%= Time.now.strftime("%d") %>
+          <% if Time.now.strftime("%m").to_i == 1 %>
+            de Enero del
+          <% elsif Time.now.strftime("%m").to_i == 2 %>
+            de Febrero del
+          <% elsif Time.now.strftime("%m").to_i == 3 %>
+            de Marzo del
+          <% elsif Time.now.strftime("%m").to_i == 4 %>
+            de Abril del
+          <% elsif Time.now.strftime("%m").to_i == 5 %>
+            de Mayo del
+          <% elsif Time.now.strftime("%m").to_i == 6 %>
+            de Junio del
+          <% elsif Time.now.strftime("%m").to_i == 7 %>
+            de Julio del
+          <% elsif Time.now.strftime("%m").to_i == 8 %>
+            de Agosto del
+          <% elsif Time.now.strftime("%m").to_i == 9 %>
+            de Septiembre del
+          <% elsif Time.now.strftime("%m").to_i == 10 %>
+            de Octubre del
+          <% elsif Time.now.strftime("%m").to_i == 11 %>
+            de Noviembre del
+          <% elsif Time.now.strftime("%m").to_i == 12 %>
+            de Diciembre del
+          <% end %>
+          <%= Time.now.strftime("%Y") %> 
+        </h3>
       </div>
       <%if @nombre%>
         <div>

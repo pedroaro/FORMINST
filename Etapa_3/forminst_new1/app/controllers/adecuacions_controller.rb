@@ -20,7 +20,8 @@ class AdecuacionsController < ApplicationController
         @escuela= Escuela.where(id: @userentidad.escuela_id).take
       end
 
-
+    @userinst2=Usuario.find(@id_docente) # se obtienen toda la información del tutor
+    @correot= @userinst2.user+'@ciens.ucv.ve'
     @correoi=  @userinst.user+'@ciens.ucv.ve'
     
     @pactv_docencia= []
@@ -183,9 +184,10 @@ class AdecuacionsController < ApplicationController
         end
       end
     end
-
+    @documents = []
+    @documents = Document.where(adecuacion_id: @adecuacion.id, informe_id: nil).all
     # se llama a la función de "pedf_adecuacion" del modelo "pdf", pasando todas las variables correspondientes
-    Pdf.pdf_adecuacion(@planformacion, @adecuacion, @tutor, @instructor, @correoi, @escuela, @pactv_docencia, @pactv_investigacion, @pactv_extension, @pactv_formacion, @pactv_otras, @sactv_docencia, @sactv_investigacion, @sactv_extension, @sactv_formacion, @sactv_otras, @tactv_docencia, @tactv_investigacion, @tactv_extension, @tactv_formacion, @tactv_otras, @cactv_docencia, @cactv_investigacion, @cactv_extension, @cactv_formacion, @cactv_otras, @fechaActual, @fechaConcurso)
+    Pdf.pdf_adecuacion(@planformacion, @adecuacion, @tutor, @instructor, @correoi, @correot, @escuela, @pactv_docencia, @pactv_investigacion, @pactv_extension, @pactv_formacion, @pactv_otras, @sactv_docencia, @sactv_investigacion, @sactv_extension, @sactv_formacion, @sactv_otras, @tactv_docencia, @tactv_investigacion, @tactv_extension, @tactv_formacion, @tactv_otras, @cactv_docencia, @cactv_investigacion, @cactv_extension, @cactv_formacion, @cactv_otras, @fechaActual, @fechaConcurso, @documents)
     @nombre_archivo= @instructor.ci.to_s+'-'+@fechaActual+'-adecuacion.pdf' # se arma el nombre del documento 
     act = "#{Rails.root}/" + @nombre_archivo
     send_file(
