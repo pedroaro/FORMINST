@@ -329,6 +329,8 @@ end
 			end
 			@persona= Persona.where(usuario_id: @plan.instructor_id).take
 			@usuario= Usuario.find(@plan.instructor_id)
+			@cpTutor= Persona.where(usuario_id: @plan.tutor_id).take
+			@cpTutorEmail= Usuario.find(@plan.tutor_id).email
 
 			@bool_enviado = 0
 			if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12)
@@ -2653,6 +2655,8 @@ end
 		@persona= Persona.where(usuario_id: @plan.instructor_id).take
 		@cpinstruccion = @persona.grado_instruccion
 		@user = Usuario.find(@plan.instructor_id)
+		@cpTutor= Persona.where(usuario_id: @plan.tutor_id).take
+		@cpTutorEmail= Usuario.find(@plan.tutor_id).email
 
 		@docencia='docencia'
 		@investigacion= 'investigacion'

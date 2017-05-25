@@ -575,6 +575,8 @@ end
 			@tutor = Persona.where(usuario_id: @adecuacion.tutor_id).take
       @usuario = Usuario.where(id: session[:usuario_id]).take
       @persona = Persona.where(usuario_id: session[:usuario_id]).take
+      @cpTutor= Persona.where(usuario_id: @plan.tutor_id).take
+      @cpTutorEmail= Usuario.find(@plan.tutor_id).email
 
 			puts "-------"
 			puts @tutor
@@ -1025,6 +1027,8 @@ end
 		@persona= Persona.where(usuario_id: @plan.instructor_id).take
 		@cpinstruccion = @persona.grado_instruccion
 		@user = Usuario.find(@plan.instructor_id)
+    @cpTutor= Persona.where(usuario_id: @plan.tutor_id).take
+    @cpTutorEmail= Usuario.find(@plan.tutor_id).email
 
 		@docencia='docencia'
 		@investigacion= 'investigacion'

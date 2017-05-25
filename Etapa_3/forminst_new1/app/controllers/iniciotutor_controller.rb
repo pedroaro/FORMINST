@@ -229,6 +229,8 @@ class IniciotutorController < ApplicationController
 			@escuela= Escuela.where(id: @userentidad.escuela_id).take
 			@persona= Persona.where(usuario_id: @plan.instructor_id).take
 			@usuario= Usuario.find(@plan.instructor_id)
+			@cpTutor= Persona.where(usuario_id: @plan.tutor_id).take
+			@cpTutorEmail= Usuario.find(@plan.tutor_id).email
 			semestre= params[:semestre].to_i
 			if !params[:adecuacion_id].blank?
 				session[:adecuacion_id]= params[:adecuacion_id]
@@ -999,6 +1001,8 @@ class IniciotutorController < ApplicationController
 			@persona= Persona.where(usuario_id: @plan.instructor_id).take
 			@cpinstruccion = @persona.grado_instruccion
 			@user = Usuario.find(@plan.instructor_id)
+			@cpTutor= Persona.where(usuario_id: @plan.tutor_id).take
+			@cpTutorEmail= Usuario.find(@plan.tutor_id).email
 
 			@docencia='docencia'
 			@investigacion= 'investigacion'
