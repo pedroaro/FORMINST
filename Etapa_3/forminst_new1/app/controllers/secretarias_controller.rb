@@ -105,18 +105,6 @@ class SecretariasController < ApplicationController
 			cpuentidad.escuela_id = cpSecretariaEscuela
 			cpuentidad.save
 
-			notific = Notificacion.new
-	        notific.instructor_id = nil
-	        notific.tutor_id = cpusuario.id
-	        notific.adecuacion_id = nil
-	        notific.informe_id = nil
-	        notific.actual = 1
-	        notificacionfecha = Date.current.to_s 
-        	notific.mensaje = "[" + notificacionfecha + "] ¡Bienvenido a FORMINST! Se ha creado su perfil de Tutor."
-        	notific.save
-			remitente3 = Usuario.where(id: notific.tutor_id).take
-			ActionCorreo.creacion_de_tutor(remitente3, notific.mensaje).deliver
-        	flash[:success] = "Se ha creado el tutor " + cppersona.nombres.to_s.split.map(&:capitalize).join(' ') + " " + cppersona.apellidos.to_s.split.map(&:capitalize).join(' ') + " de manera exitosa"
 			redirect_to controller:"secretarias", action: "index"
 
 			else
@@ -188,7 +176,7 @@ class SecretariasController < ApplicationController
 			uentidad.each do |usuarioentidad|
 				cppersona = Persona.find_by usuario_id: usuarioentidad.usuario_id
 				@cptutores[cpcontador] = Array.new(2) { |i|  }
-				@cptutores[cpcontador][0] =  cppersona.nombres.to_s.split.map(&:capitalize).join(' ') + " " + cppersona.apellidos.to_s.split.map(&:capitalize).join(' ')
+				@cptutores[cpcontador][0] =  cppersona.nombres
 				@cptutores[cpcontador][1] = usuarioentidad.usuario_id
 				cpcontador = cpcontador + 1
 			end
@@ -323,7 +311,6 @@ class SecretariasController < ApplicationController
 			        notific.tutor_id = params[:JRTutores]
 			        profe = Persona.where(usuario_id: params[:JRTutores]).take
 			        adecc = Adecuacion.where(planformacion_id: cpAdecuacion.planformacion_id).take
-			        plan = Planformacion.where(id: cpAdecuacion.planformacion_id).take
 			        notific.adecuacion_id = adecc.id
 			        notific.informe_id = nil
 			        notific.actual = 1
@@ -337,12 +324,10 @@ class SecretariasController < ApplicationController
 			        notific2.informe_id = nil
 			        notific2.actual = 2
 			        notificacionfecha = Date.current.to_s 
-		        	notific2.mensaje = "[" + notificacionfecha + "] ¡Bienvenido a FORMINST! Se le ha asignado a  " + profe.nombres.to_s.split.map(&:capitalize).join(' ') + " " + profe.apellidos.to_s.split.map(&:capitalize).join(' ') + " como tutor de su Plan de formación."
+		        	notific2.mensaje = "[" + notificacionfecha + "] Se le ha asignado a  " + cppersona.nombres.to_s.split.map(&:capitalize).join(' ') + " " + cppersona.apellidos.to_s.split.map(&:capitalize).join(' ') + " como tutor de su Plan de formación."
 		        	notific2.save
-					remitente3 = Usuario.where(id: notific.tutor_id).take
-					ActionCorreo.creacion_de_instructor(remitente3, notific.mensaje,1).deliver
-					remitente2 = Usuario.where(id: plan.instructor_id).take
-					ActionCorreo.creacion_de_instructor(remitente2, notific2.mensaje,0).deliver
+		        	puts notific2.mensaje
+		        	puts notific.mensaje
 		        	flash[:success] = "Se ha creado el instructor " + cppersona.nombres.to_s.split.map(&:capitalize).join(' ') + " " + cppersona.apellidos.to_s.split.map(&:capitalize).join(' ') + " de manera exitosa"
 					redirect_to controller:"secretarias", action: "index"
 
@@ -442,7 +427,7 @@ class SecretariasController < ApplicationController
 			uentidad.each do |usuarioentidad|
 				cppersona = Persona.find_by usuario_id: usuarioentidad.usuario_id
 				@cptutores[cpcontador] = Array.new(2) { |i|  }
-				@cptutores[cpcontador][0] = ccppersona.nombres.to_s.split.map(&:capitalize).join(' ') + " " + ccppersona.apellidos.to_s.split.map(&:capitalize).join(' ')
+				@cptutores[cpcontador][0] =  cppersona.nombres
 				@cptutores[cpcontador][1] = usuarioentidad.usuario_id
 				cpcontador = cpcontador + 1
 			end
@@ -513,7 +498,7 @@ class SecretariasController < ApplicationController
 					if usuarioentidad.usuario_id != cpplanformacion.tutor_id
 						ccppersona = Persona.find_by usuario_id: usuarioentidad.usuario_id
 						@cptutores[cpcontador] = Array.new(2) { |i|  }
-						@cptutores[cpcontador][0] = ccppersona.nombres.to_s.split.map(&:capitalize).join(' ') + " " + ccppersona.apellidos.to_s.split.map(&:capitalize).join(' ')
+						@cptutores[cpcontador][0] =  ccppersona.nombres
 						@cptutores[cpcontador][1] = usuarioentidad.usuario_id
 						cpcontador = cpcontador + 1
 					end

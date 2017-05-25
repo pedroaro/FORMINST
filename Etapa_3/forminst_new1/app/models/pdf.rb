@@ -1,7 +1,7 @@
 class Pdf 
 # estas funciones permite generar el cuerpo del documento en formato pdf
 
-	def self.pdf_adecuacion(plan, adecuacion, tutor, instructor, correoi, correot, escuela, pactv_docencia, pactv_investigacion, pactv_extension, pactv_formacion, pactv_otras, sactv_docencia, sactv_investigacion, sactv_extension, sactv_formacion, sactv_otras, tactv_docencia, tactv_investigacion, tactv_extension, tactv_formacion, tactv_otras, cactv_docencia, cactv_investigacion, cactv_extension, cactv_formacion, cactv_otras, fechaActual, fechaConcurso, soportes)
+	def self.pdf_adecuacion(plan, adecuacion, tutor, instructor, correoi, escuela, pactv_docencia, pactv_investigacion, pactv_extension, pactv_formacion, pactv_otras, sactv_docencia, sactv_investigacion, sactv_extension, sactv_formacion, sactv_otras, tactv_docencia, tactv_investigacion, tactv_extension, tactv_formacion, tactv_otras, cactv_docencia, cactv_investigacion, cactv_extension, cactv_formacion, cactv_otras, fechaActual, fechaConcurso)
 	#def self.pdf_adecuacion(adecuacion, tutor, instructor, notificacion, perfil, pactv_docencia, pactv_investigacion, pactv_extension, pactv_formacion, pactv_otras, sactv_docencia, sactv_investigacion, sactv_extension, sactv_formacion, sactv_otras, tactv_docencia, tactv_investigacion, tactv_extension, tactv_formacion, tactv_otras, cactv_docencia, cactv_investigacion, cactv_extension, cactv_formacion, cactv_otras)
 		
 		# se invocan la bibliotecas
@@ -98,7 +98,7 @@ class Pdf
 			pdf.text("2.- DATOS DEL INSTRUCTOR EN FORMACIÓN:", :style => :bold, :size  => 10)
 			dataa2 = [
 			[{:text=>"Fecha del Concurso de Oposición:", :font_style=>:bold},{:text => fechaConcurso.to_s, :align=>:left}],
-			[{:text=>"Apellidos y Nombres:", :font_style => :bold}, {:text => instructor.nombres.to_s.split.map(&:capitalize).join(' ') + " " + instructor.apellidos.to_s.split.map(&:capitalize).join(' '), :align=>:left}],
+			[{:text=>"Apellidos y Nombres:", :font_style => :bold}, {:text => instructor.apellidos+blanco+instructor.nombres, :align=>:left}],
 			[{:text=>"Cédula de Identidad:", :font_style => :bold}, {:text => instructor.ci.to_s, :align=>:left}],
 			[{:text=>"Correo Electrónico:", :font_style => :bold},{:text => correoi,  :align=>:left}],
 			[{:text=>"Teléfono Celular:", :font_style => :bold},{:text => instructor.telefono1, :align=>:left}],
@@ -137,40 +137,12 @@ class Pdf
 			
 			salto='\n'
 			pdf.text("\n")
-			pdf.text("4.- DATOS DEL TUTOR ENCARGADO:", :style => :bold, :size  => 10)
-			if !tutor.telefono2.blank?
-				dataa4 = [
-				[{:text=>"Apellidos y Nombres:", :font_style => :bold}, {:text => tutor.nombres.to_s.split.map(&:capitalize).join(' ') + " " + tutor.apellidos.to_s.split.map(&:capitalize).join(' ') , :align=>:left}],
-				[{:text=>"Correo Electrónico:", :font_style => :bold},{:text => correot,  :align=>:left}],
-				[{:text=>"Dirección:", :font_style => :bold},{:text => tutor.direccion, :align=>:left}],
-				[{:text=>"Telefono :", :font_style => :bold},{:text => tutor.telefono2,  :align=>:left}]			
-			  ] # datos que se desean en la tabla
-			else
-				dataa4 = [
-				[{:text=>"Apellidos y Nombres:", :font_style => :bold}, {:text => tutor.nombres.to_s.split.map(&:capitalize).join(' ') + " " + tutor.apellidos.to_s.split.map(&:capitalize).join(' ') , :align=>:left}],
-				[{:text=>"Correo Electrónico:", :font_style => :bold},{:text => correot,  :align=>:left}],
-				[{:text=>"Dirección:", :font_style => :bold},{:text => "No posee", :align=>:left}],
-				[{:text=>"Telefono :", :font_style => :bold},{:text => "No posee",  :align=>:left}]			
-			  ] #
-			end
-			pdf.table dataa4,  # lineas para generar la tabla en el docuemnto
-			:border_style => :grid, #:underline_header
-			:font_size  => 10, 
-			:horizontal_padding => 6,
-			:vertical_padding   => 3,
-			:border_width => 0.7, 
-			:column_widths => { 0 => 130, 1=>390}, 
-			:position => :left,
-			:align => { 0 => :left, 1 => :right}
 			
 			
-			salto='\n'
-			pdf.text("\n")
-			
-			pdf.text("5.- ACTIVIDADES A REALIZAR POR EL INSTRUCTOR:", :style => :bold, :size  => 10)
+			pdf.text("4.- ACTIVIDADES A REALIZAR POR EL INSTRUCTOR:", :style => :bold, :size  => 10)
 			
 			data4= [[{:text=>"PRIMER SEMESTRE ", :font_style => :bold}],
-				[{:text=>"5.1.- DOCENCIA:",:font_style => :bold }]] # datos que se desean en la tabla
+				[{:text=>"4.1.- DOCENCIA:",:font_style => :bold }]] # datos que se desean en la tabla
 			
 			pdf.table data4,  # lineas para generar la tabla en el docuemnto
 			:border_style => :grid, #:underline_header
@@ -209,7 +181,7 @@ class Pdf
 				:align => { 0 => :left}
 			end
 			
-			data61=[[{:text=>"5.2.- INVESTIGACIÓN:", :font_style => :bold}]] # datos que se desean en la tabla
+			data61=[[{:text=>"4.2.- INVESTIGACIÓN:", :font_style => :bold}]] # datos que se desean en la tabla
 			pdf.table data61, # lineas para generar la tabla en el docuemnto
 					:border_style => :grid, #:underline_header
 					:font_size  => 10, 
@@ -248,7 +220,7 @@ class Pdf
 					:align => { 0 => :left}
 			end
 			
-			data81=[[{:text=>"5.3.- FORMACIÓN:", :font_style => :bold}]] # datos que se desean en la tabla
+			data81=[[{:text=>"4.3.- FORMACIÓN:", :font_style => :bold}]] # datos que se desean en la tabla
 			pdf.table data81, # lineas para generar la tabla en el docuemnto
 					:border_style => :grid, #:underline_header
 					:font_size  => 10, 
@@ -288,7 +260,7 @@ class Pdf
 			end
 			
 			
-			data71=[[{:text=>"5.4.- EXTENSIÓN:", :font_style => :bold}]]# datos que se desean en la tabla
+			data71=[[{:text=>"4.4.- EXTENSIÓN:", :font_style => :bold}]]# datos que se desean en la tabla
 			
 			pdf.table data71, # lineas para generar la tabla en el docuemnto
 					:border_style => :grid, #:underline_header
@@ -329,7 +301,7 @@ class Pdf
 				:align => { 0 => :left}
 			end
 							
-			data91=[[{:text=>"5.5.- OTRAS ACTIVIDADES:", :font_style => :bold}]] # datos que se desean en la tabla
+			data91=[[{:text=>"4.5.- OTRAS ACTIVIDADES:", :font_style => :bold}]] # datos que se desean en la tabla
 			
 			pdf.table data91, # lineas para generar la tabla en el docuemnto
 					:border_style => :grid, #:underline_header
@@ -369,7 +341,7 @@ class Pdf
 				:align => { 0 => :left}
 			end
 
-			data10 = [[{:text=>"SEGUNDO SEMESTRE ", :font_style => :bold}], [{:text=>"5.1.- DOCENCIA:",:font_style => :bold }]] # datos que se desean en la tabla
+			data10 = [[{:text=>"SEGUNDO SEMESTRE ", :font_style => :bold}], [{:text=>"4.1.- DOCENCIA:",:font_style => :bold }]] # datos que se desean en la tabla
 			
 			pdf.table data10, # lineas para generar la tabla en el docuemnto
 			:border_style => :grid, #:underline_header
@@ -408,7 +380,7 @@ class Pdf
 				:align => { 0 => :left}
 			end
 			
-			data121= [[{:text=>"5.2.- INVESTIGACIÓN:", :font_style => :bold}]] # datos que se desean en la tabla
+			data121= [[{:text=>"4.2.- INVESTIGACIÓN:", :font_style => :bold}]] # datos que se desean en la tabla
 			
 			pdf.table data121, # lineas para generar la tabla en el docuemnto
 					:border_style => :grid, #:underline_header
@@ -448,7 +420,7 @@ class Pdf
 					:align => { 0 => :left}
 			end
 			
-			data141=[[{:text=>"5.3.- FORMACIÓN:", :font_style => :bold}]]# datos que se desean en la tabla
+			data141=[[{:text=>"4.3.- FORMACIÓN:", :font_style => :bold}]]# datos que se desean en la tabla
 			
 			pdf.table data141, # lineas para generar la tabla en el docuemnto
 					:border_style => :grid, #:underline_header
@@ -489,7 +461,7 @@ class Pdf
 				:align => { 0 => :left}
 			end
 			
-			data131=[[{:text=>"5.4.- EXTENSIÓN:", :font_style => :bold}]] # datos que se desean en la tabla
+			data131=[[{:text=>"4.4.- EXTENSIÓN:", :font_style => :bold}]] # datos que se desean en la tabla
 			
 			pdf.table data131, # lineas para generar la tabla en el docuemnto
 					:border_style => :grid, #:underline_header
@@ -530,7 +502,7 @@ class Pdf
 				:align => { 0 => :left}
 			end
 							
-			data151=[[{:text=>"5.5.- OTRAS ACTIVIDADES:", :font_style => :bold}]] # datos que se desean en la tabla
+			data151=[[{:text=>"4.5.- OTRAS ACTIVIDADES:", :font_style => :bold}]] # datos que se desean en la tabla
 			
 			pdf.table data151, # lineas para generar la tabla en el docuemnto
 					:border_style => :grid, #:underline_header
@@ -571,7 +543,7 @@ class Pdf
 			end
 			
 			data152= [[{:text=>"TERCER SEMESTRE ", :font_style => :bold}],
-				[{:text=>"5.1.- DOCENCIA:",:font_style => :bold }]] # datos que se desean en la tabla
+				[{:text=>"4.1.- DOCENCIA:",:font_style => :bold }]] # datos que se desean en la tabla
 			 
 			pdf.table data152, # lineas para generar la tabla en el docuemnto
 			:border_style => :grid, #:underline_header
@@ -610,7 +582,7 @@ class Pdf
 				:align => { 0 => :left}
 			end
 			
-			data154=[[{:text=>"5.2.- INVESTIGACIÓN:", :font_style => :bold}]] # datos que se desean en la tabla
+			data154=[[{:text=>"4.2.- INVESTIGACIÓN:", :font_style => :bold}]] # datos que se desean en la tabla
 			pdf.table data154, # lineas para generar la tabla en el docuemnto
 					:border_style => :grid, #:underline_header
 					:font_size  => 10, 
@@ -649,7 +621,7 @@ class Pdf
 					:align => { 0 => :left}
 			end
 			
-			data156=[[{:text=>"5.3.- FORMACIÓN:", :font_style => :bold}]] # datos que se desean en la tabla
+			data156=[[{:text=>"4.3.- FORMACIÓN:", :font_style => :bold}]] # datos que se desean en la tabla
 			pdf.table data156, # lineas para generar la tabla en el docuemnto
 					:border_style => :grid, #:underline_header
 					:font_size  => 10, 
@@ -689,7 +661,7 @@ class Pdf
 			end
 			
 			
-			data158=[[{:text=>"5.4.- EXTENSIÓN:", :font_style => :bold}]] # datos que se desean en la tabla
+			data158=[[{:text=>"4.4.- EXTENSIÓN:", :font_style => :bold}]] # datos que se desean en la tabla
 			
 			pdf.table data158, # lineas para generar la tabla en el docuemnto
 					:border_style => :grid, #:underline_header
@@ -730,7 +702,7 @@ class Pdf
 				:align => { 0 => :left}
 			end
 							
-			data160=[[{:text=>"5.5.- OTRAS ACTIVIDADES:", :font_style => :bold}]] # datos que se desean en la tabla
+			data160=[[{:text=>"4.5.- OTRAS ACTIVIDADES:", :font_style => :bold}]] # datos que se desean en la tabla
 			
 			pdf.table data160, # lineas para generar la tabla en el docuemnto
 					:border_style => :grid, #:underline_header
@@ -770,7 +742,7 @@ class Pdf
 				:align => { 0 => :left}
 			end
 
-			data162 = [[{:text=>"CUARTO SEMESTRE ", :font_style => :bold}], [{:text=>"5.1.- DOCENCIA:",:font_style => :bold }]] # datos que se desean en la tabla
+			data162 = [[{:text=>"CUARTO SEMESTRE ", :font_style => :bold}], [{:text=>"4.1.- DOCENCIA:",:font_style => :bold }]] # datos que se desean en la tabla
 			
 			pdf.table data162, # lineas para generar la tabla en el docuemnto
 			:border_style => :grid, #:underline_header
@@ -809,7 +781,7 @@ class Pdf
 				:align => { 0 => :left}
 			end
 			
-			data164= [[{:text=>"5.2.- INVESTIGACIÓN:", :font_style => :bold}]] # datos que se desean en la tabla
+			data164= [[{:text=>"4.2.- INVESTIGACIÓN:", :font_style => :bold}]] # datos que se desean en la tabla
 			
 			pdf.table data164, # lineas para generar la tabla en el docuemnto
 					:border_style => :grid, #:underline_header
@@ -849,7 +821,7 @@ class Pdf
 					:align => { 0 => :left}
 			end
 			
-			data166=[[{:text=>"5.3.- FORMACIÓN:", :font_style => :bold}]] # datos que se desean en la tabla
+			data166=[[{:text=>"4.3.- FORMACIÓN:", :font_style => :bold}]] # datos que se desean en la tabla
 			
 			pdf.table data166, # lineas para generar la tabla en el docuemnto
 					:border_style => :grid, #:underline_header
@@ -890,7 +862,7 @@ class Pdf
 				:align => { 0 => :left}
 			end
 			
-			data168=[[{:text=>"5.4.- EXTENSIÓN:", :font_style => :bold}]] # datos que se desean en la tabla
+			data168=[[{:text=>"4.4.- EXTENSIÓN:", :font_style => :bold}]] # datos que se desean en la tabla
 			
 			pdf.table data168, # lineas para generar la tabla en el docuemnto
 					:border_style => :grid, #:underline_header
@@ -931,7 +903,7 @@ class Pdf
 				:align => { 0 => :left}
 			end
 							
-			data170=[[{:text=>"5.5.- OTRAS ACTIVIDADES:", :font_style => :bold}]] # datos que se desean en la tabla
+			data170=[[{:text=>"4.5.- OTRAS ACTIVIDADES:", :font_style => :bold}]] # datos que se desean en la tabla
 			
 			pdf.table data170, # lineas para generar la tabla en el docuemnto
 					:border_style => :grid, #:underline_header
@@ -987,7 +959,10 @@ class Pdf
 			:position => :left,
 			:align => {0 => :left, 1=> :left}
 			
-			@i = soportes.size
+			@archivos= DocumentoPlan.where(planformacion_id: adecuacion.planformacion_id).all
+			@i = @archivos.size
+			puts @i
+			puts "idk what i'm doing"
 			pdf.text("\n")
 			pdf.text("Cantidad de soportes adjuntos:"+ @i.to_s+" \n", :style => :bold, :size  => 10)
 			
