@@ -76,12 +76,19 @@
         <table class="table table-bordered table-striped">
           <tbody>
             <tr>
-              <td class="text-center">
-              </td>
+              <td class="text-left"> Nombre </td>
+              <td class="text-left"> Fecha Inicio </td>
+              <td class="text-left"> Fecha Fin </td>
             </tr>
             <% @tutores_asig.each do |asig| %>
             <tr>
               <td class="text-left"> <%= Persona.where(usuario_id: asig.tutor_id).take.nombres + " " + Persona.where(usuario_id: asig.tutor_id).take.apellidos %> </td>
+              <td class="text-left"> <%= asig.fecha_inicio.to_s[8..9] + "-" + asig.fecha_inicio.to_s[5..6] + "-" + asig.fecha_inicio.to_s[0..3]%> </td>
+              <td class="text-left">
+                <% if !asig.fecha_fin.blank? %>
+                  <%= asig.fecha_fin.to_s[8..9] + "-" + asig.fecha_fin.to_s[5..6] + "-" + asig.fecha_fin.to_s[0..3]%>
+                <% end %>
+              </td>
             </tr>
             <% end %>
           </tbody>
