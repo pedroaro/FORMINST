@@ -18,7 +18,23 @@ class ForminstController < ApplicationController
 		puts correo
 		puts "SOOOOY LA CLAVE"
 		puts clave
-		if correo!=nil && correo!="" && clave!=nil && clave!=""
+
+		#Si es un Administrados
+		if correo == "Administrador" && clave=="1"
+
+			session[:usuario_id] = "-2552"
+			session[:nombre_usuario] = "Administrador"
+			session[:administrador] = true
+			session[:tutor] = false
+			session[:instructor] = false
+			session[:entidad] = false
+			flash[:success] = "Bienvenido! Administrador"
+			puts "******"
+			puts "El usuario se autentico correctamente y es tutor"
+			puts "******"
+			redirect_to controller:"administrador", action: "index"
+
+		elsif correo!=nil && correo!="" && clave!=nil && clave!=""
 		#	result = ldap.bind_as(:base => "dc=ciens, dc=ucv, dc=ve", :filter => "(uid=#{correo})", :password => clave)
 	# cambiado para desactivar LDAP		if result
       		if true
@@ -39,6 +55,7 @@ class ForminstController < ApplicationController
 									session[:usuario_id] = @usuario.id
 									@persona = Persona.where(usuario_id: session[:usuario_id]).take
 									session[:nombre_usuario] = @persona.nombres
+									session[:administrador] = false
 									session[:tutor] = true
 									session[:instructor] = false
 									session[:entidad] = false
@@ -52,6 +69,7 @@ class ForminstController < ApplicationController
 										session[:usuario_id]= @usuario.id
 										@persona = Persona.where(usuario_id: session[:usuario_id]).take
 										session[:nombre_usuario] = @persona.nombres
+										session[:administrador] = false
 										session[:tutor]= false
 										session[:instructor]= true
 										session[:entidad]= false
@@ -64,6 +82,7 @@ class ForminstController < ApplicationController
 								if tipo=="Institucional"
 									#ver si es necesario comparar el nombre del ldap con la bd local
 									session[:usuario_id]= @usuario.id
+									session[:administrador] = false
 									session[:tutor]= false
 									session[:instructor]= false
 									session[:entidad]= true
@@ -88,22 +107,22 @@ class ForminstController < ApplicationController
 									@usuarioe= Usuarioentidad.where(usuario_id: @usuario.id).take
 									@entidad= Entidad.find(@usuarioe.entidad_id)
 									if tipo=="Secretaria"
-										if @entidad.nombre=="Consejo de Escuela de Computación"
-											session[:usuario_id]= @usuario.id
-											@persona = Persona.where(usuario_id: session[:usuario_id]).take
-											session[:nombre_usuario] = @persona.nombres.titleize+' '+@persona.apellidos.titleize
-											session[:tutor]= false
-											session[:instructor]= false
-											session[:entidad]= true
-											flash[:success]= "Bienvenido! " + session[:nombre_usuario] = @persona.nombres.titleize+' '+@persona.apellidos.titleize
-											puts "El usuario se autentico correctamente y es instructor"
-											redirect_to controller:"secretarias", action: "index"
-										end
+										session[:usuario_id]= @usuario.id
+										@persona = Persona.where(usuario_id: session[:usuario_id]).take
+										session[:nombre_usuario] = @persona.nombres.titleize+' '+@persona.apellidos.titleize
+										session[:administrador] = false
+										session[:tutor]= false
+										session[:instructor]= false
+										session[:entidad]= true
+										flash[:success]= "Bienvenido! " + session[:nombre_usuario] = @persona.nombres.titleize+' '+@persona.apellidos.titleize
+										puts "El usuario se autentico correctamente y es instructor"
+										redirect_to controller:"secretarias", action: "index"
 									else
 										if @entidad.nombre=="tutor"
 											session[:usuario_id]= @usuario.id
 											@persona = Persona.where(usuario_id: session[:usuario_id]).take
 											session[:nombre_usuario] = @persona.nombres.titleize+' '+@persona.apellidos.titleize
+											session[:administrador] = false
 											session[:tutor]= true
 											session[:instructor]= false
 											session[:entidad]= false
@@ -115,6 +134,7 @@ class ForminstController < ApplicationController
 												session[:usuario_id] = @usuario.id
 												@persona = Persona.where(usuario_id: session[:usuario_id]).take
 												session[:nombre_usuario] = @persona.nombres.titleize+' '+@persona.apellidos.titleize
+												session[:administrador] = false
 												session[:tutor]= false
 												session[:instructor]= true
 												session[:entidad]= false
@@ -125,6 +145,7 @@ class ForminstController < ApplicationController
 												session[:usuario_id]= @usuario.id
 												@persona = Persona.where(usuario_id: session[:usuario_id]).take
 												session[:nombre_usuario] = @persona.nombres.titleize+' '+@persona.apellidos.titleize
+												session[:administrador] = false
 												session[:tutor]= false
 												session[:instructor]= false
 												session[:entidad]= true
@@ -163,6 +184,7 @@ class ForminstController < ApplicationController
 					session[:usuario_id] = @usuario.id
 					@persona = Persona.where(usuario_id: session[:usuario_id]).take
 					session[:nombre_usuario] = @persona.nombres.titleize+' '+@persona.apellidos.titleize
+					session[:administrador] = false
 					session[:tutor]= false
 					session[:instructor]= false
 					session[:entidad]= false

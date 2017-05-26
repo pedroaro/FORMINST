@@ -511,6 +511,8 @@ CREATE TABLE `instructortutor` (
   `instructor_id` int(11) DEFAULT NULL,
   `tutor_id` int(11) DEFAULT NULL,
   `actual` int(11) DEFAULT NULL,
+  `fecha_inicio` date DEFAULT NULL,
+  `fecha_fin` date DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `instructortutorinstructorid` (`instructor_id`),
   KEY `instructortutortutorid` (`tutor_id`),

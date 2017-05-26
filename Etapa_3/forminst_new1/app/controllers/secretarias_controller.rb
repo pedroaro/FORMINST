@@ -188,7 +188,7 @@ class SecretariasController < ApplicationController
 			uentidad.each do |usuarioentidad|
 				cppersona = Persona.find_by usuario_id: usuarioentidad.usuario_id
 				@cptutores[cpcontador] = Array.new(2) { |i|  }
-				@cptutores[cpcontador][0] =  cppersona.nombres.to_s.split.map(&:capitalize).join(' ') + " " + cppersona.apellidos.to_s.split.map(&:capitalize).join(' ')
+				@cptutores[cpcontador][0] =  cppersona.nombres
 				@cptutores[cpcontador][1] = usuarioentidad.usuario_id
 				cpcontador = cpcontador + 1
 			end
@@ -442,7 +442,7 @@ class SecretariasController < ApplicationController
 			uentidad.each do |usuarioentidad|
 				cppersona = Persona.find_by usuario_id: usuarioentidad.usuario_id
 				@cptutores[cpcontador] = Array.new(2) { |i|  }
-				@cptutores[cpcontador][0] = ccppersona.nombres.to_s.split.map(&:capitalize).join(' ') + " " + ccppersona.apellidos.to_s.split.map(&:capitalize).join(' ')
+				@cptutores[cpcontador][0] =  cppersona.nombres
 				@cptutores[cpcontador][1] = usuarioentidad.usuario_id
 				cpcontador = cpcontador + 1
 			end
@@ -513,7 +513,7 @@ class SecretariasController < ApplicationController
 					if usuarioentidad.usuario_id != cpplanformacion.tutor_id
 						ccppersona = Persona.find_by usuario_id: usuarioentidad.usuario_id
 						@cptutores[cpcontador] = Array.new(2) { |i|  }
-						@cptutores[cpcontador][0] = ccppersona.nombres.to_s.split.map(&:capitalize).join(' ') + " " + ccppersona.apellidos.to_s.split.map(&:capitalize).join(' ')
+						@cptutores[cpcontador][0] =  ccppersona.nombres
 						@cptutores[cpcontador][1] = usuarioentidad.usuario_id
 						cpcontador = cpcontador + 1
 					end
@@ -806,6 +806,16 @@ class SecretariasController < ApplicationController
 			cpuentidad.save
 
 			redirect_to controller:"secretarias", action: "index"
+
+		else
+			redirect_to controller:"forminst", action: "index"
+		end
+	end
+
+	def tutores_asignados
+		if session[:usuario_id]
+
+			@tutores_asig = Instructortutor.where(instructor_id: $id_tutor_seleccionado)
 
 		else
 			redirect_to controller:"forminst", action: "index"

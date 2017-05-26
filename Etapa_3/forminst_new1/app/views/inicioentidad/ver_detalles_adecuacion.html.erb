@@ -325,6 +325,67 @@
 
 </div>
 
+<div class= "row">
+    <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
+        <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+          <tbody>
+            <tr>
+              <td class="text-left"></td>
+            </tr>
+
+            <tr>
+              <td class="text-left"><h5><strong>4. Datos del Tutor Encargado</strong></h5></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class= "row">
+    <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
+        <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+          <tbody>
+
+            <tr>
+              <td style='width:50%;' class="text-left"><strong>Nombre:</strong></td>
+              <td style='width:50%;' class="text-left"><strong>Apellido:</strong></td>
+            </tr>
+
+            <tr>
+              <td class="text-left"><%= @cpTutor.nombres %></td>
+              <td class="text-left"><%= @cpTutor.apellidos %></td>
+            </tr>
+
+
+            <tr>
+              <td style='width:50%;' class="text-left"><strong>Dirección:</strong></td>
+              <td style='width:50%;' class="text-left"><strong>Correo Electrónico:</strong></td>
+            </tr>
+
+            <tr>
+              <td class="text-left"><%= @cpTutor.direccion %></td>
+              <td class="text-left"><%= @cpTutorEmail %>@ciens.ucv.ve</td>
+            </tr>
+
+            <tr>
+              <td style='width:50%;' class="text-left"><strong>Teléfono Celular:</strong></td>
+              <td style='width:50%;' class="text-left"><strong>Otro Celular:</strong></td>
+            </tr>
+
+            <tr>
+              <td class="text-left"><%= @cpTutor.telefono1 %></td>
+              <td class="text-left"><%= @persona.telefono2 %></td>
+            </tr>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
 <div class = 'row'>
   <div class = 'col-xs-3 col-md-3 col-lg-3'>
       <%= link_to "<< Volver", {controller: "inicioentidad", action: "listar_adecuaciones"}, class: "btn btn-forminst" %>
