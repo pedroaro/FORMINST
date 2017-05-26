@@ -49,10 +49,12 @@
         <h4 class="modal-title">Mensaje de confirmación</h4>
       </div>
       <div class="modal-body">
-        <h5>Seleccione la acción que desea realizar sobre la adecuación.</h5>
+        <h5>Seleccione la acción que desea realizar sobre la adecuación</h5>
+        <h9> (Si decide "Aprobado con Observaciones" la adecuación debe ser corregida por el tutor encargado)</h9>
       </div>
       <div class="modal-footer">
       <%= link_to "Aprobar", {controller: "inicioentidad", action: "cambiar_estatusA", :adecuacion_id => @adecuacion.id, :rechazar => 0 }, class: "btn btn-default" %>
+      <%= link_to "Aprobar con Observaciones", {controller: "inicioentidad", action: "cambiar_estatusA", :adecuacion_id => @adecuacion.id, :rechazar => 2 }, class: "btn btn-default" %>
       <%= link_to "Rechazar", {controller: "inicioentidad", action: "cambiar_estatusA", :adecuacion_id => @adecuacion.id, :rechazar => 1 }, class: "btn btn-default" %>
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
       </div>
@@ -267,12 +269,12 @@
 <div class= "row">
   <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
       <div class="table-responsive">
-      <b><p>4.- DATOS DEL INSTRUCTOR EN FORMACIÓN</p></b>
+      <b><p>4.- DATOS DEL TUTOR ENCARGADO</p></b>
       <table class="table table-black">
         <tbody>
           <tr>
             <td style="width:20%;" class="text-left"><b>Nombre y Apellido:</b></td>
-            <td class="text-left"> <%= @cpTutor.apellidos + " " + @cpTutor.nombres %> </td>
+            <td class="text-left"> <%= @cpTutor.nombres.to_s.split.map(&:capitalize).join(' ') + " " + @cpTutor.apellidos.to_s.split.map(&:capitalize).join(' ') %> </td>
           </tr>
           <tr>
             <td class="text-left"><b>Dirección:</b></td>

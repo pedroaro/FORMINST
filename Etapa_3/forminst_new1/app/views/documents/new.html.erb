@@ -278,6 +278,15 @@
 </div>
 
 <h1>Cargar Documento</h1>
+
 <br></br>
-<%= render 'form', document: @document %>
+<%if @bool_enviado == 0%>
+  <%= render 'form', document: @document %>
+<%else%>
+  <div class= "text-center">
+  <h4 >No puede agregar más soportes a esta adecuación</h4><br></br>
+  </div>
+<%end%>
+<br></br>
+
 <br></br>
