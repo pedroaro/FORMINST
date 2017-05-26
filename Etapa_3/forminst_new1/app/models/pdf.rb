@@ -141,17 +141,18 @@ class Pdf
 			if !tutor.telefono2.blank?
 				dataa4 = [
 				[{:text=>"Apellidos y Nombres:", :font_style => :bold}, {:text => tutor.nombres.to_s.split.map(&:capitalize).join(' ') + " " + tutor.apellidos.to_s.split.map(&:capitalize).join(' ') , :align=>:left}],
-				[{:text=>"Correo Electrónico:", :font_style => :bold},{:text => correot,  :align=>:left}],
 				[{:text=>"Dirección:", :font_style => :bold},{:text => tutor.direccion, :align=>:left}],
-				[{:text=>"Telefono :", :font_style => :bold},{:text => tutor.telefono2,  :align=>:left}]			
+				[{:text=>"Correo Electrónico:", :font_style => :bold},{:text => correot,  :align=>:left}],
+				[{:text=>"Telefono Celular:", :font_style => :bold},{:text => tutor.telefono1,  :align=>:left}]	,		
+				[{:text=>"Otro Telefono:", :font_style => :bold},{:text => tutor.telefono2,  :align=>:left}]			
 			  ] # datos que se desean en la tabla
 			else
-				dataa4 = [
+				dataa4 = [	
 				[{:text=>"Apellidos y Nombres:", :font_style => :bold}, {:text => tutor.nombres.to_s.split.map(&:capitalize).join(' ') + " " + tutor.apellidos.to_s.split.map(&:capitalize).join(' ') , :align=>:left}],
-				[{:text=>"Correo Electrónico:", :font_style => :bold},{:text => correot,  :align=>:left}],
 				[{:text=>"Dirección:", :font_style => :bold},{:text => "No posee", :align=>:left}],
-				[{:text=>"Telefono :", :font_style => :bold},{:text => "No posee",  :align=>:left}]			
-			  ] #
+				[{:text=>"Correo Electrónico:", :font_style => :bold},{:text => correot,  :align=>:left}],
+				[{:text=>"Telefono Celular:", :font_style => :bold},{:text => "No posee",  :align=>:left}],		
+				[{:text=>"Otro Telefono:", :font_style => :bold},{:text => "No posee",  :align=>:left}]					  ] #
 			end
 			pdf.table dataa4,  # lineas para generar la tabla en el docuemnto
 			:border_style => :grid, #:underline_header

@@ -38,7 +38,8 @@
 
 			@plan_formacion = Planformacion.where(instructor_id: session[:usuario_id]).take
 			@adecuacion = Adecuacion.where(planformacion_id: @plan_formacion).take
-			@tutor = Persona.where(usuario_id: @adecuacion.tutor_id).take.nombres
+			@tutor1 = Persona.where(usuario_id: @adecuacion.tutor_id).take
+      @tutor = @tutor1.nombres.to_s.split.map(&:capitalize).join(' ') + " " + @tutor1.apellidos.to_s.split.map(&:capitalize).join(' ')
 			@status_adecuacion = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
 			@tipo_status = TipoEstatus.where(id: @status_adecuacion.estatus_id, ).take.concepto
 

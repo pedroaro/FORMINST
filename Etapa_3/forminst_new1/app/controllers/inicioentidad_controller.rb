@@ -3058,15 +3058,9 @@ end
 							bool_observaciones= 0
 							acts_adecuacion = AdecuacionActividad.where(adecuacion_id: @adecuacion_id)
 
-							acts_adecuacion.each do |act_adecuacion|
-								obsvs_act = ObservacionActividadAdecuacion.where(adecuacionactividad_id: act_adecuacion.id, actual: 1)
-								obsvs_act.each do |obsv_act|
-									if obsv_act.observaciones != ''
-										bool_observaciones = 1
-									end
-								end
+							if (rechazar == 2)
+								bool_observaciones = 1
 							end
-
 							#Consejo de facultad
 							cambio_act = EstatusAdecuacion.where(adecuacion_id: @adecuacion_id, actual: 1).take
 		      				cambio_act.actual = 0

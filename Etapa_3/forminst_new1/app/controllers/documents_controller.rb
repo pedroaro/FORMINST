@@ -5,12 +5,16 @@ class DocumentsController < ApplicationController
   # GET /documents
   # GET /documents.json
   def index
-    @plan = Planformacion.where(id: session[:plan_id]).take
-    @documents = []
-    if !session[:informe_id].blank?
-      @documents = Document.where(adecuacion_id: session[:adecuacion_id], informe_id: session[:informe_id]).all
+    if session[:usuario_id] && session[:tutor]
+      @plan = Planformacion.where(id: session[:plan_id]).take
+      @documents = []
+      if !session[:informe_id].blank?
+        @documents = Document.where(adecuacion_id: session[:adecuacion_id], informe_id: session[:informe_id]).all
+      else
+        @documents = Document.where(adecuacion_id: session[:adecuacion_id], informe_id: nil).all
+      end
     else
-      @documents = Document.where(adecuacion_id: session[:adecuacion_id], informe_id: nil).all
+      redirect_to controller:"forminst", action: "index"
     end
   end
 
@@ -24,7 +28,17 @@ class DocumentsController < ApplicationController
 
   # GET /documents/new
   def new
-    @document = Document.new
+    @bool_enviado = 0
+    @adecuacion = Adecuacion.where(planformacion_id: session[:plan_id]).take
+    estatus_adecuacion = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
+    if (estatus_adecuacion.estatus_id != 6 && estatus_adecuacion.estatus_id != 5)
+      @bool_enviado = 1
+    end
+    if ( @bool_enviado == 1)
+      flash[:info]="No puede añadir soportes, ya ha enviado la adecuación"
+    else
+      @document = Document.new
+    end
   end
 
   # GET /documents/1/edit
@@ -34,21 +48,25 @@ class DocumentsController < ApplicationController
   # POST /documents
   # POST /documents.json
   def create
-    @document = Document.new(document_params)
-    @planformacion = Planformacion.find(session[:plan_id])
-    @adecuacion = Adecuacion.where(planformacion_id: session[:plan_id]).take
-    @document.instructor_id = @planformacion.instructor_id
-    @document.tutor_id = session[:usuario_id]
-    @document.adecuacion_id = @adecuacion.id
-    @document.informe_id = session[:informe_id]
-    respond_to do |format|
-      if @document.save
-        flash[:success]="El documento se ha subido con exito"
-        format.html { redirect_to documents_url }
-      else
-        format.html { render :new }
-        format.json { render json: @document.errors, status: :unprocessable_entity }
+    if session[:usuario_id] && session[:tutor]
+      @document = Document.new(document_params)
+      @planformacion = Planformacion.find(session[:plan_id])
+      @adecuacion = Adecuacion.where(planformacion_id: session[:plan_id]).take
+      @document.instructor_id = @planformacion.instructor_id
+      @document.tutor_id = session[:usuario_id]
+      @document.adecuacion_id = @adecuacion.id
+      @document.informe_id = session[:informe_id]
+      respond_to do |format|
+        if @document.save
+          flash[:success]="El documento se ha subido con exito"
+          format.html { redirect_to documents_url }
+        else
+          format.html { render :new }
+          format.json { render json: @document.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      redirect_to controller:"forminst", action: "index"
     end
   end
 
