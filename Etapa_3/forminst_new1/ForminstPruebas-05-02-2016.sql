@@ -544,6 +544,7 @@ CREATE TABLE `observacion_actividad_adecuacion` (
   `adecuacionactividad_id` int(11) DEFAULT NULL,
   `observaciones` longtext,
   `fecha` date DEFAULT NULL,
+  `actual` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `observacionActividadAdecuacionActividad` (`adecuacionactividad_id`),
   KEY `observacionActividadRevision` (`revision_id`),
@@ -556,11 +557,6 @@ CREATE TABLE `observacion_actividad_adecuacion` (
 -- Dumping data for table `observacion_actividad_adecuacion`
 --
 
-LOCK TABLES `observacion_actividad_adecuacion` WRITE;
-/*!40000 ALTER TABLE `observacion_actividad_adecuacion` DISABLE KEYS */;
-INSERT INTO `observacion_actividad_adecuacion` VALUES (20,NULL,247,'Se recomienda su participación en un proyecto que esté preferiblemente relacionado con su tesis de maestría. ',NULL),(21,NULL,247,'Se recomienda su participación en un proyecto que esté preferiblemente relacionado con su tesis de maestría. ',NULL),(22,NULL,258,'Esta actividad no debe ser obligatoria, pues va a depender de los recursos de la Escuela para su financiamiento. Aplica a los 4 semestres del plan de formación.',NULL),(23,4,344,'observacion_docencia_comision_1',NULL),(24,4,345,'observacion_docencia_comision_2',NULL),(25,4,346,'observacion_investigacion_comision_1',NULL),(26,4,348,'observacion_formacion_comision_1',NULL),(27,4,347,'observacion_extension_comision_1',NULL),(28,4,349,'otra_comision_1',NULL),(29,5,344,'dodencia1 consejo d escuela',NULL),(30,5,345,'',NULL),(31,5,346,'',NULL),(32,5,348,'',NULL),(33,5,347,'',NULL),(34,5,349,'',NULL);
-/*!40000 ALTER TABLE `observacion_actividad_adecuacion` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `observacion_actividad_informe`
@@ -574,6 +570,7 @@ CREATE TABLE `observacion_actividad_informe` (
   `informe_actividad_id` int(11) DEFAULT NULL,
   `revision_id` int(11) DEFAULT NULL,
   `observaciones` longtext,
+  `actual` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `observacionActividadinformeRevision` (`revision_id`),
   KEY `observacionActividadinformeinformeActividad` (`informe_actividad_id`),
@@ -588,7 +585,7 @@ CREATE TABLE `observacion_actividad_informe` (
 
 LOCK TABLES `observacion_actividad_informe` WRITE;
 /*!40000 ALTER TABLE `observacion_actividad_informe` DISABLE KEYS */;
-INSERT INTO `observacion_actividad_informe` VALUES (1,166,NULL,' En la presentación del plan, esta actividad se ubica en investigación y no en extensión.'),(2,166,NULL,' En la presentación del plan esta actividad se ubica en investigación y no en extensión.'),(3,166,NULL,'Esta actividad no corresponde a extensión sino a invstigación'),(4,166,NULL,'Esta actividad debería estar en Investigación y no en Extensión.'),(5,166,NULL,'este p unto está fuera de orden'),(6,171,NULL,'No'),(7,169,NULL,'Agregar fecha de consignación del ejemplar del trabajo de grado de maestría.'),(8,170,NULL,'Agregar fecha de presentación del trabajo de grado de maestría y la fecha de admisión en el doctorado.'),(9,163,NULL,'Recomendamos colocar No. de Estudiantes inscritos en el curso de Análisis II. Dedicación 8 horas semanales'),(10,169,NULL,'Recomendamos colocar fecha de la consignación del ejemplar en la Ofc del Postgrado de Matemática.'),(11,170,NULL,'Sugerencia: Fue admitido en el Doctorado en Matemática a partir del semestre 2 2013.'),(12,202,NULL,'Debe colocar la fecha de defensa del Trabajo de Grado de Maestría.'),(13,202,NULL,'Debe colocar la fecha de defensa del Trabajo de Grado de Maestría.'),(14,200,NULL,'Especificar el numero exacto de estudiantes.'),(15,202,NULL,'Colocar la fecha de presentación y defensa del trabajo de grado de maestría.'),(16,208,NULL,'  Cambiar redacción por: Como miembro de la Comisión de Extensión de la Escuela de Matemática, ha participado como ponente en eventos divulgativos sobre las carreras científicas, dirigidos a estudiantes y profesores de colegios y liceos. Dichos eventos han sido promocionados por la Coordinación de Extensión de la Facultad de Ciencias.'),(37,345,2,'observacion nueva'),(38,346,2,''),(39,347,2,''),(40,349,2,''),(41,477,2,''),(42,348,2,''),(43,478,2,'');
+INSERT INTO `observacion_actividad_informe` VALUES (1,166,NULL,' En la presentación del plan, esta actividad se ubica en investigación y no en extensión.',0),(2,166,NULL,' En la presentación del plan esta actividad se ubica en investigación y no en extensión.',0),(3,166,NULL,'Esta actividad no corresponde a extensión sino a invstigación',0),(4,166,NULL,'Esta actividad debería estar en Investigación y no en Extensión.',0),(5,166,NULL,'este p unto está fuera de orden',0),(6,171,NULL,'No',0),(7,169,NULL,'Agregar fecha de consignación del ejemplar del trabajo de grado de maestría.',0),(8,170,NULL,'Agregar fecha de presentación del trabajo de grado de maestría y la fecha de admisión en el doctorado.',0),(9,163,NULL,'Recomendamos colocar No. de Estudiantes inscritos en el curso de Análisis II. Dedicación 8 horas semanales',0),(10,169,NULL,'Recomendamos colocar fecha de la consignación del ejemplar en la Ofc del Postgrado de Matemática.',0),(11,170,NULL,'Sugerencia: Fue admitido en el Doctorado en Matemática a partir del semestre 2 2013.',0),(12,202,NULL,'Debe colocar la fecha de defensa del Trabajo de Grado de Maestría.',0),(13,202,NULL,'Debe colocar la fecha de defensa del Trabajo de Grado de Maestría.',0),(14,200,NULL,'Especificar el numero exacto de estudiantes.',0),(15,202,NULL,'Colocar la fecha de presentación y defensa del trabajo de grado de maestría.',0),(16,208,NULL,'  Cambiar redacción por: Como miembro de la Comisión de Extensión de la Escuela de Matemática, ha participado como ponente en eventos divulgativos sobre las carreras científicas, dirigidos a estudiantes y profesores de colegios y liceos. Dichos eventos han sido promocionados por la Coordinación de Extensión de la Facultad de Ciencias.',0),(37,345,2,'observacion nueva',0),(38,346,2,'',0),(39,347,2,'',0),(40,349,2,'',0),(41,477,2,'',0),(42,348,2,'',0),(43,478,2,'',0);
 /*!40000 ALTER TABLE `observacion_actividad_informe` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -916,7 +913,7 @@ CREATE TABLE `tipo_estatus` (
 
 LOCK TABLES `tipo_estatus` WRITE;
 /*!40000 ALTER TABLE `tipo_estatus` DISABLE KEYS */;
-INSERT INTO `tipo_estatus` VALUES (1,'APROBADO POR CONSEJO DE FACULTAD'),(2,'ENVIADO A CONSEJO TÉCNICO'),(3,'ENVIADO A COMISIÓN DE INVESTIGACIÓN'),(4,'ENVIADO A CONSEJO DE FACULTAD'),(5,'APROBADO CON OBSERVACIONES POR CONSEJO DE FACULTAD'),(6,'GUARDADO'),(7,'EN REVISIÓN MENOR POR COMISIÓN DE INVESTIGACIÓN'),(8,'ENVIADO A CONSEJO DE ESCUELA');
+INSERT INTO `tipo_estatus` VALUES (1,'APROBADO POR CONSEJO DE FACULTAD'),(2,'ENVIADO A CONSEJO TÉCNICO'),(3,'ENVIADO A COMISIÓN DE INVESTIGACIÓN'),(4,'ENVIADO A CONSEJO DE FACULTAD'),(5,'APROBADO CON OBSERVACIONES POR CONSEJO DE FACULTAD'),(6,'GUARDADO'),(7,'EN REVISIÓN MENOR POR COMISIÓN DE INVESTIGACIÓN'),(8,'ENVIADO A CONSEJO DE ESCUELA'),(9, 'RECHAZADO POR CONSEJO DE FACULTAD');
 /*!40000 ALTER TABLE `tipo_estatus` ENABLE KEYS */;
 UNLOCK TABLES;
 

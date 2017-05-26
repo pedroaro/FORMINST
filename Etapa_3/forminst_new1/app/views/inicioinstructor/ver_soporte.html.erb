@@ -20,8 +20,13 @@
   <div class="col-xs-12 col-md-12">
     <div class="btn-group" role="group">
        <%= link_to "Volver", {controller: "inicioinstructor", action: "listar_informes"}, class: "btn btn-default" %>
-      <%= link_to "Vista Previa", {controller: "inicioinstructor", action: "vista_previa1"}, class: "btn btn-default" %>
-      <%= link_to "Generar PDF", {controller: "informes", action: "generar_pdf"}, class: "btn btn-default" %>
+      <%if session[:informe_id]%> 
+        <%= link_to "Vista Previa", {controller: "inicioinstructor", action: "vista_previa1"}, class: "btn btn-default" %>
+        <%= link_to "Generar PDF", {controller: "informes", action: "generar_pdf"},target: :_blank, class: "btn btn-default" %>
+      <%else%>
+        <%= link_to "Vista Previa", {controller: "inicioinstructor", action: "vista_previa"}, class: "btn btn-default" %>
+        <%= link_to "Generar PDF", {controller: "adecuacions", action: "generar_pdf"},target: :_blank, class: "btn btn-default" %>
+      <%end%> 
       <button type="button" class="btn btn-default active">Ver Soportes</button>
     </div>
   </div>
