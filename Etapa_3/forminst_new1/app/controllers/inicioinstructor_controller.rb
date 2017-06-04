@@ -58,6 +58,37 @@
 		end
 	end
 
+  def ver_respaldos
+    if session[:usuario_id] && session[:instructor] 
+      @plan = Planformacion.where(id: session[:plan_id]).take
+      @documents = []
+      adec = Adecuacion.where(planformacion_id: session[:plan_id]).take
+      if !session[:informe_id].blank?
+        @documents = Respaldo.where(adecuacion_id: adec.id, informe_id: session[:informe_id]).all
+      else
+        @documents = Respaldo.where(adecuacion_id: adec.id, informe_id: nil).all
+      end
+    else
+      redirect_to controller:"forminst", action: "index"
+    end
+  end
+
+  def show
+    puts params[:adecuacion_id]
+    puts params[:version]
+
+    if params[:informe_id].blank?
+      @document = Respaldo.where(adecuacion_id: params[:adecuacion_id], informe_id: nil, version: params[:version].to_i, filename: params[:namefile]).take
+      puts "no informe"
+    else
+      @document = Respaldo.where(adecuacion_id: params[:adecuacion_id], informe_id: params[:informe_id],version: params[:version].to_i, filename: params[:namefile]).take
+      puts "informe"
+    end
+      send_data(@document.file_contents,
+                type: @document.content_type,
+                filename: @document.filename)
+    end
+
 	def prorrogas
 		if session[:usuario_id] && session[:instructor]= true
 	      @persona = Persona.where(usuario_id: session[:usuario_id]).take
