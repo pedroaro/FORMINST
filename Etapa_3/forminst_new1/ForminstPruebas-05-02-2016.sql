@@ -525,11 +525,11 @@ CREATE TABLE `instructortutor` (
 -- Dumping data for table `instructortutor`
 --
 
-LOCK TABLES `instructortutor` WRITE;
+-- LOCK TABLES `instructortutor` WRITE;
 /*!40000 ALTER TABLE `instructortutor` DISABLE KEYS */;
-INSERT INTO `instructortutor` VALUES (1,26,4,1),(2,27,12,1),(3,28,11,1),(4,29,20,1),(5,30,20,1),(6,31,23,1),(7,32,24,1),(8,2,1,1),(9,10,24,1),(10,10,25,1),(11,26,1,1),(12,10,1,1),(13,34,1,1);
+-- INSERT INTO `instructortutor` VALUES (1,26,4,1),(2,27,12,1),(3,28,11,1),(4,29,20,1),(5,30,20,1),(6,31,23,1),(7,32,24,1),(8,2,1,1),(9,10,24,1),(10,10,25,1),(11,26,1,1),(12,10,1,1),(13,34,1,1);
 /*!40000 ALTER TABLE `instructortutor` ENABLE KEYS */;
-UNLOCK TABLES;
+-- UNLOCK TABLES;
 
 --
 -- Table structure for table `observacion_actividad_adecuacion`
@@ -771,9 +771,44 @@ INSERT INTO `prorroga` VALUES (1,1,NULL,NULL),(2,2,NULL,NULL),(3,3,NULL,NULL),(4
 /*!40000 ALTER TABLE `prorroga` ENABLE KEYS */;
 UNLOCK TABLES;
 
+
+--
+-- Table structure for table `respaldo`
+--
+
+
+DROP TABLE IF EXISTS `respaldo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `respaldo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `filename` varchar(255) DEFAULT NULL,
+  `content_type` varchar(255) DEFAULT NULL,
+  `file_contents` BLOB DEFAULT NULL,
+  `created_at` datetime  NOT NULL,
+  `version` int(3) NOT NULL,
+  `actual` int(1) NOT NULL,
+  `estatus` varchar(255) DEFAULT NULL,
+  `instructor_id` int(11) DEFAULT NULL,
+  `tutor_id` int(11) DEFAULT NULL,
+  `adecuacion_id` int(11) DEFAULT NULL,
+  `informe_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `respaldoinstructor` (`instructor_id`),
+  KEY `respaldotutor` (`tutor_id`),
+  KEY `respaldoadecuacion` (`adecuacion_id`),
+  KEY `respaldoinforme` (`informe_id`),
+  CONSTRAINT `respaldoinstructor` FOREIGN KEY (`instructor_id`) REFERENCES `usuario` (`id`),
+  CONSTRAINT `respaldotutor` FOREIGN KEY (`tutor_id`) REFERENCES `usuario` (`id`),
+  CONSTRAINT `respaldoadecuacion` FOREIGN KEY (`adecuacion_id`) REFERENCES `adecuacion` (`id`),
+  CONSTRAINT `respaldoinforme` FOREIGN KEY (`informe_id`) REFERENCES `informe` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
 --
 -- Table structure for table `resultado`
 --
+
 
 DROP TABLE IF EXISTS `resultado`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;

@@ -27,8 +27,8 @@
         <%= link_to "Vista Previa", {controller: "inicioinstructor", action: "vista_previa"}, class: "btn btn-default" %>
         <%= link_to "Generar PDF", {controller: "adecuacions", action: "generar_pdf"},target: :_blank, class: "btn btn-default" %>
       <%end%> 
-      <button type="button" class="btn btn-default active">Ver Soportes</button>
-      <%= link_to "Versiones Anteriores", {controller: "inicioinstructor", action: "ver_respaldos"}, class: "btn btn-default" %>
+      <%= link_to "Ver Soportes", {controller: "inicioinstructor", action: "ver_soporte"}, class: "btn btn-default" %>
+      <button type="button" class="btn btn-default active">Versiones Anteriores</button>
     </div>
   </div>
 </div>
@@ -75,7 +75,9 @@
   </div>
 </div>
 
-<h1>Listado de Documentos</h1>
+<h1>Versiones Anteriores</h1>
+
+<br></br>
 
 
 <% if !@documents.blank? %>
@@ -84,14 +86,38 @@
       <thead>
         <tr>
           <th class="text-center">Nombre del Archivo</th>
+          <th class="text-center">Estatus</th>
+          <td class = "text-center">Versión</td>
           <th class="text-center">Descargar</th>
         </tr>
       </thead>
       <tbody>
-        <% @documents.each do |document| %>
+        <% @documents.each do |document1| %>
           <tr>
-            <td class = "text-center"><%= document.filename %></td>
-            <td class = "text-center" ><%= button_to 'Descargar', document, method: :get , class: "btn btn-info"%></td>
+            <td class = "text-center"><%= document1.filename %></td>
+            <td class = "text-center"><%= document1.estatus %></td>
+            <%if document1.actual == 1%> 
+              <td class = "text-center">Versión Actual</td>
+            <%else %>
+              <td class = "text-center"><%= document1.version %></td>
+            <%end%>             <td>
+            <%if session[:informe_id]%> 
+              <%= form_tag({controller: 'inicioentidad', action: 'show'}) do%>
+                <input type="hidden" name="adecuacion_id" value='<%= document1.adecuacion_id %>'>
+                <input type="hidden" name="namefile" value='<%= document1.filename %>'>
+                <input type="hidden" name="informe_id" value= '<%= document1.informe_id %>'>
+                <input type="hidden" name="version" value= '<%= document1.version %>'>
+                <button type="submit" class="btn btn-info">Descargar</button>
+              <%end%>
+            <%else %>
+              <%= form_tag({controller: 'inicioentidad', action: 'show'}) do%>
+                <input type="hidden" name="adecuacion_id" value='<%= document1.adecuacion_id %>'>
+                <input type="hidden" name="namefile" value='<%= document1.filename %>'>
+                <input type="hidden" name="version" value= '<%= document1.version %>'>
+                <button type="submit" class="btn btn-info">Descargar</button>
+              <%end%>
+            <%end%> 
+            </td>
           </tr>
         <% end %>
       </tbody>
@@ -99,11 +125,7 @@
   </div>
 <% else %>
   <br></br>
-  <%if session[:informe_id]%> 
-    <h2 class="text-center">No hay documentos adjuntos a este Informe</h2>
-  <%else %>
-    <h2 class="text-center">No hay documentos adjuntos a esta Adecuación</h2>
-  <%end%>
+    <h2 class="text-center">No hay versiones todavía, enviela para crearla</h2>
   <br></br>
 <% end %>
 <br></br>

@@ -1,7 +1,7 @@
 class Pdf 
 # estas funciones permite generar el cuerpo del documento en formato pdf
 
-	def self.pdf_adecuacion(plan, adecuacion, tutor, instructor, correoi, correot, escuela, pactv_docencia, pactv_investigacion, pactv_extension, pactv_formacion, pactv_otras, sactv_docencia, sactv_investigacion, sactv_extension, sactv_formacion, sactv_otras, tactv_docencia, tactv_investigacion, tactv_extension, tactv_formacion, tactv_otras, cactv_docencia, cactv_investigacion, cactv_extension, cactv_formacion, cactv_otras, fechaActual, fechaConcurso, soportes)
+	def self.pdf_adecuacion(plan, adecuacion, tutor, instructor, correoi, correot, escuela, pactv_docencia, pactv_investigacion, pactv_extension, pactv_formacion, pactv_otras, sactv_docencia, sactv_investigacion, sactv_extension, sactv_formacion, sactv_otras, tactv_docencia, tactv_investigacion, tactv_extension, tactv_formacion, tactv_otras, cactv_docencia, cactv_investigacion, cactv_extension, cactv_formacion, cactv_otras, fechaActual, fechaConcurso, soportes,numeroDeVersion)
 	#def self.pdf_adecuacion(adecuacion, tutor, instructor, notificacion, perfil, pactv_docencia, pactv_investigacion, pactv_extension, pactv_formacion, pactv_otras, sactv_docencia, sactv_investigacion, sactv_extension, sactv_formacion, sactv_otras, tactv_docencia, tactv_investigacion, tactv_extension, tactv_formacion, tactv_otras, cactv_docencia, cactv_investigacion, cactv_extension, cactv_formacion, cactv_otras)
 		
 		# se invocan la bibliotecas
@@ -994,10 +994,13 @@ class Pdf
 			
 		end
 		###################
-		
-		nombre_archivo= instructor.ci.to_s+'-'+fechaActual+'-adecuacion.pdf' # nombre del dcouemrnto
+		if numeroDeVersion == nil
+			nombre_archivo= instructor.ci.to_s+'-'+fechaActual+'-adecuacion.pdf' # nombre del dcouemrnto
+		else
+			nombre_archivo= instructor.ci.to_s+'-'+fechaActual+'-adecuacionV'+numeroDeVersion.to_s+'.pdf' # nombre del dcouemrnto
+		end	
 		pdf.render_file(nombre_archivo) # creación del docuemnto bajo su nombre
-
+		return nombre_archivo
 	end
 #########################################################################################################################################################################
 	def self.pdf_informe(tipo_informe,escuela,informe, adecuacion, tutor, instructor, pactv_docencia, pactv_investigacion, pactv_extension, pactv_formacion, pactv_otras, sactv_docencia, sactv_investigacion, sactv_extension, sactv_otras, sactv_formacion,  tactv_docencia, tactv_investigacion, tactv_extension,tactv_formacion, tactv_otras, cactv_docencia, cactv_investigacion, cactv_extension, cactv_formacion, cactv_otras, info_docencia, info_investigacion,info_formacion, info_extension, info_otras,resx,resultados,actividadese,observaciont, resultTP, resultPP, resultO, resultAEC, resultOEC, resultDCS)

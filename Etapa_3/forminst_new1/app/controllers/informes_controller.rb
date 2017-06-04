@@ -2574,6 +2574,7 @@ def generar_pdf() # es función permite generar el documento pdf de la adecuaci�
     cambio_est.informe_id = @informe_id
     cambio_est.fecha = Time.now 
     error = 0
+    plan = Planformacion.find(session[:plan_id])
     informesAdecuacion = Informe.where(id: @informe_id).take
     informesAdecuaciones = Informe.where(planformacion_id: session[:plan_id]).all
     contador = 0
@@ -2592,16 +2593,42 @@ def generar_pdf() # es función permite generar el documento pdf de la adecuaci�
       end
     end
 
-    if cambio_act.estatus_id == 6 && error == 0
+    if error == 0
       cambio_est = EstatusInforme.new 
       cambio_est.informe_id = @informe_id
       cambio_est.fecha = Time.now 
-      cambio_est.estatus_id = 3
+
+      respaldos = []
+      respaldos = Respaldo.where(adecuacion_id: session[:adecuacion_id], informe_id: @informe_id).all
+      numeroDeVersion = respaldos.size + 1
+      nombre = generar_pdf()
+      nameofthefile = "#{Rails.root}/"+nombre
+      contents = IO.binread(nameofthefile)
+      respaldo = Respaldo.new 
+      respaldo.filename = nombre
+      respaldo.content_type = "application/pdf"
+      respaldo.file_contents = contents
+      respaldo.created_at = Date.current
+      respaldo.version = numeroDeVersion
+      respaldo.estatus = "Enviado a Comisión de Investigación"
+      respaldo.instructor_id = plan.instructor_id
+      respaldo.tutor_id = session[:usuario_id]
+      respaldo.adecuacion_id = session[:adecuacion_id]
+      respaldo.informe_id = @informe_id
+      respaldo.actual = 1
+      if (cambio_act.estatus_id == 6)
+        cambio_est.estatus_id = 3 #Enviado a comision de investigacion
+        respaldo.estatus = "Enviado a Comisión de Investigación"
+      elsif (cambio_act.estatus_id == 5)
+        cambio_est.estatus_id = 4 #Enviado a consejo de facultad
+        respaldo.estatus = "Enviado a Consejo de Facultad"
+      end
+      respaldo.save
+
       cambio_est.actual = 1
       cambio_est.save
       cambio_act.actual = 0
       cambio_act.save
-      plan = Planformacion.find(session[:plan_id])
       cambio_est.fecha = Time.now 
       notific = Notificacion.new
       notific.instructor_id = plan.instructor_id
@@ -2612,7 +2639,12 @@ def generar_pdf() # es función permite generar el documento pdf de la adecuaci�
       puts "JAJAJA"
       person = Persona.where(usuario_id: plan.instructor_id).take
       notificacionfecha = Date.current.to_s 
-      notific.mensaje = "[" + notificacionfecha + "] El " + session[:nombre_informe] + " de " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " se ha enviado a comisión de investigación."
+      if (cambio_act.estatus_id == 6)
+        notific.mensaje = "[" + notificacionfecha + "] El " + session[:nombre_informe] + " de " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " se ha enviado a comisión de investigación."
+      elsif (cambio_act.estatus_id == 5)
+        notific.mensaje = "[" + notificacionfecha + "] El " + session[:nombre_informe] + " de " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " se ha enviado a Consejo de Facultad."
+      end
+     
       notific.save
       notific2 = Notificacion.new
       notific2.instructor_id = plan.instructor_id
@@ -2620,15 +2652,24 @@ def generar_pdf() # es función permite generar el documento pdf de la adecuaci�
       notific2.adecuacion_id = session[:adecuacion_id]
       notific2.informe_id = @informe_id
       notific2.actual = 2
-      notific2.mensaje = "[" + notificacionfecha + "] Se ha enviado el " + session[:nombre_informe] + " a comisión de investigación."
+      if (cambio_act.estatus_id == 6)
+        notific2.mensaje = "[" + notificacionfecha + "] Se ha enviado el " + session[:nombre_informe] + " a comisión de investigación."
+      elsif (cambio_act.estatus_id == 5)
+        notific2.mensaje = "[" + notificacionfecha + "] Se ha enviado el " + session[:nombre_informe] + " a Consejo de Facultad."
+      end
       notific2.save
       notific3 = Notificacion.new
       notific3.instructor_id = plan.instructor_id
       notific3.tutor_id = session[:usuario_id]
       notific3.adecuacion_id = session[:adecuacion_id]
       notific3.informe_id = @informe_id
-      notific3.actual = 3   #Comisión de investigación
-      notific3.mensaje = "[" + notificacionfecha + "] Ha recibido un nuevo Informe: ' " + session[:nombre_informe]+ " ' de " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + ", favor aprobar y enviar a la siguiente entidad."
+      if (cambio_act.estatus_id == 6)
+        notific3.actual = 3   #Comisión de investigación
+        notific3.mensaje = "[" + notificacionfecha + "] Ha recibido un nuevo Informe: ' " + session[:nombre_informe]+ " ' de " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + ", favor aprobar y enviar a la siguiente entidad."
+      elsif (cambio_act.estatus_id == 5)
+        notific3.actual = 5   #consejo de facultad
+        notific3.mensaje = "[" + notificacionfecha + "] Ha recibido un nuevo Informe: ' " + session[:nombre_informe]+ " ' de " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + ", favor revisar."
+      end
       notific3.save
       userr= Usuario.where(id: session[:usuario_id]).take
       user =Usuarioentidad.where(usuario_id: userr.id).take

@@ -35,7 +35,7 @@ class DocumentsController < ApplicationController
       @bool_enviado = 1
     end
     if ( @bool_enviado == 1)
-      flash[:info]="No puede añadir soportes, ya ha enviado la adecuación"
+      flash.now[:info]="No puede añadir soportes, ya ha enviado la adecuación"
     else
       @document = Document.new
     end
@@ -56,14 +56,9 @@ class DocumentsController < ApplicationController
       @document.tutor_id = session[:usuario_id]
       @document.adecuacion_id = @adecuacion.id
       @document.informe_id = session[:informe_id]
-      respond_to do |format|
-        if @document.save
-          flash[:success]="El documento se ha subido con exito"
-          format.html { redirect_to documents_url }
-        else
-          format.html { render :new }
-          format.json { render json: @document.errors, status: :unprocessable_entity }
-        end
+      if @document.save
+        flash[:success]="El documento se ha subido con exito"
+        redirect_to controller:"documents", action: "index"
       end
     else
       redirect_to controller:"forminst", action: "index"

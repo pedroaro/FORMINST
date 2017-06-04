@@ -214,6 +214,7 @@
       <%end%> 
   		<%= link_to "Agregar Soporte", {controller: "documents", action: "new"}, class: "btn btn-default active" %>
   		<%= link_to "Ver Soporte", {controller: "documents", action: "index"}, class: "btn btn-default" %>
+      <%= link_to "Versiones Anteriores", {controller: "inicioentidad", action: "ver_respaldos"}, class: "btn btn-default" %>
       <%if session[:informe_id]%> 
         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModalEliminar1">Eliminar Informe</button>
       <%else %>
@@ -228,12 +229,19 @@
     <div class= "text-left">
       <%if session[:nombre_usuario]%>
         <div>
-          <span><%= link_to 'Plan Formación', :controller => 'iniciotutor', :action => 'planformacions' %></span>
-          <p style="display:inline"> / </p>
-          <span><%= link_to session[:instructorName] , :controller => 'iniciotutor', :action => 'ver_detalles_adecuacion' %></span>
-          <p style="display:inline"> / </p>
-          <span><%= link_to 'Informes', :controller => 'informes', :action => 'listar_informes' %></span>
-          <p style="display:inline">  / Agregar Soporte </p>
+          <%if !session[:informe_id]%> 
+            <span><%= link_to 'Plan Formación', :controller => 'iniciotutor', :action => 'planformacions' %></span>
+            <p style="display:inline"> / </p>
+            <span><%= link_to session[:instructorName] , :controller => 'iniciotutor', :action => 'ver_detalles_adecuacion' %></span>
+            <p style="display:inline">  / Ver Soportes </p>
+          <%else%> 
+            <span><%= link_to 'Plan Formación', :controller => 'iniciotutor', :action => 'planformacions' %></span>
+            <p style="display:inline"> / </p>
+            <span><%= link_to session[:instructorName] , :controller => 'iniciotutor', :action => 'ver_detalles_adecuacion' %></span>
+            <p style="display:inline"> / </p>
+            <span><%= link_to 'Informes', :controller => 'informes', :action => 'listar_informes' %></span>
+            <p style="display:inline">  / Ver Soportes </p>
+          <%end%> 
         </div>
       <%end%>
     </div>

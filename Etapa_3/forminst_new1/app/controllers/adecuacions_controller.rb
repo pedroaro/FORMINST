@@ -1,6 +1,7 @@
 class AdecuacionsController < ApplicationController
 
   def generar_pdf() # es función permite generar el documento pdf de la adecuación
+    puts session[:adecuacion_id]
     @adecuacion= Adecuacion.find(session[:adecuacion_id]) # se obtienen la información de la adecuación seleccionada
     @planformacion= Planformacion.find(@adecuacion.planformacion_id)
     @fechaConcurso = @planformacion.fecha_inicio
@@ -186,8 +187,9 @@ class AdecuacionsController < ApplicationController
     end
     @documents = []
     @documents = Document.where(adecuacion_id: @adecuacion.id, informe_id: nil).all
+    @numeroDeVersion = nil
     # se llama a la función de "pedf_adecuacion" del modelo "pdf", pasando todas las variables correspondientes
-    Pdf.pdf_adecuacion(@planformacion, @adecuacion, @tutor, @instructor, @correoi, @correot, @escuela, @pactv_docencia, @pactv_investigacion, @pactv_extension, @pactv_formacion, @pactv_otras, @sactv_docencia, @sactv_investigacion, @sactv_extension, @sactv_formacion, @sactv_otras, @tactv_docencia, @tactv_investigacion, @tactv_extension, @tactv_formacion, @tactv_otras, @cactv_docencia, @cactv_investigacion, @cactv_extension, @cactv_formacion, @cactv_otras, @fechaActual, @fechaConcurso, @documents)
+    Pdf.pdf_adecuacion(@planformacion, @adecuacion, @tutor, @instructor, @correoi, @correot, @escuela, @pactv_docencia, @pactv_investigacion, @pactv_extension, @pactv_formacion, @pactv_otras, @sactv_docencia, @sactv_investigacion, @sactv_extension, @sactv_formacion, @sactv_otras, @tactv_docencia, @tactv_investigacion, @tactv_extension, @tactv_formacion, @tactv_otras, @cactv_docencia, @cactv_investigacion, @cactv_extension, @cactv_formacion, @cactv_otras, @fechaActual, @fechaConcurso, @documents, @numeroDeVersion)
     @nombre_archivo= @instructor.ci.to_s+'-'+@fechaActual+'-adecuacion.pdf' # se arma el nombre del documento 
     act = "#{Rails.root}/" + @nombre_archivo
     send_file(
@@ -206,6 +208,7 @@ class AdecuacionsController < ApplicationController
     pdf = Prawn::Document.new
     pdf.text "Hello It's me"
     pdf.render_file "example.pdf"
+    return "example.pdf"
     #pdf_filename = File.join(Rails.root, "example.pdf")
     #send_file(pdf_filename, :filename => "example.pdf", :disposition => 'inline', :type => "application/pdf")
 
