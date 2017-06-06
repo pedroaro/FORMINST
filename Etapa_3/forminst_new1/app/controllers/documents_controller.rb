@@ -30,8 +30,12 @@ class DocumentsController < ApplicationController
   def new
     @bool_enviado = 0
     @adecuacion = Adecuacion.where(planformacion_id: session[:plan_id]).take
-    estatus_adecuacion = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
-    if (estatus_adecuacion.estatus_id != 6 && estatus_adecuacion.estatus_id != 5)
+    if session[:informe_id].blank?
+      estatus_x = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
+    else
+      estatus_x = EstatusInforme.where(informe_id: session[:informe_id], actual: 1).take
+    end
+    if (estatus_x.estatus_id != 6 && estatus_x.estatus_id != 5)
       @bool_enviado = 1
     end
     if ( @bool_enviado == 1)

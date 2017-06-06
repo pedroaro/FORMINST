@@ -104,6 +104,7 @@
       <%= link_to "Generar PDF", {controller: "informes", action: "generar_pdf"},target: :_blank, class: "btn btn-default" %>
       <%= link_to "Agregar Soporte", {controller: "documents", action: "new"}, class: "btn btn-default" %>
       <%= link_to "Ver Soporte", {controller: "documents", action: "index"}, class: "btn btn-default" %>
+      <%= link_to "Versiones Anteriores", {controller: "iniciotutor", action: "ver_respaldos"}, class: "btn btn-default" %>
       <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModalEliminar">
         Eliminar Informe
       </button>
@@ -207,6 +208,10 @@
           <tr>
             <td class="text-left"><b>Cédula de Identidad del Instructor:</b></td>
             <td class="text-left"><%= @persona.ci %></td>
+          </tr>
+          <tr>
+            <td class="text-left"><b>Período que comprende el Informe:</b></td>
+            <td class="text-left"><%= @periodo %></td>
           </tr>
           <tr>
             <td class="text-left"><b>Apellidos y Nombre del Tutor:</b></td>

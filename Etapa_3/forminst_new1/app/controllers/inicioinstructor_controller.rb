@@ -139,6 +139,7 @@ def vista_previa1
     @cpinstruccion = @persona.grado_instruccion
     @user = Usuario.find(@plan.instructor_id)
     @tutor = Persona.where(usuario_id: @plan.tutor_id).take
+    @periodo = @informe.fecha_inicio.to_s + " al " + @informe.fecha_fin.to_s
 
     @docencia='docencia'
     @investigacion= 'investigacion'
@@ -1261,7 +1262,7 @@ end
   	      else 
   	      	@informe = Informe.find(session[:informe_id])
   	      end
-
+          @periodo = @informe.fecha_inicio.to_s + " al " + @informe.fecha_fin.to_s
   	      if @informe.numero == 1
   	        @nombre_informe= "PRIMER INFORME "
   	        session[:numero_informe]=1
