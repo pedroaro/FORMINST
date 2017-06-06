@@ -14,9 +14,17 @@
   <div class="col-xs-12 col-md-12">
     <div class="btn-group" role="group">
       <button type="button" class="btn btn-default" onclick = " location.href = 'javascript:history.back(-1);'">Volver</button>
+      <%if @bool_enviado == 0 %>
+        <%if session[:entidad_id]==13 %>
+           <button type="button" data-toggle="modal" data-target="#myModal4" class="btn btn-default">Aprobar/Rechazar</button>
+        <%else%>
+          <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-default">Enviar</button>
+        <%end%>
+      <%end%>
       <%= link_to "Vista Previa", {controller: "inicioentidad", action: "vista_previa1"}, class: "btn btn-default active" %>
       <%= link_to "Generar PDF", {controller: "informes", action: "generar_pdf"},target: :_blank, class: "btn btn-default" %>
       <%= link_to "Ver Soportes", {controller: "inicioentidad", action: "ver_soporte"}, class: "btn btn-default" %>
+      <%= link_to "Versiones Anteriores", {controller: "inicioentidad", action: "ver_respaldos"}, class: "btn btn-default" %>
     </div>
   </div>
 </div>
@@ -81,6 +89,10 @@
             <td class="text-left"><b>Cédula de Identidad del Instructor:</b></td>
             <td class="text-left"><%= @persona.ci %></td>
           </tr>
+          <tr>
+            <td class="text-left"><b>Período que comprende el Informe:</b></td>
+            <td class="text-left"><%= @periodo %></td>
+          </tr> 
           <tr>
             <td class="text-left"><b>Apellidos y Nombre del Tutor:</b></td>
             <td class="text-left"> <%=  @tutor.apellidos%> <%= @tutor.nombres %></td>

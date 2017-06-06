@@ -93,7 +93,7 @@ class ForminstController < ApplicationController
 									redirect_to controller:"inicioentidad", action: "index"
 								else
 									puts "No soy ni docente ni Institucional"
-									flash[:mensaje] = 'Su contraseña o correo electrónico es incorrecto.'
+									flash.now[:mensaje] = 'Su contraseña o correo electrónico es incorrecto.'
 									redirect_to controller:"forminst", action: "index"
 								end
 							end
@@ -157,18 +157,18 @@ class ForminstController < ApplicationController
 										end
 									end
 								else
-									flash[:danger]="Su usuario o contraseña son incorrectas"
+									flash.now[:danger]="Su usuario o contraseña son incorrectas"
 									puts "No se autentico debido a que la contraseña es incorrecta"
 									render 'index'
 								end
 							else
-								flash[:danger]="Su usuario o contraseña son incorrectas"
+								flash.now[:danger]="Su usuario o contraseña son incorrectas"
 								puts "No se autentico debido a que el correo es incorrecto"
 								render 'index'
 							end
 						end
 					else
-						flash[:danger]= "El usuario no está activo en el sistema"
+						flash.now[:danger]= "El usuario no está activo en el sistema"
 						puts "El usuario no está activo"
 						render 'index'
 					end

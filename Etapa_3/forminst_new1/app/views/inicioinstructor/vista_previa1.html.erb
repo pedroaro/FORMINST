@@ -17,6 +17,7 @@
       <%= link_to "Vista Previa", {controller: "inicioinstructor", action: "vista_previa1"}, class: "btn btn-default active" %>
       <%= link_to "Generar PDF", {controller: "informes", action: "generar_pdf"},target: :_blank, class: "btn btn-default" %>
       <%= link_to "Ver Soportes", {controller: "inicioinstructor", action: "ver_soporte"}, class: "btn btn-default" %>
+      <%= link_to "Versiones Anteriores", {controller: "inicioinstructor", action: "ver_respaldos"}, class: "btn btn-default" %>
     </div>
   </div>
 </div>
@@ -107,6 +108,9 @@
             <td class="text-left"><%= @persona.ci %></td>
           </tr>
           <tr>
+            <td class="text-left"><b>Período que comprende el Informe:</b></td>
+            <td class="text-left"><%= @periodo %></td>
+          </tr>          <tr>
             <td class="text-left"><b>Apellidos y Nombre del Tutor:</b></td>
             <td class="text-left"> <%=  @tutor.apellidos%> <%= @tutor.nombres %></td>
           </tr>

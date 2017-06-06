@@ -6,7 +6,7 @@ class InicioentidadController < ApplicationController
 			session[:adecuacion_id] = nil
 			session[:plan_id] = nil
 			session[:instructorName] = nil
-
+			session[:informe_id]=nil
 			@nombre = session[:nombre_usuario]
 			print "NO HAY USUARIO"
 			puts session[:entidad_id]
@@ -52,7 +52,8 @@ class InicioentidadController < ApplicationController
 	end
 
 	def listar_adecuaciones
-		if session[:usuario_id] && session[:entidad]= true
+		if session[:usuario_id] && session[:entidad]== true
+			session[:informe_id]=nil
 			session[:adecuacion_id]=nil
 				@nombre = session[:nombre_usuario]
 				@usu=Usuarioentidad.where(entidad_id: session[:entidad_id]).take
@@ -980,6 +981,7 @@ end
 				puts @planformacion.instructor_id
 				puts @planformacion.tutor_id
 				puts @planformacion.instructor_id
+    			@periodo = @informe.fecha_inicio.to_s + " al " + @informe.fecha_fin.to_s
 
 		      	if (@informe.numero == 1 || @informe.numero == 3)
 		        	@nombre_informe= "PRIMER INFORME "
@@ -1327,6 +1329,7 @@ end
 	    @cpinstruccion = @persona.grado_instruccion
 	    @user = Usuario.find(@plan.instructor_id)
 	    @tutor = Persona.where(usuario_id: @plan.tutor_id).take
+    	@periodo = @informe.fecha_inicio.to_s + " al " + @informe.fecha_fin.to_s
 
 	    @docencia='docencia'
 	    @investigacion= 'investigacion'
@@ -1703,6 +1706,40 @@ end
 	        @actividadesaotr.push(@act)
 	      end
 	    end
+	    @bool_enviado = 0
+		if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12)
+		#Usuario comision
+			estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take #Estatus enviado a comision de investigacioni
+			if(estatusI.estatus_id != 3)
+			@bool_enviado = 1
+			end
+
+		else
+			if (session[:entidad_id] >= 14 && session[:entidad_id] <= 17)
+			#Consejo tecnico
+				estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
+				if(estatusI.estatus_id != 2)
+				@bool_enviado = 1
+				end
+			else
+				if (session[:entidad_id] >= 1 && session[:entidad_id] <= 6)
+				#Consejo de escuela
+					estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take 
+					if(estatusI.estatus_id != 8)
+					@bool_enviado = 1 #Estatus enviado a consejo escuela
+					
+					end
+				else
+					if (session[:entidad_id] == 13)
+					#Consejo de facultad
+						estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
+						if(estatusI.estatus_id != 4)
+						@bool_enviado = 1
+						end
+					end	
+				end
+			end
+		end
 		else
 			flash[:info]="Selecciona un informe"
 			redirect_to controller: "inicioentidad", action: "listar_informes"
@@ -2100,9 +2137,39 @@ end
 	end
 
 
+	def ver_respaldos
+		if session[:usuario_id] && session[:entidad] 
+		  @plan = Planformacion.where(id: session[:plan_id]).take
+		  adec = Adecuacion.where(planformacion_id: session[:plan_id]).take
+		  @documents = []
+		  if !session[:informe_id].blank?
+		    @documents = Respaldo.where(adecuacion_id: adec.id, informe_id: session[:informe_id]).all
+		  else
+		    @documents = Respaldo.where(adecuacion_id: session[:adecuacion_id], informe_id: nil).all
+		  end
+		else
+		  redirect_to controller:"forminst", action: "index"
+		end
+	end
+
+	def show
+		puts params[:adecuacion_id]
+		puts params[:version]
+
+		if params[:informe_id].blank?
+			@document = Respaldo.where(adecuacion_id: params[:adecuacion_id], informe_id: nil, version: params[:version].to_i, filename: params[:namefile]).take
+			puts "no informe"
+		else
+			@document = Respaldo.where(adecuacion_id: params[:adecuacion_id], informe_id: params[:informe_id],version: params[:version].to_i, filename: params[:namefile]).take
+			puts "informe"
+		end
+	    send_data(@document.file_contents,
+	              type: @document.content_type,
+	              filename: @document.filename)
+  	end
 
 	def guardar_observaciones2
- 		if session[:usuario_id] && session[:entidad]= true
+ 		if session[:usuario_id] && session[:entidad]== true
  			@semestre = params[:semestre].to_i
  			@vista_adecuacion = @semestre + 2
 		    @adecuacion= Adecuacion.find(session[:adecuacion_id])
@@ -2156,6 +2223,7 @@ end
 				          	oa.adecuacionactividad_id = aa.id
 				          	oa.revision_id =  revision.id
 				          	oa.observaciones = params[observacion]
+				          	oa.actual = 1
 				          	oa.save
 				        else
 				       		oa.observaciones = params[observacion]
@@ -2185,6 +2253,7 @@ end
 				          	oa.adecuacionactividad_id = aa.id
 				          	oa.revision_id =  revision.id
 				          	oa.observaciones = params[observacion]
+				          	oa.actual = 1
 				          	oa.save
 				        else
 				       		oa.observaciones = params[observacion]
@@ -2211,6 +2280,7 @@ end
 				          	oa.adecuacionactividad_id = aa.id
 				          	oa.revision_id =  revision.id
 				          	oa.observaciones = params[observacion]
+				          	oa.actual = 1
 				          	oa.save
 				        else
 				       		oa.observaciones = params[observacion]
@@ -2234,9 +2304,6 @@ end
 
 		      		observacion =:observacion.to_s+@act.to_s
 
-		     
-
-		        
 		      			oa= ObservacionActividadAdecuacion.where(adecuacionactividad_id: aa, revision_id: revision.id).take
 
 		          		if(oa == nil || oa =="")
@@ -2244,6 +2311,7 @@ end
 				          	oa.adecuacionactividad_id = aa.id
 				          	oa.revision_id =  revision.id
 				          	oa.observaciones = params[observacion]
+				          	oa.actual = 1
 				          	oa.save
 				        else
 				       		oa.observaciones = params[observacion]
@@ -2274,6 +2342,7 @@ end
 				          	oa.adecuacionactividad_id = aa.id
 				          	oa.revision_id =  revision.id
 				          	oa.observaciones = params[observacion]
+				          	oa.actual = 1
 				          	oa.save
 				        else
 				       		oa.observaciones = params[observacion]
@@ -2395,6 +2464,9 @@ end
 		adec = Adecuacion.where(planformacion_id: informeAct.planformacion_id).take
 		session[:adecuacion_id] = adec.id
 		if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12)
+			@document = Respaldo.where(adecuacion_id: session[:adecuacion_id], informe_id: @informe_id, actual: 1).take
+			@document.estatus = "Enviado a Consejo de Escuela"
+			@document.save
 			cambio_act = EstatusInforme.where(informe_id: @informe_id, actual: 1).take
 	      	cambio_act.actual = 0
 	      	cambio_act.save
@@ -2472,6 +2544,9 @@ end
 			else
 				if (session[:entidad_id] >= 1 && session[:entidad_id] <= 6)
 				#Consejo de escuela
+					@document = Respaldo.where(adecuacion_id: session[:adecuacion_id], informe_id: @informe_id, actual: 1).take
+					@document.estatus = "Enviado a Consejo de Facultad"
+					@document.save
 					cambio_act = EstatusInforme.where(informe_id: @informe_id, actual: 1).take
 			      	cambio_act.actual = 0
 			      	cambio_act.save
@@ -2524,16 +2599,9 @@ end
 						bool_observaciones= 0
 						acts_informe = InformeActividad.where(informe_id: @informe_id)
 						
-						acts_informe.each do |act_informe|
-							obsvs_act = ObservacionActividadInforme.where(informe_actividad_id: act_informe.id)
-
-							obsvs_act.each do |obsv_act|
-								if obsv_act.observaciones != ''
-									bool_observaciones= 1
-								end
-							end
+						if (rechazar == 2)
+							bool_observaciones = 1
 						end
-						
 						#Consejo de facultad
 						cambio_act = EstatusInforme.where(informe_id: @informe_id, actual: 1).take
 				      	cambio_act.actual = 0
@@ -2551,18 +2619,18 @@ end
 								cambio_est.estatus_id = 1
 							end
 						end
-
 						cambio_est.actual = 1
 						cambio_est.save
 
 						
 						inf = Informe.where(id: @informe_id).take
-		            	remitente = Usuario.where(id: inf.tutor_id).take
-		            	email= remitente.user + "@ciens.ucv.ve"
-		            	ActionCorreo.envio_informe(email).deliver
 						cambio_est.fecha = Time.now 
 						plan = Planformacion.find(session[:plan_id])
 						if(rechazar == 1)
+							@document = Respaldo.where(adecuacion_id: session[:adecuacion_id], informe_id: @informe_id, actual: 1).take
+							@document.estatus = "Rechazado por Consejo de Facultad"
+							@document.actual = 0
+							@document.save
 							flash[:info]="El informe ha sido rechazado por consejo de facultad"
 							notific = Notificacion.new
 							notific.instructor_id = plan.instructor_id
@@ -2588,6 +2656,10 @@ end
 							ActionCorreo.envio_informe(remitente2, notific2.mensaje,1).deliver
 						else
 							if bool_observaciones == 1 
+								@document = Respaldo.where(adecuacion_id: session[:adecuacion_id], informe_id: @informe_id, actual: 1).take
+								@document.estatus = "Aprobado por Consejo de Facultad con Observaciones"
+								@document.actual = 0
+								@document.save	
 								flash[:info]="El informe ha sido aprobado con observaciones por consejo de facultad"
 								notific = Notificacion.new
 								notific.instructor_id = plan.instructor_id
@@ -2612,6 +2684,10 @@ end
 								remitente2 = Usuario.where(id: plan.instructor_id).take
 								ActionCorreo.envio_informe(remitente2, notific2.mensaje,1).deliver
 							else
+								@document = Respaldo.where(adecuacion_id: session[:adecuacion_id], informe_id: @informe_id, actual: 1).take
+								@document.estatus = "Aprobado por Consejo de Facultad"
+								@document.actual = 0
+								@document.save
 								flash[:info]="El informe ha sido aprobado por consejo de facultad"
 								notific = Notificacion.new
 								notific.instructor_id = plan.instructor_id
@@ -2645,6 +2721,7 @@ end
 	end 
 	
 	def vista_previa
+		session[:informe_id]=nil
 		@fechaActual = Date.current.to_s
 		@plan= Planformacion.find(session[:plan_id])
 		@fechaConcurso = @plan.fecha_inicio
@@ -2827,7 +2904,40 @@ end
 				end
 			end
 		end
+		@bool_enviado = 0
+		if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12)
+		#Usuario comision
+			estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take #Estatus enviado a comision de investigacioni
+			if(estatusI.estatus_id != 3)
+			@bool_enviado = 1
+			end
 
+		else
+			if (session[:entidad_id] >= 14 && session[:entidad_id] <= 17)
+			#Consejo tecnico
+				estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
+				if(estatusI.estatus_id != 2)
+				@bool_enviado = 1
+				end
+			else
+				if (session[:entidad_id] >= 1 && session[:entidad_id] <= 6)
+				#Consejo de escuela
+					estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take 
+					if(estatusI.estatus_id != 8)
+					@bool_enviado = 1 #Estatus enviado a consejo escuela
+					
+					end
+				else
+					if (session[:entidad_id] == 13)
+					#Consejo de facultad
+						estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
+						if(estatusI.estatus_id != 4)
+						@bool_enviado = 1
+						end
+					end	
+				end
+			end
+		end
 	end
 
 	def cambiar_estatusA
@@ -2847,8 +2957,22 @@ end
 				cambio_est.actual = 1
 				cambio_est.save
 				cambio_est.fecha = Time.now 
+				adac = AdecuacionActividad.where(adecuacion_id: @adecuacion_id).all
+				adac.each do |adaa|
+					oa = ObservacionActividadAdecuacion.where(adecuacionactividad_id: adaa.id, actual: 1).all
+					oa.each do |oaa|
+						oaa.fecha = Time.now 
+						oaa.actual = 0
+						oaa.save
+					end
+				end
+
 				plan= Planformacion.find(session[:plan_id])
 				notific = Notificacion.new
+				@document = Respaldo.where(adecuacion_id: session[:adecuacion_id], informe_id: nil, actual: 1).take
+				@document.estatus = "Enviado a Consejo de Escuela"
+				@document.save
+
 		        notific.instructor_id = plan.instructor_id
 		        notific.tutor_id = plan.tutor_id
 		        notific.adecuacion_id = session[:adecuacion_id]
@@ -2917,7 +3041,18 @@ end
 				else
 					if (session[:entidad_id] >= 1 && session[:entidad_id] <= 6)
 					#Consejo de escuela
-
+						adac = AdecuacionActividad.where(adecuacion_id: @adecuacion_id).all
+						adac.each do |adaa|
+							oa = ObservacionActividadAdecuacion.where(adecuacionactividad_id: adaa.id, actual: 1).all
+							oa.each do |oaa|
+								oaa.fecha = Time.now 
+								oaa.actual = 0
+								oaa.save
+							end
+						end
+						@document = Respaldo.where(adecuacion_id: session[:adecuacion_id], informe_id: nil, actual: 1).take
+						@document.estatus = "Enviado a Consejo de Facultad"
+						@document.save
 						cambio_act = EstatusAdecuacion.where(adecuacion_id: @adecuacion_id, actual: 1).take
 	      				cambio_act.actual = 0
 	      				cambio_act.save
@@ -2968,18 +3103,11 @@ end
 						if (session[:entidad_id] == 13)
 
 							bool_observaciones= 0
-								acts_adecuacion = AdecuacionActividad.where(adecuacion_id: @adecuacion_id)
-								
-								acts_adecuacion.each do |act_adecuacion|
-									obsvs_act = ObservacionActividadAdecuacion.where(adecuacionactividad_id: act_adecuacion.id)
+							acts_adecuacion = AdecuacionActividad.where(adecuacion_id: @adecuacion_id)
 
-									obsvs_act.each do |obsv_act|
-										if obsv_act.observaciones != ''
-											bool_observaciones= 1
-										end
-									end
-								end
-
+							if (rechazar == 2)
+								bool_observaciones = 1
+							end
 							#Consejo de facultad
 							cambio_act = EstatusAdecuacion.where(adecuacion_id: @adecuacion_id, actual: 1).take
 		      				cambio_act.actual = 0
@@ -3000,8 +3128,12 @@ end
 							cambio_est.save
 							
 							adec = Adecuacion.where(id: @adecuacion_id).take
-							plan = Planformacion.where(id: adec.plan_id).take
+							plan = Planformacion.where(id: adec.planformacion_id).take
 							if(rechazar == 1)
+								@document = Respaldo.where(adecuacion_id: session[:adecuacion_id], informe_id: nil, actual: 1).take
+								@document.estatus = "Rechazado por Consejo de Facultad"
+								@document.actual = 0
+								@document.save
 								flash[:info]="La adecuación ha sido rechazada por consejo de facultad"
 								notific = Notificacion.new
 						        notific.instructor_id = plan.instructor_id
@@ -3027,6 +3159,10 @@ end
 								ActionCorreo.envio_adecuacion(remitente2, notific2.mensaje,1).deliver		##CORREO AL INSTRUCTOR
 							else
 								if bool_observaciones == 1 
+									@document = Respaldo.where(adecuacion_id: session[:adecuacion_id], informe_id: nil, actual: 1).take
+									@document.estatus = "Aprobado por Consejo de Facultad con Observaciones"
+									@document.actual = 0
+									@document.save
 									flash[:info]="La adecuación ha sido aprobada con observaciones por consejo de facultad"
 									notific = Notificacion.new
 							        notific.instructor_id = plan.instructor_id
@@ -3051,6 +3187,10 @@ end
 									remitente2 = Usuario.where(id: plan.instructor_id).take
 									ActionCorreo.envio_adecuacion(remitente2, notific2.mensaje,1).deliver		##CORREO AL INSTRUCTOR
 								else
+									@document = Respaldo.where(adecuacion_id: session[:adecuacion_id], informe_id: nil, actual: 1).take
+									@document.estatus = "Aprobado por Consejo de Facultad"
+									@document.actual = 0
+									@document.save
 									flash[:info]="El informe ha sido aprobado por consejo de facultad"
 									notific = Notificacion.new
 							        notific.instructor_id = plan.instructor_id
@@ -3074,6 +3214,15 @@ end
 									ActionCorreo.envio_adecuacion(remitente3, notific.mensaje,2).deliver		##CORREO AL TUTOR
 									remitente2 = Usuario.where(id: plan.instructor_id).take
 									ActionCorreo.envio_adecuacion(remitente2, notific2.mensaje,1).deliver		##CORREO AL INSTRUCTOR
+								end
+							end
+							adac = AdecuacionActividad.where(adecuacion_id: @adecuacion_id).all
+							adac.each do |adaa|
+								oa = ObservacionActividadAdecuacion.where(adecuacionactividad_id: adaa.id, actual: 1).all
+								oa.each do |oaa|
+									oaa.fecha = Time.now 
+									oaa.actual = 0
+									oaa.save
 								end
 							end
 						end	

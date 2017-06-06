@@ -90,6 +90,7 @@
       </div>
       <div class="modal-footer">
       <%= link_to "Aprobar", {controller: "inicioentidad", action: "cambiar_estatusI", :informe_id => @informe.id, :rechazar => 0 }, class: "btn btn-default" %>
+      <%= link_to "Aprobar con Observaciones", {controller: "inicioentidad", action: "cambiar_estatusI", :informe_id => @informe.id, :rechazar => 2 }, class: "btn btn-default" %>
       <%= link_to "Rechazar", {controller: "inicioentidad", action: "cambiar_estatusI", :informe_id => @informe.id, :rechazar => 1 }, class: "btn btn-default" %>
       
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
@@ -120,9 +121,10 @@
        
         <%end%>
       
-      <%= link_to "Vista Previa", {controller: "iniciotutor", action: "vista_previa"}, class: "btn btn-default" %>
+      <%= link_to "Vista Previa", {controller: "inicioentidad", action: "vista_previa1"}, class: "btn btn-default" %>
       <%= link_to "Generar PDF", {controller: "informes", action: "generar_pdf"},target: :_blank, class: "btn btn-default" %>
       <%= link_to "Ver Soportes", {controller: "inicioentidad", action: "ver_soporte"}, class: "btn btn-default" %>
+      <%= link_to "Versiones Anteriores", {controller: "inicioentidad", action: "ver_respaldos"}, class: "btn btn-default" %>
 
     </div>
   </div>

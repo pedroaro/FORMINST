@@ -419,6 +419,8 @@ CREATE TABLE `informe` (
   `numero` int(11) DEFAULT NULL,
   `fecha_creacion` date DEFAULT NULL,
   `estado` varchar(255) DEFAULT NULL,
+  `fecha_inicio` date DEFAULT NULL,
+  `fecha_fin` date DEFAULT NULL,
   `fecha_modificacion` date DEFAULT NULL,
   `tipo_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
@@ -437,7 +439,6 @@ CREATE TABLE `informe` (
 
 LOCK TABLES `informe` WRITE;
 /*!40000 ALTER TABLE `informe` DISABLE KEYS */;
-INSERT INTO `informe` VALUES (1,1,4,'Considero que el desempeño del instructor en esta etapa fue  satisfactorio.','Las actividad programadas para esta etapa se cumplieron.',NULL,NULL,NULL,NULL,NULL),(2,1,4,'Considero que el desempeño del instructor en esta etapa fue  satisfactorio.','Las actividad programadas para esta etapa se cumplieron.',NULL,NULL,NULL,NULL,NULL),(3,1,4,'Considero que el desempeño del instructor en esta etapa fue  satisfactorio.','Las actividad programadas para esta etapa se cumplieron.',NULL,NULL,NULL,NULL,NULL),(4,1,4,'Considero que el desempeño del instructor en esta etapa fue  satisfactorio.','Las actividad programadas para esta etapa se cumplieron.',NULL,NULL,NULL,NULL,NULL),(5,1,4,'Considero que el desempeño del instructor en esta etapa fue  satisfactorio.','Las actividad programadas para esta etapa se cumplieron.',NULL,NULL,NULL,NULL,NULL),(6,1,4,'Considero que el desempeño del instructor en esta etapa fue  satisfactorio.','Las actividad programadas para esta etapa se cumplieron.',NULL,NULL,NULL,NULL,NULL),(7,1,4,'Considero que el desempeño del instructor en esta etapa fue  satisfactorio.','Las actividad programadas para esta etapa se cumplieron.',NULL,NULL,NULL,NULL,NULL),(8,1,4,'Considero que el desempeño del instructor en esta etapa fue  satisfactorio.','Las actividad programadas para esta etapa se cumplieron.',NULL,NULL,NULL,NULL,NULL),(9,1,4,'Considero que el desempeño del instructor en esta etapa fue  satisfactorio.','Las actividad programadas para esta etapa se cumplieron.',NULL,NULL,NULL,NULL,NULL),(10,1,4,'Considero que el desempeño del instructor en esta etapa fue  satisfactorio.','Las actividad programadas para esta etapa se cumplieron.',NULL,NULL,NULL,NULL,NULL),(11,1,4,'Considero que el desempeño del instructor en esta etapa fue satisfactorio.',NULL,NULL,NULL,NULL,NULL,NULL),(12,1,4,'Considero que el desempeño del instructor en esta etapa fue satisfactorio.',NULL,NULL,NULL,NULL,NULL,NULL),(13,3,11,'Considero que el desempeño de la Instructora Daniela Torrealba en el desarrollo de este período de su plan de formación y capacitación fue altamente satisfactorio','La Instructora Torrealba cumplió satisfactoriamente las actividad contempladas en el plan de formación y capacitación programadas para este período.',NULL,NULL,NULL,NULL,NULL),(14,1,4,'Considero que el desempeño del instructor en esta etapa fue satisfactorio.','El instructor cumplió con todo lo programado para estos tres primeros semestres. \r\n\r\nCon este informe se entrega el certificado de curso de servivio comunitario, el cual había sido programado para el segundo semestre. EL instructor no pudo tomarlo en esa oprtunidad porque no se dictó.',NULL,NULL,NULL,NULL,NULL),(15,1,4,'Opino que el instructor ha tenido un desempeño excelente y que se merece que los trámites administrativos correspondientes a sus informe no se atrasen por observaciones de forma.','Las actividad programas se cumplieron totalmente. \r\n\r\nEl curso de servicio comunitario estaba programado para el segundo semestre, en ese año se inscribió, sin embargo este curso se dictó en el tercer semestre. En los soportes coloco el certificado y lo colocaré también en el informe del tercer semestre. Creo que es mejor que sobre y no que falte, espero que esto no ocasione ni demoras, ni malentendidos.',NULL,NULL,NULL,NULL,NULL),(16,1,4,'Considero que el desempeño del instructor en esta etapa fue altamente satisfactorio.','El instructor Kenyer Aguiar cumpló totalmente con las actividad contempladas para el cuarto semestre de su Plan de Formación.',NULL,NULL,NULL,NULL,NULL),(17,3,11,'Considero que el desempeño de la Instructora Daniela Torrealba  en el desarrollo de  este período de su Plan de Formación y Capacitación fue Altamente Satisfactorio.','La Instructora Torrealba Cumplió Satisfactoriamente las actividad contempladas en el Plan de Formación y Capacitación programadas para este período.',NULL,NULL,NULL,NULL,NULL),(38,8,1,'opiniont uror','conclsuones tutor',1,'2015-06-22','37','2015-06-22',1),(51,8,1,'opinion tutor2','conclusiones2',2,'2015-07-06','50','2015-07-06',1),(52,14,1,'','',1,'2015-08-13','51','2015-08-13',1),(53,14,1,'','',2,'2015-08-13','52','2015-08-13',1),(54,14,1,'ejecutada ','ejecutada ',1,'2015-08-13','53','2015-08-13',2),(55,14,1,'','',3,'2015-10-14','54','2015-10-14',1),(56,14,1,'','',4,'2015-11-13','71','2015-11-13',1);
 /*!40000 ALTER TABLE `informe` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -525,11 +526,11 @@ CREATE TABLE `instructortutor` (
 -- Dumping data for table `instructortutor`
 --
 
-LOCK TABLES `instructortutor` WRITE;
+-- LOCK TABLES `instructortutor` WRITE;
 /*!40000 ALTER TABLE `instructortutor` DISABLE KEYS */;
-INSERT INTO `instructortutor` VALUES (1,26,4,1),(2,27,12,1),(3,28,11,1),(4,29,20,1),(5,30,20,1),(6,31,23,1),(7,32,24,1),(8,2,1,1),(9,10,24,1),(10,10,25,1),(11,26,1,1),(12,10,1,1),(13,34,1,1);
+-- INSERT INTO `instructortutor` VALUES (1,26,4,1),(2,27,12,1),(3,28,11,1),(4,29,20,1),(5,30,20,1),(6,31,23,1),(7,32,24,1),(8,2,1,1),(9,10,24,1),(10,10,25,1),(11,26,1,1),(12,10,1,1),(13,34,1,1);
 /*!40000 ALTER TABLE `instructortutor` ENABLE KEYS */;
-UNLOCK TABLES;
+-- UNLOCK TABLES;
 
 --
 -- Table structure for table `observacion_actividad_adecuacion`
@@ -544,6 +545,7 @@ CREATE TABLE `observacion_actividad_adecuacion` (
   `adecuacionactividad_id` int(11) DEFAULT NULL,
   `observaciones` longtext,
   `fecha` date DEFAULT NULL,
+  `actual` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `observacionActividadAdecuacionActividad` (`adecuacionactividad_id`),
   KEY `observacionActividadRevision` (`revision_id`),
@@ -556,11 +558,6 @@ CREATE TABLE `observacion_actividad_adecuacion` (
 -- Dumping data for table `observacion_actividad_adecuacion`
 --
 
-LOCK TABLES `observacion_actividad_adecuacion` WRITE;
-/*!40000 ALTER TABLE `observacion_actividad_adecuacion` DISABLE KEYS */;
-INSERT INTO `observacion_actividad_adecuacion` VALUES (20,NULL,247,'Se recomienda su participación en un proyecto que esté preferiblemente relacionado con su tesis de maestría. ',NULL),(21,NULL,247,'Se recomienda su participación en un proyecto que esté preferiblemente relacionado con su tesis de maestría. ',NULL),(22,NULL,258,'Esta actividad no debe ser obligatoria, pues va a depender de los recursos de la Escuela para su financiamiento. Aplica a los 4 semestres del plan de formación.',NULL),(23,4,344,'observacion_docencia_comision_1',NULL),(24,4,345,'observacion_docencia_comision_2',NULL),(25,4,346,'observacion_investigacion_comision_1',NULL),(26,4,348,'observacion_formacion_comision_1',NULL),(27,4,347,'observacion_extension_comision_1',NULL),(28,4,349,'otra_comision_1',NULL),(29,5,344,'dodencia1 consejo d escuela',NULL),(30,5,345,'',NULL),(31,5,346,'',NULL),(32,5,348,'',NULL),(33,5,347,'',NULL),(34,5,349,'',NULL);
-/*!40000 ALTER TABLE `observacion_actividad_adecuacion` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `observacion_actividad_informe`
@@ -574,6 +571,7 @@ CREATE TABLE `observacion_actividad_informe` (
   `informe_actividad_id` int(11) DEFAULT NULL,
   `revision_id` int(11) DEFAULT NULL,
   `observaciones` longtext,
+  `actual` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `observacionActividadinformeRevision` (`revision_id`),
   KEY `observacionActividadinformeinformeActividad` (`informe_actividad_id`),
@@ -588,7 +586,7 @@ CREATE TABLE `observacion_actividad_informe` (
 
 LOCK TABLES `observacion_actividad_informe` WRITE;
 /*!40000 ALTER TABLE `observacion_actividad_informe` DISABLE KEYS */;
-INSERT INTO `observacion_actividad_informe` VALUES (1,166,NULL,' En la presentación del plan, esta actividad se ubica en investigación y no en extensión.'),(2,166,NULL,' En la presentación del plan esta actividad se ubica en investigación y no en extensión.'),(3,166,NULL,'Esta actividad no corresponde a extensión sino a invstigación'),(4,166,NULL,'Esta actividad debería estar en Investigación y no en Extensión.'),(5,166,NULL,'este p unto está fuera de orden'),(6,171,NULL,'No'),(7,169,NULL,'Agregar fecha de consignación del ejemplar del trabajo de grado de maestría.'),(8,170,NULL,'Agregar fecha de presentación del trabajo de grado de maestría y la fecha de admisión en el doctorado.'),(9,163,NULL,'Recomendamos colocar No. de Estudiantes inscritos en el curso de Análisis II. Dedicación 8 horas semanales'),(10,169,NULL,'Recomendamos colocar fecha de la consignación del ejemplar en la Ofc del Postgrado de Matemática.'),(11,170,NULL,'Sugerencia: Fue admitido en el Doctorado en Matemática a partir del semestre 2 2013.'),(12,202,NULL,'Debe colocar la fecha de defensa del Trabajo de Grado de Maestría.'),(13,202,NULL,'Debe colocar la fecha de defensa del Trabajo de Grado de Maestría.'),(14,200,NULL,'Especificar el numero exacto de estudiantes.'),(15,202,NULL,'Colocar la fecha de presentación y defensa del trabajo de grado de maestría.'),(16,208,NULL,'  Cambiar redacción por: Como miembro de la Comisión de Extensión de la Escuela de Matemática, ha participado como ponente en eventos divulgativos sobre las carreras científicas, dirigidos a estudiantes y profesores de colegios y liceos. Dichos eventos han sido promocionados por la Coordinación de Extensión de la Facultad de Ciencias.'),(37,345,2,'observacion nueva'),(38,346,2,''),(39,347,2,''),(40,349,2,''),(41,477,2,''),(42,348,2,''),(43,478,2,'');
+INSERT INTO `observacion_actividad_informe` VALUES (1,166,NULL,' En la presentación del plan, esta actividad se ubica en investigación y no en extensión.',0),(2,166,NULL,' En la presentación del plan esta actividad se ubica en investigación y no en extensión.',0),(3,166,NULL,'Esta actividad no corresponde a extensión sino a invstigación',0),(4,166,NULL,'Esta actividad debería estar en Investigación y no en Extensión.',0),(5,166,NULL,'este p unto está fuera de orden',0),(6,171,NULL,'No',0),(7,169,NULL,'Agregar fecha de consignación del ejemplar del trabajo de grado de maestría.',0),(8,170,NULL,'Agregar fecha de presentación del trabajo de grado de maestría y la fecha de admisión en el doctorado.',0),(9,163,NULL,'Recomendamos colocar No. de Estudiantes inscritos en el curso de Análisis II. Dedicación 8 horas semanales',0),(10,169,NULL,'Recomendamos colocar fecha de la consignación del ejemplar en la Ofc del Postgrado de Matemática.',0),(11,170,NULL,'Sugerencia: Fue admitido en el Doctorado en Matemática a partir del semestre 2 2013.',0),(12,202,NULL,'Debe colocar la fecha de defensa del Trabajo de Grado de Maestría.',0),(13,202,NULL,'Debe colocar la fecha de defensa del Trabajo de Grado de Maestría.',0),(14,200,NULL,'Especificar el numero exacto de estudiantes.',0),(15,202,NULL,'Colocar la fecha de presentación y defensa del trabajo de grado de maestría.',0),(16,208,NULL,'  Cambiar redacción por: Como miembro de la Comisión de Extensión de la Escuela de Matemática, ha participado como ponente en eventos divulgativos sobre las carreras científicas, dirigidos a estudiantes y profesores de colegios y liceos. Dichos eventos han sido promocionados por la Coordinación de Extensión de la Facultad de Ciencias.',0),(37,345,2,'observacion nueva',0),(38,346,2,'',0),(39,347,2,'',0),(40,349,2,'',0),(41,477,2,'',0),(42,348,2,'',0),(43,478,2,'',0);
 /*!40000 ALTER TABLE `observacion_actividad_informe` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -774,9 +772,44 @@ INSERT INTO `prorroga` VALUES (1,1,NULL,NULL),(2,2,NULL,NULL),(3,3,NULL,NULL),(4
 /*!40000 ALTER TABLE `prorroga` ENABLE KEYS */;
 UNLOCK TABLES;
 
+
+--
+-- Table structure for table `respaldo`
+--
+
+
+DROP TABLE IF EXISTS `respaldo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `respaldo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `filename` varchar(255) DEFAULT NULL,
+  `content_type` varchar(255) DEFAULT NULL,
+  `file_contents` BLOB DEFAULT NULL,
+  `created_at` datetime  NOT NULL,
+  `version` int(3) NOT NULL,
+  `actual` int(1) NOT NULL,
+  `estatus` varchar(255) DEFAULT NULL,
+  `instructor_id` int(11) DEFAULT NULL,
+  `tutor_id` int(11) DEFAULT NULL,
+  `adecuacion_id` int(11) DEFAULT NULL,
+  `informe_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `respaldoinstructor` (`instructor_id`),
+  KEY `respaldotutor` (`tutor_id`),
+  KEY `respaldoadecuacion` (`adecuacion_id`),
+  KEY `respaldoinforme` (`informe_id`),
+  CONSTRAINT `respaldoinstructor` FOREIGN KEY (`instructor_id`) REFERENCES `usuario` (`id`),
+  CONSTRAINT `respaldotutor` FOREIGN KEY (`tutor_id`) REFERENCES `usuario` (`id`),
+  CONSTRAINT `respaldoadecuacion` FOREIGN KEY (`adecuacion_id`) REFERENCES `adecuacion` (`id`),
+  CONSTRAINT `respaldoinforme` FOREIGN KEY (`informe_id`) REFERENCES `informe` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
 --
 -- Table structure for table `resultado`
 --
+
 
 DROP TABLE IF EXISTS `resultado`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -916,7 +949,7 @@ CREATE TABLE `tipo_estatus` (
 
 LOCK TABLES `tipo_estatus` WRITE;
 /*!40000 ALTER TABLE `tipo_estatus` DISABLE KEYS */;
-INSERT INTO `tipo_estatus` VALUES (1,'APROBADO POR CONSEJO DE FACULTAD'),(2,'ENVIADO A CONSEJO TÉCNICO'),(3,'ENVIADO A COMISIÓN DE INVESTIGACIÓN'),(4,'ENVIADO A CONSEJO DE FACULTAD'),(5,'APROBADO CON OBSERVACIONES POR CONSEJO DE FACULTAD'),(6,'GUARDADO'),(7,'EN REVISIÓN MENOR POR COMISIÓN DE INVESTIGACIÓN'),(8,'ENVIADO A CONSEJO DE ESCUELA');
+INSERT INTO `tipo_estatus` VALUES (1,'APROBADO POR CONSEJO DE FACULTAD'),(2,'ENVIADO A CONSEJO TÉCNICO'),(3,'ENVIADO A COMISIÓN DE INVESTIGACIÓN'),(4,'ENVIADO A CONSEJO DE FACULTAD'),(5,'APROBADO CON OBSERVACIONES POR CONSEJO DE FACULTAD'),(6,'GUARDADO'),(7,'EN REVISIÓN MENOR POR COMISIÓN DE INVESTIGACIÓN'),(8,'ENVIADO A CONSEJO DE ESCUELA'),(9, 'RECHAZADO POR CONSEJO DE FACULTAD');
 /*!40000 ALTER TABLE `tipo_estatus` ENABLE KEYS */;
 UNLOCK TABLES;
 
