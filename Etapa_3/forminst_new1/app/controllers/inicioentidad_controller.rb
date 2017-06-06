@@ -980,6 +980,7 @@ end
 				puts @planformacion.instructor_id
 				puts @planformacion.tutor_id
 				puts @planformacion.instructor_id
+    			@periodo = @informe.fecha_inicio.to_s + " al " + @informe.fecha_fin.to_s
 
 		      	if (@informe.numero == 1 || @informe.numero == 3)
 		        	@nombre_informe= "PRIMER INFORME "
@@ -1327,6 +1328,7 @@ end
 	    @cpinstruccion = @persona.grado_instruccion
 	    @user = Usuario.find(@plan.instructor_id)
 	    @tutor = Persona.where(usuario_id: @plan.tutor_id).take
+    	@periodo = @informe.fecha_inicio.to_s + " al " + @informe.fecha_fin.to_s
 
 	    @docencia='docencia'
 	    @investigacion= 'investigacion'

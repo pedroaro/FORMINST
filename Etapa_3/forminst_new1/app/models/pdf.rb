@@ -1003,7 +1003,7 @@ class Pdf
 		return nombre_archivo
 	end
 #########################################################################################################################################################################
-	def self.pdf_informe(tipo_informe,escuela,informe, adecuacion, tutor, instructor, pactv_docencia, pactv_investigacion, pactv_extension, pactv_formacion, pactv_otras, sactv_docencia, sactv_investigacion, sactv_extension, sactv_otras, sactv_formacion,  tactv_docencia, tactv_investigacion, tactv_extension,tactv_formacion, tactv_otras, cactv_docencia, cactv_investigacion, cactv_extension, cactv_formacion, cactv_otras, info_docencia, info_investigacion,info_formacion, info_extension, info_otras,resx,resultados,actividadese,observaciont, resultTP, resultPP, resultO, resultAEC, resultOEC, resultDCS)
+	def self.pdf_informe(tipo_informe,escuela,informe, adecuacion, tutor, instructor, pactv_docencia, pactv_investigacion, pactv_extension, pactv_formacion, pactv_otras, sactv_docencia, sactv_investigacion, sactv_extension, sactv_otras, sactv_formacion,  tactv_docencia, tactv_investigacion, tactv_extension,tactv_formacion, tactv_otras, cactv_docencia, cactv_investigacion, cactv_extension, cactv_formacion, cactv_otras, info_docencia, info_investigacion,info_formacion, info_extension, info_otras,resx,resultados,actividadese,observaciont, resultTP, resultPP, resultO, resultAEC, resultOEC, resultDCS,documents, numeroDeVersion)
 		noplan_a=[]
 		noplan_na=[]
 		res_tp=[]
@@ -1066,13 +1066,13 @@ class Pdf
 			#[{:text=>"Fecha de realización del informe:", :font_style => :bold}, {:text => informe.fecha_informe.to_s, :align=>:left}],
 			[{:text=>"Fecha de realización del informe:", :font_style => :bold}, {:text => informe.fecha_creacion.to_s, :align=>:left}],
 			#[{:text=>"Apellidos y Nombres del Instructor:", :font_style => :bold},{:text => instructor.apellidos+blanco+instructor.nombres, :align=>:left}],
-			[{:text=>"Apellidos y Nombres del Instructor:", :font_style => :bold},{:text => instructor.apellidos+ " " +instructor.nombres, :align=>:left}],
+			[{:text=>"Apellidos y Nombres del Instructor:", :font_style => :bold},{:text => instructor.nombres.to_s.split.map(&:capitalize).join(' ') + " " + instructor.apellidos.to_s.split.map(&:capitalize).join(' '), :align=>:left}],
 			#[{:text=>"Cédula de Identidad del Instructor:", :font_style => :bold}, {:text => instructor.ci.to_s, :align=>:left}],
 			[{:text=>"Cédula de Identidad del Instructor:", :font_style => :bold}, {:text => instructor.ci.to_s, :align=>:left}],
 			#[{:text=>"Período que comprende el Informe:", :font_style => :bold}, {:text => informe.periodo.to_s, :align=>:left}],
-			[{:text=>"Período que comprende el Informe:", :font_style => :bold}, {:text => "informe.periodo.to_s", :align=>:left}],
+			[{:text=>"Período que comprende el Informe:", :font_style => :bold}, {:text => informe.fecha_inicio.to_s + " al " + informe.fecha_fin.to_s, :align=>:left}],
 			#[{:text=>"Apellidos y Nombre del Tutor:", :font_style => :bold}, {:text => tutor.nombres, :align=>:left}],
-			[{:text=>"Apellidos y Nombre del Tutor:", :font_style => :bold}, {:text => tutor.nombres, :align=>:left}],
+			[{:text=>"Apellidos y Nombre del Tutor:", :font_style => :bold}, {:text => tutor.nombres.to_s.split.map(&:capitalize).join(' ') + " " + tutor.apellidos.to_s.split.map(&:capitalize).join(' '), :align=>:left}],
 			#[{:text=>"Cédula de Identidad del Tutor:", :font_style => :bold}, {:text => tutor.ci.to_s, :align=>:left}],
 			[{:text=>"Cédula de Identidad del Tutor:", :font_style => :bold}, {:text => tutor.ci.to_s, :align=>:left}],
 			#+[{:text=>"Escuela o Instituto de adscripción:", :font_style => :bold}, {:text => escuela.nombre, :align=>:left}]
@@ -2492,10 +2492,8 @@ class Pdf
 			:column_widths => {0 => 260, 1=>260}, 
 			:position => :left,
 			:align => {0 => :left, 1=> :left}
-			
 
-			@archivos= DocumentoInforme.where(id: informe.id).all
-			@i = @archivos.size
+			@i = documents.size
 			pdf.text("\n")
 			pdf.text("Cantidad de soportes adjuntos:"+ @i.to_s+" \n", :style => :bold, :size  => 10)
 			
@@ -2503,7 +2501,12 @@ class Pdf
 		end
 		#####################+
 		fechaActual = Date.current.to_s
-   		nombre_archivo= instructor.ci.to_s+'-'+fechaActual+'-informe.pdf' # se arma el nombre del documento 
+		if numeroDeVersion == nil
+   			nombre_archivo= instructor.ci.to_s+'-'+fechaActual+'-informe.pdf' # se arma el nombre del documento 
+		else
+   			nombre_archivo= instructor.ci.to_s+'-'+fechaActual+'-informeV'+numeroDeVersion.to_s+'.pdf' # se arma el nombre del documento 
+		end	
 		pdf.render_file(nombre_archivo) # creación del docuemnto bajo su nombre
+		return nombre_archivo
 	end
 end
