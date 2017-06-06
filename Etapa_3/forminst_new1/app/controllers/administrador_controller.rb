@@ -91,4 +91,68 @@ class AdministradorController < ApplicationController
 			redirect_to controller:"forminst", action: "index"
 		end
 	end
+
+	def seleccionar_entidad
+		session[:administrador]
+		if session[:usuario_id]=="-2552" && session[:administrador] && session[:nombre_usuario]=="Administrador"
+
+			#Todas las Entidades
+			cpentidad = Entidad.all
+			cpcontador = 0
+			@cpentidades = []
+			@cpentidades[cpcontador] = Array.new(2) { |i|  }
+			@cpentidades[cpcontador][0] =  "Seleccione una entidad"
+			@cpentidades[cpcontador][1] = 0
+			cpcontador = cpcontador + 1
+
+			cpentidad.each do |entidad|
+				if entidad.nombre != "tutor" && entidad.nombre != "instructor"
+					@cpentidades[cpcontador] = Array.new(2) { |i|  }
+					@cpentidades[cpcontador][0] =  entidad.nombre
+					@cpentidades[cpcontador][1] = entidad.id
+					cpcontador = cpcontador + 1
+				end
+			end
+
+		else
+			redirect_to controller:"forminst", action: "index"
+		end
+	end
+
+	def modificar_email
+		session[:administrador]
+		if session[:usuario_id]=="-2552" && session[:administrador] && session[:nombre_usuario]=="Administrador"
+			puts params[:jrentidades]
+			cjpUsuarios = Usuarioentidad.where(entidad_id: params[:jrentidades])
+			cjpUsuarios.each do |uentidad|
+				if Usuario.where(id: uentidad.usuario_id).take.tipo == "Institucional"
+					$id = uentidad.usuario_id
+				end
+			end
+			puts $id
+			@email = Usuario.where(id: $id).take.email
+
+		else
+			redirect_to controller:"forminst", action: "index"
+		end
+	end
+
+	def guardar_email
+		session[:administrador]
+		if session[:usuario_id]=="-2552" && session[:administrador] && session[:nombre_usuario]=="Administrador"
+			
+			usuario = Usuario.where(id: $id).take
+			usuario.email = params[:email]
+			usuario.user = params[:email]
+			usuario.save
+			redirect_to controller:"administrador", action: "index"
+		else
+			redirect_to controller:"forminst", action: "index"
+		end
+	end
+
+	def logout
+		reset_session
+		redirect_to controller: "forminst", action: "index"
+	end
 end

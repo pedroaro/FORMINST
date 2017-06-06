@@ -313,6 +313,55 @@
     </div>
   </div>
 
+  <% if !@tutorAnteriores.blank? %>
+
+    <div class= "row">
+      <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
+          <div class="table-responsive">
+          <table class="table table-bordered table-striped">
+            <tbody>
+              <tr>
+                <td class="text-left"></td>
+              </tr>
+
+              <tr>
+                <td class="text-left"><h5><strong>5. Tutores Anteriores</strong></h5></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+      <div class= "row">
+        <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
+          <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+              <tbody>
+                <tr>
+                  <td class="text-left"> Nombre </td>
+                  <td class="text-left"> Fecha Inicio </td>
+                  <td class="text-left"> Fecha Fin </td>
+                </tr>
+                <% @tutorAnteriores.each do |asig| %>
+                <tr>
+                  <td class="text-left"> <%= Persona.where(usuario_id: asig.tutor_id).take.nombres + " " + Persona.where(usuario_id: asig.tutor_id).take.apellidos %> </td>
+                  <td class="text-left"> <%= asig.fecha_inicio.to_s[8..9] + "-" + asig.fecha_inicio.to_s[5..6] + "-" + asig.fecha_inicio.to_s[0..3]%> </td>
+                  <td class="text-left">
+                    <% if !asig.fecha_fin.blank? %>
+                      <%= asig.fecha_fin.to_s[8..9] + "-" + asig.fecha_fin.to_s[5..6] + "-" + asig.fecha_fin.to_s[0..3]%>
+                    <% end %>
+                  </td>
+                </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+  <% end %>
+
 <div class = 'row'>
   <div class = 'col-xs-3 col-md-3 col-lg-3'>
       <%= link_to "<< Volver", {controller: "inicioinstructor", action: "listar_adecuaciones"}, class: "btn btn-forminst" %>

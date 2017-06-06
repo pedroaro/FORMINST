@@ -566,7 +566,8 @@ end
 			if params[:adecuacion_id]!=nil
 				session[:adecuacion_id]= params[:adecuacion_id]
 			end
-
+      
+      @tutoresAnteriores = Instructortutor.where(instructor_id: session[:usuario_id], actual: 0)
 			@adecuacion= Adecuacion.find(session[:adecuacion_id])
 			@plan = Planformacion.where(instructor_id: session[:usuario_id]).take
 			@userentidad= Usuarioentidad.where(usuario_id: session[:usuario_id]).take

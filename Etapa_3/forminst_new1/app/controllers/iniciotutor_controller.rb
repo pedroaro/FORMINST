@@ -209,6 +209,7 @@ class IniciotutorController < ApplicationController
 			if !params[:plan_id].blank?
 				session[:plan_id] = params[:plan_id]
 			end
+			@tutoresAnteriores = Instructortutor.where(instructor_id: session[:usuario_id], actual: 0)
 			@nombre = session[:nombre_usuario]
 			@planformacion = Planformacion.find(session[:plan_id])
 			@instructorName = Persona.where(usuario_id: @planformacion.instructor_id).take.nombres
