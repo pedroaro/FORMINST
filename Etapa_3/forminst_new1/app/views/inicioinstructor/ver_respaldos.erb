@@ -19,7 +19,7 @@
 <div class="row">
   <div class="col-xs-12 col-md-12">
     <div class="btn-group" role="group">
-       <%= link_to "Volver", {controller: "inicioinstructor", action: "listar_informes"}, class: "btn btn-default" %>
+      <button type="button" class="btn btn-default" onclick = " location.href = 'javascript:history.back(-1);'">Volver</button>
       <%if session[:informe_id]%> 
         <%= link_to "Vista Previa", {controller: "inicioinstructor", action: "vista_previa1"}, class: "btn btn-default" %>
         <%= link_to "Generar PDF", {controller: "informes", action: "generar_pdf"},target: :_blank, class: "btn btn-default" %>
@@ -92,7 +92,7 @@
         </tr>
       </thead>
       <tbody>
-        <% @documents.each do |document1| %>
+        <% @documents.reverse_each.each_with_index do |document1| %>
           <tr>
             <td class = "text-center"><%= document1.filename %></td>
             <td class = "text-center"><%= document1.estatus %></td>
