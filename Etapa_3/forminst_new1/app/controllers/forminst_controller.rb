@@ -117,7 +117,7 @@ class ForminstController < ApplicationController
 										flash[:success]= "Bienvenido! " + session[:nombre_usuario] = @persona.nombres.titleize+' '+@persona.apellidos.titleize
 										puts "El usuario se autentico correctamente y es instructor"
 										redirect_to controller:"secretarias", action: "index"
-									else
+									elsif tipo == "Docente"
 										if @entidad.nombre=="tutor"
 											session[:usuario_id]= @usuario.id
 											@persona = Persona.where(usuario_id: session[:usuario_id]).take
@@ -155,6 +155,17 @@ class ForminstController < ApplicationController
 												redirect_to controller:"forminst", action: "index"
 											end
 										end
+									elsif tipo == "Institucional"
+										session[:usuario_id]= @usuario.id
+										session[:administrador] = false
+										session[:tutor]= false
+										session[:instructor]= false
+										session[:entidad]= true
+										session[:entidad_id] = @entidad.id
+										puts (session[:entidad_id])
+										session[:nombre_usuario] = @entidad.nombre
+										puts "El usuario se autentico correctamente y es una entidad"
+										redirect_to controller:"inicioentidad", action: "index"
 									end
 								else
 									flash.now[:danger]="Su usuario o contraseña son incorrectas"
