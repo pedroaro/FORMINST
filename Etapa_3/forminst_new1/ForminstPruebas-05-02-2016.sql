@@ -39,7 +39,7 @@ CREATE TABLE `actividad` (
 
 LOCK TABLES `actividad` WRITE;
 /*!40000 ALTER TABLE `actividad` DISABLE KEYS */;
-i/*!40000 ALTER TABLE `actividad` ENABLE KEYS */;
+/*!40000 ALTER TABLE `actividad` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --

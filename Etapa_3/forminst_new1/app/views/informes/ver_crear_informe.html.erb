@@ -106,13 +106,13 @@
                 <% else %>
                   <div id="sandbox-container">
                     <div class="input-group date">
-                        <input type="text" class="form-control" name="fechaIni" value="<%=$cpfechaIni%>" required oninvalid="setCustomValidity('Ingrese una fecha de nacimiento válida')" onchange="try{setCustomValidity('')}catch(e){}"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                        <input type="text" class="form-control" name="fechaIni" value="<%=$cpfechaIni%>" required oninvalid="setCustomValidity('Ingrese una fecha de nacimiento válida')" onchange="mostrarFecha(this.value)"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
                     </div>
                   </div>
                 <% end %>
               </td>
               <td class="text-center">
-                  <textarea class="form-control" rows="1" disabled><%= @fecha_fin1%></textarea>
+                  <input id="nuevaFecha" class="form-control" rows="1" disabled><%= @fecha_fin1%></input>
               </td>
             </tr>
           </tbody>
@@ -460,6 +460,17 @@
         autoclose: true});
 </script>
 
+<script type="text/javascript">
+    function mostrarFecha(op) {
+        var date = new Date(op.substring(0, 4),op.substring(5, 7) - 1,op.substring(8, 10));
+        date.setDate(date.getDate() + 180);
+        var dd = date.getDate();
+        var mm = date.getMonth() + 1;
+        var y = date.getFullYear();
+        var hola = y.toString() + '-' + mm.toString() + '-' + dd.toString();
+        document.getElementById("nuevaFecha").value=hola;
+    }
+</script>
 
 <script type="text/javascript">
     $(document).ready(function() {
