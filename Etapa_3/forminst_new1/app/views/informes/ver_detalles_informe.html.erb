@@ -249,7 +249,7 @@
             <td class="text-left"><strong>Cédula de Identidad del Instructor: </strong></td>
           </tr>
           <tr>
-            <td class="text-left"><%= session[:instructorName]%></td>
+            <td class="text-left"><%= @instructor.nombres.to_s.split.map(&:capitalize).join(' ') + " " + @instructor.apellidos.to_s.split.map(&:capitalize).join(' ')%></td>
             <td class="text-left"><%= @instructor.ci%></td>
           </tr>
           <tr>
@@ -258,7 +258,7 @@
           </tr>
           <tr>
             <td class="text-left"><%=@periodo%></td>
-            <td class="text-left"><%= @persona.nombres%></td>
+            <td class="text-left"><%= @persona.nombres.to_s.split.map(&:capitalize).join(' ') + " " + @persona.apellidos.to_s.split.map(&:capitalize).join(' ')%></td>
           </tr>
            <tr>
             <td class="text-left"><strong>Cédula de Identidad del Tutor: </strong></td>

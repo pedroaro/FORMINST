@@ -1,3 +1,5 @@
+
+
 <div class = 'row'>
   <div class="col-xs-12 col-md-12">
     <ul class="nav nav-tabs">
@@ -256,7 +258,31 @@
           <input id="cant_result" type="hidden" name="cant_result" value="<%=@resultados.size()%>"/> 
           <input id="tipoinf" type="hidden" name="tipoinf" value="<%=@tipo_informe%>"/> 
           <input id="numeroinf" type="hidden" name="numero_informe" value="<%=@numero_informe%>"/> 
+          <table id="cprtabla" class="table table-bordered ">
+            <tbody>
+              <tr>
+                <td style='width:50%;' class="text-center"><strong>Fecha de inicio</strong></td>
+                <td style='width:50%;' class="text-center"><strong>Fecha fin</strong></td>
+              </tr>
 
+              <tr>
+                <td class="text-center">
+                  <% if @numero_informe == 3 || @numero_informe == 6 || @numero_informe == 7 %>
+                    <textarea class="form-control" rows="1" disabled><%= @fecha1 %></textarea>
+                  <% else %>
+                    <div id="sandbox-container">
+                      <div class="input-group date">
+                          <input type="text" class="form-control" name="fechaIni" value="<%=@fecha1%>" required oninvalid="setCustomValidity('Ingrese una fecha de nacimiento válida')" onchange="try{setCustomValidity('')}catch(e){}"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                      </div>
+                    </div>
+                  <% end %>
+                </td>
+                <td class="text-center">
+                    <textarea class="form-control" id= "TextBox3" rows="1" disabled><%= @fecha2%></textarea>
+                </td>
+              </tr>
+            </tbody>
+          </table>
           <table id="cprtabla" class="table table-bordered ">
             <tbody>
               <tr></tr>
@@ -2521,6 +2547,14 @@
   }
 </script>
 
+<script type="text/javascript">
+    $('#sandbox-container .input-group.date').datepicker({
+        format: "yyyy-mm-dd", 
+        language: "es",
+        keyboardNavigation: false,
+        autoclose: true
+      });
+</script>
 
 <script type="text/javascript">
     $(document).ready(function() {

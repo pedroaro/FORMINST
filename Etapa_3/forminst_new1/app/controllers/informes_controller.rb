@@ -26,6 +26,8 @@ class InformesController < ApplicationController
           @actividadesaext= []
           @actividadesafor= []
           @actividadesaotr= []
+          @fecha_inicio1 = nil
+          @fecha_fin1 = nil
           if params[:informe_id].to_i == 1
             @nombre_informe = "PRIMER SEMESTRAL"
             @tipo_informe=1 
@@ -88,6 +90,15 @@ class InformesController < ApplicationController
                 @nombre_informe = "PRIMER ANUAL"
                 @tipo_informe=3
                 @numero_informe=3
+                informe1 = Informe.where( planformacion_id: session[:plan_id], numero: 1).take
+		      	informe2 = Informe.where( planformacion_id: session[:plan_id], numero: 2).take
+		      	if informe1.blank? || informe2.blank?
+		      		flash[:danger] = "Debe crear primero el primer y segundo informe semestral "
+                    redirect_to controller:"informes", action: "listar_informes"
+                    return 0
+		      	end
+			    @fecha_inicio1 = informe1.fecha_inicio
+			    @fecha_fin1 = informe2.fecha_fin 
                 @actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: [1,2]).all
                 @actividadesa.each do |actade| 
                   @act= Actividad.find(actade.actividad_id)
@@ -175,6 +186,15 @@ class InformesController < ApplicationController
                       @nombre_informe = "SEGUNDO ANUAL"
                       @tipo_informe=6
                       @numero_informe=6
+                      informe1 = Informe.where( planformacion_id: session[:plan_id], numero: 4).take
+			      	  informe2 = Informe.where( planformacion_id: session[:plan_id], numero: 5).take
+			      	  if informe1.blank? || informe2.blank?
+			      		flash[:danger] = "Debe crear primero el tercer y cuarto informe semestral "
+	                    redirect_to controller: "informes", action: "listar_informes"
+                      	return 0
+		      		  end
+				      @fecha_inicio1 = informe1.fecha_inicio
+				      @fecha_fin1 = informe2.fecha_fin 
                       @actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: [3,4]).all
                       @actividadesa.each do |actade| 
                         @act= Actividad.find(actade.actividad_id)
@@ -204,6 +224,15 @@ class InformesController < ApplicationController
                         @nombre_informe = "PRIMER FINAL"
                         @tipo_informe=7
                         @numero_informe=7
+                       	informe1 = Informe.where( planformacion_id: session[:plan_id], numero: 3).take
+				      	informe2 = Informe.where( planformacion_id: session[:plan_id], numero: 6).take
+				        if informe1.blank? || informe2.blank?
+				      		flash[:danger] = "Debe crear primero el primer y segundo informe anual "
+		                    redirect_to controller: "informes", action: "listar_informes"
+	                      	return 0
+		      		  	end
+					    @fecha_inicio1 = informe1.fecha_inicio
+					    @fecha_fin1 = informe2.fecha_fin 
                         @actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: [1,2,3,4]).all
                         @actividadesa.each do |actade| 
                           @act= Actividad.find(actade.actividad_id)
@@ -297,6 +326,9 @@ class InformesController < ApplicationController
         @estatus= EstatusInforme.where(informe_id: @informe.id, actual: 1).take
         @status= TipoEstatus.find(@estatus.estatus_id)
         @est= EstatusInforme.where(informe_id: @informe.id).take
+        @numero_informe = @informe.numero
+        @fecha1 = @informe.fecha_inicio
+        @fecha2 = @informe.fecha_fin
         @modificar= false
         if @est.estatus_id == 6
           @modificar=true
@@ -1024,8 +1056,25 @@ end
       informe.numero = @numero_informe
       informe.fecha_creacion = Time.now
       informe.fecha_modificacion = Time.now
-      informe.fecha_inicio = params[:fechaIni]
-      informe.fecha_fin = informe.fecha_inicio + 180.days
+      if @tipo_informe == 1 || @tipo_informe== 2 || @tipo_informe==4 || @tipo_informe==5
+	      informe.fecha_inicio = params[:fechaIni]
+	      informe.fecha_fin = informe.fecha_inicio + 180.days
+      elsif (@tipo_informe == 3) #TIPO SEMESTRAL
+      	informe1 = Informe.where( planformacion_id: session[:plan_id], numero: 1).take
+      	informe2 = Informe.where( planformacion_id: session[:plan_id], numero: 2).take
+	    informe.fecha_inicio = informe1.fecha_inicio
+	    informe.fecha_fin = informe2.fecha_fin 
+	  elsif(@tipo_informe == 6)	#TIPO ANUAL
+	  	informe1 = Informe.where( planformacion_id: session[:plan_id], numero: 4).take
+      	informe2 = Informe.where( planformacion_id: session[:plan_id], numero: 5).take
+	    informe.fecha_inicio = informe1.fecha_inicio
+	    informe.fecha_fin = informe2.fecha_fin 
+	  elsif(@tipo_informe == 7)	#TIPO FINAL
+	  	informe1 = Informe.where( planformacion_id: session[:plan_id], numero: 1).take
+      	informe2 = Informe.where( planformacion_id: session[:plan_id], numero: 5).take
+	    informe.fecha_inicio = informe1.fecha_inicio
+	    informe.fecha_fin = informe2.fecha_fin 
+	  end
       informe.save
       puts "Se guarda informe"
 
@@ -2020,6 +2069,9 @@ def generar_pdf() # es funciÃ³n permite generar el documento pdf de la adecuaciÃ
     @cant_ext= params[:cant_extension].to_i
     @cant_otr= params[:cant_otra].to_i
     @cant_result= params[:cant_result].to_i
+    @fecha_inicio = params[:fechaIni]
+    @informe.fecha_inicio = @fecha_inicio
+    @informe.fecha_fin = @informe.fecha_inicio + 180.days
     @informe.opinion_tutor = params[:opinion]
     @informe.conclusiones = params[:conclusiones]
     @plan= Planformacion.find(session[:plan_id])
