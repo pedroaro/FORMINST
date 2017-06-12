@@ -91,7 +91,13 @@
               <td><%= @nombreinstructor[i] %></td>
               <td><%= planformacion.fecha_inicio %></td>
               <td><%= planformacion.fecha_fin %></td>
-              <td><%= planformacion.fecha_modificacion %></td>
+              <td>
+              <% if planformacion.fecha_modificacion.blank? %>
+                - 
+              <% else %>
+                <%= planformacion.fecha_modificacion %>
+              <% end %>
+              </td>
               <td><%= @status[i] %></td>
               <td>
                 <% if @cpenviado[i] == 0%>

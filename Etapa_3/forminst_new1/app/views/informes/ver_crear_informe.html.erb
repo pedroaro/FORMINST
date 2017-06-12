@@ -101,14 +101,18 @@
 
             <tr>
               <td class="text-center">
-              <div id="sandbox-container">
-                <div class="input-group date">
-                  <input type="text" class="form-control" name="fechaIni" value="<%=$cpfechaIni%>" required oninvalid="setCustomValidity('Ingrese una fecha de nacimiento válida')" onchange="try{setCustomValidity('')}catch(e){}"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-                </div>
-              </div>
+                <% if @numero_informe == 3 || @numero_informe == 6 || @numero_informe == 7 %>
+                  <textarea class="form-control" rows="1" disabled><%= @fecha_inicio1 %></textarea>
+                <% else %>
+                  <div id="sandbox-container">
+                    <div class="input-group date">
+                        <input type="text" class="form-control" name="fechaIni" value="<%=$cpfechaIni%>" required oninvalid="setCustomValidity('Ingrese una fecha de nacimiento válida')" onchange="try{setCustomValidity('')}catch(e){}"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                    </div>
+                  </div>
+                <% end %>
               </td>
               <td class="text-center">
-                  <textarea class="form-control" rows="1" disabled><%= $cpfechaIni%></textarea>
+                  <textarea class="form-control" rows="1" disabled><%= @fecha_fin1%></textarea>
               </td>
             </tr>
           </tbody>

@@ -63,6 +63,9 @@ class DocumentsController < ApplicationController
       if @document.save
         flash[:success]="El documento se ha subido con exito"
         redirect_to controller:"documents", action: "index"
+      else
+        flash[:danger]="El documento no se ha cargado, recuerde que debe pesar menos de 1MB"
+        redirect_to controller:"documents", action: "new"
       end
     else
       redirect_to controller:"forminst", action: "index"

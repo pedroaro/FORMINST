@@ -14,7 +14,7 @@
 <div class="row">
   <div class="col-xs-12 col-md-12">
     <div class="btn-group" role="group">
-       <%= link_to "Volver", {controller: "inicioinstructor", action: "listar_informes"}, class: "btn btn-default" %>
+      <button type="button" class="btn btn-default" onclick = " location.href = 'javascript:history.back(-1);'">Volver</button>
       <%= link_to "Vista Previa", {controller: "inicioinstructor", action: "vista_previa1"}, class: "btn btn-default" %>
       <%= link_to "Generar PDF", {controller: "informes", action: "generar_pdf"},target: :_blank, class: "btn btn-default" %>
       <%= link_to "Ver Soportes", {controller: "inicioinstructor", action: "ver_soporte"}, class: "btn btn-default" %>
@@ -156,7 +156,7 @@
 
 <div class = 'row'>
   <div class = 'col-xs-3 col-md-3 col-lg-3'>
-      <%= link_to "<< Volver", {controller: "inicioinstructor", action: "listar_informes"}, class: "btn btn-forminst" %>
+      <button type="button" class="btn btn-default" onclick = " location.href = 'javascript:history.back(-1);'">Volver</button>
   </div>
   <div class = 'col-xs-9 col-md-9 col-lg-9 text-right'>
      <%= link_to "Siguiente >>", {controller: "inicioinstructor", action: "detalles_informe2"}, class: "btn btn-forminst" %>
