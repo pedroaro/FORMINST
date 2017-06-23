@@ -53,20 +53,25 @@ class DocumentsController < ApplicationController
   # POST /documents.json
   def create
     if session[:usuario_id] && session[:tutor]
-      @document = Document.new(document_params)
-      @planformacion = Planformacion.find(session[:plan_id])
-      @adecuacion = Adecuacion.where(planformacion_id: session[:plan_id]).take
-      @document.instructor_id = @planformacion.instructor_id
-      @document.tutor_id = session[:usuario_id]
-      @document.adecuacion_id = @adecuacion.id
-      @document.informe_id = session[:informe_id]
-      if @document.save
-        flash[:success]="El documento se ha subido con exito"
-        redirect_to controller:"documents", action: "index"
-      else
-        flash[:danger]="El documento no se ha cargado, recuerde que debe pesar menos de 1MB"
-        redirect_to controller:"documents", action: "new"
-      end
+	    if params[:document].present?
+			@document = Document.new(document_params)
+			@planformacion = Planformacion.find(session[:plan_id])
+			@adecuacion = Adecuacion.where(planformacion_id: session[:plan_id]).take
+			@document.instructor_id = @planformacion.instructor_id
+			@document.tutor_id = session[:usuario_id]
+			@document.adecuacion_id = @adecuacion.id
+			@document.informe_id = session[:informe_id]
+			if @document.save
+			flash[:success]="El documento se ha subido con exito"
+			redirect_to controller:"documents", action: "index"
+			else
+			flash[:danger]="El documento no se ha cargado, recuerde que debe pesar menos de 1MB"
+			redirect_to controller:"documents", action: "new"
+			end
+		else
+		flash[:info]="Debe seleccionar un archivo antes de cargar"
+		redirect_to controller:"documents", action: "new"
+		end
     else
       redirect_to controller:"forminst", action: "index"
     end
