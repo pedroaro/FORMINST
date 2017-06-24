@@ -112,7 +112,11 @@
                 <% end %>
               </td>
               <td class="text-center">
-                  <input id="nuevaFecha" class="form-control" rows="1" disabled><%= @fecha_fin1%></input>
+              	<% if @numero_informe == 3 || @numero_informe == 6 || @numero_informe == 7 %>
+                    <textarea class="form-control" rows="1" disabled><%= @fecha_fin1 %></textarea>
+                <% else %>
+                    <input id="nuevaFecha" class="form-control" rows="1" disabled><%= @fecha_fin1%></input>
+                <% end %>
               </td>
             </tr>
           </tbody>

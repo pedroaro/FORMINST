@@ -225,14 +225,14 @@ class InformesController < ApplicationController
                         @tipo_informe=7
                         @numero_informe=7
                        	informe1 = Informe.where( planformacion_id: session[:plan_id], numero: 3).take
-				      	informe2 = Informe.where( planformacion_id: session[:plan_id], numero: 6).take
-				        if informe1.blank? || informe2.blank?
-				      		flash[:danger] = "Debe crear primero el primer y segundo informe anual "
-		                    redirect_to controller: "informes", action: "listar_informes"
-	                      	return 0
-		      		  	end
-					    @fecha_inicio1 = informe1.fecha_inicio
-					    @fecha_fin1 = informe2.fecha_fin 
+        				      	informe2 = Informe.where( planformacion_id: session[:plan_id], numero: 6).take
+        				        if informe1.blank? || informe2.blank?
+        				      		flash[:danger] = "Debe crear primero el primer y segundo informe anual "
+        		                    redirect_to controller: "informes", action: "listar_informes"
+        	                      	return 0
+        		      		  end
+          					    @fecha_inicio1 = informe1.fecha_inicio
+          					    @fecha_fin1 = informe2.fecha_fin 
                         @actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: [1,2,3,4]).all
                         @actividadesa.each do |actade| 
                           @act= Actividad.find(actade.actividad_id)

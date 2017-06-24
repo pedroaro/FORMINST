@@ -1514,8 +1514,8 @@ class IniciotutorController < ApplicationController
 				    respaldos = Respaldo.where(adecuacion_id: @adecuacion_id, informe_id: nil).all
 				   	numeroDeVersion = respaldos.size + 1
 					nombre = generar_pdf()
-					#nameofthefile = "#{Rails.root}/"+nombre
-			   		nameofthefile = nombre
+					nameofthefile = "#{Rails.root}/tmp/PDFs/"+nombre
+			   		#nameofthefile = nombre
 					contents = IO.binread(nameofthefile)
 
 			        respaldo = Respaldo.new 
@@ -1783,7 +1783,7 @@ class IniciotutorController < ApplicationController
     @numeroDeVersion = respaldos.size + 1
     Pdf.pdf_adecuacion(@planformacion, @adecuacion, @tutor, @instructor, @correoi, @correot, @escuela, @pactv_docencia, @pactv_investigacion, @pactv_extension, @pactv_formacion, @pactv_otras, @sactv_docencia, @sactv_investigacion, @sactv_extension, @sactv_formacion, @sactv_otras, @tactv_docencia, @tactv_investigacion, @tactv_extension, @tactv_formacion, @tactv_otras, @cactv_docencia, @cactv_investigacion, @cactv_extension, @cactv_formacion, @cactv_otras, @fechaActual, @fechaConcurso, @documents, @numeroDeVersion)
     @nombre_archivo= @instructor.ci.to_s+'-'+@fechaActual+'-adecuacionV'+@numeroDeVersion.to_s+'.pdf' # se arma el nombre del documento 
-    act = "#{Rails.root}/" + @nombre_archivo
+    act = "#{Rails.root}/tmp/PDFs" + @nombre_archivo
     puts @nombre_archivo
     return @nombre_archivo # se retorna el nombre del archivo
   end

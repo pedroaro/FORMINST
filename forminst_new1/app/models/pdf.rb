@@ -999,7 +999,8 @@ class Pdf
 		else
 			nombre_archivo= instructor.ci.to_s+'-'+fechaActual+'-adecuacionV'+numeroDeVersion.to_s+'.pdf' # nombre del dcouemrnto
 		end	
-		pdf.render_file(nombre_archivo) # creación del docuemnto bajo su nombre
+		url = "#{Rails.root}/tmp/PDFs/" + nombre_archivo
+		pdf.render_file(url) # creación del docuemnto bajo su nombre
 		return nombre_archivo
 	end
 #########################################################################################################################################################################

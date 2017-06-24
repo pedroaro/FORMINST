@@ -191,7 +191,8 @@ class AdecuacionsController < ApplicationController
     # se llama a la función de "pedf_adecuacion" del modelo "pdf", pasando todas las variables correspondientes
     Pdf.pdf_adecuacion(@planformacion, @adecuacion, @tutor, @instructor, @correoi, @correot, @escuela, @pactv_docencia, @pactv_investigacion, @pactv_extension, @pactv_formacion, @pactv_otras, @sactv_docencia, @sactv_investigacion, @sactv_extension, @sactv_formacion, @sactv_otras, @tactv_docencia, @tactv_investigacion, @tactv_extension, @tactv_formacion, @tactv_otras, @cactv_docencia, @cactv_investigacion, @cactv_extension, @cactv_formacion, @cactv_otras, @fechaActual, @fechaConcurso, @documents, @numeroDeVersion)
     @nombre_archivo= @instructor.ci.to_s+'-'+@fechaActual+'-adecuacion.pdf' # se arma el nombre del documento 
-    act = @nombre_archivo
+    act = "#{Rails.root}/tmp/PDFs/" + @nombre_archivo
+    #act = @nombre_archivo        #PRODUCCION
     send_file(
       act,
       filename: @nombre_archivo,
