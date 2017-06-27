@@ -1,0 +1,165 @@
+<div class = 'row'>
+  <div class="col-xs-12 col-md-12">
+      <ul class="nav nav-tabs">
+        <li><a href="../inicioinstructor/index">Inicio</a></li>
+        <li><a href="../inicioinstructor/listar_adecuaciones">Adecuación del Plan</a></li>
+        <li><a href="../inicioinstructor/listar_informes"  class = 'active'>Informes</a></li>
+        <li><a href="../inicioinstructor/prorrogas">Prorrogas</a></li>
+        <li><a href="../inicioinstructor/logout">Cerrar Sesión</a></li>
+      </ul>
+  
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12 col-md-12">
+    <div class="btn-group" role="group">
+      <button type="button" class="btn btn-default" onclick = " location.href = 'javascript:history.back(-1);'">Volver</button>
+      <%= link_to "Vista Previa", {controller: "inicioinstructor", action: "vista_previa1"}, class: "btn btn-default" %>
+      <%= link_to "Generar PDF", {controller: "informes", action: "generar_pdf"},target: :_blank, class: "btn btn-default" %>
+      <%= link_to "Ver Soportes", {controller: "inicioinstructor", action: "ver_soporte"}, class: "btn btn-default" %>
+      <%= link_to "Versiones Anteriores", {controller: "inicioinstructor", action: "ver_respaldos"}, class: "btn btn-default" %>
+    </div>
+  </div>
+</div>
+
+<div class = 'row'>
+  <div class="col-xs-12 col-md-12">
+    <%if flash[:mensaje]%>
+      <div class="panel panel-warning">
+        <div class="panel-body">
+          <h5><b><%=flash[:mensaje]%></b></h5>
+        </div>
+      </div>
+    <%end%>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12 col-md-12 col-md-offset-0">
+    <div class="text-right">
+      <div id = "fechamuestra">
+        <h3> <%= Time.now.strftime("%d") %>
+          <% if Time.now.strftime("%m").to_i == 1 %>
+            de Enero del
+          <% elsif Time.now.strftime("%m").to_i == 2 %>
+            de Febrero del
+          <% elsif Time.now.strftime("%m").to_i == 3 %>
+            de Marzo del
+          <% elsif Time.now.strftime("%m").to_i == 4 %>
+            de Abril del
+          <% elsif Time.now.strftime("%m").to_i == 5 %>
+            de Mayo del
+          <% elsif Time.now.strftime("%m").to_i == 6 %>
+            de Junio del
+          <% elsif Time.now.strftime("%m").to_i == 7 %>
+            de Julio del
+          <% elsif Time.now.strftime("%m").to_i == 8 %>
+            de Agosto del
+          <% elsif Time.now.strftime("%m").to_i == 9 %>
+            de Septiembre del
+          <% elsif Time.now.strftime("%m").to_i == 10 %>
+            de Octubre del
+          <% elsif Time.now.strftime("%m").to_i == 11 %>
+            de Noviembre del
+          <% elsif Time.now.strftime("%m").to_i == 12 %>
+            de Diciembre del
+          <% end %>
+          <%= Time.now.strftime("%Y") %> 
+        </h3>
+      </div>
+      <%if @nombre%>
+        <div>
+          <h4><b><%=@nombre%></b></h4>
+        </div>
+      <%end%>
+    </div>
+  </div>
+</div>
+
+<div class = 'row'>
+  <div class="col-xs-11 col-xs-offset-1 col-md-12 col-md-offset-0 text-justify">
+    <h1 class="text-left">Detalles del Informe</h1>
+  </div>
+</div>
+<div class = 'row'>
+  <div class="col-xs-11 col-xs-offset-1 col-md-12 col-md-offset-0 text-center">
+    <h5><strong><%=@nombre_informe%> DE ACTIVIDADES REALIZADAS POR EL INSTRUCTOR DURANTE LA EJECUCIÓN DE SU PLAN DE FORMACIÓN Y CAPACITACIÓN</strong></h5>
+  </div>
+</div>
+<div class = 'row'>
+  <div class="col-xs-11 col-xs-offset-1 col-md-12 col-md-offset-0 text-left">
+    <h5><strong>Estado del Documento: <%=@status.concepto%></strong></h5>
+  </div>
+</div>
+<br/>
+<div class= "row">
+  <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped">
+        <tbody>
+          <tr>
+            <td class="text-center">
+            </td>
+          </tr>
+          <tr>
+            <td class="text-left"><h5><strong>1. Datos del instructor en formación y su tutor:</strong></h5></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class= "row">
+  <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped">
+        <tbody>
+          <tr>
+            <td style='width:50%;' class="text-left"><strong>Numero del Informe:</strong></td>
+            <td style='width:50%;' class="text-left"><strong>Fecha de Realización del Informe:</strong></td>
+          </tr>
+          <tr>
+            <td class="text-left"><%= @informe.numero%></td>
+            <td class="text-left"><%= @informe.fecha_creacion%></td>
+          </tr>
+          <tr>
+            <td style='width:50%;' class="text-left"><strong>Apellidos y Nombres del Instructor:</strong></td>
+            <td style='width:50%;' class="text-left"><strong>Cédula de Identidad del Instructor:</strong></td>
+          </tr>
+          <tr>
+            <td class="text-left"><%= @instructor.nombres%></td>
+            <td class="text-left"><%= @instructor.ci%></td>
+          </tr>
+          <tr>
+            <td style='width:50%;' class="text-left"><strong>Período que comprende el informe:</strong></td>
+            <td style='width:50%;' class="text-left"><strong>Apellidos y Nombres del Tutor:</strong></td>
+          </tr>
+          <tr>
+            <td class="text-left"><%= @periodo%></td>
+            <td class="text-left"><%= @persona.nombres%></td>
+          </tr>
+           <tr>
+            <td style='width:50%;' class="text-left"><strong>Cédula de Identidad del Tutor:</strong></td>
+            <td style='width:50%;' class="text-left"><strong>Escuela o Instituto de Adscripción:</strong></td>
+          </tr>
+          <tr>
+            <td class="text-left"><%= @persona.ci%></td>
+            <td class="text-left"><%= @escuela.nombre%></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class = 'row'>
+  <div class = 'col-xs-3 col-md-3 col-lg-3'>
+      <button type="button" class="btn btn-default" onclick = " location.href = 'javascript:history.back(-1);'">Volver</button>
+  </div>
+  <div class = 'col-xs-9 col-md-9 col-lg-9 text-right'>
+     <%= link_to "Siguiente >>", {controller: "inicioinstructor", action: "detalles_informe2"}, class: "btn btn-forminst" %>
+  </div>
+</div>
+

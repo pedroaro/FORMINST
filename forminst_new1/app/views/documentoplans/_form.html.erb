@@ -1,0 +1,29 @@
+<%= form_for(@documentoplan) do |f| %>
+  <% if @documentoplan.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@documentoplan.errors.count, "error") %> prohibited this documentoplan from being saved:</h2>
+
+      <ul>
+      <% @documentoplan.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :id %><br>
+    <%= f.number_field :id %>
+  </div>
+  <div class="field">
+    <%= f.label :planFormacionId %><br>
+    <%= f.number_field :planFormacionId %>
+  </div>
+  <div class="field">
+    <%= f.label :archivo %><br>
+    <%= f.text_field :archivo %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

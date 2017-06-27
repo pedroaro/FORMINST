@@ -1,0 +1,131 @@
+<div class = 'row'>
+  <div class="col-xs-12 col-md-12">
+      <ul class="nav nav-tabs">
+        <li><a href="../inicioentidad/index">Inicio</a></li>
+        <li><a href="../inicioentidad/listar_adecuaciones" class="active">Listar Adecuaciones</a></li>
+        <li><a href="../inicioentidad/listar_informes">Listar Informes</a></li>
+        <li><a href="../inicioentidad/prorroga">Prorroga</a></li>
+        <li><a href="../inicioentidad/logout">Cerrar Sesión</a></li>
+      </ul>
+  </div>
+</div>
+
+<div class = 'row'>
+  <div class="col-xs-12 col-md-12">
+    <%if flash[:mensaje]%>
+      <div class="panel panel-warning">
+        <div class="panel-body">
+          <h5><b><%=flash[:mensaje]%></b></h5>
+        </div>
+      </div>
+    <%end%>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12 col-md-12 col-md-offset-0">
+    <div class="text-right">
+      <div id = "fechamuestra">
+        <h3> <%= Time.now.strftime("%d") %>
+          <% if Time.now.strftime("%m").to_i == 1 %>
+            de Enero del
+          <% elsif Time.now.strftime("%m").to_i == 2 %>
+            de Febrero del
+          <% elsif Time.now.strftime("%m").to_i == 3 %>
+            de Marzo del
+          <% elsif Time.now.strftime("%m").to_i == 4 %>
+            de Abril del
+          <% elsif Time.now.strftime("%m").to_i == 5 %>
+            de Mayo del
+          <% elsif Time.now.strftime("%m").to_i == 6 %>
+            de Junio del
+          <% elsif Time.now.strftime("%m").to_i == 7 %>
+            de Julio del
+          <% elsif Time.now.strftime("%m").to_i == 8 %>
+            de Agosto del
+          <% elsif Time.now.strftime("%m").to_i == 9 %>
+            de Septiembre del
+          <% elsif Time.now.strftime("%m").to_i == 10 %>
+            de Octubre del
+          <% elsif Time.now.strftime("%m").to_i == 11 %>
+            de Noviembre del
+          <% elsif Time.now.strftime("%m").to_i == 12 %>
+            de Diciembre del
+          <% end %>
+          <%= Time.now.strftime("%Y") %> 
+        </h3>
+      </div>
+      <%if @nombre%>
+        <div>
+          <h4><b><%=@nombre%></b></h4>
+        </div>
+      <%end%>
+    </div>
+  </div>
+</div>
+
+
+<div class = 'row'>
+  <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0 text-justify">
+    <h1 class="text-left">Lista de Adecuaciones</h1>
+  </div>
+</div>
+
+<% if @adecuacion %>
+<div class = 'row'>
+  <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
+    <p class="text-justify">Haga click en "Ver detalles" sobre la Adecuacion correspondiente en caso de que se desee visualizar los detalles de la misma</p>
+    <div class="table-responsive">
+      <table class="table table-hover table-bordered text-center">
+        <thead>
+          <tr>
+            <th class="text-center">Fecha de Creación</th>
+            <th class="text-center">Tutor</th>
+            <th class="text-center">Instructor</th>
+            <th class="text-center">Estado</th>
+            <th class="text-center">Fecha de Última Modificación</th>
+            <th class="text-center">Detalles</th>
+          </tr>
+        </thead>
+
+
+        <tbody>
+          <% @adecuaciones.each_with_index do |adecuacion, i| %>
+          <tr>
+            <td class = "text-center"><%= adecuacion.fecha_creacion %></td>
+            <td class = "text-center"><%= @nombre_tutor[i] %></td>
+            <td class = "text-center"><%= @nombre_instructor[i] %></td>
+            <td class="text-center"><%= @status[i]%></td>
+            <td class="text-center"><%= adecuacion.fecha_modificacion %></td>
+            <td class = "text-center">
+              <%= form_tag({controller: 'inicioentidad', action: 'ver_detalles_adecuacion'}) do%>
+                <input type="hidden" name="adecuacion_id" value='<%= adecuacion.id %>'>
+                <button type="submit" class="btn btn-forminst-blue">Ver Detalles</button>
+              <%end%>
+            </td>
+          </tr>
+          
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<% else %>
+  <div class = 'row'>
+    <div class="col-xs-12 col-md-12">
+      <h3 class = 'text-center'>No hay Adecuaciones</h3>
+    </div>
+  </div>
+  <br>
+<% end %>
+<div class = 'row'>
+  <div class = 'col-xs-12 col-md-12'>
+    <center>
+      <!--button type="button" class="btn btn-forminst" onclick = " location.href = 'javascript:history.back(-1);'">Volver</button-->
+      <button type="button" class="btn btn-forminst" onclick = " location.href = '../iniciotutor/ver_detalles_plan'">Volver</button>
+    </center>
+  </div>
+</div>
+</br>
+</br>

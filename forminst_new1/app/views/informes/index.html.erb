@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Informes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Planformacionid</th>
+      <th>Tutorid</th>
+      <th>Opiniontutor</th>
+      <th>Conclusiones</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @informes.each do |informe| %>
+      <tr>
+        <td><%= informe.id %></td>
+        <td><%= informe.PlanFormacionId %></td>
+        <td><%= informe.tutorId %></td>
+        <td><%= informe.opinionTutor %></td>
+        <td><%= informe.conclusiones %></td>
+        <td><%= link_to 'Show', informe %></td>
+        <td><%= link_to 'Edit', edit_informe_path(informe) %></td>
+        <td><%= link_to 'Destroy', informe, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Informe', new_informe_path %>

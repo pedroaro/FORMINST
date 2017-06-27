@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Id:</strong>
+  <%= @documentoinforme.id %>
+</p>
+
+<p>
+  <strong>Informeid:</strong>
+  <%= @documentoinforme.informeId %>
+</p>
+
+<p>
+  <strong>Archivo:</strong>
+  <%= @documentoinforme.archivo %>
+</p>
+
+<%= link_to 'Edit', edit_documentoinforme_path(@documentoinforme) %> |
+<%= link_to 'Back', documentoinformes_path %>

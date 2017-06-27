@@ -1,0 +1,300 @@
+<div class = 'row'>
+  <div class="col-xs-12 col-md-12">
+      <ul class="nav nav-tabs">
+        <li><a href="../iniciotutor/index">Inicio</a></li>
+        <%if session[:informe_id]%> 
+	    	  <li><a href="../iniciotutor/planformacions">Plan de Formación</a></li>
+  	    <%else %>
+  	    	<li><a href="../iniciotutor/planformacions" class='active'>Plan de Formación</a></li>
+  	    <%end%>
+        <%if session[:informe_id]%> 
+          <li class="dropdown">
+	            <a href="#" class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-expanded="false">Informes <span class="caret"></span></a>
+	            <ul class="dropdown-menu nav" role="menu">
+	              <li></li>
+	              <li><a href="#" data-toggle="modal" data-target="#selectInforme">
+	                Crear Informe
+	              </a></li>
+	              <li><%= link_to 'Listar Informes', :controller => 'informes', :action => 'listar_informes' %></li>
+	            </ul>
+	        </li>		
+        <%else %>
+  			<li class="dropdown">
+  	            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Informes <span class="caret"></span></a>
+  	            <ul class="dropdown-menu nav" role="menu">
+  	              <li></li>
+  	              <li><a href="#" data-toggle="modal" data-target="#selectInforme">
+  	                Crear Informe
+  	              </a></li>
+  	              <li><%= link_to 'Listar Informes', :controller => 'informes', :action => 'listar_informes' %></li>
+  	            </ul>
+  	        </li>
+		    <%end%>    
+        <li><%= link_to 'Prórroga', :controller => 'iniciotutor', :action => 'prorroga' %></li>
+        <li><a href="../iniciotutor/logout">Cerrar Sesión</a></li>
+      </ul>
+  </div>
+</div>
+
+<div class="modal fade" id="myModalEliminar1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h3 class="modal-title" id="myModalLabel">Eliminar Informe</h3>
+      </div>
+      <div class="modal-body">
+        <h5>¿Está seguro que desea eliminar este informe?</h5>
+      </div>
+      <div class="modal-footer">
+        <%= link_to "Aceptar", {controller: "informes", action: "eliminar_informe", :informe_id => session[:informe_id] }, class: "btn btn-default" %>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="myModal1" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Mensaje de confirmación</h4>
+      </div>
+      <div class="modal-body">
+        <h5>¿Está seguro que desea enviar el informe?</h5>
+      </div>
+      <div class="modal-footer">
+        <%= link_to "Aceptar", {controller: "informes", action: "cambiar_estatusI", :informe_id => session[:informe_id] }, class: "btn btn-default" %>
+      
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Mensaje de confirmación</h4>
+      </div>
+      <div class="modal-body">
+      <center>
+          <h5>¿Está seguro que desea enviar esta adecuación?</h5>
+        </center>
+      </div>
+      <div class="modal-footer">
+        <%= link_to "Aceptar", {controller: "iniciotutor", action: "cambiar_estatusA", :adecuacion_id => session[:adecuacion_id] }, class: "btn btn-default" %>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+<div class="modal fade" id="myModalEliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h3 class="modal-title" id="myModalLabel">Eliminar Adecuación</h3>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <center>
+            <h5>¿Está seguro que desea eliminar esta adecuación?</h5>
+          </center>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <%= link_to "Aceptar", {controller: "iniciotutor", action: "eliminar_adecuacion" }, class: "btn btn-default" %>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="myModalEliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h3 class="modal-title" id="myModalLabel">Eliminar Adecuación</h3>
+      </div>
+      <div class="modal-body">
+          <%= form_tag({controller: 'iniciotutor', action: 'eliminar_adecuacion'}) do%>
+            <div class="form-group">
+              <center>
+                <h5>Está seguro que desea eliminar esta adecuación?</h5>
+              </center>
+            </div>
+      </div>
+      <div class="modal-footer">
+          <button type="submit" class="btn btn-forminst">Si</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+      </div>
+      <%end%>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="myModal2" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Mensaje de notificación</h4>
+      </div>
+      <div class="modal-body">
+        <h5>El adecuación ya fue enviada.</h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="selectInforme" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h3 class="modal-title" id="myModalLabel">Eliminar Informe</h3>
+      </div>
+      <div class="modal-body">
+        <h5>Seleccione el informe a crear</h5>
+      </div>
+      <div class="modal-body">
+        <b>&emsp;&emsp;&emsp;</b>
+        <%= link_to "Informe 1", {controller: "informes", action: "ver_crear_informe", :informe_id => 1 }, class: "btn btn-forminst-blue" %>
+        <b>&emsp;&emsp;&emsp;</b>
+        <%= link_to "Informe 2", {controller: "informes", action: "ver_crear_informe", :informe_id => 2 }, class: "btn btn-forminst-blue" %>
+        <b>&emsp;&emsp;&emsp;</b>
+        <%= link_to "Informe 3", {controller: "informes", action: "ver_crear_informe", :informe_id => 3 }, class: "btn btn-forminst-blue" %>
+        <b>&emsp;&emsp;&emsp;</b>
+        <%= link_to "Informe 4", {controller: "informes", action: "ver_crear_informe", :informe_id => 4 }, class: "btn btn-forminst-blue" %>
+        <p>   </p>
+        <b>&emsp;&emsp;&emsp;</b>
+        <%= link_to "Informe 5", {controller: "informes", action: "ver_crear_informe", :informe_id => 5 }, class: "btn btn-forminst-blue" %>
+        <b>&emsp;&emsp;&emsp;</b>
+        <%= link_to "Informe 6", {controller: "informes", action: "ver_crear_informe", :informe_id => 6 }, class: "btn btn-forminst-blue" %>
+        <b>&emsp;&emsp;&emsp;</b>
+        <%= link_to "Informe 7", {controller: "informes", action: "ver_crear_informe", :informe_id => 7 }, class: "btn btn-forminst-blue" %>
+        <b>&emsp;&emsp;&emsp;</b>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12 col-md-12">
+    <div class="btn-group" role="group">
+      <button type="button" class="btn btn-default" onclick = " location.href = 'javascript:history.back(-1);'">Volver</button>
+      <%if session[:informe_id]%> 
+        <button type="button" data-toggle="modal" data-target="#myModal1" class="btn btn-default">Enviar</button>
+      <%else%> 
+        <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-default">Enviar</button>
+      <%end%> 
+      <%if session[:informe_id]%> 
+        <%= link_to "Vista Previa", {controller: "informes", action: "vista_previa"}, class: "btn btn-default" %>
+      <%else%> 
+		    <%= link_to "Vista Previa", {controller: "iniciotutor", action: "vista_previa"}, class: "btn btn-default" %>
+      <%end%> 
+      <%if session[:informe_id]%> 
+        <%= link_to "Generar PDF", {controller: "informes", action: "generar_pdf"},target: :_blank, class: "btn btn-default" %>
+      <%else%> 
+        <%= link_to "Generar PDF", {controller: "adecuacions", action: "generar_pdf"},target: :_blank, class: "btn btn-default" %>
+      <%end%> 
+  		<%= link_to "Agregar Soporte", {controller: "documents", action: "new"}, class: "btn btn-default active" %>
+  		<%= link_to "Ver Soporte", {controller: "documents", action: "index"}, class: "btn btn-default" %>
+      <%= link_to "Versiones Anteriores", {controller: "iniciotutor", action: "ver_respaldos"}, class: "btn btn-default" %>
+      <%if session[:informe_id]%> 
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModalEliminar1">Eliminar Informe</button>
+      <%else %>
+        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModalEliminar">Eliminar Adecuación</button>
+      <%end%>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12 col-md-12 col-md-offset-0">
+    <div class= "text-left">
+      <%if session[:nombre_usuario]%>
+        <div>
+          <%if !session[:informe_id]%> 
+            <span><%= link_to 'Plan Formación', :controller => 'iniciotutor', :action => 'planformacions' %></span>
+            <p style="display:inline"> / </p>
+            <span><%= link_to session[:instructorName] , :controller => 'iniciotutor', :action => 'ver_detalles_adecuacion' %></span>
+            <p style="display:inline">  / Ver Soportes </p>
+          <%else%> 
+            <span><%= link_to 'Plan Formación', :controller => 'iniciotutor', :action => 'planformacions' %></span>
+            <p style="display:inline"> / </p>
+            <span><%= link_to session[:instructorName] , :controller => 'iniciotutor', :action => 'ver_detalles_adecuacion' %></span>
+            <p style="display:inline"> / </p>
+            <span><%= link_to 'Informes', :controller => 'informes', :action => 'listar_informes' %></span>
+            <p style="display:inline">  / Ver Soportes </p>
+          <%end%> 
+        </div>
+      <%end%>
+    </div>
+    <div class="text-right">
+      <div id = "fechamuestra">
+        <h3> <%= Time.now.strftime("%d") %>
+          <% if Time.now.strftime("%m").to_i == 1 %>
+            de Enero del
+          <% elsif Time.now.strftime("%m").to_i == 2 %>
+            de Febrero del
+          <% elsif Time.now.strftime("%m").to_i == 3 %>
+            de Marzo del
+          <% elsif Time.now.strftime("%m").to_i == 4 %>
+            de Abril del
+          <% elsif Time.now.strftime("%m").to_i == 5 %>
+            de Mayo del
+          <% elsif Time.now.strftime("%m").to_i == 6 %>
+            de Junio del
+          <% elsif Time.now.strftime("%m").to_i == 7 %>
+            de Julio del
+          <% elsif Time.now.strftime("%m").to_i == 8 %>
+            de Agosto del
+          <% elsif Time.now.strftime("%m").to_i == 9 %>
+            de Septiembre del
+          <% elsif Time.now.strftime("%m").to_i == 10 %>
+            de Octubre del
+          <% elsif Time.now.strftime("%m").to_i == 11 %>
+            de Noviembre del
+          <% elsif Time.now.strftime("%m").to_i == 12 %>
+            de Diciembre del
+          <% end %>
+          <%= Time.now.strftime("%Y") %> 
+        </h3>
+      </div>
+      <%if session[:nombre_usuario]%>
+        <div>
+          <h4><b><%=session[:nombre_usuario]%></b></h4>
+        </div>
+      <%end%>
+    </div>
+  </div>
+</div>
+
+<h1>Cargar Documento</h1>
+<h4 >El archivo a adjuntar debe tener un tamaño menor a 1 MB </h4><br></br>
+<br></br>
+<%if @bool_enviado == 0%>
+  <%= render 'form', document: @document %>
+<%else%>
+  <div class= "text-center">
+  <h4 >No puede agregar más soportes a esta adecuación</h4><br></br>
+  </div>
+<%end%>
+<br></br>
+
+<br></br>

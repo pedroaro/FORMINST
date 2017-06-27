@@ -1,0 +1,97 @@
+<div class = 'row'>
+	<div class="col-xs-12 col-md-12">
+		
+			<ul class="nav nav-tabs">
+				<li><a href="../iniciotutor/index">Inicio</a></li>
+				<li><a href="../iniciotutor/planformacions">Plan de Formación</a></li>
+				<li><a href="../iniciotutor/notificaciones" class = 'active'>Notificaciones</a></li>
+				<li><a href="../iniciotutor/logout">Cerrar Sesión</a></li>
+				<li><%#= link_to 'Cerrar Sesión', :controller => 'iniciotutor', :action => 'logout', :salida => '1' %></li>
+			</ul>
+		
+	</div>
+
+</div>
+<div class="row">
+	<div class="col-xs-12 col-md-12">
+		<div class="text-right">
+			<div id = "fechamuestra">
+				<h3> <%= Time.now.strftime("%d") %>
+		          <% if Time.now.strftime("%m").to_i == 1 %>
+		            de Enero del
+		          <% elsif Time.now.strftime("%m").to_i == 2 %>
+		            de Febrero del
+		          <% elsif Time.now.strftime("%m").to_i == 3 %>
+		            de Marzo del
+		          <% elsif Time.now.strftime("%m").to_i == 4 %>
+		            de Abril del
+		          <% elsif Time.now.strftime("%m").to_i == 5 %>
+		            de Mayo del
+		          <% elsif Time.now.strftime("%m").to_i == 6 %>
+		            de Junio del
+		          <% elsif Time.now.strftime("%m").to_i == 7 %>
+		            de Julio del
+		          <% elsif Time.now.strftime("%m").to_i == 8 %>
+		            de Agosto del
+		          <% elsif Time.now.strftime("%m").to_i == 9 %>
+		            de Septiembre del
+		          <% elsif Time.now.strftime("%m").to_i == 10 %>
+		            de Octubre del
+		          <% elsif Time.now.strftime("%m").to_i == 11 %>
+		            de Noviembre del
+		          <% elsif Time.now.strftime("%m").to_i == 12 %>
+		            de Diciembre del
+		          <% end %>
+		          <%= Time.now.strftime("%Y") %> 
+		        </h3>
+			</div>
+			<%if session[:nombre_usuario]%>
+				<div>
+					<h4><b><%=session[:nombre_usuario]%></b></h4>
+				</div>
+			<%end%>
+			<p>Tutor</p>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class = 'col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0 text-justify'>
+		<h1 class = 'text-left'>Notificaciones:</h1>
+	</div>
+</div>
+
+<% if @notificaciones1 %>
+  <div class = 'row'>
+    <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
+	    <div class="table-responsive">
+	      <table class="table table-hover table-bordered text-center">
+	        <thead>
+	          <tr>
+	            <th class="text-center">Notificaciones</th>
+	            <th class="text-center" style='width:10%;'>Acción</th>
+	          </tr>
+	        </thead>
+	        <tbody>
+	        	<% if !@notificaciones1.blank? %>
+		          <% @notificaciones1.reverse_each.each_with_index do |notificaciones1| %> 
+					<%= form_tag({controller: 'iniciotutor', action: 'borrar_notificaciones'}) do%>
+					<input id="noti" type="hidden" name="noti" value='<%= notificaciones1.id %>'/>
+		            <tr>
+		              <td class="text-left"><%= notificaciones1.mensaje %></td>
+		              <td><button type="submit" class="glyphicon glyphicon-trash" aria-hidden="true"></button></td>
+		            </tr>
+		        	<% end %>
+		          <% end %>
+		        <% else %>
+	          		<tr>
+			            <td class="text-center">No tienes nuevas notificaciones, vuelve mas tarde</td>
+			        </tr>
+	          	<% end %>
+	        </tbody>
+	      </table>
+	    </div>
+    </div>
+  </div>
+<% else %>
+      <h1>Usted no posee ninguna Notificación</h1>
+<% end %>

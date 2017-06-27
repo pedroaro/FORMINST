@@ -1,0 +1,310 @@
+<div class = 'row'>
+  <div class="col-xs-5 col-md-12">
+    <div class="container">
+      <ul class="nav nav-tabs">
+        <li><a href="../iniciotutor/index">Inicio</a></li>
+        <li><a href="../iniciotutor/crear_adecuacion" class = 'active'>Crear Adecuación</a></li> 
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Informes <span class="caret"></span></a>
+            <ul class="dropdown-menu nav" role="menu">
+              <li></li>
+              <li><%= link_to 'Crear Informe', :controller => 'informes', :action => 'ver_crear_informe'%></li>
+              <li><%= link_to 'Listar Informes', :controller => 'informes', :action => 'listar_informes'%></li>
+            </ul>
+        </li>
+        <li><%= link_to 'Prórroga', :controller => 'iniciotutor', :action => 'prorroga', :plan_id => @planformacion, :instructorName => @instructorName %></li>
+        <li><a href="../iniciotutor/logout">Cerrar Sesión</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12 col-md-12">
+    <div class= "text-left">
+      <%if @nombre%>
+        <div>
+          <b> Plan Formación  /  <%= @instructorName  %> / Crear Adecuación</b>
+        </div>
+      <%end%>
+    </div>
+    <div class="text-right">
+      <div id = "fechamuestra">
+        <h3> <%= Time.now.strftime("%d") %>
+          <% if Time.now.strftime("%m").to_i == 1 %>
+            de Enero del
+          <% elsif Time.now.strftime("%m").to_i == 2 %>
+            de Febrero del
+          <% elsif Time.now.strftime("%m").to_i == 3 %>
+            de Marzo del
+          <% elsif Time.now.strftime("%m").to_i == 4 %>
+            de Abril del
+          <% elsif Time.now.strftime("%m").to_i == 5 %>
+            de Mayo del
+          <% elsif Time.now.strftime("%m").to_i == 6 %>
+            de Junio del
+          <% elsif Time.now.strftime("%m").to_i == 7 %>
+            de Julio del
+          <% elsif Time.now.strftime("%m").to_i == 8 %>
+            de Agosto del
+          <% elsif Time.now.strftime("%m").to_i == 9 %>
+            de Septiembre del
+          <% elsif Time.now.strftime("%m").to_i == 10 %>
+            de Octubre del
+          <% elsif Time.now.strftime("%m").to_i == 11 %>
+            de Noviembre del
+          <% elsif Time.now.strftime("%m").to_i == 12 %>
+            de Diciembre del
+          <% end %>
+          <%= Time.now.strftime("%Y") %> 
+        </h3>
+      </div>
+      <%if @nombre%>
+        <div>
+          <h4><b><%=@nombre%></b></h4>
+        </div>
+      <%end%>
+    </div>
+  </div>
+</div>
+
+<div class = 'row'>
+  <div class="col-xs-12 col-md-12 text-justify">
+    <h1 class="text-left">Crear Adecuación</h1>
+    <p class="text-justify">Actividades a realizar por el instructor:</p>
+  </div>
+</div>
+</br>
+<div class = 'row'>
+  <div class = 'col-xs-12 col-xs-offset-0 col-md-10 col-md-offset-1'>
+    <%= form_tag({controller: 'iniciotutor', action: 'guardar_adecuacion', semestre: 4}) do%>
+
+      <ul class="tabs">
+        <li><%= link_to '1° Semestre', :controller => 'iniciotutor', :action => 'crear_adecuacion', :plan_id => @planformacion, :instructorName => @instructorName %></li>
+        <li><%= link_to '2° Semestre', :controller => 'iniciotutor', :action => 'crear_adecuacion_semestre2', :plan_id => @planformacion, :instructorName => @instructorName %></li>
+        
+        <li><%= link_to '3° Semestre', :controller => 'iniciotutor', :action => 'crear_adecuacion_semestre3', :plan_id => @planformacion, :instructorName => @instructorName %></li>
+        <li class="activa"><a href="#">4° Semestre</a></li>
+      </ul>
+
+      <div class="contenedor_tab">
+        
+        <div class="contenido_tab">
+          
+          <div class = 'row'>
+            <div class = 'col-xs-10 col-md-10'>
+              <div class="act_doc">
+              <label for = 'docencia0'>Actividades de Docencia: </label> <br>
+                <div class ='container'>
+                  <div class = 'col-xs-11 col-md-9'>
+                    <textarea class = 'form-control' rows="2" name="docencia0" placeholder="Ingrese una actividad..."  required style=" margin-left:-30px;" id ='docencia0'></textarea><br>
+                  </div>
+                </div>
+                <input id="cant_docencia" type="hidden" name="cant_docencia" value="1"/> 
+              </div>
+              <a class="agregar_docencia add"><span class="glyphicon glyphicon-plus"></span> Agregar otra actividad de docencia</a><br><br><br>
+            </div>
+          </div>
+
+          <div class = 'row'>
+            <div class = 'col-xs-10 col-md-10'>
+              <div class="act_inv">
+              <label for = 'investigacion0'>Actividades de Investigación: </label><br>
+                <div class ='container'>
+                  <div class = 'col-xs-11 col-md-9'>
+                    <textarea class = 'form-control' rows="2" name="investigacion0" placeholder="Ingrese una actividad..."  required style=" margin-left:-30px;" id ='investigacion0'></textarea> <br>
+                  </div>
+                </div> 
+                <input id="cant_investigacion" type="hidden" name="cant_investigacion" value="1"/> 
+              </div>
+              <a class="agregar_investigacion add"><span class="glyphicon glyphicon-plus"></span> Agregar otra actividad de Investigación</a><br><br><br>
+            </div>
+          </div>
+
+          <div class = 'row'>
+            <div class = 'col-xs-10 col-md-10'>
+              <div class="act_for">
+              <label for = 'formacion0'>Actividades de Formación: </label><br>
+                <div class ='container'>
+                  <div class = 'col-xs-11 col-md-9'>
+                    <textarea class = 'form-control' rows="2" name="formacion0" placeholder="Ingrese una actividad..."  required style=" margin-left:-30px;" id ='formacion0'></textarea> <br>
+                  </div>
+                </div>
+                <input id="cant_formacion" type="hidden" name="cant_formacion" value="1"/>
+              </div>
+              <a class="agregar_formacion add"><span class="glyphicon glyphicon-plus"></span> Agregar otra actividad de formación</a><br><br><br>
+            </div>
+          </div>
+
+          <div class = 'row'>
+            <div class = 'col-xs-10 col-md-10'>
+              <div class="act_ext">
+              <label for = 'extension0'>Actividades de Extensión: </label><br>
+                <div class ='container'>
+                  <div class = 'col-xs-11 col-md-9'>
+                    <textarea class = 'form-control' rows="2" name="extension0" placeholder="Ingrese una actividad..." style=" margin-left:-30px;" id ='extension0'></textarea> <br>
+                  </div>
+                </div>
+                <input id="cant_extension" type="hidden" name="cant_extension" value="1"/>
+              </div>
+              <a class="agregar_extension add"><span class="glyphicon glyphicon-plus"></span> Agregar otra actividad de extensión</a><br><br><br>
+            </div>
+          </div>
+
+          <div class = 'row'>
+            <div class = 'col-xs-10 col-md-10'>
+              <div class="act_otra">
+              <label for = 'otra0'>Otras Actividades: </label><br>
+                <div class ='container'>
+                  <div class = 'col-xs-11 col-md-9'>
+                    <textarea class = 'form-control' rows="2" name="otra0" placeholder="Ingrese una actividad..." style=" margin-left:-30px;" id ='otra0'></textarea> <br>
+                  </div>
+                </div>
+                <input id="cant_otra" type="hidden" name="cant_otra" value="1"/>
+              </div>
+              <a class="agregar_otra add"><span class="glyphicon glyphicon-plus"></span> Agregar otra actividad</a><br><br><br>
+            </div>
+          </div>
+
+          <div class = 'row'>
+            <div class="col-xs-3 col-xs-offset-6 col-md-3 col-md-offset-8">
+              <center><button type="submit" class="btn btn-forminst">Guardar</button></center>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    <%end%>
+  </div>
+</div>
+
+<div class = 'row'>
+  <div class = 'col-xs-12 col-md-12'>
+    <center>
+      <button type="button" class="btn btn-forminst" onclick = " location.href = 'javascript:history.back(-1);'">Volver</button>
+    </center>
+  </div>
+</div>
+<br>
+<br>
+
+<script type="text/javascript">
+  function eliminar (elemento){
+    $(elemento).parent().parent().parent().remove();
+  }
+</script>
+
+<script type='text/javascript'> 
+    $(document).ready(function() {
+      var cant_docencia=1;
+      var cant_investigacion=1;
+      var cant_formacion=1;
+      var cant_extension=1;
+      var cant_otra=1;
+
+   /*   $(".contenido_tab").hide(); //Ocultar capas
+        $("ul.tabs li:first").addClass("activa").show(); //Activar primera pestaña
+        $(".contenido_tab:first").show(); //Mostrar contenido primera pestaña
+
+        // Sucesos al hacer click en una pestaña
+        $("ul.tabs li").click(function() {
+        $("ul.tabs li").removeClass("activa"); //Borrar todas las clases "activa"
+        $(this).addClass("activa"); //Añadir clase "activa" a la pestaña seleccionada
+        $(".contenido_tab").hide(); //Ocultar todo el contenido de la pestaña
+        var activatab = $(this).find("a").attr("href"); //Leer el valor de href para identificar la pestaña activa 
+        $(activatab).fadeIn(); //Visibilidad con efecto fade del contenido activo
+        return false;
+        }); */
+
+      $(".agregar_docencia").click(function() {
+        $(".act_doc").append('<div id="docencia'+cant_docencia+'">\
+                                <div class ="container">\
+                                  <div class = "col-xs-11 col-md-9">\
+                                    <textarea class = "form-control" rows="2"  style="margin-left:-30px;"  name="docencia'+cant_docencia+'" placeholder="Ingrese una actividad..." required></textarea>\
+                                  </div>\
+                                  <div class = "col-xs-1 col-md-1">\
+                                    <button type="button" class="btn btn-default eliminar" title="Eliminar Actividad" onclick = "eliminar(this)">\
+                                      <span class="glyphicon glyphicon-remove"></span>\
+                                    </button>\
+                                  </div>\
+                                </div>\
+                              <br></div>');
+          cant_docencia = cant_docencia + 1;
+          $("#cant_docencia").val(cant_docencia);
+          
+      });
+
+      $(".agregar_investigacion").click(function() {
+        $(".act_inv").append('<div id="investigacion'+cant_investigacion+'">\
+                                <div class ="container">\
+                                  <div class = "col-xs-11 col-md-9">\
+                                    <textarea class = "form-control" rows="2"  style="margin-left:-30px;"  name="investigacion'+cant_investigacion+'" placeholder="Ingrese una actividad..." required></textarea>\
+                                  </div>\
+                                  <div class = "col-xs-1 col-md-1">\
+                                    <button type="button" class="btn btn-default eliminar" title="Eliminar Actividad" onclick = "eliminar(this)">\
+                                      <span class="glyphicon glyphicon-remove"></span>\
+                                    </button>\
+                                  </div>\
+                                </div>\
+                              <br></div>');
+        cant_investigacion= cant_investigacion + 1;
+        $("#cant_investigacion").val(cant_investigacion);
+      });
+
+      $(".agregar_formacion").click(function() {
+        $(".act_for").append('<div id="formacion'+cant_formacion+'">\
+                                <div class ="container">\
+                                  <div class = "col-xs-11 col-md-9">\
+                                    <textarea class = "form-control" rows="2"  style="margin-left:-30px;"  name="formacion'+cant_formacion+'" placeholder="Ingrese una actividad..." required></textarea>\
+                                  </div>\
+                                  <div class = "col-xs-1 col-md-1">\
+                                    <button type="button" class="btn btn-default eliminar" title="Eliminar Actividad" onclick = "eliminar(this)">\
+                                      <span class="glyphicon glyphicon-remove"></span>\
+                                    </button>\
+                                  </div>\
+                                </div>\
+                              <br></div>');
+        cant_formacion=cant_formacion+1;
+        $("#cant_formacion").val(cant_formacion);
+      });
+
+
+      $(".agregar_extension").click(function() {
+        $(".act_ext").append('<div id="extension'+cant_extension+'">\
+                                <div class ="container">\
+                                  <div class = "col-xs-11 col-md-9">\
+                                    <textarea class = "form-control" rows="2"  style="margin-left:-30px;"  name="extension'+cant_extension+'" placeholder="Ingrese una actividad..."></textarea>\
+                                  </div>\
+                                  <div class = "col-xs-1 col-md-1">\
+                                    <button type="button" class="btn btn-default eliminar" title="Eliminar Actividad" onclick = "eliminar(this)">\
+                                      <span class="glyphicon glyphicon-remove"></span>\
+                                    </button>\
+                                  </div>\
+                                </div>\
+                              <br></div>');
+        cant_extension=cant_extension+1;
+        $("#cant_extension").val(cant_extension);
+
+      });
+
+      $(".agregar_otra").click(function() {
+        $(".act_otra").append('<div id="otra'+cant_otra+'">\
+                                <div class ="container">\
+                                  <div class = "col-xs-11 col-md-9">\
+                                    <textarea class = "form-control" rows="2"  style="margin-left:-30px;"  name="otra'+cant_otra+'" placeholder="Ingrese una actividad..."></textarea>\
+                                  </div>\
+                                  <div class = "col-xs-1 col-md-1">\
+                                    <button type="button" class="btn btn-default eliminar" title="Eliminar Actividad" onclick = "eliminar(this)">\
+                                      <span class="glyphicon glyphicon-remove"></span>\
+                                    </button>\
+                                  </div>\
+                                </div>\
+                              <br></div>');
+        cant_otra=cant_otra+1;
+        $("#cant_otra").val(cant_otra);
+
+      });
+    });
+
+    //window.open("190.169.74.156:3000/iniciotutor/guardar_adecuacion?cant_docencia="+cant_docencia)
+
+</script>

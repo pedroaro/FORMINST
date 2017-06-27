@@ -1,0 +1,227 @@
+
+
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Mensaje de confirmación</h4>
+      </div>
+      <div class="modal-body">
+        <h5>Está seguro que desea enviar la adecuación?.</h5>
+      </div>
+      <div class="modal-footer">
+        <%= link_to "Aceptar", {controller: "iniciotutor", action: "cambiar_estatusA", :adecuacion_id => @adecuacion.id }, class: "btn btn-default" %>
+      
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="myModal2" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Mensaje de notificación</h4>
+      </div>
+      <div class="modal-body">
+        <h5>El adecuación ya fue enviado.</h5>
+      </div>
+      <div class="modal-footer">
+    
+        <button type="button" class="btn btn-default" data-dismiss="modal">Aceptar</button>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+
+<div class="modal fade" id="myModal4" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Mensaje de confirmación</h4>
+      </div>
+      <div class="modal-body">
+        <h5>Seleccione la acción que desea realizar sobre la adecuación.</h5>
+      </div>
+      <div class="modal-footer">
+      <%= link_to "Aceptar", {controller: "inicioentidad", action: "cambiar_estatusA", :adecuacion_id => @adecuacion.id, :rechazar => 0 }, class: "btn btn-default" %>
+      <%= link_to "Rechazar", {controller: "inicioentidad", action: "cambiar_estatusA", :adecuacion_id => @adecuacion.id, :rechazar => 1 }, class: "btn btn-default" %>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+<div class = 'row'>
+  <div class="col-xs-12 col-md-12">
+      <ul class="nav nav-tabs">
+        <li><a href="../inicioentidad/index">Inicio</a></li>
+        <li><%= link_to 'Listar Adecuaciones', :controller => 'inicioentidad', :action => 'listar_adecuaciones' %></li>
+        <li><%= link_to 'Listar Informes', :controller => 'inicioentidad', :action => 'listar_informes' %></li>
+        <li><%= link_to 'Prórroga', :controller => 'inicioentidad', :action => 'prorroga' %></li>
+        <li><a href="../inicioentidad/logout">Cerrar Sesión</a></li>
+      </ul>
+  
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12 col-md-12">
+    <div class="btn-group" role="group">
+       <button type="button" class="btn btn-default" onclick = " location.href = 'javascript:history.back(-1);'">Volver</button>
+        <%if @bool_enviado == 0 %>
+          <%if session[:entidad_id]==13 %>
+             <button type="button" data-toggle="modal" data-target="#myModal4" class="btn btn-default">Aprobar/Rechazar</button>
+          <%else%>
+            <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-default">Enviar</button>
+          <%end%>
+
+        <%else%>
+            <%if session[:entidad_id]==13 %>
+                <button type="button" data-toggle="modal" data-target="#myModal2" class="btn btn-default">Aprobar/Rechazar</button>
+            <%else%>
+                <button type="button" data-toggle="modal" data-target="#myModal2" class="btn btn-default">Enviar</button>
+            <%end%>
+       
+        <%end%>
+      <%= link_to "Vista Previa", {controller: "inicioentidad", action: "vista_previa"}, class: "btn btn-default" %>
+      <%= link_to "Generar PDF", {controller: "adecuacions", action: "descargar_pdf"}, class: "btn btn-default" %>
+    </div>
+  </div>
+</div>
+
+<div class = 'row'>
+  <div class="col-xs-12 col-md-12">
+    <%if flash[:mensaje]%>
+      <div class="panel panel-warning">
+        <div class="panel-body">
+          <h5><b><%=flash[:mensaje]%></b></h5>
+        </div>
+      </div>
+    <%end%>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12 col-md-12 col-md-offset-0">
+    <div class="text-right">
+      <div id = "fechamuestra">
+        <h3> <%= Time.now.strftime("%d") %>
+          <% if Time.now.strftime("%m").to_i == 1 %>
+            de Enero del
+          <% elsif Time.now.strftime("%m").to_i == 2 %>
+            de Febrero del
+          <% elsif Time.now.strftime("%m").to_i == 3 %>
+            de Marzo del
+          <% elsif Time.now.strftime("%m").to_i == 4 %>
+            de Abril del
+          <% elsif Time.now.strftime("%m").to_i == 5 %>
+            de Mayo del
+          <% elsif Time.now.strftime("%m").to_i == 6 %>
+            de Junio del
+          <% elsif Time.now.strftime("%m").to_i == 7 %>
+            de Julio del
+          <% elsif Time.now.strftime("%m").to_i == 8 %>
+            de Agosto del
+          <% elsif Time.now.strftime("%m").to_i == 9 %>
+            de Septiembre del
+          <% elsif Time.now.strftime("%m").to_i == 10 %>
+            de Octubre del
+          <% elsif Time.now.strftime("%m").to_i == 11 %>
+            de Noviembre del
+          <% elsif Time.now.strftime("%m").to_i == 12 %>
+            de Diciembre del
+          <% end %>
+          <%= Time.now.strftime("%Y") %> 
+        </h3>
+      </div>
+      <%if @nombre%>
+        <div>
+          <h4><b><%=@nombre%></b></h4>
+        </div>
+      <%end%>
+    </div>
+  </div>
+</div>
+
+
+<%if @boolobs == 1 %>
+  <div class = 'row'>
+    <div class="col-xs-11 col-xs-offset-1 col-md-12 col-md-offset-0 text-justify">
+      <h1 class="text-left">Observaciones de la actividad seleccionada</h1>
+    </div>
+  </div>
+
+<%else%>
+  <div class = 'row'>
+    <div class="col-xs-11 col-xs-offset-1 col-md-12 col-md-offset-0 text-justify">
+      <h1 class="text-left">No hay observaciones en la actividad seleccionada.</h1>
+    </div>
+  </div>
+<%end%>
+
+<div class= "row">
+  <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
+    <div class="table-responsive">
+      <table class="table table-bordered table-striped">
+        <tbody>
+   
+         
+          <% if @obs_inv != nil && @obs_inv != "" %>
+            <tr>
+                <td class="text-center"><strong>Comisión de investigación</strong></td>  
+            </tr>
+            <tr>
+                <td class="text-left"><%= @obs_inv%></td>
+            </tr>
+          <%end%>
+          <% if @obs_consejoT != nil && @obs_consejoT != "" %>
+            <tr>
+                <td class="text-center"><strong>Consejo técnico</strong></td>  
+            </tr>
+            <tr>
+                <td class="text-left"><%= @obs_consejoT%></td>
+            </tr>
+          <%end%>
+          <% if @obs_consejoE != nil && @obs_consejoE != "" %>
+            <tr>
+                <td class="text-center"><strong>Consejo de escuela</strong></td>  
+            </tr>
+            <tr>
+                <td class="text-left"><%= @obs_consejoE%></td>
+            </tr>
+          <%end%>
+          <% if @obs_consejoF != nil && @obs_consejoF != "" %>
+            <tr>
+                <td class="text-center"><strong>Consejo de facultad</strong></td>  
+            </tr>
+            <tr>
+                <td class="text-left"><%= @obs_consejoF%></td>
+            </tr>
+          <%end%>
+            
+          
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-offset-5 col-xs-12 col-md-12">
+    <div class="btn-group" role="group">
+       <button style="margin-left: 30px; margin-bottom: 20px;" type="button" class="btn btn-default volverObs" onclick=" location.href = 'javascript:history.back(-1);'">Volver</button>
+    </div>
+</div>

@@ -1,0 +1,721 @@
+<div class = 'row'>
+  <div class="col-xs-12 col-md-12">
+      <ul class="nav nav-tabs">
+        <li><a href="../inicioentidad/index">Inicio</a></li>
+        <li><a href="../inicioentidad/listar_adecuaciones">Listar Adecuaciones</a></li>
+        <li><a href="../inicioentidad/listar_informes" class="active">Listar Informes</a></li>
+        <li><a href="../inicioentidad/prorroga">Prorroga</a></li>
+        <li><a href="../inicioentidad/logout">Cerrar Sesión</a></li>
+      </ul>
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Mensaje de confirmación</h4>
+      </div>
+      <div class="modal-body">
+        <h5>Está seguro que desea enviar el informe?.</h5>
+      </div>
+      <div class="modal-footer">
+        <%= link_to "Aceptar", {controller: "inicioentidad", action: "cambiar_estatusI", :informe_id => @informe.id }, class: "btn btn-default" %>
+      
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="myModal2" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Mensaje de notificación</h4>
+      </div>
+      <div class="modal-body">
+        <h5>El informe ya fue enviado.</h5>
+      </div>
+      <div class="modal-footer">
+    
+        <button type="button" class="btn btn-default" data-dismiss="modal">Aceptar</button>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+
+<div class="modal fade" id="myModal3" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Mensaje de notificación</h4>
+      </div>
+      <div class="modal-body">
+        <h5>No puede realizar ningún cambio debido a que el informe ya fue fue enviado.</h5>
+      </div>
+      <div class="modal-footer">
+    
+        <button type="button" class="btn btn-default" data-dismiss="modal">Aceptar</button>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+
+<div class="modal fade" id="myModal4" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Mensaje de confirmación</h4>
+      </div>
+      <div class="modal-body">
+        <h5>Seleccione la acción que desea realizar sobre el informe.</h5>
+      </div>
+      <div class="modal-footer">
+      <%= link_to "Aprobar", {controller: "inicioentidad", action: "cambiar_estatusI", :informe_id => @informe.id, :rechazar => 0 }, class: "btn btn-default" %>
+      <%= link_to "Aprobar con Observaciones", {controller: "inicioentidad", action: "cambiar_estatusI", :informe_id => @informe.id, :rechazar => 2 }, class: "btn btn-default" %>
+      <%= link_to "Rechazar", {controller: "inicioentidad", action: "cambiar_estatusI", :informe_id => @informe.id, :rechazar => 1 }, class: "btn btn-default" %>
+      
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+
+<div class="row">
+  <div class="col-xs-12 col-md-12">
+    <div class="btn-group" role="group">
+       <button type="button" class="btn btn-default" onclick = " location.href = 'javascript:history.back(-1);'">Volver</button>  
+       <%if @bool_enviado == 0 %>
+          <%if session[:entidad_id]==13 %>
+             <button type="button" data-toggle="modal" data-target="#myModal4" class="btn btn-default">Aprobar/Rechazar</button>
+          <%else%>
+            <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-default">Enviar</button>
+          <%end%>
+
+        <%else%>
+            <%if session[:entidad_id]==13 %>
+                <button type="button" data-toggle="modal" data-target="#myModal2" class="btn btn-default">Aprobar/Rechazar</button>
+            <%else%>
+                <button type="button" data-toggle="modal" data-target="#myModal2" class="btn btn-default">Enviar</button>
+            <%end%>
+       
+        <%end%>
+      
+      <%= link_to "Vista Previa", {controller: "inicioentidad", action: "vista_previa1"}, class: "btn btn-default" %>
+      <%= link_to "Generar PDF", {controller: "informes", action: "generar_pdf"},target: :_blank, class: "btn btn-default" %>
+      <%= link_to "Ver Soportes", {controller: "inicioentidad", action: "ver_soporte"}, class: "btn btn-default" %>
+      <%= link_to "Versiones Anteriores", {controller: "inicioentidad", action: "ver_respaldos"}, class: "btn btn-default" %>
+
+    </div>
+  </div>
+</div>
+
+<div class = 'row'>
+  <div class="col-xs-12 col-md-12">
+    <%if flash[:mensaje]%>
+      <div class="panel panel-warning">
+        <div class="panel-body">
+          <h5><b><%=flash[:mensaje]%></b></h5>
+        </div>
+      </div>
+    <%end%>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12 col-md-12 col-md-offset-0">
+    <div class="text-right">
+      <div id = "fechamuestra">
+        <h3> <%= Time.now.strftime("%d") %>
+          <% if Time.now.strftime("%m").to_i == 1 %>
+            de Enero del
+          <% elsif Time.now.strftime("%m").to_i == 2 %>
+            de Febrero del
+          <% elsif Time.now.strftime("%m").to_i == 3 %>
+            de Marzo del
+          <% elsif Time.now.strftime("%m").to_i == 4 %>
+            de Abril del
+          <% elsif Time.now.strftime("%m").to_i == 5 %>
+            de Mayo del
+          <% elsif Time.now.strftime("%m").to_i == 6 %>
+            de Junio del
+          <% elsif Time.now.strftime("%m").to_i == 7 %>
+            de Julio del
+          <% elsif Time.now.strftime("%m").to_i == 8 %>
+            de Agosto del
+          <% elsif Time.now.strftime("%m").to_i == 9 %>
+            de Septiembre del
+          <% elsif Time.now.strftime("%m").to_i == 10 %>
+            de Octubre del
+          <% elsif Time.now.strftime("%m").to_i == 11 %>
+            de Noviembre del
+          <% elsif Time.now.strftime("%m").to_i == 12 %>
+            de Diciembre del
+          <% end %>
+          <%= Time.now.strftime("%Y") %> 
+        </h3>
+      </div>
+      <%if @nombre%>
+        <div>
+          <h4><b><%=@nombre%></b></h4>
+        </div>
+      <%end%>
+    </div>
+  </div>
+</div>
+
+<div class = 'row'>
+  <div class="col-xs-11 col-xs-offset-1 col-md-12 col-md-offset-0 text-justify">
+    <h1 class="text-left">Detalles del Informe</h1>
+  </div>
+</div>
+<div class = 'row'>
+  <div class="col-xs-11 col-xs-offset-1 col-md-12 col-md-offset-0 text-center">
+    <h5><strong><%=session[:nombre_informe]%> DE ACTIVIDADES REALIZADAS POR EL INSTRUCTOR DURANTE LA EJECUCIÓN DE SU PLAN DE FORMACIÓN Y CAPACITACIÓN</strong></h5>
+  </div>
+</div>
+<div class = 'row'>
+  <div class="col-xs-11 col-xs-offset-1 col-md-12 col-md-offset-0 text-left">
+    <h5><strong>Estado del Documento:<%=@status.concepto%></strong></h5>
+  </div>
+</div>
+<br/>
+<div class= "row">
+  <div class="col-xs-12 col-md-12 col-lg-12">
+    <%= form_tag({controller: 'inicioentidad', action: 'guardar_observaciones'}) do%>
+        <input id="cant_docencia" type="hidden" name="cant_docencia" value="<%=@actividadesadoc.size()%>"/> 
+        <input id="cant_investigacion" type="hidden" name="cant_investigacion" value="<%=@actividadesainv.size()%>"/>
+        <input id="cant_formacion" type="hidden" name="cant_formacion" value="<%=@actividadesafor.size()%>"/> 
+        <input id="cant_extension" type="hidden" name="cant_extension" value="<%=@actividadesaext.size()%>"/> 
+        <input id="cant_otra" type="hidden" name="cant_otra" value="<%=@actividadesaotr.size()%>"/> 
+        <input id="cant_otra" type="hidden" name="cant_otra" value="<%=@actividadesaotr.size()%>"/> 
+        <input id="tipoinf" type="hidden" name="tipoinf" value="<%=@tipo_informe%>"/> 
+        <input id="numeroinf" type="hidden" name="numero_informe" value="<%=@numero_informe%>"/> 
+
+        <% if @bool_enviado == 0 %>
+          <h4><strong> Actividades a realizar por el instructor:</h4>
+
+          <table class="table table-bordered ">
+           <tbody>
+              <tr class='title-table'>
+
+                <td class="text-center"  style='width:30%;'><strong>Actividad Docente Programada</strong></td>
+                <td class="text-center"  style='width:30%;'><strong>Actividad Docente Ejecutada</strong></td>
+                <td class="text-center"  style='width:30%;'><strong>Observaciones</strong></td>
+                <td class="text-center"  style='width:30%;'><strong>Mas observaciones</strong></td>
+              </tr>
+                <% @actividadesadoc.each_with_index do |actdoc, i| %>
+             
+                  <tr>
+                    <td>
+                      <textarea class="form-control" rows="3" name='docencia<%= actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
+                    </td>
+                    <td>
+                      <% if @actividadese[@j]!="" && @actividadese[@j]!=nil %>
+                        <textarea class="form-control" rows="3" name='ejecutada<%= actdoc.id.to_s%>' disabled ><%=  @actividadese[@j].descripcion %></textarea>
+                      <%else%>
+                         <textarea class="form-control" rows="3" name='ejecutada<%= actdoc.id.to_s%>' disabled ></textarea>
+                      <%end%>
+            
+                    </td>
+                    <td>
+                      <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' ><%=@observaciont[@j] %></textarea>
+                    </td>
+                    <td class="text-center">
+                      <%= link_to "Más obs. ", {:controller => "inicioentidad", :action => "mas_observaciones", :actividad_id => actdoc.id, :informe_id => @informe.id }, class: "pad add btn btn-default" %>
+                    </td>
+                    
+                    <input type="hidden" name="doc<%=i.to_s%>" value='<%= actdoc.id %>'>
+                    
+                  </tr>
+                  <% @j= @j +1 %>
+                <% end %>
+              <tr class='title-table'>
+                <td class="text-center"  style='width:30%;'><strong>Actividad de Investigación Programada</strong></td>
+                <td class="text-center"  style='width:30%;'><strong>Actividad de Investigación Ejecutada</strong></td>
+                <td class="text-center"  style='width:30%;'><strong>Observaciones</strong></td>
+                <td class="text-center"  style='width:30%;'><strong>Mas observaciones</strong></td>
+              </tr>
+
+              <% @actividadesainv.each_with_index do |actdoc,i| %>
+                <tr>
+                  <td>
+                      <textarea class="form-control" rows="3" name='investigacion<%= actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
+                    </td>
+                    <td>
+                      <% if @actividadese[@j]!="" && @actividadese[@j]!=nil %>
+                        <textarea class="form-control" rows="3" name='ejecutada<%= actdoc.id.to_s%>' disabled ><%=  @actividadese[@j].descripcion %></textarea>
+                      <%else%>
+                         <textarea class="form-control" rows="3" name='ejecutada<%= actdoc.id.to_s%>' disabled ></textarea>
+                      <%end%>
+                    </td>
+                    <td>
+                      <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' ><%=@observaciont[@j] %></textarea>
+
+                    </td>
+                    <td class="text-center">
+                       <%= link_to "Más obs. ", {:controller => "inicioentidad", :action => "mas_observaciones", :actividad_id => actdoc.id, :informe_id => @informe.id }, class: "pad add btn btn-default" %>
+                    </td>
+                    
+                    <input type="hidden" name="inv<%=i.to_s%>" value='<%= actdoc.id %>'>
+                </tr>
+                <% if @resultados[@j]!= nil %>
+                    <tr>
+                      <td>
+                        <div class="row">
+                          <div class="col-xs-12 col-md-12 col-lg-12">
+                             <tr>
+                             <td colspan="4">
+                              <h5>Resultados: </h5>
+                             </td>
+                             </tr>
+                             <tr>
+                             <td colspan="4">
+                             <div class="well">
+                             <% @resultados2a[@j].each_with_index do |cpresultados| %>
+                               <span class="pull-left glyphicon glyphicon-ok" aria-hidden="true">
+                               </span>
+                               &nbsp; <%= cpresultados %>  
+                               <br>
+                             <% end %>
+                             </div>
+                             </td>
+                             </tr>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                <%end%>
+
+                <% @j= @j +1 %>
+              <% end %>
+
+              <tr class='title-table'>
+                <td class="text-center"  style='width:30%;'><strong>Actividad de Formación Programada</strong></td>
+                <td class="text-center"  style='width:30%;'><strong>Actividad de Formación Ejecutada</strong></td>
+                <td class="text-center"  style='width:30%;'><strong>Observaciones</strong></td>
+                <td class="text-center"  style='width:30%;'><strong>Mas observaciones</strong></td>
+              </tr>
+              <% @actividadesafor.each_with_index do |actdoc,i| %>
+                <tr>
+                  <td>
+                      <textarea class="form-control" rows="3" name='formacion<%= actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
+                    </td>
+                    <td>
+                      <% if @actividadese[@j]!="" && @actividadese[@j]!=nil %>
+                        <textarea class="form-control" rows="3" name='ejecutada<%= actdoc.id.to_s%>' disabled ><%=  @actividadese[@j].descripcion %></textarea>
+                      <%else%>
+                         <textarea class="form-control" rows="3" name='ejecutada<%= actdoc.id.to_s%>' disabled ></textarea>
+                      <%end%>
+                    </td>
+                    <td>
+                      <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' ><%=@observaciont[@j] %></textarea>
+                    </td>
+                    <td>
+                       <%= link_to "Más obs. ", {:controller => "inicioentidad", :action => "mas_observaciones", :actividad_id => actdoc.id, :informe_id => @informe.id }, class: "pad add btn btn-default" %>
+                    </td>
+                    
+                    <input type="hidden" name="ext<%=i.to_s%>" value='<%= actdoc.id %>'>
+                </tr>
+                <% @j= @j +1 %>
+              <% end %>
+              <tr  class='title-table'>
+                <td class="text-center"  style='width:30%;'><strong>Actividad de Extensión Programada</strong></td>
+                <td class="text-center"  style='width:30%;'><strong>Actividad de Extensión Ejecutada</strong></td>
+                <td class="text-center"  style='width:30%;'><strong>Observaciones</strong></td>
+                <td class="text-center"  style='width:30%;'><strong>Mas observaciones</strong></td>
+              </tr>
+              <% @actividadesaext.each_with_index do |actdoc,i| %>
+                <tr>
+                  <td>
+                      <textarea class="form-control" rows="3" name='extension<%= actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
+                    </td>
+                    <td>
+                      <% if @actividadese[@j]!="" && @actividadese[@j]!=nil %>
+                        <textarea class="form-control" rows="3" name='ejecutada<%= actdoc.id.to_s%>' disabled ><%=  @actividadese[@j].descripcion %></textarea>
+                      <%else%>
+                         <textarea class="form-control" rows="3" name='ejecutada<%= actdoc.id.to_s%>' disabled ></textarea>
+                      <%end%>
+                    </td>
+                    <td>
+                      <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' ><%=@observaciont[@j] %></textarea>
+                    </td>
+                    <td>
+                       <%= link_to "Más obs. ", {:controller => "inicioentidad", :action => "mas_observaciones", :actividad_id => actdoc.id, :informe_id => @informe.id }, class: "pad add btn btn-default" %>
+                    </td>
+                    
+                    <input type="hidden" name="for<%=i.to_s%>" value='<%= actdoc.id %>'>
+                </tr>
+                <% @j= @j +1 %>
+              <% end %>
+              </tbody>
+            </table>
+                <p> &emsp; </p>
+                <h4><strong>Otras Actividades:</strong></h4>
+
+              <table class="table table-bordered ">
+              <tbody>
+              <tr>
+                <td class="text-center" colspan="2"><strong>Contempladas en el plan formación</strong></td>
+                <td class="text-center" colspan="2"><strong>No contempladas en el plan formación</strong></td>
+              </tr>
+              <% @actividadesaotr.each_with_index do |actdoc,i| %>
+                <tr>
+                  <td colspan="2">
+                    <textarea class="form-control" rows="3"  name='otra<%= actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
+                  </td>
+                  <td colspan="2">
+                    <%if !@actividadese[@j].blank? %>
+                    <textarea class="form-control" rows="3" name='ejecutada<%= actdoc.id.to_s%>' disabled><%=  @actividadese[@j].descripcion %></textarea>
+                    <%else%>
+                    <textarea class="form-control" rows="3" name='ejecutada<%= actdoc.id.to_s%>' disabled></textarea>
+                    <%end%>
+                  </td>
+                  <input type="hidden" name="otra<%=i.to_s%>" value='<%= actdoc.id %>'>
+                </tr>
+                <% @j= @j +1 %>
+              <% end %>
+              
+              <tr  class='title-table'>
+                <td colspan="2" class="text-center" style='width:45%;'><strong>Actividad no contemplada en el plan de formación y capacitación</strong></td>
+                <td class="text-center" style='width:45%;'><strong>Observaciones</strong></td>
+                <td class="text-center"  style='width:10%;'><strong>Mas observaciones</strong></td>
+              </tr>
+              <tr>
+              </tr>
+              <tr>
+                <td colspan="4"><b>Conclusiones:</b></td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                    <textareaname="conclusiones" class="form-control" rows="3" disabled><%= @informe.conclusiones%></textarea>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4"><b>Opinión tutor:</b></td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                    <textarea name="opinion" class="form-control" rows="3" disabled><%= @informe.opinion_tutor %></textarea>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        <% else %>
+              <h4><strong> Actividades a realizar por el instructor:</h4>
+
+              <table id="cprtabla" class="table table-bordered ">
+            <tbody>
+              <tr></tr>
+              <tr>
+                <td class="text-center" colspan="4"><h5><strong> Actividades a realizar por el instructor:</strong></h5></td>
+              </tr>
+              <tr class='title-table'>
+
+                <td class="text-center"  style='width:30%;'><strong>Actividad Docente Programada</strong></td>
+                <td class="text-center"  style='width:30%;'><strong>Actividad Docente Ejecutada</strong></td>
+                <td class="text-center"  style='width:30%;'><strong>Observaciones</strong></td>
+                <td class="text-center"  style='width:30%;'><strong>Más observaciones</strong></td>
+              </tr>
+                <% @actividadesadoc.each_with_index do |actdoc, i| %>
+                  <tr>
+                    <td>
+                      <textarea class="form-control" rows="3" name='docencia<%= actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
+                    </td>
+                    <td>
+                      <textarea class="form-control" rows="3" name='ejecutada<%= actdoc.id.to_s%>' disabled><%= @actividadese[@j].descripcion %></textarea>
+                    </td>
+                    <td>
+                      <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' disabled><%=@observaciont[@j] %> </textarea>
+                    </td>
+                    <td>
+                      <%= link_to "Más obs. ", {:controller => "informes", :action => "mas_observaciones", :actividad_id => actdoc.id, :informe_id => @informe.id }, class: "pad add btn btn-default" %>
+                    </td>
+                    <input type="hidden" name="doc<%=i.to_s%>" value='<%= actdoc.id %>'>
+                    
+                  </tr>
+                  <% @j= @j +1 %>
+                <% end %>
+
+              <tr><td colspan="3"></td></tr>
+    
+              <tr class='title-table'>
+                <td class="text-center"><strong>Actividad de Investigación Programada</strong></td>
+                <td class="text-center"><strong>Actividad de Investigación Ejecutada</strong></td>
+                <td class="text-center"><strong>Observaciones</strong></td>
+                <td class="text-center"  style='width:30%;'><strong>Más observaciones</strong></td>
+              </tr>
+
+              <% @actividadesainv.each_with_index do |actdoc,i| %>
+                <tr>
+                  <td>
+                      <textarea class="form-control" rows="3" name='investigacion<%= actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
+                    </td>
+                    <td>
+                      <textarea class="form-control" rows="3" name='ejecutada<%= actdoc.id.to_s%>' disabled><%= @actividadese[@j].descripcion %></textarea>
+                    </td>
+                    <td>
+                      <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' disabled><%=@observaciont[@j] %></textarea>
+                    </td>
+                    <td>
+                      <%= link_to "Más obs. ", {:controller => "informes", :action => "mas_observaciones", :actividad_id => actdoc.id, :informe_id => @informe.id }, class: "pad add btn btn-default" %>
+                    </td>
+                    <input type="hidden" name="inv<%=i.to_s%>" value='<%= actdoc.id %>'>
+                </tr>
+
+                <input type="hidden" name="result<%=i.to_s%>" value='-1'>
+                <% cpcont = 1 %>
+                <% if !@resultados[@j].blank? %>
+                  <tr>
+                    <td>
+                      <div class="row">
+                        <div class="col-xs-12 col-md-12 col-lg-12">
+                           <tr>
+                           <td colspan="4">
+                            <h5>Resultados: </h5>
+                           </td>
+                           </tr>
+                           <tr>
+                           <td colspan="4">
+                           <div class="well">
+                           <% @resultados2a[@j].each_with_index do |cpresultados| %>
+                             <span class="pull-left glyphicon glyphicon-ok" aria-hidden="true">
+                             </span>
+                             &nbsp; <%= cpresultados %>  
+                             <br>
+                           <% end %>
+                           </div>
+                           </td>
+                           </tr>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                <%end%>
+                <% @j= @j +1 %>
+              <% end %>
+
+              
+              
+              <tr><td colspan="3"></td></tr>
+
+              <tr class='title-table'>
+                <td class="text-center"><strong>Actividad de Formación Programada</strong></td>
+                <td class="text-center"><strong>Actividad de Formación Ejecutada</strong></td>
+                <td class="text-center"><strong>Observaciones</strong></td>
+                <td class="text-center"  style='width:30%;'><strong>Más observaciones</strong></td>
+              </tr>
+              <% @actividadesafor.each_with_index do |actdoc,i| %>
+                <tr>
+                  <td>
+                      <textarea class="form-control" rows="3" name='formacion<%= actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
+                    </td>
+                    <td>
+                      <textarea class="form-control" rows="3" name='ejecutada<%= actdoc.id.to_s%>' disabled><%= @actividadese[@j].descripcion %></textarea>
+                    </td>
+                    <td>
+                      <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' disabled><%=@observaciont[@j] %></textarea>
+                    </td>
+                    <td>
+                      <%= link_to "Más obs. ", {:controller => "informes", :action => "mas_observaciones", :actividad_id => actdoc.id, :informe_id => @informe.id }, class: "pad add btn btn-default" %>
+                    </td>
+                    <input type="hidden" name="for<%=i.to_s%>" value='<%= actdoc.id %>'>
+                </tr>
+                <% @j= @j +1 %>
+              <% end %>
+
+              <tr><td colspan="3"></td></tr>
+
+              <tr  class='title-table'>
+                <td class="text-center"><strong>Actividad de Extensión Programada</strong></td>
+                <td class="text-center"><strong>Actividad de Extensión Ejecutada</strong></td>
+                <td class="text-center"><strong>Observaciones</strong></td>
+                <td class="text-center"  style='width:30%;'><strong>Más observaciones</strong></td>
+              </tr>
+              <% @actividadesaext.each_with_index do |actdoc,i| %>
+                <tr>
+                  <td>
+                      <textarea class="form-control" rows="3" name='extension<%= actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
+                    </td>
+                    <td>
+                      <textarea class="form-control" rows="3" name='ejecutada<%= actdoc.id.to_s%>' disabled><%=  @actividadese[@j].descripcion %></textarea>
+                    </td>
+                    <td>
+                      <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' disabled><%=@observaciont[@j] %></textarea>
+                    </td>
+                    <td>
+                      <%= link_to "Más obs. ", {:controller => "informes", :action => "mas_observaciones", :actividad_id => actdoc.id, :informe_id => @informe.id }, class: "pad add btn btn-default" %>
+                    </td>
+                    <input type="hidden" name="ext<%=i.to_s%>" value='<%= actdoc.id %>'>
+                </tr>
+                 <% @j= @j +1 %>
+              <% end %>
+
+              <tr  class='title-table'>
+              <tr>
+                <td class="text-center" colspan="4"><h5><strong> Otras Actividades:</strong></h5></td>
+              </tr>
+                <td class="text-center" colspan="2"><strong>Contempladas en el plan formación</strong></td>
+                <td class="text-center" colspan="2"><strong>No contempladas en el plan formación</strong></td>
+              </tr>
+              <% @actividadesaotr.each_with_index do |actdoc,i| %>
+                <tr>
+                  <td colspan="2">
+                    <textarea class="form-control" rows="3"  name='otra<%= actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
+                  </td>
+                  <td colspan="2">
+                    <%if @actividadese[@j] != nil %>
+                    <textarea class="form-control" rows="3" name='ejecutada<%= actdoc.id.to_s%>' disabled><%=  @actividadese[@j].descripcion %></textarea>
+                    <%else%>
+                    <textarea class="form-control" rows="3" name='ejecutada<%= actdoc.id.to_s%>' disabled></textarea>
+                    <%end%>
+                  </td>
+                  <input type="hidden" name="otra<%=i.to_s%>" value='<%= actdoc.id %>'>
+                </tr>
+                <% @j= @j +1 %>
+              <% end %>
+              <tr>
+                <td colspan="4"><b>Conclusiones:</b></td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                    <textarea name="conclusiones" class="form-control" rows="3" disabled><%= @informe.conclusiones%></textarea>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4"><b>Opinión tutor:</b></td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                    <textarea name="opinion" class="form-control" rows="3" disabled><%= @informe.opinion_tutor %></textarea>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4"><b>Justificaciones (Extensión del Período del Informe)</b></td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                    <textarea name="justi" class="form-control" rows="3" disabled><%= @informe.justificaciones %></textarea>
+                </td>
+              </tr>
+          
+
+            </tbody>
+          </table>
+        <% end %>
+      <div class = 'row'>
+
+        <div class = 'col-xs-4 col-md-4 col-lg-4'>
+            <%= link_to "<< Volver", {controller: "inicioentidad", action: "ver_detalles_informe"}, class: "btn btn-forminst" %>
+        </div>
+        <div class = 'col-xs-4 col-md-4 col-lg-4'>
+          <%if @bool_enviado == 0 %>
+            <center><button type="submit" class="btn btn-forminst btn-lg">Guardar</button></center>
+          <%end%>   
+        </div>
+        <div class = 'col-xs-4 col-md-4 col-lg-4 text-right'>
+           <%= link_to "Listar Informes >>", {controller: "inicioentidad", action: "listar_informes"}, class: "btn btn-forminst" %>
+        </div>
+          
+      </div>
+      <br><br>
+    <% end %>
+  </div>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h3 class="modal-title" id="myModalLabel">Eliminar Informe</h3>
+      </div>
+      <div class="modal-body">
+          <%= form_tag({controller: 'informes', action: 'eliminar_informe'}) do%>
+            <div class="form-group">
+              <center>
+                <h5><strong>Está seguro que desea eliminar este informe?</strong></h5>
+              </center>
+            </div>
+      </div>
+      <div class="modal-footer">
+          <button type="submit" class="btn btn-forminst">Si</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+      </div>
+      <%end%>
+    </div>
+  </div>
+</div>
+
+
+<!--<script type="text/javascript">
+  function eliminar (elemento){
+    $(elemento).parent().html('<a class="btn btn-default resultado"><span class="glyphicon glyphicon-plus"></span> Agregar Resultado</a>');
+  }
+
+</script> -->
+    
+<script type="text/javascript">
+
+    $(document).ready(function() {
+
+      $(document).on('click', '.resultado', function(){
+        var params = $(this).attr("rel");
+        $("#res"+params).show()
+        $(this).parent().addClass("resultado"+params)
+        $(this).parent().css({display: "none"})
+
+        });
+
+      $(document).on('click', '.eliminar_resultado', function(){ 
+        var params = $(this).attr("rel");
+        $("#res"+params).css({display: "none"});
+        $(".resultado"+params).show();
+        $("#sel"+params).val("");
+        $("#resultado_tipos"+params).val("");
+        $("#resultado_titulo"+params).val("");
+        $("#resultado_autor"+params).val("");
+        $("#resultado_titulocap"+params).val("");
+        $("#resultado_autorcap"+params).val("");
+        $("#resultado_dia"+params).val("");
+        $("#resultado_mes"+params).val("");
+        $("#resultado_ano"+params).val("");
+        $("#resultado_ciudad"+params).val("");
+        $("#resultado_estado"+params).val("");
+        $("#resultado_pais"+params).val("");
+        $("#resultado_org"+params).val("");
+        $("#resultado_duracion"+params).val("");
+        $("#resultado_editor"+params).val("");
+        $("#resultado_tl"+params).val("");
+        $("#resultado_al").val("");
+        $("#resultado_nr"+params).val("");
+        $("#resultado_np"+params).val("");
+        $("#resultado_paginas"+params).val("");
+        $("#resultado_na"+params).val("");
+        $("#resultado_nombre_pw"+params).val("");
+        $("#resultado_sitio_pw"+params).val("").css({display: "none"});
+        $("#resultado_url"+params).val("").css({display: "none"});
+      }); 
+
+    });
+</script>

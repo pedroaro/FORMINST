@@ -1,0 +1,131 @@
+<div class = 'row'>
+  <div class="col-xs-12 col-md-12">
+      <ul class="nav nav-tabs">
+        <li><a href="../inicioinstructor/index">Inicio</a></li>
+        <%if session[:informe_id]%> 
+          <li><a href="../inicioinstructor/listar_adecuaciones">Adecuación del Plan</a></li>
+          <li><a href="../inicioinstructor/listar_informes"  class = 'active'>Informes</a></li>
+        <%else %>
+          <li><a href="../inicioinstructor/listar_adecuaciones" class='active'>Adecuación del Plan</a></li>
+          <li><a href="../inicioinstructor/listar_informes" >Informes</a></li>
+        <%end%>
+        <li><a href="../inicioinstructor/prorrogas">Prorrogas</a></li>
+        <li><a href="../inicioinstructor/logout">Cerrar Sesión</a></li>
+      </ul>
+  
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12 col-md-12">
+    <div class="btn-group" role="group">
+      <button type="button" class="btn btn-default" onclick = " location.href = 'javascript:history.back(-1);'">Volver</button>
+      <%if session[:informe_id]%> 
+        <%= link_to "Vista Previa", {controller: "inicioinstructor", action: "vista_previa1"}, class: "btn btn-default" %>
+        <%= link_to "Generar PDF", {controller: "informes", action: "generar_pdf"},target: :_blank, class: "btn btn-default" %>
+      <%else%>
+        <%= link_to "Vista Previa", {controller: "inicioinstructor", action: "vista_previa"}, class: "btn btn-default" %>
+        <%= link_to "Generar PDF", {controller: "adecuacions", action: "generar_pdf"},target: :_blank, class: "btn btn-default" %>
+      <%end%> 
+      <%= link_to "Ver Soportes", {controller: "inicioinstructor", action: "ver_soporte"}, class: "btn btn-default" %>
+      <button type="button" class="btn btn-default active">Versiones Anteriores</button>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12 col-md-12 col-md-offset-0">
+    <div class="text-right">
+      <div id = "fechamuestra">
+        <h3> <%= Time.now.strftime("%d") %>
+          <% if Time.now.strftime("%m").to_i == 1 %>
+            de Enero del
+          <% elsif Time.now.strftime("%m").to_i == 2 %>
+            de Febrero del
+          <% elsif Time.now.strftime("%m").to_i == 3 %>
+            de Marzo del
+          <% elsif Time.now.strftime("%m").to_i == 4 %>
+            de Abril del
+          <% elsif Time.now.strftime("%m").to_i == 5 %>
+            de Mayo del
+          <% elsif Time.now.strftime("%m").to_i == 6 %>
+            de Junio del
+          <% elsif Time.now.strftime("%m").to_i == 7 %>
+            de Julio del
+          <% elsif Time.now.strftime("%m").to_i == 8 %>
+            de Agosto del
+          <% elsif Time.now.strftime("%m").to_i == 9 %>
+            de Septiembre del
+          <% elsif Time.now.strftime("%m").to_i == 10 %>
+            de Octubre del
+          <% elsif Time.now.strftime("%m").to_i == 11 %>
+            de Noviembre del
+          <% elsif Time.now.strftime("%m").to_i == 12 %>
+            de Diciembre del
+          <% end %>
+          <%= Time.now.strftime("%Y") %> 
+        </h3>
+      </div>
+      <%if session[:nombre_usuario]%>
+        <div>
+          <h4><b><%=session[:nombre_usuario]%></b></h4>
+        </div>
+      <%end%>
+    </div>
+  </div>
+</div>
+
+<h1>Versiones Anteriores</h1>
+
+<br></br>
+
+
+<% if !@documents.blank? %>
+  <div class="table-responsive">
+    <table class="table table-hover table-bordered text-center">
+      <thead>
+        <tr>
+          <th class="text-center">Nombre del Archivo</th>
+          <th class="text-center">Estatus</th>
+          <th class = "text-center">Versión</th>
+          <th class="text-center">Descargar</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @documents.reverse_each.each_with_index do |document1| %>
+          <tr>
+            <td class = "text-center"><%= document1.filename %></td>
+            <td class = "text-center"><%= document1.estatus %></td>
+            <%if document1.actual == 1%> 
+              <td class = "text-center">Versión Actual</td>
+            <%else %>
+              <td class = "text-center"><%= document1.version %></td>
+            <%end%>             <td>
+            <%if session[:informe_id]%> 
+              <%= form_tag({controller: 'inicioentidad', action: 'show'}) do%>
+                <input type="hidden" name="adecuacion_id" value='<%= document1.adecuacion_id %>'>
+                <input type="hidden" name="namefile" value='<%= document1.filename %>'>
+                <input type="hidden" name="informe_id" value= '<%= document1.informe_id %>'>
+                <input type="hidden" name="version" value= '<%= document1.version %>'>
+                <button type="submit" class="btn btn-info">Descargar</button>
+              <%end%>
+            <%else %>
+              <%= form_tag({controller: 'inicioentidad', action: 'show'}) do%>
+                <input type="hidden" name="adecuacion_id" value='<%= document1.adecuacion_id %>'>
+                <input type="hidden" name="namefile" value='<%= document1.filename %>'>
+                <input type="hidden" name="version" value= '<%= document1.version %>'>
+                <button type="submit" class="btn btn-info">Descargar</button>
+              <%end%>
+            <%end%> 
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% else %>
+  <br></br>
+    <h2 class="text-center">No hay versiones todavía, enviela para crearla</h2>
+  <br></br>
+<% end %>
+<br></br>

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: 1
+  PlanFormacionId: 1
+  tutorId: 1
+  opinionTutor: MyText
+  conclusiones: MyText
+
+two:
+  id: 1
+  PlanFormacionId: 1
+  tutorId: 1
+  opinionTutor: MyText
+  conclusiones: MyText
