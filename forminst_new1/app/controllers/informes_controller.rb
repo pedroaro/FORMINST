@@ -1083,6 +1083,7 @@ end
   	    informe.fecha_inicio = informe1.fecha_inicio
   	    informe.fecha_fin = informe2.fecha_fin 
   	  end
+
       informe.save
       puts "Se guarda informe"
 

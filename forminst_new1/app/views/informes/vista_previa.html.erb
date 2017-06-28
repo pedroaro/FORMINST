@@ -442,11 +442,7 @@
           <% @actividadesadoc.each_with_index do |actividadesadoc, i| %> 
             <tr>
               <td class="text-center"><%= actividadesadoc.actividad %></td>
-              <td class="text-center">
-                <% if !@actividadese[@j].blank? %>
-                  <%= @actividadese[@j].descripcion %>
-                <% end %>
-              </td>
+              <td class="text-center"><%= @actividadese[@j].descripcion %></td>
               <td class="text-center"><%= @observaciont[@i] %></td>
             </tr>
             <% @j= @j +1 %>
@@ -469,11 +465,7 @@
           <% @actividadesainv.each_with_index do |actividadesainv, i| %> 
             <tr>
               <td class="text-center"><%= actividadesainv.actividad %></td>
-              <td class="text-center">
-                <% if !@actividadese[@j].blank? %>
-                  <%= @actividadese[@j].descripcion %>
-                <% end %>
-              </td>
+              <td class="text-center"><%= @actividadese[@j].descripcion %></td>
               <td class="text-center"><%= @observaciont[@i] %></td>
             </tr>
             <% @j= @j +1 %>
@@ -565,11 +557,7 @@
           <% @actividadesafor.each_with_index do |actividadesafor, i| %> 
             <tr>
               <td class="text-center"><%= actividadesafor.actividad %></td>
-              <td class="text-center">
-                <% if !@actividadese[@j].blank? %>
-                  <%= @actividadese[@j].descripcion %>
-                <% end %>
-              </td>
+              <td class="text-center"><%= @actividadese[@j].descripcion %></td>
               <td class="text-center"><%= @observaciont[@i] %></td>
             </tr>
             <% @j= @j +1 %>
@@ -592,11 +580,7 @@
           <% @actividadesaext.each_with_index do |actividadesaext, i| %> 
             <tr>
               <td class="text-center"><%= actividadesaext.actividad %></td>
-              <td class="text-center">
-                <% if !@actividadese[@j].blank? %>
-                  <%= @actividadese[@j].descripcion %>
-                <% end %>
-              </td>
+              <td class="text-center"><%= @actividadese[@j].descripcion %></td>
               <td class="text-center"><%= @observaciont[@i] %></td>
             <% @j= @j +1 %>
             <% @i= @i +1 %>
@@ -642,14 +626,6 @@
       <table class="table table-hover table-bordered text-center">
         <tbody>
          <tr><td class="text-left"> <%= @informe.opinion_tutor.to_s %></td></tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="table-responsive">
-      <b><p>10.- JUSTIFICACIONES:</p></b>
-      <table class="table table-hover table-bordered text-center">
-        <tbody>
-         <tr><td class="text-left"> <%= @informe.justificaciones.to_s %></td></tr>
         </tbody>
       </table>
     </div>

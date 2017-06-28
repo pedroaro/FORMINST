@@ -410,6 +410,7 @@ CREATE TABLE `informe` (
   `tutor_id` int(11) DEFAULT NULL,
   `opinion_tutor` longtext,
   `conclusiones` longtext,
+  `justificaciones` longtext,
   `numero` int(11) DEFAULT NULL,
   `fecha_creacion` date DEFAULT NULL,
   `estado` varchar(255) DEFAULT NULL,

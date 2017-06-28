@@ -12374,6 +12374,27 @@ actionpack (5.0.3) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
 actionpack (5.0.3) lib/action_dispatch/middleware/debug_exceptions.rb:49:in `call'
 web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
 web-console (3.5.1) lib/web_console/middleware.rb:20:in `block in call'
+=======
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/pedro/Documents/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/pedro/Documents/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/pedro/Documents/FORMINST/forminst_new1/config/routes.rb:6)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/pedro/Documents/FORMINST/forminst_new1/config/routes.rb:6)
+Started GET "/" for 127.0.0.1 at 2017-06-21 18:56:21 -0400
+Processing by ForminstController#index as HTML
+  Rendering forminst/index.html.erb within layouts/ec_aplanes
+  Rendered forminst/index.html.erb within layouts/ec_aplanes (20.7ms)
+Completed 200 OK in 3854ms (Views: 3559.8ms)
+
+
+Started GET "/assets/resumes.self-04cc9dbe46072d3fd344605539470f544b4c34422019e2ec6dc4c097eb37e932.css?body=1" for 127.0.0.1 at 2017-06-21 18:56:25 -0400
+Started GET "/assets/scaffolds.self-f0d797c86337285e3cf864fe2ddfc2a04acf1d57d124cd1a4d180d177bc61542.css?body=1" for 127.0.0.1 at 2017-06-21 18:56:25 -0400
+Started GET "/images/nav.jpg" for 127.0.0.1 at 2017-06-21 18:56:26 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/images/nav.jpg"):
+  
+actionpack (5.0.3) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
 web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
 web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
 actionpack (5.0.3) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
@@ -12433,6 +12454,33 @@ actionpack (5.0.3) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
 actionpack (5.0.3) lib/action_dispatch/middleware/debug_exceptions.rb:49:in `call'
 web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
 web-console (3.5.1) lib/web_console/middleware.rb:20:in `block in call'
+=======
+  Rendering /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout
+  Rendering /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.6ms)
+  Rendered collection of /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/routes/_route.html.erb [18 times] (69.9ms)
+  Rendered /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/routes/_table.html.erb (39.7ms)
+  Rendering /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.2ms)
+  Rendered /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (212.7ms)
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/pedro/Documents/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/pedro/Documents/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/pedro/Documents/FORMINST/forminst_new1/config/routes.rb:6)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/pedro/Documents/FORMINST/forminst_new1/config/routes.rb:6)
+Started GET "/" for 127.0.0.1 at 2017-06-23 15:38:44 -0400
+Processing by ForminstController#index as HTML
+  Rendering forminst/index.html.erb within layouts/ec_aplanes
+  Rendered forminst/index.html.erb within layouts/ec_aplanes (17.5ms)
+Completed 200 OK in 4754ms (Views: 4426.1ms)
+
+
+Started GET "/images/nav.jpg" for 127.0.0.1 at 2017-06-23 15:38:53 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/images/nav.jpg"):
+  
+actionpack (5.0.3) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
 web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
 web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
 actionpack (5.0.3) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
@@ -12770,3 +12818,112 @@ DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is depreca
   [1m[35m (0.4ms)[0m  [1m[35mSHOW CREATE TABLE `usuario`[0m
   [1m[35m (1.1ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'usuario'[0m
   [1m[35m (0.5ms)[0m  [1m[35mSHOW CREATE TABLE `usuarioentidad`[0m
+=======
+  Rendering /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout
+  Rendering /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.3ms)
+  Rendered collection of /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/routes/_route.html.erb [18 times] (71.7ms)
+  Rendered /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/routes/_table.html.erb (246.3ms)
+  Rendering /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (3.4ms)
+  Rendered /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (459.5ms)
+Started POST "/forminst/autenticar" for 127.0.0.1 at 2017-06-23 15:39:07 -0400
+Processing by ForminstController#autenticar as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"CcS8g5UqExx8Ywb79Vdrl18uMhwc74DwnUDsJ14BzRj9RwUk6R1Gt9NXPMAQIHpTuspEjz280Zooc0NwPO76Zg==", "correo"=>"ana", "password"=>"[FILTERED]"}
+  [1m[36mUsuario Load (0.4ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`user` = 'ana' LIMIT 1[0m
+  [1m[36mUsuarioentidad Load (1.3ms)[0m  [1m[34mSELECT  `usuarioentidad`.* FROM `usuarioentidad` WHERE `usuarioentidad`.`usuario_id` = 37 LIMIT 1[0m
+  [1m[36mEntidad Load (0.3ms)[0m  [1m[34mSELECT  `entidad`.* FROM `entidad` WHERE `entidad`.`id` = 18 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `usuarioentidad`.* FROM `usuarioentidad` WHERE `usuarioentidad`.`usuario_id` = 37 LIMIT 1[0m  [["usuario_id", 37], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `entidad`.* FROM `entidad` WHERE `entidad`.`id` = 18 LIMIT 1[0m  [["id", 18], ["LIMIT", 1]]
+  [1m[36mPersona Load (0.4ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 37 LIMIT 1[0m
+Redirected to http://localhost:3000/iniciotutor
+Completed 302 Found in 751ms (ActiveRecord: 84.3ms)
+
+
+Started GET "/iniciotutor" for 127.0.0.1 at 2017-06-23 15:39:08 -0400
+Processing by IniciotutorController#index as HTML
+  [1m[36mNotificacion Load (0.3ms)[0m  [1m[34mSELECT `notificacion`.* FROM `notificacion` WHERE `notificacion`.`tutor_id` = 37[0m
+  Rendering iniciotutor/index.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/index.html.erb within layouts/ly_inicio_tutor (2.5ms)
+Completed 200 OK in 253ms (Views: 224.7ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/assets/banner.png" for 127.0.0.1 at 2017-06-23 15:39:08 -0400
+Started GET "/assets/glyphicons-halflings-regular.woff2" for 127.0.0.1 at 2017-06-23 15:39:08 -0400
+Started GET "/iniciotutor/planformacions" for 127.0.0.1 at 2017-06-23 15:39:13 -0400
+Processing by IniciotutorController#planformacions as HTML
+  [1m[36mPersona Load (18.2ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 37 LIMIT 1[0m
+  [1m[36mPlanformacion Load (0.3ms)[0m  [1m[34mSELECT `planformacion`.* FROM `planformacion` WHERE `planformacion`.`tutor_id` = 37[0m
+  [1m[36mPersona Load (0.4ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 38 LIMIT 1[0m
+  [1m[36mAdecuacion Load (16.4ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 15 LIMIT 1[0m
+  [1m[36mEstatusAdecuacion Load (38.7ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 19 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  Rendering iniciotutor/planformacions.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/planformacions.html.erb within layouts/ly_inicio_tutor (3.1ms)
+Completed 200 OK in 427ms (Views: 212.9ms | ActiveRecord: 77.5ms)
+
+
+Started POST "/iniciotutor/ver_detalles_adecuacion" for 127.0.0.1 at 2017-06-23 15:39:18 -0400
+Processing by IniciotutorController#ver_detalles_adecuacion as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"BQi859ATeS9dw04VjlvGiOCSJyUeiX15SemxY5UzI87xiwVArCQshPL3dC5rLNdMBXZRtj/aLBP82h4099wUsA==", "plan_id"=>"15"}
+  [1m[36mPlanformacion Load (0.5ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 15 LIMIT 1[0m
+  [1m[36mPersona Load (0.4ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 38 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 15 LIMIT 1[0m  [["id", 15], ["LIMIT", 1]]
+  [1m[36mUsuarioentidad Load (0.3ms)[0m  [1m[34mSELECT  `usuarioentidad`.* FROM `usuarioentidad` WHERE `usuarioentidad`.`usuario_id` = 38 LIMIT 1[0m
+  [1m[36mEscuela Load (0.3ms)[0m  [1m[34mSELECT  `escuela`.* FROM `escuela` WHERE `escuela`.`id` = 2 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 38 LIMIT 1[0m  [["usuario_id", 38], ["LIMIT", 1]]
+  [1m[36mUsuario Load (0.3ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 38 LIMIT 1[0m
+  [1m[36mPersona Load (0.3ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 37 LIMIT 1[0m
+  [1m[36mUsuario Load (0.2ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 37 LIMIT 1[0m
+  [1m[36mAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 15 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 15 LIMIT 1[0m  [["id", 15], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `usuarioentidad`.* FROM `usuarioentidad` WHERE `usuarioentidad`.`usuario_id` = 38 LIMIT 1[0m  [["usuario_id", 38], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `escuela`.* FROM `escuela` WHERE `escuela`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 38 LIMIT 1[0m  [["usuario_id", 38], ["LIMIT", 1]]
+  Rendering iniciotutor/ver_detalles_adecuacion.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/ver_detalles_adecuacion.html.erb within layouts/ly_inicio_tutor (7.1ms)
+Completed 200 OK in 250ms (Views: 202.8ms | ActiveRecord: 5.6ms)
+
+
+Started GET "/assets/banner.png" for 127.0.0.1 at 2017-06-23 15:39:19 -0400
+Started GET "/informes/listar_informes" for 127.0.0.1 at 2017-06-23 15:39:25 -0400
+Processing by InformesController#listar_informes as HTML
+  [1m[36mPersona Load (0.4ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 37 LIMIT 1[0m
+  [1m[36mInforme Load (66.1ms)[0m  [1m[34mSELECT  `informe`.* FROM `informe` WHERE `informe`.`planformacion_id` = 15 LIMIT 1[0m
+  [1m[36mInforme Load (0.4ms)[0m  [1m[34mSELECT `informe`.* FROM `informe` WHERE `informe`.`planformacion_id` = 15[0m
+  [1m[36mEstatusInforme Load (7.4ms)[0m  [1m[34mSELECT  `estatus_informe`.* FROM `estatus_informe` WHERE `estatus_informe`.`informe_id` = 1 AND `estatus_informe`.`actual` = 1 LIMIT 1[0m
+  [1m[36mEstatusInforme Load (0.4ms)[0m  [1m[34mSELECT  `estatus_informe`.* FROM `estatus_informe` WHERE `estatus_informe`.`informe_id` = 2 AND `estatus_informe`.`actual` = 1 LIMIT 1[0m
+  [1m[36mEstatusInforme Load (0.2ms)[0m  [1m[34mSELECT  `estatus_informe`.* FROM `estatus_informe` WHERE `estatus_informe`.`informe_id` = 3 AND `estatus_informe`.`actual` = 1 LIMIT 1[0m
+  Rendering informes/listar_informes.html.erb within layouts/ly_inicio_tutor
+  Rendered informes/listar_informes.html.erb within layouts/ly_inicio_tutor (5.1ms)
+Completed 200 OK in 488ms (Views: 256.1ms | ActiveRecord: 78.4ms)
+
+
+Started POST "/informes/ver_detalles_informe" for 127.0.0.1 at 2017-06-23 15:39:30 -0400
+Processing by InformesController#ver_detalles_informe as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Pwzudglf6R6lOF+k62o79FtrePFHBtOEixzCvn0TfOvLj1fRdWi8tQoMZZ8OHSowvo8OYmZVgu4+L23pH/xLlQ==", "informe_id"=>"1"}
+  [1m[36mPersona Load (0.5ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 37 LIMIT 1[0m
+  [1m[36mPlanformacion Load (0.4ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 15 LIMIT 1[0m
+  [1m[36mPersona Load (0.5ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 38 LIMIT 1[0m
+  [1m[36mInforme Load (0.5ms)[0m  [1m[34mSELECT  `informe`.* FROM `informe` WHERE `informe`.`id` = 1 LIMIT 1[0m
+  [1m[36mEstatusInforme Load (0.4ms)[0m  [1m[34mSELECT  `estatus_informe`.* FROM `estatus_informe` WHERE `estatus_informe`.`informe_id` = 1 AND `estatus_informe`.`actual` = 1 LIMIT 1[0m
+  [1m[36mTipoEstatus Load (0.3ms)[0m  [1m[34mSELECT  `tipo_estatus`.* FROM `tipo_estatus` WHERE `tipo_estatus`.`id` = 6 LIMIT 1[0m
+  [1m[36mUsuarioentidad Load (0.3ms)[0m  [1m[34mSELECT  `usuarioentidad`.* FROM `usuarioentidad` WHERE `usuarioentidad`.`usuario_id` = 38 LIMIT 1[0m
+  [1m[36mEntidad Load (0.3ms)[0m  [1m[34mSELECT  `entidad`.* FROM `entidad` WHERE `entidad`.`id` = 19 LIMIT 1[0m
+  [1m[36mEscuela Load (0.4ms)[0m  [1m[34mSELECT  `escuela`.* FROM `escuela` WHERE `escuela`.`id` = 2 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `estatus_informe`.* FROM `estatus_informe` WHERE `estatus_informe`.`informe_id` = 1 AND `estatus_informe`.`actual` = 1 LIMIT 1[0m  [["informe_id", 1], ["actual", 1], ["LIMIT", 1]]
+  Rendering informes/ver_detalles_informe.html.erb within layouts/ly_inicio_tutor
+  Rendered informes/ver_detalles_informe.html.erb within layouts/ly_inicio_tutor (7.3ms)
+Completed 200 OK in 307ms (Views: 205.4ms | ActiveRecord: 4.8ms)
+
+
+Started GET "/assets/banner.png" for 127.0.0.1 at 2017-06-23 15:39:31 -0400
+Started GET "/documents/new" for 127.0.0.1 at 2017-06-23 15:39:34 -0400
+Processing by DocumentsController#new as HTML
+  [1m[36mAdecuacion Load (0.4ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 15 LIMIT 1[0m
+  [1m[36mEstatusInforme Load (0.3ms)[0m  [1m[34mSELECT  `estatus_informe`.* FROM `estatus_informe` WHERE `estatus_informe`.`informe_id` = 1 AND `estatus_informe`.`actual` = 1 LIMIT 1[0m
+  Rendering documents/new.html.erb within layouts/ly_inicio_tutor
+  Rendered documents/_form.html.erb (12.5ms)
+  Rendered documents/new.html.erb within layouts/ly_inicio_tutor (20.1ms)
+Completed 200 OK in 245ms (Views: 213.9ms | ActiveRecord: 1.7ms)
+
+
