@@ -1,7 +1,7 @@
 class Pdf 
 # estas funciones permite generar el cuerpo del documento en formato pdf
 
-	def self.pdf_adecuacion(plan, adecuacion, tutor, instructor, correoi, correot, escuela, pactv_docencia, pactv_investigacion, pactv_extension, pactv_formacion, pactv_otras, sactv_docencia, sactv_investigacion, sactv_extension, sactv_formacion, sactv_otras, tactv_docencia, tactv_investigacion, tactv_extension, tactv_formacion, tactv_otras, cactv_docencia, cactv_investigacion, cactv_extension, cactv_formacion, cactv_otras, fechaActual, fechaConcurso, soportes,numeroDeVersion)
+	def self.pdf_adecuacion(plan, adecuacion, tutor, instructor, correoi, correot, escuela, pactv_docencia, pactv_investigacion, pactv_extension, pactv_formacion, pactv_otras, sactv_docencia, sactv_investigacion, sactv_extension, sactv_formacion, sactv_otras, tactv_docencia, tactv_investigacion, tactv_extension, tactv_formacion, tactv_otras, cactv_docencia, cactv_investigacion, cactv_extension, cactv_formacion, cactv_otras, fechaActual, fechaConcurso, soportes,numeroDeVersion, dactv_obligatorias)
 	#def self.pdf_adecuacion(adecuacion, tutor, instructor, notificacion, perfil, pactv_docencia, pactv_investigacion, pactv_extension, pactv_formacion, pactv_otras, sactv_docencia, sactv_investigacion, sactv_extension, sactv_formacion, sactv_otras, tactv_docencia, tactv_investigacion, tactv_extension, tactv_formacion, tactv_otras, cactv_docencia, cactv_investigacion, cactv_extension, cactv_formacion, cactv_otras)
 		
 		# se invocan la bibliotecas
@@ -962,6 +962,46 @@ class Pdf
 				data171 =[[{:text => "No hubo." , :aling=> :left}]] # datos que se desean en la tabla
 				
 				pdf.table data171, # lineas para generar la tabla en el docuemnto
+				:border_style => :grid, #:underline_header
+				:font_size  => 10, 
+				:horizontal_padding => 6,
+				:vertical_padding   => 3,
+				:border_width => 0.7, 
+				:column_widths => { 0 => 520}, 
+				:position => :left,
+				:align => { 0 => :left}
+			end
+			#Actividades Obligatorias
+
+			data171 = [[{:text=>"ACTIVIDADES OBLIGATORIAS ", :font_style => :bold}], [{:text=>"5.1.- ACTIVIDADES OBLIGATORIAS:",:font_style => :bold }]] # datos que se desean en la tabla
+			
+			pdf.table data171, # lineas para generar la tabla en el docuemnto
+			:border_style => :grid, #:underline_header
+			:font_size  => 10, 
+			:horizontal_padding => 6,
+			:vertical_padding   => 3,
+			:border_width => 0.7, 
+			:column_widths => { 0 => 520}, 
+			:position => :left,
+			:align => { 0 => :left}
+			
+			if dactv_obligatorias != []
+				dactv_obligatorias.each do |actv|
+					data172 = [[{:text=>  actv.actividad ,  :align=>:left}]] # datos que se desean en la tabla
+					
+					pdf.table data172, # lineas para generar la tabla en el docuemnto
+					:border_style => :grid, #:underline_header
+					:font_size  => 10, 
+					:horizontal_padding => 6,
+					:vertical_padding   => 3,
+					:border_width => 0.7, 
+					:column_widths => { 0 => 520}, 
+					:position => :left,
+					:align => { 0 => :left}
+				end	
+			else
+				data172 = [[{:text=>  "No hubo." ,  :align=>:left}]] # datos que se desean en la tabla
+				pdf.table data172, # lineas para generar la tabla en el docuemnto
 				:border_style => :grid, #:underline_header
 				:font_size  => 10, 
 				:horizontal_padding => 6,
@@ -2512,40 +2552,6 @@ class Pdf
 			
 			
 			pdf.text("\n")
-			pdf.text("10.- JUSTIFICACIONES:", :style => :bold, :size  => 10)
-			
-			if !informe.justificaciones.blank?
-				data112 = [[{:text=> informe.justificaciones.to_s, :align=> :left}]] # datos que se desean en la tabla
-				
-				pdf.table data112, # lineas para generar la tabla en el docuemnto
-				:border_style => :grid, #:underline_header
-				:font_size  => 8, 
-				:horizontal_padding => 6,
-				:vertical_padding   => 3,
-				:border_width => 0.7, 
-				:column_widths => { 0 => 520}, 
-				:position => :left,
-				:align => { 0 => :left}
-				
-			else
-				data112 = [[{:text=> " ", :align=> :left}]] # datos que se desean en la tabla
-				
-				pdf.table data112, # lineas para generar la tabla en el docuemnto
-				:border_style => :grid, #:underline_header
-				:font_size  => 8, 
-				:horizontal_padding => 6,
-				:vertical_padding   => 3,
-				:border_width => 0.7, 
-				:column_widths => { 0 => 520}, 
-				:position => :left,
-				:align => { 0 => :left}
-			end
-			
-			
-			#FIN DEL INFORME		
-			
-			
-			pdf.text("\n")
 			data12 = [
 				[{:text=>"Firma del Tutor: \n", :font_style => :bold}, {:text => 'Fecha:', :align=>:left,  :font_style => :bold} ],
 				[{:text=>"Adecuación del Plan de Formación y Capacitación Aprobado por el Consejo de Escuela o Instituto en Sesión de Fecha: \n",  :font_style => :bold}, {:text => 'Adecuación del Plan de Formación y Capacitación Aprobado por el Consejo de la Facultad de Ciencias en Sesión de Fecha:', :align=>:left,  :font_style => :bold} ]] # cuadro final del documento
@@ -2573,8 +2579,7 @@ class Pdf
 		else
    			nombre_archivo= instructor.ci.to_s+'-'+fechaActual+'-informeV'+numeroDeVersion.to_s+'.pdf' # se arma el nombre del documento 
 		end	
-		url = "#{Rails.root}/tmp/PDFs/" + nombre_archivo
-		pdf.render_file(url) # creación del docuemnto bajo su nombre
+		pdf.render_file(nombre_archivo) # creación del docuemnto bajo su nombre
 		return nombre_archivo
 	end
 end

@@ -115,11 +115,7 @@
               	<% if @numero_informe == 3 || @numero_informe == 6 || @numero_informe == 7 %>
                     <textarea class="form-control" rows="1" disabled><%= @fecha_fin1 %></textarea>
                 <% else %>
-                    <div id="sandbox-container">
-                    <div class="input-group date">
-                      <input type="text" class="form-control" name="fechaFin" onchange="mostrarFecha(this.value)"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
-                    </div>
-                  </div>
+                    <input id="nuevaFecha" class="form-control" rows="1" disabled><%= @fecha_fin1%></input>
                 <% end %>
               </td>
             </tr>
@@ -272,14 +268,6 @@
               <tr>
                 <td colspan="4">
                     <textarea name="opinion" class="form-control" rows="3" ></textarea>
-                </td>
-              </tr>
-              <tr>
-                <td colspan="4"><b>Justificaciones (Extensión del Período del Informe)</b></td>
-              </tr>
-              <tr>
-                <td colspan="4">
-                    <textarea name="justi" class="form-control" rows="3" ></textarea>
                 </td>
               </tr>
           

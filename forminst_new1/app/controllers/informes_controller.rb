@@ -1028,7 +1028,6 @@ end
       end
 
       @fecha_inicio = params[:fechaIni]
-      @fecha_fin = params[:fechaFin]
 
       @cant_doc= params[:cant_docencia].to_i
       @cant_inv= params[:cant_investigacion].to_i
@@ -1055,34 +1054,29 @@ end
       informe.tutor_id = session[:usuario_id]
       informe.opinion_tutor = params[:opinion]
       informe.conclusiones = params[:conclusiones]
-      informe.justificaciones = params[:justi]
       informe.tipo_id = @tipo
       informe.numero = @numero_informe
       informe.fecha_creacion = Time.now
       informe.fecha_modificacion = Time.now
-      if (@tipo_informe == 1 || @tipo_informe== 2 || @tipo_informe==4 || @tipo_informe==5)
-	      if !params[:fechaIni].blank?
-          informe.fecha_inicio = @fecha_inicio
-        end
-        if !params[:fechaFin].blank?
-          informe.fecha_fin = @fecha_fin
-        end
+      if (@tipo_informe == 1 || @tipo_informe== 2 || @tipo_informe==4 || @tipo_informe==5) && !params[:fechaIni].blank?
+	      informe.fecha_inicio = params[:fechaIni]
+	      informe.fecha_fin = informe.fecha_inicio + 180.days
       elsif (@tipo_informe == 3) #TIPO SEMESTRAL
       	informe1 = Informe.where( planformacion_id: session[:plan_id], numero: 1).take
       	informe2 = Informe.where( planformacion_id: session[:plan_id], numero: 2).take
-  	    informe.fecha_inicio = informe1.fecha_inicio
-  	    informe.fecha_fin = informe2.fecha_fin 
-  	  elsif(@tipo_informe == 6)	#TIPO ANUAL
-  	  	informe1 = Informe.where( planformacion_id: session[:plan_id], numero: 4).take
-        informe2 = Informe.where( planformacion_id: session[:plan_id], numero: 5).take
-  	    informe.fecha_inicio = informe1.fecha_inicio
-  	    informe.fecha_fin = informe2.fecha_fin 
-  	  elsif(@tipo_informe == 7)	#TIPO FINAL
-  	  	informe1 = Informe.where( planformacion_id: session[:plan_id], numero: 1).take
-        informe2 = Informe.where( planformacion_id: session[:plan_id], numero: 5).take
-  	    informe.fecha_inicio = informe1.fecha_inicio
-  	    informe.fecha_fin = informe2.fecha_fin 
-  	  end
+	    informe.fecha_inicio = informe1.fecha_inicio
+	    informe.fecha_fin = informe2.fecha_fin 
+	  elsif(@tipo_informe == 6)	#TIPO ANUAL
+	  	informe1 = Informe.where( planformacion_id: session[:plan_id], numero: 4).take
+      	informe2 = Informe.where( planformacion_id: session[:plan_id], numero: 5).take
+	    informe.fecha_inicio = informe1.fecha_inicio
+	    informe.fecha_fin = informe2.fecha_fin 
+	  elsif(@tipo_informe == 7)	#TIPO FINAL
+	  	informe1 = Informe.where( planformacion_id: session[:plan_id], numero: 1).take
+      	informe2 = Informe.where( planformacion_id: session[:plan_id], numero: 5).take
+	    informe.fecha_inicio = informe1.fecha_inicio
+	    informe.fecha_fin = informe2.fecha_fin 
+	  end
       informe.save
       puts "Se guarda informe"
 
@@ -2051,8 +2045,8 @@ def generar_pdf() # es función permite generar el documento pdf de la adecuaci�
     # se llama a la función de "pedf_adecuacion" del modelo "pdf", pasando todas las variables correspondientes
     @nombre_archivo= Pdf.pdf_informe(@TipoSemestre, @escuela, @informe, @adecuacion, @tutor, @instructor, @pactv_docencia, @pactv_investigacion, @pactv_extension, @pactv_formacion, @pactv_otras, @sactv_docencia, @sactv_investigacion, @sactv_extension, @sactv_formacion, @sactv_otras, @tactv_docencia, @tactv_investigacion, @tactv_extension, @tactv_formacion, @tactv_otras, @cactv_docencia, @cactv_investigacion, @cactv_extension, @cactv_formacion, @cactv_otras, @actividadesadoc, @actividadesainv, @actividadesafor, @actividadesaext, @actividadesaotr,@res,@resultados,@actividadese,@observaciont,@resultTP,@resultPP,@resultO,@resultAEC,@resultOEC,@resultDCS, @documents, @numeroDeVersion)
     puts @nombre_archivo
-    act = "#{Rails.root}/tmp/PDFs/" + @nombre_archivo
-    #act = @nombre_archivo
+    #act = "#{Rails.root}/" + @nombre_archivo
+    act = @nombre_archivo
     send_file(
       act,
       filename: @nombre_archivo,
@@ -2073,13 +2067,10 @@ def generar_pdf() # es función permite generar el documento pdf de la adecuaci�
     if !params[:fechaIni].blank?
       @fecha_inicio = params[:fechaIni]
       @informe.fecha_inicio = @fecha_inicio
-    end
-    if !params[:fechaFin].blank?
-      @informe.fecha_fin = params[:fechaFin]
+      @informe.fecha_fin = @informe.fecha_inicio + 180.days
     end
     @informe.opinion_tutor = params[:opinion]
     @informe.conclusiones = params[:conclusiones]
-    @informe.justificaciones = params[:justi]
     @plan= Planformacion.find(session[:plan_id])
     @plan.fecha_modificacion = Time.now
     @plan.save
@@ -2090,7 +2081,6 @@ def generar_pdf() # es función permite generar el documento pdf de la adecuaci�
       @act = params[i].to_i
       while j <  @cant_doc
         ia = InformeActividad.where(informe_id: @informe.id,actividad_id: @act).take
-
         ejecutada =:ejecutada.to_s+@act.to_s
         if params[ejecutada]!=nil && params[ejecutada]!=""
           ae = ActividadEjecutada.where(informe_actividad_id: ia.id, actual: 1).take
@@ -2116,6 +2106,7 @@ def generar_pdf() # es función permite generar el documento pdf de la adecuaci�
         j= j+1
         i=:doc.to_s+j.to_s
         @act= params[i].to_i
+
       end
 
       #Comienza actividades de investigacion
@@ -2631,144 +2622,140 @@ def generar_pdf() # es función permite generar el documento pdf de la adecuaci�
     informesAdecuacion = Informe.where(id: @informe_id).take
     informesAdecuaciones = Informe.where(planformacion_id: session[:plan_id]).all
     contador = 0
-    @informe = Informe.find(@informe_id)
+
     if !informesAdecuacion.fecha_inicio.blank?
-      if informesAdecuacion.numero != 1
-        maxinforme = informesAdecuacion.numero.to_i - 1
-        for i in 1..maxinforme
-          informesAdecuaciones.each do |inf|
-            estatusInf = EstatusInforme.where(informe_id: inf.id, actual: 1 ).take
-            if (estatusInf.estatus_id != 6 && inf.numero == i)
-              contador = contador + 1
-            end
+    if informesAdecuacion.numero != 1
+      maxinforme = informesAdecuacion.numero.to_i - 1
+      for i in 1..maxinforme
+        informesAdecuaciones.each do |inf|
+          estatusInf = EstatusInforme.where(informe_id: inf.id, actual: 1 ).take
+          if (estatusInf.estatus_id != 6 && inf.numero == i)
+            contador = contador + 1
           end
         end
-        if (contador != maxinforme)
-          error = error + 1
-        end
       end
+      if (contador != maxinforme)
+        error = error + 1
+      end
+    end
 
-      if error == 0
-        if @informe.justificaciones.blank?
-          @informe.justificaciones = "Sin Justificaciones"
-        end
-        @informe.save
-        cambio_est = EstatusInforme.new 
-        cambio_est.informe_id = @informe_id
-        cambio_est.fecha = Time.now 
+    if error == 0
+      cambio_est = EstatusInforme.new 
+      cambio_est.informe_id = @informe_id
+      cambio_est.fecha = Time.now 
 
-        respaldos = []
-        respaldos = Respaldo.where(adecuacion_id: session[:adecuacion_id], informe_id: @informe_id).all
-        numeroDeVersion = respaldos.size + 1
-        nombre = generar_pdf()
-        nameofthefile = "#{Rails.root}/tmp/PDFs/" + nombre 
-        #nameofthefile  = nombre
-        contents = IO.binread(nameofthefile)
-        respaldo = Respaldo.new 
-        respaldo.filename = nombre
-        respaldo.content_type = "application/pdf"
-        respaldo.file_contents = contents
-        respaldo.created_at = Date.current
-        respaldo.version = numeroDeVersion
+      respaldos = []
+      respaldos = Respaldo.where(adecuacion_id: session[:adecuacion_id], informe_id: @informe_id).all
+      numeroDeVersion = respaldos.size + 1
+      nombre = generar_pdf()
+      #nameofthefile = "#{Rails.root}/" + nombre
+      nameofthefile  = nombre
+      contents = IO.binread(nameofthefile)
+      respaldo = Respaldo.new 
+      respaldo.filename = nombre
+      respaldo.content_type = "application/pdf"
+      respaldo.file_contents = contents
+      respaldo.created_at = Date.current
+      respaldo.version = numeroDeVersion
+      respaldo.estatus = "Enviado a Comisión de Investigación"
+      respaldo.instructor_id = plan.instructor_id
+      respaldo.tutor_id = session[:usuario_id]
+      respaldo.adecuacion_id = session[:adecuacion_id]
+      respaldo.informe_id = @informe_id
+      respaldo.actual = 1
+      if (cambio_act.estatus_id == 6)
+        cambio_est.estatus_id = 3 #Enviado a comision de investigacion
         respaldo.estatus = "Enviado a Comisión de Investigación"
-        respaldo.instructor_id = plan.instructor_id
-        respaldo.tutor_id = session[:usuario_id]
-        respaldo.adecuacion_id = session[:adecuacion_id]
-        respaldo.informe_id = @informe_id
-        respaldo.actual = 1
-        if (cambio_act.estatus_id == 6)
-          cambio_est.estatus_id = 3 #Enviado a comision de investigacion
-          respaldo.estatus = "Enviado a Comisión de Investigación"
-        elsif (cambio_act.estatus_id == 5)
-          cambio_est.estatus_id = 4 #Enviado a consejo de facultad
-          respaldo.estatus = "Enviado a Consejo de Facultad"
-        end
-        respaldo.save
+      elsif (cambio_act.estatus_id == 5)
+        cambio_est.estatus_id = 4 #Enviado a consejo de facultad
+        respaldo.estatus = "Enviado a Consejo de Facultad"
+      end
+      respaldo.save
 
-        cambio_est.actual = 1
-        cambio_est.save
-        cambio_act.actual = 0
-        cambio_act.save
-        cambio_est.fecha = Time.now 
-        notific = Notificacion.new
-        notific.instructor_id = plan.instructor_id
-        notific.tutor_id = session[:usuario_id]
-        notific.adecuacion_id = session[:adecuacion_id]
-        notific.informe_id = @informe_id
-        notific.actual = 1
-        puts "JAJAJA"
-        person = Persona.where(usuario_id: plan.instructor_id).take
-        notificacionfecha = Date.current.to_s 
-        if (cambio_act.estatus_id == 6)
-          notific.mensaje = "[" + notificacionfecha + "] El " + session[:nombre_informe] + " de " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " se ha enviado a comisión de investigación."
-        elsif (cambio_act.estatus_id == 5)
-          notific.mensaje = "[" + notificacionfecha + "] El " + session[:nombre_informe] + " de " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " se ha enviado a Consejo de Facultad."
-        end
-       
-        notific.save
-        notific2 = Notificacion.new
-        notific2.instructor_id = plan.instructor_id
-        notific2.tutor_id = session[:usuario_id]
-        notific2.adecuacion_id = session[:adecuacion_id]
-        notific2.informe_id = @informe_id
-        notific2.actual = 2
-        if (cambio_act.estatus_id == 6)
-          notific2.mensaje = "[" + notificacionfecha + "] Se ha enviado el " + session[:nombre_informe] + " a comisión de investigación."
-        elsif (cambio_act.estatus_id == 5)
-          notific2.mensaje = "[" + notificacionfecha + "] Se ha enviado el " + session[:nombre_informe] + " a Consejo de Facultad."
-        end
-        notific2.save
-        notific3 = Notificacion.new
-        notific3.instructor_id = plan.instructor_id
-        notific3.tutor_id = session[:usuario_id]
-        notific3.adecuacion_id = session[:adecuacion_id]
-        notific3.informe_id = @informe_id
-        if (cambio_act.estatus_id == 6)
-          notific3.actual = 3   #Comisión de investigación
-          notific3.mensaje = "[" + notificacionfecha + "] Ha recibido un nuevo Informe: ' " + session[:nombre_informe]+ " ' de " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + ", favor aprobar y enviar a la siguiente entidad."
-        elsif (cambio_act.estatus_id == 5)
-          notific3.actual = 5   #consejo de facultad
-          notific3.mensaje = "[" + notificacionfecha + "] Ha recibido un nuevo Informe: ' " + session[:nombre_informe]+ " ' de " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + ", favor revisar."
-        end
-        notific3.save
-        userr= Usuario.where(id: session[:usuario_id]).take
-        user =Usuarioentidad.where(usuario_id: userr.id).take
-        if(user.escuela_id == 1)
-          uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 7).take
+      cambio_est.actual = 1
+      cambio_est.save
+      cambio_act.actual = 0
+      cambio_act.save
+      cambio_est.fecha = Time.now 
+      notific = Notificacion.new
+      notific.instructor_id = plan.instructor_id
+      notific.tutor_id = session[:usuario_id]
+      notific.adecuacion_id = session[:adecuacion_id]
+      notific.informe_id = @informe_id
+      notific.actual = 1
+      puts "JAJAJA"
+      person = Persona.where(usuario_id: plan.instructor_id).take
+      notificacionfecha = Date.current.to_s 
+      if (cambio_act.estatus_id == 6)
+        notific.mensaje = "[" + notificacionfecha + "] El " + session[:nombre_informe] + " de " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " se ha enviado a comisión de investigación."
+      elsif (cambio_act.estatus_id == 5)
+        notific.mensaje = "[" + notificacionfecha + "] El " + session[:nombre_informe] + " de " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " se ha enviado a Consejo de Facultad."
+      end
+     
+      notific.save
+      notific2 = Notificacion.new
+      notific2.instructor_id = plan.instructor_id
+      notific2.tutor_id = session[:usuario_id]
+      notific2.adecuacion_id = session[:adecuacion_id]
+      notific2.informe_id = @informe_id
+      notific2.actual = 2
+      if (cambio_act.estatus_id == 6)
+        notific2.mensaje = "[" + notificacionfecha + "] Se ha enviado el " + session[:nombre_informe] + " a comisión de investigación."
+      elsif (cambio_act.estatus_id == 5)
+        notific2.mensaje = "[" + notificacionfecha + "] Se ha enviado el " + session[:nombre_informe] + " a Consejo de Facultad."
+      end
+      notific2.save
+      notific3 = Notificacion.new
+      notific3.instructor_id = plan.instructor_id
+      notific3.tutor_id = session[:usuario_id]
+      notific3.adecuacion_id = session[:adecuacion_id]
+      notific3.informe_id = @informe_id
+      if (cambio_act.estatus_id == 6)
+        notific3.actual = 3   #Comisión de investigación
+        notific3.mensaje = "[" + notificacionfecha + "] Ha recibido un nuevo Informe: ' " + session[:nombre_informe]+ " ' de " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + ", favor aprobar y enviar a la siguiente entidad."
+      elsif (cambio_act.estatus_id == 5)
+        notific3.actual = 5   #consejo de facultad
+        notific3.mensaje = "[" + notificacionfecha + "] Ha recibido un nuevo Informe: ' " + session[:nombre_informe]+ " ' de " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + ", favor revisar."
+      end
+      notific3.save
+      userr= Usuario.where(id: session[:usuario_id]).take
+      user =Usuarioentidad.where(usuario_id: userr.id).take
+      if(user.escuela_id == 1)
+        uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 7).take
+      else
+        if(user.escuela_id == 2)
+          uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 8).take
         else
-          if(user.escuela_id == 2)
-            uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 8).take
+          if(user.escuela_id == 3)
+            uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 9).take
           else
-            if(user.escuela_id == 3)
-              uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 9).take
+            if(user.escuela_id == 4)
+            uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 10).take
             else
-              if(user.escuela_id == 4)
-              uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 10).take
+              if(user.escuela_id == 9)
+                uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 11).take
               else
-                if(user.escuela_id == 9)
-                  uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 11).take
-                else
-                  if(user.escuela_id == 10)
-                    uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 12).take
-                  end
+                if(user.escuela_id == 10)
+                  uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 12).take
                 end
               end
             end
-          end  
-        end
-        remitente3 = Usuario.where(id: session[:usuario_id]).take
-        ActionCorreo.envio_informe(remitente3, notific.mensaje,2).deliver
-        remitente2 = Usuario.where(id: plan.instructor_id).take
-        ActionCorreo.envio_informe(remitente2, notific2.mensaje,1).deliver
-        remitente = Usuario.where(id: uentidad.usuario_id).take
-        ActionCorreo.envio_informe(remitente, notific3.mensaje,0).deliver
-        flash[:success]="El informe se ha envíado a comision de investigacion"
-      else
-          flash[:info]="Debe enviar los informes en orden"
+          end
+        end  
       end
-    else 
-      flash[:info]="Debe introducir una fecha de inicio"
+      remitente3 = Usuario.where(id: session[:usuario_id]).take
+      ActionCorreo.envio_informe(remitente3, notific.mensaje,2).deliver
+      remitente2 = Usuario.where(id: plan.instructor_id).take
+      ActionCorreo.envio_informe(remitente2, notific2.mensaje,1).deliver
+      remitente = Usuario.where(id: uentidad.usuario_id).take
+      ActionCorreo.envio_informe(remitente, notific3.mensaje,0).deliver
+      flash[:success]="El informe se ha envíado a comision de investigacion"
+    else
+        flash[:info]="Debe enviar los informes en orden"
     end
+  else 
+    flash[:info]="Debe introducir una fecha de inicio"
+  end
     redirect_to controller:"informes", action: "listar_informes"
   end
 
