@@ -16691,3 +16691,7 @@ Processing by InformesController#detalles_informe2 as HTML
   Rendered informes/detalles_informe2.html.erb within layouts/ly_inicio_tutor (164.6ms)
 Completed 200 OK in 362ms (Views: 342.3ms | ActiveRecord: 6.3ms)
 Started GET "/assets/banner.png" for 127.0.0.1 at 2017-06-23 17:03:45 -0400
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/Downloads/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/Downloads/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/Downloads/FORMINST/forminst_new1/config/routes.rb:6)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/Downloads/FORMINST/forminst_new1/config/routes.rb:6)
