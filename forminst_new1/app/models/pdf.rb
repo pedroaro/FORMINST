@@ -2547,7 +2547,39 @@ class Pdf
 				:align => { 0 => :left}
 			end
 			
+						
 			
+			pdf.text("\n")
+			pdf.text("10.- JUSTIFICACIONES:", :style => :bold, :size  => 10)
+			
+			if !informe.justificaciones.blank?
+				data112 = [[{:text=> informe.justificaciones.to_s, :align=> :left}]] # datos que se desean en la tabla
+				
+				pdf.table data112, # lineas para generar la tabla en el docuemnto
+				:border_style => :grid, #:underline_header
+				:font_size  => 8, 
+				:horizontal_padding => 6,
+				:vertical_padding   => 3,
+				:border_width => 0.7, 
+				:column_widths => { 0 => 520}, 
+				:position => :left,
+				:align => { 0 => :left}
+				
+			else
+				data112 = [[{:text=> " ", :align=> :left}]] # datos que se desean en la tabla
+				
+				pdf.table data112, # lineas para generar la tabla en el docuemnto
+				:border_style => :grid, #:underline_header
+				:font_size  => 8, 
+				:horizontal_padding => 6,
+				:vertical_padding   => 3,
+				:border_width => 0.7, 
+				:column_widths => { 0 => 520}, 
+				:position => :left,
+				:align => { 0 => :left}
+			end
+			
+						
 			#FIN DEL INFORME		
 			
 			
