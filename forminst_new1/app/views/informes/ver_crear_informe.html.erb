@@ -106,7 +106,7 @@
                 <% else %>
                   <div id="sandbox-container">
                     <div class="input-group date">
-                        <input type="text" class="form-control" name="fechaIni" value="<%=$cpfechaIni%>" required oninvalid="setCustomValidity('Ingrese una fecha de nacimiento válida')" onchange="mostrarFecha(this.value)"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                        <input type="text" class="form-control" name="fechaIni" onchange="mostrarFecha(this.value)"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
                     </div>
                   </div>
                 <% end %>
@@ -115,7 +115,11 @@
               	<% if @numero_informe == 3 || @numero_informe == 6 || @numero_informe == 7 %>
                     <textarea class="form-control" rows="1" disabled><%= @fecha_fin1 %></textarea>
                 <% else %>
-                    <input id="nuevaFecha" class="form-control" rows="1" disabled><%= @fecha_fin1%></input>
+                    <div id="sandbox-container">
+                    <div class="input-group date">
+                      <input type="text" class="form-control" name="fechaFin" onchange="mostrarFecha(this.value)"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                    </div>
+                  </div>
                 <% end %>
               </td>
             </tr>
@@ -140,7 +144,7 @@
                       <textarea class="form-control" rows="3" name='docencia<%= actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
                     </td>
                     <td>
-                      <textarea class="form-control" rows="3" name='ejecutada<%= actdoc.id.to_s%>' ><%= actdoc.actividad %></textarea>
+                      <textarea class="form-control" rows="3" name='ejecutada<%= actdoc.id.to_s%>' ></textarea>
                     </td>
                     <td>
                       <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' ></textarea>
@@ -164,7 +168,7 @@
                       <textarea class="form-control" rows="3" name='investigacion<%= actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
                     </td>
                     <td>
-                      <textarea class="form-control" rows="3" name='ejecutada<%= actdoc.id.to_s%>' ><%= actdoc.actividad %></textarea>
+                      <textarea class="form-control" rows="3" name='ejecutada<%= actdoc.id.to_s%>' ></textarea>
                     </td>
                     <td>
                       <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' ></textarea>
@@ -205,7 +209,7 @@
                       <textarea class="form-control" rows="3" name='formacion<%= actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
                     </td>
                     <td>
-                      <textarea class="form-control" rows="3" name='ejecutada<%= actdoc.id.to_s%>' ><%= actdoc.actividad %></textarea>
+                      <textarea class="form-control" rows="3" name='ejecutada<%= actdoc.id.to_s%>' ></textarea>
                     </td>
                     <td>
                       <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' ></textarea>
@@ -227,7 +231,7 @@
                       <textarea class="form-control" rows="3" name='extension<%= actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
                     </td>
                     <td>
-                      <textarea class="form-control" rows="3" name='ejecutada<%= actdoc.id.to_s%>' ><%=  actdoc.actividad %></textarea>
+                      <textarea class="form-control" rows="3" name='ejecutada<%= actdoc.id.to_s%>' ></textarea>
                     </td>
                     <td>
                       <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' ></textarea>
@@ -249,7 +253,7 @@
                     <textarea class="form-control" rows="3"  name='otra<%= actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
                   </td>
                   <td colspan="2">
-                    <textarea class="form-control" rows="3" name='ejecutada<%= actdoc.id.to_s%>' ><%= actdoc.actividad %></textarea>
+                    <textarea class="form-control" rows="3" name='ejecutada<%= actdoc.id.to_s%>' ></textarea>
                   </td>
                   <input type="hidden" name="otra<%=i.to_s%>" value='<%= actdoc.id %>'>
                 </tr>
@@ -268,6 +272,14 @@
               <tr>
                 <td colspan="4">
                     <textarea name="opinion" class="form-control" rows="3" ></textarea>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4"><b>Justificaciones (Extensión del Período del Informe)</b></td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                    <textarea name="justi" class="form-control" rows="3" ></textarea>
                 </td>
               </tr>
           

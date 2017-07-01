@@ -1,7 +1,7 @@
 class Pdf 
 # estas funciones permite generar el cuerpo del documento en formato pdf
 
-	def self.pdf_adecuacion(plan, adecuacion, tutor, instructor, correoi, correot, escuela, pactv_docencia, pactv_investigacion, pactv_extension, pactv_formacion, pactv_otras, sactv_docencia, sactv_investigacion, sactv_extension, sactv_formacion, sactv_otras, tactv_docencia, tactv_investigacion, tactv_extension, tactv_formacion, tactv_otras, cactv_docencia, cactv_investigacion, cactv_extension, cactv_formacion, cactv_otras, fechaActual, fechaConcurso, soportes,numeroDeVersion)
+	def self.pdf_adecuacion(plan, adecuacion, tutor, instructor, correoi, correot, escuela, pactv_docencia, pactv_investigacion, pactv_extension, pactv_formacion, pactv_otras, sactv_docencia, sactv_investigacion, sactv_extension, sactv_formacion, sactv_otras, tactv_docencia, tactv_investigacion, tactv_extension, tactv_formacion, tactv_otras, cactv_docencia, cactv_investigacion, cactv_extension, cactv_formacion, cactv_otras, fechaActual, fechaConcurso, soportes,numeroDeVersion, dactv_obligatorias)
 	#def self.pdf_adecuacion(adecuacion, tutor, instructor, notificacion, perfil, pactv_docencia, pactv_investigacion, pactv_extension, pactv_formacion, pactv_otras, sactv_docencia, sactv_investigacion, sactv_extension, sactv_formacion, sactv_otras, tactv_docencia, tactv_investigacion, tactv_extension, tactv_formacion, tactv_otras, cactv_docencia, cactv_investigacion, cactv_extension, cactv_formacion, cactv_otras)
 		
 		# se invocan la bibliotecas
@@ -962,6 +962,46 @@ class Pdf
 				data171 =[[{:text => "No hubo." , :aling=> :left}]] # datos que se desean en la tabla
 				
 				pdf.table data171, # lineas para generar la tabla en el docuemnto
+				:border_style => :grid, #:underline_header
+				:font_size  => 10, 
+				:horizontal_padding => 6,
+				:vertical_padding   => 3,
+				:border_width => 0.7, 
+				:column_widths => { 0 => 520}, 
+				:position => :left,
+				:align => { 0 => :left}
+			end
+			#Actividades Obligatorias
+
+			data171 = [[{:text=>"ACTIVIDADES OBLIGATORIAS ", :font_style => :bold}], [{:text=>"5.1.- ACTIVIDADES OBLIGATORIAS:",:font_style => :bold }]] # datos que se desean en la tabla
+			
+			pdf.table data171, # lineas para generar la tabla en el docuemnto
+			:border_style => :grid, #:underline_header
+			:font_size  => 10, 
+			:horizontal_padding => 6,
+			:vertical_padding   => 3,
+			:border_width => 0.7, 
+			:column_widths => { 0 => 520}, 
+			:position => :left,
+			:align => { 0 => :left}
+			
+			if dactv_obligatorias != []
+				dactv_obligatorias.each do |actv|
+					data172 = [[{:text=>  actv.actividad ,  :align=>:left}]] # datos que se desean en la tabla
+					
+					pdf.table data172, # lineas para generar la tabla en el docuemnto
+					:border_style => :grid, #:underline_header
+					:font_size  => 10, 
+					:horizontal_padding => 6,
+					:vertical_padding   => 3,
+					:border_width => 0.7, 
+					:column_widths => { 0 => 520}, 
+					:position => :left,
+					:align => { 0 => :left}
+				end	
+			else
+				data172 = [[{:text=>  "No hubo." ,  :align=>:left}]] # datos que se desean en la tabla
+				pdf.table data172, # lineas para generar la tabla en el docuemnto
 				:border_style => :grid, #:underline_header
 				:font_size  => 10, 
 				:horizontal_padding => 6,
@@ -1941,9 +1981,17 @@ class Pdf
 					ai = ActividadEjecutada.where(informe_actividad_id: ae.id).take
         			obs= ObservacionTutor.where(informe_actividad_id: ae.id).take
         			if !obs.blank?
-						data31 = [[{:text=> actv.actividad.to_s, :align=>:left}, {:text => ai.descripcion.to_s, :align=>:left}, {:text => obs.observaciones.to_s, :align=>:left}]] # datos que se desean en la tabla
+        				if !ai.blank?
+							data31 = [[{:text=> actv.actividad.to_s, :align=>:left}, {:text => ai.descripcion.to_s, :align=>:left}, {:text => obs.observaciones.to_s, :align=>:left}]] # datos que se desean en la tabla
+						else
+							data31 = [[{:text=> actv.actividad.to_s, :align=>:left}, {:text => "", :align=>:left}, {:text => obs.observaciones.to_s, :align=>:left}]] # datos que se desean en la tabla
+						end
 					else
-						data31 = [[{:text=> actv.actividad.to_s, :align=>:left}, {:text => ai.descripcion.to_s, :align=>:left}, {:text => "", :align=>:left}]] # datos que se desean en la tabla
+						if !ai.blank?
+							data31 = [[{:text=> actv.actividad.to_s, :align=>:left}, {:text => ai.descripcion.to_s, :align=>:left}, {:text => "", :align=>:left}]] # datos que se desean en la tabla
+						else
+							data31 = [[{:text=> actv.actividad.to_s, :align=>:left}, {:text => "", :align=>:left}, {:text => "", :align=>:left}]] # datos que se desean en la tabla
+						end
 					end
 					pdf.table data31, # lineas para generar la tabla en el docuemnto
 					:border_style => :grid, #:underline_header
@@ -1992,9 +2040,17 @@ class Pdf
 					ai = ActividadEjecutada.where(informe_actividad_id: ae.id).take
         			obs= ObservacionTutor.where(informe_actividad_id: ae.id).take
         			if !obs.blank?
-						data41 = [[{:text=> actv.actividad.to_s, :align=>:left}, {:text => ai.descripcion.to_s, :align=>:left}, {:text => obs.observaciones.to_s, :align=>:left}]] # datos que se desean en la tabla
+        				if !ai.blank?
+							data41 = [[{:text=> actv.actividad.to_s, :align=>:left}, {:text => ai.descripcion.to_s, :align=>:left}, {:text => obs.observaciones.to_s, :align=>:left}]] # datos que se desean en la tabla
+						else
+							data41 = [[{:text=> actv.actividad.to_s, :align=>:left}, {:text => "", :align=>:left}, {:text => obs.observaciones.to_s, :align=>:left}]] # datos que se desean en la tabla
+						end
 					else
-						data41 = [[{:text=> actv.actividad.to_s, :align=>:left}, {:text => ai.descripcion.to_s, :align=>:left}, {:text => "", :align=>:left}]] # datos que se desean en la tabla
+						if !ai.blank?
+							data41 = [[{:text=> actv.actividad.to_s, :align=>:left}, {:text => ai.descripcion.to_s, :align=>:left}, {:text => "", :align=>:left}]] # datos que se desean en la tabla
+						else
+							data41 = [[{:text=> actv.actividad.to_s, :align=>:left}, {:text => "", :align=>:left}, {:text => "", :align=>:left}]] # datos que se desean en la tabla
+						end
 					end
 					pdf.table data41, # lineas para generar la tabla en el docuemnto
 					:border_style => :grid, #:underline_header
@@ -2281,9 +2337,17 @@ class Pdf
 					ai = ActividadEjecutada.where(informe_actividad_id: ae.id).take
         			obs= ObservacionTutor.where(informe_actividad_id: ae.id).take
         			if !obs.blank?
-						data51 = [[{:text=> actv.actividad.to_s, :align=>:left}, {:text => ai.descripcion.to_s, :align=>:left}, {:text => obs.observaciones.to_s, :align=>:left}]] # datos que se desean en la tabla
+        				if !ai.blank?
+							data51 = [[{:text=> actv.actividad.to_s, :align=>:left}, {:text => ai.descripcion.to_s, :align=>:left}, {:text => obs.observaciones.to_s, :align=>:left}]] # datos que se desean en la tabla
+						else
+							data51 = [[{:text=> actv.actividad.to_s, :align=>:left}, {:text => "", :align=>:left}, {:text => obs.observaciones.to_s, :align=>:left}]] # datos que se desean en la tabla
+						end
 					else
-						data51 = [[{:text=> actv.actividad.to_s, :align=>:left}, {:text => ai.descripcion.to_s, :align=>:left}, {:text => "", :align=>:left}]] # datos que se desean en la tabla
+						if !ai.blank?
+							data51 = [[{:text=> actv.actividad.to_s, :align=>:left}, {:text => ai.descripcion.to_s, :align=>:left}, {:text => "", :align=>:left}]] # datos que se desean en la tabla
+						else
+							data51 = [[{:text=> actv.actividad.to_s, :align=>:left}, {:text => "", :align=>:left}, {:text => "", :align=>:left}]] # datos que se desean en la tabla
+						end
 					end
 					pdf.table data51,  # lineas para generar la tabla en el docuemnto
 					:border_style => :grid, #:underline_header
@@ -2333,9 +2397,17 @@ class Pdf
 					ai = ActividadEjecutada.where(informe_actividad_id: ae.id).take
         			obs= ObservacionTutor.where(informe_actividad_id: ae.id).take
         			if !obs.blank?
-						data61 = [[{:text=> actv.actividad.to_s, :align=>:left}, {:text => ai.descripcion.to_s, :align=>:left}, {:text => obs.observaciones.to_s, :align=>:left}]] # datos que se desean en la tabla
+        				if !ai.blank?
+							data61 = [[{:text=> actv.actividad.to_s, :align=>:left}, {:text => ai.descripcion.to_s, :align=>:left}, {:text => obs.observaciones.to_s, :align=>:left}]] # datos que se desean en la tabla
+						else
+							data61 = [[{:text=> actv.actividad.to_s, :align=>:left}, {:text => "", :align=>:left}, {:text => obs.observaciones.to_s, :align=>:left}]] # datos que se desean en la tabla
+						end
 					else
-						data61 = [[{:text=> actv.actividad.to_s, :align=>:left}, {:text => ai.descripcion.to_s, :align=>:left}, {:text => "", :align=>:left}]] # datos que se desean en la tabla
+						if !ai.blank?
+							data61 = [[{:text=> actv.actividad.to_s, :align=>:left}, {:text => ai.descripcion.to_s, :align=>:left}, {:text => "", :align=>:left}]] # datos que se desean en la tabla
+						else
+							data61 = [[{:text=> actv.actividad.to_s, :align=>:left}, {:text => "", :align=>:left}, {:text => "", :align=>:left}]] # datos que se desean en la tabla
+						end
 					end
 					pdf.table data61, # lineas para generar la tabla en el docuemnto
 					:border_style => :grid, #:underline_header
@@ -2475,7 +2547,39 @@ class Pdf
 				:align => { 0 => :left}
 			end
 			
+						
 			
+			pdf.text("\n")
+			pdf.text("10.- JUSTIFICACIONES:", :style => :bold, :size  => 10)
+			
+			if !informe.justificaciones.blank?
+				data112 = [[{:text=> informe.justificaciones.to_s, :align=> :left}]] # datos que se desean en la tabla
+				
+				pdf.table data112, # lineas para generar la tabla en el docuemnto
+				:border_style => :grid, #:underline_header
+				:font_size  => 8, 
+				:horizontal_padding => 6,
+				:vertical_padding   => 3,
+				:border_width => 0.7, 
+				:column_widths => { 0 => 520}, 
+				:position => :left,
+				:align => { 0 => :left}
+				
+			else
+				data112 = [[{:text=> " ", :align=> :left}]] # datos que se desean en la tabla
+				
+				pdf.table data112, # lineas para generar la tabla en el docuemnto
+				:border_style => :grid, #:underline_header
+				:font_size  => 8, 
+				:horizontal_padding => 6,
+				:vertical_padding   => 3,
+				:border_width => 0.7, 
+				:column_widths => { 0 => 520}, 
+				:position => :left,
+				:align => { 0 => :left}
+			end
+			
+						
 			#FIN DEL INFORME		
 			
 			

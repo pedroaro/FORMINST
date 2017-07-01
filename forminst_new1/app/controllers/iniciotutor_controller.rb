@@ -208,6 +208,7 @@ class IniciotutorController < ApplicationController
 			@cant_delete= params[:cant_delete]
 			@cant_edit= params[:cant_edit]
 			@cant_doc= params[:cant_docencia]
+			@cant_obli= params[:cant_obligatoria]
 			@cant_inv= params[:cant_investigacion]
 			@cant_for= params[:cant_formacion]
 			@cant_ext= params[:cant_extension]
@@ -262,6 +263,8 @@ class IniciotutorController < ApplicationController
 
 				while j < @cant_edit.to_i
 					@act= Actividad.find(@edit)
+					puts "jlaaajlsajlsjklajsdlashkdsklahfd"
+					puts @edit
 					tipo= @act.tipo_actividad_id
 
 					if tipo==1
@@ -282,6 +285,9 @@ class IniciotutorController < ApplicationController
 								else
 									if tipo==5
 										m=:otra.to_s+@edit.to_s
+										text= params[m]
+									elsif tipo==7
+										m=:obligatoria.to_s+@edit.to_s
 										text= params[m]
 									end
 								end
@@ -341,6 +347,36 @@ class IniciotutorController < ApplicationController
 				j = j + 1
 				i=:nuevadoc.to_s+j.to_s;
 				@docencias = params[i]
+			end
+
+			j=0
+			i=:nuevaobli.to_s+j.to_s
+			@obliga = params[i]
+
+			#obligatorias
+			while j < @cant_obli.to_i
+				@modifique= true
+				if  @obliga!=nil && @obliga!=""
+					a = Actividad.new
+					a.tipo_actividad_id = 7
+					a.actividad = @obliga
+					a.save
+					puts @adecuacion.id
+					puts a.id
+					puts semestre
+					adac = AdecuacionActividad.new
+					adac.adecuacion_id = @adecuacion.id
+					adac.actividad_id = a.id
+					adac.semestre = semestre
+					@plan.fecha_modificacion = Time.now
+					@plan.save
+					@adecuacion.fecha_modificacion = Time.now
+					@adecuacion.save
+					adac.save
+				end
+				j = j + 1
+				i=:nuevaobli.to_s+j.to_s;
+				@obliga = params[i]
 			end
 
 			j=0
@@ -770,6 +806,55 @@ class IniciotutorController < ApplicationController
 		end
 	end
 
+	def detalles_adecuacion7
+		if session[:usuario_id] && session[:tutor]
+			@iddoc= 'id_docencia'
+			@docencia='docencia'
+			@obligatoria='obligatoria'
+			@investigacion= 'investigacion'
+			@formacion= 'formacion'
+			@extension= 'extension'
+			@otra= 'otra' 
+			@nombre = session[:nombre_usuario]
+			@instructorName = session[:instructorName]
+			@plan= Planformacion.find(session[:plan_id])
+			@actividadesadoc= []
+			@actividadesainv= []
+			@actividadesaext= []
+			@actividadesafor= []
+			@actividadesaotr= []
+			@actividadesaobli= []
+			@adecuacion = Adecuacion.where(planformacion_id: session[:plan_id]).take
+			@est= EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
+			if !session[:editar] && (@est.estatus_id == 6 || @est.estatus_id == 5)
+				flash.now[:info]= "Para editar la Adecuación debe seleccionar Modificar Adecuación"
+			end
+			@actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 5).all
+			puts "GyyyGHELLO1"
+			puts @actividadesa
+			if @actividadesa.blank?
+				puts "GGHELLO1"
+			end
+			@actividadesa.each do |actade| 
+				puts "HELLO1"
+				@act= Actividad.find(actade.actividad_id)
+				tipo= @act.tipo_actividad_id
+				if tipo==7
+					puts "HELLO15"
+					puts @act.actividad
+					@actividadesaobli.push(@act)
+				end
+			end
+			@bool_enviado = 0
+			estatus_adecuacion = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
+
+			if (estatus_adecuacion.estatus_id != 6 && estatus_adecuacion.estatus_id != 5 )
+				@bool_enviado = 1
+			end
+		else
+			redirect_to controller:"forminst", action: "index"
+		end
+	end
 
 	def guardar_adecuacion
 		if session[:usuario_id] && session[:tutor]
@@ -1164,6 +1249,19 @@ class IniciotutorController < ApplicationController
 							end
 						end
 					end
+				end
+			end
+
+
+			@actividades5obli= []
+			@actividades5= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 5).all
+			@actividades5.each do |actade| 
+				@act= Actividad.find(actade.actividad_id)
+				tipo= @act.tipo_actividad_id
+				if tipo == 7
+					puts "soy otro tipo de actividad"
+					puts @act.actividad
+					@actividades5obli.push(@act)
 				end
 			end
 		else 
@@ -1635,6 +1733,7 @@ class IniciotutorController < ApplicationController
     @cactv_formacion= []
     @cactv_extension=[]
     @cactv_otras=[]
+    @dactv_obligatorias=[]
 
     @actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 1).all
     @actividadesa.each do |actade| 
@@ -1775,13 +1874,24 @@ class IniciotutorController < ApplicationController
         end
       end
     end
+
+    @cactividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 5).all
+    @cactividadesa.each do |actade| 
+      @act= Actividad.find(actade.actividad_id)
+      tipo= @act.tipo_actividad_id
+      if tipo==7
+        puts "soy una actividad de docencia"
+        puts @act.actividad
+        @dactv_obligatorias.push(@act)
+      end
+    end
     @documents = []
     @documents = Document.where(adecuacion_id: @adecuacion.id, informe_id: nil).all
     # se llama a la función de "pedf_adecuacion" del modelo "pdf", pasando todas las variables correspondientes
     respaldos = []
     respaldos = Respaldo.where(adecuacion_id: @adecuacion.id, informe_id: nil).all
     @numeroDeVersion = respaldos.size + 1
-    Pdf.pdf_adecuacion(@planformacion, @adecuacion, @tutor, @instructor, @correoi, @correot, @escuela, @pactv_docencia, @pactv_investigacion, @pactv_extension, @pactv_formacion, @pactv_otras, @sactv_docencia, @sactv_investigacion, @sactv_extension, @sactv_formacion, @sactv_otras, @tactv_docencia, @tactv_investigacion, @tactv_extension, @tactv_formacion, @tactv_otras, @cactv_docencia, @cactv_investigacion, @cactv_extension, @cactv_formacion, @cactv_otras, @fechaActual, @fechaConcurso, @documents, @numeroDeVersion)
+    Pdf.pdf_adecuacion(@planformacion, @adecuacion, @tutor, @instructor, @correoi, @correot, @escuela, @pactv_docencia, @pactv_investigacion, @pactv_extension, @pactv_formacion, @pactv_otras, @sactv_docencia, @sactv_investigacion, @sactv_extension, @sactv_formacion, @sactv_otras, @tactv_docencia, @tactv_investigacion, @tactv_extension, @tactv_formacion, @tactv_otras, @cactv_docencia, @cactv_investigacion, @cactv_extension, @cactv_formacion, @cactv_otras, @fechaActual, @fechaConcurso, @documents, @numeroDeVersion, @dactv_obligatorias)
     @nombre_archivo= @instructor.ci.to_s+'-'+@fechaActual+'-adecuacionV'+@numeroDeVersion.to_s+'.pdf' # se arma el nombre del documento 
     act = "#{Rails.root}/tmp/PDFs" + @nombre_archivo
     puts @nombre_archivo

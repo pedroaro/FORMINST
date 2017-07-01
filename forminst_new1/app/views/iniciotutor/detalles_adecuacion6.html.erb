@@ -250,6 +250,7 @@
         <li><%= link_to '2° Semestre', :controller => 'iniciotutor', :action => 'detalles_adecuacion4' %></li>
         <li><%= link_to '3° Semestre', :controller => 'iniciotutor', :action => 'detalles_adecuacion5' %></li>
         <li class="activa"><a href="#">4° Semestre</a></li>
+        <li><%= link_to 'Obligatorias', :controller => 'iniciotutor', :action => 'detalles_adecuacion7' %></li>
       </ul>
   </div>
 </div>
@@ -268,7 +269,7 @@
           <tbody>
             <tr></tr>
             <tr>
-              <td class="text-left" colspan="2"><h5><strong>4. Actividades a realizar por el instructor</strong></h5></td>
+              <td class="text-left" colspan="3"><h5><strong>4. Actividades a realizar por el instructor</strong></h5></td>
               
             </tr>
             <tr>
@@ -545,6 +546,8 @@
                                     </button>\
                                   </center>\
                                 </td>\
+                                <td>\
+                                </td>\
                               </tr>');
           cant_docencia = cant_docencia + 1;
           console.log(cant_docencia);
@@ -564,6 +567,8 @@
                                     </button>\
                                   </center>\
                                 </td>\
+                                <td>\
+                                </td>\
                               </tr>');
           cant_investigacion = cant_investigacion + 1;
           $("#cant_investigacion").val(cant_investigacion);
@@ -581,6 +586,8 @@
                                       <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>\
                                     </button>\
                                   </center>\
+                                </td>\
+                                <td>\
                                 </td>\
                               </tr>');
           cant_formacion = cant_formacion + 1;
@@ -600,6 +607,8 @@
                                     </button>\
                                   </center>\
                                 </td>\
+                                <td>\
+                                </td>\
                               </tr>');
           cant_extension = cant_extension + 1;
           $("#cant_extension").val(cant_extension);
@@ -617,6 +626,8 @@
                                       <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>\
                                     </button>\
                                   </center>\
+                                </td>\
+                                <td>\
                                 </td>\
                               </tr>');
           cant_otra = cant_otra + 1;
