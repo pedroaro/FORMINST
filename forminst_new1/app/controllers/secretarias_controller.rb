@@ -31,6 +31,24 @@ class SecretariasController < ApplicationController
 				$cpuai = nil
 			end
 
+			cpSecretariaID = session[:usuario_id]
+			cpSecretaria = Usuarioentidad.where(usuario_id: cpSecretariaID).take
+			cpSecretariaEscuela = cpSecretaria.escuela_id
+			uentidad = Departamento.where(escuela_id: cpSecretariaEscuela)
+			cpcontador = 0
+			@departamentos = []
+			@departamentos[cpcontador] = Array.new(2) { |i|  }
+			@departamentos[cpcontador][0] =  "Seleccione un Departamento"
+			@departamentos[cpcontador][1] = 0
+			cpcontador = cpcontador + 1
+
+			uentidad.each do |usuarioentidad|
+				@departamentos[cpcontador] = Array.new(2) { |i|  }
+				@departamentos[cpcontador][0] = usuarioentidad.nombre
+				@departamentos[cpcontador][1] = usuarioentidad.id
+				cpcontador = cpcontador + 1
+			end
+
 			$modulo = "agregarTutor"
 
 			@nombre = session[:nombre_usuario]
@@ -71,70 +89,86 @@ class SecretariasController < ApplicationController
 				puts params[:Area]
 				puts params[:Subarea]
 			
-			cpSecretariaID = session[:usuario_id]
-			cpSecretaria = Usuarioentidad.where(usuario_id: cpSecretariaID).take
-			cpSecretariaEscuela = cpSecretaria.escuela_id
+				if params[:depto].to_i != 0
+					cpSecretariaID = session[:usuario_id]
+					cpSecretaria = Usuarioentidad.where(usuario_id: cpSecretariaID).take
+					cpSecretariaEscuela = cpSecretaria.escuela_id
 
-			cpusuario = Usuario.new
-			cpusuario.user = params[:correo].to_s
-			cpusuario.password = params[:CI].to_s
-			cpusuario.ldap = 0
-			cpusuario.activo = 1
-			cpusuario.tipo = "Docente"
-			cpusuario.email = params[:correo].to_s
-			cpusuario.save
+					cpusuario = Usuario.new
+					cpusuario.user = params[:correo].to_s
+					cpusuario.password = params[:CI].to_s
+					cpusuario.ldap = 0
+					cpusuario.activo = 1
+					cpusuario.tipo = "Docente"
+					cpusuario.email = params[:correo].to_s
+					cpusuario.save
 
-			cppersona = Persona.new
-			cppersona.usuario_id = cpusuario.id
-			cppersona.nombres = params[:Nombre].to_s
-			cppersona.apellidos = params[:Apellido].to_s
-			cppersona.fecha_nacimiento = params[:FechaNac].to_s
-			cppersona.ci = params[:CI].to_s
-			cppersona.telefono1 = params[:Tlf].to_s
-			cppersona.telefono2 = params[:OTlf].to_s
-			cppersona.direccion = params[:Dir].to_s
-			cppersona.grado_instruccion = params[:GradoI].to_s
-			cppersona.area = params[:Area].to_s
-			cppersona.subarea = params[:Subarea].to_s
-			cppersona.save
+					cppersona = Persona.new
+					cppersona.usuario_id = cpusuario.id
+					cppersona.nombres = params[:Nombre].to_s
+					cppersona.apellidos = params[:Apellido].to_s
+					cppersona.fecha_nacimiento = params[:FechaNac].to_s
+					cppersona.ci = params[:CI].to_s
+					cppersona.telefono1 = params[:Tlf].to_s
+					cppersona.telefono2 = params[:OTlf].to_s
+					cppersona.direccion = params[:Dir].to_s
+					cppersona.grado_instruccion = params[:GradoI].to_s
+					cppersona.area = params[:Area].to_s
+					cppersona.subarea = params[:Subarea].to_s
+					cppersona.save
 
-			cpuentidad = Usuarioentidad.new
-			cpuentidad.usuario_id = cpusuario.id
-			cpuentidad.entidad_id = 18
-			cpuentidad.id = cpusuario.id
-			cpuentidad.escuela_id = cpSecretariaEscuela
-			cpuentidad.save
+					cpuentidad = Usuarioentidad.new
+					cpuentidad.usuario_id = cpusuario.id
+					cpuentidad.entidad_id = 18
+					cpuentidad.id = cpusuario.id
+					cpuentidad.escuela_id = cpSecretariaEscuela
+					cpuentidad.departamento_id = params[:depto].to_i
+					cpuentidad.save
 
-			notific = Notificacion.new
-	        notific.instructor_id = nil
-	        notific.tutor_id = cpusuario.id
-	        notific.adecuacion_id = nil
-	        notific.informe_id = nil
-	        notific.actual = 1
-	        notificacionfecha = Date.current.to_s 
-        	notific.mensaje = "[" + notificacionfecha + "] ¡Bienvenido a FORMINST! Se ha creado su perfil de Tutor."
-        	notific.save
-			remitente3 = Usuario.where(id: notific.tutor_id).take
-			ActionCorreo.creacion_de_tutor(remitente3, notific.mensaje).deliver
-        	flash[:success] = "Se ha creado el tutor " + cppersona.nombres.to_s.split.map(&:capitalize).join(' ') + " " + cppersona.apellidos.to_s.split.map(&:capitalize).join(' ') + " de manera exitosa"
-			redirect_to controller:"secretarias", action: "index"
+					notific = Notificacion.new
+			        notific.instructor_id = nil
+			        notific.tutor_id = cpusuario.id
+			        notific.adecuacion_id = nil
+			        notific.informe_id = nil
+			        notific.actual = 1
+			        notificacionfecha = Date.current.to_s 
+		        	notific.mensaje = "[" + notificacionfecha + "] ¡Bienvenido a FORMINST! Se ha creado su perfil de Tutor."
+		        	notific.save
+					remitente3 = Usuario.where(id: notific.tutor_id).take
+					ActionCorreo.creacion_de_tutor(remitente3, notific.mensaje).deliver
+		        	flash[:success] = "Se ha creado el tutor " + cppersona.nombres.to_s.split.map(&:capitalize).join(' ') + " " + cppersona.apellidos.to_s.split.map(&:capitalize).join(' ') + " de manera exitosa"
+					redirect_to controller:"secretarias", action: "index"
+				else
+					$cpnombre = params[:Nombre]
+					$cpapellido =params[:Apellido]
+					$cpci = params[:CI]
+					$cpcorreo = params[:correo]
+					$cptlf = params[:Tlf]
+					$cpotlf = params[:OTlf]
+					$cpfechanac = params[:FechaNac]
+					$cpdir = params[:Dir]
+					$cpgradoi = params[:GradoI]
+					$cparea = params[:Area]
+					$cpsubarea = params[:Subarea]
 
+					flash[:danger] = "Debe selecionar un departamento"
+					redirect_to :back
+				end
 			else
-			$cpnombre = params[:Nombre]
-			$cpapellido =params[:Apellido]
-			$cpci = params[:CI]
-			$cpcorreo = params[:correo]
-			$cptlf = params[:Tlf]
-			$cpotlf = params[:OTlf]
-			$cpfechanac = params[:FechaNac]
-			$cpdir = params[:Dir]
-			$cpgradoi = params[:GradoI]
-			$cparea = params[:Area]
-			$cpsubarea = params[:Subarea]
+				$cpnombre = params[:Nombre]
+				$cpapellido =params[:Apellido]
+				$cpci = params[:CI]
+				$cpcorreo = params[:correo]
+				$cptlf = params[:Tlf]
+				$cpotlf = params[:OTlf]
+				$cpfechanac = params[:FechaNac]
+				$cpdir = params[:Dir]
+				$cpgradoi = params[:GradoI]
+				$cparea = params[:Area]
+				$cpsubarea = params[:Subarea]
 
-			flash[:danger] = "La cedula de identidad ya existe"
-			redirect_to :back
-
+				flash[:danger] = "La cedula de identidad ya existe"
+				redirect_to :back
 			end
 		else
 			redirect_to controller:"forminst", action: "index"
@@ -175,6 +209,21 @@ class SecretariasController < ApplicationController
 			cpSecretariaID = session[:usuario_id]
 			cpSecretaria = Usuarioentidad.where(usuario_id: cpSecretariaID).take
 			cpSecretariaEscuela = cpSecretaria.escuela_id
+
+			deptos = Departamento.where(escuela_id: cpSecretariaEscuela)
+			cpcontador1 = 0
+			@departamentos = []
+			@departamentos[cpcontador1] = Array.new(2) { |i|  }
+			@departamentos[cpcontador1][0] =  "Seleccione un Departamento"
+			@departamentos[cpcontador1][1] = 0
+			cpcontador1 = cpcontador1 + 1
+
+			deptos.each do |usuarioentidad|
+				@departamentos[cpcontador1] = Array.new(2) { |i|  }
+				@departamentos[cpcontador1][0] = usuarioentidad.nombre
+				@departamentos[cpcontador1][1] = usuarioentidad.id
+				cpcontador1 = cpcontador1 + 1
+			end
 
 			uentidad = Usuarioentidad.where(escuela_id: cpSecretariaEscuela, entidad_id: 18)
 			cpcontador = 0
@@ -243,109 +292,131 @@ class SecretariasController < ApplicationController
 			puts haceralgo
 			
 			if haceralgo == "Si"	
+				if params[:JRTutores].to_s != "0" && params[:depto].to_i != 0
+					profenti = Usuarioentidad.where(usuario_id: params[:JRTutores]).take
+					if profenti.departamento_id == params[:depto].to_i
+						cpelAno = params[:FechaConcurso][0..3]
+						cpanoIncrementado = cpelAno.to_i + 2
+						cpGuardar = cpanoIncrementado.to_s + params[:FechaConcurso][4..params[:FechaConcurso].mb_chars.length]
+						puts cpGuardar
 
-				if params[:JRTutores].to_s != "0"
-					cpelAno = params[:FechaConcurso][0..3]
-					cpanoIncrementado = cpelAno.to_i + 2
-					cpGuardar = cpanoIncrementado.to_s + params[:FechaConcurso][4..params[:FechaConcurso].mb_chars.length]
-					puts cpGuardar
+						cpSecretariaID = session[:usuario_id]
+						cpSecretaria = Usuarioentidad.where(usuario_id: cpSecretariaID).take
+						cpSecretariaEscuela = cpSecretaria.escuela_id
 
-					cpSecretariaID = session[:usuario_id]
-					cpSecretaria = Usuarioentidad.where(usuario_id: cpSecretariaID).take
-					cpSecretariaEscuela = cpSecretaria.escuela_id
+						cpusuario = Usuario.new
+						cpusuario.user = params[:correo]
+						cpusuario.password = params[:CI].to_s
+						cpusuario.ldap = 0
+						cpusuario.activo = 1
+						cpusuario.tipo = "Docente"
+						cpusuario.email = params[:correo]
+						cpusuario.save
 
-					cpusuario = Usuario.new
-					cpusuario.user = params[:correo]
-					cpusuario.password = params[:CI].to_s
-					cpusuario.ldap = 0
-					cpusuario.activo = 1
-					cpusuario.tipo = "Docente"
-					cpusuario.email = params[:correo]
-					cpusuario.save
+						cppersona = Persona.new
+						cppersona.usuario_id = cpusuario.id
+						cppersona.nombres = params[:Nombre]
+						cppersona.apellidos = params[:Apellido]
+						cppersona.fecha_nacimiento = params[:FechaNac]
+						cppersona.ci = params[:CI].to_s
+						cppersona.telefono1 = params[:Tlf]
+						cppersona.telefono2 = params[:OTlf]
+						cppersona.direccion = params[:Dir]
+						cppersona.grado_instruccion = params[:GradoI]
+						cppersona.area = params[:Area]
+						cppersona.subarea = params[:Subarea]
+						cppersona.save
 
-					cppersona = Persona.new
-					cppersona.usuario_id = cpusuario.id
-					cppersona.nombres = params[:Nombre]
-					cppersona.apellidos = params[:Apellido]
-					cppersona.fecha_nacimiento = params[:FechaNac]
-					cppersona.ci = params[:CI].to_s
-					cppersona.telefono1 = params[:Tlf]
-					cppersona.telefono2 = params[:OTlf]
-					cppersona.direccion = params[:Dir]
-					cppersona.grado_instruccion = params[:GradoI]
-					cppersona.area = params[:Area]
-					cppersona.subarea = params[:Subarea]
-					cppersona.save
+						cpuentidad = Usuarioentidad.new
+						cpuentidad.usuario_id = cpusuario.id
+						cpuentidad.entidad_id = 19
+						cpuentidad.id = cpusuario.id
+						cpuentidad.escuela_id = cpSecretariaEscuela
+						cpuentidad.departamento_id = params[:depto].to_i
+						cpuentidad.save
 
-					cpuentidad = Usuarioentidad.new
-					cpuentidad.usuario_id = cpusuario.id
-					cpuentidad.entidad_id = 19
-					cpuentidad.id = cpusuario.id
-					cpuentidad.escuela_id = cpSecretariaEscuela
-					cpuentidad.save
+						cpplanformacion = Planformacion.new
+						cpplanformacion.fecha_inicio = params[:FechaConcurso]
+						cpplanformacion.fecha_fin = cpGuardar
+						cpplanformacion.activo = 1
+						cpplanformacion.instructor_id = cpusuario.id
+						cpplanformacion.tutor_id = params[:JRTutores]
+						cpplanformacion.adscripcion_docencia = params[:UAD]
+						cpplanformacion.adscripcion_investigacion = params[:UAI]
+						cpplanformacion.save
 
-					cpplanformacion = Planformacion.new
-					cpplanformacion.fecha_inicio = params[:FechaConcurso]
-					cpplanformacion.fecha_fin = cpGuardar
-					cpplanformacion.activo = 1
-					cpplanformacion.instructor_id = cpusuario.id
-					cpplanformacion.tutor_id = params[:JRTutores]
-					cpplanformacion.adscripcion_docencia = params[:UAD]
-					cpplanformacion.adscripcion_investigacion = params[:UAI]
-					cpplanformacion.save
+						cpAdecuacion = Adecuacion.new
+						cpAdecuacion.planformacion_id = cpplanformacion.id
+						cpAdecuacion.tutor_id = cpplanformacion.tutor_id
+						cpAdecuacion.fecha_creacion = cpplanformacion.fecha_inicio
+						cpAdecuacion.fecha_modificacion = cpplanformacion.fecha_inicio
+						cpAdecuacion.save
 
-					cpAdecuacion = Adecuacion.new
-					cpAdecuacion.planformacion_id = cpplanformacion.id
-					cpAdecuacion.tutor_id = cpplanformacion.tutor_id
-					cpAdecuacion.fecha_creacion = cpplanformacion.fecha_inicio
-					cpAdecuacion.fecha_modificacion = cpplanformacion.fecha_inicio
-					cpAdecuacion.save
+						cpEstatus_Adecuacion = EstatusAdecuacion.new
+						cpEstatus_Adecuacion.adecuacion_id = cpAdecuacion.id
+						cpEstatus_Adecuacion.fecha = Date.current.to_s
+						cpEstatus_Adecuacion.estatus_id = 6
+						cpEstatus_Adecuacion.actual = 1
+						cpEstatus_Adecuacion.save
 
-					cpEstatus_Adecuacion = EstatusAdecuacion.new
-					cpEstatus_Adecuacion.adecuacion_id = cpAdecuacion.id
-					cpEstatus_Adecuacion.fecha = Date.current.to_s
-					cpEstatus_Adecuacion.estatus_id = 6
-					cpEstatus_Adecuacion.actual = 1
-					cpEstatus_Adecuacion.save
-
-					cpinstructortutor = Instructortutor.where(instructor_id: cpplanformacion.instructor_id, tutor_id: params[:JRTutores]).take
-					if cpinstructortutor.blank?
-						cpinstructortutor = Instructortutor.new
-						cpinstructortutor.tutor_id = params[:JRTutores]
-						cpinstructortutor.instructor_id = cpplanformacion.instructor_id
-						cpinstructortutor.actual = 1
+						cpinstructortutor = Instructortutor.where(instructor_id: cpplanformacion.instructor_id, tutor_id: params[:JRTutores]).take
+						if cpinstructortutor.blank?
+							cpinstructortutor = Instructortutor.new
+							cpinstructortutor.tutor_id = params[:JRTutores]
+							cpinstructortutor.instructor_id = cpplanformacion.instructor_id
+							cpinstructortutor.actual = 1
+						else
+							cpinstructortutor.actual = 1
+						end
+						cpinstructortutor.save
+						notific = Notificacion.new
+				        notific.instructor_id = cpusuario.id
+				        notific.tutor_id = params[:JRTutores]
+				        profe = Persona.where(usuario_id: params[:JRTutores]).take
+				        adecc = Adecuacion.where(planformacion_id: cpAdecuacion.planformacion_id).take
+				        plan = Planformacion.where(id: cpAdecuacion.planformacion_id).take
+				        notific.adecuacion_id = adecc.id
+				        notific.informe_id = nil
+				        notific.actual = 1
+				        notificacionfecha = Date.current.to_s 
+			        	notific.mensaje = "[" + notificacionfecha + "] Se le ha asignado el Plan formación de " + cppersona.nombres.to_s.split.map(&:capitalize).join(' ') + " " + cppersona.apellidos.to_s.split.map(&:capitalize).join(' ') + ", recuerde crear la adecuación correspondiente y enviarla."
+			        	notific.save
+			        	notific2 = Notificacion.new
+				        notific2.instructor_id = cpusuario.id
+				        notific2.tutor_id = params[:JRTutores]
+				        notific2.adecuacion_id = adecc.id
+				        notific2.informe_id = nil
+				        notific2.actual = 2
+				        notificacionfecha = Date.current.to_s 
+			        	notific2.mensaje = "[" + notificacionfecha + "] ¡Bienvenido a FORMINST! Se le ha asignado a  " + profe.nombres.to_s.split.map(&:capitalize).join(' ') + " " + profe.apellidos.to_s.split.map(&:capitalize).join(' ') + " como tutor de su Plan de formación."
+			        	notific2.save
+						remitente3 = Usuario.where(id: notific.tutor_id).take
+						ActionCorreo.creacion_de_instructor(remitente3, notific.mensaje,1).deliver
+						remitente2 = Usuario.where(id: plan.instructor_id).take
+						ActionCorreo.creacion_de_instructor(remitente2, notific2.mensaje,0).deliver
+			        	flash[:success] = "Se ha creado el instructor " + cppersona.nombres.to_s.split.map(&:capitalize).join(' ') + " " + cppersona.apellidos.to_s.split.map(&:capitalize).join(' ') + " de manera exitosa"
+						redirect_to controller:"secretarias", action: "index"
 					else
-						cpinstructortutor.actual = 1
-					end
-					cpinstructortutor.save
-					notific = Notificacion.new
-			        notific.instructor_id = cpusuario.id
-			        notific.tutor_id = params[:JRTutores]
-			        profe = Persona.where(usuario_id: params[:JRTutores]).take
-			        adecc = Adecuacion.where(planformacion_id: cpAdecuacion.planformacion_id).take
-			        plan = Planformacion.where(id: cpAdecuacion.planformacion_id).take
-			        notific.adecuacion_id = adecc.id
-			        notific.informe_id = nil
-			        notific.actual = 1
-			        notificacionfecha = Date.current.to_s 
-		        	notific.mensaje = "[" + notificacionfecha + "] Se le ha asignado el Plan formación de " + cppersona.nombres.to_s.split.map(&:capitalize).join(' ') + " " + cppersona.apellidos.to_s.split.map(&:capitalize).join(' ') + ", recuerde crear la adecuación correspondiente y enviarla."
-		        	notific.save
-		        	notific2 = Notificacion.new
-			        notific2.instructor_id = cpusuario.id
-			        notific2.tutor_id = params[:JRTutores]
-			        notific2.adecuacion_id = adecc.id
-			        notific2.informe_id = nil
-			        notific2.actual = 2
-			        notificacionfecha = Date.current.to_s 
-		        	notific2.mensaje = "[" + notificacionfecha + "] ¡Bienvenido a FORMINST! Se le ha asignado a  " + profe.nombres.to_s.split.map(&:capitalize).join(' ') + " " + profe.apellidos.to_s.split.map(&:capitalize).join(' ') + " como tutor de su Plan de formación."
-		        	notific2.save
-					remitente3 = Usuario.where(id: notific.tutor_id).take
-					ActionCorreo.creacion_de_instructor(remitente3, notific.mensaje,1).deliver
-					remitente2 = Usuario.where(id: plan.instructor_id).take
-					ActionCorreo.creacion_de_instructor(remitente2, notific2.mensaje,0).deliver
-		        	flash[:success] = "Se ha creado el instructor " + cppersona.nombres.to_s.split.map(&:capitalize).join(' ') + " " + cppersona.apellidos.to_s.split.map(&:capitalize).join(' ') + " de manera exitosa"
-					redirect_to controller:"secretarias", action: "index"
 
+						$cpnombre = params[:Nombre]
+						$cpapellido =params[:Apellido]
+						$cpci = params[:CI]
+						$cpcorreo = params[:correo]
+						$cptlf = params[:Tlf]
+						$cpotlf = params[:OTlf]
+						$cpfechanac = params[:FechaNac]
+						$cpdir = params[:Dir]
+						$cpgradoi = params[:GradoI]
+						$cparea = params[:Area]
+						$cpsubarea = params[:Subarea]
+						$cpfechaconcurso = params[:FechaConcurso]
+						$cpjrtutores = params[:JRTutores]
+						$cpuad = params[:UAD]
+						$cpuai = params[:UAI]
+						flash[:danger] = "El tutor debe pertenecer al mismo departamento del instructor"
+						redirect_to :back
+
+					end
 				else
 
 					$cpnombre = params[:Nombre]
@@ -363,7 +434,7 @@ class SecretariasController < ApplicationController
 					$cpjrtutores = params[:JRTutores]
 					$cpuad = params[:UAD]
 					$cpuai = params[:UAI]
-					flash[:danger] = "Seleccione un Tutor"
+					flash[:danger] = "Seleccione Departamento y Tutor"
 					redirect_to :back
 
 				end
