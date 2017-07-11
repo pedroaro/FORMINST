@@ -14247,3 +14247,131 @@ app/controllers/documents_controller.rb:56:in `create'
   Rendering /usr/local/lib/ruby/gems/2.4.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
   Rendered /usr/local/lib/ruby/gems/2.4.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
   Rendered /usr/local/lib/ruby/gems/2.4.0/gems/actionpack-5.0.3/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (23.4ms)
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/pedro/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/pedro/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/pedro/FORMINST/forminst_new1/config/routes.rb:6)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/pedro/FORMINST/forminst_new1/config/routes.rb:6)
+DEPRECATION WARNING: You didn't set `secret_key_base`. Read the upgrade documentation to learn more about this new config option. (called from env_config at /home/pedro/.rvm/gems/ruby-2.4.0/gems/railties-5.0.4/lib/rails/application.rb:246)
+DEPRECATION WARNING: You didn't set `secret_key_base`. Read the upgrade documentation to learn more about this new config option. (called from env_config at /home/pedro/.rvm/gems/ruby-2.4.0/gems/railties-5.0.4/lib/rails/application.rb:246)
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/pedro/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/pedro/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/pedro/FORMINST/forminst_new1/config/routes.rb:6)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/pedro/FORMINST/forminst_new1/config/routes.rb:6)
+Started GET "/" for 127.0.0.1 at 2017-07-01 13:17:25 -0400
+Processing by ForminstController#index as HTML
+  Rendering forminst/index.html.erb within layouts/ec_aplanes
+  Rendered forminst/index.html.erb within layouts/ec_aplanes (7.3ms)
+Completed 200 OK in 24188ms (Views: 24127.9ms)
+Started GET "/assets/resumes.self-eca7f8cd638c316f9be7176e76b6a74d46806ec146c85a565f2d359404a2f919.css?body=1" for 127.0.0.1 at 2017-07-01 13:17:50 -0400
+Started GET "/assets/scaffolds.self-7950a8af286d736ebec8f229c9e4afad34f03d3175fdd3ae43b81e5428830623.css?body=1" for 127.0.0.1 at 2017-07-01 13:17:50 -0400
+Started GET "/images/nav.jpg" for 127.0.0.1 at 2017-07-01 13:17:51 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/images/nav.jpg"):
+  
+actionpack (5.0.4) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.4) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.4) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.4) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.4) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.4) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.4) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.3) lib/rack/method_override.rb:22:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.4) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.4) lib/rails/engine.rb:522:in `call'
+puma (3.9.1) lib/puma/configuration.rb:224:in `call'
+puma (3.9.1) lib/puma/server.rb:602:in `handle_request'
+puma (3.9.1) lib/puma/server.rb:435:in `process_client'
+puma (3.9.1) lib/puma/server.rb:299:in `block in run'
+puma (3.9.1) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  Rendering /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout
+  Rendering /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.4ms)
+  Rendered collection of /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/routes/_route.html.erb [18 times] (147.8ms)
+  Rendered /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/routes/_table.html.erb (17.4ms)
+  Rendering /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.2ms)
+  Rendered /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (220.5ms)
+Started POST "/forminst/autenticar" for 127.0.0.1 at 2017-07-01 13:18:08 -0400
+Processing by ForminstController#autenticar as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"htdKB8HBo+bpDpxNNBXALXX8s9h7jOh6Ir3+oeFlZdYYa4btLr93HOctDdZn/SQ8qp+curYRcWu2dUECPOFt0g==", "correo"=>"ana", "password"=>"[FILTERED]"}
+Redirected to http://localhost:3000/iniciotutor
+Completed 302 Found in 2138ms (ActiveRecord: 596.7ms)
+Started GET "/iniciotutor" for 127.0.0.1 at 2017-07-01 13:18:10 -0400
+Processing by IniciotutorController#index as HTML
+  Rendering iniciotutor/index.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/index.html.erb within layouts/ly_inicio_tutor (4.3ms)
+Completed 200 OK in 336ms (Views: 221.9ms | ActiveRecord: 59.3ms)
+Started GET "/assets/banner.png" for 127.0.0.1 at 2017-07-01 13:18:11 -0400
+Started GET "/assets/glyphicons-halflings-regular.woff2" for 127.0.0.1 at 2017-07-01 13:18:11 -0400
+Started GET "/iniciotutor/planformacions" for 127.0.0.1 at 2017-07-01 13:19:03 -0400
+Processing by IniciotutorController#planformacions as HTML
+  Rendering iniciotutor/planformacions.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/planformacions.html.erb within layouts/ly_inicio_tutor (4.2ms)
+Completed 200 OK in 622ms (Views: 233.1ms | ActiveRecord: 269.2ms)
+Started POST "/iniciotutor/ver_detalles_adecuacion" for 127.0.0.1 at 2017-07-01 13:19:07 -0400
+Processing by IniciotutorController#ver_detalles_adecuacion as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"8VrrjL+mHajOnd+lAs4ajAHEPmEBiifucdhveWDz9T5v5idmUNjJUsC+Tj5RJv6d3qcRA8wXvv/lENDavXf9Og==", "plan_id"=>"15"}
+  Rendering iniciotutor/ver_detalles_adecuacion.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/ver_detalles_adecuacion.html.erb within layouts/ly_inicio_tutor (7.0ms)
+Completed 200 OK in 565ms (Views: 230.2ms | ActiveRecord: 59.0ms)
+Started GET "/assets/banner.png" for 127.0.0.1 at 2017-07-01 13:19:08 -0400
+Started GET "/informes/listar_informes" for 127.0.0.1 at 2017-07-01 13:19:13 -0400
+Processing by InformesController#listar_informes as HTML
+  Rendering informes/listar_informes.html.erb within layouts/ly_inicio_tutor
+  Rendered informes/listar_informes.html.erb within layouts/ly_inicio_tutor (5.1ms)
+Completed 200 OK in 331ms (Views: 199.9ms | ActiveRecord: 38.4ms)
+Started POST "/informes/ver_detalles_informe" for 127.0.0.1 at 2017-07-01 13:19:24 -0400
+Processing by InformesController#ver_detalles_informe as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"vFe8teiTZDedyXyKkII0nojqY8dBErnW5HBdxo/iCaIi63BfB+2wzZPq7RHDatCPV4lMpYyPIMdwuOJlUmYBpg==", "informe_id"=>"4"}
+  Rendering informes/ver_detalles_informe.html.erb within layouts/ly_inicio_tutor
+  Rendered informes/ver_detalles_informe.html.erb within layouts/ly_inicio_tutor (6.5ms)
+Completed 200 OK in 667ms (Views: 210.7ms | ActiveRecord: 33.6ms)
+Started GET "/assets/banner.png" for 127.0.0.1 at 2017-07-01 13:19:25 -0400
+Started GET "/informes/detalles_informe2" for 127.0.0.1 at 2017-07-01 13:19:30 -0400
+Processing by InformesController#detalles_informe2 as HTML
+  Rendering informes/detalles_informe2.html.erb within layouts/ly_inicio_tutor
+  Rendered informes/detalles_informe2.html.erb within layouts/ly_inicio_tutor (203.7ms)
+Completed 500 Internal Server Error in 543ms (ActiveRecord: 180.7ms)
+  
+ActionView::Template::Error (undefined method `justificaciones' for #<Informe:0x007ff8fabdc4f0>):
+    2154:               </tr>
+    2155:               <tr>
+    2156:                 <td colspan="4">
+    2157:                     <textarea name="justi" class="form-control" rows="3" ><%= @informe.justificaciones %></textarea>
+    2158:                 </td>
+    2159:               </tr>
+    2160:           
+  
+app/views/informes/detalles_informe2.html.erb:2157:in `block in _app_views_informes_detalles_informe__html_erb__4075738849150729958_70353667008020'
+app/views/informes/detalles_informe2.html.erb:252:in `_app_views_informes_detalles_informe__html_erb__4075738849150729958_70353667008020'
+  Rendering /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout
+  Rendering /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (6.8ms)
+  Rendering /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.4ms)
+  Rendering /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (26.6ms)
+Started GET "/informes/ver_detalles_informe" for 127.0.0.1 at 2017-07-01 13:21:58 -0400
+Processing by InformesController#ver_detalles_informe as HTML
+  Rendering informes/ver_detalles_informe.html.erb within layouts/ly_inicio_tutor
+  Rendered informes/ver_detalles_informe.html.erb within layouts/ly_inicio_tutor (11.2ms)
+Completed 200 OK in 316ms (Views: 294.9ms | ActiveRecord: 2.3ms)
+Started GET "/assets/banner.png" for 127.0.0.1 at 2017-07-01 13:21:59 -0400
+Started GET "/informes/detalles_informe2" for 127.0.0.1 at 2017-07-01 13:22:01 -0400
+Processing by InformesController#detalles_informe2 as HTML
+  Rendering informes/detalles_informe2.html.erb within layouts/ly_inicio_tutor
+  Rendered informes/detalles_informe2.html.erb within layouts/ly_inicio_tutor (166.0ms)
+Completed 200 OK in 394ms (Views: 350.1ms | ActiveRecord: 19.3ms)
+Started GET "/assets/glyphicons-halflings-regular.woff2" for 127.0.0.1 at 2017-07-01 13:22:02 -0400
+Started GET "/informes/vista_previa" for 127.0.0.1 at 2017-07-01 13:22:28 -0400
+Processing by InformesController#vista_previa as HTML
+  Rendering informes/vista_previa.html.erb within layouts/ly_inicio_tutor
+  Rendered informes/vista_previa.html.erb within layouts/ly_inicio_tutor (11.8ms)
+Completed 200 OK in 525ms (Views: 220.1ms | ActiveRecord: 122.1ms)
