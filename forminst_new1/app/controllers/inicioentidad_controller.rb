@@ -814,7 +814,93 @@ end
 		end
 	end
 
-	
+	def detalles_adecuacion7
+		if session[:usuario_id] && session[:entidad]= true
+			@semestre = 5
+			@iddoc= 'id_docencia'
+			@docencia='docencia'
+			@investigacion= 'investigacion'
+			@obligatoria = 'obligatoria'
+			session[:informe_id] = nil
+			@formacion= 'formacion'
+			@extension= 'extension'
+			@otra= 'otra' 
+			@nombre = session[:nombre_usuario]
+			@adecuacion= Adecuacion.find(session[:adecuacion_id])
+
+			@plan= Planformacion.find(@adecuacion.planformacion_id)
+			@actividadesadoc= []
+			@actividadesainv= []
+			@actividadesaext= []
+			@actividadesafor= []
+			@actividadesaotr= []
+			@actividadesaobli= []
+			@observaciont= []
+			@j=0
+			@est= EstatusAdecuacion.where(adecuacion_id: @adecuacion.id).take
+			@revision= Revision.where(usuario_id: session[:usuario_id], adecuacion_id: @adecuacion.id, estatus_id: @est.estatus_id, informe_id: nil).take
+			@actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 5).all
+			@actividadesa.each do |actade| 
+
+				@act= Actividad.find(actade.actividad_id)
+				tipo= @act.tipo_actividad_id
+
+				if(@revision!=nil && @revision != "")
+			
+					@obs= ObservacionActividadAdecuacion.where(adecuacionactividad_id: actade.id, revision_id: @revision.id).take
+		       
+			        if @obs==nil
+			          	@observaciont.push("")
+			        else
+			          	@observaciont.push(@obs.observaciones)
+			        end
+			    end
+
+				
+				if tipo==7
+					puts "soy otro tipo de actividad"
+					puts @act.actividad
+					@actividadesaobli.push(@act)
+				end
+			end
+			@bool_enviado = 0
+			if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12)
+			#Usuario comision
+				estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take #Estatus enviado a comision de investigacioni
+				if(estatusI.estatus_id != 3)
+				@bool_enviado = 1
+				end
+
+			else
+				if (session[:entidad_id] >= 14 && session[:entidad_id] <= 17)
+				#Consejo tecnico
+					estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
+					if(estatusI.estatus_id != 2)
+					@bool_enviado = 1
+					end
+				else
+					if (session[:entidad_id] >= 1 && session[:entidad_id] <= 6)
+					#Consejo de escuela
+						estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take 
+						if(estatusI.estatus_id != 8)
+						@bool_enviado = 1 #Estatus enviado a consejo escuela
+						
+						end
+					else
+						if (session[:entidad_id] == 13)
+						#Consejo de facultad
+							estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
+							if(estatusI.estatus_id != 4)
+							@bool_enviado = 1
+							end
+						end	
+					end
+				end
+			end
+		else
+			redirect_to controller:"forminst", action: "index"
+		end
+	end
 
 	def listar_informes
 	    if session[:usuario_id] && session[:entidad]= true
@@ -1003,7 +1089,7 @@ end
 		        	if @informe.tipo_id == 2
 		          		@nombre_informe= @nombre_informe+"ANUAL"
 		        	else
-		          		@nombre_informe= @nombre_informe+"FINAL"
+		          		@nombre_informe= "INFORME "+"FINAL"
 		        	end
 		      	end
 
@@ -1078,6 +1164,7 @@ end
     	@actividadesaext= []
     	@actividadesafor= []
     	@actividadesaotr= []
+    	@actividadesaobli= []
     	@resultados= []
     	@resultados2= ""
     	@resultados2a= []
@@ -1270,6 +1357,8 @@ end
 		              		else
 		                		if tipo==5
 		                  			@actividadesaotr.push(@act)
+		                  		elsif tipo==7
+		                  			@actividadesaobli.push(@act)
 		                		end
 		             		end
 		            	end
@@ -1334,6 +1423,7 @@ end
 	    @docencia='docencia'
 	    @investigacion= 'investigacion'
 	    @formacion= 'formacion'
+	    @obligatoria= 'obligatoria'
 	    @extension= 'extension'
 	    @otra= 'otra' 
 
@@ -1507,6 +1597,19 @@ end
 	        end
 	      end
 	    end
+
+	    @actividades5obli= []
+	    @actividades5= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 5).all
+	    @actividades5.each do |actade| 
+	      @act= Actividad.find(actade.actividad_id)
+	      tipo= @act.tipo_actividad_id
+          if tipo==7
+            puts "soy otro tipo de actividad"
+            puts @act.actividad
+            @actividades5obli.push(@act)
+          end
+	    end
+
 	    @bool_enviado = 0
 	    estatus_informe = EstatusInforme.where(informe_id: @informe.id, actual: 1).take
 	    if (estatus_informe.estatus_id != 6 && estatus_informe.estatus_id != 5)
@@ -1520,6 +1623,7 @@ end
 	    @actividadesaext= []
 	    @actividadesafor= []
 	    @actividadesaotr= []
+	    @actividadesaobli= []
 	    @resultados= []
 	    @actividadese= []
 	    @observaciont= []
@@ -1704,6 +1808,8 @@ end
 	        @actividadesafor.push(@act)
 	      elsif tipo==5
 	        @actividadesaotr.push(@act)
+	      elsif tipo==7
+	        @actividadesaobli.push(@act)
 	      end
 	    end
 	    @bool_enviado = 0
@@ -1757,6 +1863,7 @@ end
 		    @cant_for = params[:cant_formacion].to_i
 		    @cant_ext = params[:cant_extension].to_i
 		    @cant_otr = params[:cant_otra].to_i
+		    @cant_obli = params[:cant_obligatoria].to_i
 		    @cant_result= params[:cant_result].to_i
 		    @informe.opinion_tutor = params[:opinion]
 		    @informe.conclusiones = params[:conclusiones]
@@ -1911,8 +2018,36 @@ end
 			        @act= params[i].to_i
 			    end
 
+			#Comienza actividades de docencia
+				puts "comienza actividades de docencia"
+				puts @cant_obli
+		      	j=0
+			    i=:obli.to_s+j.to_s
+			    @act = params[i].to_i
+		      	while j <  @cant_obli
+		      		puts j
+		        	ia = InformeActividad.where(informe_id: @informe.id,actividad_id: @act).take     
+		        	observacion =:observacion.to_s+@act.to_s
+		        	
+		          		oa = ObservacionActividadInforme.where(informe_actividad_id: ia, revision_id: revision.id).take
+		          		if(oa == nil || oa =="")
+				          	oa = ObservacionActividadInforme.new
+				          	oa.informe_actividad_id = ia.id
+				          	oa.revision_id =  revision.id
+				          	oa.observaciones = params[observacion]
+				          	oa.save
+				        else
+				       		oa.observaciones = params[observacion]
+				       		oa.save
+				       	end
+		        	j= j+1
+			        i=:obli.to_s+j.to_s
+			        @act= params[i].to_i
+			    end
+
 
 			#Comienzan Otras actividades
+				puts "comienza otras actividades"
 		      	j=0
 		      	i=:otr.to_s+j.to_s
 		      	@act = params[i].to_i
@@ -2178,6 +2313,7 @@ end
 		    @cant_inv= params[:cant_investigacion].to_i
 		    @cant_for= params[:cant_formacion].to_i
 		    @cant_ext= params[:cant_extension].to_i
+		    @cant_obli= params[:cant_obligatoria].to_i
 		    @cant_otr= params[:cant_otra].to_i
 		
 
@@ -2354,6 +2490,33 @@ end
 			        @act= params[i].to_i
 			    end
 
+			#Comienza actividades obligatorias
+		      	j=0
+		      	i=:obli.to_s+j.to_s
+		      	@act = params[i].to_i
+		      	while j <  @cant_obli
+		      		aa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: params[:semestre].to_i, actividad_id: @act).take
+
+		      		observacion =:observacion.to_s+@act.to_s
+		        
+		      			oa= ObservacionActividadAdecuacion.where(adecuacionactividad_id: aa, revision_id: revision.id).take
+
+		          		if(oa == nil || oa =="")
+				          	oa = ObservacionActividadAdecuacion.new
+				          	oa.adecuacionactividad_id = aa.id
+				          	oa.revision_id =  revision.id
+				          	oa.observaciones = params[observacion]
+				          	oa.actual = 1
+				          	oa.save
+				        else
+				       		oa.observaciones = params[observacion]
+				       		oa.save
+				       	end
+		        	  j= j+1
+			        i=:obli.to_s+j.to_s
+			        @act= params[i].to_i
+			    end
+
 	      
 
 	      	flash[:success]="Se han creado y/o modificado las observaciones satisfactoriamente"
@@ -2368,7 +2531,10 @@ end
 	      			redirect_to controller:"inicioentidad", action: "detalles_adecuacion5"
 	      	end
 	      	if(@semestre == 4)
-	      			redirect_to controller:"inicioentidad", action: "detalles_adecuacion5"
+	      			redirect_to controller:"inicioentidad", action: "detalles_adecuacion6"
+	      	end
+	      	if(@semestre == 5)
+	      			redirect_to controller:"inicioentidad", action: "detalles_adecuacion7"
 	      	end
 	      
  		end
@@ -2740,6 +2906,7 @@ end
 		@investigacion= 'investigacion'
 		@formacion= 'formacion'
 		@extension= 'extension'
+		@obligatoria= 'obligatoria'
 		@otra= 'otra' 
 
 		@nombre = session[:nombre_usuario]
@@ -2904,6 +3071,19 @@ end
 				end
 			end
 		end
+
+		@actividades5obli= []
+		@actividades5= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 5).all
+		@actividades5.each do |actade| 
+			@act= Actividad.find(actade.actividad_id)
+			tipo= @act.tipo_actividad_id
+			if tipo==7
+				puts "soy otro tipo de actividad"
+				puts @act.actividad
+				@actividades5obli.push(@act)
+			end
+		end
+
 		@bool_enviado = 0
 		if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12)
 		#Usuario comision

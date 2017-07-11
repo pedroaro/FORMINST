@@ -88,6 +88,7 @@
         <input id="cant_investigacion" type="hidden" name="cant_investigacion" value="<%=@actividadesainv.size()%>"/>
         <input id="cant_formacion" type="hidden" name="cant_formacion" value="<%=@actividadesafor.size()%>"/> 
         <input id="cant_extension" type="hidden" name="cant_extension" value="<%=@actividadesaext.size()%>"/> 
+        <input id="cant_obligatoria" type="hidden" name="cant_obligatoria" value="<%=@actividadesaobli.size()%>"/> 
         <input id="cant_otra" type="hidden" name="cant_otra" value="<%=@actividadesaotr.size()%>"/> 
         <input id="tipoinf" type="hidden" name="tipoinf" value="<%=@tipo_informe%>"/> 
         <input id="tipoinf" type="hidden" name="numero_informe" value="<%=@numero_informe%>"/> 
@@ -115,7 +116,11 @@
               	<% if @numero_informe == 3 || @numero_informe == 6 || @numero_informe == 7 %>
                     <textarea class="form-control" rows="1" disabled><%= @fecha_fin1 %></textarea>
                 <% else %>
-                    <input id="nuevaFecha" class="form-control" rows="1" disabled><%= @fecha_fin1%></input>
+                    <div id="sandbox-container">
+                    <div class="input-group date">
+                      <input type="text" class="form-control" name="fechaFin" onchange="mostrarFecha(this.value)"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                    </div>
+                  </div>
                 <% end %>
               </td>
             </tr>
@@ -236,6 +241,29 @@
                 </tr>
               <% end %>
 
+              <% if @actividadesaobli != [] %>
+              <tr><td colspan="3"></td></tr>
+                <tr  class='title-table'>
+                  <td class="text-center"><strong>Actividad para la Aprobación</strong></td>
+                  <td class="text-center"><strong>Actividad para la Aprobación Ejecutada</strong></td>
+                  <td class="text-center"><strong>Observaciones</strong></td>
+                </tr>
+                <% @actividadesaobli.each_with_index do |actdoc,i| %>
+                  <tr>
+                    <td>
+                        <textarea class="form-control" rows="3" name='extension<%= actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
+                      </td>
+                      <td>
+                        <textarea class="form-control" rows="3" name='ejecutada<%= actdoc.id.to_s%>' ></textarea>
+                      </td>
+                      <td>
+                        <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' ></textarea>
+                      </td>
+                      <input type="hidden" name="obli<%=i.to_s%>" value='<%= actdoc.id %>'>
+                  </tr>
+                <% end %>
+              <% end %>
+
               <tr  class='title-table'>
               <tr>
                 <td class="text-center" colspan="4"><h5><strong> Otras Actividades:</strong></h5></td>
@@ -254,6 +282,7 @@
                   <input type="hidden" name="otra<%=i.to_s%>" value='<%= actdoc.id %>'>
                 </tr>
               <% end %>
+
               <tr>
                 <td colspan="4"><b>Conclusiones:</b></td>
               </tr>
@@ -268,6 +297,14 @@
               <tr>
                 <td colspan="4">
                     <textarea name="opinion" class="form-control" rows="3" ></textarea>
+                </td>
+              </tr>
+              <tr>
+                <td colspan="4"><b>Justificaciones (Extensión del Período del Informe)</b></td>
+              </tr>
+              <tr>
+                <td colspan="4">
+                    <textarea name="justi" class="form-control" rows="3" ></textarea>
                 </td>
               </tr>
           

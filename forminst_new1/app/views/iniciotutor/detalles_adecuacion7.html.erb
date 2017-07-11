@@ -188,10 +188,10 @@
           <p style="display:inline"> / </p>
           <%if !session[:editar]%> 
             <span><%= link_to session[:instructorName] , :controller => 'iniciotutor', :action => 'ver_detalles_adecuacion' %></span>
-            <p style="display:inline"> /  Detalles 4to Semestre  </p>
+            <p style="display:inline"> /  Detalles Actividades para la Aprobación  </p>
           <%else %>
             <span><%= link_to session[:instructorName] , :controller => 'iniciotutor', :action => 'ver_detalles_adecuacion' %></span>
-            <p style="display:inline"> / Modificar 4to Semestre </p>
+            <p style="display:inline"> / Modificar Actividades para la Aprobación </p>
           <%end%>   
         </div>
       <%end%>

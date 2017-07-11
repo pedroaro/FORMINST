@@ -717,6 +717,7 @@ CREATE TABLE `planformacion` (
   `fecha_modificacion` date DEFAULT NULL,
   `adscripcion_docencia` varchar(255) DEFAULT NULL,
   `adscripcion_investigacion` varchar(255) DEFAULT NULL,
+  `mensaje` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `PlanFormacionInstructor` (`instructor_id`),
   KEY `PlanFormacionTutor` (`tutor_id`),

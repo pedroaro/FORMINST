@@ -143,6 +143,7 @@ def vista_previa1
 
     @docencia='docencia'
     @investigacion= 'investigacion'
+    @obligatoria= 'obligatoria'
     @formacion= 'formacion'
     @extension= 'extension'
     @otra= 'otra' 
@@ -317,6 +318,19 @@ def vista_previa1
         end
       end
     end
+
+    @actividades5obli= []
+    @actividades5= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 5).all
+    @actividades5.each do |actade| 
+      @act= Actividad.find(actade.actividad_id)
+      tipo= @act.tipo_actividad_id
+      if tipo==7
+        puts "soy otro tipo de actividad"
+        puts @act.actividad
+        @actividades5obli.push(@act)
+      end
+    end
+
     @bool_enviado = 0
     estatus_informe = EstatusInforme.where(informe_id: @informe.id, actual: 1).take
     if (estatus_informe.estatus_id != 6 && estatus_informe.estatus_id != 5)
@@ -329,6 +343,7 @@ def vista_previa1
     @actividadesainv= []
     @actividadesaext= []
     @actividadesafor= []
+    @actividadesaobli= []
     @actividadesaotr= []
     @resultados= []
     @actividadese= []
@@ -514,6 +529,8 @@ def vista_previa1
         @actividadesafor.push(@act)
       elsif tipo==5
         @actividadesaotr.push(@act)
+      elsif tipo==7
+        @actividadesaobli.push(@act)
       end
     end
   else
@@ -1048,6 +1065,41 @@ end
 		end
 	end
 
+  def detalles_adecuacion7
+    if session[:usuario_id] && session[:instructor]= true
+      session[:informe_id] = nil
+      @iddoc= 'id_docencia'
+      @docencia='docencia'
+      @investigacion= 'investigacion'
+      @formacion= 'formacion'
+      @obligatoria= 'obligatoria'
+      @extension= 'extension'
+      @otra= 'otra' 
+      @nombre = session[:nombre_usuario]
+      @instructorName = session[:instructorName]
+      @adecuacion= Adecuacion.find(session[:adecuacion_id])
+      @plan = Planformacion.where(instructor_id: session[:usuario_id]).take
+      @actividadesadoc= []
+      @actividadesainv= []
+      @actividadesaext= []
+      @actividadesafor= []
+      @actividadesaobli= []
+      @actividadesaotr= []
+      @actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 5).all
+      @actividadesa.each do |actade| 
+        @act= Actividad.find(actade.actividad_id)
+        tipo= @act.tipo_actividad_id
+          if tipo==7
+            puts "soy otro tipo de actividad"
+            puts @act.actividad
+            @actividadesaobli.push(@act)
+          end
+      end
+    else
+      redirect_to controller:"forminst", action: "index"
+    end
+  end
+
 	def vista_previa
 		@fechaActual = Date.current.to_s
     session[:informe_id] = nil
@@ -1068,6 +1120,7 @@ end
 		@investigacion= 'investigacion'
 		@formacion= 'formacion'
 		@extension= 'extension'
+		@obligatoria= 'obligatoria'
 		@otra= 'otra' 
 
 		@nombre = session[:nombre_usuario]
@@ -1233,6 +1286,18 @@ end
 			end
 		end
 
+		@actividades5obli= []
+		@actividades5= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 5).all
+		@actividades5.each do |actade| 
+			@act= Actividad.find(actade.actividad_id)
+			tipo= @act.tipo_actividad_id
+			if tipo==7
+				puts "soy otro tipo de actividad"
+				puts @act.actividad
+				@actividades5obli.push(@act)
+			end
+		end
+
 	end
 
 	def ver_detalles_informe
@@ -1329,6 +1394,7 @@ end
       @actividadesainv= []
       @actividadesaext= []
       @actividadesafor= []
+      @actividadesaobli= []
       @actividadesaotr= []
       @resultados= []
       @resultados2= ""
@@ -1489,6 +1555,8 @@ end
                 else
                   if tipo==5
                     @actividadesaotr.push(@act)
+                  elsif tipo==7
+                    @actividadesaobli.push(@act)
                   end
                 end
               end

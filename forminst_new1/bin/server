@@ -12,7 +12,7 @@ ActiveRecord::Base.establish_connection(
 )
 
 while true
-
+	puts "ejecutando..."
 	#Aclualizar los estatus de las adecuaciones luego de haber pasado dos semana-----------------------------------------------
 	estatus_adecuacion = EstatusAdecuacion.where(actual: 1).all
 	fecha = Time.now.strftime("%Y-%m-%d")
@@ -306,5 +306,106 @@ while true
 
 	end
 	#FIN aclualizar los estatus de los informes luego de haber pasado dos semana--------------------------------------------
+
+	#Enviar correo de notificacion de informes------------------------------------------------------------------------------
+	planFormacion = Planformacion.all
+	fecha = Time.now.strftime("%Y-%m-%d")
+	fecha2 = Time.now
+	puts "inicio"
+	planFormacion.each do |plan|
+		puts plan.fecha_inicio
+		if plan.fecha_inicio + 5.month <= fecha2 && plan.fecha_inicio + 11.month >= fecha2 && plan.mensaje.blank?
+			puts plan.fecha_inicio
+
+			adecuacion = Adecuacion.where(planformacion_id: plan.id).take
+			notific = Notificacion.new
+			notific.instructor_id = plan.instructor_id
+			notific.tutor_id = plan.tutor_id
+			notific.adecuacion_id = adecuacion.id
+			notific.actual = 1
+			person = Persona.where(usuario_id: plan.tutor_id).take
+			person2 = Persona.where(usuario_id: plan.instructor_id).take
+			notificacionfecha = Date.current.to_s 
+			notific.mensaje = "[" + notificacionfecha + "] " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " usted posee un mes para enviar el primer informe semestral de " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +"."
+			notific.save
+
+			remitente3 = Usuario.where(id: plan.tutor_id).take
+			ActionCorreo.envio_informe(remitente3, notific.mensaje,2).deliver
+
+			plan.mensaje = 1
+			plan.save
+		end
+
+		if plan.fecha_inicio + 11.month <= fecha2 && plan.fecha_inicio + 17.month >= fecha2 && plan.mensaje == 1
+			puts plan.fecha_inicio
+
+			adecuacion = Adecuacion.where(planformacion_id: plan.id).take
+			notific = Notificacion.new
+			notific.instructor_id = plan.instructor_id
+			notific.tutor_id = plan.tutor_id
+			notific.adecuacion_id = adecuacion.id
+			notific.actual = 1
+			person = Persona.where(usuario_id: plan.tutor_id).take
+			person2 = Persona.where(usuario_id: plan.instructor_id).take
+			notificacionfecha = Date.current.to_s 
+			notific.mensaje = "[" + notificacionfecha + "] " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " usted posee un mes para enviar el segundo informe semestral junto con el primer informe anual de " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +"."
+			notific.save
+
+			remitente3 = Usuario.where(id: plan.tutor_id).take
+			ActionCorreo.envio_informe(remitente3, notific.mensaje,2).deliver
+
+			plan.mensaje = 2
+			plan.save
+		end
+
+		if plan.fecha_inicio + 17.month <= fecha2 && plan.fecha_inicio + 23.month >= fecha2 && plan.mensaje == 2
+			puts plan.fecha_inicio
+
+			adecuacion = Adecuacion.where(planformacion_id: plan.id).take
+			notific = Notificacion.new
+			notific.instructor_id = plan.instructor_id
+			notific.tutor_id = plan.tutor_id
+			notific.adecuacion_id = adecuacion.id
+			notific.actual = 1
+			person = Persona.where(usuario_id: plan.tutor_id).take
+			person2 = Persona.where(usuario_id: plan.instructor_id).take
+			notificacionfecha = Date.current.to_s 
+			notific.mensaje = "[" + notificacionfecha + "] " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " usted posee un mes para enviar el tercer informe semestral de " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +"."
+			notific.save
+
+			remitente3 = Usuario.where(id: plan.tutor_id).take
+			ActionCorreo.envio_informe(remitente3, notific.mensaje,2).deliver
+
+			plan.mensaje = 3
+			plan.save
+		end
+
+		if plan.fecha_inicio + 23.month <= fecha2 && plan.mensaje == 3
+			puts plan.fecha_inicio
+
+			adecuacion = Adecuacion.where(planformacion_id: plan.id).take
+			notific = Notificacion.new
+			notific.instructor_id = plan.instructor_id
+			notific.tutor_id = plan.tutor_id
+			notific.adecuacion_id = adecuacion.id
+			notific.actual = 1
+			person = Persona.where(usuario_id: plan.tutor_id).take
+			person2 = Persona.where(usuario_id: plan.instructor_id).take
+			notificacionfecha = Date.current.to_s 
+			notific.mensaje = "[" + notificacionfecha + "] " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " usted posee un mes para enviar el cuarto informe semestral junto con el segundo informe anual y el final de " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +"."
+			notific.save
+
+			remitente3 = Usuario.where(id: plan.tutor_id).take
+			ActionCorreo.envio_informe(remitente3, notific.mensaje,2).deliver
+
+			plan.mensaje = 4
+			plan.save
+		end
+
+	end
+
+
+	#FIN Enviar correo de notificacion de informes--------------------------------------------------------------------------
+	puts "fin"
 	sleep(1.day)
 end
