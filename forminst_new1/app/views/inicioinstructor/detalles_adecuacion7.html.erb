@@ -54,7 +54,7 @@
             de Diciembre del
           <% end %>
           <%= Time.now.strftime("%Y") %> 
-        </h3>
+        </h3> 
       </div>
       <%if @nombre%>
         <div>
@@ -75,10 +75,10 @@
   <div class = 'col-xs-12 col-md-12 col-lg-12'>
       <ul class="tabs">
         <li><%= link_to '1° Semestre', :controller => 'inicioinstructor', :action => 'detalles_adecuacion3' %></li>
-        <li class="activa"><a href="#">2° Semestre</a></li>
+        <li><%= link_to '2° Semestre', :controller => 'inicioinstructor', :action => 'detalles_adecuacion4' %></li>
         <li><%= link_to '3° Semestre', :controller => 'inicioinstructor', :action => 'detalles_adecuacion5' %></li>
         <li><%= link_to '4° Semestre', :controller => 'inicioinstructor', :action => 'detalles_adecuacion6' %></li>
-        <li><%= link_to 'Obligatorias', :controller => 'inicioinstructor', :action => 'detalles_adecuacion7' %></li>
+        <li class="activa"><a href="#">Obligatorias</a></li>
       </ul>
   </div>
 </div>
@@ -101,63 +101,16 @@
             </tr>
             <tr>
 
-              <td class="text-center"><strong>Actividades de Docencia</strong></td>
+              <td class="text-center"><strong>Actividades para la Aprobación</strong></td>
             </tr>
-              <% @actividadesadoc.each_with_index do |actdoc, i| %>
+              <% @actividadesaobli.each_with_index do |actdoc, i| %>
                 <tr>
                   <td>
-                    <textarea class="form-control" rows="2"  name='<%= @docencia+actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
+                    <textarea class="form-control" rows="2"  name='<%= @obligatoria+actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
                     <input type="hidden" name="<%= @iddoc+i.to_s%> " value='<%= actdoc.id %>'>
                   </td>
                 </tr>
               <% end %>
-
-            <tr>
-
-              <td class="text-center"><strong>Actividades de Investigación</strong></td>
-            </tr>
-            <% @actividadesainv.each_with_index do |actdoc,i| %>
-              <tr>
-                <td>
-                  <textarea class="form-control" rows="2"  name='<%= @investigacion+actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
-                </td>
-              </tr>
-            <% end %>
-
-            <tr>
-              <td class="text-center"><strong>Actividades de Formación</strong></td>
-            </tr>
-            <% @actividadesafor.each_with_index do |actdoc,i| %>
-              <tr>
-                <td>
-                  <textarea class="form-control" rows="2"  name='<%= @formacion+actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
-                </td>
-              </tr>
-            <% end %>
-
-            <tr>
-              <td class="text-center"><strong>Actividades de Extensión</strong></td>
-            </tr>
-            <% @actividadesaext.each_with_index do |actdoc,i| %>
-              <tr>
-                <td>
-                  <textarea class="form-control" rows="2"  name='<%= @extension+actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
-                </td>
-              </tr>
-            <% end %>
-
-            <tr>
-              <td class="text-center"><strong>Otras Actividades</strong></td>
-            </tr>
-            <% @actividadesaotr.each_with_index do |actdoc,i| %>
-              <tr>
-                <td>
-                  <textarea class="form-control" rows="2"  name='<%= @otra+actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
-                </td>
-            
-              </tr>
-            <% end %>
-
           </tbody>
         </table>
     <% end %>
@@ -169,7 +122,6 @@
       <button type="button" class="btn btn-default" onclick = " location.href = 'javascript:history.back(-1);'">Volver</button>
   </div>
   <div class = 'col-xs-9 col-md-9 col-lg-9 text-right'>
-     <%= link_to "Siguiente >>", {controller: "inicioinstructor", action: "detalles_adecuacion5"}, class: "btn btn-forminst" %>
   </div>
 </div>
 

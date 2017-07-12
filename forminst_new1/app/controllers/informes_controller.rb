@@ -26,6 +26,7 @@ class InformesController < ApplicationController
           @actividadesaext= []
           @actividadesafor= []
           @actividadesaotr= []
+          @actividadesaobli= []
           @fecha_inicio1 = nil
           @fecha_fin1 = nil
           if params[:informe_id].to_i == 1
@@ -233,7 +234,7 @@ class InformesController < ApplicationController
         		      		  end
           					    @fecha_inicio1 = informe1.fecha_inicio
           					    @fecha_fin1 = informe2.fecha_fin 
-                        @actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: [1,2,3,4]).all
+                        @actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: [1,2,3,4,5]).all
                         @actividadesa.each do |actade| 
                           @act= Actividad.find(actade.actividad_id)
                           tipo= @act.tipo_actividad_id
@@ -251,6 +252,8 @@ class InformesController < ApplicationController
                                 else
                                   if tipo==5
                                     @actividadesaotr.push(@act)
+                                  elsif tipo==7
+                                  	@actividadesaobli.push(@act)
                                   end
                                 end
                               end
@@ -344,6 +347,7 @@ class InformesController < ApplicationController
         @actividadesaext= []
         @actividadesafor= []
         @actividadesaotr= []
+        @actividadesaobli= []
         @resultados= []
         @resultados2= ""
         @resultados2a= []
@@ -519,6 +523,8 @@ class InformesController < ApplicationController
                   else
                     if tipo==5
                       @actividadesaotr.push(@act)
+                    elsif tipo==7
+                      @actividadesaobli.push(@act)
                     end
                   end
                 end
@@ -553,6 +559,7 @@ def vista_previa
     @tutor = Persona.where(usuario_id: session[:usuario_id]).take
     @docencia='docencia'
     @investigacion= 'investigacion'
+    @obligatoria= 'obligatoria'
     @formacion= 'formacion'
     @extension= 'extension'
     @otra= 'otra' 
@@ -727,6 +734,21 @@ def vista_previa
         end
       end
     end
+
+
+    @actividades5obli= []
+    @actividades5= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 5).all
+    @actividades5.each do |actade| 
+      @act= Actividad.find(actade.actividad_id)
+      tipo= @act.tipo_actividad_id
+      if tipo==7
+        puts "soy otro tipo de actividad"
+        puts @act.actividad
+        @actividades5obli.push(@act)
+      end
+    end
+
+
     @bool_enviado = 0
     estatus_informe = EstatusInforme.where(informe_id: @informe.id, actual: 1).take
     if (estatus_informe.estatus_id != 6 && estatus_informe.estatus_id != 5)
@@ -739,6 +761,7 @@ def vista_previa
     @actividadesainv= []
     @actividadesaext= []
     @actividadesafor= []
+    @actividadesaobli= []
     @actividadesaotr= []
     @resultados= []
     @actividadese= []
@@ -924,6 +947,8 @@ def vista_previa
         @actividadesafor.push(@act)
       elsif tipo==5
         @actividadesaotr.push(@act)
+      elsif tipo==7
+        @actividadesaobli.push(@act)
       end
     end
   else
@@ -1034,6 +1059,7 @@ end
       @cant_inv= params[:cant_investigacion].to_i
       @cant_for= params[:cant_formacion].to_i
       @cant_ext= params[:cant_extension].to_i
+      @cant_obli= params[:cant_obligatoria].to_i
       @cant_otr= params[:cant_otra].to_i
 
       @tipo_informe = params[:tipoinf].to_i
@@ -1529,6 +1555,40 @@ end
         @act= params[i].to_i
       end
 
+      #Comienza actividades obligatorias
+      j=0
+      i=:obli.to_s+j.to_s
+      @act = params[i].to_i
+      while j <  @cant_obli
+        ia = InformeActividad.new
+        ia.informe_id = informe.id
+        ia.actividad_id = @act
+        ia.save
+
+        ejecutada =:ejecutada.to_s+@act.to_s
+        ae = ActividadEjecutada.new
+        ae.descripcion = params[ejecutada]
+        ae.fecha = Time.now
+        ae.actual = 1
+        ae.informe_actividad_id = ia.id
+        ae.save
+
+        observacion =:observacion.to_s+@act.to_s
+        if params[observacion]!=nil && params[observacion]!=""
+          oa = ObservacionTutor.new
+          oa.observaciones = params[observacion]
+          oa.fecha = Time.now
+          oa.actual = 1
+          oa.informe_actividad_id = ia.id
+          oa.save
+        end
+        
+
+        j= j+1
+        i=:obli.to_s+j.to_s
+        @act= params[i].to_i
+      end
+
       #Comienzan otras actividades contempladas en el plan
       j=0
       i=:otra.to_s+j.to_s
@@ -1609,6 +1669,7 @@ def generar_pdf() # es funciÃ³n permite generar el documento pdf de la adecuaciÃ
     @cactv_formacion= []
     @cactv_extension=[]
     @cactv_otras=[]
+    @factv_obligatoria=[]
 
     @aactv_docencia= []
     @aactv_investigacion= []
@@ -1848,12 +1909,24 @@ def generar_pdf() # es funciÃ³n permite generar el documento pdf de la adecuaciÃ
         end
       end
     end
+
+    @cactividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 5).all
+    @cactividadesa.each do |actade| 
+      @act= Actividad.find(actade.actividad_id)
+      tipo= @act.tipo_actividad_id
+      if tipo==7
+        puts "soy una actividad de docencia"
+        puts @act.actividad
+        @factv_obligatoria.push(@act)
+      end
+    end
     @actividadesa= InformeActividad.where(informe_id: @informe.id).all
     @actividadesadoc= []
     @actividadesainv= []
     @actividadesaext= []
     @actividadesafor= []
     @actividadesaotr= []
+    @actividadesaobli= []
     @resultados= []
     @actividadese= []
     @observaciont= []
@@ -2038,6 +2111,8 @@ def generar_pdf() # es funciÃ³n permite generar el documento pdf de la adecuaciÃ
         @actividadesafor.push(@act)
       elsif tipo==5
         @actividadesaotr.push(@act)
+      elsif tipo==7
+        @actividadesaobli.push(@act)
       end
     end
   end
@@ -2049,7 +2124,9 @@ def generar_pdf() # es funciÃ³n permite generar el documento pdf de la adecuaciÃ
     respaldos = Respaldo.where(adecuacion_id: @adecuacion.id, informe_id: session[:informe_id] ).all
     @numeroDeVersion = respaldos.size + 1
     # se llama a la funciÃ³n de "pedf_adecuacion" del modelo "pdf", pasando todas las variables correspondientes
-    @nombre_archivo= Pdf.pdf_informe(@TipoSemestre, @escuela, @informe, @adecuacion, @tutor, @instructor, @pactv_docencia, @pactv_investigacion, @pactv_extension, @pactv_formacion, @pactv_otras, @sactv_docencia, @sactv_investigacion, @sactv_extension, @sactv_formacion, @sactv_otras, @tactv_docencia, @tactv_investigacion, @tactv_extension, @tactv_formacion, @tactv_otras, @cactv_docencia, @cactv_investigacion, @cactv_extension, @cactv_formacion, @cactv_otras, @actividadesadoc, @actividadesainv, @actividadesafor, @actividadesaext, @actividadesaotr,@res,@resultados,@actividadese,@observaciont,@resultTP,@resultPP,@resultO,@resultAEC,@resultOEC,@resultDCS, @documents, @numeroDeVersion)
+    puts "hola que tal"
+    puts @TipoSemestre.tipo
+    @nombre_archivo= Pdf.pdf_informe(@TipoSemestre, @escuela, @informe, @adecuacion, @tutor, @instructor, @pactv_docencia, @pactv_investigacion, @pactv_extension, @pactv_formacion, @pactv_otras, @sactv_docencia, @sactv_investigacion, @sactv_extension, @sactv_formacion, @sactv_otras, @tactv_docencia, @tactv_investigacion, @tactv_extension, @tactv_formacion, @tactv_otras, @cactv_docencia, @cactv_investigacion, @cactv_extension, @cactv_formacion, @cactv_otras, @actividadesadoc, @actividadesainv, @actividadesafor, @actividadesaext, @actividadesaotr,@res,@resultados,@actividadese,@observaciont,@resultTP,@resultPP,@resultO,@resultAEC,@resultOEC,@resultDCS, @documents, @numeroDeVersion, @factv_obligatoria, @actividadesaobli)
     puts @nombre_archivo
     act = "#{Rails.root}/tmp/PDFs/" + @nombre_archivo
     #act = @nombre_archivo
@@ -2068,6 +2145,7 @@ def generar_pdf() # es funciÃ³n permite generar el documento pdf de la adecuaciÃ
     @cant_inv= params[:cant_investigacion].to_i
     @cant_for= params[:cant_formacion].to_i
     @cant_ext= params[:cant_extension].to_i
+    @cant_obli= params[:cant_obligatoria].to_i
     @cant_otr= params[:cant_otra].to_i
     @cant_result= params[:cant_result].to_i
     if !params[:fechaIni].blank?
@@ -2531,6 +2609,42 @@ def generar_pdf() # es funciÃ³n permite generar el documento pdf de la adecuaciÃ
         i=:ext.to_s+j.to_s
         @act= params[i].to_i
       end
+
+      #Comienza actividades obligatorias
+      j=0
+      i=:obli.to_s+j.to_s
+      @act = params[i].to_i
+      while j <  @cant_obli
+        ia = InformeActividad.where(informe_id: @informe.id,actividad_id: @act).take
+
+        ejecutada =:ejecutada.to_s+@act.to_s
+        if params[ejecutada]!=nil && params[ejecutada]!=""
+          ae = ActividadEjecutada.where(informe_actividad_id: ia.id, actual: 1).take
+          ae.descripcion = params[ejecutada]
+          ae.save
+        end
+
+         observacion =:observacion.to_s+@act.to_s
+      
+          oa = ObservacionTutor.where(informe_actividad_id: ia.id).take
+            if(oa == nil || oa =="")
+              oa = ObservacionTutor.new
+              oa.observaciones = params[observacion]
+              oa.fecha = Time.now
+              oa.informe_actividad_id = ia.id
+              oa.save
+            else
+               oa.observaciones = params[observacion]
+                  oa.save
+            end
+     
+        
+        
+        j= j+1
+        i=:obli.to_s+j.to_s
+        @act= params[i].to_i
+      end
+
       #Comienzan otras actividades
       j=0
       i=:otra.to_s+j.to_s

@@ -485,6 +485,17 @@
                 <td class="text-left"><%= actdoc.actividad %></td>
               </tr>
           <% end %>
+          <tr>
+            <td><b>ACTIVIDADES OBLIGATORIAS</b></td>
+          </tr>
+          <tr>
+            <td class="text-left"><b>5.1.- Actividades Obligatorias:</b></td>
+          </tr>
+            <% @actividades5obli.each_with_index do |actdoc, i| %>
+              <tr>
+                <td class="text-left"><%= actdoc.actividad %></td>
+              </tr>
+          <% end %>
         </tbody>
       </table>
     </div>

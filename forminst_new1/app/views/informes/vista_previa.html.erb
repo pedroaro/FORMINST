@@ -417,6 +417,17 @@
                 <td class="text-left"><%= actdoc.actividad %></td>
               </tr>
           <% end %>
+          <tr>
+            <td><b>ACTIVIDADES OBLIGATORIAS</b></td>
+          </tr>
+          <tr>
+            <td class="text-left"><b>2.1.- Actividades Obligatorias:</b></td>
+          </tr>
+          <% @actividades5obli.each_with_index do |actdoc, i| %>
+            <tr>
+              <td class="text-left"><%= actdoc.actividad %></td>
+            </tr>
+          <% end %>
         </tbody>
       </table>
     </div>
@@ -605,8 +616,39 @@
         </tbody>
       </table>
     </div>
+    <% x=7 %>
+    <% if @actividadesaobli!=[] %> 
+      <div class="table-responsive">
+        <b><p><%= x %>.- ACTIVIDADES PARA LA APROBACIÓN:</p></b>
+        <table class="table table-hover table-bordered text-center">
+          <thead>
+            <tr>
+              <th style="width:35%;" class="text-center">ACTIVIDAD PARA LA APROBACIÓN PROGRAMADA</th>
+              <th style="width:35%;" class="text-center">ACTIVIDAD PARA LA APROBACIÓN EJECUTADA</th>
+              <th class="text-center">OBSERVACIONES</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @actividadesaobli.each_with_index do |actividadesaobli, i| %> 
+              <tr>
+                <td class="text-center"><%= actividadesaobli.actividad %></td>
+                <td class="text-center">
+                  <% if !@actividadese[@j].blank? %>
+                    <%= @actividadese[@j].descripcion %>
+                  <% end %>
+                </td>
+                <td class="text-center"><%= @observaciont[@i] %></td>
+              <% @j= @j +1 %>
+              <% @i= @i +1 %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <% x=x+1 %>
+    <% end %> 
     <div class="table-responsive">
-      <b><p>7.- OTRAS ACTIVIDADES:</p></b>
+      <b><p><%= x %>.- OTRAS ACTIVIDADES:</p></b>
       <table class="table table-hover table-bordered text-center">
         <thead>
           <tr>
@@ -629,24 +671,27 @@
         </tbody>
       </table>
     </div>
+    <% x=x+1 %>
     <div class="table-responsive">
-      <b><p>8.- CONCLUSIONES:</p></b>
+      <b><p><%= x %>.- CONCLUSIONES:</p></b>
       <table class="table table-hover table-bordered text-center">
         <tbody>
          <tr><td class="text-left"> <%= @informe.conclusiones.to_s %></td></tr>
         </tbody>
       </table>
     </div>
+    <% x=x+1 %>
     <div class="table-responsive">
-      <b><p>9.- OPINIÓN DEL TUTOR:</p></b>
+      <b><p><%= x %>.- OPINIÓN DEL TUTOR:</p></b>
       <table class="table table-hover table-bordered text-center">
         <tbody>
          <tr><td class="text-left"> <%= @informe.opinion_tutor.to_s %></td></tr>
         </tbody>
       </table>
     </div>
+    <% x=x+1 %>
     <div class="table-responsive">
-      <b><p>10.- JUSTIFICACIONES:</p></b>
+      <b><p><%= x %>.- JUSTIFICACIONES:</p></b>
       <table class="table table-hover table-bordered text-center">
         <tbody>
          <tr><td class="text-left"> <%= @informe.justificaciones.to_s %></td></tr>
