@@ -16453,3 +16453,122 @@ Processing by InicioentidadController#listar_informes as HTML
   Rendering inicioentidad/listar_informes.html.erb within layouts/ly_inicio_entidad
   Rendered inicioentidad/listar_informes.html.erb within layouts/ly_inicio_entidad (3.4ms)
 Completed 200 OK in 234ms (Views: 223.9ms | ActiveRecord: 2.3ms)
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/pedro/Documents/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/pedro/Documents/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/pedro/Documents/FORMINST/forminst_new1/config/routes.rb:6)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/pedro/Documents/FORMINST/forminst_new1/config/routes.rb:6)
+Started GET "/documents/new" for 127.0.0.1 at 2017-07-07 09:28:23 -0400
+Processing by DocumentsController#new as HTML
+Completed 500 Internal Server Error in 2822ms (ActiveRecord: 1363.6ms)
+  
+NoMethodError (undefined method `id' for nil:NilClass):
+  
+app/controllers/documents_controller.rb:34:in `new'
+  Rendering /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (3.6ms)
+  Rendering /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.7ms)
+  Rendering /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.7ms)
+  Rendered /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (42.8ms)
+Started GET "/" for 127.0.0.1 at 2017-07-07 09:28:31 -0400
+Processing by ForminstController#index as HTML
+  Rendering forminst/index.html.erb within layouts/ec_aplanes
+  Rendered forminst/index.html.erb within layouts/ec_aplanes (31.7ms)
+Completed 200 OK in 9072ms (Views: 8255.4ms | ActiveRecord: 703.4ms)
+Started GET "/images/nav.jpg" for 127.0.0.1 at 2017-07-07 09:28:41 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/images/nav.jpg"):
+  
+actionpack (5.0.4) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.4) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.4) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.4) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.4) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.4) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.4) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.3) lib/rack/method_override.rb:22:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.4) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.4) lib/rails/engine.rb:522:in `call'
+puma (3.9.1) lib/puma/configuration.rb:224:in `call'
+puma (3.9.1) lib/puma/server.rb:602:in `handle_request'
+puma (3.9.1) lib/puma/server.rb:435:in `process_client'
+puma (3.9.1) lib/puma/server.rb:299:in `block in run'
+puma (3.9.1) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  Rendering /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout
+  Rendering /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.2ms)
+  Rendered collection of /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/routes/_route.html.erb [18 times] (305.4ms)
+  Rendered /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/routes/_table.html.erb (40.3ms)
+  Rendering /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (2.3ms)
+  Rendered /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (645.5ms)
+Started POST "/forminst/autenticar" for 127.0.0.1 at 2017-07-07 09:28:52 -0400
+Processing by ForminstController#autenticar as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"stSaNKatJvr0LeY3QBXG62OGclDeFhBxn5gMd3kCHwkuZhJKUblYc7VUvvUhrC1nA70AQgzpXvKT7phsRm26Jg==", "correo"=>"ana", "password"=>"[FILTERED]"}
+Redirected to http://localhost:3000/iniciotutor
+Completed 302 Found in 726ms (ActiveRecord: 561.4ms)
+Started GET "/iniciotutor" for 127.0.0.1 at 2017-07-07 09:28:53 -0400
+Processing by IniciotutorController#index as HTML
+  Rendering iniciotutor/index.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/index.html.erb within layouts/ly_inicio_tutor (2.4ms)
+Completed 200 OK in 517ms (Views: 198.1ms | ActiveRecord: 259.0ms)
+Started GET "/assets/banner.png" for 127.0.0.1 at 2017-07-07 09:28:54 -0400
+Started GET "/assets/glyphicons-halflings-regular.woff2" for 127.0.0.1 at 2017-07-07 09:28:54 -0400
+Started GET "/iniciotutor/planformacions" for 127.0.0.1 at 2017-07-07 09:28:56 -0400
+Processing by IniciotutorController#planformacions as HTML
+  Rendering iniciotutor/planformacions.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/planformacions.html.erb within layouts/ly_inicio_tutor (4.4ms)
+Completed 200 OK in 816ms (Views: 231.1ms | ActiveRecord: 451.3ms)
+Started POST "/iniciotutor/ver_detalles_adecuacion" for 127.0.0.1 at 2017-07-07 09:28:59 -0400
+Processing by IniciotutorController#ver_detalles_adecuacion as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"koq868HaHtJkJEGGd849InuaF3hwISUXumb8Da9E4wAOODSVNs5gWyVdGUQWd9auG6FlaqLea5S2EGgWkCtGLw==", "plan_id"=>"1"}
+  Rendering iniciotutor/ver_detalles_adecuacion.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/ver_detalles_adecuacion.html.erb within layouts/ly_inicio_tutor (6.8ms)
+Completed 200 OK in 447ms (Views: 189.0ms | ActiveRecord: 209.2ms)
+Started GET "/assets/banner.png" for 127.0.0.1 at 2017-07-07 09:28:59 -0400
+Started GET "/documents/new" for 127.0.0.1 at 2017-07-07 09:29:03 -0400
+Processing by DocumentsController#new as HTML
+  Rendering documents/new.html.erb within layouts/ly_inicio_tutor
+  Rendered documents/_form.html.erb (46.6ms)
+  Rendered documents/new.html.erb within layouts/ly_inicio_tutor (73.4ms)
+Completed 200 OK in 608ms (Views: 275.1ms | ActiveRecord: 196.6ms)
+Started GET "/documents/new" for 127.0.0.1 at 2017-07-07 09:29:29 -0400
+Processing by DocumentsController#new as HTML
+  Rendering documents/new.html.erb within layouts/ly_inicio_tutor
+  Rendered documents/_form.html.erb (1.2ms)
+  Rendered documents/_form.html.erb (0.5ms)
+  Rendered documents/new.html.erb within layouts/ly_inicio_tutor (12.6ms)
+Completed 200 OK in 208ms (Views: 201.9ms | ActiveRecord: 1.3ms)
+Started GET "/assets/banner.png" for 127.0.0.1 at 2017-07-07 09:29:30 -0400
+Started GET "/documents/new" for 127.0.0.1 at 2017-07-07 09:59:37 -0400
+Processing by DocumentsController#new as HTML
+  Rendering documents/new.html.erb within layouts/ly_inicio_tutor
+  Rendered documents/_form.html.erb (1.0ms)
+  Rendered documents/new.html.erb within layouts/ly_inicio_tutor (80.8ms)
+Completed 200 OK in 1286ms (Views: 798.1ms | ActiveRecord: 279.9ms)
+Started GET "/assets/banner.png" for 127.0.0.1 at 2017-07-07 09:59:39 -0400
+Started POST "/documents" for 127.0.0.1 at 2017-07-07 10:02:08 -0400
+Processing by DocumentsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ximcYqeADVlrSH9fw/WURCUVSgKboWMwqcOa+1IBbL1amxQcUJRz0CoxJ52iTH/IRS44EEleLbOltQ7gbW7Jkg==", "document"=>{"file"=>[#<ActionDispatch::Http::UploadedFile:0x007fac79b30f60 @tempfile=#<Tempfile:/tmp/RackMultipart20170707-3183-1irvzed.ovpn>, @original_filename="hydra-udp-1194-config.ovpn", @content_type="application/octet-stream", @headers="Content-Disposition: form-data; name=\"document[file][]\"; filename=\"hydra-udp-1194-config.ovpn\"\r\nContent-Type: application/octet-stream\r\n">, #<ActionDispatch::Http::UploadedFile:0x007fac79b30ee8 @tempfile=#<Tempfile:/tmp/RackMultipart20170707-3183-1607552.odt>, @original_filename="revisión.odt", @content_type="application/vnd.oasis.opendocument.text", @headers="Content-Disposition: form-data; name=\"document[file][]\"; filename=\"revisi\xC3\xB3n.odt\"\r\nContent-Type: application/vnd.oasis.opendocument.text\r\n">]}, "commit"=>"Subir Archivo"}
+Completed 500 Internal Server Error in 6ms (ActiveRecord: 1.3ms)
+  
+NoMethodError (undefined method `size' for nil:NilClass):
+  
+app/models/document.rb:25:in `file_size_under_one_mb'
+app/controllers/documents_controller.rb:64:in `create'
+  Rendering /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (5.5ms)
+  Rendering /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.2ms)
+  Rendering /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.8ms)
+  Rendered /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (26.7ms)
