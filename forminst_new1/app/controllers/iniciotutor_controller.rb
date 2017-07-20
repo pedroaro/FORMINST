@@ -541,6 +541,8 @@ class IniciotutorController < ApplicationController
 			@actividadesaext= []
 			@actividadesafor= []
 			@actividadesaotr= []
+			@observacionesExtras= []
+			@j=0
 			@actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 1).all
 			@actividadesa.each do |actade| 
 				@act= Actividad.find(actade.actividad_id)
@@ -574,6 +576,28 @@ class IniciotutorController < ApplicationController
 						end
 					end
 				end
+			end
+			@actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 1).all
+			@actividadesa.each do |actade| 
+				@cpObs= ObservacionActividadAdecuacion.where(adecuacionactividad_id: actade.id).all
+
+			    if @cpObs.blank?
+			    	@observacionesExtras.push("no")
+			    else
+
+					cpBool = 0
+					@cpObs.each do |probar|
+						if !probar.observaciones.blank?
+							cpBool = 1
+						end
+					end
+
+			    	if cpBool == 0
+			    		@observacionesExtras.push("no")
+			    	else
+			    		@observacionesExtras.push("si")
+			    	end
+			    end
 			end
 			@bool_enviado = 0
 			estatus_adecuacion = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take

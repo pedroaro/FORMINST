@@ -5,11 +5,25 @@ class DocumentsController < ApplicationController
   # GET /documents
   # GET /documents.json
   def index
+
+    #validar si se envio la adecuacion
+    @bool_enviado = 0
+    @adecuacion = Adecuacion.where(planformacion_id: session[:plan_id]).take
+    if session[:informe_id].blank?
+      estatus_x = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
+    else
+      estatus_x = EstatusInforme.where(informe_id: session[:informe_id], actual: 1).take
+    end
+    if (estatus_x.estatus_id != 6 && estatus_x.estatus_id != 5)
+      @bool_enviado = 1
+    end
+
     if session[:usuario_id] && session[:tutor]
       @plan = Planformacion.where(id: session[:plan_id]).take
+      $actividad = params[:actividad_id].to_i
       @documents = []
       if !session[:informe_id].blank?
-        @documents = Document.where(adecuacion_id: session[:adecuacion_id], informe_id: session[:informe_id]).all
+        @documents = Document.where(adecuacion_id: session[:adecuacion_id], informe_id: session[:informe_id], actividad_id: $actividad).all
       else
         @documents = Document.where(adecuacion_id: session[:adecuacion_id], informe_id: nil).all
       end
@@ -61,9 +75,10 @@ class DocumentsController < ApplicationController
 			@document.tutor_id = session[:usuario_id]
 			@document.adecuacion_id = @adecuacion.id
 			@document.informe_id = session[:informe_id]
+      @document.actividad_id = $actividad
 			if @document.save
 			flash[:success]="El documento se ha subido con exito"
-			redirect_to controller:"documents", action: "index"
+			redirect_to controller:"documents", action: "index", :actividad_id => $actividad
 			else
 			flash[:danger]="El documento no se ha cargado, recuerde que debe pesar menos de 1MB"
 			redirect_to controller:"documents", action: "new"
@@ -95,11 +110,8 @@ class DocumentsController < ApplicationController
   # DELETE /documents/1.json
   def destroy
     @document.destroy
-    respond_to do |format|
-      flash[:success]="El documento fue borrado con exito"
-      format.html { redirect_to documents_url }
-      format.json { head :no_content }
-    end
+    flash[:success]="El documento fue borrado con exito"
+    redirect_to controller:"documents", action: "index", :actividad_id => $actividad
   end
 
   private

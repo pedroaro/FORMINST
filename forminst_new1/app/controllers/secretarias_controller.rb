@@ -54,6 +54,18 @@ class SecretariasController < ApplicationController
 				end
 			end
 
+			cjprusuario = Usuario.all
+			cjprusuario.each do |usuarioactual|
+				puts usuarioactual.user
+				if usuarioactual.email == params[:correo].to_s
+					haceralgo = "No"
+				end
+				puts usuarioactual.email
+				if usuarioactual.user == params[:correo].to_s
+					haceralgo = "No"
+				end
+			end
+
 			puts "holaaaaaaaaaaaaaaaa"
 			puts haceralgo
 			
@@ -132,7 +144,7 @@ class SecretariasController < ApplicationController
 			$cparea = params[:Area]
 			$cpsubarea = params[:Subarea]
 
-			flash[:danger] = "La cedula de identidad ya existe"
+			flash[:danger] = "La cedula de identidad o el correo ya existe"
 			redirect_to :back
 
 			end
@@ -235,6 +247,18 @@ class SecretariasController < ApplicationController
 			cjprpersonas.each do |personaactual|
 				puts personaactual.ci
 				if personaactual.ci == params[:CI].to_s
+					haceralgo = "No"
+				end
+			end
+
+			cjprusuario = Usuario.all
+			cjprusuario.each do |usuarioactual|
+				puts usuarioactual.user
+				if usuarioactual.email == params[:correo].to_s
+					haceralgo = "No"
+				end
+				puts usuarioactual.email
+				if usuarioactual.user == params[:correo].to_s
 					haceralgo = "No"
 				end
 			end
@@ -386,7 +410,7 @@ class SecretariasController < ApplicationController
 				$cpjrtutores = params[:JRTutores]
 				$cpuad = params[:UAD]
 				$cpuai = params[:UAI]
-				flash[:danger] = "La cedula de identidad ya existe"
+				flash[:danger] = "La cedula de identidad o el correo ya existe"
 				redirect_to :back
 
 			end
@@ -544,6 +568,8 @@ class SecretariasController < ApplicationController
 				$cpnombre = cppersona.nombres
 				$cpapellido = cppersona.apellidos
 				$cpci = cppersona.ci
+				$cpcifija = cppersona.ci
+				$cpcorreofijo = cpusuario.email
 				$cpcorreo = cpusuario.email
 				$cptlf = cppersona.telefono1
 				$cpotlf = cppersona.telefono2
@@ -573,78 +599,128 @@ class SecretariasController < ApplicationController
 	def guarda_instructor_modificado
 		if session[:usuario_id]	
 
-				puts params[:Nombre]
-				puts params[:Apellido]
-				puts params[:CI]
-				puts params[:correo]
-				puts params[:Tlf]
-				puts params[:OTlf]
-				puts params[:FechaNac]
-				puts params[:Dir]
-				puts params[:GradoI]
-				puts params[:Area]
-				puts params[:Subarea]
+			puts params[:Nombre]
+			puts params[:Apellido]
+			puts params[:CI]
+			puts params[:correo]
+			puts params[:Tlf]
+			puts params[:OTlf]
+			puts params[:FechaNac]
+			puts params[:Dir]
+			puts params[:GradoI]
+			puts params[:Area]
+			puts params[:Subarea]
 
-			cpusuario = Usuario.find_by id: $id_tutor_seleccionado
-			cpusuario.user = params[:correo].to_s
-			cpusuario.password = params[:CI].to_s
-			cpusuario.email = params[:correo].to_s
-			cpusuario.save
+			haceralgo = "Si"
+				
+			i = 1
+			j = 1
+			nombre = "hola"
+			cpid = 1
 
-			cppersona = Persona.find_by usuario_id: $id_tutor_seleccionado
-			cppersona.nombres = params[:Nombre].to_s
-			cppersona.apellidos = params[:Apellido].to_s
-			cppersona.fecha_nacimiento = params[:FechaNac].to_s
-			cppersona.ci = params[:CI].to_s
-			cppersona.telefono1 = params[:Tlf].to_s
-			cppersona.telefono2 = params[:OTlf].to_s
-			cppersona.direccion = params[:Dir].to_s
-			cppersona.grado_instruccion = params[:GradoI].to_s
-			cppersona.area = params[:Area].to_s
-			cppersona.subarea = params[:Subarea].to_s
-			cppersona.save
+			cjprpersonas = Persona.all
+			cjprpersonas.each do |personaactual|
+				puts personaactual.ci
+				if personaactual.ci == params[:CI].to_s && personaactual.ci != $cpcifija.to_s
+					haceralgo = "No"
+				end
+			end
 
-			cpuentidad = Usuarioentidad.find_by usuario_id: $id_tutor_seleccionado
-			cpuentidad.usuario_id = cpusuario.id
-			cpuentidad.id = cpusuario.id
-			cpuentidad.save
+			cjprusuario = Usuario.all
+			cjprusuario.each do |usuarioactual|
+				puts usuarioactual.user
+				if usuarioactual.email == params[:correo].to_s && usuarioactual.email != $cpcorreofijo.to_s
+					haceralgo = "No"
+				end
+				puts usuarioactual.email
+				if usuarioactual.user == params[:correo].to_s && usuarioactual.user != $cpcorreofijo.to_s
+					haceralgo = "No"
+				end
+			end
 
-			cpplanformacion = Planformacion.find_by instructor_id: $id_tutor_seleccionado
-			cpplanformacion.fecha_inicio = params[:FechaConcurso]
-			cpplanformacion.adscripcion_docencia = params[:UAD]
-			cpplanformacion.adscripcion_investigacion = params[:UAI]
-			if params[:JRTutores].to_s != "0"
+			puts "holaaaaaaaaaaaaaaaa"
+			puts haceralgo
+			
+			if haceralgo == "Si"
 
-					cpinstructortutor = Instructortutor.where(instructor_id: cpplanformacion.instructor_id, tutor_id: cpplanformacion.tutor_id).take
+				cpusuario = Usuario.find_by id: $id_tutor_seleccionado
+				cpusuario.user = params[:correo].to_s
+				cpusuario.password = params[:CI].to_s
+				cpusuario.email = params[:correo].to_s
+				cpusuario.save
 
-					cpinstructortutor.actual = 0
-					cpinstructortutor.save
+				cppersona = Persona.find_by usuario_id: $id_tutor_seleccionado
+				cppersona.nombres = params[:Nombre].to_s
+				cppersona.apellidos = params[:Apellido].to_s
+				cppersona.fecha_nacimiento = params[:FechaNac].to_s
+				cppersona.ci = params[:CI].to_s
+				cppersona.telefono1 = params[:Tlf].to_s
+				cppersona.telefono2 = params[:OTlf].to_s
+				cppersona.direccion = params[:Dir].to_s
+				cppersona.grado_instruccion = params[:GradoI].to_s
+				cppersona.area = params[:Area].to_s
+				cppersona.subarea = params[:Subarea].to_s
+				cppersona.save
 
-					cpinstructortutor = Instructortutor.where(instructor_id: cpplanformacion.instructor_id, tutor_id: params[:JRTutores]).take
-					if cpinstructortutor.blank?
-						cpinstructortutor = Instructortutor.new
-						cpinstructortutor.tutor_id = params[:JRTutores]
-						cpinstructortutor.instructor_id = cpplanformacion.instructor_id
-						cpinstructortutor.actual = 1
-						cpplanformacion.tutor_id = params[:JRTutores]
-					else
-						cpinstructortutor.actual = 1
-						cpplanformacion.tutor_id = params[:JRTutores]
-					end
-					cpinstructortutor.save
+				cpuentidad = Usuarioentidad.find_by usuario_id: $id_tutor_seleccionado
+				cpuentidad.usuario_id = cpusuario.id
+				cpuentidad.id = cpusuario.id
+				cpuentidad.save
 
-					pacjadecuacion = Adecuacion.where(planformacion_id: cpplanformacion.id).take
-					pacjadecuacion.tutor_id = params[:JRTutores]
-					pacjadecuacion.save
+				cpplanformacion = Planformacion.find_by instructor_id: $id_tutor_seleccionado
+				cpplanformacion.fecha_inicio = params[:FechaConcurso]
+				cpplanformacion.adscripcion_docencia = params[:UAD]
+				cpplanformacion.adscripcion_investigacion = params[:UAI]
+				if params[:JRTutores].to_s != "0"
+
+						cpinstructortutor = Instructortutor.where(instructor_id: cpplanformacion.instructor_id, tutor_id: cpplanformacion.tutor_id).take
+
+						cpinstructortutor.actual = 0
+						cpinstructortutor.save
+
+						cpinstructortutor = Instructortutor.where(instructor_id: cpplanformacion.instructor_id, tutor_id: params[:JRTutores]).take
+						if cpinstructortutor.blank?
+							cpinstructortutor = Instructortutor.new
+							cpinstructortutor.tutor_id = params[:JRTutores]
+							cpinstructortutor.instructor_id = cpplanformacion.instructor_id
+							cpinstructortutor.actual = 1
+							cpplanformacion.tutor_id = params[:JRTutores]
+						else
+							cpinstructortutor.actual = 1
+							cpplanformacion.tutor_id = params[:JRTutores]
+						end
+						cpinstructortutor.save
+
+						pacjadecuacion = Adecuacion.where(planformacion_id: cpplanformacion.id).take
+						pacjadecuacion.tutor_id = params[:JRTutores]
+						pacjadecuacion.save
+
+				end
+				cpplanformacion.save
+
+				cpAdecuacion = Adecuacion.find_by planformacion_id: cpplanformacion.id
+				cpAdecuacion.fecha_creacion = cpplanformacion.fecha_inicio
+				cpAdecuacion.save
+
+				redirect_to controller:"secretarias", action: "index"
+
+			else
+			$cpnombre = params[:Nombre]
+			$cpapellido =params[:Apellido]
+			$cpci = params[:CI]
+			$cpcorreo = params[:correo]
+			$cptlf = params[:Tlf]
+			$cpotlf = params[:OTlf]
+			$cpfechanac = params[:FechaNac]
+			$cpdir = params[:Dir]
+			$cpgradoi = params[:GradoI]
+			$cparea = params[:Area]
+			$cpsubarea = params[:Subarea]
+
+			flash[:danger] = "La cedula de identidad ya existe"
+			redirect_to :back
 
 			end
-			cpplanformacion.save
-
-			cpAdecuacion = Adecuacion.find_by planformacion_id: cpplanformacion.id
-			cpAdecuacion.fecha_creacion = cpplanformacion.fecha_inicio
-			cpAdecuacion.save
-
-			redirect_to controller:"secretarias", action: "index"
 
 		else
 			redirect_to controller:"forminst", action: "index"
@@ -744,7 +820,9 @@ class SecretariasController < ApplicationController
 				$cpnombre = cppersona.nombres
 				$cpapellido = cppersona.apellidos
 				$cpci = cppersona.ci
+				$cpcifija = cppersona.ci
 				$cpcorreo = cpusuario.email
+				$cpcorreofijo = cpusuario.email
 				$cptlf = cppersona.telefono1
 				$cpotlf = cppersona.telefono2
 				$cpfechanac = cppersona.fecha_nacimiento
@@ -781,31 +859,81 @@ class SecretariasController < ApplicationController
 				puts params[:Area]
 				puts params[:Subarea]
 
-			cpusuario = Usuario.find_by id: $id_tutor_seleccionado
-			cpusuario.user = params[:correo].to_s
-			cpusuario.password = params[:CI].to_s
-			cpusuario.email = params[:correo].to_s
-			cpusuario.save
+			haceralgo = "Si"
+				
+			i = 1
+			j = 1
+			nombre = "hola"
+			cpid = 1
 
-			cppersona = Persona.find_by usuario_id: $id_tutor_seleccionado
-			cppersona.nombres = params[:Nombre].to_s
-			cppersona.apellidos = params[:Apellido].to_s
-			cppersona.fecha_nacimiento = params[:FechaNac].to_s
-			cppersona.ci = params[:CI].to_s
-			cppersona.telefono1 = params[:Tlf].to_s
-			cppersona.telefono2 = params[:OTlf].to_s
-			cppersona.direccion = params[:Dir].to_s
-			cppersona.grado_instruccion = params[:GradoI].to_s
-			cppersona.area = params[:Area].to_s
-			cppersona.subarea = params[:Subarea].to_s
-			cppersona.save
+			cjprpersonas = Persona.all
+			cjprpersonas.each do |personaactual|
+				puts personaactual.ci
+				if personaactual.ci == params[:CI].to_s && personaactual.ci != $cpcifija.to_s
+					haceralgo = "No"
+				end
+			end
 
-			cpuentidad = Usuarioentidad.find_by usuario_id: $id_tutor_seleccionado
-			cpuentidad.usuario_id = cpusuario.id
-			cpuentidad.id = cpusuario.id
-			cpuentidad.save
+			cjprusuario = Usuario.all
+			cjprusuario.each do |usuarioactual|
+				puts usuarioactual.user
+				if usuarioactual.email == params[:correo].to_s && usuarioactual.email != $cpcorreofijo.to_s
+					haceralgo = "No"
+				end
+				puts usuarioactual.email
+				if usuarioactual.user == params[:correo].to_s && usuarioactual.user != $cpcorreofijo.to_s
+					haceralgo = "No"
+				end
+			end
 
-			redirect_to controller:"secretarias", action: "index"
+			puts "holaaaaaaaaaaaaaaaa"
+			puts haceralgo
+			
+			if haceralgo == "Si"
+
+				cpusuario = Usuario.find_by id: $id_tutor_seleccionado
+				cpusuario.user = params[:correo].to_s
+				cpusuario.password = params[:CI].to_s
+				cpusuario.email = params[:correo].to_s
+				cpusuario.save
+
+				cppersona = Persona.find_by usuario_id: $id_tutor_seleccionado
+				cppersona.nombres = params[:Nombre].to_s
+				cppersona.apellidos = params[:Apellido].to_s
+				cppersona.fecha_nacimiento = params[:FechaNac].to_s
+				cppersona.ci = params[:CI].to_s
+				cppersona.telefono1 = params[:Tlf].to_s
+				cppersona.telefono2 = params[:OTlf].to_s
+				cppersona.direccion = params[:Dir].to_s
+				cppersona.grado_instruccion = params[:GradoI].to_s
+				cppersona.area = params[:Area].to_s
+				cppersona.subarea = params[:Subarea].to_s
+				cppersona.save
+
+				cpuentidad = Usuarioentidad.find_by usuario_id: $id_tutor_seleccionado
+				cpuentidad.usuario_id = cpusuario.id
+				cpuentidad.id = cpusuario.id
+				cpuentidad.save
+
+				redirect_to controller:"secretarias", action: "index"
+
+			else
+			$cpnombre = params[:Nombre]
+			$cpapellido =params[:Apellido]
+			$cpci = params[:CI]
+			$cpcorreo = params[:correo]
+			$cptlf = params[:Tlf]
+			$cpotlf = params[:OTlf]
+			$cpfechanac = params[:FechaNac]
+			$cpdir = params[:Dir]
+			$cpgradoi = params[:GradoI]
+			$cparea = params[:Area]
+			$cpsubarea = params[:Subarea]
+
+			flash[:danger] = "La cedula de identidad o el correo ya existe"
+			redirect_to :back
+
+			end
 
 		else
 			redirect_to controller:"forminst", action: "index"

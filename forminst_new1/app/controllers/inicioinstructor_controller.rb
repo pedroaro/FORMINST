@@ -3,8 +3,8 @@
 
 	def index
 		if session[:usuario_id] && session[:instructor]= true
-			session[:adecuacion_id] = nil
       plan = Planformacion.where(instructor_id: session[:usuario_id]).take
+      session[:adecuacion_id] = Adecuacion.where(planformacion_id: plan.id).take.id
 			session[:plan_id] = plan.id
 			session[:instructorName] = nil
       session[:informe_id] = nil
@@ -24,9 +24,10 @@
 
   def ver_soporte
     @plan = Planformacion.where(id: session[:plan_id]).take
+    $actividad = params[:actividad_id].to_i
     @documents = []
     if !session[:informe_id].blank?
-      @documents = Document.where(adecuacion_id: session[:adecuacion_id], informe_id: session[:informe_id]).all
+      @documents = Document.where(adecuacion_id: session[:adecuacion_id], informe_id: session[:informe_id], actividad_id: $actividad).all
     else
       @documents = Document.where(adecuacion_id: session[:adecuacion_id], informe_id: nil).all
     end

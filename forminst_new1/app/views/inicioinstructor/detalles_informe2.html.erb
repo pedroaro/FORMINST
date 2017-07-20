@@ -17,7 +17,6 @@
       <button type="button" class="btn btn-default" onclick = " location.href = 'javascript:history.back(-1);'">Volver</button>
       <%= link_to "Vista Previa", {controller: "inicioinstructor", action: "vista_previa1"}, class: "btn btn-default" %>
       <%= link_to "Generar PDF", {controller: "informes", action: "generar_pdf"},target: :_blank, class: "btn btn-default" %>
-      <%= link_to "Ver Soportes", {controller: "inicioinstructor", action: "ver_soporte"}, class: "btn btn-default" %>
       <%= link_to "Versiones Anteriores", {controller: "inicioinstructor", action: "ver_respaldos"}, class: "btn btn-default" %>
     </div>
   </div>
@@ -95,7 +94,7 @@
             <tbody>
               <tr></tr>
               <tr>
-                <td class="text-center" colspan="4"><h5><strong> Actividades a realizar por el instructor:</strong></h5></td>
+                <td class="text-center" colspan="5"><h5><strong> Actividades a realizar por el instructor:</strong></h5></td>
               </tr>
               <tr class='title-table'>
 
@@ -103,6 +102,7 @@
                 <td class="text-center"  style='width:30%;'><strong>Actividad Docente Ejecutada</strong></td>
                 <td class="text-center"  style='width:30%;'><strong>Observaciones</strong></td>
                 <td class="text-center"  style='width:30%;'><strong>Más observaciones</strong></td>
+                <td class="text-center"  style='width:30%;'><strong>Soportes</strong></td>
               </tr>
                 <% @actividadesadoc.each_with_index do |actdoc, i| %>
                   <tr>
@@ -118,19 +118,23 @@
                     <td>
                       <%= link_to "Más obs. ", {:controller => "informes", :action => "mas_observaciones", :actividad_id => actdoc.id, :informe_id => @informe.id }, class: "pad add btn btn-default" %>
                     </td>
+                    <td>
+                      <%= link_to "Soportes", {:controller => "inicioinstructor", :action => "ver_soporte", :actividad_id => actdoc.id }, class: "pad add btn btn-default" %>
+                    </td>
                     <input type="hidden" name="doc<%=i.to_s%>" value='<%= actdoc.id %>'>
                     
                   </tr>
                   <% @j= @j +1 %>
                 <% end %>
 
-              <tr><td colspan="3"></td></tr>
+              <tr><td colspan="5"></td></tr>
     
               <tr class='title-table'>
                 <td class="text-center"><strong>Actividad de Investigación Programada</strong></td>
                 <td class="text-center"><strong>Actividad de Investigación Ejecutada</strong></td>
                 <td class="text-center"><strong>Observaciones</strong></td>
                 <td class="text-center"  style='width:30%;'><strong>Más observaciones</strong></td>
+                <td class="text-center"  style='width:30%;'><strong>Soportes</strong></td>
               </tr>
 
               <% @actividadesainv.each_with_index do |actdoc,i| %>
@@ -147,6 +151,9 @@
                     <td>
                       <%= link_to "Más obs. ", {:controller => "informes", :action => "mas_observaciones", :actividad_id => actdoc.id, :informe_id => @informe.id }, class: "pad add btn btn-default" %>
                     </td>
+                    <td>
+                      <%= link_to "Soportes", {:controller => "inicioinstructor", :action => "ver_soporte", :actividad_id => actdoc.id }, class: "pad add btn btn-default" %>
+                    </td>
                     <input type="hidden" name="inv<%=i.to_s%>" value='<%= actdoc.id %>'>
                 </tr>
 
@@ -158,12 +165,12 @@
                       <div class="row">
                         <div class="col-xs-12 col-md-12 col-lg-12">
                            <tr>
-                           <td colspan="4">
+                           <td colspan="5">
                             <h5>Resultados: </h5>
                            </td>
                            </tr>
                            <tr>
-                           <td colspan="4">
+                           <td colspan="5">
                            <div class="well">
                            <% @resultados2a[@j].each_with_index do |cpresultados| %>
                              <span class="pull-left glyphicon glyphicon-ok" aria-hidden="true">
@@ -184,13 +191,14 @@
 
               
               
-              <tr><td colspan="3"></td></tr>
+              <tr><td colspan="5"></td></tr>
 
               <tr class='title-table'>
                 <td class="text-center"><strong>Actividad de Formación Programada</strong></td>
                 <td class="text-center"><strong>Actividad de Formación Ejecutada</strong></td>
                 <td class="text-center"><strong>Observaciones</strong></td>
                 <td class="text-center"  style='width:30%;'><strong>Más observaciones</strong></td>
+                <td class="text-center"  style='width:30%;'><strong>Soportes</strong></td>
               </tr>
               <% @actividadesafor.each_with_index do |actdoc,i| %>
                 <tr>
@@ -206,18 +214,22 @@
                     <td>
                       <%= link_to "Más obs. ", {:controller => "informes", :action => "mas_observaciones", :actividad_id => actdoc.id, :informe_id => @informe.id }, class: "pad add btn btn-default" %>
                     </td>
+                    <td>
+                      <%= link_to "Soportes", {:controller => "inicioinstructor", :action => "ver_soporte", :actividad_id => actdoc.id }, class: "pad add btn btn-default" %>
+                    </td>
                     <input type="hidden" name="for<%=i.to_s%>" value='<%= actdoc.id %>'>
                 </tr>
                 <% @j= @j +1 %>
               <% end %>
 
-              <tr><td colspan="3"></td></tr>
+              <tr><td colspan="5"></td></tr>
 
               <tr  class='title-table'>
                 <td class="text-center"><strong>Actividad de Extensión Programada</strong></td>
                 <td class="text-center"><strong>Actividad de Extensión Ejecutada</strong></td>
                 <td class="text-center"><strong>Observaciones</strong></td>
                 <td class="text-center"  style='width:30%;'><strong>Más observaciones</strong></td>
+                <td class="text-center"  style='width:30%;'><strong>Soportes</strong></td>
               </tr>
               <% @actividadesaext.each_with_index do |actdoc,i| %>
                 <tr>
@@ -233,19 +245,23 @@
                     <td>
                       <%= link_to "Más obs. ", {:controller => "informes", :action => "mas_observaciones", :actividad_id => actdoc.id, :informe_id => @informe.id }, class: "pad add btn btn-default" %>
                     </td>
+                    <td>
+                      <%= link_to "Soportes", {:controller => "inicioinstructor", :action => "ver_soporte", :actividad_id => actdoc.id }, class: "pad add btn btn-default" %>
+                    </td>
                     <input type="hidden" name="ext<%=i.to_s%>" value='<%= actdoc.id %>'>
                 </tr>
                  <% @j= @j +1 %>
               <% end %>
 
               <% if @actividadesaobli!=[] %>
-                <tr><td colspan="3"></td></tr>
+                <tr><td colspan="5"></td></tr>
 
                 <tr  class='title-table'>
                   <td class="text-center"><strong>Actividad para la Aprobación Programada</strong></td>
                   <td class="text-center"><strong>Actividad para la Aprobación Ejecutada</strong></td>
                   <td class="text-center"><strong>Observaciones</strong></td>
                   <td class="text-center"  style='width:30%;'><strong>Más observaciones</strong></td>
+                <td class="text-center"  style='width:30%;'><strong>Soportes</strong></td>
                 </tr>
                 <% @actividadesaobli.each_with_index do |actdoc,i| %>
                   <tr>
@@ -261,6 +277,9 @@
                       <td>
                         <%= link_to "Más obs. ", {:controller => "informes", :action => "mas_observaciones", :actividad_id => actdoc.id, :informe_id => @informe.id }, class: "pad add btn btn-default" %>
                       </td>
+                      <td>
+                        <%= link_to "Soportes", {:controller => "inicioinstructor", :action => "ver_soporte", :actividad_id => actdoc.id }, class: "pad add btn btn-default" %>
+                      </td>
                       <input type="hidden" name="ext<%=i.to_s%>" value='<%= actdoc.id %>'>
                   </tr>
                    <% @j= @j +1 %>
@@ -269,17 +288,17 @@
 
               <tr  class='title-table'>
               <tr>
-                <td class="text-center" colspan="4"><h5><strong> Otras Actividades:</strong></h5></td>
+                <td class="text-center" colspan="5"><h5><strong> Otras Actividades:</strong></h5></td>
               </tr>
                 <td class="text-center" colspan="2"><strong>Contempladas en el plan formación</strong></td>
-                <td class="text-center" colspan="2"><strong>No contempladas en el plan formación</strong></td>
+                <td class="text-center" colspan="3"><strong>No contempladas en el plan formación</strong></td>
               </tr>
               <% @actividadesaotr.each_with_index do |actdoc,i| %>
                 <tr>
                   <td colspan="2">
                     <textarea class="form-control" rows="3"  name='otra<%= actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
                   </td>
-                  <td colspan="2">
+                  <td colspan="3">
                     <%if @actividadese[@j] != nil %>
                     <textarea class="form-control" rows="3" name='ejecutada<%= actdoc.id.to_s%>' disabled><%=  @actividadese[@j].descripcion %></textarea>
                     <%else%>
@@ -291,26 +310,26 @@
                 <% @j= @j +1 %>
               <% end %>
               <tr>
-                <td colspan="4"><b>Conclusiones:</b></td>
+                <td colspan="5"><b>Conclusiones:</b></td>
               </tr>
               <tr>
-                <td colspan="4">
+                <td colspan="5">
                     <textarea name="conclusiones" class="form-control" rows="3" disabled><%= @informe.conclusiones%></textarea>
                 </td>
               </tr>
               <tr>
-                <td colspan="4"><b>Opinión tutor:</b></td>
+                <td colspan="5"><b>Opinión tutor:</b></td>
               </tr>
               <tr>
-                <td colspan="4">
+                <td colspan="5">
                     <textarea name="opinion" class="form-control" rows="3" disabled><%= @informe.opinion_tutor %></textarea>
                 </td>
               </tr>
               <tr>
-                <td colspan="4"><b>Justificaciones (Extensión del Período del Informe)</b></td>
+                <td colspan="5"><b>Justificaciones (Extensión del Período del Informe)</b></td>
               </tr>
               <tr>
-                <td colspan="4">
+                <td colspan="5">
                     <textarea name="justi" class="form-control" rows="3" disabled><%= @informe.justificaciones %></textarea>
                 </td>
               </tr>

@@ -177,9 +177,10 @@ def ver_soporte
     @plan = Planformacion.where(id: session[:plan_id]).take
     @documents = []
     if !session[:informe_id].blank?
+    	$actividad = params[:actividad_id].to_i
     	adec = Adecuacion.where(planformacion_id: session[:plan_id]).take
     	session[:adecuacion_id] = adec.id
-      	@documents = Document.where(adecuacion_id: session[:adecuacion_id], informe_id: session[:informe_id]).all
+      	@documents = Document.where(adecuacion_id: session[:adecuacion_id], informe_id: session[:informe_id], actividad_id: $actividad).all
 		@bool_enviado = 0
 		if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12)
 		#Usuario comision
@@ -394,6 +395,7 @@ end
 			@actividadesafor= []
 			@actividadesaotr= []
 			@observaciont= []
+			@observacionesExtras= []
 			@j=0
 			@est= EstatusAdecuacion.where(adecuacion_id: @adecuacion.id).take
 			@revision= Revision.where(usuario_id: session[:usuario_id], adecuacion_id: @adecuacion.id, estatus_id: @est.estatus_id, informe_id: nil).take
@@ -412,6 +414,33 @@ end
 			        else
 			          	@observaciont.push(@obs.observaciones)
 			        end
+
+			        @cpObs= ObservacionActividadAdecuacion.where(adecuacionactividad_id: actade.id).where.not(revision_id: @revision.id).all
+				    if @cpObs.blank?
+				    	@observacionesExtras.push("no")
+				    else
+				    	@observacionesExtras.push("si")
+				    end
+				else 
+					@cpObs= ObservacionActividadAdecuacion.where(adecuacionactividad_id: actade.id).all
+
+				    if @cpObs.blank?
+				    	@observacionesExtras.push("no")
+				    else
+
+						cpBool = 0
+						@cpObs.each do |probar|
+							if !probar.observaciones.blank?
+								cpBool = 1
+							end
+						end
+
+				    	if cpBool == 0
+				    		@observacionesExtras.push("no")
+				    	else
+				    		@observacionesExtras.push("si")
+				    	end
+				    end
 			    end
 
 				if tipo==1
@@ -504,6 +533,7 @@ end
 			@actividadesafor= []
 			@actividadesaotr= []
 			@observaciont= []
+			@observacionesExtras= []
 			@j=0
 			@est= EstatusAdecuacion.where(adecuacion_id: @adecuacion.id).take
 			@revision= Revision.where(usuario_id: session[:usuario_id], adecuacion_id: @adecuacion.id, estatus_id: @est.estatus_id, informe_id: nil).take
@@ -522,6 +552,33 @@ end
 			        else
 			          	@observaciont.push(@obs.observaciones)
 			        end
+
+			        @cpObs= ObservacionActividadAdecuacion.where(adecuacionactividad_id: actade.id).where.not(revision_id: @revision.id).all
+				    if @cpObs.blank?
+				    	@observacionesExtras.push("no")
+				    else
+				    	@observacionesExtras.push("si")
+				    end
+				else 
+					@cpObs= ObservacionActividadAdecuacion.where(adecuacionactividad_id: actade.id).all
+
+				    if @cpObs.blank?
+				    	@observacionesExtras.push("no")
+				    else
+
+						cpBool = 0
+						@cpObs.each do |probar|
+							if !probar.observaciones.blank?
+								cpBool = 1
+							end
+						end
+
+				    	if cpBool == 0
+				    		@observacionesExtras.push("no")
+				    	else
+				    		@observacionesExtras.push("si")
+				    	end
+				    end
 			    end
 
 				if tipo==1
@@ -614,6 +671,7 @@ end
 			@actividadesafor= []
 			@actividadesaotr= []
 			@observaciont= []
+			@observacionesExtras= []
 			@j=0
 			@est= EstatusAdecuacion.where(adecuacion_id: @adecuacion.id).take
 			@revision= Revision.where(usuario_id: session[:usuario_id], adecuacion_id: @adecuacion.id, estatus_id: @est.estatus_id, informe_id: nil).take
@@ -632,6 +690,33 @@ end
 			        else
 			          	@observaciont.push(@obs.observaciones)
 			        end
+
+			        @cpObs= ObservacionActividadAdecuacion.where(adecuacionactividad_id: actade.id).where.not(revision_id: @revision.id).all
+				    if @cpObs.blank?
+				    	@observacionesExtras.push("no")
+				    else
+				    	@observacionesExtras.push("si")
+				    end
+				else 
+					@cpObs= ObservacionActividadAdecuacion.where(adecuacionactividad_id: actade.id).all
+
+				    if @cpObs.blank?
+				    	@observacionesExtras.push("no")
+				    else
+
+						cpBool = 0
+						@cpObs.each do |probar|
+							if !probar.observaciones.blank?
+								cpBool = 1
+							end
+						end
+
+				    	if cpBool == 0
+				    		@observacionesExtras.push("no")
+				    	else
+				    		@observacionesExtras.push("si")
+				    	end
+				    end
 			    end
 
 				if tipo==1
@@ -724,6 +809,7 @@ end
 			@actividadesafor= []
 			@actividadesaotr= []
 			@observaciont= []
+			@observacionesExtras= []
 			@j=0
 			@est= EstatusAdecuacion.where(adecuacion_id: @adecuacion.id).take
 			@revision= Revision.where(usuario_id: session[:usuario_id], adecuacion_id: @adecuacion.id, estatus_id: @est.estatus_id, informe_id: nil).take
@@ -742,6 +828,33 @@ end
 			        else
 			          	@observaciont.push(@obs.observaciones)
 			        end
+
+			        @cpObs= ObservacionActividadAdecuacion.where(adecuacionactividad_id: actade.id).where.not(revision_id: @revision.id).all
+				    if @cpObs.blank?
+				    	@observacionesExtras.push("no")
+				    else
+				    	@observacionesExtras.push("si")
+				    end
+				else 
+					@cpObs= ObservacionActividadAdecuacion.where(adecuacionactividad_id: actade.id).all
+
+				    if @cpObs.blank?
+				    	@observacionesExtras.push("no")
+				    else
+
+						cpBool = 0
+						@cpObs.each do |probar|
+							if !probar.observaciones.blank?
+								cpBool = 1
+							end
+						end
+
+				    	if cpBool == 0
+				    		@observacionesExtras.push("no")
+				    	else
+				    		@observacionesExtras.push("si")
+				    	end
+				    end
 			    end
 
 				if tipo==1
@@ -1171,6 +1284,7 @@ end
     	@resultados2b= []
     	@actividadese= []
     	@observaciont= []
+    	@observacionesExtras = []
     	@revision= Revision.where(informe_id: @informe.id, usuario_id: session[:usuario_id], adecuacion_id: @adecuacion.id).take
     	@actividadesa.each do |actade| 
     		if @resultados2b != []
@@ -1243,13 +1357,62 @@ end
 
 	        	if @revision == nil || @revision == ""
 		        	@obs=nil
+
 		        else
 		        	@obs= ObservacionActividadInforme.where(informe_actividad_id: actade.id, revision_id: @revision.id).take
-		        end	        
+
+		        end	  
+		        @cpObs2= ObservacionTutor.where(informe_actividad_id: actade.id).take 
+		        cpVerificar = "si"
+		        if !@cpObs2.blank? && !@cpObs2.observaciones.blank? 
+		        	@observacionesExtras.push("si")
+		        	cpVerificar = "no"
+		        end
 		        if @obs==nil
 		          	@observaciont.push("")
+
+		          	if cpVerificar == "si"
+			          	@cpObs= ObservacionActividadInforme.where(informe_actividad_id: actade.id).all
+					    if @cpObs.blank?
+					    	@observacionesExtras.push("no")
+					    else
+
+							cpBool = 0
+							@cpObs.each do |probar|
+								if !probar.observaciones.blank?
+									cpBool = 1
+								end
+							end
+
+					    	if cpBool == 0
+					    		@observacionesExtras.push("no")
+					    	else
+					    		@observacionesExtras.push("si")
+					    	end
+					    end
+					end
 		        else
 		          	@observaciont.push(@obs.observaciones)
+
+		          	if cpVerificar == "si"
+			          	@cpObs= ObservacionActividadInforme.where(informe_actividad_id: actade.id).where.not(revision_id: @revision.id).all
+					    if @cpObs.blank?
+					    	@observacionesExtras.push("no")
+					    else
+							cpBool = 0
+							@cpObs.each do |probar|
+								if !probar.observaciones.blank?
+									cpBool = 1
+								end
+							end
+
+					    	if cpBool == 0
+					    		@observacionesExtras.push("no")
+					    	else
+					    		@observacionesExtras.push("si")
+					    	end
+					    end
+					end
 		        end
 
 	     	else
@@ -1338,10 +1501,57 @@ end
 		        	@obs= ObservacionActividadInforme.where(informe_actividad_id: actade.id, revision_id: @revision.id).take
 		        end
 
+		        @cpObs2= ObservacionTutor.where(informe_actividad_id: actade.id).take 
+		        cpVerificar = "si"
+		        if !@cpObs2.blank? && !@cpObs2.observaciones.blank? 
+		        	@observacionesExtras.push("si")
+		        	cpVerificar = "no"
+		        end
 		        if @obs==nil
 		          	@observaciont.push("")
+
+		          	if cpVerificar == "si"
+			          	@cpObs= ObservacionActividadInforme.where(informe_actividad_id: actade.id).all
+					    if @cpObs.blank?
+					    	@observacionesExtras.push("no")
+					    else
+
+							cpBool = 0
+							@cpObs.each do |probar|
+								if !probar.observaciones.blank?
+									cpBool = 1
+								end
+							end
+
+					    	if cpBool == 0
+					    		@observacionesExtras.push("no")
+					    	else
+					    		@observacionesExtras.push("si")
+					    	end
+					    end
+					end
 		        else
 		          	@observaciont.push(@obs.observaciones)
+
+		          	if cpVerificar == "si"
+			          	@cpObs= ObservacionActividadInforme.where(informe_actividad_id: actade.id).where.not(revision_id: @revision.id).all
+					    if @cpObs.blank?
+					    	@observacionesExtras.push("no")
+					    else
+							cpBool = 0
+							@cpObs.each do |probar|
+								if !probar.observaciones.blank?
+									cpBool = 1
+								end
+							end
+
+					    	if cpBool == 0
+					    		@observacionesExtras.push("no")
+					    	else
+					    		@observacionesExtras.push("si")
+					    	end
+					    end
+					end
 		        end
 		        if tipo==1
 		          	@actividadesadoc.push(@act)

@@ -197,6 +197,7 @@
   <div class="col-xs-12 col-md-12">
     <div class="btn-group" role="group">
       <button type="button" class="btn btn-default" onclick = " location.href = 'javascript:history.back(-1);'">Volver</button>
+      <%= link_to "Volver al Informe", {controller: "informes", action: "detalles_informe2" }, class: "btn btn-default" %>
       <%if session[:informe_id]%> 
         <button type="button" data-toggle="modal" data-target="#myModal1" class="btn btn-default">Enviar</button>
       <%else%> 
@@ -211,10 +212,9 @@
         <%= link_to "Generar PDF", {controller: "informes", action: "generar_pdf"},target: :_blank, class: "btn btn-default" %>
       <%else%> 
         <%= link_to "Generar PDF", {controller: "adecuacions", action: "generar_pdf"},target: :_blank, class: "btn btn-default" %>
+        <%= link_to "Agregar Soporte", {controller: "documents", action: "new"}, class: "btn btn-default active" %>
       <%end%> 
-  		<%= link_to "Agregar Soporte", {controller: "documents", action: "new"}, class: "btn btn-default active" %>
-  		<%= link_to "Ver Soporte", {controller: "documents", action: "index"}, class: "btn btn-default" %>
-      <%= link_to "Versiones Anteriores", {controller: "iniciotutor", action: "ver_respaldos"}, class: "btn btn-default" %>
+  		<%= link_to "Ver Soporte", {controller: "documents", action: "index", :actividad_id => $actividad }, class: "btn btn-default" %>
       <%if session[:informe_id]%> 
         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModalEliminar1">Eliminar Informe</button>
       <%else %>
@@ -292,7 +292,7 @@
   <%= render 'form', document: @document %>
 <%else%>
   <div class= "text-center">
-  <h4 >No puede agregar más soportes a esta adecuación</h4><br></br>
+  <h4 >No puede agregar más soportes</h4><br></br>
   </div>
 <%end%>
 <br></br>

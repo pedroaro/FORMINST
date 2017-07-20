@@ -132,8 +132,6 @@
         <%end%>
       <%= link_to "Vista Previa", {controller: "informes", action: "vista_previa"}, class: "btn btn-default" %>
       <%= link_to "Generar PDF", {controller: "informes", action: "generar_pdf"},target: :_blank, class: "btn btn-default" %>
-      <%= link_to "Agregar Soporte", {controller: "documents", action: "new"}, class: "btn btn-default" %>
-      <%= link_to "Ver Soporte", {controller: "documents", action: "index"}, class: "btn btn-default" %>
       <%= link_to "Versiones Anteriores", {controller: "iniciotutor", action: "ver_respaldos"}, class: "btn btn-default" %>
       <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModalEliminar">
         Eliminar Informe

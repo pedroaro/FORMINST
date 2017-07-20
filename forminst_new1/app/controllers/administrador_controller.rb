@@ -130,7 +130,7 @@ class AdministradorController < ApplicationController
 				end
 			end
 			puts $id
-			@email = Usuario.where(id: $id).take.email
+			@email = Usuario.where(id: $id).take.user
 
 		else
 			redirect_to controller:"forminst", action: "index"
