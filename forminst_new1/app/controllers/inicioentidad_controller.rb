@@ -56,8 +56,9 @@ class InicioentidadController < ApplicationController
 			session[:informe_id]=nil
 			session[:adecuacion_id]=nil
 				@nombre = session[:nombre_usuario]
-				@usu=Usuarioentidad.where(entidad_id: session[:entidad_id]).take
+				@usu=Usuarioentidad.where(usuario_id: session[:usuario_id]).take
 				@entidad_escuela_id= @usu.escuela_id
+				@entidad_departamento= @usu.departamento_id
 				@adecuaciones = []
 				@status = []
 				@nombre_tutor = []
@@ -127,7 +128,10 @@ class InicioentidadController < ApplicationController
 					@tutor_escuela = Usuarioentidad.where(usuario_id: @adec.tutor_id).take
 					puts @tutor_escuela.escuela_id
 					puts @entidad_escuela_id
-					if @tutor_escuela.escuela_id == @entidad_escuela_id
+					puts @tutor_escuela.departamento_id
+					puts @entidad_departamento
+					puts "hola"
+					if @tutor_escuela.escuela_id == @entidad_escuela_id && (@tutor_escuela.departamento_id == @entidad_departamento || @entidad_departamento == nil)
 						
 						@adecuacion = true
 						@adecuaciones.push(@adec)
@@ -1019,8 +1023,9 @@ end
 	    if session[:usuario_id] && session[:entidad]= true
 	    	session[:informe_id]=nil
 	    	@nombre = session[:nombre_usuario]
-			@usu=Usuarioentidad.where(entidad_id: session[:entidad_id]).take
+			@usu=Usuarioentidad.where(usuario_id: session[:usuario_id]).take
 			@entidad_escuela_id= @usu.escuela_id
+			@depto = @usu.departamento_id
 			@informes = []
 			@tipos= []
 			@status = []
@@ -1106,7 +1111,7 @@ end
 					@nombre_instructor.push(Persona.where(usuario_id: @pf.instructor_id).take.nombres)
 				else
 					@tutor_escuela = Usuarioentidad.where(usuario_id: @inf.tutor_id).take
-					if @tutor_escuela.escuela_id == @entidad_escuela_id
+					if @tutor_escuela.escuela_id == @entidad_escuela_id && (@tutor_escuela.departamento_id == @depto || @depto == nil)
 						@informe = true
 						@informes.push(@inf)
 						if @inf.tipo_id == 1

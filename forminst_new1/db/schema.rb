@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170417122515) do
+ActiveRecord::Schema.define(version: 20170704214431) do
 
   create_table "actividad", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "tipo_actividad_id"
@@ -51,12 +51,26 @@ ActiveRecord::Schema.define(version: 20170417122515) do
     t.datetime "updated_at"
   end
 
-  create_table "document", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "departamento", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string  "nombre"
+    t.integer "escuela_id"
+    t.index ["escuela_id"], name: "escuelaDepartamento", using: :btree
+  end
+
+  create_table "document", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "filename"
     t.string   "content_type"
-    t.binary   "file_contents", limit: 65535
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.binary   "file_contents", limit: 16777215
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
+    t.integer  "instructor_id"
+    t.integer  "tutor_id"
+    t.integer  "adecuacion_id"
+    t.integer  "informe_id"
+    t.index ["adecuacion_id"], name: "documentadecuacion", using: :btree
+    t.index ["informe_id"], name: "documentinforme", using: :btree
+    t.index ["instructor_id"], name: "documentinstructor", using: :btree
+    t.index ["tutor_id"], name: "documenttutor", using: :btree
   end
 
   create_table "documento", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -130,6 +144,8 @@ ActiveRecord::Schema.define(version: 20170417122515) do
     t.integer "numero"
     t.date    "fecha_creacion"
     t.string  "estado"
+    t.date    "fecha_inicio"
+    t.date    "fecha_fin"
     t.date    "fecha_modificacion"
     t.integer "tipo_id"
     t.index ["planformacion_id"], name: "informePlanFormacion", using: :btree
@@ -140,10 +156,8 @@ ActiveRecord::Schema.define(version: 20170417122515) do
   create_table "informe_actividad", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "informe_id"
     t.integer "actividad_id"
-    t.integer "resultado_id"
     t.index ["actividad_id"], name: "informeActividadActividad", using: :btree
     t.index ["informe_id"], name: "informeActividadinforme", using: :btree
-    t.index ["resultado_id"], name: "informe_actividad_ibfk_1", using: :btree
   end
 
   create_table "instructors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
@@ -155,6 +169,8 @@ ActiveRecord::Schema.define(version: 20170417122515) do
     t.integer "instructor_id"
     t.integer "tutor_id"
     t.integer "actual"
+    t.date    "fecha_inicio"
+    t.date    "fecha_fin"
     t.index ["instructor_id"], name: "instructortutorinstructorid", using: :btree
     t.index ["tutor_id"], name: "instructortutortutorid", using: :btree
   end
@@ -177,6 +193,7 @@ ActiveRecord::Schema.define(version: 20170417122515) do
     t.integer "adecuacionactividad_id"
     t.text    "observaciones",          limit: 4294967295
     t.date    "fecha"
+    t.integer "actual"
     t.index ["adecuacionactividad_id"], name: "observacionActividadAdecuacionActividad", using: :btree
     t.index ["revision_id"], name: "observacionActividadRevision", using: :btree
   end
@@ -185,6 +202,7 @@ ActiveRecord::Schema.define(version: 20170417122515) do
     t.integer "informe_actividad_id"
     t.integer "revision_id"
     t.text    "observaciones",        limit: 4294967295
+    t.integer "actual"
     t.index ["informe_actividad_id"], name: "observacionActividadinformeinformeActividad", using: :btree
     t.index ["revision_id"], name: "observacionActividadinformeRevision", using: :btree
   end
@@ -246,13 +264,35 @@ ActiveRecord::Schema.define(version: 20170417122515) do
     t.index ["planformacion_id"], name: "prorrogaPlanFormacion", using: :btree
   end
 
+  create_table "respaldo", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "filename"
+    t.string   "content_type"
+    t.binary   "file_contents", limit: 16777215
+    t.datetime "created_at",                     null: false
+    t.integer  "version",                        null: false
+    t.integer  "actual",                         null: false
+    t.string   "estatus"
+    t.integer  "instructor_id"
+    t.integer  "tutor_id"
+    t.integer  "adecuacion_id"
+    t.integer  "informe_id"
+    t.index ["adecuacion_id"], name: "respaldoadecuacion", using: :btree
+    t.index ["informe_id"], name: "respaldoinforme", using: :btree
+    t.index ["instructor_id"], name: "respaldoinstructor", using: :btree
+    t.index ["tutor_id"], name: "respaldotutor", using: :btree
+  end
+
   create_table "resultado", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "informe_actividad_id"
     t.integer "tipo_resultado_id"
-    t.text    "concepto",          limit: 4294967295
+    t.text    "concepto",             limit: 4294967295
     t.string  "tipo_publicacion"
+    t.string  "nombre_capitulo"
+    t.string  "infoafiliaion"
+    t.string  "cptipo"
+    t.string  "nombre"
     t.string  "titulo"
     t.string  "autor"
-    t.string  "titulo_capitulo"
     t.string  "autor_capitulo"
     t.integer "dia"
     t.string  "mes"
@@ -279,8 +319,7 @@ ActiveRecord::Schema.define(version: 20170417122515) do
     t.string  "DOI"
     t.string  "ISBN"
     t.string  "universidad"
-    t.string  "MaeDoc"
-    t.string  "rango_paginas"
+    t.index ["informe_actividad_id"], name: "resultadoInformeActividad", using: :btree
     t.index ["tipo_resultado_id"], name: "resultadoTipoResultado", using: :btree
   end
 
@@ -294,6 +333,15 @@ ActiveRecord::Schema.define(version: 20170417122515) do
     t.index ["estatus_id"], name: "revisionTipoEstatus", using: :btree
     t.index ["informe_id"], name: "revisioninforme", using: :btree
     t.index ["usuario_id"], name: "revisionusuario", using: :btree
+  end
+
+  create_table "session", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.string   "session_id",               null: false
+    t.text     "data",       limit: 65535
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.index ["session_id"], name: "index_session_on_session_id", unique: true, using: :btree
+    t.index ["updated_at"], name: "index_session_on_updated_at", using: :btree
   end
 
   create_table "tipo_actividad", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -330,6 +378,8 @@ ActiveRecord::Schema.define(version: 20170417122515) do
     t.integer "usuario_id"
     t.integer "entidad_id"
     t.integer "escuela_id"
+    t.integer "departamento_id"
+    t.index ["departamento_id"], name: "departamentoUsuario", using: :btree
     t.index ["entidad_id"], name: "usuarioEntidadEntidad", using: :btree
     t.index ["escuela_id"], name: "usuarioEscuela", using: :btree
     t.index ["usuario_id"], name: "usuarioEntidadUsuario", using: :btree
@@ -346,6 +396,11 @@ ActiveRecord::Schema.define(version: 20170417122515) do
   add_foreign_key "adecuacion", "usuario", column: "tutor_id", name: "adecuacionUsuario", on_update: :cascade, on_delete: :cascade
   add_foreign_key "adecuacion_actividad", "actividad", name: "adecuacionactividadActividad", on_update: :cascade, on_delete: :cascade
   add_foreign_key "adecuacion_actividad", "adecuacion", name: "adecuacionactividadAdecuacion", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "departamento", "escuela", name: "escuelaDepartamento", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "document", "adecuacion", name: "documentadecuacion"
+  add_foreign_key "document", "informe", name: "documentinforme"
+  add_foreign_key "document", "usuario", column: "instructor_id", name: "documentinstructor"
+  add_foreign_key "document", "usuario", column: "tutor_id", name: "documenttutor"
   add_foreign_key "documento", "informe_actividad", name: "documentoInformeactividad", on_update: :cascade, on_delete: :cascade
   add_foreign_key "documento_informe", "informe", name: "documentoInforme", on_update: :cascade, on_delete: :cascade
   add_foreign_key "documento_plan", "planformacion", name: "documentoPlan", on_update: :cascade, on_delete: :cascade
@@ -360,7 +415,6 @@ ActiveRecord::Schema.define(version: 20170417122515) do
   add_foreign_key "informe", "usuario", column: "tutor_id", name: "informeusuario", on_update: :cascade, on_delete: :cascade
   add_foreign_key "informe_actividad", "actividad", name: "informeActividadActividad", on_update: :cascade, on_delete: :cascade
   add_foreign_key "informe_actividad", "informe", name: "informeActividadinforme", on_update: :cascade, on_delete: :cascade
-  add_foreign_key "informe_actividad", "resultado", name: "informe_actividad_ibfk_1"
   add_foreign_key "instructortutor", "usuario", column: "instructor_id", name: "instructortutorinstructorid"
   add_foreign_key "instructortutor", "usuario", column: "tutor_id", name: "instructortutortutorid"
   add_foreign_key "notificacion", "adecuacion", name: "notificacionadecuacion"
@@ -378,11 +432,17 @@ ActiveRecord::Schema.define(version: 20170417122515) do
   add_foreign_key "planformacion", "usuario", column: "instructor_id", name: "PlanFormacionInstructor", on_update: :cascade, on_delete: :cascade
   add_foreign_key "planformacion", "usuario", column: "tutor_id", name: "PlanFormacionTutor", on_update: :cascade, on_delete: :cascade
   add_foreign_key "prorroga", "planformacion", name: "prorrogaPlanFormacion", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "respaldo", "adecuacion", name: "respaldoadecuacion"
+  add_foreign_key "respaldo", "informe", name: "respaldoinforme"
+  add_foreign_key "respaldo", "usuario", column: "instructor_id", name: "respaldoinstructor"
+  add_foreign_key "respaldo", "usuario", column: "tutor_id", name: "respaldotutor"
+  add_foreign_key "resultado", "informe_actividad", name: "resultadoInformeActividad", on_update: :cascade, on_delete: :cascade
   add_foreign_key "resultado", "tipo_resultado", name: "resultadoTipoResultado", on_update: :cascade, on_delete: :cascade
   add_foreign_key "revision", "adecuacion", name: "revisionAdecuacion", on_update: :cascade, on_delete: :cascade
   add_foreign_key "revision", "informe", name: "revisioninforme", on_update: :cascade, on_delete: :cascade
   add_foreign_key "revision", "tipo_estatus", column: "estatus_id", name: "revisionTipoEstatus", on_update: :cascade, on_delete: :cascade
   add_foreign_key "revision", "usuario", name: "revisionusuario", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "usuarioentidad", "departamento", name: "departamentoUsuario", on_update: :cascade, on_delete: :cascade
   add_foreign_key "usuarioentidad", "entidad", name: "usuarioEntidadEntidad", on_update: :cascade, on_delete: :cascade
   add_foreign_key "usuarioentidad", "escuela", name: "usuarioEscuela"
   add_foreign_key "usuarioentidad", "usuario", name: "usuarioEntidadUsuario", on_update: :cascade, on_delete: :cascade

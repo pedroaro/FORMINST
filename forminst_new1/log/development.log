@@ -15043,3 +15043,701 @@ Sent file /home/administrador/Documents/forminst/forminst_new1/tmp/PDFs/1-2017-0
 Completed 200 OK in 4674ms (ActiveRecord: 21.5ms)
 
 
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/pedro/Documents/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/pedro/Documents/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/pedro/Documents/FORMINST/forminst_new1/config/routes.rb:6)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/pedro/Documents/FORMINST/forminst_new1/config/routes.rb:6)
+Started GET "/secretarias/guarda_instructor?FechaConcurso=2017-06-29&Nombre=Pedro+Alejandro&Apellido=Rodriguez&CI=12&FechaNac=2017-06-27&Dir=LA+TRINIDAD&correo=pedroo&Tlf=04129898765&OTlf=02129878787&GradoI=licenciado&Area=Ciencias&Subarea=Computaci%C3%B2n&depto=2&UAI=ati&UAD=ati2&JRTutores=48&commit=Guardar" for 127.0.0.1 at 2017-07-04 16:48:51 -0400
+Processing by SecretariasController#guarda_instructor as HTML
+  Parameters: {"FechaConcurso"=>"2017-06-29", "Nombre"=>"Pedro Alejandro", "Apellido"=>"Rodriguez", "CI"=>"12", "FechaNac"=>"2017-06-27", "Dir"=>"LA TRINIDAD", "correo"=>"pedroo", "Tlf"=>"04129898765", "OTlf"=>"02129878787", "GradoI"=>"licenciado", "Area"=>"Ciencias", "Subarea"=>"Computaciòn", "depto"=>"2", "UAI"=>"ati", "UAD"=>"ati2", "JRTutores"=>"48", "commit"=>"Guardar"}
+Redirected to http://localhost:3000/
+Completed 302 Found in 12ms
+
+
+Started GET "/" for 127.0.0.1 at 2017-07-04 16:48:51 -0400
+Processing by ForminstController#index as HTML
+  Rendering forminst/index.html.erb within layouts/ec_aplanes
+  Rendered forminst/index.html.erb within layouts/ec_aplanes (2.4ms)
+Completed 200 OK in 4810ms (Views: 4809.0ms)
+
+
+Started GET "/images/nav.jpg" for 127.0.0.1 at 2017-07-04 16:48:56 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/images/nav.jpg"):
+  
+actionpack (5.0.4) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.4) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.4) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.4) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.4) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.4) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.4) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.3) lib/rack/method_override.rb:22:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.4) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.4) lib/rails/engine.rb:522:in `call'
+puma (3.9.1) lib/puma/configuration.rb:224:in `call'
+puma (3.9.1) lib/puma/server.rb:602:in `handle_request'
+puma (3.9.1) lib/puma/server.rb:435:in `process_client'
+puma (3.9.1) lib/puma/server.rb:299:in `block in run'
+puma (3.9.1) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  Rendering /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout
+  Rendering /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.4ms)
+  Rendered collection of /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/routes/_route.html.erb [18 times] (7.2ms)
+  Rendered /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/routes/_table.html.erb (9.7ms)
+  Rendering /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.3ms)
+  Rendered /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (44.5ms)
+Started POST "/forminst/autenticar" for 127.0.0.1 at 2017-07-04 16:49:05 -0400
+Processing by ForminstController#autenticar as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"g808VfAqeTOcVYn+FvZ08OnLsL/+YVMWpPXrrU++fQ5tl0FR0oueyLqLVxYFyivjzX28iKoBOGXkGhiDj2Xfrw==", "correo"=>"secretaria.biologia", "password"=>"[FILTERED]"}
+  [1m[36mUsuario Load (1.0ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`user` = 'secretaria.biologia' LIMIT 1[0m
+  [1m[36mUsuarioentidad Load (0.3ms)[0m  [1m[34mSELECT  `usuarioentidad`.* FROM `usuarioentidad` WHERE `usuarioentidad`.`usuario_id` = 47 LIMIT 1[0m
+  [1m[36mEntidad Load (0.3ms)[0m  [1m[34mSELECT  `entidad`.* FROM `entidad` WHERE `entidad`.`id` = 1 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `usuarioentidad`.* FROM `usuarioentidad` WHERE `usuarioentidad`.`usuario_id` = 47 LIMIT 1[0m  [["usuario_id", 47], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `entidad`.* FROM `entidad` WHERE `entidad`.`id` = 1 LIMIT 1[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mPersona Load (0.3ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 47 LIMIT 1[0m
+Redirected to http://localhost:3000/secretarias
+Completed 302 Found in 81ms (ActiveRecord: 6.6ms)
+
+
+Started GET "/secretarias" for 127.0.0.1 at 2017-07-04 16:49:05 -0400
+Processing by SecretariasController#index as HTML
+  Rendering secretarias/index.html.erb within layouts/ly_inicio_entidad
+  Rendered secretarias/index.html.erb within layouts/ly_inicio_entidad (2.5ms)
+Completed 200 OK in 198ms (Views: 197.3ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/banner.png" for 127.0.0.1 at 2017-07-04 16:49:06 -0400
+Started GET "/secretarias/agregarInstructor" for 127.0.0.1 at 2017-07-04 16:49:09 -0400
+Processing by SecretariasController#agregarInstructor as HTML
+  [1m[36mPersona Load (0.5ms)[0m  [1m[34mSELECT `persona`.* FROM `persona`[0m
+  [1m[36mUsuarioentidad Load (0.6ms)[0m  [1m[34mSELECT  `usuarioentidad`.* FROM `usuarioentidad` WHERE `usuarioentidad`.`usuario_id` = 47 LIMIT 1[0m
+  [1m[36mDepartamento Load (0.5ms)[0m  [1m[34mSELECT `departamento`.* FROM `departamento` WHERE `departamento`.`escuela_id` = 1[0m
+  [1m[36mUsuarioentidad Load (0.6ms)[0m  [1m[34mSELECT `usuarioentidad`.* FROM `usuarioentidad` WHERE `usuarioentidad`.`escuela_id` = 1 AND `usuarioentidad`.`entidad_id` = 18[0m
+  [1m[36mPersona Load (0.3ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 20 LIMIT 1[0m
+  [1m[36mPersona Load (0.3ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 48 LIMIT 1[0m
+  [1m[36mPersona Load (0.3ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 49 LIMIT 1[0m
+  Rendering secretarias/agregarInstructor.html.erb within layouts/ly_inicio_entidad
+  Rendered secretarias/agregarInstructor.html.erb within layouts/ly_inicio_entidad (3.2ms)
+Completed 200 OK in 251ms (Views: 212.4ms | ActiveRecord: 4.3ms)
+
+
+Started GET "/secretarias/guarda_instructor?FechaConcurso=2017-06-28&Nombre=pedro&Apellido=orellana&CI=12&FechaNac=2017-06-27&Dir=LA+TRINIDAD&correo=pedroo&Tlf=04129898765&OTlf=02129879898&GradoI=licenciado&Area=Ciencias&Subarea=Computaci%C3%B2n&depto=2&UAI=ati&UAD=ati2&JRTutores=48&commit=Guardar" for 127.0.0.1 at 2017-07-04 16:50:11 -0400
+Processing by SecretariasController#guarda_instructor as HTML
+  Parameters: {"FechaConcurso"=>"2017-06-28", "Nombre"=>"pedro", "Apellido"=>"orellana", "CI"=>"12", "FechaNac"=>"2017-06-27", "Dir"=>"LA TRINIDAD", "correo"=>"pedroo", "Tlf"=>"04129898765", "OTlf"=>"02129879898", "GradoI"=>"licenciado", "Area"=>"Ciencias", "Subarea"=>"Computaciòn", "depto"=>"2", "UAI"=>"ati", "UAD"=>"ati2", "JRTutores"=>"48", "commit"=>"Guardar"}
+  [1m[36mPersona Load (0.4ms)[0m  [1m[34mSELECT `persona`.* FROM `persona`[0m
+  [1m[36mUsuarioentidad Load (0.4ms)[0m  [1m[34mSELECT  `usuarioentidad`.* FROM `usuarioentidad` WHERE `usuarioentidad`.`usuario_id` = 48 LIMIT 1[0m
+DEPRECATION WARNING: `redirect_to :back` is deprecated and will be removed from Rails 5.1. Please use `redirect_back(fallback_location: fallback_location)` where `fallback_location` represents the location to use if the request has no HTTP referer information. (called from guarda_instructor at /home/pedro/Documents/FORMINST/forminst_new1/app/controllers/secretarias_controller.rb:417)
+Redirected to http://localhost:3000/secretarias/agregarInstructor
+Completed 302 Found in 5ms (ActiveRecord: 0.8ms)
+
+
+  
+ActionDispatch::Cookies::CookieOverflow (ActionDispatch::Cookies::CookieOverflow):
+  
+actionpack (5.0.4) lib/action_dispatch/middleware/cookies.rb:594:in `commit'
+actionpack (5.0.4) lib/action_dispatch/middleware/cookies.rb:465:in `[]='
+actionpack (5.0.4) lib/action_dispatch/middleware/session/cookie_store.rb:117:in `set_cookie'
+rack (2.0.3) lib/rack/session/abstract/id.rb:363:in `commit_session'
+rack (2.0.3) lib/rack/session/abstract/id.rb:234:in `context'
+rack (2.0.3) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/cookies.rb:613:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/callbacks.rb:38:in `block in call'
+activesupport (5.0.4) lib/active_support/callbacks.rb:97:in `__run_callbacks__'
+activesupport (5.0.4) lib/active_support/callbacks.rb:750:in `_run_call_callbacks'
+activesupport (5.0.4) lib/active_support/callbacks.rb:90:in `run_callbacks'
+actionpack (5.0.4) lib/action_dispatch/middleware/callbacks.rb:36:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/debug_exceptions.rb:49:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.4) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.4) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.4) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.4) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.4) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.4) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.3) lib/rack/method_override.rb:22:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.4) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.4) lib/rails/engine.rb:522:in `call'
+puma (3.9.1) lib/puma/configuration.rb:224:in `call'
+puma (3.9.1) lib/puma/server.rb:602:in `handle_request'
+puma (3.9.1) lib/puma/server.rb:435:in `process_client'
+puma (3.9.1) lib/puma/server.rb:299:in `block in run'
+puma (3.9.1) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  Rendering /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (4.1ms)
+  Rendering /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.5ms)
+  Rendering /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (2.2ms)
+  Rendered /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (23.8ms)
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/pedro/Documents/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/pedro/Documents/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/pedro/Documents/FORMINST/forminst_new1/config/routes.rb:6)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/pedro/Documents/FORMINST/forminst_new1/config/routes.rb:6)
+Started GET "/" for 127.0.0.1 at 2017-07-04 16:54:25 -0400
+Processing by ForminstController#index as HTML
+  Rendering forminst/index.html.erb within layouts/ec_aplanes
+  Rendered forminst/index.html.erb within layouts/ec_aplanes (5.2ms)
+Completed 200 OK in 554ms (Views: 544.3ms)
+
+
+Started GET "/images/nav.jpg" for 127.0.0.1 at 2017-07-04 16:54:26 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/images/nav.jpg"):
+  
+actionpack (5.0.4) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.4) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.4) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.4) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.4) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.4) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.4) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.3) lib/rack/method_override.rb:22:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.4) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.4) lib/rails/engine.rb:522:in `call'
+puma (3.9.1) lib/puma/configuration.rb:224:in `call'
+puma (3.9.1) lib/puma/server.rb:602:in `handle_request'
+puma (3.9.1) lib/puma/server.rb:435:in `process_client'
+puma (3.9.1) lib/puma/server.rb:299:in `block in run'
+puma (3.9.1) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  Rendering /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout
+  Rendering /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.5ms)
+  Rendered collection of /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/routes/_route.html.erb [18 times] (6.3ms)
+  Rendered /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/routes/_table.html.erb (7.9ms)
+  Rendering /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.3ms)
+  Rendered /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (40.7ms)
+Started POST "/forminst/autenticar" for 127.0.0.1 at 2017-07-04 16:54:34 -0400
+Processing by ForminstController#autenticar as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"9Ap4DRlvmvnEe5/3ez+xgU/idTovwIyNe3YVM94EnW7Q14SuoWrELLfiCryNrQm1tjHDX5g9YG0x9N4ycdchtw==", "correo"=>"secretaria.biologia", "password"=>"[FILTERED]"}
+  [1m[36mUsuario Load (0.5ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`user` = 'secretaria.biologia' LIMIT 1[0m
+  [1m[36mUsuarioentidad Load (0.4ms)[0m  [1m[34mSELECT  `usuarioentidad`.* FROM `usuarioentidad` WHERE `usuarioentidad`.`usuario_id` = 47 LIMIT 1[0m
+  [1m[36mEntidad Load (0.4ms)[0m  [1m[34mSELECT  `entidad`.* FROM `entidad` WHERE `entidad`.`id` = 1 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `usuarioentidad`.* FROM `usuarioentidad` WHERE `usuarioentidad`.`usuario_id` = 47 LIMIT 1[0m  [["usuario_id", 47], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `entidad`.* FROM `entidad` WHERE `entidad`.`id` = 1 LIMIT 1[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mPersona Load (0.3ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 47 LIMIT 1[0m
+Redirected to http://localhost:3000/secretarias
+Completed 302 Found in 78ms (ActiveRecord: 7.0ms)
+
+
+Started GET "/secretarias" for 127.0.0.1 at 2017-07-04 16:54:34 -0400
+Processing by SecretariasController#index as HTML
+  Rendering secretarias/index.html.erb within layouts/ly_inicio_entidad
+  Rendered secretarias/index.html.erb within layouts/ly_inicio_entidad (2.2ms)
+Completed 200 OK in 195ms (Views: 193.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/banner.png" for 127.0.0.1 at 2017-07-04 16:54:34 -0400
+Started GET "/secretarias/agregarInstructor" for 127.0.0.1 at 2017-07-04 16:54:40 -0400
+Processing by SecretariasController#agregarInstructor as HTML
+  [1m[36mPersona Load (0.6ms)[0m  [1m[34mSELECT `persona`.* FROM `persona`[0m
+  [1m[36mUsuarioentidad Load (0.5ms)[0m  [1m[34mSELECT  `usuarioentidad`.* FROM `usuarioentidad` WHERE `usuarioentidad`.`usuario_id` = 47 LIMIT 1[0m
+  [1m[36mDepartamento Load (0.3ms)[0m  [1m[34mSELECT `departamento`.* FROM `departamento` WHERE `departamento`.`escuela_id` = 1[0m
+  [1m[36mUsuarioentidad Load (0.5ms)[0m  [1m[34mSELECT `usuarioentidad`.* FROM `usuarioentidad` WHERE `usuarioentidad`.`escuela_id` = 1 AND `usuarioentidad`.`entidad_id` = 18[0m
+  [1m[36mPersona Load (0.3ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 20 LIMIT 1[0m
+  [1m[36mPersona Load (0.5ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 48 LIMIT 1[0m
+  [1m[36mPersona Load (0.3ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 49 LIMIT 1[0m
+  Rendering secretarias/agregarInstructor.html.erb within layouts/ly_inicio_entidad
+  Rendered secretarias/agregarInstructor.html.erb within layouts/ly_inicio_entidad (3.1ms)
+Completed 200 OK in 217ms (Views: 191.7ms | ActiveRecord: 3.8ms)
+
+
+Started GET "/assets/glyphicons-halflings-regular.woff2" for 127.0.0.1 at 2017-07-04 16:54:40 -0400
+Started GET "/secretarias/guarda_instructor?FechaConcurso=2017-07-07&Nombre=Pedro&Apellido=Rodri&CI=12&FechaNac=2017-06-30&Dir=LA+TRINIDAD&correo=pedroo&Tlf=04129898765&OTlf=02129898098&GradoI=licenciado&Area=a&Subarea=aasd&depto=2&UAI=ati&UAD=ati2&JRTutores=48&commit=Guardar" for 127.0.0.1 at 2017-07-04 16:55:43 -0400
+Processing by SecretariasController#guarda_instructor as HTML
+  Parameters: {"FechaConcurso"=>"2017-07-07", "Nombre"=>"Pedro", "Apellido"=>"Rodri", "CI"=>"12", "FechaNac"=>"2017-06-30", "Dir"=>"LA TRINIDAD", "correo"=>"pedroo", "Tlf"=>"04129898765", "OTlf"=>"02129898098", "GradoI"=>"licenciado", "Area"=>"a", "Subarea"=>"aasd", "depto"=>"2", "UAI"=>"ati", "UAD"=>"ati2", "JRTutores"=>"48", "commit"=>"Guardar"}
+  [1m[36mPersona Load (0.5ms)[0m  [1m[34mSELECT `persona`.* FROM `persona`[0m
+  [1m[36mUsuarioentidad Load (0.4ms)[0m  [1m[34mSELECT  `usuarioentidad`.* FROM `usuarioentidad` WHERE `usuarioentidad`.`usuario_id` = 48 LIMIT 1[0m
+DEPRECATION WARNING: `redirect_to :back` is deprecated and will be removed from Rails 5.1. Please use `redirect_back(fallback_location: fallback_location)` where `fallback_location` represents the location to use if the request has no HTTP referer information. (called from guarda_instructor at /home/pedro/Documents/FORMINST/forminst_new1/app/controllers/secretarias_controller.rb:417)
+Redirected to http://localhost:3000/secretarias/agregarInstructor
+Completed 302 Found in 6ms (ActiveRecord: 0.9ms)
+
+
+  
+ActionDispatch::Cookies::CookieOverflow (ActionDispatch::Cookies::CookieOverflow):
+  
+actionpack (5.0.4) lib/action_dispatch/middleware/cookies.rb:594:in `commit'
+actionpack (5.0.4) lib/action_dispatch/middleware/cookies.rb:465:in `[]='
+actionpack (5.0.4) lib/action_dispatch/middleware/session/cookie_store.rb:117:in `set_cookie'
+rack (2.0.3) lib/rack/session/abstract/id.rb:363:in `commit_session'
+rack (2.0.3) lib/rack/session/abstract/id.rb:234:in `context'
+rack (2.0.3) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/cookies.rb:613:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/callbacks.rb:38:in `block in call'
+activesupport (5.0.4) lib/active_support/callbacks.rb:97:in `__run_callbacks__'
+activesupport (5.0.4) lib/active_support/callbacks.rb:750:in `_run_call_callbacks'
+activesupport (5.0.4) lib/active_support/callbacks.rb:90:in `run_callbacks'
+actionpack (5.0.4) lib/action_dispatch/middleware/callbacks.rb:36:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/debug_exceptions.rb:49:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.4) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.4) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.4) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.4) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.4) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.4) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.3) lib/rack/method_override.rb:22:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.4) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.4) lib/rails/engine.rb:522:in `call'
+puma (3.9.1) lib/puma/configuration.rb:224:in `call'
+puma (3.9.1) lib/puma/server.rb:602:in `handle_request'
+puma (3.9.1) lib/puma/server.rb:435:in `process_client'
+puma (3.9.1) lib/puma/server.rb:299:in `block in run'
+puma (3.9.1) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  Rendering /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (2.7ms)
+  Rendering /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.2ms)
+  Rendering /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.8ms)
+  Rendered /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (23.7ms)
+Started GET "/secretarias/guarda_instructor?FechaConcurso=2017-07-07&Nombre=Pedro&Apellido=Rodri&CI=12&FechaNac=2017-06-30&Dir=LA+TRINIDAD&correo=pedroo&Tlf=04129898765&OTlf=02129898098&GradoI=licenciado&Area=a&Subarea=aasd&depto=1&UAI=ati&UAD=ati2&JRTutores=48&commit=Guardar" for 127.0.0.1 at 2017-07-04 16:55:49 -0400
+Processing by SecretariasController#guarda_instructor as HTML
+  Parameters: {"FechaConcurso"=>"2017-07-07", "Nombre"=>"Pedro", "Apellido"=>"Rodri", "CI"=>"12", "FechaNac"=>"2017-06-30", "Dir"=>"LA TRINIDAD", "correo"=>"pedroo", "Tlf"=>"04129898765", "OTlf"=>"02129898098", "GradoI"=>"licenciado", "Area"=>"a", "Subarea"=>"aasd", "depto"=>"1", "UAI"=>"ati", "UAD"=>"ati2", "JRTutores"=>"48", "commit"=>"Guardar"}
+  [1m[36mPersona Load (0.4ms)[0m  [1m[34mSELECT `persona`.* FROM `persona`[0m
+  [1m[36mUsuarioentidad Load (0.4ms)[0m  [1m[34mSELECT  `usuarioentidad`.* FROM `usuarioentidad` WHERE `usuarioentidad`.`usuario_id` = 48 LIMIT 1[0m
+DEPRECATION WARNING: `redirect_to :back` is deprecated and will be removed from Rails 5.1. Please use `redirect_back(fallback_location: fallback_location)` where `fallback_location` represents the location to use if the request has no HTTP referer information. (called from guarda_instructor at /home/pedro/Documents/FORMINST/forminst_new1/app/controllers/secretarias_controller.rb:417)
+Redirected to http://localhost:3000/secretarias/agregarInstructor
+Completed 302 Found in 5ms (ActiveRecord: 0.8ms)
+
+
+  
+ActionDispatch::Cookies::CookieOverflow (ActionDispatch::Cookies::CookieOverflow):
+  
+actionpack (5.0.4) lib/action_dispatch/middleware/cookies.rb:594:in `commit'
+actionpack (5.0.4) lib/action_dispatch/middleware/cookies.rb:465:in `[]='
+actionpack (5.0.4) lib/action_dispatch/middleware/session/cookie_store.rb:117:in `set_cookie'
+rack (2.0.3) lib/rack/session/abstract/id.rb:363:in `commit_session'
+rack (2.0.3) lib/rack/session/abstract/id.rb:234:in `context'
+rack (2.0.3) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/cookies.rb:613:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/callbacks.rb:38:in `block in call'
+activesupport (5.0.4) lib/active_support/callbacks.rb:97:in `__run_callbacks__'
+activesupport (5.0.4) lib/active_support/callbacks.rb:750:in `_run_call_callbacks'
+activesupport (5.0.4) lib/active_support/callbacks.rb:90:in `run_callbacks'
+actionpack (5.0.4) lib/action_dispatch/middleware/callbacks.rb:36:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/debug_exceptions.rb:49:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.4) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.4) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.4) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.4) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.4) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.4) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.3) lib/rack/method_override.rb:22:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.4) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.4) lib/rails/engine.rb:522:in `call'
+puma (3.9.1) lib/puma/configuration.rb:224:in `call'
+puma (3.9.1) lib/puma/server.rb:602:in `handle_request'
+puma (3.9.1) lib/puma/server.rb:435:in `process_client'
+puma (3.9.1) lib/puma/server.rb:299:in `block in run'
+puma (3.9.1) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  Rendering /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout
+  Rendering /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/_source.html.erb
+  Rendered /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/_source.html.erb (4.4ms)
+  Rendering /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.6ms)
+  Rendering /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (2.9ms)
+  Rendered /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (25.8ms)
+Started GET "/" for 127.0.0.1 at 2017-07-04 17:44:02 -0400
+Processing by ForminstController#index as HTML
+  Rendering forminst/index.html.erb within layouts/ec_aplanes
+  Rendered forminst/index.html.erb within layouts/ec_aplanes (1.5ms)
+Completed 200 OK in 186ms (Views: 185.4ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/actividadejecutadas.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2017-07-04 17:44:02 -0400
+Started GET "/assets/documentoinformes.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2017-07-04 17:44:02 -0400
+Started GET "/assets/adecuacionactividads.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2017-07-04 17:44:02 -0400
+Started GET "/assets/adecuacions.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2017-07-04 17:44:02 -0400
+Started GET "/assets/actividads.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2017-07-04 17:44:02 -0400
+Started GET "/assets/documentoplans.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2017-07-04 17:44:02 -0400
+Started GET "/assets/documents.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2017-07-04 17:44:02 -0400
+Started GET "/assets/download.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2017-07-04 17:44:02 -0400
+Started GET "/assets/documentos.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2017-07-04 17:44:02 -0400
+Started GET "/assets/entidads.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2017-07-04 17:44:02 -0400
+Started GET "/assets/escuelas.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2017-07-04 17:44:02 -0400
+Started GET "/assets/estatusadecuacions.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2017-07-04 17:44:02 -0400
+Started GET "/assets/estilo.self-cd95d208c936164d19e4f42a864f71b5fc59ed3ff92781466555711e0cff2dfe.css?body=1" for 127.0.0.1 at 2017-07-04 17:44:02 -0400
+Started GET "/assets/estatusinformes.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2017-07-04 17:44:02 -0400
+Started GET "/assets/forminst.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2017-07-04 17:44:02 -0400
+Started GET "/assets/informeactividads.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2017-07-04 17:44:02 -0400
+Started GET "/assets/informes.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2017-07-04 17:44:02 -0400
+Started GET "/assets/observacionactividadinformes.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2017-07-04 17:44:02 -0400
+Started GET "/assets/observacionactividadadecuacions.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2017-07-04 17:44:02 -0400
+Started GET "/assets/observaciontutors.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2017-07-04 17:44:02 -0400
+Started GET "/assets/permisologia.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2017-07-04 17:44:02 -0400
+Started GET "/assets/permisos.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2017-07-04 17:44:02 -0400
+Started GET "/assets/personas.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2017-07-04 17:44:02 -0400
+Started GET "/assets/planformacions.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2017-07-04 17:44:02 -0400
+Started GET "/assets/revisions.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2017-07-04 17:44:02 -0400
+Started GET "/assets/prorrogas.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2017-07-04 17:44:02 -0400
+Started GET "/assets/resumes.self-04cc9dbe46072d3fd344605539470f544b4c34422019e2ec6dc4c097eb37e932.css?body=1" for 127.0.0.1 at 2017-07-04 17:44:02 -0400
+Started GET "/assets/resultados.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2017-07-04 17:44:02 -0400
+Started GET "/assets/scaffolds.self-f0d797c86337285e3cf864fe2ddfc2a04acf1d57d124cd1a4d180d177bc61542.css?body=1" for 127.0.0.1 at 2017-07-04 17:44:02 -0400
+Started GET "/assets/tipoestatuses.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2017-07-04 17:44:02 -0400
+Started GET "/assets/tipoactividads.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2017-07-04 17:44:02 -0400
+Started GET "/assets/tiporesultados.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2017-07-04 17:44:02 -0400
+Started GET "/assets/usuarios.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2017-07-04 17:44:02 -0400
+Started GET "/assets/usuarioentidads.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 127.0.0.1 at 2017-07-04 17:44:02 -0400
+Started GET "/assets/bootstrap.self-41eebfa0c7cb3a57dce1fe7cba6e88d1f44907c903872bd379993ad600f6c72c.css?body=1" for 127.0.0.1 at 2017-07-04 17:44:02 -0400
+Started GET "/assets/application.self-b63027d3f47d2836df3dbd282d5142aca512727e183a0e41854176474b151a95.css?body=1" for 127.0.0.1 at 2017-07-04 17:44:02 -0400
+Started GET "/assets/bootstrap-datepicker.self-0c5270493dfc2e1553acbc6a1d834f513b3a436982fbbae5e38a0e6811db05e7.css?body=1" for 127.0.0.1 at 2017-07-04 17:44:02 -0400
+Started GET "/assets/jquery_ujs.self-784a997f6726036b1993eb2217c9cb558e1cbb801c6da88105588c56f13b466a.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:02 -0400
+Started GET "/assets/jquery.self-bd7ddd393353a8d2480a622e80342adf488fb6006d667e8b42e4c0073393abee.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:02 -0400
+Started GET "/assets/turbolinks.self-1d1fddf91adc38ac2045c51f0a3e05ca97d07d24d15a4dcbf705009106489e69.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:02 -0400
+Started GET "/assets/jquery-2.1.3.min.self-167adc1826a31cef2040f73c4d3996900974f3b4578f72e2c1bfb814d66ca2fb.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:02 -0400
+Started GET "/assets/bootstrap.self-e5f04e1a4d121273a314196210515f27b377d2d34a7e56e9348a0170962b72c4.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:02 -0400
+Started GET "/assets/actividadejecutadas.self-19a187bec6cdb96d6de80a61c16c857c613536adf9138476bd367db38d282635.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:02 -0400
+Started GET "/assets/adecuacionactividads.self-19a187bec6cdb96d6de80a61c16c857c613536adf9138476bd367db38d282635.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:02 -0400
+Started GET "/assets/documentoinformes.self-19a187bec6cdb96d6de80a61c16c857c613536adf9138476bd367db38d282635.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:02 -0400
+Started GET "/assets/actividads.self-19a187bec6cdb96d6de80a61c16c857c613536adf9138476bd367db38d282635.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:02 -0400
+Started GET "/assets/adecuacions.self-19a187bec6cdb96d6de80a61c16c857c613536adf9138476bd367db38d282635.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:02 -0400
+Started GET "/assets/documentoplans.self-19a187bec6cdb96d6de80a61c16c857c613536adf9138476bd367db38d282635.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:02 -0400
+Started GET "/assets/documents.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:02 -0400
+Started GET "/assets/documentos.self-19a187bec6cdb96d6de80a61c16c857c613536adf9138476bd367db38d282635.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/download.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/escuelas.self-19a187bec6cdb96d6de80a61c16c857c613536adf9138476bd367db38d282635.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/entidads.self-19a187bec6cdb96d6de80a61c16c857c613536adf9138476bd367db38d282635.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/estatusadecuacions.self-19a187bec6cdb96d6de80a61c16c857c613536adf9138476bd367db38d282635.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/estatusinformes.self-19a187bec6cdb96d6de80a61c16c857c613536adf9138476bd367db38d282635.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/forminst.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/informeactividads.self-19a187bec6cdb96d6de80a61c16c857c613536adf9138476bd367db38d282635.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/observacionactividadadecuacions.self-19a187bec6cdb96d6de80a61c16c857c613536adf9138476bd367db38d282635.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/informes.self-04155f907d6dd99d130955127a5ca60938b9d119d7f43467fb349795d463b7b3.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/observacionactividadinformes.self-19a187bec6cdb96d6de80a61c16c857c613536adf9138476bd367db38d282635.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/observaciontutors.self-19a187bec6cdb96d6de80a61c16c857c613536adf9138476bd367db38d282635.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/permisos.self-19a187bec6cdb96d6de80a61c16c857c613536adf9138476bd367db38d282635.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/personas.self-19a187bec6cdb96d6de80a61c16c857c613536adf9138476bd367db38d282635.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/permisologia.self-19a187bec6cdb96d6de80a61c16c857c613536adf9138476bd367db38d282635.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/planformacions.self-19a187bec6cdb96d6de80a61c16c857c613536adf9138476bd367db38d282635.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/prorrogas.self-19a187bec6cdb96d6de80a61c16c857c613536adf9138476bd367db38d282635.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/resultados.self-19a187bec6cdb96d6de80a61c16c857c613536adf9138476bd367db38d282635.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/revisions.self-19a187bec6cdb96d6de80a61c16c857c613536adf9138476bd367db38d282635.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/resumes.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/tipoactividads.self-19a187bec6cdb96d6de80a61c16c857c613536adf9138476bd367db38d282635.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/tipoestatuses.self-19a187bec6cdb96d6de80a61c16c857c613536adf9138476bd367db38d282635.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/tiporesultados.self-19a187bec6cdb96d6de80a61c16c857c613536adf9138476bd367db38d282635.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/usuarios.self-19a187bec6cdb96d6de80a61c16c857c613536adf9138476bd367db38d282635.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/usuarioentidads.self-19a187bec6cdb96d6de80a61c16c857c613536adf9138476bd367db38d282635.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/core.self-57c10ac271cbabce89f4ea96d8248e58dc13bdd3928a468fcbf58dabc5e98db2.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.ar.self-3b6d7157be553c75fb586e9bbcb1caf9ffb68b3e52621ce7a0b4d80b3816a41e.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.az.self-e95a3ffa2c92ab9fd1c490585f0664f385a0c529f4b462c4e8f1fab196728f98.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.bg.self-962a18198db67ac87d9079f67b2167072ca4588cb77341999c5d6a93334a9143.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.bs.self-a9f88ff3048eda7a3915d3bc5fee831813bf64357688ca1d71249f190b5b3c2e.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.ca.self-9a18332afeed3b5d913f701e3a5359a3906fac9f8fe0d8271bfa59b17bef3843.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.cs.self-d8764534d484a8ad1107f25d5055c72def7515ff37b74002e171bc01791e2569.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.da.self-3cb1f2509fcef48537941cbfc1e01034b1803fb2a32d1fbccf9eea1d71a3d144.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.cy.self-6269279f98dbec07d08be043c80d3698c8db6da6098298b06c7e9eaca989db3a.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.de.self-df52cb73f35b10e81c27da3726fedcb47ce944244b37822f2808191f1b699614.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.el.self-c47144f58a0c79632a13f38f22efd1b9f2d077e4d6ed1184c473b92bb0a17383.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.en-GB.self-e822658c28f996dd9184e78b590ee770da01e479bc73fdb235b694232278bb4c.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.en-AU.self-6667a122850dd1f2b2e036bdaad22bc82d7fb3d6f24c0eb0ca5455cbdfae2985.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.en-IE.self-2343c16be658cb33730d4bb5cc188138bfbfff767491792dba7fb6c3feec55f3.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.en-NZ.self-e7bff6fcdc1f42c430f5244edebec300ec6789167e45ad0d8c919a0d448a85c2.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.en-ZA.self-549cd856dbe9789814440b4a2b1ed261958a653716f64283cafd91fe41984ce7.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.es.self-842ee703891e9e2578cff08e872f082190b7b443253897c84981fb1241ef1483.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.eo.self-bb3c1772c20b81e485802d43cdcda342c29037880fca098f5a82db81c8decae7.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.et.self-8d6af09ae9e4558db67ad818cac5de0451f7a10dc31a6e2987a715562524c44b.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.fa.self-20ab53975a47e1cdba4e7a41e0f0c567a2a699d53118ccdf6ea5aae33b692d15.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.eu.self-0df62f8cfe7e8b05855195ee28292e9cf35ec174cd33f7feac7c62e5e6066bda.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.fo.self-fd8c0c500526cb16dd180ba9d832a4e5e0d40c3a570318a73ee2076b32cbbd1a.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.fi.self-2609765afa68eb2078568f8d785522a588a73222538228637427eac53496df66.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.fr-CH.self-5a3e4840822fb4e6aa55af077ce89acb48e1629c299244258666a9eaf3e16a5f.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.fr.self-fc22f4a24fd9c64106ee1ffdd8167f9bcbb8544093f9acfd3e78cc79acaaa8ab.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.gl.self-1fccddef3fa899f6fc9f859fb7ea9d5839b554e6ec225bc2c195bd7f67ea55ad.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.he.self-9d26121395049e408a1223d6eeccf625e4969a6a5d52f740af1ad533646e93a4.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.hr.self-7e61fabfb46c1eb015b85ee997ba8710aebb4640736f5ac596cfd37f32caab66.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.hu.self-f49dd94a82276c26c3441a8f5834842aaff8e1015d2ee90af3a842482685b1b3.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.hy.self-519e17fdf49be45e3c787cde8525c882046f51fd063bfc978bc38a37308dc7e9.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.id.self-ea07114145eb6345c3e6b4e0ab99c8dcb42b05e7fc972cbde0997b752895ebc9.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.is.self-eb9734e137173e9c043266c371c2dc6723f896d0d10cd0d9489ab448425352de.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.ja.self-cb335efac68187f94ccc34ed07c05f7cf6ace4ae97770209f1e89c92892f0610.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.it.self-71bbf2309e2ea365c4b4e21bcf5fa9e79bd1fb6aee0a2f097a0439645a79dbf7.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.it-CH.self-717fdb47d5142b72e9e7f64eec844ae20deacf76e64b484fc6c52139ea64e607.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.ka.self-b8cf8fca37ec25ed1c3872fed7e439361179491173710ea1dfa3e784e9c5bbd0.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.kh.self-9d2694499d40685986d7db3a0fb8145a88ed95a042b4d7b86545493ce3c1201f.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.kk.self-4845840e42189e63d0aa4796c6664efe1edc81c9390acfdf1e5514fb91dc294e.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.ko.self-77411d790ff5bbd9da257d55c4375bc080c3c72222f94abc313f675eeabaedd1.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.kr.self-2c4ff027cc32c6144d3460f8e1b848fbc60db128d486ae541883497f289127bb.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.lt.self-fc4a3d6ee6a275732e35936f07c8fee862c21064b1471d79be6a50a81627c395.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.lv.self-5d8e8777406208ba6d788c14eb94dc6ec161efe23c377bb1688acd8a3dc80c70.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.me.self-bc3ded41fba54540cb7c229e2a81c54e1dc95aa060e13249996c3af17a07d925.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.mk.self-2879e14c87c2ed072afa02e973d28c25eccda71604f545f325f5ccb7f9566d9a.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.ms.self-5448409786aef52a30a3fa0309fed12e2972d62f3ffcecd3daad3661d2b3a3bb.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.mn.self-9bde9683a01be40a036bf1d3df9376fc1855a9df29248e5604ab8c1926bafe4f.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.nb.self-bc15d9793637e09369dcc17cc1f76ee50f8fb3bd314b592238db7e107ba9780c.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.nl.self-12fa155a1784c9def99d028f7178ab609055cce8de67d75371780172dea6e6ce.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.no.self-835c27d08aa948acba7a496420da4d74da46ffbe5b7b900d927debc46878ceba.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.nl-BE.self-8a42d57bf7a5ef08e774ad6ac07ccc42119609f0887a0a9db992a31bc22fb8c8.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.pl.self-bd9ed91cf705ebdec0d35a577541cb18a7b106c255b63b14048b839454783b50.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.pt-BR.self-c8b0cbc3c837667cc1e12914294f4cc5e3310d82d74031773327f31004772938.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.pt.self-761e5926a9ad2a08a3931dbecc3f19f9079398de8cd2388f2a193c14d40d7de7.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.ro.self-b0f0745b965ffc6c72f79cf8ab7962617897fd538084871b7316538cabf5ab3d.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.rs.self-968b0850c75dc75987a4287bd692cad3d074729c3a0f67f92d48cfb6ccd1eac9.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.rs-latin.self-9778ded684088fc0d8cd4abcb87572575e59f1027cdbfa98570db215dfed95d0.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.sk.self-508e59df5ae2738367e9ee26ceb1984620c7d3365d89c500a2f654c73e41c4cc.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.ru.self-4e8d9a4dc60207a247dd0e4d7c0f172c8cd08f8b4f1e8e86dd7384489559aafb.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.sl.self-18b1915d69a94d8c0c7dc954a99ae4786ff2f67d4925370ccb926692fc536885.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.sr-latin.self-be5aec102faba5f69237b7bb53843eed7f75c417025cf9105616fe3bea3e3da0.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.sq.self-3224e5dba45c9b9362543f5efe2a02d23b71b7181ea0b7a92fc4637559f17799.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.sr.self-0fdd9f114cd83480c0d41f6c4cd9ff5d41984d64f6d7944bd4739f2b9a8b0559.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.sv.self-59511a9cf8697e071e3e45937a4ffa74ce67edf099d767fcfcd43544833b639f.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.sw.self-6b5e12e322803172a7bb234b38a2774a18b7057caba09bf10e95276875879a35.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.th.self-38ccaf19cff8c13178de6efb294156266bbb5ce6652531d4b53f7f869986ce71.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.tr.self-32d4dcbd80fec4c33ced2cc50217d1cdfe9b351815a939878dedd504f0f29eec.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.ua.self-d3090a654f9c3b2ecf04746b1d8616e9fbcd4f6063435f91e76ffd00688684f4.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.uk.self-ba78379f87a0202998faa6e7c5b20476712eb0431e243819807b20ef110db58f.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.vi.self-36dc3fbbffa4afffa02f84c934c42cc69a7b8bf9637967f9d510c3a595c06bfd.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.zh-CN.self-ea1ea635099f9e93b2f5903108a2f939897810d090fa5959545f9cd4ecfaef14.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/locales/bootstrap-datepicker.zh-TW.self-919520009565c93f98d81b453874a8adc045d992e4cf63904186e82f852e123b.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/bootstrap-datepicker/index.self-75a11da44c802486bc6f65640aa48a730f0f684c5c07a42ba3cd1735eb3fb070.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/assets/application.self-6c048475f03dc4f8c79b96b8afb2f110fd7fcebd836fb44942699b2fb2b3c67b.js?body=1" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+Started GET "/images/nav.jpg" for 127.0.0.1 at 2017-07-04 17:44:03 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/images/nav.jpg"):
+  
+actionpack (5.0.4) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.4) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.4) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.4) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.4) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.4) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.4) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.3) lib/rack/method_override.rb:22:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.4) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.4) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.4) lib/rails/engine.rb:522:in `call'
+puma (3.9.1) lib/puma/configuration.rb:224:in `call'
+puma (3.9.1) lib/puma/server.rb:602:in `handle_request'
+puma (3.9.1) lib/puma/server.rb:435:in `process_client'
+puma (3.9.1) lib/puma/server.rb:299:in `block in run'
+puma (3.9.1) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  Rendering /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout
+  Rendering /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.8ms)
+  Rendered collection of /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/routes/_route.html.erb [18 times] (7.1ms)
+  Rendered /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.8ms)
+  Rendering /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.9ms)
+  Rendered /home/pedro/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.4/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (38.9ms)
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/pedro/Documents/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/pedro/Documents/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/pedro/Documents/FORMINST/forminst_new1/config/routes.rb:6)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/pedro/Documents/FORMINST/forminst_new1/config/routes.rb:6)
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/pedro/Documents/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/pedro/Documents/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/pedro/Documents/FORMINST/forminst_new1/config/routes.rb:6)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/pedro/Documents/FORMINST/forminst_new1/config/routes.rb:6)
+  [1m[35m (955.3ms)[0m  [1m[35mCREATE TABLE `schema_migrations` (`version` varchar(255) PRIMARY KEY) ENGINE=InnoDB[0m
+  [1m[35m (349.7ms)[0m  [1m[35mCREATE TABLE `ar_internal_metadata` (`key` varchar(255) PRIMARY KEY, `value` varchar(255), `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (17.1ms)[0m  [1m[34mSELECT DATABASE() as db[0m
+  [1m[35m (11.7ms)[0m  [1m[34mSELECT GET_LOCK('8192848615411373970', 0);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Migrating to CreateUsuarios (20150126161941)
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class CreateUsuarios < ActiveRecord::Migration[4.2] (called from block in execute at /home/pedro/.rvm/gems/ruby-2.4.0@global/gems/rake-12.0.0/lib/rake/task.rb:250)
+  [1m[35m (325.2ms)[0m  [1m[35mCREATE TABLE `usuarios` (`id` int AUTO_INCREMENT PRIMARY KEY, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (29.5ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20150126161941')[0m
+  [1m[35m (45.8ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateTutors (20150126162010)
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class CreateTutors < ActiveRecord::Migration[4.2] (called from block in execute at /home/pedro/.rvm/gems/ruby-2.4.0@global/gems/rake-12.0.0/lib/rake/task.rb:250)
+  [1m[35m (346.9ms)[0m  [1m[35mCREATE TABLE `tutors` (`id` int AUTO_INCREMENT PRIMARY KEY, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (21.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20150126162010')[0m
+  [1m[35m (121.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateInstructors (20150126162016)
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class CreateInstructors < ActiveRecord::Migration[4.2] (called from block in execute at /home/pedro/.rvm/gems/ruby-2.4.0@global/gems/rake-12.0.0/lib/rake/task.rb:250)
+  [1m[35m (479.1ms)[0m  [1m[35mCREATE TABLE `instructors` (`id` int AUTO_INCREMENT PRIMARY KEY, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20150126162016')[0m
+  [1m[35m (54.3ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateEntidads (20150126162022)
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class CreateEntidads < ActiveRecord::Migration[4.2] (called from block in execute at /home/pedro/.rvm/gems/ruby-2.4.0@global/gems/rake-12.0.0/lib/rake/task.rb:250)
+  [1m[35m (423.8ms)[0m  [1m[35mCREATE TABLE `entidads` (`id` int AUTO_INCREMENT PRIMARY KEY, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20150126162022')[0m
+  [1m[35m (87.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateArea (20150511190108)
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class CreateArea < ActiveRecord::Migration[4.2] (called from block in execute at /home/pedro/.rvm/gems/ruby-2.4.0@global/gems/rake-12.0.0/lib/rake/task.rb:250)
+  [1m[35m (424.3ms)[0m  [1m[35mCREATE TABLE `area` (`id` int AUTO_INCREMENT PRIMARY KEY, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20150511190108')[0m
+  [1m[35m (86.7ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateActividadEjecutada (20150511190603)
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class CreateActividadEjecutada < ActiveRecord::Migration[4.2] (called from block in execute at /home/pedro/.rvm/gems/ruby-2.4.0@global/gems/rake-12.0.0/lib/rake/task.rb:250)
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE TABLE `actividad_ejecutada` (`id` int AUTO_INCREMENT PRIMARY KEY, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT RELEASE_LOCK('8192848615411373970')[0m
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/pedro/Documents/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/pedro/Documents/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/pedro/Documents/FORMINST/forminst_new1/config/routes.rb:6)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/pedro/Documents/FORMINST/forminst_new1/config/routes.rb:6)
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT DATABASE() as db[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT GET_LOCK('8192848615411373970', 0);[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+Migrating to AddSessionsTable (20170704214431)
+DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is deprecated. Please specify the Rails release the migration was written for:
+
+  class AddSessionsTable < ActiveRecord::Migration[4.2] (called from block in execute at /home/pedro/.rvm/gems/ruby-2.4.0@global/gems/rake-12.0.0/lib/rake/task.rb:250)
+  [1m[35m (407.3ms)[0m  [1m[35mCREATE TABLE `session` (`id` int AUTO_INCREMENT PRIMARY KEY, `session_id` varchar(255) NOT NULL, `data` text, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (439.3ms)[0m  [1m[35mCREATE UNIQUE INDEX `index_session_on_session_id`  ON `session` (`session_id`) [0m
+  [1m[35m (278.0ms)[0m  [1m[35mCREATE  INDEX `index_session_on_updated_at`  ON `session` (`updated_at`) [0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO `schema_migrations` (`version`) VALUES ('20170704214431')[0m
+  [1m[35m (42.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  `ar_internal_metadata`.* FROM `ar_internal_metadata` WHERE `ar_internal_metadata`.`key` = 'environment' LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO `ar_internal_metadata` (`key`, `value`, `created_at`, `updated_at`) VALUES ('environment', 'development', '2017-07-04 21:50:02', '2017-07-04 21:50:02')[0m
+  [1m[35m (47.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT RELEASE_LOCK('8192848615411373970')[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT `schema_migrations`.* FROM `schema_migrations`[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSHOW CREATE TABLE `actividad`[0m
+  [1m[35m (17.2ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'actividad'[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSHOW CREATE TABLE `actividad_ejecutada`[0m
+  [1m[35m (0.6ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'actividad_ejecutada'[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSHOW CREATE TABLE `adecuacion`[0m
+  [1m[35m (0.6ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'adecuacion'[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSHOW CREATE TABLE `adecuacion_actividad`[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `area`[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `departamento`[0m
+  [1m[35m (0.5ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'departamento'[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSHOW CREATE TABLE `document`[0m
+  [1m[35m (0.5ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'document'[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `documento`[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'documento'[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `documento_informe`[0m
+  [1m[35m (0.5ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'documento_informe'[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `documento_plan`[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'documento_plan'[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `entidad`[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'entidad'[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `entidads`[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `escuela`[0m
+  [1m[35m (0.6ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'escuela'[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `estatus_adecuacion`[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `estatus_informe`[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `historial_actividad`[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'historial_actividad'[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `historial_resultado`[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'historial_resultado'[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `informe`[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'informe'[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSHOW CREATE TABLE `informe_actividad`[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `instructors`[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSHOW CREATE TABLE `instructortutor`[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSHOW CREATE TABLE `notificacion`[0m
+  [1m[35m (0.6ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'notificacion'[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSHOW CREATE TABLE `observacion_actividad_adecuacion`[0m
+  [1m[35m (0.6ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'observacion_actividad_adecuacion'[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSHOW CREATE TABLE `observacion_actividad_informe`[0m
+  [1m[35m (0.5ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'observacion_actividad_informe'[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `observacion_tutor`[0m
+  [1m[35m (0.5ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'observacion_tutor'[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `permiso`[0m
+  [1m[35m (0.5ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'permiso'[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `permisologia`[0m
+  [1m[35m (0.5ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'permisologia'[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `persona`[0m
+  [1m[35m (0.5ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'persona'[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `planformacion`[0m
+  [1m[35m (0.5ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'planformacion'[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `prorroga`[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `respaldo`[0m
+  [1m[35m (0.5ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'respaldo'[0m
+  [1m[35m (0.3ms)[0m  [1m[35mSHOW CREATE TABLE `resultado`[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'resultado'[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `revision`[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `session`[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'session'[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `tipo_actividad`[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'tipo_actividad'[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `tipo_estatus`[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'tipo_estatus'[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `tipo_informe`[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'tipo_informe'[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `tipo_resultado`[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'tipo_resultado'[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `tutors`[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `usuario`[0m
+  [1m[35m (0.4ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'usuario'[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `usuarioentidad`[0m
+  [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `usuarios`[0m

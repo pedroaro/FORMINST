@@ -131,6 +131,29 @@ LOCK TABLES `adecuacion_actividad` WRITE;
 /*!40000 ALTER TABLE `adecuacion_actividad` ENABLE KEYS */;
 UNLOCK TABLES;
 
+DROP TABLE IF EXISTS `departamento`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `departamento` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(255) DEFAULT NULL,
+  `escuela_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `escuelaDepartamento` (`escuela_id`),
+  CONSTRAINT `escuelaDepartamento` FOREIGN KEY (`escuela_id`) REFERENCES `escuela` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `departamento`
+--
+
+LOCK TABLES `departamento` WRITE;
+/*!40000 ALTER TABLE `departamento` DISABLE KEYS */;
+INSERT INTO `departamento` VALUES (1,'Departamento de Biología Celular', 1),(2,'Departamento de Botanica', 1),(3,'Departamento de Ecología', 1),(4,'Departamento de Tecnología de Alimentos', 1),(5,'Departamento de Zoología',1),(6,'Centro de Microscopía Electrónica',1),(7,'Departamento de Física',3),(8,'Departamento de Química',10),(9,'Departamento de Computación',2),(10,'Departamento de Geoquímica', 4),(11,'Departamento de Matemática',9),(12,'Desconocida', 12);
+/*!40000 ALTER TABLE `departamento` ENABLE KEYS */;
+UNLOCK TABLES;
+
 DROP TABLE IF EXISTS `document`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -282,6 +305,7 @@ LOCK TABLES `escuela` WRITE;
 INSERT INTO `escuela` VALUES (1,'Escuela de Biología'),(2,'Escuela de Computación'),(3,'Escuela de Física'),(4,'Escuela de Geoqímica'),(5,'Instituto Biología Experimental'),(6,'Instituto de Ciencia y Tecnología de Alimentos'),(7,'Instituto de Ciencias de la Tierra'),(8,'Instituto de Zoología y Ecología Tropical'),(9,'Escuela de Matemática'),(10,'Escuela de Química'),(11,'Consejo de Facultad'),(12,'Desconocida');
 /*!40000 ALTER TABLE `escuela` ENABLE KEYS */;
 UNLOCK TABLES;
+
 
 --
 -- Table structure for table `estatus_adecuacion`
@@ -1013,6 +1037,13 @@ CREATE TABLE `usuario` (
 -- Dumping data for table `usuario`
 --
 
+--INSERT INTO `usuario` VALUES (47,'secretaria.biologia',0,1,'secretaria','secretaria.biologia','Secretaria'),(41,'comision_biologia_celular',0,1,'ib123','comision_biologiac','Institucional'),(42,'comision_botanica',0,1,'ib123','comision_botanica','Institucional'),(43,'comision_ecologia',0,1,'ib123','comision_ecologia','Institucional'),(44,'comision_TdI',0,1,'ib123','comision_TdI','Institucional'),(45,'comision_zoologia',0,1,'ib123','comision_zoologia','Institucional'),(46,'comision_ME',0,1,'ib123','comision_ME','Institucional');
+--INSERT INTO `persona` VALUES (57,47,'Secretaria J.','Biología',NULL,'10531496',NULL,NULL,NULL,NULL,NULL,NULL);
+
+
+--INSERT INTO `usuarioentidad` VALUES (41,41,7,1,1),(42,42,7,1,2),(43,43,7,1,3),(44,44,7,1,4),(45,45,7,1,5),(46,46,7,1,6),(47,47,1,1,NULL);
+--INSERT INTO `usuarioentidad` VALUES (52,52,1,1,NULL);
+
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
 INSERT INTO `usuario` VALUES (1,'zairap.yepez',1,1,NULL,NULL,'Docente'),(2,'tdivasta',1,1,NULL,NULL,'Docente'),(3,'comisioninv.computacion',1,1,NULL,NULL,'Institucional'),(4,'marisela.dominguez',1,1,NULL,NULL,'Docente'),(5,'comisioninv.matematica',1,1,NULL,NULL,'Institucional'),(6,'consejo.matematica',1,1,NULL,NULL,'Institucional'),(7,'seconfac',1,1,NULL,NULL,'Docente'),(8,'consejo.computacion',1,1,NULL,NULL,'Institucional'),(9,'consultace.matematica',1,1,NULL,NULL,'Institucional'),(10,'renny.hernandez',1,1,NULL,NULL,'Docente'),(11,'manuel.maia',1,1,NULL,NULL,'Docente'),(12,'ezoppi',1,1,NULL,NULL,'Docente'),(13,'consultaci.computacion',1,1,NULL,NULL,'Docente'),(14,'vleguiza',1,1,NULL,NULL,'Docente'),(15,'consultaci.matematica',1,1,NULL,NULL,'Docente'),(16,'mariela.castillo',1,1,NULL,NULL,'Docente'),(17,'tomas_guardia',1,1,NULL,NULL,'Docente'),(18,'consulta.seconfac',1,1,NULL,NULL,'Docente'),(19,'asilva',1,1,NULL,NULL,'Docente'),(20,'curbina',1,1,NULL,NULL,'Docente'),(21,'consultace.computacion',1,1,NULL,NULL,'Docente'),(22,'myloa.morgado',1,1,NULL,NULL,'Docente'),(23,'irene.santos',1,1,NULL,NULL,'Docente'),(24,'rhadames.carmona',1,1,NULL,NULL,'Docente'),(25,'ivan.flores',1,1,NULL,NULL,'Docente'),(26,'kenyer.aguiar',1,1,NULL,NULL,'Docente'),(27,'ruben.torres',1,1,NULL,NULL,'Docente'),(28,'daniela.torrealba',1,1,NULL,NULL,'Docente'),(29,'natalia.ortega',1,1,NULL,NULL,'Docente'),(30,'myloa.morgado',1,1,NULL,NULL,'Docente'),(31,'alfonso.garmendia',1,1,NULL,NULL,'Docente'),(32,'francisco.sans',1,1,NULL,NULL,'Docente'),(34,'jefferson.santiago',0,1,'4659589','jefferson.santiago','Docente'),(35,'consejo.facultad',1,1,NULL,NULL,'Institucional'),(36,'secretaria.uno',0,1,'secretaria','secretaria.uno','Secretaria');
@@ -1031,13 +1062,16 @@ CREATE TABLE `usuarioentidad` (
   `usuario_id` int(11) DEFAULT NULL,
   `entidad_id` int(11) DEFAULT NULL,
   `escuela_id` int(11) DEFAULT NULL,
+  `departamento_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `usuarioEntidadEntidad` (`entidad_id`),
   KEY `usuarioEntidadUsuario` (`usuario_id`),
   KEY `usuarioEscuela` (`escuela_id`),
+  KEY `departamentoUsuario` (`departamento_id`),
   CONSTRAINT `usuarioEscuela` FOREIGN KEY (`escuela_id`) REFERENCES `escuela` (`id`),
   CONSTRAINT `usuarioEntidadEntidad` FOREIGN KEY (`entidad_id`) REFERENCES `entidad` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `usuarioEntidadUsuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `usuarioEntidadUsuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `departamentoUsuario` FOREIGN KEY (`departamento_id`) REFERENCES `departamento` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1047,7 +1081,7 @@ CREATE TABLE `usuarioentidad` (
 
 LOCK TABLES `usuarioentidad` WRITE;
 /*!40000 ALTER TABLE `usuarioentidad` DISABLE KEYS */;
-INSERT INTO `usuarioentidad` VALUES (1,1,18,2),(2,2,18,2),(3,3,8,2),(4,4,18,NULL),(5,5,11,9),(6,6,5,9),(7,7,13,11),(8,8,2,2),(9,9,11,9),(10,10,18,12),(11,11,18,NULL),(12,12,18,NULL),(13,13,8,2),(14,14,18,NULL),(15,15,5,9),(16,16,18,9),(17,17,18,9),(18,18,13,11),(19,19,18,NULL),(20,20,18,1),(21,21,8,2),(22,22,18,NULL),(23,23,18,NULL),(24,24,18,2),(25,25,18,2),(26,26,19,NULL),(27,27,19,NULL),(28,28,19,NULL),(29,29,19,NULL),(30,30,19,NULL),(31,31,19,NULL),(32,32,19,12),(34,34,19,2),(35,35,13,NULL),(36,36,2,2);
+INSERT INTO `usuarioentidad` VALUES (1,1,18,2,9),(2,2,18,2,NULL),(3,3,8,2,9),(4,4,18,NULL,NULL),(5,5,11,9,11),(6,6,5,9,NULL),(7,7,13,11,NULL),(8,8,2,2,NULL),(9,9,11,9,NULL),(10,10,18,12,9),(11,11,18,NULL,NULL),(12,12,18,NULL,NULL),(13,13,8,2,NULL),(14,14,18,NULL,NULL),(15,15,5,9,NULL),(16,16,18,9,NULL),(17,17,18,9,11),(18,18,13,11,NULL),(19,19,18,NULL,9),(20,20,18,1,NULL),(21,21,8,2,NULL),(22,22,18,NULL,NULL),(23,23,18,NULL,NULL),(24,24,18,2,NULL),(25,25,18,2,9),(26,26,19,NULL,NULL),(27,27,19,NULL,NULL),(28,28,19,NULL,11),(29,29,19,NULL,NULL),(30,30,19,NULL,NULL),(31,31,19,NULL,NULL),(32,32,19,12,9),(34,34,19,2,9),(35,35,13,NULL,NULL),(36,36,2,2,9);
 /*!40000 ALTER TABLE `usuarioentidad` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

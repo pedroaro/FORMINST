@@ -217,10 +217,14 @@
             </tr>
             <tr>
               <td class="text-center"><strong>Subárea</strong></td>
+              <td class="text-center"><strong>Departamento</strong></td>
             </tr>
             <tr> 
               <td class="text-center">
                 <input type="text" name="Subarea" class="form-control" value="<%=$cpsubarea%>" required oninvalid="setCustomValidity('Ingrese una subárea válida')" onchange="try{setCustomValidity('')}catch(e){}">
+              </td>
+              <td class="text-center">
+              <%= select_tag(:cptutores, options_for_select(@departamentos), {:class => "form-control", :name=> "depto", :style => "width:100%;"}) %>
               </td>
             </tr>
           </tbody>
