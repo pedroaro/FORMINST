@@ -155,7 +155,7 @@ class ForminstController < ApplicationController
 												redirect_to controller:"forminst", action: "index"
 											end
 										end
-									elsif tipo == "Institucional"
+									elsif tipo == "Institucional" || tipo == "Vista"
 										session[:usuario_id]= @usuario.id
 										session[:administrador] = false
 										session[:tutor]= false

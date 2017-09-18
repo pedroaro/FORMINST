@@ -100,7 +100,7 @@
   <div class="col-xs-12 col-md-12">
     <div class="btn-group" role="group">
        <button type="button" class="btn btn-default" onclick = " location.href = 'javascript:history.back(-1);'">Volver</button>
-        <%if @bool_enviado == 0 %>
+        <%if @bool_enviado == 0 && @cjpTipo=="Institucional"%>
           <%if session[:entidad_id]==13 %>
              <button type="button" data-toggle="modal" data-target="#myModal4" class="btn btn-default">Aprobar/Rechazar</button>
           <%else%>
@@ -154,6 +154,12 @@
           <h4><b><%=@nombre%></b></h4>
         </div>
       <%end%>
+
+      <%if @cjpTipo=="Institucional"%>
+        <p>Entidad</p>
+      <%else%>
+        <p>Vista</p>
+      <%end%>
     </div>
   </div>
 </div>
@@ -206,7 +212,7 @@
                   <input type="hidden" name="<%= @iddoc+i.to_s%> " value='<%= actdoc.id %>'>
                 </td>
                 <td >
-                  <%if @bool_enviado==0%>
+                  <%if @bool_enviado==0 && @cjpTipo=="Institucional"%>
                     <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' ><%=@observaciont[@j] %></textarea>
                   <%else%>
                     <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' disabled><%=@observaciont[@j] %></textarea>
@@ -235,7 +241,7 @@
                 <textarea class="form-control" rows="2"  name='<%= @investigacion+actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
               </td>
               <td >
-                  <%if @bool_enviado==0%>
+                  <%if @bool_enviado==0 && @cjpTipo=="Institucional"%>
                     <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' ><%=@observaciont[@j] %></textarea>
                   <%else%>
                     <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' disabled><%=@observaciont[@j] %></textarea>
@@ -264,7 +270,7 @@
                 <textarea class="form-control" rows="2"  name='<%= @formacion+actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
               </td>
               <td>
-                  <%if @bool_enviado==0%>
+                  <%if @bool_enviado==0 && @cjpTipo=="Institucional"%>
                     <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' ><%=@observaciont[@j] %></textarea>
                   <%else%>
                     <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' disabled><%=@observaciont[@j] %></textarea>
@@ -293,7 +299,7 @@
                 <textarea class="form-control" rows="2"  name='<%= @extension+actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
               </td>
               <td >
-                  <%if @bool_enviado==0%>
+                  <%if @bool_enviado==0 && @cjpTipo=="Institucional"%>
                     <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' ><%=@observaciont[@j] %></textarea>
                   <%else%>
                     <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' disabled><%=@observaciont[@j] %></textarea>
@@ -322,7 +328,7 @@
                 <textarea class="form-control" rows="2"  name='<%= @otra+actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
               </td>
               <td >
-                  <%if @bool_enviado==0%>
+                  <%if @bool_enviado==0 && @cjpTipo=="Institucional"%>
                     <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' ><%=@observaciont[@j] %></textarea>
                   <%else%>
                     <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' disabled><%=@observaciont[@j] %></textarea>
@@ -349,7 +355,7 @@
           <%= link_to "<< Volver", {controller: "inicioentidad", action: "detalles_adecuacion3"}, class: "btn btn-forminst" %>
       </div>
       <div class = 'col-xs-4 col-md-4 col-lg-4'>
-        <%if @bool_enviado == 0 %>
+        <%if @bool_enviado == 0 && @cjpTipo=="Institucional"%>
            <center><button type="submit" class="btn btn-forminst btn-lg">Guardar cambios</button></center>
         <%else%>
          

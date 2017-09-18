@@ -7,6 +7,7 @@ class InicioentidadController < ApplicationController
 			session[:plan_id] = nil
 			session[:instructorName] = nil
 			session[:informe_id]=nil
+			@cjpTipo=Usuario.find(session[:usuario_id]).tipo
 			@nombre = session[:nombre_usuario]
 			print "NO HAY USUARIO"
 			puts session[:entidad_id]
@@ -54,6 +55,7 @@ class InicioentidadController < ApplicationController
 	def listar_adecuaciones
 		if session[:usuario_id] && session[:entidad]== true
 			session[:informe_id]=nil
+			@cjpTipo=Usuario.find(session[:usuario_id]).tipo
 			session[:adecuacion_id]=nil
 				@nombre = session[:nombre_usuario]
 				@usu=Usuarioentidad.where(usuario_id: session[:usuario_id]).take
@@ -180,6 +182,7 @@ class InicioentidadController < ApplicationController
 def ver_soporte
     @plan = Planformacion.where(id: session[:plan_id]).take
     @documents = []
+	@cjpTipo=Usuario.find(session[:usuario_id]).tipo
     if !session[:informe_id].blank?
     	$actividad = params[:actividad_id].to_i
     	adec = Adecuacion.where(planformacion_id: session[:plan_id]).take
@@ -258,6 +261,7 @@ end
 
 	def ver_detalles_adecuacion
 		if session[:usuario_id] && session[:entidad]= true
+			@cjpTipo=Usuario.find(session[:usuario_id]).tipo
 			@nombre = session[:nombre_usuario]
 			@modifique=false
 			session[:informe_id] = nil
@@ -381,6 +385,7 @@ end
 
 	def detalles_adecuacion3
 		if session[:usuario_id] && session[:entidad]= true
+			@cjpTipo=Usuario.find(session[:usuario_id]).tipo
 			@semestre = 1
 			@iddoc= 'id_docencia'
 			@docencia='docencia'
@@ -519,6 +524,7 @@ end
 
 	def detalles_adecuacion4
 		if session[:usuario_id] && session[:entidad]= true
+			@cjpTipo=Usuario.find(session[:usuario_id]).tipo
 			@semestre = 2
 			@iddoc= 'id_docencia'
 			session[:informe_id] = nil
@@ -657,6 +663,7 @@ end
 
 	def detalles_adecuacion5
 		if session[:usuario_id] && session[:entidad]= true
+			@cjpTipo=Usuario.find(session[:usuario_id]).tipo
 			@semestre = 3
 			@iddoc= 'id_docencia'
 			@docencia='docencia'
@@ -795,6 +802,7 @@ end
 
 	def detalles_adecuacion6
 		if session[:usuario_id] && session[:entidad]= true
+			@cjpTipo=Usuario.find(session[:usuario_id]).tipo
 			@semestre = 4
 			@iddoc= 'id_docencia'
 			session[:informe_id] = nil
@@ -933,6 +941,7 @@ end
 
 	def detalles_adecuacion7
 		if session[:usuario_id] && session[:entidad]= true
+			@cjpTipo=Usuario.find(session[:usuario_id]).tipo
 			@semestre = 5
 			@iddoc= 'id_docencia'
 			@docencia='docencia'
@@ -1021,6 +1030,7 @@ end
 
 	def listar_informes
 	    if session[:usuario_id] && session[:entidad]= true
+			@cjpTipo=Usuario.find(session[:usuario_id]).tipo
 	    	session[:informe_id]=nil
 	    	@nombre = session[:nombre_usuario]
 			@usu=Usuarioentidad.where(usuario_id: session[:usuario_id]).take
@@ -1167,6 +1177,7 @@ end
   	end
 	def ver_detalles_informe
 	    if session[:usuario_id] && session[:entidad]= true
+			@cjpTipo=Usuario.find(session[:usuario_id]).tipo
 	      	@nombre = session[:nombre_usuario]
 	      	if params[:informe_id]!=nil
 	        	session[:informe_id]= params[:informe_id]
@@ -1263,6 +1274,7 @@ end
 
 
 	def detalles_informe2
+		@cjpTipo=Usuario.find(session[:usuario_id]).tipo
 		@nombre = session[:nombre_usuario]
     	@informe= Informe.find(session[:informe_id])
     	@est= EstatusInforme.where(informe_id: @informe.id, actual: 1).take
@@ -1619,6 +1631,7 @@ end
 
 	def vista_previa1  
 	  if !session[:informe_id].blank?
+		@cjpTipo=Usuario.find(session[:usuario_id]).tipo
 	    @informe= Informe.find(session[:informe_id])
 	    @TipoSemestre=TipoInforme.where(id: @informe.tipo_id).take
 	    @fechaActual = Date.current.to_s
@@ -2069,6 +2082,7 @@ end
 
  	def guardar_observaciones
  		if session[:usuario_id] && session[:entidad]= true
+			@cjpTipo=Usuario.find(session[:usuario_id]).tipo
  
  			@informe = Informe.find(session[:informe_id])
  			@adecuacion = Adecuacion.where(planformacion_id: @informe.planformacion_id).take
@@ -2321,6 +2335,7 @@ end
 		@booltutor = 0
 		@informe_id = params[:informe_id].to_i
 		@actividad_id = params[:actividad_id].to_i
+			@cjpTipo=Usuario.find(session[:usuario_id]).tipo
 		ia = InformeActividad.where(informe_id: @informe_id, actividad_id: @actividad_id).take 
 
 
@@ -2408,6 +2423,7 @@ end
 		@boolobsb = 0
 		@informe_id = params[:informe_id].to_i
 		@resultado_id = params[:resultado_id].to_i
+		@cjpTipo=Usuario.find(session[:usuario_id]).tipo
 		ia = InformeActividad.where(informe_id: @informe_id, resultado_id: @resultado_id).take 
 
 		@observaciones = ObservacionActividadInforme.where(informe_actividad_id: ia.id)
@@ -2489,6 +2505,7 @@ end
 
 	def ver_respaldos
 		if session[:usuario_id] && session[:entidad] 
+		  @cjpTipo=Usuario.find(session[:usuario_id]).tipo
 		  @plan = Planformacion.where(id: session[:plan_id]).take
 		  adec = Adecuacion.where(planformacion_id: session[:plan_id]).take
 		  @documents = []
@@ -2521,6 +2538,7 @@ end
 	def guardar_observaciones2
  		if session[:usuario_id] && session[:entidad]== true
  			@semestre = params[:semestre].to_i
+			@cjpTipo=Usuario.find(session[:usuario_id]).tipo
  			@vista_adecuacion = @semestre + 2
 		    @adecuacion= Adecuacion.find(session[:adecuacion_id])
 		    @estatus= EstatusAdecuacion.where(adecuacion_id: @adecuacion.id).take
@@ -2758,6 +2776,7 @@ end
  	def mas_observaciones3 #mas obs de actividades del informe
  		@boolobs = 0
  		@adecuacion= Adecuacion.find(session[:adecuacion_id])
+		@cjpTipo=Usuario.find(session[:usuario_id]).tipo
  		@semestre = params[:semestre].to_i
  		@actividad_id = params[:actividad_id].to_i
 		
@@ -2840,6 +2859,7 @@ end
 	def cambiar_estatusI
 		@informe_id = params[:informe_id].to_i
 		rechazar = params[:rechazar].to_i
+		@cjpTipo=Usuario.find(session[:usuario_id]).tipo
 		informeAct = Informe.where(id: @informe_id).take
 		session[:plan_id] = informeAct.planformacion_id
 		adec = Adecuacion.where(planformacion_id: informeAct.planformacion_id).take
@@ -3103,6 +3123,7 @@ end
 	
 	def vista_previa
 		session[:informe_id]=nil
+		@cjpTipo=Usuario.find(session[:usuario_id]).tipo
 		@fechaActual = Date.current.to_s
 		@plan= Planformacion.find(session[:plan_id])
 		@fechaConcurso = @plan.fecha_inicio
@@ -3339,6 +3360,7 @@ end
 
 	@adecuacion_id = params[:adecuacion_id].to_i
 	rechazar = params[:rechazar].to_i
+	@cjpTipo=Usuario.find(session[:usuario_id]).tipo
 
 	if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12)
 			#Usuario comision
@@ -3630,6 +3652,7 @@ end
 	def borrar_notificaciones #mas obs de actividades del informe
 		if session[:usuario_id] && session[:entidad]= true
 			@noti= params[:noti]
+			@cjpTipo=Usuario.find(session[:usuario_id]).tipo
 			puts @noti
     		notaeliminar = Notificacion.where(id: @noti ).take
     		if notaeliminar.blank?

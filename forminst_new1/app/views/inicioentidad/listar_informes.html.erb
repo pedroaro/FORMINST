@@ -60,6 +60,12 @@
           <h4><b><%=@nombre%></b></h4>
         </div>
       <%end%>
+
+      <%if @cjpTipo=="Institucional"%>
+        <p>Entidad</p>
+      <%else%>
+        <p>Vista</p>
+      <%end%>
     </div>
   </div>
 </div>

@@ -142,7 +142,7 @@
   <div class="col-xs-12 col-md-12">
     <div class="btn-group" role="group">
        <button type="button" class="btn btn-default" onclick = " location.href = 'javascript:history.back(-1);'">Volver</button>
-        <%if @bool_enviado == 0 %>
+        <%if @bool_enviado == 0 && @cjpTipo=="Institucional"%>
           <%if session[:entidad_id]==13 %>
             <%if session[:informe_id]%> 
               <button type="button" data-toggle="modal" data-target="#myModal4i" class="btn btn-default">Aprobar/Rechazar</button>
@@ -180,15 +180,46 @@
   <div class="col-xs-12 col-md-12 col-md-offset-0">
     <div class="text-right">
       <div id = "fechamuestra">
-        <script languaje="JavaScript">
-          fecha();
-        </script> 
+        <h3> <%= Time.now.strftime("%d") %>
+          <% if Time.now.strftime("%m").to_i == 1 %>
+            de Enero del
+          <% elsif Time.now.strftime("%m").to_i == 2 %>
+            de Febrero del
+          <% elsif Time.now.strftime("%m").to_i == 3 %>
+            de Marzo del
+          <% elsif Time.now.strftime("%m").to_i == 4 %>
+            de Abril del
+          <% elsif Time.now.strftime("%m").to_i == 5 %>
+            de Mayo del
+          <% elsif Time.now.strftime("%m").to_i == 6 %>
+            de Junio del
+          <% elsif Time.now.strftime("%m").to_i == 7 %>
+            de Julio del
+          <% elsif Time.now.strftime("%m").to_i == 8 %>
+            de Agosto del
+          <% elsif Time.now.strftime("%m").to_i == 9 %>
+            de Septiembre del
+          <% elsif Time.now.strftime("%m").to_i == 10 %>
+            de Octubre del
+          <% elsif Time.now.strftime("%m").to_i == 11 %>
+            de Noviembre del
+          <% elsif Time.now.strftime("%m").to_i == 12 %>
+            de Diciembre del
+          <% end %>
+          <%= Time.now.strftime("%Y") %> 
+        </h3>
       </div>
       <%if session[:nombre_usuario]%>
         <div>
           <h4><b><%=session[:nombre_usuario]%></b></h4>
         </div>
       <%end%>
+
+      <%if @cjpTipo=="Institucional"%>
+        <p>Entidad</p>
+      <%else%>
+        <p>Vista</p>
+      <%end%> 
     </div>
   </div>
 </div>

@@ -84,6 +84,7 @@ CREATE TABLE `adecuacion` (
   `fecha_modificacion` date DEFAULT NULL,
   `fecha_creacion` date DEFAULT NULL,
   `estado` varchar(255) DEFAULT NULL,
+  `mensaje` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `adecuacionPlanformacion` (`planformacion_id`),
   KEY `adecuacionUsuario` (`tutor_id`),
