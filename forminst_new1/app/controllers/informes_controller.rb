@@ -2813,7 +2813,7 @@ def generar_pdf() # es funci√≥n permite generar el documento pdf de la adecuaci√
     puts "pendiente!!!!!!!!!!!!!!!!!!!"
     puts cpenviar
 
-    if cpenviar == "blablabla"
+    if cpenviar == "si"
 
       @informe_id = params[:informe_id].to_i
       cambio_act = EstatusInforme.where(informe_id: @informe_id, actual: 1).take

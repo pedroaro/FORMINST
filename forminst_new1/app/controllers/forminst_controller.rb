@@ -79,7 +79,7 @@ class ForminstController < ApplicationController
 									end
 								end
 							else
-								if tipo=="Institucional"
+								if tipo=="Institucional" || tipo=="Vista"
 									#ver si es necesario comparar el nombre del ldap con la bd local
 									session[:usuario_id]= @usuario.id
 									session[:administrador] = false
