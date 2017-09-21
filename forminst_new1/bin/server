@@ -316,7 +316,6 @@ while true
 		puts plan.fecha_inicio
 		if plan.fecha_inicio + 5.month <= fecha2 && plan.fecha_inicio + 11.month >= fecha2 && plan.mensaje.blank?
 			puts plan.fecha_inicio
-
 			adecuacion = Adecuacion.where(planformacion_id: plan.id).take
 			notific = Notificacion.new
 			notific.instructor_id = plan.instructor_id
@@ -331,14 +330,12 @@ while true
 
 			remitente3 = Usuario.where(id: plan.tutor_id).take
 			ActionCorreo.envio_informe(remitente3, notific.mensaje,2).deliver
-
 			plan.mensaje = 1
 			plan.save
 		end
 
-		if plan.fecha_inicio + 11.month <= fecha2 && plan.fecha_inicio + 17.month >= fecha2 && plan.mensaje == 1
+		if plan.fecha_inicio + 11.month <= fecha2 && plan.fecha_inicio + 17.month >= fecha2 && (plan.mensaje == 1 || plan.mensaje == 2)
 			puts plan.fecha_inicio
-
 			adecuacion = Adecuacion.where(planformacion_id: plan.id).take
 			notific = Notificacion.new
 			notific.instructor_id = plan.instructor_id
@@ -354,11 +351,11 @@ while true
 			remitente3 = Usuario.where(id: plan.tutor_id).take
 			ActionCorreo.envio_informe(remitente3, notific.mensaje,2).deliver
 
-			plan.mensaje = 2
+			plan.mensaje = 3
 			plan.save
 		end
 
-		if plan.fecha_inicio + 17.month <= fecha2 && plan.fecha_inicio + 23.month >= fecha2 && plan.mensaje == 2
+		if plan.fecha_inicio + 17.month <= fecha2 && plan.fecha_inicio + 23.month >= fecha2 && (plan.mensaje == 3 || plan.mensaje == 4)
 			puts plan.fecha_inicio
 
 			adecuacion = Adecuacion.where(planformacion_id: plan.id).take
@@ -376,11 +373,11 @@ while true
 			remitente3 = Usuario.where(id: plan.tutor_id).take
 			ActionCorreo.envio_informe(remitente3, notific.mensaje,2).deliver
 
-			plan.mensaje = 3
+			plan.mensaje = 5
 			plan.save
 		end
 
-		if plan.fecha_inicio + 23.month <= fecha2 && plan.mensaje == 3
+		if plan.fecha_inicio + 23.month <= fecha2 && (plan.mensaje == 5 || plan.mensaje == 6)
 			puts plan.fecha_inicio
 
 			adecuacion = Adecuacion.where(planformacion_id: plan.id).take
@@ -398,9 +395,157 @@ while true
 			remitente3 = Usuario.where(id: plan.tutor_id).take
 			ActionCorreo.envio_informe(remitente3, notific.mensaje,2).deliver
 
+			plan.mensaje = 7
+			plan.save
+		end
+
+		info = Informe.where(planformacion_id: plan.id).all
+
+		infor1 = 0
+		infor2 = 0
+		infor3 = 0
+		infor4 = 0
+		infor5 = 0
+		infor6 = 0
+		infor7 = 0
+		info.each do |inf|
+			#Se ven los informe enviados
+			if inf.numero == 1
+				est_inf = EstatusInforme.where(informe_id: inf.id).take
+				if (est_inf.estatus_id == 6 || est_inf.estatus_id == 9)
+					infor1 = 1
+				end
+			elsif inf.numero == 2
+				est_inf = EstatusInforme.where(informe_id: inf.id).take
+				if (est_inf.estatus_id == 6 || est_inf.estatus_id == 9)
+					infor2 = 1
+				end
+			elsif inf.numero == 3
+				est_inf = EstatusInforme.where(informe_id: inf.id).take
+				if (est_inf.estatus_id == 6 || est_inf.estatus_id == 9)
+					infor3 = 1
+				end
+			elsif inf.numero == 4
+				est_inf = EstatusInforme.where(informe_id: inf.id).take
+				if (est_inf.estatus_id == 6 || est_inf.estatus_id == 9)
+					infor4 = 1
+				end
+			elsif inf.numero == 5
+				est_inf = EstatusInforme.where(informe_id: inf.id).take
+				if (est_inf.estatus_id == 6 || est_inf.estatus_id == 9)
+					infor5 = 1
+				end
+			elsif inf.numero == 6
+				est_inf = EstatusInforme.where(informe_id: inf.id).take
+				if (est_inf.estatus_id == 6 || est_inf.estatus_id == 9)
+					infor6 = 1
+				end
+			elsif inf.numero == 7
+				est_inf = EstatusInforme.where(informe_id: inf.id).take
+				if (est_inf.estatus_id == 6 || est_inf.estatus_id == 9)
+					infor7 = 1
+				end
+			end
+		end
+
+		#FALTAAA
+
+		if plan.fecha_inicio + 6.month + 15.day <= fecha2 && plan.fecha_inicio + 11.month >= fecha2 && plan.mensaje == 1 && infor1 == 1
+			puts plan.fecha_inicio
+			adecuacion = Adecuacion.where(planformacion_id: plan.id).take
+			notific = Notificacion.new
+			notific.instructor_id = plan.instructor_id
+			notific.tutor_id = plan.tutor_id
+			notific.adecuacion_id = adecuacion.id
+			notific.actual = 1
+			person = Persona.where(usuario_id: plan.tutor_id).take
+			person2 = Persona.where(usuario_id: plan.instructor_id).take
+			notificacionfecha = Date.current.to_s 
+			notific.mensaje = "[" + notificacionfecha + "] " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " ha excedido en 15 dias el dia tope de entrega del primer informe semestral de " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +", enviar el la brevedad posible."
+			notific.save
+
+			remitente3 = Usuario.where(id: plan.tutor_id).take
+			ActionCorreo.envio_informe(remitente3, notific.mensaje,2).deliver
+			plan.mensaje = 2
+			plan.save
+		end
+
+		if plan.fecha_inicio + 12.month + 15.day <= fecha2 && plan.fecha_inicio + 17.month >= fecha2 && plan.mensaje == 3 && (infor2 == 1 || infor3 == 1)
+			puts plan.fecha_inicio
+			adecuacion = Adecuacion.where(planformacion_id: plan.id).take
+			notific = Notificacion.new
+			notific.instructor_id = plan.instructor_id
+			notific.tutor_id = plan.tutor_id
+			notific.adecuacion_id = adecuacion.id
+			notific.actual = 1
+			person = Persona.where(usuario_id: plan.tutor_id).take
+			person2 = Persona.where(usuario_id: plan.instructor_id).take
+			notificacionfecha = Date.current.to_s 
+			if infor2 == 1
+				notific.mensaje = "[" + notificacionfecha + "] " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + "  ha excedido en 15 dias el dia tope de entrega del segundo informe semestral y con el primer informe anual de " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +", enviar el la brevedad posible."
+			else
+				notific.mensaje = "[" + notificacionfecha + "] " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + "  ha excedido en 15 dias el dia tope de entrega del primer informe anual de " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +", enviar el la brevedad posible."
+			end
+			notific.save
+
+			remitente3 = Usuario.where(id: plan.tutor_id).take
+			ActionCorreo.envio_informe(remitente3, notific.mensaje,2).deliver
+
 			plan.mensaje = 4
 			plan.save
 		end
+
+		if plan.fecha_inicio + 18.month + 15.day <= fecha2 && plan.fecha_inicio + 23.month >= fecha2 && plan.mensaje == 5 && infor4 == 1
+			puts plan.fecha_inicio
+
+			adecuacion = Adecuacion.where(planformacion_id: plan.id).take
+			notific = Notificacion.new
+			notific.instructor_id = plan.instructor_id
+			notific.tutor_id = plan.tutor_id
+			notific.adecuacion_id = adecuacion.id
+			notific.actual = 1
+			person = Persona.where(usuario_id: plan.tutor_id).take
+			person2 = Persona.where(usuario_id: plan.instructor_id).take
+			notificacionfecha = Date.current.to_s 
+			notific.mensaje = "[" + notificacionfecha + "] " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + "  ha excedido en 15 dias el dia tope de entrega del tercer informe semestral de " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +", enviar el la brevedad posible."
+			notific.save
+
+			remitente3 = Usuario.where(id: plan.tutor_id).take
+			ActionCorreo.envio_informe(remitente3, notific.mensaje,2).deliver
+
+			plan.mensaje = 6
+			plan.save
+		end
+
+		if plan.fecha_inicio + 24.month + 15.day <= fecha2 && plan.mensaje == 7 && (infor5 == 1 || infor6 == 1 ||  infor7 == 1)
+			puts plan.fecha_inicio
+
+			adecuacion = Adecuacion.where(planformacion_id: plan.id).take
+			notific = Notificacion.new
+			notific.instructor_id = plan.instructor_id
+			notific.tutor_id = plan.tutor_id
+			notific.adecuacion_id = adecuacion.id
+			notific.actual = 1
+			person = Persona.where(usuario_id: plan.tutor_id).take
+			person2 = Persona.where(usuario_id: plan.instructor_id).take
+			notificacionfecha = Date.current.to_s 
+			if infor5 == 1
+				notific.mensaje = "[" + notificacionfecha + "] " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " ha excedido en 15 dias el dia tope de entrega del cuarto informe semestral, el segundo informe anual y el final de " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +", enviar el la brevedad posible."
+			elsif infor6 == 1
+				notific.mensaje = "[" + notificacionfecha + "] " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + "  ha excedido en 15 dias el dia tope de entrega del segundo informe anual y el final de " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +", enviar el la brevedad posible."
+			else
+				notific.mensaje = "[" + notificacionfecha + "] " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + "  ha excedido en 15 dias el dia tope de entrega del informe final de " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +", enviar el la brevedad posible."
+			end
+			notific.save
+
+			remitente3 = Usuario.where(id: plan.tutor_id).take
+			ActionCorreo.envio_informe(remitente3, notific.mensaje,2).deliver
+
+			plan.mensaje = 8
+			plan.save
+		end
+
+
 
 	end
 
