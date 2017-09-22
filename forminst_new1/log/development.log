@@ -15741,3 +15741,850 @@ DEPRECATION WARNING: Directly inheriting from ActiveRecord::Migration is depreca
   [1m[35m (0.4ms)[0m  [1m[35mSHOW TABLE STATUS LIKE 'usuario'[0m
   [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `usuarioentidad`[0m
   [1m[35m (0.2ms)[0m  [1m[35mSHOW CREATE TABLE `usuarios`[0m
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/FORMINST/forminst_new1/config/routes.rb:6)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/FORMINST/forminst_new1/config/routes.rb:6)
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/FORMINST/forminst_new1/config/routes.rb:6)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/FORMINST/forminst_new1/config/routes.rb:6)
+  [1m[36mEstatusAdecuacion Load (0.3ms)[0m  [1m[34mSELECT `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`actual` = 1[0m
+  [1m[36mEstatusInforme Load (0.2ms)[0m  [1m[34mSELECT `estatus_informe`.* FROM `estatus_informe` WHERE `estatus_informe`.`actual` = 1[0m
+  [1m[36mPlanformacion Load (0.4ms)[0m  [1m[34mSELECT `planformacion`.* FROM `planformacion`[0m
+  [1m[36mInforme Load (0.3ms)[0m  [1m[34mSELECT `informe`.* FROM `informe` WHERE `informe`.`planformacion_id` = 15[0m
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/FORMINST/forminst_new1/config/routes.rb:6)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/FORMINST/forminst_new1/config/routes.rb:6)
+  [1m[36mEstatusAdecuacion Load (0.3ms)[0m  [1m[34mSELECT `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`actual` = 1[0m
+  [1m[36mEstatusInforme Load (0.2ms)[0m  [1m[34mSELECT `estatus_informe`.* FROM `estatus_informe` WHERE `estatus_informe`.`actual` = 1[0m
+  [1m[36mPlanformacion Load (0.4ms)[0m  [1m[34mSELECT `planformacion`.* FROM `planformacion`[0m
+  [1m[36mAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 15 LIMIT 1[0m
+  [1m[36mPersona Load (0.3ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 37 LIMIT 1[0m
+  [1m[36mPersona Load (0.3ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 38 LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO `notificacion` (`instructor_id`, `tutor_id`, `adecuacion_id`, `actual`, `mensaje`) VALUES (38, 37, 19, 1, '[2017-09-22] Ana Verónica Morales Bezeira usted posee un mes para enviar el primer informe semestral de Pepe Perez.')[0m
+  [1m[35m (42.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUsuario Load (0.3ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 37 LIMIT 1[0m
+  Rendering action_correo/envio_informe.html.erb
+  Rendered action_correo/envio_informe.html.erb (1.5ms)
+ActionCorreo#envio_informe: processed outbound mail in 227.7ms
+Sent mail to forminst.ciens@gmail.com, ana@ciens.ucv.ve (7625.7ms)
+Date: Fri, 22 Sep 2017 13:00:33 -0400
+From: FORMINST
+To: forminst.ciens@gmail.com, 
+ ana@ciens.ucv.ve
+Message-ID: <59c541b16490f_45e88bbbcc22790@cicore220.mail>
+Subject: Avance de Informe
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content=3D'text/html; charset=3DUTF-8' http-equiv=3D'Content-Ty=
+pe' />
+  </head>
+	<body>
+		<table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0">=
+
+		  <tr>
+		    <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D=
+"0">
+		      <tr>
+		        	<td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a=
+2a2a" style=3D"background-color:#2a2a2a; padding:10px; font-family:Georgi=
+a, 'Times New Roman', Times, serif; color:#43c1d7; font-size:20px;">Ha re=
+cibido una notificaci=C3=B3n de Informe</td>
+		      </tr>
+		      <tr>
+		        <td width=3D"1000" align=3D"center" valign=3D"top" style=3D"pad=
+ding:12px; background-color:#ffffff;" bgcolor=3D"#ffffff;"><table width=3D=
+"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"4" style=3D"margin-b=
+ottom:20px;">
+		        </table>
+		          <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadd=
+ing=3D"4" style=3D"margin-bottom:20px;">
+		            <tr>
+		              <td align=3D"left" valign=3D"top" style=3D"font-family:Ve=
+rdana, Geneva, sans-serif; font-size:12px; color:#000000;">
+			              <div style=3D"color:#43c1d7; font-size:19px;"><b>Notific=
+aci=C3=B3n:</b><br>
+			              </div>
+			              <br>
+			              <div style=3D"color:#43c1d7;"><b>[2017-09-22] Ana Ver=C3=
+=B3nica Morales Bezeira usted posee un mes para enviar el primer informe =
+semestral de Pepe Perez.</b><br>
+			              </div>
+			              <br>
+			              <div style=3D"color:#6e6e6e;"> Para mayor informaci=C3=B3=
+n, por favor ingrese al Sitio web de FORMINST</div>
+			              <br>
+			              <br>
+		              </td>
+		            </tr>
+		            <tr>
+		              <td align=3D"center" valign=3D"top" style=3D"font-family:=
+Verdana, Geneva, sans-serif; font-size:12px; color:#000000;">
+			              <div style=3D"color:#6e6e6e;"> Universidad Central de Ve=
+nezuela</div>
+			              <div style=3D"color:#6e6e6e;"> Facultad de Ciencias</div=
+>
+			              <div style=3D"color:#6e6e6e;"> Sistema FORMINST</div>
+		              </td>
+		            </tr>
+		          </table>
+		        </table>
+		        </td>
+		      </tr>
+		      <tr>
+		      	<td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a2a=
+2a" style=3D"background-color:#2a2a2a; padding:10px; font-family:Georgia,=
+ 'Times New Roman', Times, serif; color:#43c1d7; font-size:20px;"></td>
+		      </tr>
+		    </table>
+		    <br>
+		    <br>
+		  </tr>
+		</table>
+	</body>
+</html>
+
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[33mUPDATE `planformacion` SET `mensaje` = 1 WHERE `planformacion`.`id` = 15[0m
+  [1m[35m (38.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mInforme Load (0.3ms)[0m  [1m[34mSELECT `informe`.* FROM `informe` WHERE `informe`.`planformacion_id` = 15[0m
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/FORMINST/forminst_new1/config/routes.rb:6)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/FORMINST/forminst_new1/config/routes.rb:6)
+  [1m[36mEstatusAdecuacion Load (0.3ms)[0m  [1m[34mSELECT `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`actual` = 1[0m
+  [1m[36mEstatusInforme Load (0.2ms)[0m  [1m[34mSELECT `estatus_informe`.* FROM `estatus_informe` WHERE `estatus_informe`.`actual` = 1[0m
+  [1m[36mPlanformacion Load (0.4ms)[0m  [1m[34mSELECT `planformacion`.* FROM `planformacion`[0m
+  [1m[36mInforme Load (0.3ms)[0m  [1m[34mSELECT `informe`.* FROM `informe` WHERE `informe`.`planformacion_id` = 15[0m
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/FORMINST/forminst_new1/config/routes.rb:6)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/FORMINST/forminst_new1/config/routes.rb:6)
+  [1m[36mEstatusAdecuacion Load (0.3ms)[0m  [1m[34mSELECT `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`actual` = 1[0m
+  [1m[36mEstatusInforme Load (0.2ms)[0m  [1m[34mSELECT `estatus_informe`.* FROM `estatus_informe` WHERE `estatus_informe`.`actual` = 1[0m
+  [1m[36mPlanformacion Load (0.4ms)[0m  [1m[34mSELECT `planformacion`.* FROM `planformacion`[0m
+  [1m[36mInforme Load (1.9ms)[0m  [1m[34mSELECT `informe`.* FROM `informe` WHERE `informe`.`planformacion_id` = 15[0m
+  [1m[36mAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 15 LIMIT 1[0m
+  [1m[36mPersona Load (0.3ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 37 LIMIT 1[0m
+  [1m[36mPersona Load (0.3ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 38 LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO `notificacion` (`instructor_id`, `tutor_id`, `adecuacion_id`, `actual`, `mensaje`) VALUES (38, 37, 19, 1, '[2017-09-22] Ana Verónica Morales Bezeira ha excedido en 15 dias el dia tope de entrega del primer informe semestral de Pepe Perez, enviar el la brevedad posible.')[0m
+  [1m[35m (76.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUsuario Load (0.3ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 37 LIMIT 1[0m
+  Rendering action_correo/envio_informe.html.erb
+  Rendered action_correo/envio_informe.html.erb (1.5ms)
+ActionCorreo#envio_informe: processed outbound mail in 215.6ms
+Sent mail to forminst.ciens@gmail.com, ana@ciens.ucv.ve (9521.0ms)
+Date: Fri, 22 Sep 2017 13:09:28 -0400
+From: FORMINST
+To: forminst.ciens@gmail.com, 
+ ana@ciens.ucv.ve
+Message-ID: <59c543c8e92fc_465dd8dbc82043f@cicore220.mail>
+Subject: Avance de Informe
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content=3D'text/html; charset=3DUTF-8' http-equiv=3D'Content-Ty=
+pe' />
+  </head>
+	<body>
+		<table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0">=
+
+		  <tr>
+		    <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D=
+"0">
+		      <tr>
+		        	<td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a=
+2a2a" style=3D"background-color:#2a2a2a; padding:10px; font-family:Georgi=
+a, 'Times New Roman', Times, serif; color:#43c1d7; font-size:20px;">Ha re=
+cibido una notificaci=C3=B3n de Informe</td>
+		      </tr>
+		      <tr>
+		        <td width=3D"1000" align=3D"center" valign=3D"top" style=3D"pad=
+ding:12px; background-color:#ffffff;" bgcolor=3D"#ffffff;"><table width=3D=
+"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"4" style=3D"margin-b=
+ottom:20px;">
+		        </table>
+		          <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadd=
+ing=3D"4" style=3D"margin-bottom:20px;">
+		            <tr>
+		              <td align=3D"left" valign=3D"top" style=3D"font-family:Ve=
+rdana, Geneva, sans-serif; font-size:12px; color:#000000;">
+			              <div style=3D"color:#43c1d7; font-size:19px;"><b>Notific=
+aci=C3=B3n:</b><br>
+			              </div>
+			              <br>
+			              <div style=3D"color:#43c1d7;"><b>[2017-09-22] Ana Ver=C3=
+=B3nica Morales Bezeira ha excedido en 15 dias el dia tope de entrega del=
+ primer informe semestral de Pepe Perez, enviar el la brevedad posible.</=
+b><br>
+			              </div>
+			              <br>
+			              <div style=3D"color:#6e6e6e;"> Para mayor informaci=C3=B3=
+n, por favor ingrese al Sitio web de FORMINST</div>
+			              <br>
+			              <br>
+		              </td>
+		            </tr>
+		            <tr>
+		              <td align=3D"center" valign=3D"top" style=3D"font-family:=
+Verdana, Geneva, sans-serif; font-size:12px; color:#000000;">
+			              <div style=3D"color:#6e6e6e;"> Universidad Central de Ve=
+nezuela</div>
+			              <div style=3D"color:#6e6e6e;"> Facultad de Ciencias</div=
+>
+			              <div style=3D"color:#6e6e6e;"> Sistema FORMINST</div>
+		              </td>
+		            </tr>
+		          </table>
+		        </table>
+		        </td>
+		      </tr>
+		      <tr>
+		      	<td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a2a=
+2a" style=3D"background-color:#2a2a2a; padding:10px; font-family:Georgia,=
+ 'Times New Roman', Times, serif; color:#43c1d7; font-size:20px;"></td>
+		      </tr>
+		    </table>
+		    <br>
+		    <br>
+		  </tr>
+		</table>
+	</body>
+</html>
+
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE `planformacion` SET `mensaje` = 2 WHERE `planformacion`.`id` = 15[0m
+  [1m[35m (28.6ms)[0m  [1m[35mCOMMIT[0m
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/FORMINST/forminst_new1/config/routes.rb:6)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/FORMINST/forminst_new1/config/routes.rb:6)
+  [1m[36mEstatusAdecuacion Load (0.3ms)[0m  [1m[34mSELECT `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`actual` = 1[0m
+  [1m[36mEstatusInforme Load (0.9ms)[0m  [1m[34mSELECT `estatus_informe`.* FROM `estatus_informe` WHERE `estatus_informe`.`actual` = 1[0m
+  [1m[36mPlanformacion Load (0.4ms)[0m  [1m[34mSELECT `planformacion`.* FROM `planformacion`[0m
+  [1m[36mAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 15 LIMIT 1[0m
+  [1m[36mPersona Load (0.3ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 37 LIMIT 1[0m
+  [1m[36mPersona Load (0.4ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 38 LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO `notificacion` (`instructor_id`, `tutor_id`, `adecuacion_id`, `actual`, `mensaje`) VALUES (38, 37, 19, 1, '[2017-09-22] Ana Verónica Morales Bezeira usted posee un mes para enviar el segundo informe semestral junto con el primer informe anual de Pepe Perez.')[0m
+  [1m[35m (38.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUsuario Load (0.3ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 37 LIMIT 1[0m
+  Rendering action_correo/envio_informe.html.erb
+  Rendered action_correo/envio_informe.html.erb (1.6ms)
+ActionCorreo#envio_informe: processed outbound mail in 210.0ms
+Sent mail to forminst.ciens@gmail.com, ana@ciens.ucv.ve (9561.5ms)
+Date: Fri, 22 Sep 2017 13:11:36 -0400
+From: FORMINST
+To: forminst.ciens@gmail.com, 
+ ana@ciens.ucv.ve
+Message-ID: <59c54448560e7_46753b7bd066625@cicore220.mail>
+Subject: Avance de Informe
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content=3D'text/html; charset=3DUTF-8' http-equiv=3D'Content-Ty=
+pe' />
+  </head>
+	<body>
+		<table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0">=
+
+		  <tr>
+		    <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D=
+"0">
+		      <tr>
+		        	<td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a=
+2a2a" style=3D"background-color:#2a2a2a; padding:10px; font-family:Georgi=
+a, 'Times New Roman', Times, serif; color:#43c1d7; font-size:20px;">Ha re=
+cibido una notificaci=C3=B3n de Informe</td>
+		      </tr>
+		      <tr>
+		        <td width=3D"1000" align=3D"center" valign=3D"top" style=3D"pad=
+ding:12px; background-color:#ffffff;" bgcolor=3D"#ffffff;"><table width=3D=
+"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"4" style=3D"margin-b=
+ottom:20px;">
+		        </table>
+		          <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadd=
+ing=3D"4" style=3D"margin-bottom:20px;">
+		            <tr>
+		              <td align=3D"left" valign=3D"top" style=3D"font-family:Ve=
+rdana, Geneva, sans-serif; font-size:12px; color:#000000;">
+			              <div style=3D"color:#43c1d7; font-size:19px;"><b>Notific=
+aci=C3=B3n:</b><br>
+			              </div>
+			              <br>
+			              <div style=3D"color:#43c1d7;"><b>[2017-09-22] Ana Ver=C3=
+=B3nica Morales Bezeira usted posee un mes para enviar el segundo informe=
+ semestral junto con el primer informe anual de Pepe Perez.</b><br>
+			              </div>
+			              <br>
+			              <div style=3D"color:#6e6e6e;"> Para mayor informaci=C3=B3=
+n, por favor ingrese al Sitio web de FORMINST</div>
+			              <br>
+			              <br>
+		              </td>
+		            </tr>
+		            <tr>
+		              <td align=3D"center" valign=3D"top" style=3D"font-family:=
+Verdana, Geneva, sans-serif; font-size:12px; color:#000000;">
+			              <div style=3D"color:#6e6e6e;"> Universidad Central de Ve=
+nezuela</div>
+			              <div style=3D"color:#6e6e6e;"> Facultad de Ciencias</div=
+>
+			              <div style=3D"color:#6e6e6e;"> Sistema FORMINST</div>
+		              </td>
+		            </tr>
+		          </table>
+		        </table>
+		        </td>
+		      </tr>
+		      <tr>
+		      	<td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a2a=
+2a" style=3D"background-color:#2a2a2a; padding:10px; font-family:Georgia,=
+ 'Times New Roman', Times, serif; color:#43c1d7; font-size:20px;"></td>
+		      </tr>
+		    </table>
+		    <br>
+		    <br>
+		  </tr>
+		</table>
+	</body>
+</html>
+
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE `planformacion` SET `mensaje` = 3 WHERE `planformacion`.`id` = 15[0m
+  [1m[35m (46.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mInforme Load (0.3ms)[0m  [1m[34mSELECT `informe`.* FROM `informe` WHERE `informe`.`planformacion_id` = 15[0m
+  [1m[36mAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 15 LIMIT 1[0m
+  [1m[36mPersona Load (0.2ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 37 LIMIT 1[0m
+  [1m[36mPersona Load (0.2ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 38 LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO `notificacion` (`instructor_id`, `tutor_id`, `adecuacion_id`, `actual`, `mensaje`) VALUES (38, 37, 19, 1, '[2017-09-22] Ana Verónica Morales Bezeira  ha excedido en 15 dias el dia tope de entrega del segundo informe semestral y con el primer informe anual de Pepe Perez, enviar en la brevedad posible.')[0m
+  [1m[35m (41.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUsuario Load (0.3ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 37 LIMIT 1[0m
+  Rendering action_correo/envio_informe.html.erb
+  Rendered action_correo/envio_informe.html.erb (0.1ms)
+ActionCorreo#envio_informe: processed outbound mail in 6.0ms
+Sent mail to forminst.ciens@gmail.com, ana@ciens.ucv.ve (9605.4ms)
+Date: Fri, 22 Sep 2017 13:11:46 -0400
+From: FORMINST
+To: forminst.ciens@gmail.com, 
+ ana@ciens.ucv.ve
+Message-ID: <59c544526a18_46753b7bd066732@cicore220.mail>
+Subject: Avance de Informe
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content=3D'text/html; charset=3DUTF-8' http-equiv=3D'Content-Ty=
+pe' />
+  </head>
+	<body>
+		<table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0">=
+
+		  <tr>
+		    <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D=
+"0">
+		      <tr>
+		        	<td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a=
+2a2a" style=3D"background-color:#2a2a2a; padding:10px; font-family:Georgi=
+a, 'Times New Roman', Times, serif; color:#43c1d7; font-size:20px;">Ha re=
+cibido una notificaci=C3=B3n de Informe</td>
+		      </tr>
+		      <tr>
+		        <td width=3D"1000" align=3D"center" valign=3D"top" style=3D"pad=
+ding:12px; background-color:#ffffff;" bgcolor=3D"#ffffff;"><table width=3D=
+"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"4" style=3D"margin-b=
+ottom:20px;">
+		        </table>
+		          <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadd=
+ing=3D"4" style=3D"margin-bottom:20px;">
+		            <tr>
+		              <td align=3D"left" valign=3D"top" style=3D"font-family:Ve=
+rdana, Geneva, sans-serif; font-size:12px; color:#000000;">
+			              <div style=3D"color:#43c1d7; font-size:19px;"><b>Notific=
+aci=C3=B3n:</b><br>
+			              </div>
+			              <br>
+			              <div style=3D"color:#43c1d7;"><b>[2017-09-22] Ana Ver=C3=
+=B3nica Morales Bezeira  ha excedido en 15 dias el dia tope de entrega de=
+l segundo informe semestral y con el primer informe anual de Pepe Perez, =
+enviar en la brevedad posible.</b><br>
+			              </div>
+			              <br>
+			              <div style=3D"color:#6e6e6e;"> Para mayor informaci=C3=B3=
+n, por favor ingrese al Sitio web de FORMINST</div>
+			              <br>
+			              <br>
+		              </td>
+		            </tr>
+		            <tr>
+		              <td align=3D"center" valign=3D"top" style=3D"font-family:=
+Verdana, Geneva, sans-serif; font-size:12px; color:#000000;">
+			              <div style=3D"color:#6e6e6e;"> Universidad Central de Ve=
+nezuela</div>
+			              <div style=3D"color:#6e6e6e;"> Facultad de Ciencias</div=
+>
+			              <div style=3D"color:#6e6e6e;"> Sistema FORMINST</div>
+		              </td>
+		            </tr>
+		          </table>
+		        </table>
+		        </td>
+		      </tr>
+		      <tr>
+		      	<td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a2a=
+2a" style=3D"background-color:#2a2a2a; padding:10px; font-family:Georgia,=
+ 'Times New Roman', Times, serif; color:#43c1d7; font-size:20px;"></td>
+		      </tr>
+		    </table>
+		    <br>
+		    <br>
+		  </tr>
+		</table>
+	</body>
+</html>
+
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE `planformacion` SET `mensaje` = 4 WHERE `planformacion`.`id` = 15[0m
+  [1m[35m (54.4ms)[0m  [1m[35mCOMMIT[0m
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/FORMINST/forminst_new1/config/routes.rb:6)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/FORMINST/forminst_new1/config/routes.rb:6)
+  [1m[36mEstatusAdecuacion Load (0.4ms)[0m  [1m[34mSELECT `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`actual` = 1[0m
+  [1m[36mEstatusInforme Load (0.3ms)[0m  [1m[34mSELECT `estatus_informe`.* FROM `estatus_informe` WHERE `estatus_informe`.`actual` = 1[0m
+  [1m[36mPlanformacion Load (0.4ms)[0m  [1m[34mSELECT `planformacion`.* FROM `planformacion`[0m
+  [1m[36mAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 15 LIMIT 1[0m
+  [1m[36mPersona Load (0.3ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 37 LIMIT 1[0m
+  [1m[36mPersona Load (0.4ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 38 LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[32mINSERT INTO `notificacion` (`instructor_id`, `tutor_id`, `adecuacion_id`, `actual`, `mensaje`) VALUES (38, 37, 19, 1, '[2017-09-22] Ana Verónica Morales Bezeira usted posee un mes para enviar el tercer informe semestral de Pepe Perez.')[0m
+  [1m[35m (75.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (32.2ms)[0m  [1m[32mINSERT INTO `notificacion` (`instructor_id`, `tutor_id`, `adecuacion_id`, `actual`, `mensaje`) VALUES (38, 37, 19, 2, '[2017-09-22] Pepe Perez su tutor Pepe Perez aun no ha enviado el tercer informe semestral, dispone de un mes para enviarlo.')[0m
+  [1m[35m (33.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUsuario Load (0.3ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 38 LIMIT 1[0m
+ActionCorreo#retraso_informe: processed outbound mail in 3.3ms
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/FORMINST/forminst_new1/config/routes.rb:6)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/FORMINST/forminst_new1/config/routes.rb:6)
+  [1m[36mEstatusAdecuacion Load (0.3ms)[0m  [1m[34mSELECT `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`actual` = 1[0m
+  [1m[36mEstatusInforme Load (1.5ms)[0m  [1m[34mSELECT `estatus_informe`.* FROM `estatus_informe` WHERE `estatus_informe`.`actual` = 1[0m
+  [1m[36mPlanformacion Load (0.4ms)[0m  [1m[34mSELECT `planformacion`.* FROM `planformacion`[0m
+  [1m[36mAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 15 LIMIT 1[0m
+  [1m[36mPersona Load (0.3ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 37 LIMIT 1[0m
+  [1m[36mPersona Load (0.4ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 38 LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO `notificacion` (`instructor_id`, `tutor_id`, `adecuacion_id`, `actual`, `mensaje`) VALUES (38, 37, 19, 1, '[2017-09-22] Ana Verónica Morales Bezeira usted posee un mes para enviar el tercer informe semestral de Pepe Perez.')[0m
+  [1m[35m (33.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO `notificacion` (`instructor_id`, `tutor_id`, `adecuacion_id`, `actual`, `mensaje`) VALUES (38, 37, 19, 2, '[2017-09-22] Pepe Perez su tutor Pepe Perez aun no ha enviado el tercer informe semestral, dispone de un mes para enviarlo.')[0m
+  [1m[35m (65.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUsuario Load (0.3ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 38 LIMIT 1[0m
+ActionCorreo#retraso_informe: processed outbound mail in 3.2ms
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/FORMINST/forminst_new1/config/routes.rb:6)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/FORMINST/forminst_new1/config/routes.rb:6)
+  [1m[36mEstatusAdecuacion Load (0.3ms)[0m  [1m[34mSELECT `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`actual` = 1[0m
+  [1m[36mEstatusInforme Load (1.3ms)[0m  [1m[34mSELECT `estatus_informe`.* FROM `estatus_informe` WHERE `estatus_informe`.`actual` = 1[0m
+  [1m[36mPlanformacion Load (0.4ms)[0m  [1m[34mSELECT `planformacion`.* FROM `planformacion`[0m
+  [1m[36mAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 15 LIMIT 1[0m
+  [1m[36mPersona Load (0.5ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 37 LIMIT 1[0m
+  [1m[36mPersona Load (0.4ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 38 LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO `notificacion` (`instructor_id`, `tutor_id`, `adecuacion_id`, `actual`, `mensaje`) VALUES (38, 37, 19, 1, '[2017-09-22] Ana Verónica Morales Bezeira usted posee un mes para enviar el tercer informe semestral de Pepe Perez.')[0m
+  [1m[35m (33.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO `notificacion` (`instructor_id`, `tutor_id`, `adecuacion_id`, `actual`, `mensaje`) VALUES (38, 37, 19, 2, '[2017-09-22] Pepe Perez su tutor Pepe Perez aun no ha enviado el tercer informe semestral, dispone de un mes para enviarlo.')[0m
+  [1m[35m (31.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUsuario Load (0.3ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 38 LIMIT 1[0m
+  Rendering action_correo/retraso_informe.erb
+  Rendered action_correo/retraso_informe.erb (1.4ms)
+ActionCorreo#retraso_informe: processed outbound mail in 213.7ms
+Sent mail to forminst.ciens@gmail.com, pepe@ciens.ucv.ve (19098.7ms)
+Date: Fri, 22 Sep 2017 13:55:51 -0400
+From: FORMINST
+To: forminst.ciens@gmail.com, 
+ pepe@ciens.ucv.ve
+Message-ID: <59c54ea76df1f_4822c5fbd4429ab@cicore220.mail>
+Subject: =?UTF-8?Q?Recordatorio_de_env=C3=ADo_de_informe?=
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content=3D'text/html; charset=3DUTF-8' http-equiv=3D'Content-Ty=
+pe' />
+  </head>
+	<body>
+		<table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0">=
+
+		  <tr>
+		    <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D=
+"0">
+		      <tr>
+		        	<td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a=
+2a2a" style=3D"background-color:#2a2a2a; padding:10px; font-family:Georgi=
+a, 'Times New Roman', Times, serif; color:#43c1d7; font-size:20px;">Recor=
+datorio de env=C3=ADo de informe</td>
+		      </tr>
+		      <tr>
+		        <td width=3D"1000" align=3D"center" valign=3D"top" style=3D"pad=
+ding:12px; background-color:#ffffff;" bgcolor=3D"#ffffff;"><table width=3D=
+"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"4" style=3D"margin-b=
+ottom:20px;">
+		        </table>
+		          <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadd=
+ing=3D"4" style=3D"margin-bottom:20px;">
+		            <tr>
+		              <td align=3D"left" valign=3D"top" style=3D"font-family:Ve=
+rdana, Geneva, sans-serif; font-size:12px; color:#000000;">
+			              <div style=3D"color:#43c1d7; font-size:19px;"><b>Notific=
+aci=C3=B3n:</b><br>
+			              </div>
+			              <br>
+			              <div style=3D"color:#43c1d7;"><b>[2017-09-22] Pepe Perez=
+ su tutor Pepe Perez aun no ha enviado el tercer informe semestral, dispo=
+ne de un mes para enviarlo.</b><br>
+			              </div>
+			              <br>
+			              <div style=3D"color:#6e6e6e;"> Para mayor informaci=C3=B3=
+n, por favor ingrese al Sitio web de FORMINST</div>
+			              <br>
+			              <br>
+		              </td>
+		            </tr>
+		            <tr>
+		              <td align=3D"center" valign=3D"top" style=3D"font-family:=
+Verdana, Geneva, sans-serif; font-size:12px; color:#000000;">
+			              <div style=3D"color:#6e6e6e;"> Universidad Central de Ve=
+nezuela</div>
+			              <div style=3D"color:#6e6e6e;"> Facultad de Ciencias</div=
+>
+			              <div style=3D"color:#6e6e6e;"> Sistema FORMINST</div>
+		              </td>
+		            </tr>
+		          </table>
+		        </table>
+		        </td>
+		      </tr>
+		      <tr>
+		      	<td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a2a=
+2a" style=3D"background-color:#2a2a2a; padding:10px; font-family:Georgia,=
+ 'Times New Roman', Times, serif; color:#43c1d7; font-size:20px;"></td>
+		      </tr>
+		    </table>
+		    <br>
+		    <br>
+		  </tr>
+		</table>
+	</body>
+</html>=
+
+  [1m[36mUsuario Load (0.4ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 37 LIMIT 1[0m
+  Rendering action_correo/retraso_informe.erb
+  Rendered action_correo/retraso_informe.erb (0.1ms)
+ActionCorreo#retraso_informe: processed outbound mail in 6.4ms
+Sent mail to forminst.ciens@gmail.com, ana@ciens.ucv.ve (37659.2ms)
+Date: Fri, 22 Sep 2017 13:56:10 -0400
+From: FORMINST
+To: forminst.ciens@gmail.com, 
+ ana@ciens.ucv.ve
+Message-ID: <59c54eba87712_4822c5fbd4430bb@cicore220.mail>
+Subject: =?UTF-8?Q?Recordatorio_de_env=C3=ADo_de_informe?=
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content=3D'text/html; charset=3DUTF-8' http-equiv=3D'Content-Ty=
+pe' />
+  </head>
+	<body>
+		<table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0">=
+
+		  <tr>
+		    <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D=
+"0">
+		      <tr>
+		        	<td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a=
+2a2a" style=3D"background-color:#2a2a2a; padding:10px; font-family:Georgi=
+a, 'Times New Roman', Times, serif; color:#43c1d7; font-size:20px;">Recor=
+datorio de env=C3=ADo de informe</td>
+		      </tr>
+		      <tr>
+		        <td width=3D"1000" align=3D"center" valign=3D"top" style=3D"pad=
+ding:12px; background-color:#ffffff;" bgcolor=3D"#ffffff;"><table width=3D=
+"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"4" style=3D"margin-b=
+ottom:20px;">
+		        </table>
+		          <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadd=
+ing=3D"4" style=3D"margin-bottom:20px;">
+		            <tr>
+		              <td align=3D"left" valign=3D"top" style=3D"font-family:Ve=
+rdana, Geneva, sans-serif; font-size:12px; color:#000000;">
+			              <div style=3D"color:#43c1d7; font-size:19px;"><b>Notific=
+aci=C3=B3n:</b><br>
+			              </div>
+			              <br>
+			              <div style=3D"color:#43c1d7;"><b>[2017-09-22] Ana Ver=C3=
+=B3nica Morales Bezeira usted posee un mes para enviar el tercer informe =
+semestral de Pepe Perez.</b><br>
+			              </div>
+			              <br>
+			              <div style=3D"color:#6e6e6e;"> Para mayor informaci=C3=B3=
+n, por favor ingrese al Sitio web de FORMINST</div>
+			              <br>
+			              <br>
+		              </td>
+		            </tr>
+		            <tr>
+		              <td align=3D"center" valign=3D"top" style=3D"font-family:=
+Verdana, Geneva, sans-serif; font-size:12px; color:#000000;">
+			              <div style=3D"color:#6e6e6e;"> Universidad Central de Ve=
+nezuela</div>
+			              <div style=3D"color:#6e6e6e;"> Facultad de Ciencias</div=
+>
+			              <div style=3D"color:#6e6e6e;"> Sistema FORMINST</div>
+		              </td>
+		            </tr>
+		          </table>
+		        </table>
+		        </td>
+		      </tr>
+		      <tr>
+		      	<td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a2a=
+2a" style=3D"background-color:#2a2a2a; padding:10px; font-family:Georgia,=
+ 'Times New Roman', Times, serif; color:#43c1d7; font-size:20px;"></td>
+		      </tr>
+		    </table>
+		    <br>
+		    <br>
+		  </tr>
+		</table>
+	</body>
+</html>=
+
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE `planformacion` SET `mensaje` = 5 WHERE `planformacion`.`id` = 15[0m
+  [1m[35m (42.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mInforme Load (0.3ms)[0m  [1m[34mSELECT `informe`.* FROM `informe` WHERE `informe`.`planformacion_id` = 15[0m
+  [1m[36mAdecuacion Load (0.2ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 15 LIMIT 1[0m
+  [1m[36mPersona Load (0.2ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 37 LIMIT 1[0m
+  [1m[36mPersona Load (0.2ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 38 LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO `notificacion` (`instructor_id`, `tutor_id`, `adecuacion_id`, `actual`, `mensaje`) VALUES (38, 37, 19, 1, '[2017-09-22] Ana Verónica Morales Bezeira  ha excedido en 15 dias el dia tope de entrega del tercer informe semestral de Pepe Perez, enviar en la brevedad posible.')[0m
+  [1m[35m (83.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO `notificacion` (`instructor_id`, `tutor_id`, `adecuacion_id`, `actual`, `mensaje`) VALUES (38, 37, 19, 2, '[2017-09-22] Pepe Perez su tutor Pepe Perez  ha excedido en 15 dias el dia tope de entrega del tercer informe semestral, enviar en la brevedad posible.')[0m
+  [1m[35m (39.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUsuario Load (0.3ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 38 LIMIT 1[0m
+  Rendering action_correo/retraso_informe.erb
+  Rendered action_correo/retraso_informe.erb (0.1ms)
+ActionCorreo#retraso_informe: processed outbound mail in 6.0ms
+Sent mail to forminst.ciens@gmail.com, pepe@ciens.ucv.ve (31932.0ms)
+Date: Fri, 22 Sep 2017 13:56:48 -0400
+From: FORMINST
+To: forminst.ciens@gmail.com, 
+ pepe@ciens.ucv.ve
+Message-ID: <59c54ee063d53_4822c5fbd44314a@cicore220.mail>
+Subject: =?UTF-8?Q?Recordatorio_de_env=C3=ADo_de_informe?=
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content=3D'text/html; charset=3DUTF-8' http-equiv=3D'Content-Ty=
+pe' />
+  </head>
+	<body>
+		<table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0">=
+
+		  <tr>
+		    <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D=
+"0">
+		      <tr>
+		        	<td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a=
+2a2a" style=3D"background-color:#2a2a2a; padding:10px; font-family:Georgi=
+a, 'Times New Roman', Times, serif; color:#43c1d7; font-size:20px;">Recor=
+datorio de env=C3=ADo de informe</td>
+		      </tr>
+		      <tr>
+		        <td width=3D"1000" align=3D"center" valign=3D"top" style=3D"pad=
+ding:12px; background-color:#ffffff;" bgcolor=3D"#ffffff;"><table width=3D=
+"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"4" style=3D"margin-b=
+ottom:20px;">
+		        </table>
+		          <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadd=
+ing=3D"4" style=3D"margin-bottom:20px;">
+		            <tr>
+		              <td align=3D"left" valign=3D"top" style=3D"font-family:Ve=
+rdana, Geneva, sans-serif; font-size:12px; color:#000000;">
+			              <div style=3D"color:#43c1d7; font-size:19px;"><b>Notific=
+aci=C3=B3n:</b><br>
+			              </div>
+			              <br>
+			              <div style=3D"color:#43c1d7;"><b>[2017-09-22] Pepe Perez=
+ su tutor Pepe Perez  ha excedido en 15 dias el dia tope de entrega del t=
+ercer informe semestral, enviar en la brevedad posible.</b><br>
+			              </div>
+			              <br>
+			              <div style=3D"color:#6e6e6e;"> Para mayor informaci=C3=B3=
+n, por favor ingrese al Sitio web de FORMINST</div>
+			              <br>
+			              <br>
+		              </td>
+		            </tr>
+		            <tr>
+		              <td align=3D"center" valign=3D"top" style=3D"font-family:=
+Verdana, Geneva, sans-serif; font-size:12px; color:#000000;">
+			              <div style=3D"color:#6e6e6e;"> Universidad Central de Ve=
+nezuela</div>
+			              <div style=3D"color:#6e6e6e;"> Facultad de Ciencias</div=
+>
+			              <div style=3D"color:#6e6e6e;"> Sistema FORMINST</div>
+		              </td>
+		            </tr>
+		          </table>
+		        </table>
+		        </td>
+		      </tr>
+		      <tr>
+		      	<td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a2a=
+2a" style=3D"background-color:#2a2a2a; padding:10px; font-family:Georgia,=
+ 'Times New Roman', Times, serif; color:#43c1d7; font-size:20px;"></td>
+		      </tr>
+		    </table>
+		    <br>
+		    <br>
+		  </tr>
+		</table>
+	</body>
+</html>=
+
+  [1m[36mUsuario Load (0.5ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 37 LIMIT 1[0m
+  Rendering action_correo/retraso_informe.erb
+  Rendered action_correo/retraso_informe.erb (0.1ms)
+ActionCorreo#retraso_informe: processed outbound mail in 7.7ms
+Sent mail to forminst.ciens@gmail.com, ana@ciens.ucv.ve (24345.0ms)
+Date: Fri, 22 Sep 2017 13:57:20 -0400
+From: FORMINST
+To: forminst.ciens@gmail.com, 
+ ana@ciens.ucv.ve
+Message-ID: <59c54f0055a97_4822c5fbd4432a@cicore220.mail>
+Subject: =?UTF-8?Q?Recordatorio_de_env=C3=ADo_de_informe?=
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content=3D'text/html; charset=3DUTF-8' http-equiv=3D'Content-Ty=
+pe' />
+  </head>
+	<body>
+		<table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0">=
+
+		  <tr>
+		    <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D=
+"0">
+		      <tr>
+		        	<td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a=
+2a2a" style=3D"background-color:#2a2a2a; padding:10px; font-family:Georgi=
+a, 'Times New Roman', Times, serif; color:#43c1d7; font-size:20px;">Recor=
+datorio de env=C3=ADo de informe</td>
+		      </tr>
+		      <tr>
+		        <td width=3D"1000" align=3D"center" valign=3D"top" style=3D"pad=
+ding:12px; background-color:#ffffff;" bgcolor=3D"#ffffff;"><table width=3D=
+"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"4" style=3D"margin-b=
+ottom:20px;">
+		        </table>
+		          <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadd=
+ing=3D"4" style=3D"margin-bottom:20px;">
+		            <tr>
+		              <td align=3D"left" valign=3D"top" style=3D"font-family:Ve=
+rdana, Geneva, sans-serif; font-size:12px; color:#000000;">
+			              <div style=3D"color:#43c1d7; font-size:19px;"><b>Notific=
+aci=C3=B3n:</b><br>
+			              </div>
+			              <br>
+			              <div style=3D"color:#43c1d7;"><b>[2017-09-22] Ana Ver=C3=
+=B3nica Morales Bezeira  ha excedido en 15 dias el dia tope de entrega de=
+l tercer informe semestral de Pepe Perez, enviar en la brevedad posible.<=
+/b><br>
+			              </div>
+			              <br>
+			              <div style=3D"color:#6e6e6e;"> Para mayor informaci=C3=B3=
+n, por favor ingrese al Sitio web de FORMINST</div>
+			              <br>
+			              <br>
+		              </td>
+		            </tr>
+		            <tr>
+		              <td align=3D"center" valign=3D"top" style=3D"font-family:=
+Verdana, Geneva, sans-serif; font-size:12px; color:#000000;">
+			              <div style=3D"color:#6e6e6e;"> Universidad Central de Ve=
+nezuela</div>
+			              <div style=3D"color:#6e6e6e;"> Facultad de Ciencias</div=
+>
+			              <div style=3D"color:#6e6e6e;"> Sistema FORMINST</div>
+		              </td>
+		            </tr>
+		          </table>
+		        </table>
+		        </td>
+		      </tr>
+		      <tr>
+		      	<td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a2a=
+2a" style=3D"background-color:#2a2a2a; padding:10px; font-family:Georgia,=
+ 'Times New Roman', Times, serif; color:#43c1d7; font-size:20px;"></td>
+		      </tr>
+		    </table>
+		    <br>
+		    <br>
+		  </tr>
+		</table>
+	</body>
+</html>=
+
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE `planformacion` SET `mensaje` = 6 WHERE `planformacion`.`id` = 15[0m
+  [1m[35m (43.2ms)[0m  [1m[35mCOMMIT[0m
