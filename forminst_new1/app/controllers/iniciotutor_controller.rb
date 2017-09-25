@@ -198,6 +198,9 @@ class IniciotutorController < ApplicationController
 			if !params[:plan_id].blank?
 				session[:plan_id] = params[:plan_id]
 			end
+			if params[:editar] == 'no' 
+				session[:editar]= false
+			end
 			@tutoresAnteriores = Instructortutor.where(instructor_id: session[:usuario_id], actual: 0)
 			@nombre = session[:nombre_usuario]
 			@planformacion = Planformacion.find(session[:plan_id])
@@ -519,7 +522,9 @@ class IniciotutorController < ApplicationController
 				session[:adecuacion_id]= @adecuacion.id
 			end
 			@adecuacion = Adecuacion.where(planformacion_id: session[:plan_id]).take
+				puts "AAAAA"
 			if params[:editar] == 'no' 
+				puts "HAHAJKLASCNKJC"
 				session[:editar]= false
 			end
 			@est= EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
@@ -1578,9 +1583,19 @@ class IniciotutorController < ApplicationController
 						puts "oh nooo"
 						g = g + 1
 				end
+				aob = 0
+				@actividades4= AdecuacionActividad.where(adecuacion_id: @adecuacion_id, semestre: 5).all
+				if @actividades4.blank?
+			        g = g + 1
+			        aob = 1
+				end
 
 				if (g != 0)
-					flash[:danger]="No puede enviar la adecuación sin haber llenado todos los semestres"
+					if aob == 0
+						flash[:danger]="No puede enviar la adecuación sin haber llenado todos los semestres"
+					else
+						flash[:danger]="No puede enviar la adecuación sin tener al menos una actividad obligatoria"
+					end
 			   	   	redirect_to controller:"iniciotutor", action: "detalles_adecuacion3"
 			   	else
 					plan = Planformacion.find(session[:plan_id])
