@@ -92,7 +92,7 @@ class InformesController < ApplicationController
                 @tipo_informe=3
                 @numero_informe=3
                 informe1 = Informe.where( planformacion_id: session[:plan_id], numero: 1).take
-		      	informe2 = Informe.where( planformacion_id: session[:plan_id], numero: 2).take
+		      	    informe2 = Informe.where( planformacion_id: session[:plan_id], numero: 2).take
 		      	if informe1.blank? || informe2.blank?
 		      		flash[:danger] = "Debe crear primero el primer y segundo informe semestral "
                     redirect_to controller:"informes", action: "listar_informes"
@@ -1022,6 +1022,28 @@ end
 
         @instructor = Persona.where(usuario_id: @planformacion.instructor_id).take
         @informe= Informe.find(session[:informe_id])
+
+        #Anual
+        if @informe.numero ==3
+          @informe.fecha_inicio = Informe.where( planformacion_id: session[:plan_id], numero: 1).take.fecha_inicio
+          @informe.fecha_fin = Informe.where( planformacion_id: session[:plan_id], numero: 2).take.fecha_fin
+          @informe.save
+        end
+
+        #Anual
+        if @informe.numero ==6
+          @informe.fecha_inicio = Informe.where( planformacion_id: session[:plan_id], numero: 4).take.fecha_inicio
+          @informe.fecha_fin = Informe.where( planformacion_id: session[:plan_id], numero: 5).take.fecha_fin
+          @informe.save
+        end
+
+        #Anual
+        if @informe.numero ==7
+          @informe.fecha_inicio = Informe.where( planformacion_id: session[:plan_id], numero: 1).take.fecha_inicio
+          @informe.fecha_fin = Informe.where( planformacion_id: session[:plan_id], numero: 4).take.fecha_fin
+          @informe.save
+        end
+
         @periodo = @informe.fecha_inicio.to_s + " al " + @informe.fecha_fin.to_s
         @estatus= EstatusInforme.where(informe_id: @informe.id, actual: 1).take
         @status= TipoEstatus.find(@estatus.estatus_id)
@@ -2813,7 +2835,7 @@ def generar_pdf() # es funciÃ³n permite generar el documento pdf de la adecuaciÃ
     puts "pendiente!!!!!!!!!!!!!!!!!!!"
     puts cpenviar
 
-    if cpenviar == "blablabla"
+    if cpenviar == "si"
 
       @informe_id = params[:informe_id].to_i
       cambio_act = EstatusInforme.where(informe_id: @informe_id, actual: 1).take

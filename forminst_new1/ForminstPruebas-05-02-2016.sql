@@ -84,6 +84,7 @@ CREATE TABLE `adecuacion` (
   `fecha_modificacion` date DEFAULT NULL,
   `fecha_creacion` date DEFAULT NULL,
   `estado` varchar(255) DEFAULT NULL,
+  `mensaje` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `adecuacionPlanformacion` (`planformacion_id`),
   KEY `adecuacionUsuario` (`tutor_id`),
@@ -168,15 +169,18 @@ CREATE TABLE `document` (
   `tutor_id` int(11) DEFAULT NULL,
   `adecuacion_id` int(11) DEFAULT NULL,
   `informe_id` int(11) DEFAULT NULL,
+  `actividad_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `documentinstructor` (`instructor_id`),
   KEY `documenttutor` (`tutor_id`),
   KEY `documentadecuacion` (`adecuacion_id`),
   KEY `documentinforme` (`informe_id`),
+  KEY `documentactividad` (`actividad_id`),
   CONSTRAINT `documentinstructor` FOREIGN KEY (`instructor_id`) REFERENCES `usuario` (`id`),
   CONSTRAINT `documenttutor` FOREIGN KEY (`tutor_id`) REFERENCES `usuario` (`id`),
   CONSTRAINT `documentadecuacion` FOREIGN KEY (`adecuacion_id`) REFERENCES `adecuacion` (`id`),
-  CONSTRAINT `documentinforme` FOREIGN KEY (`informe_id`) REFERENCES `informe` (`id`)
+  CONSTRAINT `documentinforme` FOREIGN KEY (`informe_id`) REFERENCES `informe` (`id`),
+  CONSTRAINT `documentactividad` FOREIGN KEY (`actividad_id`) REFERENCES `actividad` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -441,6 +445,7 @@ CREATE TABLE `informe` (
   `fecha_fin` date DEFAULT NULL,
   `fecha_modificacion` date DEFAULT NULL,
   `tipo_id` int(11) DEFAULT NULL,
+  `justificaciones` longtext,
   PRIMARY KEY (`id`),
   KEY `informePlanFormacion` (`planformacion_id`),
   KEY `informeusuario` (`tutor_id`),
@@ -938,7 +943,7 @@ CREATE TABLE `tipo_actividad` (
 
 LOCK TABLES `tipo_actividad` WRITE;
 /*!40000 ALTER TABLE `tipo_actividad` DISABLE KEYS */;
-INSERT INTO `tipo_actividad` VALUES (1,'Docencia'),(2,'Investigacion'),(3,'Extension'),(4,'Formacion'),(5,'Otras Actividad'),(6,'No Contempladas en el Plan');
+INSERT INTO `tipo_actividad` VALUES (1,'Docencia'),(2,'Investigacion'),(3,'Extension'),(4,'Formacion'),(5,'Otras Actividad'),(6,'No Contempladas en el Plan'), (7,'Obligatorias');
 /*!40000 ALTER TABLE `tipo_actividad` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1037,12 +1042,9 @@ CREATE TABLE `usuario` (
 -- Dumping data for table `usuario`
 --
 
---INSERT INTO `usuario` VALUES (47,'secretaria.biologia',0,1,'secretaria','secretaria.biologia','Secretaria'),(41,'comision_biologia_celular',0,1,'ib123','comision_biologiac','Institucional'),(42,'comision_botanica',0,1,'ib123','comision_botanica','Institucional'),(43,'comision_ecologia',0,1,'ib123','comision_ecologia','Institucional'),(44,'comision_TdI',0,1,'ib123','comision_TdI','Institucional'),(45,'comision_zoologia',0,1,'ib123','comision_zoologia','Institucional'),(46,'comision_ME',0,1,'ib123','comision_ME','Institucional');
---INSERT INTO `persona` VALUES (57,47,'Secretaria J.','Biología',NULL,'10531496',NULL,NULL,NULL,NULL,NULL,NULL);
+INSERT INTO `usuario` VALUES (47,'secretaria.biologia',0,1,'secretaria','secretaria.biologia','Secretaria'),(41,'comision_biologia_celular',0,1,'ib123','comision_biologiac','Institucional'),(42,'comision_botanica',0,1,'ib123','comision_botanica','Institucional'),(43,'comision_ecologia',0,1,'ib123','comision_ecologia','Institucional'),(44,'comision_TdI',0,1,'ib123','comision_TdI','Institucional'),(45,'comision_zoologia',0,1,'ib123','comision_zoologia','Institucional'),(46,'comision_ME',0,1,'ib123','comision_ME','Institucional');
+INSERT INTO `persona` VALUES (57,47,'Secretaria J.','Biología',NULL,'10531496',NULL,NULL,NULL,NULL,NULL,NULL);
 
-
---INSERT INTO `usuarioentidad` VALUES (41,41,7,1,1),(42,42,7,1,2),(43,43,7,1,3),(44,44,7,1,4),(45,45,7,1,5),(46,46,7,1,6),(47,47,1,1,NULL);
---INSERT INTO `usuarioentidad` VALUES (52,52,1,1,NULL);
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
@@ -1081,7 +1083,7 @@ CREATE TABLE `usuarioentidad` (
 
 LOCK TABLES `usuarioentidad` WRITE;
 /*!40000 ALTER TABLE `usuarioentidad` DISABLE KEYS */;
-INSERT INTO `usuarioentidad` VALUES (1,1,18,2,9),(2,2,18,2,NULL),(3,3,8,2,9),(4,4,18,NULL,NULL),(5,5,11,9,11),(6,6,5,9,NULL),(7,7,13,11,NULL),(8,8,2,2,NULL),(9,9,11,9,NULL),(10,10,18,12,9),(11,11,18,NULL,NULL),(12,12,18,NULL,NULL),(13,13,8,2,NULL),(14,14,18,NULL,NULL),(15,15,5,9,NULL),(16,16,18,9,NULL),(17,17,18,9,11),(18,18,13,11,NULL),(19,19,18,NULL,9),(20,20,18,1,NULL),(21,21,8,2,NULL),(22,22,18,NULL,NULL),(23,23,18,NULL,NULL),(24,24,18,2,NULL),(25,25,18,2,9),(26,26,19,NULL,NULL),(27,27,19,NULL,NULL),(28,28,19,NULL,11),(29,29,19,NULL,NULL),(30,30,19,NULL,NULL),(31,31,19,NULL,NULL),(32,32,19,12,9),(34,34,19,2,9),(35,35,13,NULL,NULL),(36,36,2,2,9);
+INSERT INTO `usuarioentidad` VALUES (1,1,18,2,9),(2,2,18,2,NULL),(3,3,8,2,9),(4,4,18,NULL,NULL),(5,5,11,9,11),(6,6,5,9,NULL),(7,7,13,11,NULL),(8,8,2,2,NULL),(9,9,11,9,NULL),(10,10,18,12,9),(11,11,18,NULL,NULL),(12,12,18,NULL,NULL),(13,13,8,2,NULL),(14,14,18,NULL,NULL),(15,15,5,9,NULL),(16,16,18,9,NULL),(17,17,18,9,11),(18,18,13,11,NULL),(19,19,18,NULL,9),(20,20,18,1,NULL),(21,21,8,2,NULL),(22,22,18,NULL,NULL),(23,23,18,NULL,NULL),(24,24,18,2,NULL),(25,25,18,2,9),(26,26,19,NULL,NULL),(27,27,19,NULL,NULL),(28,28,19,NULL,11),(29,29,19,NULL,NULL),(30,30,19,NULL,NULL),(31,31,19,NULL,NULL),(32,32,19,12,9),(34,34,19,2,9),(35,35,13,NULL,NULL),(36,36,2,2,9),(41,41,7,1,1),(42,42,7,1,2),(43,43,7,1,3),(44,44,7,1,4),(45,45,7,1,5),(46,46,7,1,6),(47,47,1,1,NULL),(52,52,1,1,NULL);
 /*!40000 ALTER TABLE `usuarioentidad` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

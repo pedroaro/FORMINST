@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: forminst
 -- ------------------------------------------------------
--- Server version 5.5.40-0+wheezy1
+-- Server version	5.5.40-0+wheezy1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -84,6 +84,7 @@ CREATE TABLE `adecuacion` (
   `fecha_modificacion` date DEFAULT NULL,
   `fecha_creacion` date DEFAULT NULL,
   `estado` varchar(255) DEFAULT NULL,
+  `mensaje` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `adecuacionPlanformacion` (`planformacion_id`),
   KEY `adecuacionUsuario` (`tutor_id`),
@@ -131,6 +132,29 @@ LOCK TABLES `adecuacion_actividad` WRITE;
 /*!40000 ALTER TABLE `adecuacion_actividad` ENABLE KEYS */;
 UNLOCK TABLES;
 
+DROP TABLE IF EXISTS `departamento`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `departamento` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(255) DEFAULT NULL,
+  `escuela_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `escuelaDepartamento` (`escuela_id`),
+  CONSTRAINT `escuelaDepartamento` FOREIGN KEY (`escuela_id`) REFERENCES `escuela` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `departamento`
+--
+
+LOCK TABLES `departamento` WRITE;
+/*!40000 ALTER TABLE `departamento` DISABLE KEYS */;
+INSERT INTO `departamento` VALUES (1,'Departamento de Biología Celular', 1),(2,'Departamento de Botanica', 1),(3,'Departamento de Ecología', 1),(4,'Departamento de Tecnología de Alimentos', 1),(5,'Departamento de Zoología',1),(6,'Centro de Microscopía Electrónica',1),(7,'Departamento de Física',3),(8,'Departamento de Química',10),(9,'Departamento de Computación',2),(10,'Departamento de Geoquímica', 4),(11,'Departamento de Matemática',9),(12,'Desconocida', 12);
+/*!40000 ALTER TABLE `departamento` ENABLE KEYS */;
+UNLOCK TABLES;
+
 DROP TABLE IF EXISTS `document`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -138,22 +162,25 @@ CREATE TABLE `document` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `filename` varchar(255) DEFAULT NULL,
   `content_type` varchar(255) DEFAULT NULL,
-  `file_contents` BLOB DEFAULT NULL,
+  `file_contents` MEDIUMBLOB DEFAULT NULL,
   `created_at` datetime  NOT NULL,
   `updated_at` datetime NOT NULL,
   `instructor_id` int(11) DEFAULT NULL,
   `tutor_id` int(11) DEFAULT NULL,
   `adecuacion_id` int(11) DEFAULT NULL,
   `informe_id` int(11) DEFAULT NULL,
+  `actividad_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `documentinstructor` (`instructor_id`),
   KEY `documenttutor` (`tutor_id`),
   KEY `documentadecuacion` (`adecuacion_id`),
   KEY `documentinforme` (`informe_id`),
+  KEY `documentactividad` (`actividad_id`),
   CONSTRAINT `documentinstructor` FOREIGN KEY (`instructor_id`) REFERENCES `usuario` (`id`),
   CONSTRAINT `documenttutor` FOREIGN KEY (`tutor_id`) REFERENCES `usuario` (`id`),
   CONSTRAINT `documentadecuacion` FOREIGN KEY (`adecuacion_id`) REFERENCES `adecuacion` (`id`),
-  CONSTRAINT `documentinforme` FOREIGN KEY (`informe_id`) REFERENCES `informe` (`id`)
+  CONSTRAINT `documentinforme` FOREIGN KEY (`informe_id`) REFERENCES `informe` (`id`),
+  CONSTRAINT `documentactividad` FOREIGN KEY (`actividad_id`) REFERENCES `actividad` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -282,6 +309,7 @@ LOCK TABLES `escuela` WRITE;
 INSERT INTO `escuela` VALUES (1,'Escuela de Biología'),(2,'Escuela de Computación'),(3,'Escuela de Física'),(4,'Escuela de Geoqímica'),(5,'Instituto Biología Experimental'),(6,'Instituto de Ciencia y Tecnología de Alimentos'),(7,'Instituto de Ciencias de la Tierra'),(8,'Instituto de Zoología y Ecología Tropical'),(9,'Escuela de Matemática'),(10,'Escuela de Química'),(11,'Consejo de Facultad'),(12,'Desconocida');
 /*!40000 ALTER TABLE `escuela` ENABLE KEYS */;
 UNLOCK TABLES;
+
 
 --
 -- Table structure for table `estatus_adecuacion`
@@ -417,6 +445,7 @@ CREATE TABLE `informe` (
   `fecha_fin` date DEFAULT NULL,
   `fecha_modificacion` date DEFAULT NULL,
   `tipo_id` int(11) DEFAULT NULL,
+  `justificaciones` longtext,
   PRIMARY KEY (`id`),
   KEY `informePlanFormacion` (`planformacion_id`),
   KEY `informeusuario` (`tutor_id`),
@@ -519,10 +548,11 @@ CREATE TABLE `instructortutor` (
 -- Dumping data for table `instructortutor`
 --
 
- LOCK TABLES `instructortutor` WRITE;
+-- LOCK TABLES `instructortutor` WRITE;
 /*!40000 ALTER TABLE `instructortutor` DISABLE KEYS */;
+-- INSERT INTO `instructortutor` VALUES (1,26,4,1),(2,27,12,1),(3,28,11,1),(4,29,20,1),(5,30,20,1),(6,31,23,1),(7,32,24,1),(8,2,1,1),(9,10,24,1),(10,10,25,1),(11,26,1,1),(12,10,1,1),(13,34,1,1);
 /*!40000 ALTER TABLE `instructortutor` ENABLE KEYS */;
- UNLOCK TABLES;
+-- UNLOCK TABLES;
 
 --
 -- Table structure for table `observacion_actividad_adecuacion`
@@ -695,6 +725,7 @@ CREATE TABLE `persona` (
 
 LOCK TABLES `persona` WRITE;
 /*!40000 ALTER TABLE `persona` DISABLE KEYS */;
+INSERT INTO `persona` VALUES (52,36,'Secretaria J.','Uno W.',NULL,'10531496',NULL,NULL,NULL,NULL,NULL,NULL),(57,47,'Secretaria J.','Biología',NULL,'10531496',NULL,NULL,NULL,NULL,NULL,NULL);
 /*!40000 ALTER TABLE `persona` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -715,6 +746,7 @@ CREATE TABLE `planformacion` (
   `fecha_modificacion` date DEFAULT NULL,
   `adscripcion_docencia` varchar(255) DEFAULT NULL,
   `adscripcion_investigacion` varchar(255) DEFAULT NULL,
+  `mensaje` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `PlanFormacionInstructor` (`instructor_id`),
   KEY `PlanFormacionTutor` (`tutor_id`),
@@ -772,7 +804,7 @@ CREATE TABLE `respaldo` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `filename` varchar(255) DEFAULT NULL,
   `content_type` varchar(255) DEFAULT NULL,
-  `file_contents` BLOB DEFAULT NULL,
+  `file_contents` MEDIUMBLOB DEFAULT NULL,
   `created_at` datetime  NOT NULL,
   `version` int(3) NOT NULL,
   `actual` int(1) NOT NULL,
@@ -911,7 +943,7 @@ CREATE TABLE `tipo_actividad` (
 
 LOCK TABLES `tipo_actividad` WRITE;
 /*!40000 ALTER TABLE `tipo_actividad` DISABLE KEYS */;
-INSERT INTO `tipo_actividad` VALUES (1,'Docencia'),(2,'Investigacion'),(3,'Extension'),(4,'Formacion'),(5,'Otras Actividad'),(6,'No Contempladas en el Plan');
+INSERT INTO `tipo_actividad` VALUES (1,'Docencia'),(2,'Investigacion'),(3,'Extension'),(4,'Formacion'),(5,'Otras Actividad'),(6,'No Contempladas en el Plan'), (7,'Obligatorias');
 /*!40000 ALTER TABLE `tipo_actividad` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1012,7 +1044,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1,'consejo_biologia',0,1,'cb123','consejo_biologia','Institucional'), (2,'consejo_computacion',0,1,'cc123','consejo_computacion','Institucional'), (3,'consejo_fisica',0,1,'cf123','consejo_fisica','Institucional'), (4,'consejo_geoquimica',0,1,'cg123','consejo_geoquimica','Institucional'), (5,'consejo_matematica',0,1,'cm123','consejo_matematica','Institucional'), (6,'consejo_quimica',0,1,'cb123','consejo_quimica','Institucional'), (7,'comision_biologia',0,1,'ib123','comision_biologia','Institucional'), (8,'comision_computacion',0,1,'ic123','comision_computacion','Institucional'), (9,'comision_fisica',0,1,'if123','comision_fisica','Institucional'), (10,'comision_geoquimica',0,1,'ig123','comision_geoquimica','Institucional'), (11,'comision_matematica',0,1,'im123','comision_matematica','Institucional'), (12,'comision_quimica',0,1,'iq123','comision_quimica','Institucional'), (13,'consejo_facultad',0,1,'conf123','consejo_facultad','Institucional'), (14,'tecnico_ibe',0,1,'ti123','tecnico_ibe','Institucional'), (15,'tecnico_ict',0,1,'ict123','tecnico_ict','Institucional'), (16,'tecnico_icta',0,1,'icta123','tecnico_icta','Institucional'), (17,'tecnico_izet',0,1,'izet123','tecnico_izet','Institucional');
+INSERT INTO `usuario` VALUES (1, "departamento.biologia.celular",0,1,"dbc","departamento.biologia.celular","Institucional"), (2, "departamento.botanica",0,1,"db","departamento.botanica","Institucional"), (3, "departamento.ecologia",0,1,"de","departamento.ecologia","Institucional"), (4, "departamento.tecnologia.alimentos",0,1,"dta","departamento.tecnologia.alimentos","Institucional"), (5, "departamento.zoologia",0,1,"dz","departamento.zoologia","Institucional"), (6, "centro.microscopia.electronica",0,1,"cme","centro.microscopia.electronica","Institucional"), (7, "escuela.biologia",0,1,"eb","escuela.biologia","Institucional"), (8, "comision.investigacion.fisica",0,1,"cif","comision.investigacion.fisica","Institucional"), (9, "consejo.escuela.fisica",0,1,"cef","consejo.escuela.fisica","Institucional"), (10, "comision.investigacion.quimica",0,1,"ciq","comision.investigacion.quimica","Institucional"), (11, "consejo.escuela.quimica",0,1,"ceq","consejo.escuela.quimica","Institucional"), (12, "comision.investigacion.computacion",0,1,"cic","comision.investigacion.computacion","Institucional"), (13, "consejo.escuela.computacion",0,1,"cec","consejo.escuela.computacion","Institucional"), (14, "comision.investigacion.geoquimica",0,1,"cig","comision.investigacion.geoquimica","Institucional"), (15, "consejo.escuela.geoquimica",0,1,"ceg","consejo.escuela.geoquimica","Institucional"), (16, "comision.investigacion.matematica",0,1,"cim","comision.investigacion.matematica","Institucional"), (17, "consejo.escuela.matematica",0,1,"cem","consejo.escuela.matematica","Institucional"), (18, "consejo.facultad",0,1,"cf","consejo.facultad","Institucional"), (19, "consejo.ibe",0,1,"cibe","consejo.ibe","Institucional"), (20, "consejo.ict",0,1,"cict","consejo.ict","Institucional"), (21, "consejo.icta",0,1,"cicta","consejo.icta","Institucional"), (22, "consejo.izet",0,1,"izet","consejo.izet","Institucional");
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -1028,13 +1060,16 @@ CREATE TABLE `usuarioentidad` (
   `usuario_id` int(11) DEFAULT NULL,
   `entidad_id` int(11) DEFAULT NULL,
   `escuela_id` int(11) DEFAULT NULL,
+  `departamento_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `usuarioEntidadEntidad` (`entidad_id`),
   KEY `usuarioEntidadUsuario` (`usuario_id`),
   KEY `usuarioEscuela` (`escuela_id`),
+  KEY `departamentoUsuario` (`departamento_id`),
   CONSTRAINT `usuarioEscuela` FOREIGN KEY (`escuela_id`) REFERENCES `escuela` (`id`),
   CONSTRAINT `usuarioEntidadEntidad` FOREIGN KEY (`entidad_id`) REFERENCES `entidad` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `usuarioEntidadUsuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `usuarioEntidadUsuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `departamentoUsuario` FOREIGN KEY (`departamento_id`) REFERENCES `departamento` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -1044,7 +1079,7 @@ CREATE TABLE `usuarioentidad` (
 
 LOCK TABLES `usuarioentidad` WRITE;
 /*!40000 ALTER TABLE `usuarioentidad` DISABLE KEYS */;
-INSERT INTO `usuarioentidad` VALUES (1,1,1,1), (2,2,2,2), (3,3,3,3), (4,4,4,4), (5,5,5,9), (6,6,6,10), (7,7,7,1), (8,8,8,2), (9,9,9,3), (10,10,10,4), (11,11,11,9), (12,12,12,10), (13,13,13,11), (14,14,14,NULL), (15,15,15,NULL), (16,16,16,NULL), (17,17,17,NULL);
+INSERT INTO `usuarioentidad` VALUES (1,1,7,1,1), (2,2,7,1,2), (3,3,7,1,3), (4,4,7,1,4), (5,5,7,1,5), (6,6,7,1,6), (7,7,1,1,NULL), (8,8,9,3,7), (9,9,3,3,NULL), (10,10,12,10,8), (11,11,6,10,NULL), (12,12,8,2,9), (13,13,2,2,NULL), (14,14,10,4,10), (15,15,4,4,null), (16,16,11,9,11), (17,17,5,9,NULL), (18,18,13,NULL,NULL), (19,19,14,NULL,NULL), (20,20,15,NULL,NULL), (21,21,16,NULL,NULL), (22,22,17,NULL,NULL);
 /*!40000 ALTER TABLE `usuarioentidad` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
