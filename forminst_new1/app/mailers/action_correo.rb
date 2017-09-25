@@ -27,6 +27,14 @@ class ActionCorreo < ActionMailer::Base
 		end
 	end
 
+	def retraso_informe(remitente, mensaje)
+  		@mensaje = mensaje
+  		email = remitente.user + "@ciens.ucv.ve"
+  		@email= email
+		@user_email = 'forminst.ciens@gmail.com'
+		mail(to: [@user_email,@email], subject: 'Recordatorio de envío de informe')
+	end
+
 	def creacion_de_instructor(remitente, mensaje, id)
   		@id = id
   		@mensaje = mensaje

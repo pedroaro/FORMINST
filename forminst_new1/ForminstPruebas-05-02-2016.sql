@@ -1042,9 +1042,12 @@ CREATE TABLE `usuario` (
 -- Dumping data for table `usuario`
 --
 
-INSERT INTO `usuario` VALUES (47,'secretaria.biologia',0,1,'secretaria','secretaria.biologia','Secretaria'),(41,'comision_biologia_celular',0,1,'ib123','comision_biologiac','Institucional'),(42,'comision_botanica',0,1,'ib123','comision_botanica','Institucional'),(43,'comision_ecologia',0,1,'ib123','comision_ecologia','Institucional'),(44,'comision_TdI',0,1,'ib123','comision_TdI','Institucional'),(45,'comision_zoologia',0,1,'ib123','comision_zoologia','Institucional'),(46,'comision_ME',0,1,'ib123','comision_ME','Institucional');
-INSERT INTO `persona` VALUES (57,47,'Secretaria J.','Biología',NULL,'10531496',NULL,NULL,NULL,NULL,NULL,NULL);
+#INSERT INTO `usuario` VALUES (47,'secretaria.biologia',0,1,'secretaria','secretaria.biologia','Secretaria'),(41,'comision_biologia_celular',0,1,'ib123','comision_biologiac','Institucional'),(42,'comision_botanica',0,1,'ib123','comision_botanica','Institucional'),(43,'comision_ecologia',0,1,'ib123','comision_ecologia','Institucional'),(44,'comision_TdI',0,1,'ib123','comision_TdI','Institucional'),(45,'comision_zoologia',0,1,'ib123','comision_zoologia','Institucional'),(46,'comision_ME',0,1,'ib123','comision_ME','Institucional');
+#INSERT INTO `persona` VALUES (57,47,'Secretaria J.','Biología',NULL,'10531496',NULL,NULL,NULL,NULL,NULL,NULL);
 
+
+#INSERT INTO `usuarioentidad` VALUES (41,41,7,1,1),(42,42,7,1,2),(43,43,7,1,3),(44,44,7,1,4),(45,45,7,1,5),(46,46,7,1,6),(47,47,1,1,NULL);
+#INSERT INTO `usuarioentidad` VALUES (52,52,1,1,NULL);
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;

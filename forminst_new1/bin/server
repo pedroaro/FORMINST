@@ -18,7 +18,7 @@ while true
 	fecha = Time.now.strftime("%Y-%m-%d")
 	fecha2 = Time.now
 	estatus_adecuacion.each do |status|
-		if status.fecha + 2.week <= fecha2
+		if status.fecha + 3.week <= fecha2
 			puts status.fecha
 			#----------------------------------------------
 			if status.estatus_id == 3
@@ -328,8 +328,20 @@ while true
 			notific.mensaje = "[" + notificacionfecha + "] " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " usted posee un mes para enviar el primer informe semestral de " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +"."
 			notific.save
 
+			notific2 = Notificacion.new
+			notific2.instructor_id = plan.instructor_id
+			notific2.tutor_id = plan.tutor_id
+			notific2.adecuacion_id = adecuacion.id
+			notific2.actual = 2
+			notificacionfecha = Date.current.to_s 
+			notific2.mensaje = "[" + notificacionfecha + "] " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') + " su tutor " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +" aun no ha enviado el primer informe semestral, dispone de un mes para enviarlo."
+			notific2.save
+
+			remitente4 = Usuario.where(id: plan.instructor_id).take
+			ActionCorreo.retraso_informe(remitente4, notific2.mensaje).deliver
+
 			remitente3 = Usuario.where(id: plan.tutor_id).take
-			ActionCorreo.envio_informe(remitente3, notific.mensaje,2).deliver
+			ActionCorreo.retraso_informe(remitente3, notific.mensaje).deliver
 			plan.mensaje = 1
 			plan.save
 		end
@@ -348,8 +360,20 @@ while true
 			notific.mensaje = "[" + notificacionfecha + "] " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " usted posee un mes para enviar el segundo informe semestral junto con el primer informe anual de " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +"."
 			notific.save
 
+			notific2 = Notificacion.new
+			notific2.instructor_id = plan.instructor_id
+			notific2.tutor_id = plan.tutor_id
+			notific2.adecuacion_id = adecuacion.id
+			notific2.actual = 2
+			notificacionfecha = Date.current.to_s 
+			notific2.mensaje = "[" + notificacionfecha + "] " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') + " su tutor " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +" aun no ha enviado el segundo informe semestral junto con el primer informe anual, dispone de un mes para enviarlo."
+			notific2.save
+
+			remitente4 = Usuario.where(id: plan.instructor_id).take
+			ActionCorreo.retraso_informe(remitente4, notific2.mensaje).deliver
+
 			remitente3 = Usuario.where(id: plan.tutor_id).take
-			ActionCorreo.envio_informe(remitente3, notific.mensaje,2).deliver
+			ActionCorreo.retraso_informe(remitente3, notific.mensaje).deliver
 
 			plan.mensaje = 3
 			plan.save
@@ -370,8 +394,20 @@ while true
 			notific.mensaje = "[" + notificacionfecha + "] " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " usted posee un mes para enviar el tercer informe semestral de " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +"."
 			notific.save
 
+			notific2 = Notificacion.new
+			notific2.instructor_id = plan.instructor_id
+			notific2.tutor_id = plan.tutor_id
+			notific2.adecuacion_id = adecuacion.id
+			notific2.actual = 2
+			notificacionfecha = Date.current.to_s 
+			notific2.mensaje = "[" + notificacionfecha + "] " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') + " su tutor " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +" aun no ha enviado el tercer informe semestral, dispone de un mes para enviarlo."
+			notific2.save
+
+			remitente4 = Usuario.where(id: plan.instructor_id).take
+			ActionCorreo.retraso_informe(remitente4, notific2.mensaje).deliver
+
 			remitente3 = Usuario.where(id: plan.tutor_id).take
-			ActionCorreo.envio_informe(remitente3, notific.mensaje,2).deliver
+			ActionCorreo.retraso_informe(remitente3, notific.mensaje).deliver
 
 			plan.mensaje = 5
 			plan.save
@@ -392,8 +428,20 @@ while true
 			notific.mensaje = "[" + notificacionfecha + "] " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " usted posee un mes para enviar el cuarto informe semestral junto con el segundo informe anual y el final de " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +"."
 			notific.save
 
+			notific2 = Notificacion.new
+			notific2.instructor_id = plan.instructor_id
+			notific2.tutor_id = plan.tutor_id
+			notific2.adecuacion_id = adecuacion.id
+			notific2.actual = 2
+			notificacionfecha = Date.current.to_s 
+			notific2.mensaje = "[" + notificacionfecha + "] " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') + " su tutor " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +" aun no ha enviado el cuarto informe semestral junto con el segundo informe anual y el final, dispone de un mes para enviarlo."
+			notific2.save
+
+			remitente4 = Usuario.where(id: plan.instructor_id).take
+			ActionCorreo.retraso_informe(remitente4, notific2.mensaje).deliver
+
 			remitente3 = Usuario.where(id: plan.tutor_id).take
-			ActionCorreo.envio_informe(remitente3, notific.mensaje,2).deliver
+			ActionCorreo.retraso_informe(remitente3, notific.mensaje).deliver
 
 			plan.mensaje = 7
 			plan.save
@@ -412,45 +460,43 @@ while true
 			#Se ven los informe enviados
 			if inf.numero == 1
 				est_inf = EstatusInforme.where(informe_id: inf.id).take
-				if (est_inf.estatus_id == 6 || est_inf.estatus_id == 9)
+				if (est_inf.estatus_id != 6 && est_inf.estatus_id != 9)
 					infor1 = 1
 				end
 			elsif inf.numero == 2
 				est_inf = EstatusInforme.where(informe_id: inf.id).take
-				if (est_inf.estatus_id == 6 || est_inf.estatus_id == 9)
+				if (est_inf.estatus_id != 6 && est_inf.estatus_id != 9)
 					infor2 = 1
 				end
 			elsif inf.numero == 3
 				est_inf = EstatusInforme.where(informe_id: inf.id).take
-				if (est_inf.estatus_id == 6 || est_inf.estatus_id == 9)
+				if (est_inf.estatus_id != 6 && est_inf.estatus_id != 9)
 					infor3 = 1
 				end
 			elsif inf.numero == 4
 				est_inf = EstatusInforme.where(informe_id: inf.id).take
-				if (est_inf.estatus_id == 6 || est_inf.estatus_id == 9)
+				if (est_inf.estatus_id != 6 && est_inf.estatus_id != 9)
 					infor4 = 1
 				end
 			elsif inf.numero == 5
 				est_inf = EstatusInforme.where(informe_id: inf.id).take
-				if (est_inf.estatus_id == 6 || est_inf.estatus_id == 9)
+				if (est_inf.estatus_id != 6 && est_inf.estatus_id != 9)
 					infor5 = 1
 				end
 			elsif inf.numero == 6
 				est_inf = EstatusInforme.where(informe_id: inf.id).take
-				if (est_inf.estatus_id == 6 || est_inf.estatus_id == 9)
+				if (est_inf.estatus_id != 6 && est_inf.estatus_id != 9)
 					infor6 = 1
 				end
 			elsif inf.numero == 7
 				est_inf = EstatusInforme.where(informe_id: inf.id).take
-				if (est_inf.estatus_id == 6 || est_inf.estatus_id == 9)
+				if (est_inf.estatus_id != 6 && est_inf.estatus_id != 9)
 					infor7 = 1
 				end
 			end
 		end
 
-		#FALTAAA
-
-		if plan.fecha_inicio + 6.month + 15.day <= fecha2 && plan.fecha_inicio + 11.month >= fecha2 && plan.mensaje == 1 && infor1 == 1
+		if plan.fecha_inicio + 6.month + 15.day <= fecha2 && plan.fecha_inicio + 11.month >= fecha2 && plan.mensaje == 1 && infor1 == 0
 			puts plan.fecha_inicio
 			adecuacion = Adecuacion.where(planformacion_id: plan.id).take
 			notific = Notificacion.new
@@ -461,16 +507,28 @@ while true
 			person = Persona.where(usuario_id: plan.tutor_id).take
 			person2 = Persona.where(usuario_id: plan.instructor_id).take
 			notificacionfecha = Date.current.to_s 
-			notific.mensaje = "[" + notificacionfecha + "] " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " ha excedido en 15 dias el dia tope de entrega del primer informe semestral de " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +", enviar el la brevedad posible."
+			notific.mensaje = "[" + notificacionfecha + "] " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " ha excedido en 15 dias el dia tope de entrega del primer informe semestral de " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +", enviar en la brevedad posible."
 			notific.save
 
+			notific2 = Notificacion.new
+			notific2.instructor_id = plan.instructor_id
+			notific2.tutor_id = plan.tutor_id
+			notific2.adecuacion_id = adecuacion.id
+			notific2.actual = 2
+			notificacionfecha = Date.current.to_s 
+			notific2.mensaje = "[" + notificacionfecha + "] " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') + " su tutor " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +"  ha excedido en 15 dias el dia tope de entrega del primer informe semestral, enviar en la brevedad posible."
+			notific2.save
+
+			remitente4 = Usuario.where(id: plan.instructor_id).take
+			ActionCorreo.retraso_informe(remitente4, notific2.mensaje).deliver
+
 			remitente3 = Usuario.where(id: plan.tutor_id).take
-			ActionCorreo.envio_informe(remitente3, notific.mensaje,2).deliver
+			ActionCorreo.retraso_informe(remitente3, notific.mensaje).deliver
 			plan.mensaje = 2
 			plan.save
 		end
 
-		if plan.fecha_inicio + 12.month + 15.day <= fecha2 && plan.fecha_inicio + 17.month >= fecha2 && plan.mensaje == 3 && (infor2 == 1 || infor3 == 1)
+		if plan.fecha_inicio + 12.month + 15.day <= fecha2 && plan.fecha_inicio + 17.month >= fecha2 && plan.mensaje == 3 && (infor2 == 0 || infor3 == 0)
 			puts plan.fecha_inicio
 			adecuacion = Adecuacion.where(planformacion_id: plan.id).take
 			notific = Notificacion.new
@@ -481,21 +539,37 @@ while true
 			person = Persona.where(usuario_id: plan.tutor_id).take
 			person2 = Persona.where(usuario_id: plan.instructor_id).take
 			notificacionfecha = Date.current.to_s 
-			if infor2 == 1
-				notific.mensaje = "[" + notificacionfecha + "] " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + "  ha excedido en 15 dias el dia tope de entrega del segundo informe semestral y con el primer informe anual de " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +", enviar el la brevedad posible."
+			if infor2 == 0
+				notific.mensaje = "[" + notificacionfecha + "] " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + "  ha excedido en 15 dias el dia tope de entrega del segundo informe semestral y con el primer informe anual de " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +", enviar en la brevedad posible."
 			else
-				notific.mensaje = "[" + notificacionfecha + "] " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + "  ha excedido en 15 dias el dia tope de entrega del primer informe anual de " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +", enviar el la brevedad posible."
+				notific.mensaje = "[" + notificacionfecha + "] " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + "  ha excedido en 15 dias el dia tope de entrega del primer informe anual de " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +", enviar en la brevedad posible."
 			end
 			notific.save
 
+			notific2 = Notificacion.new
+			notific2.instructor_id = plan.instructor_id
+			notific2.tutor_id = plan.tutor_id
+			notific2.adecuacion_id = adecuacion.id
+			notific2.actual = 2
+			notificacionfecha = Date.current.to_s 
+			if infor2 == 0
+				notific2.mensaje = "[" + notificacionfecha + "] " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') + " su tutor " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +"  ha excedido en 15 dias el dia tope de entrega del segundo informe semestral y con el primer informe anual, enviar en la brevedad posible."
+			else
+				notific2.mensaje = "[" + notificacionfecha + "] " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') + " su tutor " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +"  ha excedido en 15 dias el dia tope de entrega del primer informe anual, enviar en la brevedad posible."
+			end
+			notific2.save
+
+			remitente4 = Usuario.where(id: plan.instructor_id).take
+			ActionCorreo.retraso_informe(remitente4, notific2.mensaje).deliver
+
 			remitente3 = Usuario.where(id: plan.tutor_id).take
-			ActionCorreo.envio_informe(remitente3, notific.mensaje,2).deliver
+			ActionCorreo.retraso_informe(remitente3, notific.mensaje).deliver
 
 			plan.mensaje = 4
 			plan.save
 		end
 
-		if plan.fecha_inicio + 18.month + 15.day <= fecha2 && plan.fecha_inicio + 23.month >= fecha2 && plan.mensaje == 5 && infor4 == 1
+		if plan.fecha_inicio + 18.month + 15.day <= fecha2 && plan.fecha_inicio + 23.month >= fecha2 && plan.mensaje == 5 && infor4 == 0
 			puts plan.fecha_inicio
 
 			adecuacion = Adecuacion.where(planformacion_id: plan.id).take
@@ -507,17 +581,29 @@ while true
 			person = Persona.where(usuario_id: plan.tutor_id).take
 			person2 = Persona.where(usuario_id: plan.instructor_id).take
 			notificacionfecha = Date.current.to_s 
-			notific.mensaje = "[" + notificacionfecha + "] " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + "  ha excedido en 15 dias el dia tope de entrega del tercer informe semestral de " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +", enviar el la brevedad posible."
+			notific.mensaje = "[" + notificacionfecha + "] " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + "  ha excedido en 15 dias el dia tope de entrega del tercer informe semestral de " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +", enviar en la brevedad posible."
 			notific.save
 
+			notific2 = Notificacion.new
+			notific2.instructor_id = plan.instructor_id
+			notific2.tutor_id = plan.tutor_id
+			notific2.adecuacion_id = adecuacion.id
+			notific2.actual = 2
+			notificacionfecha = Date.current.to_s 
+			notific2.mensaje = "[" + notificacionfecha + "] " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') + " su tutor " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +"  ha excedido en 15 dias el dia tope de entrega del tercer informe semestral, enviar en la brevedad posible."
+			notific2.save
+
+			remitente4 = Usuario.where(id: plan.instructor_id).take
+			ActionCorreo.retraso_informe(remitente4, notific2.mensaje).deliver
+
 			remitente3 = Usuario.where(id: plan.tutor_id).take
-			ActionCorreo.envio_informe(remitente3, notific.mensaje,2).deliver
+			ActionCorreo.retraso_informe(remitente3, notific.mensaje).deliver
 
 			plan.mensaje = 6
 			plan.save
 		end
 
-		if plan.fecha_inicio + 24.month + 15.day <= fecha2 && plan.mensaje == 7 && (infor5 == 1 || infor6 == 1 ||  infor7 == 1)
+		if plan.fecha_inicio + 24.month + 15.day <= fecha2 && plan.mensaje == 7 && (infor5 == 0 || infor6 == 0 ||  infor7 == 0)
 			puts plan.fecha_inicio
 
 			adecuacion = Adecuacion.where(planformacion_id: plan.id).take
@@ -529,24 +615,39 @@ while true
 			person = Persona.where(usuario_id: plan.tutor_id).take
 			person2 = Persona.where(usuario_id: plan.instructor_id).take
 			notificacionfecha = Date.current.to_s 
-			if infor5 == 1
-				notific.mensaje = "[" + notificacionfecha + "] " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " ha excedido en 15 dias el dia tope de entrega del cuarto informe semestral, el segundo informe anual y el final de " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +", enviar el la brevedad posible."
-			elsif infor6 == 1
-				notific.mensaje = "[" + notificacionfecha + "] " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + "  ha excedido en 15 dias el dia tope de entrega del segundo informe anual y el final de " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +", enviar el la brevedad posible."
+			if infor5 == 0
+				notific.mensaje = "[" + notificacionfecha + "] " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " ha excedido en 15 dias el dia tope de entrega del cuarto informe semestral, el segundo informe anual y el final de " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +", enviar en la brevedad posible."
+			elsif infor6 == 0
+				notific.mensaje = "[" + notificacionfecha + "] " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + "  ha excedido en 15 dias el dia tope de entrega del segundo informe anual y el final de " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +", enviar en la brevedad posible."
 			else
-				notific.mensaje = "[" + notificacionfecha + "] " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + "  ha excedido en 15 dias el dia tope de entrega del informe final de " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +", enviar el la brevedad posible."
+				notific.mensaje = "[" + notificacionfecha + "] " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + "  ha excedido en 15 dias el dia tope de entrega del informe final de " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +", enviar en la brevedad posible."
 			end
 			notific.save
 
+			notific2 = Notificacion.new
+			notific2.instructor_id = plan.instructor_id
+			notific2.tutor_id = plan.tutor_id
+			notific2.adecuacion_id = adecuacion.id
+			notific2.actual = 2
+			notificacionfecha = Date.current.to_s 
+			if infor5 == 0
+				notific2.mensaje = "[" + notificacionfecha + "] " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') + " su tutor " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +"  ha excedido en 15 dias el dia tope de entrega del cuarto informe semestral, con el primer informe anual y el iforme final, enviar en la brevedad posible."
+			elsif infor6 == 0
+				notific2.mensaje = "[" + notificacionfecha + "] " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') + " su tutor " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +"  ha excedido en 15 dias el dia tope de entrega del segundo informe final y con el informe final, enviar en la brevedad posible."
+			else
+				notific2.mensaje = "[" + notificacionfecha + "] " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') + " su tutor " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +"  ha excedido en 15 dias el dia tope de entrega del informe final, enviar en la brevedad posible."
+			end
+			notific2.save
+
+			remitente4 = Usuario.where(id: plan.instructor_id).take
+			ActionCorreo.retraso_informe(remitente4, notific2.mensaje).deliver
+
 			remitente3 = Usuario.where(id: plan.tutor_id).take
-			ActionCorreo.envio_informe(remitente3, notific.mensaje,2).deliver
+			ActionCorreo.retraso_informe(remitente3, notific.mensaje).deliver
 
 			plan.mensaje = 8
 			plan.save
 		end
-
-
-
 	end
 
 
