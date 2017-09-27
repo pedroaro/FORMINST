@@ -525,6 +525,7 @@ class IniciotutorController < ApplicationController
 
 		if session[:usuario_id] && session[:tutor]
 			if params[:plan_id]
+				@planformacion = Planformacion.find(params[:plan_id])
 				session[:editar]= true
 				puts "it's me"
 				session[:plan_id] = @planformacion.id
@@ -532,9 +533,10 @@ class IniciotutorController < ApplicationController
 				session[:instructorName] = @instructorName
 				@adecuacion = Adecuacion.where(planformacion_id: session[:plan_id]).take
 				session[:adecuacion_id]= @adecuacion.id
+			else 
+				@planformacion = Planformacion.find(session[:plan_id])
 			end
-
-			@planformacion = Planformacion.find(session[:plan_id])
+			
 			if !@planformacion.blank?
 				#Ver si el informe fue rachazado
 				cpInstructor = Usuario.find(@planformacion.instructor_id)
