@@ -326,6 +326,18 @@ class InformesController < ApplicationController
         puts "NO HAY SESION PLAN"
         @planformacion = Planformacion.find(session[:plan_id])
       end
+
+      if !@planformacion.blank?
+        #Ver si el informe fue rachazado
+        cpInstructor = Usuario.find(@planformacion.instructor_id)
+        if (cpInstructor.activo == 0)
+          @cpBloquear = true
+        else
+          @cpBloquear = false
+        end
+        #fin
+      end
+
       if session[:informe_id]
         @informe= Informe.find(session[:informe_id])
         @estatus= EstatusInforme.where(informe_id: @informe.id, actual: 1).take
@@ -585,7 +597,20 @@ def vista_previa
     @TipoSemestre=TipoInforme.where(id: @informe.tipo_id).take
     @fechaActual = Date.current.to_s
     @plan= Planformacion.find(session[:plan_id])
-    @fechaConcurso = @plan.fecha_inicio
+    
+
+      if !@plan.blank?
+        #Ver si el informe fue rachazado
+        cpInstructor = Usuario.find(@plan.instructor_id)
+        if (cpInstructor.activo == 0)
+          @cpBloquear = true
+        else
+          @cpBloquear = false
+        end
+        #fin
+      end
+      
+      @fechaConcurso = @plan.fecha_inicio
     @usere= Usuarioentidad.where(usuario_id: @plan.instructor_id).take
     @escuela= Escuela.find(@usere.escuela_id)
     @adecuacion= Adecuacion.where(planformacion_id: @plan.id).take
@@ -1011,6 +1036,17 @@ end
         @planformacion = Planformacion.find(session[:plan_id])
       end
 
+      if !@planformacion.blank?
+        #Ver si el informe fue rachazado
+        cpInstructor = Usuario.find(@planformacion.instructor_id)
+        if (cpInstructor.activo == 0)
+          @cpBloquear = true
+        else
+          @cpBloquear = false
+        end
+        #fin
+      end
+          
       if params[:informe_id]
         puts "HAY SESION PLAN"
         session[:informe_id] = params[:informe_id]

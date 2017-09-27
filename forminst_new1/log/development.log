@@ -21669,4 +21669,7 @@ Completed 200 OK in 240ms (Views: 233.9ms | ActiveRecord: 1.4ms)
   [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
   [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE `session` SET `data` = 'BAh7DUkiEF9jc3JmX3Rva2VuBjoGRUZJIjFWTUI1WVNJTmI4ZnV4RWxQRFVj\nbGVaZ2pnOUU4cm5sRk9ZNEd5c0o5ZWZVPQY7AEZJIg91c3VhcmlvX2lkBjsA\nRmkoSSISYWRtaW5pc3RyYWRvcgY7AEZGSSIKdHV0b3IGOwBGRkkiD2luc3Ry\ndWN0b3IGOwBGRkkiDGVudGlkYWQGOwBGVEkiD2VudGlkYWRfaWQGOwBGaRJJ\nIhNub21icmVfdXN1YXJpbwY7AEZJIhhDb25zZWpvIGRlIEZhY3VsdGFkBjsA\nVA==\n' WHERE `session`.`id` = 52[0m
   [1m[35m (39.2ms)[0m  [1m[35mCOMMIT[0m
-Started GET "/assets/banner.png" for ::1 at 2017-09-27 11:53:21 -0400
+Started GET "/assets/banner.png" for ::1 at 2017-09-27 11:53:21 -0400DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/Desktop/Forminst 0.85/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/Desktop/Forminst 0.85/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/Desktop/Forminst 0.85/FORMINST/forminst_new1/config/routes.rb:6)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/Desktop/Forminst 0.85/FORMINST/forminst_new1/config/routes.rb:6)

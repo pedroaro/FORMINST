@@ -90,9 +90,11 @@
         <h5>Seleccione la acción que desea realizar sobre el informe.</h5>
       </div>
       <div class="modal-footer">
-      <%= link_to "Aprobar", {controller: "inicioentidad", action: "cambiar_estatusI", :informe_id => session[:informe_id], :rechazar => 0 }, class: "btn btn-default" %>
-      <%= link_to "Rechazar", {controller: "inicioentidad", action: "cambiar_estatusI", :informe_id => session[:informe_id], :rechazar => 1 }, class: "btn btn-default" %>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <center>
+          <%= link_to "Aprobar", {controller: "inicioentidad", action: "cambiar_estatusI", :informe_id => session[:informe_id], :rechazar => 0 }, class: "btn btn-default" %>
+          <%= link_to "Aprobar con Observaciones", {controller: "inicioentidad", action: "cambiar_estatusA", :adecuacion_id => @adecuacion.id, :rechazar => 2 }, class: "btn btn-default" %>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        </center>
       </div>
     </div>
   </div>
@@ -148,9 +150,9 @@
         <%if @bool_enviado == 0 && @cjpTipo=="Institucional"%>
           <%if session[:entidad_id]==13 %>
             <%if session[:informe_id]%> 
-              <button type="button" data-toggle="modal" data-target="#myModal4i" class="btn btn-default">Aprobar/Rechazar</button>
+              <button type="button" data-toggle="modal" data-target="#myModal4i" class="btn btn-default">Aprobar</button>
             <%else %>
-              <button type="button" data-toggle="modal" data-target="#myModal4" class="btn btn-default">Aprobar/Rechazar</button>
+              <button type="button" data-toggle="modal" data-target="#myModal4" class="btn btn-default">Aprobar</button>
             <%end%>
           <%else%>
             <%if session[:informe_id]%> 
@@ -161,7 +163,7 @@
           <%end%>
         <%else %>
           <%if session[:entidad_id]==13 %>
-            <button type="button" class="btn btn-default disabled">Aprobar/Rechazar</button>
+            <button type="button" class="btn btn-default disabled">Aprobar</button>
           <%else%>
             <button type="button" class="btn btn-default disabled">Enviar</button>
           <%end%>
