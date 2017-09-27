@@ -1,0 +1,97 @@
+<div class = 'row'>
+  <div class="col-xs-12 col-md-12">
+    
+    <ul class="nav nav-tabs"> 
+      <li><a href="../inicioentidad/index">Inicio</a></li>
+        <li><%= link_to 'Listar Adecuaciones', :controller => 'inicioentidad', :action => 'listar_adecuaciones' %></li>
+        <li><%= link_to 'Listar Informes', :controller => 'inicioentidad', :action => 'listar_informes' %></li>
+        <li><%= link_to 'Prórroga', :controller => 'inicioentidad', :action => 'prorroga' %></li>
+        <%if session[:entidad_id]==13 %>
+          <li><a href="#" class="active">Reactivación</a></li>
+        <%end%>
+        <li><a href="../inicioentidad/logout">Cerrar Sesión</a></li>
+    </ul>
+    
+  </div>
+
+</div>
+<div class="row">
+  <div class="col-xs-12 col-md-12">
+    <div class="text-right">
+      <div id = "fechamuestra">
+        <h3> <%= Time.now.strftime("%d") %>
+              <% if Time.now.strftime("%m").to_i == 1 %>
+                de Enero del
+              <% elsif Time.now.strftime("%m").to_i == 2 %>
+                de Febrero del
+              <% elsif Time.now.strftime("%m").to_i == 3 %>
+                de Marzo del
+              <% elsif Time.now.strftime("%m").to_i == 4 %>
+                de Abril del
+              <% elsif Time.now.strftime("%m").to_i == 5 %>
+                de Mayo del
+              <% elsif Time.now.strftime("%m").to_i == 6 %>
+                de Junio del
+              <% elsif Time.now.strftime("%m").to_i == 7 %>
+                de Julio del
+              <% elsif Time.now.strftime("%m").to_i == 8 %>
+                de Agosto del
+              <% elsif Time.now.strftime("%m").to_i == 9 %>
+                de Septiembre del
+              <% elsif Time.now.strftime("%m").to_i == 10 %>
+                de Octubre del
+              <% elsif Time.now.strftime("%m").to_i == 11 %>
+                de Noviembre del
+              <% elsif Time.now.strftime("%m").to_i == 12 %>
+                de Diciembre del
+              <% end %>
+              <%= Time.now.strftime("%Y") %> 
+            </h3>
+      </div>
+      <%if @nombre%>
+        <div>
+          <h4><b><%=@nombre%></b></h4>
+        </div>
+      <%end%>
+      
+      <%if @cjpTipo=="Institucional"%>
+        <p>Entidad</p>
+      <%else%>
+        <p>Vista</p>
+      <%end%>
+    </div>
+  </div>
+</div>
+<form accept-charset="UTF-8" controller ="inicioentidad" action="reactivacion_guardar">
+  <div class="row">
+    <div class = 'col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0 text-justify'>
+      <h1 class = 'text-left'>Reactivación de Instructores</h1>
+      <p style="color: gray ">Esta funcionalidad le permite al consejo de facultad habilitar instructores que habían sido desincorporados anteriormente, seleccione el instructor que desee volver a habilitar y una descripción de porque se reincorporó al sistema.</p>
+      <br>
+      <div class= "row">
+        <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
+          <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+              <tbody>
+                <tr>
+                  <td class="text-center"><strong>Buscar el instructor</strong></td>
+                </tr>
+                <tr> 
+                  <td class="text-center">
+                    <%= select_tag(:instructor, options_for_select(@instructores), {:class => "form-control", :name=> "Instructor", :style => "width:100%;"}) %>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      
+      <br>
+      <br>
+    </div>
+  </div>
+  <center><input name="commit" type="submit" class="btn btn-info btn-lg" value="Habilitar" /></center>
+  <br>
+  <br>
+</form>

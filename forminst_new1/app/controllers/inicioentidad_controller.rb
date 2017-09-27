@@ -52,6 +52,93 @@ class InicioentidadController < ApplicationController
 		redirect_to controller: "forminst", action: "index"
 	end
 
+	def reactivacion
+		if session[:usuario_id]
+			enti = Usuarioentidad.where(usuario_id: session[:usuario_id]).take
+		end
+		if session[:usuario_id] && session[:entidad]= true && session[:entidad]= true && enti.entidad_id == 13
+			session[:adecuacion_id] = nil
+			session[:plan_id] = nil
+			session[:instructorName] = nil
+			session[:informe_id]=nil
+			@cjpTipo=Usuario.find(session[:usuario_id]).tipo
+			@nombre = session[:nombre_usuario]
+			print "NO HAY USUARIO"
+			puts session[:entidad_id]
+			if not @nombre
+				print "NO HAY USUARIO"
+			end
+			@usu=Usuarioentidad.where(entidad_id: session[:entidad_id]).take
+			@entidad_escuela_id= @usu.escuela_id
+			@usuarios = Usuario.where(activo: 0).all
+			@instructores = []
+			cpcontador = 0
+			@instructores[cpcontador] = Array.new(2) { |i|  }
+			@instructores[cpcontador][0] =  "Seleccione el instructor"
+			@instructores[cpcontador][1] = 0
+			cpcontador = cpcontador + 1
+
+			@usuarios.each do |usuari|
+				cppersona = Persona.find_by usuario_id: usuari.id
+				@instructores[cpcontador] = Array.new(2) { |i|  }
+				@instructores[cpcontador][0] = cppersona.nombres.to_s.split.map(&:capitalize).join(' ') + " " + cppersona.apellidos.to_s.split.map(&:capitalize).join(' ')
+				@instructores[cpcontador][1] = usuari.id
+				cpcontador = cpcontador + 1
+			end
+
+			i = 1
+			j = 1
+			nombre = "hola"
+			cpid = 1
+
+			while i < cpcontador  do
+				nombre = @instructores[i][0]
+				cpid = @instructores[i][1]
+				j = i + 1
+				while j < cpcontador  do
+
+					if @instructores[j][0] < nombre
+						@instructores[i][0] = @instructores[j][0]
+						@instructores[i][1] = @instructores[j][1]
+						@instructores[j][0] = nombre
+						@instructores[j][1] = cpid
+						nombre = @instructores[i][0]
+						cpid = @instructores[i][1]
+					end
+
+					j +=1
+				end
+				i +=1
+			end
+
+		else
+			redirect_to controller:"forminst", action: "index"
+		end
+	end
+
+
+	def reactivacion_guardar
+		if session[:usuario_id]	
+			if params[:Instructor].to_s != "0"
+				usuari = Usuario.where(id: params[:Instructor]).take
+				if !usuari.blank?
+					usuari.activo = 1
+					usuari.save
+					pers = Persona.where(usuario_id: usuari.id).take
+					nombres = pers.nombres.to_s.split.map(&:capitalize).join(' ') + " " + pers.apellidos.to_s.split.map(&:capitalize).join(' ')
+					flash[:success]= "Se ha habilitado a " + nombres + " de manera exitosa"
+				else
+					flash[:danger]= "Error al seleccionar usuario, puede no existir en la Base de Datos"
+				end
+			else
+				flash[:info]= "Debe seleccionar un instructor primero"
+			end
+			redirect_to :back
+		else
+			redirect_to controller:"forminst", action: "index"
+		end
+	end
+
 	def listar_adecuaciones
 		if session[:usuario_id] && session[:entidad]== true
 			session[:informe_id]=nil

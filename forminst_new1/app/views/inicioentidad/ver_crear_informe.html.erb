@@ -5,6 +5,9 @@
         <li><%= link_to 'Listar Adecuaciones', :controller => 'inicioentidad', :action => 'listar_adecuaciones' %></li>
         <li><%= link_to 'Listar Informes', :controller => 'inicioentidad', :action => 'listar_informes' %></li>
         <li><%= link_to 'Prórroga', :controller => 'inicioentidad', :action => 'prorroga' %></li>
+        <%if session[:entidad_id]==13 %>
+          <li><%= link_to 'Reactivación', :controller => 'inicioentidad', :action => 'reactivacion' %></li>
+        <%end%>
         <li><a href="../inicioentidad/logout">Cerrar Sesión</a></li>
       </ul>
   

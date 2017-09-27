@@ -5,6 +5,9 @@
         <li><a href="../inicioentidad/listar_adecuaciones" class="active">Listar Adecuaciones</a></li>
         <li><a href="../inicioentidad/listar_informes">Listar Informes</a></li>
         <li><a href="../inicioentidad/prorroga">Prorroga</a></li>
+        <%if session[:entidad_id]==13 %>
+          <li><a href="../inicioentidad/reactivacion">Reactivación</a></li>
+        <%end%>
         <li><a href="../inicioentidad/logout">Cerrar Sesión</a></li>
       </ul>
   </div>
