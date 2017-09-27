@@ -164,7 +164,7 @@
             <%= link_to "Versiones Anteriores", {controller: "iniciotutor", action: "ver_respaldos"}, class: "btn btn-default" %>
             <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModalEliminar">Eliminar Adecuación</button>
             <% if @bool_enviado == 0%>
-              <button type="submit" class="btn btn-forminst-blue">Modificar Adecuación</button>
+              <button type="submit" class="btn btn-forminst-blue" style="color: white">Modificar Adecuación</button>
             <% else%>
               <button type="submit" class="btn btn-forminst-blue" disabled>Modificar Adecuación</button>
             <% end%>
