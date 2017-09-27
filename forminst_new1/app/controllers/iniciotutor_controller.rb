@@ -128,6 +128,7 @@ class IniciotutorController < ApplicationController
 	def crear_adecuacion
 		if session[:usuario_id] && session[:tutor]
 			@planformacion = Planformacion.find(session[:plan_id])
+
 			@ade= Adecuacion.where(planformacion_id: @planformacion.id).take
 
 			if @ade == nil
@@ -201,6 +202,18 @@ class IniciotutorController < ApplicationController
 			@tutoresAnteriores = Instructortutor.where(instructor_id: session[:usuario_id], actual: 0)
 			@nombre = session[:nombre_usuario]
 			@planformacion = Planformacion.find(session[:plan_id])
+
+			if !@planformacion.blank?
+				#Ver si el informe fue rachazado
+				cpInstructor = Usuario.find(@planformacion.instructor_id)
+				if (cpInstructor.activo == false)
+					@cpBloquear = true
+				else
+					@cpBloquear = false
+				end
+				#fin
+			end
+
 			@instructorName = Persona.where(usuario_id: @planformacion.instructor_id).take.nombres
 			session[:instructorName] = @instructorName
 			@instructorName = session[:instructorName]
@@ -511,13 +524,25 @@ class IniciotutorController < ApplicationController
 			if params[:plan_id]
 				session[:editar]= true
 				puts "it's me"
-				@planformacion = Planformacion.find(params[:plan_id])
 				session[:plan_id] = @planformacion.id
 				@instructorName = Persona.where(usuario_id: @planformacion.instructor_id).take.nombres
 				session[:instructorName] = @instructorName
 				@adecuacion = Adecuacion.where(planformacion_id: session[:plan_id]).take
 				session[:adecuacion_id]= @adecuacion.id
 			end
+
+			@planformacion = Planformacion.find(session[:plan_id])
+			if !@planformacion.blank?
+				#Ver si el informe fue rachazado
+				cpInstructor = Usuario.find(@planformacion.instructor_id)
+				if (cpInstructor.activo == false)
+					@cpBloquear = true
+				else
+					@cpBloquear = false
+				end
+				#fin
+			end
+
 			@adecuacion = Adecuacion.where(planformacion_id: session[:plan_id]).take
 			if params[:editar] == 'no' 
 				session[:editar]= false
@@ -626,6 +651,19 @@ class IniciotutorController < ApplicationController
 			@nombre = session[:nombre_usuario]
 			@instructorName = session[:instructorName]
 			@plan= Planformacion.find(session[:plan_id])
+
+			@planformacion = Planformacion.find(session[:plan_id])
+			if !@planformacion.blank?
+				#Ver si el informe fue rachazado
+				cpInstructor = Usuario.find(@planformacion.instructor_id)
+				if (cpInstructor.activo == false)
+					@cpBloquear = true
+				else
+					@cpBloquear = false
+				end
+				#fin
+			end
+
 			@actividadesadoc= []
 			@actividadesainv= []
 			@actividadesaext= []
@@ -688,6 +726,19 @@ class IniciotutorController < ApplicationController
 			@nombre = session[:nombre_usuario]
 			@instructorName = session[:instructorName]
 			@plan= Planformacion.find(session[:plan_id])
+
+			@planformacion = Planformacion.find(session[:plan_id])
+			if !@planformacion.blank?
+				#Ver si el informe fue rachazado
+				cpInstructor = Usuario.find(@planformacion.instructor_id)
+				if (cpInstructor.activo == false)
+					@cpBloquear = true
+				else
+					@cpBloquear = false
+				end
+				#fin
+			end
+
 			@actividadesadoc= []
 			@actividadesainv= []
 			@actividadesaext= []
@@ -769,6 +820,19 @@ class IniciotutorController < ApplicationController
 			@nombre = session[:nombre_usuario]
 			@instructorName = session[:instructorName]
 			@plan= Planformacion.find(session[:plan_id])
+
+			@planformacion = Planformacion.find(session[:plan_id])
+			if !@planformacion.blank?
+				#Ver si el informe fue rachazado
+				cpInstructor = Usuario.find(@planformacion.instructor_id)
+				if (cpInstructor.activo == false)
+					@cpBloquear = true
+				else
+					@cpBloquear = false
+				end
+				#fin
+			end
+
 			@actividadesadoc= []
 			@actividadesainv= []
 			@actividadesaext= []
@@ -842,6 +906,19 @@ class IniciotutorController < ApplicationController
 			@nombre = session[:nombre_usuario]
 			@instructorName = session[:instructorName]
 			@plan= Planformacion.find(session[:plan_id])
+			
+			@planformacion = Planformacion.find(session[:plan_id])
+			if !@planformacion.blank?
+				#Ver si el informe fue rachazado
+				cpInstructor = Usuario.find(@planformacion.instructor_id)
+				if (cpInstructor.activo == false)
+					@cpBloquear = true
+				else
+					@cpBloquear = false
+				end
+				#fin
+			end
+
 			@actividadesadoc= []
 			@actividadesainv= []
 			@actividadesaext= []
@@ -1095,6 +1172,19 @@ class IniciotutorController < ApplicationController
 		if session[:usuario_id] && session[:tutor]
 			@fechaActual = Date.current.to_s
 			@plan= Planformacion.find(session[:plan_id])
+			
+
+			if !@plan.blank?
+				#Ver si el informe fue rachazado
+				cpInstructor = Usuario.find(@plan.instructor_id)
+				if (cpInstructor.activo == false)
+					@cpBloquear = true
+				else
+					@cpBloquear = false
+				end
+				#fin
+			end
+
 			@fechaConcurso = @plan.fecha_inicio
 			@usere= Usuarioentidad.where(usuario_id: @plan.instructor_id).take
 			@escuela= Escuela.find(@usere.escuela_id)
@@ -1925,7 +2015,19 @@ class IniciotutorController < ApplicationController
 	def mas_observaciones3 #mas obs de actividades del informe
 
 		@adecuacion= Adecuacion.find(session[:adecuacion_id])
- 		@semestre = params[:semestre].to_i
+		@planformacion=Planformacion.find(@adecuacion.planformacion_id)
+		if !@planformacion.blank?
+			#Ver si el informe fue rachazado
+			cpInstructor = Usuario.find(@planformacion.instructor_id)
+			if (cpInstructor.activo == false)
+				@cpBloquear = true
+			else
+				@cpBloquear = false
+			end
+			#fin
+		end
+
+		@semestre = params[:semestre].to_i
  		@actividad_id = params[:actividad_id].to_i
 		
 		aa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: @semestre, actividad_id: @actividad_id).take
@@ -1974,6 +2076,16 @@ class IniciotutorController < ApplicationController
 	def ver_respaldos
 		if session[:usuario_id] && session[:tutor] 
 		  @plan = Planformacion.where(id: session[:plan_id]).take
+		  if !@plan.blank?
+			#Ver si el informe fue rachazado
+			cpInstructor = Usuario.find(@plan.instructor_id)
+			if (cpInstructor.activo == false)
+				@cpBloquear = true
+			else
+				@cpBloquear = false
+			end
+			#fin
+		  end
 		  @documents = []
 		  if !session[:informe_id].blank?
 		    @documents = Respaldo.where(adecuacion_id: session[:adecuacion_id], informe_id: session[:informe_id]).all

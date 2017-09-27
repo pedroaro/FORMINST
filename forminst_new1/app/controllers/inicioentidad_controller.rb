@@ -181,6 +181,7 @@ class InicioentidadController < ApplicationController
 
 def ver_soporte
     @plan = Planformacion.where(id: session[:plan_id]).take
+    @adecuacion = Adecuacion.where(planformacion_id: session[:plan_id]).take
     @documents = []
 	@cjpTipo=Usuario.find(session[:usuario_id]).tipo
     if !session[:informe_id].blank?
@@ -1225,7 +1226,8 @@ end
 		      	@estatus= EstatusInforme.where(informe_id: @informe.id, actual: 1).take
 		      	@status= TipoEstatus.find(@estatus.estatus_id)
 		      	@userentidad=Usuarioentidad.where(entidad_id: session[:entidad_id]).take
-				@escuela= Escuela.find(@userentidad.escuela_id)
+		      	@userentidadUsuario=Usuarioentidad.where(usuario_id: @informe.tutor_id).take
+				@escuela= Escuela.where(id: @userentidadUsuario.escuela_id).take
 		      	session[:nombre_informe] = @nombre_informe.downcase.split.map(&:capitalize).join(' ')		##Capitalize every first word of the string
 		      	session[:status_informe] = @status.concepto
 		    else
@@ -2507,10 +2509,10 @@ end
 		if session[:usuario_id] && session[:entidad] 
 		  @cjpTipo=Usuario.find(session[:usuario_id]).tipo
 		  @plan = Planformacion.where(id: session[:plan_id]).take
-		  adec = Adecuacion.where(planformacion_id: session[:plan_id]).take
+		  @adec = Adecuacion.where(planformacion_id: session[:plan_id]).take
 		  @documents = []
 		  if !session[:informe_id].blank?
-		    @documents = Respaldo.where(adecuacion_id: adec.id, informe_id: session[:informe_id]).all
+		    @documents = Respaldo.where(adecuacion_id: @adec.id, informe_id: session[:informe_id]).all
 		  else
 		    @documents = Respaldo.where(adecuacion_id: session[:adecuacion_id], informe_id: nil).all
 		  end
@@ -3055,6 +3057,9 @@ end
 							ActionCorreo.envio_informe(remitente3, notific.mensaje,2).deliver
 							remitente2 = Usuario.where(id: plan.instructor_id).take
 							ActionCorreo.envio_informe(remitente2, notific2.mensaje,1).deliver
+							cpusuario = Usuario.where(id: plan.instructor_id).take
+							cpusuario.activo = 0
+							cpusuario.save
 						else
 							if bool_observaciones == 1 
 								@document = Respaldo.where(adecuacion_id: session[:adecuacion_id], informe_id: @informe_id, actual: 1).take

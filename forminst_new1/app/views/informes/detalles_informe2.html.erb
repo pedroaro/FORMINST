@@ -14,9 +14,13 @@
           <ul class="dropdown-menu nav" role="menu">
             <li></li>
 
-            <li><a href="#" data-toggle="modal" data-target="#selectInforme">
-            	Crear Informe
-            </a></li>
+            <%if @cpBloquear%>
+                <li><a href="#" style="color:gray">Crear Informe</a></li>
+              <%else%>
+              <li><a href="#" data-toggle="modal" data-target="#selectInforme">
+                Crear Informe
+              </a></li>
+              <%end%>
             <li><a href="#" class = 'active'>Listar Informes</a></li>
           </ul>
       </li>

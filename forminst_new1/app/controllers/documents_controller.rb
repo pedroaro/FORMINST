@@ -20,6 +20,18 @@ class DocumentsController < ApplicationController
 
     if session[:usuario_id] && session[:tutor]
       @plan = Planformacion.where(id: session[:plan_id]).take
+
+      if !@plan.blank?
+      #Ver si el informe fue rachazado
+      cpInstructor = Usuario.find(@plan.instructor_id)
+      if (cpInstructor.activo == false)
+        @cpBloquear = true
+      else
+        @cpBloquear = false
+      end
+      #fin
+    end
+
       $actividad = params[:actividad_id].to_i
       @documents = []
       if !session[:informe_id].blank?
