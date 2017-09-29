@@ -1,6 +1,7 @@
 class ForminstController < ApplicationController
 	require 'net-ldap'
 	require 'pry'
+	require 'digest/sha1'
 
 	layout 'ec_aplanes'
 
@@ -18,6 +19,8 @@ class ForminstController < ApplicationController
 		puts correo
 		puts "SOOOOY LA CLAVE"
 		puts clave
+		puts Digest::SHA1.hexdigest(clave)
+		clave = Digest::SHA1.hexdigest(clave)
 
 		#Si es un Administrados
 		if correo == "Administrador" && clave=="1"

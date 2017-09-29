@@ -1,4 +1,5 @@
 class SecretariasController < ApplicationController
+	require 'digest/sha1'
 	layout 'ly_inicio_entidad'
 	def index
 		$modulo = "index"
@@ -108,7 +109,7 @@ class SecretariasController < ApplicationController
 
 					cpusuario = Usuario.new
 					cpusuario.user = params[:correo].to_s
-					cpusuario.password = params[:CI].to_s
+					cpusuario.password = Digest::SHA1.hexdigest(params[:CI])
 					cpusuario.ldap = 0
 					cpusuario.activo = 1
 					cpusuario.tipo = "Docente"
@@ -330,7 +331,7 @@ class SecretariasController < ApplicationController
 
 						cpusuario = Usuario.new
 						cpusuario.user = params[:correo]
-						cpusuario.password = params[:CI].to_s
+						cpusuario.password = Digest::SHA1.hexdigest(params[:CI])
 						cpusuario.ldap = 0
 						cpusuario.activo = 1
 						cpusuario.tipo = "Docente"
