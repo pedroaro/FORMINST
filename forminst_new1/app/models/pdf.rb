@@ -164,72 +164,33 @@ class Pdf
 			:position => :left,
 			:align => { 0 => :left, 1 => :right}
 			
-			
+			pdf.text("\n")
 
 			pdf.text("\n")
 			pdf.text("5.- PRESENTACIÓN", :style => :bold, :size  => 10)
-			if !plan.presentacion.blank?
-				data35 = [[{:text=>  plan.presentacion ,  :align=>:left}]] # datos que se desean en la tabla
-				
-				pdf.table data35, # lineas para generar la tabla en el docuemnto
-				:border_style => :grid, #:underline_header
-				:font_size  => 10, 
-				:horizontal_padding => 6,
-				:vertical_padding   => 3,
-				:border_width => 0.7, 
-				:column_widths => { 0 => 520}, 
-				:position => :left,
-				:align => { 0 => :left}
+			if !plan.id.blank?
+				dataaa35 = [[{:text=>  plan.id.to_s  ,  :align=>:left}]] # datos que se desean en la tabla
 			else
-				data35 = [[{:text=>  " " ,  :align=>:left}]] # datos que se desean en la tabla
-				pdf.table data35, # lineas para generar la tabla en el docuemnto
-				:border_style => :grid, #:underline_header
-				:font_size  => 10, 
-				:horizontal_padding => 6,
-				:vertical_padding   => 3,
-				:border_width => 0.7, 
-				:column_widths => { 0 => 520}, 
-				:position => :left,
-				:align => { 0 => :left}
+				dataaa35 = [[{:text=>  " " ,  :align=>:left}]] # datos que se desean en la tabla
 			end
 
-			pdf.table data35,  # lineas para generar la tabla en el docuemnto
+			pdf.table dataaa35,  # lineas para generar la tabla en el docuemnto
 			:border_style => :grid, #:underline_header
 			:font_size  => 10, 
 			:horizontal_padding => 6,
 			:vertical_padding   => 3,
 			:border_width => 0.7, 
-			:column_widths => { 0 => 130, 1=>390}, 
+			:column_widths => { 0 => 520}, 
 			:position => :left,
-			:align => { 0 => :left, 1 => :right}
-
+			:align => { 0 => :left}
 
 			pdf.text("\n")
 			pdf.text("6.- DESCRIPCIÓN DEL PERFIL DEL INSTRUCTOR GANADOR DEL CONCURSO", :style => :bold, :size  => 10)
 			
-			if !plan.descripcion.blank?
-				data350 = [[{:text=>  actv.actividad ,  :align=>:left}]] # datos que se desean en la tabla
-				
-				pdf.table data350, # lineas para generar la tabla en el docuemnto
-				:border_style => :grid, #:underline_header
-				:font_size  => 10, 
-				:horizontal_padding => 6,
-				:vertical_padding   => 3,
-				:border_width => 0.7, 
-				:column_widths => { 0 => 520}, 
-				:position => :left,
-				:align => { 0 => :left}
+			if !plan.id.blank?
+				data350 = [[{:text=>  plan.id.to_s   ,  :align=>:left}]] # datos que se desean en la tabla
 			else
 				data350 = [[{:text=>  " " ,  :align=>:left}]] # datos que se desean en la tabla
-				pdf.table data35, # lineas para generar la tabla en el docuemnto
-				:border_style => :grid, #:underline_header
-				:font_size  => 10, 
-				:horizontal_padding => 6,
-				:vertical_padding   => 3,
-				:border_width => 0.7, 
-				:column_widths => { 0 => 520}, 
-				:position => :left,
-				:align => { 0 => :left}
 			end
 				
 			pdf.table data350,  # lineas para generar la tabla en el docuemnto
@@ -238,37 +199,19 @@ class Pdf
 			:horizontal_padding => 6,
 			:vertical_padding   => 3,
 			:border_width => 0.7, 
-			:column_widths => { 0 => 130, 1=>390}, 
+			:column_widths => { 0 => 520}, 
 			:position => :left,
-			:align => { 0 => :left, 1 => :right}
+			:align => { 0 => :left}
 
 
 			pdf.text("\n")
 			pdf.text("7.- DOCENCIA", :style => :bold, :size  => 10)
 			
-			if !plan.docencia.blank?
-				data351 = [[{:text=>  actv.actividad ,  :align=>:left}]] # datos que se desean en la tabla
+			if !plan.id.blank?
+				data351 = [[{:text=>  plan.id.to_s   ,  :align=>:left}]] # datos que se desean en la tabla
 				
-				pdf.table data351, # lineas para generar la tabla en el docuemnto
-				:border_style => :grid, #:underline_header
-				:font_size  => 10, 
-				:horizontal_padding => 6,
-				:vertical_padding   => 3,
-				:border_width => 0.7, 
-				:column_widths => { 0 => 520}, 
-				:position => :left,
-				:align => { 0 => :left}
 			else
 				data351 = [[{:text=>  " " ,  :align=>:left}]] # datos que se desean en la tabla
-				pdf.table data351, # lineas para generar la tabla en el docuemnto
-				:border_style => :grid, #:underline_header
-				:font_size  => 10, 
-				:horizontal_padding => 6,
-				:vertical_padding   => 3,
-				:border_width => 0.7, 
-				:column_widths => { 0 => 520}, 
-				:position => :left,
-				:align => { 0 => :left}
 			end
 				
 			pdf.table data351,  # lineas para generar la tabla en el docuemnto
@@ -277,37 +220,18 @@ class Pdf
 			:horizontal_padding => 6,
 			:vertical_padding   => 3,
 			:border_width => 0.7, 
-			:column_widths => { 0 => 130, 1=>390}, 
+			:column_widths => { 0 => 520}, 
 			:position => :left,
-			:align => { 0 => :left, 1 => :right}
+			:align => { 0 => :left}
 
 
 			pdf.text("\n")
 			pdf.text("8.- INVESTIGACIÓN", :style => :bold, :size  => 10)
 			
-			if !plan.investigacion.blank?
-				data352 = [[{:text=>  actv.actividad ,  :align=>:left}]] # datos que se desean en la tabla
-				
-				pdf.table data352, # lineas para generar la tabla en el docuemnto
-				:border_style => :grid, #:underline_header
-				:font_size  => 10, 
-				:horizontal_padding => 6,
-				:vertical_padding   => 3,
-				:border_width => 0.7, 
-				:column_widths => { 0 => 520}, 
-				:position => :left,
-				:align => { 0 => :left}
+			if !plan.id.blank?
+				data352 = [[{:text=>  plan.id.to_s  ,  :align=>:left}]] # datos que se desean en la tabla
 			else
 				data352 = [[{:text=>  " " ,  :align=>:left}]] # datos que se desean en la tabla
-				pdf.table data352, # lineas para generar la tabla en el docuemnto
-				:border_style => :grid, #:underline_header
-				:font_size  => 10, 
-				:horizontal_padding => 6,
-				:vertical_padding   => 3,
-				:border_width => 0.7, 
-				:column_widths => { 0 => 520}, 
-				:position => :left,
-				:align => { 0 => :left}
 			end
 				
 			pdf.table data352,  # lineas para generar la tabla en el docuemnto
@@ -316,37 +240,18 @@ class Pdf
 			:horizontal_padding => 6,
 			:vertical_padding   => 3,
 			:border_width => 0.7, 
-			:column_widths => { 0 => 130, 1=>390}, 
+			:column_widths => { 0 => 520}, 
 			:position => :left,
-			:align => { 0 => :left, 1 => :right}
+			:align => { 0 => :left}
 
 
 			pdf.text("\n")
 			pdf.text("9.- FORMACIÓN Y CAPACITACIÓN PROFESIONAL", :style => :bold, :size  => 10)
 			
-			if !plan.formacion.blank?
-				data353 = [[{:text=>  actv.actividad ,  :align=>:left}]] # datos que se desean en la tabla
-				
-				pdf.table data353, # lineas para generar la tabla en el docuemnto
-				:border_style => :grid, #:underline_header
-				:font_size  => 10, 
-				:horizontal_padding => 6,
-				:vertical_padding   => 3,
-				:border_width => 0.7, 
-				:column_widths => { 0 => 520}, 
-				:position => :left,
-				:align => { 0 => :left}
-			else
+			if !plan.id.blank?
+				data353 = [[{:text=>  plan.id.to_s  ,  :align=>:left}]] # datos que se desean en la tabla
+							else
 				data353 = [[{:text=>  " " ,  :align=>:left}]] # datos que se desean en la tabla
-				pdf.table data353, # lineas para generar la tabla en el docuemnto
-				:border_style => :grid, #:underline_header
-				:font_size  => 10, 
-				:horizontal_padding => 6,
-				:vertical_padding   => 3,
-				:border_width => 0.7, 
-				:column_widths => { 0 => 520}, 
-				:position => :left,
-				:align => { 0 => :left}
 			end
 				
 			pdf.table data353,  # lineas para generar la tabla en el docuemnto
@@ -355,37 +260,18 @@ class Pdf
 			:horizontal_padding => 6,
 			:vertical_padding   => 3,
 			:border_width => 0.7, 
-			:column_widths => { 0 => 130, 1=>390}, 
+			:column_widths => { 0 => 520}, 
 			:position => :left,
-			:align => { 0 => :left, 1 => :right}
+			:align => { 0 => :left}
 
 
 			pdf.text("\n")
 			pdf.text("10.- EXTENSION", :style => :bold, :size  => 10)
 			
-			if !plan.extension.blank?
-				data354 = [[{:text=>  actv.actividad ,  :align=>:left}]] # datos que se desean en la tabla
-				
-				pdf.table data354, # lineas para generar la tabla en el docuemnto
-				:border_style => :grid, #:underline_header
-				:font_size  => 10, 
-				:horizontal_padding => 6,
-				:vertical_padding   => 3,
-				:border_width => 0.7, 
-				:column_widths => { 0 => 520}, 
-				:position => :left,
-				:align => { 0 => :left}
+			if !plan.id.blank?
+				data354 = [[{:text=>  plan.id.to_s  ,  :align=>:left}]] # datos que se desean en la tabla
 			else
 				data354 = [[{:text=>  " " ,  :align=>:left}]] # datos que se desean en la tabla
-				pdf.table data354, # lineas para generar la tabla en el docuemnto
-				:border_style => :grid, #:underline_header
-				:font_size  => 10, 
-				:horizontal_padding => 6,
-				:vertical_padding   => 3,
-				:border_width => 0.7, 
-				:column_widths => { 0 => 520}, 
-				:position => :left,
-				:align => { 0 => :left}
 			end
 				
 			pdf.table data354,  # lineas para generar la tabla en el docuemnto
@@ -394,9 +280,9 @@ class Pdf
 			:horizontal_padding => 6,
 			:vertical_padding   => 3,
 			:border_width => 0.7, 
-			:column_widths => { 0 => 130, 1=>390}, 
+			:column_widths => { 0 => 520}, 
 			:position => :left,
-			:align => { 0 => :left, 1 => :right}
+			:align => { 0 => :left}
 
 			salto='\n'
 			pdf.text("\n")
