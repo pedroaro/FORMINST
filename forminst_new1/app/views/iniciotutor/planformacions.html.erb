@@ -102,7 +102,7 @@
               <td>
                 <% if @cpenviado[i] == 0%>
 
-                  <%= form_tag({controller: 'iniciotutor', action: 'detalles_adecuacion3'}) do%>
+                  <%= form_tag({controller: 'iniciotutor', action: 'detalles_adecuacion2'}) do%>
                     <input type="hidden" name="plan_id" value='<%= planformacion.id %>'>
                     <input type="hidden" name="editar" value='si'>
                     <button type="submit" class="btn btn-forminst-blue">Modificar</button>
@@ -110,7 +110,7 @@
 
                 <% else %>
 
-                  <%= form_tag({controller: 'iniciotutor', action: 'detalles_adecuacion3'}) do%>
+                  <%= form_tag({controller: 'iniciotutor', action: 'detalles_adecuacion2'}) do%>
                     <input type="hidden" name="plan_id" value='<%= planformacion.id %>'>
                     <input type="hidden" name="editar" value='si'>
                     <button type="submit" class="btn btn-forminst-blue" disabled>Modificar</button>
