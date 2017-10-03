@@ -25153,3 +25153,172 @@ Completed 200 OK in 4613ms (ActiveRecord: 12.9ms)
 
   [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
   [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/forminst_new1/config/routes.rb:6)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/forminst_new1/config/routes.rb:6)
+Started GET "/" for ::1 at 2017-10-03 08:21:39 -0400
+Processing by ForminstController#index as HTML
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM `session` WHERE `session`.`id` = 99[0m
+  [1m[35m (38.2ms)[0m  [1m[35mCOMMIT[0m
+  Rendering forminst/index.html.erb within layouts/ec_aplanes
+  Rendered forminst/index.html.erb within layouts/ec_aplanes (6.4ms)
+Completed 200 OK in 928ms (Views: 724.3ms | ActiveRecord: 168.5ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE `session` SET `data` = 'BAh7BkkiEF9jc3JmX3Rva2VuBjoGRUZJIjFLU2xJN3pXWUJjdVFyd2FqZm5o\nSFhSNkhZK0NmY0M5Y2NRS09OVFRBWGtBPQY7AEY=\n', `updated_at` = '2017-10-03 12:21:40' WHERE `session`.`id` = 100[0m
+  [1m[35m (50.9ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/images/nav.jpg" for ::1 at 2017-10-03 08:21:40 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/images/nav.jpg"):
+  
+actionpack (5.0.6) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.6) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.3) lib/rack/method_override.rb:22:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.6) lib/rails/engine.rb:522:in `call'
+puma (3.10.0) lib/puma/configuration.rb:225:in `call'
+puma (3.10.0) lib/puma/server.rb:605:in `handle_request'
+puma (3.10.0) lib/puma/server.rb:437:in `process_client'
+puma (3.10.0) lib/puma/server.rb:301:in `block in run'
+puma (3.10.0) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  Rendering /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout
+  Rendering /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.6ms)
+  Rendered collection of /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb [18 times] (59.9ms)
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (14.6ms)
+  Rendering /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (4.7ms)
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (116.5ms)
+Started GET "/" for ::1 at 2017-10-03 08:23:17 -0400
+Processing by ForminstController#index as HTML
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[31mDELETE FROM `session` WHERE `session`.`id` = 100[0m
+  [1m[35m (65.4ms)[0m  [1m[35mCOMMIT[0m
+  Rendering forminst/index.html.erb within layouts/ec_aplanes
+  Rendered forminst/index.html.erb within layouts/ec_aplanes (2.0ms)
+Completed 200 OK in 406ms (Views: 246.1ms | ActiveRecord: 147.7ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE `session` SET `data` = 'BAh7BkkiEF9jc3JmX3Rva2VuBjoGRUZJIjFpeWpLc3RkaXhBRDBGRGJWb0pE\nOXppV0pzSEp2Mmh1RmJmSGdFeWFRUnZZPQY7AEY=\n', `updated_at` = '2017-10-03 12:23:18' WHERE `session`.`id` = 101[0m
+  [1m[35m (35.9ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/" for ::1 at 2017-10-03 08:24:00 -0400
+Processing by ForminstController#index as HTML
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[31mDELETE FROM `session` WHERE `session`.`id` = 101[0m
+  [1m[35m (48.8ms)[0m  [1m[35mCOMMIT[0m
+  Rendering forminst/index.html.erb within layouts/ec_aplanes
+  Rendered forminst/index.html.erb within layouts/ec_aplanes (1.7ms)
+Completed 200 OK in 388ms (Views: 248.6ms | ActiveRecord: 131.5ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE `session` SET `data` = 'BAh7BkkiEF9jc3JmX3Rva2VuBjoGRUZJIjFHUzZEcGlzU0lBVlVzSDJBOEJv\nQ0FnZzNEUjNpOUNTZWF4K2pmSjhhZ2ljPQY7AEY=\n' WHERE `session`.`id` = 102[0m
+  [1m[35m (41.5ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/" for ::1 at 2017-10-03 08:31:02 -0400
+Processing by ForminstController#index as HTML
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[31mDELETE FROM `session` WHERE `session`.`id` = 102[0m
+  [1m[35m (40.0ms)[0m  [1m[35mCOMMIT[0m
+  Rendering forminst/index.html.erb within layouts/ec_aplanes
+  Rendered forminst/index.html.erb within layouts/ec_aplanes (3.4ms)
+Completed 200 OK in 363ms (Views: 266.8ms | ActiveRecord: 88.5ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (4.0ms)[0m  [1m[33mUPDATE `session` SET `data` = 'BAh7BkkiEF9jc3JmX3Rva2VuBjoGRUZJIjFkUzRMZGNVZzRWMlBhWUZhaEpl\ndk5qd1ZsZTIwa3IwZGo0NFRpNUwxZnJNPQY7AEY=\n', `updated_at` = '2017-10-03 12:31:03' WHERE `session`.`id` = 103[0m
+  [1m[35m (104.7ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/images/favicon.ico" for ::1 at 2017-10-03 08:31:03 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/images/favicon.ico"):
+  
+actionpack (5.0.6) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.6) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.3) lib/rack/method_override.rb:22:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.6) lib/rails/engine.rb:522:in `call'
+puma (3.10.0) lib/puma/configuration.rb:225:in `call'
+puma (3.10.0) lib/puma/server.rb:605:in `handle_request'
+puma (3.10.0) lib/puma/server.rb:437:in `process_client'
+puma (3.10.0) lib/puma/server.rb:301:in `block in run'
+puma (3.10.0) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  Rendering /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout
+  Rendering /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.5ms)
+  Rendered collection of /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb [18 times] (10.2ms)
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (5.2ms)
+  Rendering /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (2.4ms)
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (56.7ms)
+Started GET "/" for ::1 at 2017-10-03 08:32:04 -0400
+Processing by ForminstController#index as HTML
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM `session` WHERE `session`.`id` = 103[0m
+  [1m[35m (39.1ms)[0m  [1m[35mCOMMIT[0m
+  Rendering forminst/index.html.erb within layouts/ec_aplanes
+  Rendered forminst/index.html.erb within layouts/ec_aplanes (1.6ms)
+Completed 200 OK in 308ms (Views: 229.9ms | ActiveRecord: 72.3ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE `session` SET `data` = 'BAh7BkkiEF9jc3JmX3Rva2VuBjoGRUZJIjFBYitEQmkzMDJHeXk1WjM5VFU1\nQ2xrWC9qK1R6eCtsaWVYVDhOTmVHNjgwPQY7AEY=\n' WHERE `session`.`id` = 104[0m
+  [1m[35m (43.8ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/" for ::1 at 2017-10-03 08:33:10 -0400
+Processing by ForminstController#index as HTML
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (5.2ms)[0m  [1m[31mDELETE FROM `session` WHERE `session`.`id` = 104[0m
+  [1m[35m (105.2ms)[0m  [1m[35mCOMMIT[0m
+  Rendering forminst/index.html.erb within layouts/ec_aplanes
+  Rendered forminst/index.html.erb within layouts/ec_aplanes (1.7ms)
+Completed 200 OK in 432ms (Views: 240.3ms | ActiveRecord: 175.3ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[33mUPDATE `session` SET `data` = 'BAh7BkkiEF9jc3JmX3Rva2VuBjoGRUZJIjFhSG9vQjdjTVRDS2NZdzh0VFFy\nZ0NOcEI0cVF3VWpBbjY2Yms4YXFjaTBZPQY7AEY=\n' WHERE `session`.`id` = 105[0m
+  [1m[35m (74.5ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/" for ::1 at 2017-10-03 08:34:35 -0400
+Processing by ForminstController#index as HTML
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[31mDELETE FROM `session` WHERE `session`.`id` = 105[0m
+  [1m[35m (57.9ms)[0m  [1m[35mCOMMIT[0m
+  Rendering forminst/index.html.erb within layouts/ec_aplanes
+  Rendered forminst/index.html.erb within layouts/ec_aplanes (1.6ms)
+Completed 200 OK in 384ms (Views: 238.4ms | ActiveRecord: 131.5ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE `session` SET `data` = 'BAh7BkkiEF9jc3JmX3Rva2VuBjoGRUZJIjEreDdXL3NPRkR6TENiYXZUQ05G\nWWhnWDNlYy9ybU5CSTE1OC9naUt0QjdRPQY7AEY=\n' WHERE `session`.`id` = 106[0m
+  [1m[35m (53.5ms)[0m  [1m[35mCOMMIT[0m
