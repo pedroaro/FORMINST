@@ -311,17 +311,110 @@
 </div>
 <br>
 
+
+
 <div class= "row">
   <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
       <div class="table-responsive">
-      <b><p>5.-ACTIVIDADES A REALIZAR POR EL INSTRUCTOR</p></b>
+      <b><p>5.- PRESENTACIÓN</p></b>
+      <table class="table table-black">
+        <tbody>
+          <tr>
+            <td class="text-left"><%= @plan.id %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<br>
+<div class= "row">
+  <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
+      <div class="table-responsive">
+      <b><p>6.- DESCRIPCIÓN DEL PERFIL DEL INSTRUCTOR GANADOR DEL CONCURSO</p></b>
+      <table class="table table-black">
+        <tbody>
+          <tr>
+            <td class="text-left"><%=  @plan.id %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<br>
+<div class= "row">
+  <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
+      <div class="table-responsive">
+      <b><p>7.- DOCENCIA</p></b>
+      <table class="table table-black">
+        <tbody>
+          <tr>
+            <td class="text-left"><%=  @plan.id %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<br>
+<div class= "row">
+  <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
+      <div class="table-responsive">
+      <b><p>8.- INVESTIGACIÓN</p></b>
+      <table class="table table-black">
+        <tbody>
+          <tr>
+            <td class="text-left"><%=  @plan.id %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<br>
+<div class= "row">
+  <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
+      <div class="table-responsive">
+      <b><p>9.- FORMACIÓN Y CAPACITACIÓN PROFESIONAL</p></b>
+      <table class="table table-black">
+        <tbody>
+          <tr>
+            <td class="text-left"><%=  @plan.id %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<br>
+<div class= "row">
+  <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
+      <div class="table-responsive">
+      <b><p>10.- EXTENSION</p></b>
+      <table class="table table-black">
+        <tbody>
+          <tr>
+            <td class="text-left"><%=  @plan.id %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<br>
+
+<div class= "row">
+  <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
+      <div class="table-responsive">
+      <b><p>11.-ACTIVIDADES A REALIZAR POR EL INSTRUCTOR</p></b>
       <table class="table table-black">
         <tbody>
           <tr>
             <td><b>PRIMER SEMESTRE</b></td>
           </tr>
           <tr>
-            <td class="text-left"><b>5.1.- Docencia:</b></td>
+            <td class="text-left"><b>11.1.- Docencia:</b></td>
           </tr>
             <% @actividades1doc.each_with_index do |actdoc, i| %>
               <tr>
@@ -329,7 +422,7 @@
               </tr>
             <% end %>
           <tr>
-            <td class="text-left"><b>5.2.- Investigación:</b></td>
+            <td class="text-left"><b>11.2.- Investigación:</b></td>
           </tr>
             <% @actividades1inv.each_with_index do |actdoc, i| %>
                 <tr>
@@ -337,7 +430,7 @@
                 </tr>
             <% end %>
           <tr>
-            <td class="text-left"><b>5.3.- Formación:</b></td>
+            <td class="text-left"><b>11.3.- Formación:</b></td>
           </tr>
           <% @actividades1for.each_with_index do |actdoc, i| %>
               <tr>
@@ -345,7 +438,7 @@
               </tr>
           <% end %>
           <tr>
-            <td class="text-left"><b>5.4.- Extensión:</b></td>
+            <td class="text-left"><b>11.4.- Extensión:</b></td>
           </tr>
           <% @actividades1ext.each_with_index do |actdoc, i| %>
               <tr>
@@ -353,7 +446,7 @@
               </tr>
           <% end %>
           <tr>
-            <td class="text-left"><b>5.5.- Otras Actividades:</b></td>
+            <td class="text-left"><b>11.5.- Otras Actividades:</b></td>
           </tr>
           <% @actividades1otr.each_with_index do |actdoc, i| %>
               <tr>
@@ -367,7 +460,7 @@
             <td><b>SEGUNDO SEMESTRE</b></td>
             </tr>
           <tr>
-            <td class="text-left"><b>5.1.- Docencia:</b></td>
+            <td class="text-left"><b>11.1.- Docencia:</b></td>
           </tr>
             <% @actividades2doc.each_with_index do |actdoc, i| %>
               <tr>
@@ -375,7 +468,7 @@
               </tr>
             <% end %>
           <tr>
-            <td class="text-left"><b>5.2.- Investigación:</b></td>
+            <td class="text-left"><b>11.2.- Investigación:</b></td>
           </tr>
             <% @actividades2inv.each_with_index do |actdoc, i| %>
                 <tr>
@@ -383,7 +476,7 @@
                 </tr>
             <% end %>
           <tr>
-            <td class="text-left"><b>5.3.- Formación:</b></td>
+            <td class="text-left"><b>11.3.- Formación:</b></td>
           </tr>
           <% @actividades2for.each_with_index do |actdoc, i| %>
               <tr>
@@ -391,7 +484,7 @@
               </tr>
           <% end %>
           <tr>
-            <td class="text-left"><b>5.4.- Extensión:</b></td>
+            <td class="text-left"><b>11.4.- Extensión:</b></td>
           </tr>
           <% @actividades2ext.each_with_index do |actdoc, i| %>
               <tr>
@@ -399,7 +492,7 @@
               </tr>
           <% end %>
           <tr>
-            <td class="text-left"><b>5.5.- Otras Actividades:</b></td>
+            <td class="text-left"><b>11.5.- Otras Actividades:</b></td>
           </tr>
           <% @actividades2otr.each_with_index do |actdoc, i| %>
               <tr>
@@ -412,7 +505,7 @@
             <td><b>TERCER SEMESTRE</b></td>
           </tr>
           <tr>
-            <td class="text-left"><b>5.1.- Docencia:</b></td>
+            <td class="text-left"><b>11.1.- Docencia:</b></td>
           </tr>
             <% @actividades3doc.each_with_index do |actdoc, i| %>
               <tr>
@@ -420,7 +513,7 @@
               </tr>
             <% end %>
           <tr>
-            <td class="text-left"><b>5.2.- Investigación:</b></td>
+            <td class="text-left"><b>11.2.- Investigación:</b></td>
           </tr>
             <% @actividades3inv.each_with_index do |actdoc, i| %>
                 <tr>
@@ -428,7 +521,7 @@
                 </tr>
             <% end %>
           <tr>
-            <td class="text-left"><b>5.3.- Formación:</b></td>
+            <td class="text-left"><b>11.3.- Formación:</b></td>
           </tr>
           <% @actividades3for.each_with_index do |actdoc, i| %>
               <tr>
@@ -436,7 +529,7 @@
               </tr>
           <% end %>
           <tr>
-            <td class="text-left"><b>5.4.- Extensión:</b></td>
+            <td class="text-left"><b>11.4.- Extensión:</b></td>
           </tr>
           <% @actividades3ext.each_with_index do |actdoc, i| %>
               <tr>
@@ -444,7 +537,7 @@
               </tr>
           <% end %>
           <tr>
-            <td class="text-left"><b>5.5.- Otras Actividades:</b></td>
+            <td class="text-left"><b>11.5.- Otras Actividades:</b></td>
           </tr>
           <% @actividades3otr.each_with_index do |actdoc, i| %>
               <tr>
@@ -456,7 +549,7 @@
             <td><b>CUARTO SEMESTRE</b></td>
           </tr>
           <tr>
-            <td class="text-left"><b>5.1.- Docencia:</b></td>
+            <td class="text-left"><b>11.1.- Docencia:</b></td>
           </tr>
             <% @actividades4doc.each_with_index do |actdoc, i| %>
               <tr>
@@ -464,7 +557,7 @@
               </tr>
             <% end %>
           <tr>
-            <td class="text-left"><b>5.2.- Investigación:</b></td>
+            <td class="text-left"><b>11.2.- Investigación:</b></td>
           </tr>
             <% @actividades4inv.each_with_index do |actdoc, i| %>
                 <tr>
@@ -472,7 +565,7 @@
                 </tr>
             <% end %>
           <tr>
-            <td class="text-left"><b>5.3.- Formación:</b></td>
+            <td class="text-left"><b>11.3.- Formación:</b></td>
           </tr>
           <% @actividades4for.each_with_index do |actdoc, i| %>
               <tr>
@@ -480,7 +573,7 @@
               </tr>
           <% end %>
           <tr>
-            <td class="text-left"><b>5.4.- Extensión:</b></td>
+            <td class="text-left"><b>11.4.- Extensión:</b></td>
           </tr>
           <% @actividades4ext.each_with_index do |actdoc, i| %>
               <tr>
@@ -488,7 +581,7 @@
               </tr>
           <% end %>
           <tr>
-            <td class="text-left"><b>5.5.- Otras Actividades:</b></td>
+            <td class="text-left"><b>11.5.- Otras Actividades:</b></td>
           </tr>
           <% @actividades4otr.each_with_index do |actdoc, i| %>
               <tr>
@@ -499,7 +592,7 @@
             <td><b>ACTIVIDADES OBLIGATORIAS</b></td>
           </tr>
           <tr>
-            <td class="text-left"><b>5.1.- Actividades Obligatorias:</b></td>
+            <td class="text-left"><b>12.- Actividades Obligatorias:</b></td>
           </tr>
             <% @actividades5obli.each_with_index do |actdoc, i| %>
               <tr>

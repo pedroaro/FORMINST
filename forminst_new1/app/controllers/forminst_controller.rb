@@ -19,11 +19,10 @@ class ForminstController < ApplicationController
 		puts correo
 		puts "SOOOOY LA CLAVE"
 		puts clave
-		puts Digest::SHA1.hexdigest(clave)
 		clave = Digest::SHA1.hexdigest(clave)
 
 		#Si es un Administrados
-		if correo == "Administrador" && clave=="1"
+		if correo == "Administrador" && params[:password]=="1"
 
 			session[:usuario_id] = "-2552"
 			session[:nombre_usuario] = "Administrador"
@@ -92,6 +91,7 @@ class ForminstController < ApplicationController
 									session[:entidad_id] = @entidad.id
 									puts (session[:entidad_id])
 									session[:nombre_usuario] = @entidad.nombre
+									flash[:success]= "Bienvenido al " + @entidad.nombre
 									puts "El usuario se autentico correctamente y es una entidad"
 									redirect_to controller:"inicioentidad", action: "index"
 								else
@@ -167,6 +167,7 @@ class ForminstController < ApplicationController
 										session[:entidad_id] = @entidad.id
 										puts (session[:entidad_id])
 										session[:nombre_usuario] = @entidad.nombre
+										flash[:success]= "Bienvenido al " + @entidad.nombre
 										puts "El usuario se autentico correctamente y es una entidad"
 										redirect_to controller:"inicioentidad", action: "index"
 									end
