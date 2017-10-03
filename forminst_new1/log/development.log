@@ -16812,69 +16812,69 @@ Content-Transfer-Encoding: quoted-printable
     <meta content=3D'text/html; charset=3DUTF-8' http-equiv=3D'Content-Ty=
 pe' />
   </head>
-	<body>
-		<table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0">=
+  <body>
+    <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0">=
 
-		  <tr>
-		    <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D=
+      <tr>
+        <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D=
 "0">
-		      <tr>
-		        	<td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a=
+          <tr>
+              <td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a=
 2a2a" style=3D"background-color:#2a2a2a; padding:10px; font-family:Georgi=
 a, 'Times New Roman', Times, serif; color:#43c1d7; font-size:20px;">Nueva=
  Asignaci=C3=B3n de Instructor</td>
-		      </tr>
-		      <tr>
-		        <td width=3D"1000" align=3D"center" valign=3D"top" style=3D"pad=
+          </tr>
+          <tr>
+            <td width=3D"1000" align=3D"center" valign=3D"top" style=3D"pad=
 ding:12px; background-color:#ffffff;" bgcolor=3D"#ffffff;"><table width=3D=
 "100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"4" style=3D"margin-b=
 ottom:20px;">
-		        </table>
-		          <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadd=
+            </table>
+              <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadd=
 ing=3D"4" style=3D"margin-bottom:20px;">
-		            <tr>
-		              <td align=3D"left" valign=3D"top" style=3D"font-family:Ve=
+                <tr>
+                  <td align=3D"left" valign=3D"top" style=3D"font-family:Ve=
 rdana, Geneva, sans-serif; font-size:12px; color:#000000;">
-			              <div style=3D"color:#43c1d7; font-size:19px;"><b>Notific=
+                    <div style=3D"color:#43c1d7; font-size:19px;"><b>Notific=
 aci=C3=B3n:</b><br>
-			              </div>
-			              <br>
-			              <div style=3D"color:#43c1d7;"><b>[2017-09-25] Se le ha a=
+                    </div>
+                    <br>
+                    <div style=3D"color:#43c1d7;"><b>[2017-09-25] Se le ha a=
 signado el Plan formaci=C3=B3n de Pedro Rodriguez, recuerde crear la adec=
 uaci=C3=B3n correspondiente y enviarla.</b><br>
-			              </div>
-			              <br>
-			              <div style=3D"color:#6e6e6e;"> Para mayor informaci=C3=B3=
+                    </div>
+                    <br>
+                    <div style=3D"color:#6e6e6e;"> Para mayor informaci=C3=B3=
 n, por favor ingrese al Sitio web de FORMINST</div>
-			              <br>
-			              <br>
-		              </td>
-		            </tr>
-		            <tr>
-		              <td align=3D"center" valign=3D"top" style=3D"font-family:=
+                    <br>
+                    <br>
+                  </td>
+                </tr>
+                <tr>
+                  <td align=3D"center" valign=3D"top" style=3D"font-family:=
 Verdana, Geneva, sans-serif; font-size:12px; color:#000000;">
-			              <div style=3D"color:#6e6e6e;"> Universidad Central de Ve=
+                    <div style=3D"color:#6e6e6e;"> Universidad Central de Ve=
 nezuela</div>
-			              <div style=3D"color:#6e6e6e;"> Facultad de Ciencias</div=
+                    <div style=3D"color:#6e6e6e;"> Facultad de Ciencias</div=
 >
-			              <div style=3D"color:#6e6e6e;"> Sistema FORMINST</div>
-		              </td>
-		            </tr>
-		          </table>
-		        </table>
-		        </td>
-		      </tr>
-		      <tr>
-		      	<td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a2a=
+                    <div style=3D"color:#6e6e6e;"> Sistema FORMINST</div>
+                  </td>
+                </tr>
+              </table>
+            </table>
+            </td>
+          </tr>
+          <tr>
+            <td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a2a=
 2a" style=3D"background-color:#2a2a2a; padding:10px; font-family:Georgia,=
  'Times New Roman', Times, serif; color:#43c1d7; font-size:20px;"></td>
-		      </tr>
-		    </table>
-		    <br>
-		    <br>
-		  </tr>
-		</table>
-	</body>
+          </tr>
+        </table>
+        <br>
+        <br>
+      </tr>
+    </table>
+  </body>
 </html>=
 
   [1m[36mUsuario Load (0.4ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 39 LIMIT 1[0m
@@ -16899,69 +16899,69 @@ Content-Transfer-Encoding: quoted-printable
     <meta content=3D'text/html; charset=3DUTF-8' http-equiv=3D'Content-Ty=
 pe' />
   </head>
-	<body>
-		<table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0">=
+  <body>
+    <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0">=
 
-		  <tr>
-		    <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D=
+      <tr>
+        <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D=
 "0">
-		      <tr>
-		        	<td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a=
+          <tr>
+              <td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a=
 2a2a" style=3D"background-color:#2a2a2a; padding:10px; font-family:Georgi=
 a, 'Times New Roman', Times, serif; color:#43c1d7; font-size:20px;">=C2=A1=
 Bienvenido a FORMINST!</td>
-		      </tr>
-		      <tr>
-		        <td width=3D"1000" align=3D"center" valign=3D"top" style=3D"pad=
+          </tr>
+          <tr>
+            <td width=3D"1000" align=3D"center" valign=3D"top" style=3D"pad=
 ding:12px; background-color:#ffffff;" bgcolor=3D"#ffffff;"><table width=3D=
 "100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"4" style=3D"margin-b=
 ottom:20px;">
-		        </table>
-		          <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadd=
+            </table>
+              <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadd=
 ing=3D"4" style=3D"margin-bottom:20px;">
-		            <tr>
-		              <td align=3D"left" valign=3D"top" style=3D"font-family:Ve=
+                <tr>
+                  <td align=3D"left" valign=3D"top" style=3D"font-family:Ve=
 rdana, Geneva, sans-serif; font-size:12px; color:#000000;">
-			              <div style=3D"color:#43c1d7; font-size:19px;"><b>Notific=
+                    <div style=3D"color:#43c1d7; font-size:19px;"><b>Notific=
 aci=C3=B3n:</b><br>
-			              </div>
-			              <br>
-			              <div style=3D"color:#43c1d7;"><b>[2017-09-25] =C2=A1Bien=
+                    </div>
+                    <br>
+                    <div style=3D"color:#43c1d7;"><b>[2017-09-25] =C2=A1Bien=
 venido a FORMINST! Se le ha asignado a  Ana Ver=C3=B3nica Morales Bezeira=
  como tutor de su Plan de formaci=C3=B3n.</b><br>
-			              </div>
-			              <br>
-			              <div style=3D"color:#6e6e6e;"> Para mayor informaci=C3=B3=
+                    </div>
+                    <br>
+                    <div style=3D"color:#6e6e6e;"> Para mayor informaci=C3=B3=
 n, por favor ingrese al Sitio web de FORMINST</div>
-			              <br>
-			              <br>
-		              </td>
-		            </tr>
-		            <tr>
-		              <td align=3D"center" valign=3D"top" style=3D"font-family:=
+                    <br>
+                    <br>
+                  </td>
+                </tr>
+                <tr>
+                  <td align=3D"center" valign=3D"top" style=3D"font-family:=
 Verdana, Geneva, sans-serif; font-size:12px; color:#000000;">
-			              <div style=3D"color:#6e6e6e;"> Universidad Central de Ve=
+                    <div style=3D"color:#6e6e6e;"> Universidad Central de Ve=
 nezuela</div>
-			              <div style=3D"color:#6e6e6e;"> Facultad de Ciencias</div=
+                    <div style=3D"color:#6e6e6e;"> Facultad de Ciencias</div=
 >
-			              <div style=3D"color:#6e6e6e;"> Sistema FORMINST</div>
-		              </td>
-		            </tr>
-		          </table>
-		        </table>
-		        </td>
-		      </tr>
-		      <tr>
-		      	<td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a2a=
+                    <div style=3D"color:#6e6e6e;"> Sistema FORMINST</div>
+                  </td>
+                </tr>
+              </table>
+            </table>
+            </td>
+          </tr>
+          <tr>
+            <td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a2a=
 2a" style=3D"background-color:#2a2a2a; padding:10px; font-family:Georgia,=
  'Times New Roman', Times, serif; color:#43c1d7; font-size:20px;"></td>
-		      </tr>
-		    </table>
-		    <br>
-		    <br>
-		  </tr>
-		</table>
-	</body>
+          </tr>
+        </table>
+        <br>
+        <br>
+      </tr>
+    </table>
+  </body>
 </html>=
 
 Redirected to http://localhost:3000/secretarias
@@ -17878,69 +17878,69 @@ Content-Transfer-Encoding: quoted-printable
     <meta content=3D'text/html; charset=3DUTF-8' http-equiv=3D'Content-Ty=
 pe' />
   </head>
-	<body>
-		<table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0">=
+  <body>
+    <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0">=
 
-		  <tr>
-		    <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D=
+      <tr>
+        <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D=
 "0">
-		      <tr>
-		        	<td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a=
+          <tr>
+              <td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a=
 2a2a" style=3D"background-color:#2a2a2a; padding:10px; font-family:Georgi=
 a, 'Times New Roman', Times, serif; color:#43c1d7; font-size:20px;">Ha re=
 cibido una notificaci=C3=B3n de Adecuaci=C3=B3n</td>
-		      </tr>
-		      <tr>
-		        <td width=3D"1000" align=3D"center" valign=3D"top" style=3D"pad=
+          </tr>
+          <tr>
+            <td width=3D"1000" align=3D"center" valign=3D"top" style=3D"pad=
 ding:12px; background-color:#ffffff;" bgcolor=3D"#ffffff;"><table width=3D=
 "100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"4" style=3D"margin-b=
 ottom:20px;">
-		        </table>
-		          <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadd=
+            </table>
+              <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadd=
 ing=3D"4" style=3D"margin-bottom:20px;">
-		            <tr>
-		              <td align=3D"left" valign=3D"top" style=3D"font-family:Ve=
+                <tr>
+                  <td align=3D"left" valign=3D"top" style=3D"font-family:Ve=
 rdana, Geneva, sans-serif; font-size:12px; color:#000000;">
-			              <div style=3D"color:#43c1d7; font-size:19px;"><b>Notific=
+                    <div style=3D"color:#43c1d7; font-size:19px;"><b>Notific=
 aci=C3=B3n:</b><br>
-			              </div>
-			              <br>
-			              <div style=3D"color:#43c1d7;"><b>[2017-09-25] La adecuac=
+                    </div>
+                    <br>
+                    <div style=3D"color:#43c1d7;"><b>[2017-09-25] La adecuac=
 i=C3=B3n de Pedro Rodriguez se ha enviado a comisi=C3=B3n de investigaci=C3=
 =B3n.</b><br>
-			              </div>
-			              <br>
-			              <div style=3D"color:#6e6e6e;"> Para mayor informaci=C3=B3=
+                    </div>
+                    <br>
+                    <div style=3D"color:#6e6e6e;"> Para mayor informaci=C3=B3=
 n, por favor ingrese al Sitio web de FORMINST</div>
-			              <br>
-			              <br>
-		              </td>
-		            </tr>
-		            <tr>
-		              <td align=3D"center" valign=3D"top" style=3D"font-family:=
+                    <br>
+                    <br>
+                  </td>
+                </tr>
+                <tr>
+                  <td align=3D"center" valign=3D"top" style=3D"font-family:=
 Verdana, Geneva, sans-serif; font-size:12px; color:#000000;">
-			              <div style=3D"color:#6e6e6e;"> Universidad Central de Ve=
+                    <div style=3D"color:#6e6e6e;"> Universidad Central de Ve=
 nezuela</div>
-			              <div style=3D"color:#6e6e6e;"> Facultad de Ciencias</div=
+                    <div style=3D"color:#6e6e6e;"> Facultad de Ciencias</div=
 >
-			              <div style=3D"color:#6e6e6e;"> Sistema FORMINST</div>
-		              </td>
-		            </tr>
-		          </table>
-		        </table>
-		        </td>
-		      </tr>
-		      <tr>
-		      	<td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a2a=
+                    <div style=3D"color:#6e6e6e;"> Sistema FORMINST</div>
+                  </td>
+                </tr>
+              </table>
+            </table>
+            </td>
+          </tr>
+          <tr>
+            <td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a2a=
 2a" style=3D"background-color:#2a2a2a; padding:10px; font-family:Georgia,=
  'Times New Roman', Times, serif; color:#43c1d7; font-size:20px;"></td>
-		      </tr>
-		    </table>
-		    <br>
-		    <br>
-		  </tr>
-		</table>
-	</body>
+          </tr>
+        </table>
+        <br>
+        <br>
+      </tr>
+    </table>
+  </body>
 </html>=
 
   [1m[36mUsuario Load (0.4ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 39 LIMIT 1[0m
@@ -17965,68 +17965,68 @@ Content-Transfer-Encoding: quoted-printable
     <meta content=3D'text/html; charset=3DUTF-8' http-equiv=3D'Content-Ty=
 pe' />
   </head>
-	<body>
-		<table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0">=
+  <body>
+    <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0">=
 
-		  <tr>
-		    <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D=
+      <tr>
+        <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D=
 "0">
-		      <tr>
-		        	<td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a=
+          <tr>
+              <td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a=
 2a2a" style=3D"background-color:#2a2a2a; padding:10px; font-family:Georgi=
 a, 'Times New Roman', Times, serif; color:#43c1d7; font-size:20px;">Ha re=
 cibido una notificaci=C3=B3n de Adecuaci=C3=B3n</td>
-		      </tr>
-		      <tr>
-		        <td width=3D"1000" align=3D"center" valign=3D"top" style=3D"pad=
+          </tr>
+          <tr>
+            <td width=3D"1000" align=3D"center" valign=3D"top" style=3D"pad=
 ding:12px; background-color:#ffffff;" bgcolor=3D"#ffffff;"><table width=3D=
 "100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"4" style=3D"margin-b=
 ottom:20px;">
-		        </table>
-		          <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadd=
+            </table>
+              <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadd=
 ing=3D"4" style=3D"margin-bottom:20px;">
-		            <tr>
-		              <td align=3D"left" valign=3D"top" style=3D"font-family:Ve=
+                <tr>
+                  <td align=3D"left" valign=3D"top" style=3D"font-family:Ve=
 rdana, Geneva, sans-serif; font-size:12px; color:#000000;">
-			              <div style=3D"color:#43c1d7; font-size:19px;"><b>Notific=
+                    <div style=3D"color:#43c1d7; font-size:19px;"><b>Notific=
 aci=C3=B3n:</b><br>
-			              </div>
-			              <br>
-			              <div style=3D"color:#43c1d7;"><b>[2017-09-25] Su adecuac=
+                    </div>
+                    <br>
+                    <div style=3D"color:#43c1d7;"><b>[2017-09-25] Su adecuac=
 i=C3=B3n se ha enviado a comisi=C3=B3n de investigaci=C3=B3n.</b><br>
-			              </div>
-			              <br>
-			              <div style=3D"color:#6e6e6e;"> Para mayor informaci=C3=B3=
+                    </div>
+                    <br>
+                    <div style=3D"color:#6e6e6e;"> Para mayor informaci=C3=B3=
 n, por favor ingrese al Sitio web de FORMINST</div>
-			              <br>
-			              <br>
-		              </td>
-		            </tr>
-		            <tr>
-		              <td align=3D"center" valign=3D"top" style=3D"font-family:=
+                    <br>
+                    <br>
+                  </td>
+                </tr>
+                <tr>
+                  <td align=3D"center" valign=3D"top" style=3D"font-family:=
 Verdana, Geneva, sans-serif; font-size:12px; color:#000000;">
-			              <div style=3D"color:#6e6e6e;"> Universidad Central de Ve=
+                    <div style=3D"color:#6e6e6e;"> Universidad Central de Ve=
 nezuela</div>
-			              <div style=3D"color:#6e6e6e;"> Facultad de Ciencias</div=
+                    <div style=3D"color:#6e6e6e;"> Facultad de Ciencias</div=
 >
-			              <div style=3D"color:#6e6e6e;"> Sistema FORMINST</div>
-		              </td>
-		            </tr>
-		          </table>
-		        </table>
-		        </td>
-		      </tr>
-		      <tr>
-		      	<td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a2a=
+                    <div style=3D"color:#6e6e6e;"> Sistema FORMINST</div>
+                  </td>
+                </tr>
+              </table>
+            </table>
+            </td>
+          </tr>
+          <tr>
+            <td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a2a=
 2a" style=3D"background-color:#2a2a2a; padding:10px; font-family:Georgia,=
  'Times New Roman', Times, serif; color:#43c1d7; font-size:20px;"></td>
-		      </tr>
-		    </table>
-		    <br>
-		    <br>
-		  </tr>
-		</table>
-	</body>
+          </tr>
+        </table>
+        <br>
+        <br>
+      </tr>
+    </table>
+  </body>
 </html>=
 
   [1m[36mUsuario Load (0.4ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 3 LIMIT 1[0m
@@ -18051,69 +18051,69 @@ Content-Transfer-Encoding: quoted-printable
     <meta content=3D'text/html; charset=3DUTF-8' http-equiv=3D'Content-Ty=
 pe' />
   </head>
-	<body>
-		<table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0">=
+  <body>
+    <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0">=
 
-		  <tr>
-		    <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D=
+      <tr>
+        <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D=
 "0">
-		      <tr>
-		        	<td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a=
+          <tr>
+              <td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a=
 2a2a" style=3D"background-color:#2a2a2a; padding:10px; font-family:Georgi=
 a, 'Times New Roman', Times, serif; color:#43c1d7; font-size:20px;">Ha re=
 cibido una nueva Adecuaci=C3=B3n</td>
-		      </tr>
-		      <tr>
-		        <td width=3D"1000" align=3D"center" valign=3D"top" style=3D"pad=
+          </tr>
+          <tr>
+            <td width=3D"1000" align=3D"center" valign=3D"top" style=3D"pad=
 ding:12px; background-color:#ffffff;" bgcolor=3D"#ffffff;"><table width=3D=
 "100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"4" style=3D"margin-b=
 ottom:20px;">
-		        </table>
-		          <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadd=
+            </table>
+              <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadd=
 ing=3D"4" style=3D"margin-bottom:20px;">
-		            <tr>
-		              <td align=3D"left" valign=3D"top" style=3D"font-family:Ve=
+                <tr>
+                  <td align=3D"left" valign=3D"top" style=3D"font-family:Ve=
 rdana, Geneva, sans-serif; font-size:12px; color:#000000;">
-			              <div style=3D"color:#43c1d7; font-size:19px;"><b>Notific=
+                    <div style=3D"color:#43c1d7; font-size:19px;"><b>Notific=
 aci=C3=B3n:</b><br>
-			              </div>
-			              <br>
-			              <div style=3D"color:#43c1d7;"><b>[2017-09-25] Se ha reci=
+                    </div>
+                    <br>
+                    <div style=3D"color:#43c1d7;"><b>[2017-09-25] Se ha reci=
 bido una nueva Adecuaci=C3=B3n: Pedro Rodriguez, favor revisar y enviar a=
  la siguiente entidad.</b><br>
-			              </div>
-			              <br>
-			              <div style=3D"color:#6e6e6e;"> Para mayor informaci=C3=B3=
+                    </div>
+                    <br>
+                    <div style=3D"color:#6e6e6e;"> Para mayor informaci=C3=B3=
 n, por favor ingrese al Sitio web de FORMINST</div>
-			              <br>
-			              <br>
-		              </td>
-		            </tr>
-		            <tr>
-		              <td align=3D"center" valign=3D"top" style=3D"font-family:=
+                    <br>
+                    <br>
+                  </td>
+                </tr>
+                <tr>
+                  <td align=3D"center" valign=3D"top" style=3D"font-family:=
 Verdana, Geneva, sans-serif; font-size:12px; color:#000000;">
-			              <div style=3D"color:#6e6e6e;"> Universidad Central de Ve=
+                    <div style=3D"color:#6e6e6e;"> Universidad Central de Ve=
 nezuela</div>
-			              <div style=3D"color:#6e6e6e;"> Facultad de Ciencias</div=
+                    <div style=3D"color:#6e6e6e;"> Facultad de Ciencias</div=
 >
-			              <div style=3D"color:#6e6e6e;"> Sistema FORMINST</div>
-		              </td>
-		            </tr>
-		          </table>
-		        </table>
-		        </td>
-		      </tr>
-		      <tr>
-		      	<td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a2a=
+                    <div style=3D"color:#6e6e6e;"> Sistema FORMINST</div>
+                  </td>
+                </tr>
+              </table>
+            </table>
+            </td>
+          </tr>
+          <tr>
+            <td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a2a=
 2a" style=3D"background-color:#2a2a2a; padding:10px; font-family:Georgia,=
  'Times New Roman', Times, serif; color:#43c1d7; font-size:20px;"></td>
-		      </tr>
-		    </table>
-		    <br>
-		    <br>
-		  </tr>
-		</table>
-	</body>
+          </tr>
+        </table>
+        <br>
+        <br>
+      </tr>
+    </table>
+  </body>
 </html>=
 
 Redirected to http://localhost:3000/iniciotutor/planformacions
@@ -21985,69 +21985,69 @@ Content-Transfer-Encoding: quoted-printable
     <meta content=3D'text/html; charset=3DUTF-8' http-equiv=3D'Content-Ty=
 pe' />
   </head>
-	<body>
-		<table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0">=
+  <body>
+    <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0">=
 
-		  <tr>
-		    <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D=
+      <tr>
+        <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D=
 "0">
-		      <tr>
-		        	<td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a=
+          <tr>
+              <td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a=
 2a2a" style=3D"background-color:#2a2a2a; padding:10px; font-family:Georgi=
 a, 'Times New Roman', Times, serif; color:#43c1d7; font-size:20px;">Nueva=
  Asignaci=C3=B3n de Instructor</td>
-		      </tr>
-		      <tr>
-		        <td width=3D"1000" align=3D"center" valign=3D"top" style=3D"pad=
+          </tr>
+          <tr>
+            <td width=3D"1000" align=3D"center" valign=3D"top" style=3D"pad=
 ding:12px; background-color:#ffffff;" bgcolor=3D"#ffffff;"><table width=3D=
 "100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"4" style=3D"margin-b=
 ottom:20px;">
-		        </table>
-		          <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadd=
+            </table>
+              <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadd=
 ing=3D"4" style=3D"margin-bottom:20px;">
-		            <tr>
-		              <td align=3D"left" valign=3D"top" style=3D"font-family:Ve=
+                <tr>
+                  <td align=3D"left" valign=3D"top" style=3D"font-family:Ve=
 rdana, Geneva, sans-serif; font-size:12px; color:#000000;">
-			              <div style=3D"color:#43c1d7; font-size:19px;"><b>Notific=
+                    <div style=3D"color:#43c1d7; font-size:19px;"><b>Notific=
 aci=C3=B3n:</b><br>
-			              </div>
-			              <br>
-			              <div style=3D"color:#43c1d7;"><b>[2017-09-27] Se le ha a=
+                    </div>
+                    <br>
+                    <div style=3D"color:#43c1d7;"><b>[2017-09-27] Se le ha a=
 signado el Plan formaci=C3=B3n de A A, recuerde crear la adecuaci=C3=B3n =
 correspondiente y enviarla.</b><br>
-			              </div>
-			              <br>
-			              <div style=3D"color:#6e6e6e;"> Para mayor informaci=C3=B3=
+                    </div>
+                    <br>
+                    <div style=3D"color:#6e6e6e;"> Para mayor informaci=C3=B3=
 n, por favor ingrese al Sitio web de FORMINST</div>
-			              <br>
-			              <br>
-		              </td>
-		            </tr>
-		            <tr>
-		              <td align=3D"center" valign=3D"top" style=3D"font-family:=
+                    <br>
+                    <br>
+                  </td>
+                </tr>
+                <tr>
+                  <td align=3D"center" valign=3D"top" style=3D"font-family:=
 Verdana, Geneva, sans-serif; font-size:12px; color:#000000;">
-			              <div style=3D"color:#6e6e6e;"> Universidad Central de Ve=
+                    <div style=3D"color:#6e6e6e;"> Universidad Central de Ve=
 nezuela</div>
-			              <div style=3D"color:#6e6e6e;"> Facultad de Ciencias</div=
+                    <div style=3D"color:#6e6e6e;"> Facultad de Ciencias</div=
 >
-			              <div style=3D"color:#6e6e6e;"> Sistema FORMINST</div>
-		              </td>
-		            </tr>
-		          </table>
-		        </table>
-		        </td>
-		      </tr>
-		      <tr>
-		      	<td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a2a=
+                    <div style=3D"color:#6e6e6e;"> Sistema FORMINST</div>
+                  </td>
+                </tr>
+              </table>
+            </table>
+            </td>
+          </tr>
+          <tr>
+            <td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a2a=
 2a" style=3D"background-color:#2a2a2a; padding:10px; font-family:Georgia,=
  'Times New Roman', Times, serif; color:#43c1d7; font-size:20px;"></td>
-		      </tr>
-		    </table>
-		    <br>
-		    <br>
-		  </tr>
-		</table>
-	</body>
+          </tr>
+        </table>
+        <br>
+        <br>
+      </tr>
+    </table>
+  </body>
 </html>=
 
   [1m[36mUsuario Load (0.4ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
@@ -22072,69 +22072,69 @@ Content-Transfer-Encoding: quoted-printable
     <meta content=3D'text/html; charset=3DUTF-8' http-equiv=3D'Content-Ty=
 pe' />
   </head>
-	<body>
-		<table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0">=
+  <body>
+    <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0">=
 
-		  <tr>
-		    <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D=
+      <tr>
+        <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D=
 "0">
-		      <tr>
-		        	<td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a=
+          <tr>
+              <td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a=
 2a2a" style=3D"background-color:#2a2a2a; padding:10px; font-family:Georgi=
 a, 'Times New Roman', Times, serif; color:#43c1d7; font-size:20px;">=C2=A1=
 Bienvenido a FORMINST!</td>
-		      </tr>
-		      <tr>
-		        <td width=3D"1000" align=3D"center" valign=3D"top" style=3D"pad=
+          </tr>
+          <tr>
+            <td width=3D"1000" align=3D"center" valign=3D"top" style=3D"pad=
 ding:12px; background-color:#ffffff;" bgcolor=3D"#ffffff;"><table width=3D=
 "100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"4" style=3D"margin-b=
 ottom:20px;">
-		        </table>
-		          <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadd=
+            </table>
+              <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadd=
 ing=3D"4" style=3D"margin-bottom:20px;">
-		            <tr>
-		              <td align=3D"left" valign=3D"top" style=3D"font-family:Ve=
+                <tr>
+                  <td align=3D"left" valign=3D"top" style=3D"font-family:Ve=
 rdana, Geneva, sans-serif; font-size:12px; color:#000000;">
-			              <div style=3D"color:#43c1d7; font-size:19px;"><b>Notific=
+                    <div style=3D"color:#43c1d7; font-size:19px;"><b>Notific=
 aci=C3=B3n:</b><br>
-			              </div>
-			              <br>
-			              <div style=3D"color:#43c1d7;"><b>[2017-09-27] =C2=A1Bien=
+                    </div>
+                    <br>
+                    <div style=3D"color:#43c1d7;"><b>[2017-09-27] =C2=A1Bien=
 venido a FORMINST! Se le ha asignado a  Carlos Julio Iglesias Monsalve co=
 mo tutor de su Plan de formaci=C3=B3n.</b><br>
-			              </div>
-			              <br>
-			              <div style=3D"color:#6e6e6e;"> Para mayor informaci=C3=B3=
+                    </div>
+                    <br>
+                    <div style=3D"color:#6e6e6e;"> Para mayor informaci=C3=B3=
 n, por favor ingrese al Sitio web de FORMINST</div>
-			              <br>
-			              <br>
-		              </td>
-		            </tr>
-		            <tr>
-		              <td align=3D"center" valign=3D"top" style=3D"font-family:=
+                    <br>
+                    <br>
+                  </td>
+                </tr>
+                <tr>
+                  <td align=3D"center" valign=3D"top" style=3D"font-family:=
 Verdana, Geneva, sans-serif; font-size:12px; color:#000000;">
-			              <div style=3D"color:#6e6e6e;"> Universidad Central de Ve=
+                    <div style=3D"color:#6e6e6e;"> Universidad Central de Ve=
 nezuela</div>
-			              <div style=3D"color:#6e6e6e;"> Facultad de Ciencias</div=
+                    <div style=3D"color:#6e6e6e;"> Facultad de Ciencias</div=
 >
-			              <div style=3D"color:#6e6e6e;"> Sistema FORMINST</div>
-		              </td>
-		            </tr>
-		          </table>
-		        </table>
-		        </td>
-		      </tr>
-		      <tr>
-		      	<td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a2a=
+                    <div style=3D"color:#6e6e6e;"> Sistema FORMINST</div>
+                  </td>
+                </tr>
+              </table>
+            </table>
+            </td>
+          </tr>
+          <tr>
+            <td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a2a=
 2a" style=3D"background-color:#2a2a2a; padding:10px; font-family:Georgia,=
  'Times New Roman', Times, serif; color:#43c1d7; font-size:20px;"></td>
-		      </tr>
-		    </table>
-		    <br>
-		    <br>
-		  </tr>
-		</table>
-	</body>
+          </tr>
+        </table>
+        <br>
+        <br>
+      </tr>
+    </table>
+  </body>
 </html>=
 
 Redirected to http://localhost:3000/secretarias
@@ -24885,47 +24885,47 @@ Completed 500 Internal Server Error in 140ms (ActiveRecord: 17.9ms)
 
   
 SyntaxError (/home/administrador/FORMINST/forminst_new1/app/models/pdf.rb:195: syntax error, unexpected keyword_else
-			else
-			    ^
+      else
+          ^
 /home/administrador/FORMINST/forminst_new1/app/models/pdf.rb:198: syntax error, unexpected keyword_end
-			end
-			   ^
+      end
+         ^
 /home/administrador/FORMINST/forminst_new1/app/models/pdf.rb:218: syntax error, unexpected keyword_else
-			else
-			    ^
+      else
+          ^
 /home/administrador/FORMINST/forminst_new1/app/models/pdf.rb:221: syntax error, unexpected keyword_end
-			end
-			   ^
+      end
+         ^
 /home/administrador/FORMINST/forminst_new1/app/models/pdf.rb:240: syntax error, unexpected keyword_else
-			else
-			    ^
+      else
+          ^
 /home/administrador/FORMINST/forminst_new1/app/models/pdf.rb:243: syntax error, unexpected keyword_end
-			end
-			   ^
+      end
+         ^
 /home/administrador/FORMINST/forminst_new1/app/models/pdf.rb:263: syntax error, unexpected keyword_else
-			else
-			    ^
+      else
+          ^
 /home/administrador/FORMINST/forminst_new1/app/models/pdf.rb:266: syntax error, unexpected keyword_end
-			end
-			   ^
+      end
+         ^
 /home/administrador/FORMINST/forminst_new1/app/models/pdf.rb:317: syntax error, unexpected keyword_do_block, expecting keyword_end
-				pactv_docencia.each do |actv|
-				                      ^
+        pactv_docencia.each do |actv|
+                              ^
 /home/administrador/FORMINST/forminst_new1/app/models/pdf.rb:355: syntax error, unexpected keyword_do_block, expecting keyword_end
-			pactv_investigacion.each do |actv|
-			                           ^
+      pactv_investigacion.each do |actv|
+                                 ^
 /home/administrador/FORMINST/forminst_new1/app/models/pdf.rb:394: syntax error, unexpected keyword_do_block, expecting keyword_end
-				pactv_formacion.each do |actv|
-				                       ^
+        pactv_formacion.each do |actv|
+                               ^
 /home/administrador/FORMINST/forminst_new1/app/models/pdf.rb:435: syntax error, unexpected keyword_do_block, expecting keyword_end
-				pactv_extension.each do |actv|
-				                       ^
+        pactv_extension.each do |actv|
+                               ^
 /home/administrador/FORMINST/forminst_new1/app/models/pdf.rb:476: syntax error, unexpected keyword_do_block, expecting keyword_end
-				pactv_otras.each do |actv|
-				                   ^
+        pactv_otras.each do |actv|
+                           ^
 /home/administrador/FORMINST/forminst_new1/app/models/pdf.rb:489: syntax error, unexpected keyword_else, expecting keyword_end
-			else
-			    ^
+      else
+          ^
 /home/administrador/FORMINST/forminst_new1/app/models/pdf.rb:1175: syntax error, unexpected keyword_end, expecting end-of-input):
   
 app/models/pdf.rb:195: syntax error, unexpected keyword_else
@@ -26048,68 +26048,68 @@ Content-Transfer-Encoding: quoted-printable
     <meta content=3D'text/html; charset=3DUTF-8' http-equiv=3D'Content-Ty=
 pe' />
   </head>
-	<body>
-		<table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0">=
+  <body>
+    <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0">=
 
-		  <tr>
-		    <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D=
+      <tr>
+        <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D=
 "0">
-		      <tr>
-		        	<td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a=
+          <tr>
+              <td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a=
 2a2a" style=3D"background-color:#2a2a2a; padding:10px; font-family:Georgi=
 a, 'Times New Roman', Times, serif; color:#43c1d7; font-size:20px;">=C2=A1=
 Bienvenido a FORMINST!</td>
-		      </tr>
-		      <tr>
-		        <td width=3D"1000" align=3D"center" valign=3D"top" style=3D"pad=
+          </tr>
+          <tr>
+            <td width=3D"1000" align=3D"center" valign=3D"top" style=3D"pad=
 ding:12px; background-color:#ffffff;" bgcolor=3D"#ffffff;"><table width=3D=
 "100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"4" style=3D"margin-b=
 ottom:20px;">
-		        </table>
-		          <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadd=
+            </table>
+              <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadd=
 ing=3D"4" style=3D"margin-bottom:20px;">
-		            <tr>
-		              <td align=3D"left" valign=3D"top" style=3D"font-family:Ve=
+                <tr>
+                  <td align=3D"left" valign=3D"top" style=3D"font-family:Ve=
 rdana, Geneva, sans-serif; font-size:12px; color:#000000;">
-			              <div style=3D"color:#43c1d7; font-size:19px;"><b>Notific=
+                    <div style=3D"color:#43c1d7; font-size:19px;"><b>Notific=
 aci=C3=B3n:</b><br>
-			              </div>
-			              <br>
-			              <div style=3D"color:#43c1d7;"><b>[2017-10-03] =C2=A1Bien=
+                    </div>
+                    <br>
+                    <div style=3D"color:#43c1d7;"><b>[2017-10-03] =C2=A1Bien=
 venido a FORMINST! Se ha creado su perfil de Tutor.</b><br>
-			              </div>
-			              <br>
-			              <div style=3D"color:#6e6e6e;"> Para mayor informaci=C3=B3=
+                    </div>
+                    <br>
+                    <div style=3D"color:#6e6e6e;"> Para mayor informaci=C3=B3=
 n, por favor ingrese al Sitio web de FORMINST</div>
-			              <br>
-			              <br>
-		              </td>
-		            </tr>
-		            <tr>
-		              <td align=3D"center" valign=3D"top" style=3D"font-family:=
+                    <br>
+                    <br>
+                  </td>
+                </tr>
+                <tr>
+                  <td align=3D"center" valign=3D"top" style=3D"font-family:=
 Verdana, Geneva, sans-serif; font-size:12px; color:#000000;">
-			              <div style=3D"color:#6e6e6e;"> Universidad Central de Ve=
+                    <div style=3D"color:#6e6e6e;"> Universidad Central de Ve=
 nezuela</div>
-			              <div style=3D"color:#6e6e6e;"> Facultad de Ciencias</div=
+                    <div style=3D"color:#6e6e6e;"> Facultad de Ciencias</div=
 >
-			              <div style=3D"color:#6e6e6e;"> Sistema FORMINST</div>
-		              </td>
-		            </tr>
-		          </table>
-		        </table>
-		        </td>
-		      </tr>
-		      <tr>
-		      	<td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a2a=
+                    <div style=3D"color:#6e6e6e;"> Sistema FORMINST</div>
+                  </td>
+                </tr>
+              </table>
+            </table>
+            </td>
+          </tr>
+          <tr>
+            <td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a2a=
 2a" style=3D"background-color:#2a2a2a; padding:10px; font-family:Georgia,=
  'Times New Roman', Times, serif; color:#43c1d7; font-size:20px;"></td>
-		      </tr>
-		    </table>
-		    <br>
-		    <br>
-		  </tr>
-		</table>
-	</body>
+          </tr>
+        </table>
+        <br>
+        <br>
+      </tr>
+    </table>
+  </body>
 </html>=
 
 Redirected to http://localhost:3000/secretarias
@@ -28380,68 +28380,68 @@ Content-Transfer-Encoding: quoted-printable
     <meta content=3D'text/html; charset=3DUTF-8' http-equiv=3D'Content-Ty=
 pe' />
   </head>
-	<body>
-		<table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0">=
+  <body>
+    <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0">=
 
-		  <tr>
-		    <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D=
+      <tr>
+        <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D=
 "0">
-		      <tr>
-		        	<td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a=
+          <tr>
+              <td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a=
 2a2a" style=3D"background-color:#2a2a2a; padding:10px; font-family:Georgi=
 a, 'Times New Roman', Times, serif; color:#43c1d7; font-size:20px;">=C2=A1=
 Bienvenido a FORMINST!</td>
-		      </tr>
-		      <tr>
-		        <td width=3D"1000" align=3D"center" valign=3D"top" style=3D"pad=
+          </tr>
+          <tr>
+            <td width=3D"1000" align=3D"center" valign=3D"top" style=3D"pad=
 ding:12px; background-color:#ffffff;" bgcolor=3D"#ffffff;"><table width=3D=
 "100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"4" style=3D"margin-b=
 ottom:20px;">
-		        </table>
-		          <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadd=
+            </table>
+              <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadd=
 ing=3D"4" style=3D"margin-bottom:20px;">
-		            <tr>
-		              <td align=3D"left" valign=3D"top" style=3D"font-family:Ve=
+                <tr>
+                  <td align=3D"left" valign=3D"top" style=3D"font-family:Ve=
 rdana, Geneva, sans-serif; font-size:12px; color:#000000;">
-			              <div style=3D"color:#43c1d7; font-size:19px;"><b>Notific=
+                    <div style=3D"color:#43c1d7; font-size:19px;"><b>Notific=
 aci=C3=B3n:</b><br>
-			              </div>
-			              <br>
-			              <div style=3D"color:#43c1d7;"><b>[2017-10-03] =C2=A1Bien=
+                    </div>
+                    <br>
+                    <div style=3D"color:#43c1d7;"><b>[2017-10-03] =C2=A1Bien=
 venido a FORMINST! Se ha creado su perfil de Tutor.</b><br>
-			              </div>
-			              <br>
-			              <div style=3D"color:#6e6e6e;"> Para mayor informaci=C3=B3=
+                    </div>
+                    <br>
+                    <div style=3D"color:#6e6e6e;"> Para mayor informaci=C3=B3=
 n, por favor ingrese al Sitio web de FORMINST</div>
-			              <br>
-			              <br>
-		              </td>
-		            </tr>
-		            <tr>
-		              <td align=3D"center" valign=3D"top" style=3D"font-family:=
+                    <br>
+                    <br>
+                  </td>
+                </tr>
+                <tr>
+                  <td align=3D"center" valign=3D"top" style=3D"font-family:=
 Verdana, Geneva, sans-serif; font-size:12px; color:#000000;">
-			              <div style=3D"color:#6e6e6e;"> Universidad Central de Ve=
+                    <div style=3D"color:#6e6e6e;"> Universidad Central de Ve=
 nezuela</div>
-			              <div style=3D"color:#6e6e6e;"> Facultad de Ciencias</div=
+                    <div style=3D"color:#6e6e6e;"> Facultad de Ciencias</div=
 >
-			              <div style=3D"color:#6e6e6e;"> Sistema FORMINST</div>
-		              </td>
-		            </tr>
-		          </table>
-		        </table>
-		        </td>
-		      </tr>
-		      <tr>
-		      	<td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a2a=
+                    <div style=3D"color:#6e6e6e;"> Sistema FORMINST</div>
+                  </td>
+                </tr>
+              </table>
+            </table>
+            </td>
+          </tr>
+          <tr>
+            <td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a2a=
 2a" style=3D"background-color:#2a2a2a; padding:10px; font-family:Georgia,=
  'Times New Roman', Times, serif; color:#43c1d7; font-size:20px;"></td>
-		      </tr>
-		    </table>
-		    <br>
-		    <br>
-		  </tr>
-		</table>
-	</body>
+          </tr>
+        </table>
+        <br>
+        <br>
+      </tr>
+    </table>
+  </body>
 </html>=
 
 Redirected to http://localhost:3000/secretarias
@@ -28550,69 +28550,69 @@ Content-Transfer-Encoding: quoted-printable
     <meta content=3D'text/html; charset=3DUTF-8' http-equiv=3D'Content-Ty=
 pe' />
   </head>
-	<body>
-		<table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0">=
+  <body>
+    <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0">=
 
-		  <tr>
-		    <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D=
+      <tr>
+        <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D=
 "0">
-		      <tr>
-		        	<td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a=
+          <tr>
+              <td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a=
 2a2a" style=3D"background-color:#2a2a2a; padding:10px; font-family:Georgi=
 a, 'Times New Roman', Times, serif; color:#43c1d7; font-size:20px;">Nueva=
  Asignaci=C3=B3n de Instructor</td>
-		      </tr>
-		      <tr>
-		        <td width=3D"1000" align=3D"center" valign=3D"top" style=3D"pad=
+          </tr>
+          <tr>
+            <td width=3D"1000" align=3D"center" valign=3D"top" style=3D"pad=
 ding:12px; background-color:#ffffff;" bgcolor=3D"#ffffff;"><table width=3D=
 "100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"4" style=3D"margin-b=
 ottom:20px;">
-		        </table>
-		          <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadd=
+            </table>
+              <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadd=
 ing=3D"4" style=3D"margin-bottom:20px;">
-		            <tr>
-		              <td align=3D"left" valign=3D"top" style=3D"font-family:Ve=
+                <tr>
+                  <td align=3D"left" valign=3D"top" style=3D"font-family:Ve=
 rdana, Geneva, sans-serif; font-size:12px; color:#000000;">
-			              <div style=3D"color:#43c1d7; font-size:19px;"><b>Notific=
+                    <div style=3D"color:#43c1d7; font-size:19px;"><b>Notific=
 aci=C3=B3n:</b><br>
-			              </div>
-			              <br>
-			              <div style=3D"color:#43c1d7;"><b>[2017-10-03] Se le ha a=
+                    </div>
+                    <br>
+                    <div style=3D"color:#43c1d7;"><b>[2017-10-03] Se le ha a=
 signado el Plan formaci=C3=B3n de Pepe Rodriguez, recuerde crear la adecu=
 aci=C3=B3n correspondiente y enviarla.</b><br>
-			              </div>
-			              <br>
-			              <div style=3D"color:#6e6e6e;"> Para mayor informaci=C3=B3=
+                    </div>
+                    <br>
+                    <div style=3D"color:#6e6e6e;"> Para mayor informaci=C3=B3=
 n, por favor ingrese al Sitio web de FORMINST</div>
-			              <br>
-			              <br>
-		              </td>
-		            </tr>
-		            <tr>
-		              <td align=3D"center" valign=3D"top" style=3D"font-family:=
+                    <br>
+                    <br>
+                  </td>
+                </tr>
+                <tr>
+                  <td align=3D"center" valign=3D"top" style=3D"font-family:=
 Verdana, Geneva, sans-serif; font-size:12px; color:#000000;">
-			              <div style=3D"color:#6e6e6e;"> Universidad Central de Ve=
+                    <div style=3D"color:#6e6e6e;"> Universidad Central de Ve=
 nezuela</div>
-			              <div style=3D"color:#6e6e6e;"> Facultad de Ciencias</div=
+                    <div style=3D"color:#6e6e6e;"> Facultad de Ciencias</div=
 >
-			              <div style=3D"color:#6e6e6e;"> Sistema FORMINST</div>
-		              </td>
-		            </tr>
-		          </table>
-		        </table>
-		        </td>
-		      </tr>
-		      <tr>
-		      	<td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a2a=
+                    <div style=3D"color:#6e6e6e;"> Sistema FORMINST</div>
+                  </td>
+                </tr>
+              </table>
+            </table>
+            </td>
+          </tr>
+          <tr>
+            <td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a2a=
 2a" style=3D"background-color:#2a2a2a; padding:10px; font-family:Georgia,=
  'Times New Roman', Times, serif; color:#43c1d7; font-size:20px;"></td>
-		      </tr>
-		    </table>
-		    <br>
-		    <br>
-		  </tr>
-		</table>
-	</body>
+          </tr>
+        </table>
+        <br>
+        <br>
+      </tr>
+    </table>
+  </body>
 </html>=
 
   [1m[36mUsuario Load (0.4ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 39 LIMIT 1[0m
@@ -28637,69 +28637,69 @@ Content-Transfer-Encoding: quoted-printable
     <meta content=3D'text/html; charset=3DUTF-8' http-equiv=3D'Content-Ty=
 pe' />
   </head>
-	<body>
-		<table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0">=
+  <body>
+    <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0">=
 
-		  <tr>
-		    <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D=
+      <tr>
+        <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D=
 "0">
-		      <tr>
-		        	<td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a=
+          <tr>
+              <td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a=
 2a2a" style=3D"background-color:#2a2a2a; padding:10px; font-family:Georgi=
 a, 'Times New Roman', Times, serif; color:#43c1d7; font-size:20px;">=C2=A1=
 Bienvenido a FORMINST!</td>
-		      </tr>
-		      <tr>
-		        <td width=3D"1000" align=3D"center" valign=3D"top" style=3D"pad=
+          </tr>
+          <tr>
+            <td width=3D"1000" align=3D"center" valign=3D"top" style=3D"pad=
 ding:12px; background-color:#ffffff;" bgcolor=3D"#ffffff;"><table width=3D=
 "100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"4" style=3D"margin-b=
 ottom:20px;">
-		        </table>
-		          <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadd=
+            </table>
+              <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadd=
 ing=3D"4" style=3D"margin-bottom:20px;">
-		            <tr>
-		              <td align=3D"left" valign=3D"top" style=3D"font-family:Ve=
+                <tr>
+                  <td align=3D"left" valign=3D"top" style=3D"font-family:Ve=
 rdana, Geneva, sans-serif; font-size:12px; color:#000000;">
-			              <div style=3D"color:#43c1d7; font-size:19px;"><b>Notific=
+                    <div style=3D"color:#43c1d7; font-size:19px;"><b>Notific=
 aci=C3=B3n:</b><br>
-			              </div>
-			              <br>
-			              <div style=3D"color:#43c1d7;"><b>[2017-10-03] =C2=A1Bien=
+                    </div>
+                    <br>
+                    <div style=3D"color:#43c1d7;"><b>[2017-10-03] =C2=A1Bien=
 venido a FORMINST! Se le ha asignado a  Ana Morales como tutor de su Plan=
  de formaci=C3=B3n.</b><br>
-			              </div>
-			              <br>
-			              <div style=3D"color:#6e6e6e;"> Para mayor informaci=C3=B3=
+                    </div>
+                    <br>
+                    <div style=3D"color:#6e6e6e;"> Para mayor informaci=C3=B3=
 n, por favor ingrese al Sitio web de FORMINST</div>
-			              <br>
-			              <br>
-		              </td>
-		            </tr>
-		            <tr>
-		              <td align=3D"center" valign=3D"top" style=3D"font-family:=
+                    <br>
+                    <br>
+                  </td>
+                </tr>
+                <tr>
+                  <td align=3D"center" valign=3D"top" style=3D"font-family:=
 Verdana, Geneva, sans-serif; font-size:12px; color:#000000;">
-			              <div style=3D"color:#6e6e6e;"> Universidad Central de Ve=
+                    <div style=3D"color:#6e6e6e;"> Universidad Central de Ve=
 nezuela</div>
-			              <div style=3D"color:#6e6e6e;"> Facultad de Ciencias</div=
+                    <div style=3D"color:#6e6e6e;"> Facultad de Ciencias</div=
 >
-			              <div style=3D"color:#6e6e6e;"> Sistema FORMINST</div>
-		              </td>
-		            </tr>
-		          </table>
-		        </table>
-		        </td>
-		      </tr>
-		      <tr>
-		      	<td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a2a=
+                    <div style=3D"color:#6e6e6e;"> Sistema FORMINST</div>
+                  </td>
+                </tr>
+              </table>
+            </table>
+            </td>
+          </tr>
+          <tr>
+            <td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a2a=
 2a" style=3D"background-color:#2a2a2a; padding:10px; font-family:Georgia,=
  'Times New Roman', Times, serif; color:#43c1d7; font-size:20px;"></td>
-		      </tr>
-		    </table>
-		    <br>
-		    <br>
-		  </tr>
-		</table>
-	</body>
+          </tr>
+        </table>
+        <br>
+        <br>
+      </tr>
+    </table>
+  </body>
 </html>=
 
 Redirected to http://localhost:3000/secretarias
@@ -29585,69 +29585,69 @@ Content-Transfer-Encoding: quoted-printable
     <meta content=3D'text/html; charset=3DUTF-8' http-equiv=3D'Content-Ty=
 pe' />
   </head>
-	<body>
-		<table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0">=
+  <body>
+    <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0">=
 
-		  <tr>
-		    <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D=
+      <tr>
+        <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D=
 "0">
-		      <tr>
-		        	<td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a=
+          <tr>
+              <td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a=
 2a2a" style=3D"background-color:#2a2a2a; padding:10px; font-family:Georgi=
 a, 'Times New Roman', Times, serif; color:#43c1d7; font-size:20px;">Ha re=
 cibido una notificaci=C3=B3n de Adecuaci=C3=B3n</td>
-		      </tr>
-		      <tr>
-		        <td width=3D"1000" align=3D"center" valign=3D"top" style=3D"pad=
+          </tr>
+          <tr>
+            <td width=3D"1000" align=3D"center" valign=3D"top" style=3D"pad=
 ding:12px; background-color:#ffffff;" bgcolor=3D"#ffffff;"><table width=3D=
 "100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"4" style=3D"margin-b=
 ottom:20px;">
-		        </table>
-		          <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadd=
+            </table>
+              <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadd=
 ing=3D"4" style=3D"margin-bottom:20px;">
-		            <tr>
-		              <td align=3D"left" valign=3D"top" style=3D"font-family:Ve=
+                <tr>
+                  <td align=3D"left" valign=3D"top" style=3D"font-family:Ve=
 rdana, Geneva, sans-serif; font-size:12px; color:#000000;">
-			              <div style=3D"color:#43c1d7; font-size:19px;"><b>Notific=
+                    <div style=3D"color:#43c1d7; font-size:19px;"><b>Notific=
 aci=C3=B3n:</b><br>
-			              </div>
-			              <br>
-			              <div style=3D"color:#43c1d7;"><b>[2017-10-03] La adecuac=
+                    </div>
+                    <br>
+                    <div style=3D"color:#43c1d7;"><b>[2017-10-03] La adecuac=
 i=C3=B3n de Pepe Rodriguez se ha enviado a comisi=C3=B3n de investigaci=C3=
 =B3n.</b><br>
-			              </div>
-			              <br>
-			              <div style=3D"color:#6e6e6e;"> Para mayor informaci=C3=B3=
+                    </div>
+                    <br>
+                    <div style=3D"color:#6e6e6e;"> Para mayor informaci=C3=B3=
 n, por favor ingrese al Sitio web de FORMINST</div>
-			              <br>
-			              <br>
-		              </td>
-		            </tr>
-		            <tr>
-		              <td align=3D"center" valign=3D"top" style=3D"font-family:=
+                    <br>
+                    <br>
+                  </td>
+                </tr>
+                <tr>
+                  <td align=3D"center" valign=3D"top" style=3D"font-family:=
 Verdana, Geneva, sans-serif; font-size:12px; color:#000000;">
-			              <div style=3D"color:#6e6e6e;"> Universidad Central de Ve=
+                    <div style=3D"color:#6e6e6e;"> Universidad Central de Ve=
 nezuela</div>
-			              <div style=3D"color:#6e6e6e;"> Facultad de Ciencias</div=
+                    <div style=3D"color:#6e6e6e;"> Facultad de Ciencias</div=
 >
-			              <div style=3D"color:#6e6e6e;"> Sistema FORMINST</div>
-		              </td>
-		            </tr>
-		          </table>
-		        </table>
-		        </td>
-		      </tr>
-		      <tr>
-		      	<td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a2a=
+                    <div style=3D"color:#6e6e6e;"> Sistema FORMINST</div>
+                  </td>
+                </tr>
+              </table>
+            </table>
+            </td>
+          </tr>
+          <tr>
+            <td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a2a=
 2a" style=3D"background-color:#2a2a2a; padding:10px; font-family:Georgia,=
  'Times New Roman', Times, serif; color:#43c1d7; font-size:20px;"></td>
-		      </tr>
-		    </table>
-		    <br>
-		    <br>
-		  </tr>
-		</table>
-	</body>
+          </tr>
+        </table>
+        <br>
+        <br>
+      </tr>
+    </table>
+  </body>
 </html>=
 
   [1m[36mUsuario Load (0.4ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 39 LIMIT 1[0m
@@ -29672,68 +29672,68 @@ Content-Transfer-Encoding: quoted-printable
     <meta content=3D'text/html; charset=3DUTF-8' http-equiv=3D'Content-Ty=
 pe' />
   </head>
-	<body>
-		<table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0">=
+  <body>
+    <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0">=
 
-		  <tr>
-		    <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D=
+      <tr>
+        <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D=
 "0">
-		      <tr>
-		        	<td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a=
+          <tr>
+              <td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a=
 2a2a" style=3D"background-color:#2a2a2a; padding:10px; font-family:Georgi=
 a, 'Times New Roman', Times, serif; color:#43c1d7; font-size:20px;">Ha re=
 cibido una notificaci=C3=B3n de Adecuaci=C3=B3n</td>
-		      </tr>
-		      <tr>
-		        <td width=3D"1000" align=3D"center" valign=3D"top" style=3D"pad=
+          </tr>
+          <tr>
+            <td width=3D"1000" align=3D"center" valign=3D"top" style=3D"pad=
 ding:12px; background-color:#ffffff;" bgcolor=3D"#ffffff;"><table width=3D=
 "100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"4" style=3D"margin-b=
 ottom:20px;">
-		        </table>
-		          <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadd=
+            </table>
+              <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadd=
 ing=3D"4" style=3D"margin-bottom:20px;">
-		            <tr>
-		              <td align=3D"left" valign=3D"top" style=3D"font-family:Ve=
+                <tr>
+                  <td align=3D"left" valign=3D"top" style=3D"font-family:Ve=
 rdana, Geneva, sans-serif; font-size:12px; color:#000000;">
-			              <div style=3D"color:#43c1d7; font-size:19px;"><b>Notific=
+                    <div style=3D"color:#43c1d7; font-size:19px;"><b>Notific=
 aci=C3=B3n:</b><br>
-			              </div>
-			              <br>
-			              <div style=3D"color:#43c1d7;"><b>[2017-10-03] Su adecuac=
+                    </div>
+                    <br>
+                    <div style=3D"color:#43c1d7;"><b>[2017-10-03] Su adecuac=
 i=C3=B3n se ha enviado a comisi=C3=B3n de investigaci=C3=B3n.</b><br>
-			              </div>
-			              <br>
-			              <div style=3D"color:#6e6e6e;"> Para mayor informaci=C3=B3=
+                    </div>
+                    <br>
+                    <div style=3D"color:#6e6e6e;"> Para mayor informaci=C3=B3=
 n, por favor ingrese al Sitio web de FORMINST</div>
-			              <br>
-			              <br>
-		              </td>
-		            </tr>
-		            <tr>
-		              <td align=3D"center" valign=3D"top" style=3D"font-family:=
+                    <br>
+                    <br>
+                  </td>
+                </tr>
+                <tr>
+                  <td align=3D"center" valign=3D"top" style=3D"font-family:=
 Verdana, Geneva, sans-serif; font-size:12px; color:#000000;">
-			              <div style=3D"color:#6e6e6e;"> Universidad Central de Ve=
+                    <div style=3D"color:#6e6e6e;"> Universidad Central de Ve=
 nezuela</div>
-			              <div style=3D"color:#6e6e6e;"> Facultad de Ciencias</div=
+                    <div style=3D"color:#6e6e6e;"> Facultad de Ciencias</div=
 >
-			              <div style=3D"color:#6e6e6e;"> Sistema FORMINST</div>
-		              </td>
-		            </tr>
-		          </table>
-		        </table>
-		        </td>
-		      </tr>
-		      <tr>
-		      	<td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a2a=
+                    <div style=3D"color:#6e6e6e;"> Sistema FORMINST</div>
+                  </td>
+                </tr>
+              </table>
+            </table>
+            </td>
+          </tr>
+          <tr>
+            <td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a2a=
 2a" style=3D"background-color:#2a2a2a; padding:10px; font-family:Georgia,=
  'Times New Roman', Times, serif; color:#43c1d7; font-size:20px;"></td>
-		      </tr>
-		    </table>
-		    <br>
-		    <br>
-		  </tr>
-		</table>
-	</body>
+          </tr>
+        </table>
+        <br>
+        <br>
+      </tr>
+    </table>
+  </body>
 </html>=
 
   [1m[36mUsuario Load (0.4ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 12 LIMIT 1[0m
@@ -29758,69 +29758,69 @@ Content-Transfer-Encoding: quoted-printable
     <meta content=3D'text/html; charset=3DUTF-8' http-equiv=3D'Content-Ty=
 pe' />
   </head>
-	<body>
-		<table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0">=
+  <body>
+    <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0">=
 
-		  <tr>
-		    <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D=
+      <tr>
+        <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D=
 "0">
-		      <tr>
-		        	<td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a=
+          <tr>
+              <td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a=
 2a2a" style=3D"background-color:#2a2a2a; padding:10px; font-family:Georgi=
 a, 'Times New Roman', Times, serif; color:#43c1d7; font-size:20px;">Ha re=
 cibido una nueva Adecuaci=C3=B3n</td>
-		      </tr>
-		      <tr>
-		        <td width=3D"1000" align=3D"center" valign=3D"top" style=3D"pad=
+          </tr>
+          <tr>
+            <td width=3D"1000" align=3D"center" valign=3D"top" style=3D"pad=
 ding:12px; background-color:#ffffff;" bgcolor=3D"#ffffff;"><table width=3D=
 "100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"4" style=3D"margin-b=
 ottom:20px;">
-		        </table>
-		          <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadd=
+            </table>
+              <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadd=
 ing=3D"4" style=3D"margin-bottom:20px;">
-		            <tr>
-		              <td align=3D"left" valign=3D"top" style=3D"font-family:Ve=
+                <tr>
+                  <td align=3D"left" valign=3D"top" style=3D"font-family:Ve=
 rdana, Geneva, sans-serif; font-size:12px; color:#000000;">
-			              <div style=3D"color:#43c1d7; font-size:19px;"><b>Notific=
+                    <div style=3D"color:#43c1d7; font-size:19px;"><b>Notific=
 aci=C3=B3n:</b><br>
-			              </div>
-			              <br>
-			              <div style=3D"color:#43c1d7;"><b>[2017-10-03] Se ha reci=
+                    </div>
+                    <br>
+                    <div style=3D"color:#43c1d7;"><b>[2017-10-03] Se ha reci=
 bido una nueva Adecuaci=C3=B3n: Pepe Rodriguez, favor revisar y enviar a =
 la siguiente entidad.</b><br>
-			              </div>
-			              <br>
-			              <div style=3D"color:#6e6e6e;"> Para mayor informaci=C3=B3=
+                    </div>
+                    <br>
+                    <div style=3D"color:#6e6e6e;"> Para mayor informaci=C3=B3=
 n, por favor ingrese al Sitio web de FORMINST</div>
-			              <br>
-			              <br>
-		              </td>
-		            </tr>
-		            <tr>
-		              <td align=3D"center" valign=3D"top" style=3D"font-family:=
+                    <br>
+                    <br>
+                  </td>
+                </tr>
+                <tr>
+                  <td align=3D"center" valign=3D"top" style=3D"font-family:=
 Verdana, Geneva, sans-serif; font-size:12px; color:#000000;">
-			              <div style=3D"color:#6e6e6e;"> Universidad Central de Ve=
+                    <div style=3D"color:#6e6e6e;"> Universidad Central de Ve=
 nezuela</div>
-			              <div style=3D"color:#6e6e6e;"> Facultad de Ciencias</div=
+                    <div style=3D"color:#6e6e6e;"> Facultad de Ciencias</div=
 >
-			              <div style=3D"color:#6e6e6e;"> Sistema FORMINST</div>
-		              </td>
-		            </tr>
-		          </table>
-		        </table>
-		        </td>
-		      </tr>
-		      <tr>
-		      	<td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a2a=
+                    <div style=3D"color:#6e6e6e;"> Sistema FORMINST</div>
+                  </td>
+                </tr>
+              </table>
+            </table>
+            </td>
+          </tr>
+          <tr>
+            <td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a2a=
 2a" style=3D"background-color:#2a2a2a; padding:10px; font-family:Georgia,=
  'Times New Roman', Times, serif; color:#43c1d7; font-size:20px;"></td>
-		      </tr>
-		    </table>
-		    <br>
-		    <br>
-		  </tr>
-		</table>
-	</body>
+          </tr>
+        </table>
+        <br>
+        <br>
+      </tr>
+    </table>
+  </body>
 </html>=
 
 Redirected to http://localhost:3000/iniciotutor/planformacions
