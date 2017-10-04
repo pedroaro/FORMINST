@@ -943,7 +943,7 @@ CREATE TABLE `tipo_actividad` (
 
 LOCK TABLES `tipo_actividad` WRITE;
 /*!40000 ALTER TABLE `tipo_actividad` DISABLE KEYS */;
-INSERT INTO `tipo_actividad` VALUES (1,'Docencia'),(2,'Investigacion'),(3,'Extension'),(4,'Formacion'),(5,'Otras Actividad'),(6,'No Contempladas en el Plan'), (7,'Obligatorias');
+INSERT INTO `tipo_actividad` VALUES (1,'Docencia'),(2,'Investigacion'),(3,'Extension'),(4,'Formacion'),(5,'Otras Actividad'),(6,'No Contempladas en el Plan'), (7,'Obligatorias'), (8,'Descripcion'), (9,'Presentacion');
 /*!40000 ALTER TABLE `tipo_actividad` ENABLE KEYS */;
 UNLOCK TABLES;
 
