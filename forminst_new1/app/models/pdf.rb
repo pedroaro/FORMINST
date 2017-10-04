@@ -1,12 +1,69 @@
 class Pdf 
 # estas funciones permite generar el cuerpo del documento en formato pdf
 
-	def self.pdf_adecuacion(plan, adecuacion, tutor, instructor, correoi, correot, escuela, pactv_docencia, pactv_investigacion, pactv_extension, pactv_formacion, pactv_otras, sactv_docencia, sactv_investigacion, sactv_extension, sactv_formacion, sactv_otras, tactv_docencia, tactv_investigacion, tactv_extension, tactv_formacion, tactv_otras, cactv_docencia, cactv_investigacion, cactv_extension, cactv_formacion, cactv_otras, fechaActual, fechaConcurso, soportes,numeroDeVersion, dactv_obligatorias)
+	def self.pdf_adecuacion(actividades, plan, adecuacion, tutor, instructor, correoi, correot, escuela, pactv_docencia, pactv_investigacion, pactv_extension, pactv_formacion, pactv_otras, sactv_docencia, sactv_investigacion, sactv_extension, sactv_formacion, sactv_otras, tactv_docencia, tactv_investigacion, tactv_extension, tactv_formacion, tactv_otras, cactv_docencia, cactv_investigacion, cactv_extension, cactv_formacion, cactv_otras, fechaActual, fechaConcurso, soportes,numeroDeVersion, dactv_obligatorias)
 	#def self.pdf_adecuacion(adecuacion, tutor, instructor, notificacion, perfil, pactv_docencia, pactv_investigacion, pactv_extension, pactv_formacion, pactv_otras, sactv_docencia, sactv_investigacion, sactv_extension, sactv_formacion, sactv_otras, tactv_docencia, tactv_investigacion, tactv_extension, tactv_formacion, tactv_otras, cactv_docencia, cactv_investigacion, cactv_extension, cactv_formacion, cactv_otras)
 		
 		# se invocan la bibliotecas
 		require "prawn" 
 		require "prawn/layout"
+
+		presentacion = ""
+		descripcion = ""
+		docencia = ""	
+		investigacion = ""
+		formacion = ""	
+		extension = ""
+
+		if !actividades.blank?
+			puts "entroooo"
+			actividades.each do |actividadAde|
+				if actividadAde.tipo_actividad_id == 9
+					if actividadAde.actividad.blank?
+						presentacion = " "
+					else
+						presentacion = actividadAde.actividad	
+					end
+				elsif actividadAde.tipo_actividad_id == 8
+					if actividadAde.actividad.blank?
+						descripcion = " "
+					else
+						descripcion = actividadAde.actividad	
+					end
+				elsif actividadAde.tipo_actividad_id == 1
+					if actividadAde.actividad.blank?
+						docencia = " "
+					else
+						docencia = actividadAde.actividad	
+					end
+				elsif actividadAde.tipo_actividad_id == 2
+					if actividadAde.actividad.blank?
+						investigacion = " "
+					else
+						investigacion = actividadAde.actividad	
+					end
+				elsif actividadAde.tipo_actividad_id == 4
+					if actividadAde.actividad.blank?
+						formacion = " "
+					else
+						formacion = actividadAde.actividad	
+					end
+				elsif actividadAde.tipo_actividad_id == 3
+					if actividadAde.actividad.blank?
+						extension = " "
+					else
+						extension = actividadAde.actividad	
+					end
+				end
+			end
+		else
+			presentacion = " "
+			descripcion = " "
+			docencia = " "	
+			investigacion = " "
+			formacion = " "	
+			extension = " "	
+		end
 
 
 		pdf= Prawn::Document.new(:background=>"#{Rails.root}/app/assets/images/fondo.png", :top_margin=> 99, :bottom_margin=>35, :page_size => 'A4') # se coloca la imagen de fondo del documento
@@ -168,11 +225,7 @@ class Pdf
 
 			pdf.text("\n")
 			pdf.text("5.- PRESENTACIÓN", :style => :bold, :size  => 10)
-			if !plan.id.blank?
-				dataaa35 = [[{:text=>  plan.id.to_s  ,  :align=>:left}]] # datos que se desean en la tabla
-			else
-				dataaa35 = [[{:text=>  " " ,  :align=>:left}]] # datos que se desean en la tabla
-			end
+			dataaa35 = [[{:text=>  presentacion  ,  :align=>:left}]] # datos que se desean en la tabla
 
 			pdf.table dataaa35,  # lineas para generar la tabla en el docuemnto
 			:border_style => :grid, #:underline_header
@@ -186,12 +239,8 @@ class Pdf
 
 			pdf.text("\n")
 			pdf.text("6.- DESCRIPCIÓN DEL PERFIL DEL INSTRUCTOR GANADOR DEL CONCURSO", :style => :bold, :size  => 10)
-			
-			if !plan.id.blank?
-				data350 = [[{:text=>  plan.id.to_s   ,  :align=>:left}]] # datos que se desean en la tabla
-			else
-				data350 = [[{:text=>  " " ,  :align=>:left}]] # datos que se desean en la tabla
-			end
+
+			data350 = [[{:text=>  descripcion ,  :align=>:left}]] # datos que se desean en la tabla
 				
 			pdf.table data350,  # lineas para generar la tabla en el docuemnto
 			:border_style => :grid, #:underline_header
@@ -207,12 +256,8 @@ class Pdf
 			pdf.text("\n")
 			pdf.text("7.- DOCENCIA", :style => :bold, :size  => 10)
 			
-			if !plan.id.blank?
-				data351 = [[{:text=>  plan.id.to_s   ,  :align=>:left}]] # datos que se desean en la tabla
-				
-			else
-				data351 = [[{:text=>  " " ,  :align=>:left}]] # datos que se desean en la tabla
-			end
+			data351 = [[{:text=> docencia   ,  :align=>:left}]] # datos que se desean en la tabla
+
 				
 			pdf.table data351,  # lineas para generar la tabla en el docuemnto
 			:border_style => :grid, #:underline_header
@@ -228,11 +273,7 @@ class Pdf
 			pdf.text("\n")
 			pdf.text("8.- INVESTIGACIÓN", :style => :bold, :size  => 10)
 			
-			if !plan.id.blank?
-				data352 = [[{:text=>  plan.id.to_s  ,  :align=>:left}]] # datos que se desean en la tabla
-			else
-				data352 = [[{:text=>  " " ,  :align=>:left}]] # datos que se desean en la tabla
-			end
+			data352 = [[{:text=> investigacion  ,  :align=>:left}]] # datos que se desean en la tabla
 				
 			pdf.table data352,  # lineas para generar la tabla en el docuemnto
 			:border_style => :grid, #:underline_header
@@ -248,11 +289,7 @@ class Pdf
 			pdf.text("\n")
 			pdf.text("9.- FORMACIÓN Y CAPACITACIÓN PROFESIONAL", :style => :bold, :size  => 10)
 			
-			if !plan.id.blank?
-				data353 = [[{:text=>  plan.id.to_s  ,  :align=>:left}]] # datos que se desean en la tabla
-							else
-				data353 = [[{:text=>  " " ,  :align=>:left}]] # datos que se desean en la tabla
-			end
+			data353 = [[{:text=>  formacion  ,  :align=>:left}]] # datos que se desean en la tabla
 				
 			pdf.table data353,  # lineas para generar la tabla en el docuemnto
 			:border_style => :grid, #:underline_header
@@ -268,11 +305,7 @@ class Pdf
 			pdf.text("\n")
 			pdf.text("10.- EXTENSION", :style => :bold, :size  => 10)
 			
-			if !plan.id.blank?
-				data354 = [[{:text=>  plan.id.to_s  ,  :align=>:left}]] # datos que se desean en la tabla
-			else
-				data354 = [[{:text=>  " " ,  :align=>:left}]] # datos que se desean en la tabla
-			end
+			data354 = [[{:text=>  extension  ,  :align=>:left}]] # datos que se desean en la tabla
 				
 			pdf.table data354,  # lineas para generar la tabla en el docuemnto
 			:border_style => :grid, #:underline_header

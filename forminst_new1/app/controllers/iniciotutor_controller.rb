@@ -547,6 +547,8 @@ class IniciotutorController < ApplicationController
 
 				#Presentacion
 				if params[:presentacionId].blank?
+					puts params[:presentacionId]
+					puts "JAJAJAJA"
 					cpActividad = Actividad.new
 					cpActividad.tipo_actividad_id = 9
 					cpActividad.actividad = params[:presentacion]
@@ -633,29 +635,41 @@ class IniciotutorController < ApplicationController
 					puts @edit
 					puts i
 					if @edit == "presentacion"
-						cpActividad = Actividad.find(params[:presentacionId])
-						cpActividad.actividad = params[:presentacion]
-						cpActividad.save
+						if !params[:presentacionId].blank?
+							cpActividad = Actividad.find(params[:presentacionId])
+							cpActividad.actividad = params[:presentacion]
+							cpActividad.save
+						end
 					elsif @edit == "descripcion"
-						cpActividad = Actividad.find(params[:descripcionId])
-						cpActividad.actividad = params[:descripcion]
-						cpActividad.save
+						if !params[:presentacionId].blank?
+							cpActividad = Actividad.find(params[:descripcionId])
+							cpActividad.actividad = params[:descripcion]
+							cpActividad.save
+						end
 					elsif @edit == "docencia"
-						cpActividad = Actividad.find(params[:docenciaId])
-						cpActividad.actividad = params[:docencia]
-						cpActividad.save
+						if !params[:presentacionId].blank?
+							cpActividad = Actividad.find(params[:docenciaId])
+							cpActividad.actividad = params[:docencia]
+							cpActividad.save
+						end
 					elsif @edit == "investigacion"
-						cpActividad = Actividad.find(params[:investigacionId])
-						cpActividad.actividad = params[:investigacion]
-						cpActividad.save
+						if !params[:presentacionId].blank?
+							cpActividad = Actividad.find(params[:investigacionId])
+							cpActividad.actividad = params[:investigacion]
+							cpActividad.save
+						end
 					elsif @edit == "formacion"
-						cpActividad = Actividad.find(params[:formacionId])
-						cpActividad.actividad = params[:formacion]
-						cpActividad.save
+						if !params[:presentacionId].blank?
+							cpActividad = Actividad.find(params[:formacionId])
+							cpActividad.actividad = params[:formacion]
+							cpActividad.save
+						end
 					elsif @edit == "extension"
-						cpActividad = Actividad.find(params[:extensionId])
-						cpActividad.actividad = params[:extension]
-						cpActividad.save
+						if !params[:presentacionId].blank?
+							cpActividad = Actividad.find(params[:extensionId])
+							cpActividad.actividad = params[:extension]
+							cpActividad.save
+						end
 					end
 
 					j+=1
@@ -1437,6 +1451,33 @@ class IniciotutorController < ApplicationController
 
 			@nombre = session[:nombre_usuario]
 			@instructorName = session[:instructorName]
+
+			actividades = AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 0)
+			if !actividades.blank?
+				actividades.each do |actividadAde|
+					actividad = Actividad.find(actividadAde.actividad_id)
+					if actividad.tipo_actividad_id == 9
+						@presentacion = actividad.actividad
+					elsif actividad.tipo_actividad_id == 8
+						@descripcion = actividad.actividad
+					elsif actividad.tipo_actividad_id == 1
+						@docencia = actividad.actividad	
+					elsif actividad.tipo_actividad_id == 2
+						@investigacion = actividad.actividad
+					elsif actividad.tipo_actividad_id == 4
+						@formacion = actividad.actividad	
+					elsif actividad.tipo_actividad_id == 3
+						@extension = actividad.actividad	
+					end
+				end
+			else
+				@presentacion = " "
+				@descripcion = " "
+				@docencia = " "	
+				@investigacion = " "
+				@formacion = " "	
+				@extension = " "	
+			end
 
 			@actividades1doc= []
 			@actividades1inv= []
@@ -2247,7 +2288,15 @@ class IniciotutorController < ApplicationController
     respaldos = []
     respaldos = Respaldo.where(adecuacion_id: @adecuacion.id, informe_id: nil).all
     @numeroDeVersion = respaldos.size + 1
-    Pdf.pdf_adecuacion(@planformacion, @adecuacion, @tutor, @instructor, @correoi, @correot, @escuela, @pactv_docencia, @pactv_investigacion, @pactv_extension, @pactv_formacion, @pactv_otras, @sactv_docencia, @sactv_investigacion, @sactv_extension, @sactv_formacion, @sactv_otras, @tactv_docencia, @tactv_investigacion, @tactv_extension, @tactv_formacion, @tactv_otras, @cactv_docencia, @cactv_investigacion, @cactv_extension, @cactv_formacion, @cactv_otras, @fechaActual, @fechaConcurso, @documents, @numeroDeVersion, @dactv_obligatorias)
+    @actividades1 = []
+    actividades = AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 0)
+	if !actividades.blank?
+      	actividades.each do |actividadAde|
+	        actividad = Actividad.find(actividadAde.actividad_id)
+	        @actividades1.push(actividad)
+      	end
+    end
+    Pdf.pdf_adecuacion(@actividades1, @planformacion, @adecuacion, @tutor, @instructor, @correoi, @correot, @escuela, @pactv_docencia, @pactv_investigacion, @pactv_extension, @pactv_formacion, @pactv_otras, @sactv_docencia, @sactv_investigacion, @sactv_extension, @sactv_formacion, @sactv_otras, @tactv_docencia, @tactv_investigacion, @tactv_extension, @tactv_formacion, @tactv_otras, @cactv_docencia, @cactv_investigacion, @cactv_extension, @cactv_formacion, @cactv_otras, @fechaActual, @fechaConcurso, @documents, @numeroDeVersion, @dactv_obligatorias)
     @nombre_archivo= @instructor.ci.to_s+'-'+@fechaActual+'-adecuacionV'+@numeroDeVersion.to_s+'.pdf' # se arma el nombre del documento 
     act = "#{Rails.root}/tmp/PDFs" + @nombre_archivo
     puts @nombre_archivo

@@ -3240,6 +3240,33 @@ end
 		@nombre = session[:nombre_usuario]
 		@instructorName = session[:instructorName]
 
+		actividades = AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 0)
+		if !actividades.blank?
+			actividades.each do |actividadAde|
+				actividad = Actividad.find(actividadAde.actividad_id)
+				if actividad.tipo_actividad_id == 9
+					@presentacion = actividad.actividad
+				elsif actividad.tipo_actividad_id == 8
+					@descripcion = actividad.actividad
+				elsif actividad.tipo_actividad_id == 1
+					@docencia = actividad.actividad	
+				elsif actividad.tipo_actividad_id == 2
+					@investigacion = actividad.actividad
+				elsif actividad.tipo_actividad_id == 4
+					@formacion = actividad.actividad	
+				elsif actividad.tipo_actividad_id == 3
+					@extension = actividad.actividad	
+				end
+			end
+		else
+			@presentacion = " "
+			@descripcion = " "
+			@docencia = " "	
+			@investigacion = " "
+			@formacion = " "	
+			@extension = " "	
+		end
+
 		@actividades1doc= []
 		@actividades1inv= []
 		@actividades1ext= []

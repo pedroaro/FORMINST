@@ -62,10 +62,10 @@ class AdministradorController < ApplicationController
 			puts params[:correo]
 			puts params[:escuela]
 			puts params[:entidad]
-
+			clave = params[:CI].to_s
 			cpusuario = Usuario.new
 			cpusuario.user = params[:correo]
-			cpusuario.password = Digest::SHA1.hexdigest(params[params[:CI].to_s])
+			cpusuario.password = Digest::SHA1.hexdigest(clave)
 			cpusuario.ldap = 0
 			cpusuario.activo = 1
 			cpusuario.tipo = "Secretaria"
