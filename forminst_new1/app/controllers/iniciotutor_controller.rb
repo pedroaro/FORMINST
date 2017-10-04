@@ -511,75 +511,6 @@ class IniciotutorController < ApplicationController
 				@otra = params[i]
 			end
 
-			#Guardar primera parte del informe
-			if !params[:firtsPart].blank?
-				#Presentacion
-				cpActividad = Actividad.new
-				cpActividad.tipo_actividad_id = 9
-				cpActividad.actividad = params[:presentacion]
-				cpActividad.save
-				cpActividadAdecuacion = AdecuacionActividad.new
-				cpActividadAdecuacion.adecuacion_id = session[:adecuacion_id]
-				cpActividadAdecuacion.actividad_id = cpActividad.id
-				cpActividadAdecuacion.semestre = 0
-				cpActividadAdecuacion.save
-
-				# Descripción del Perfil del Ganador del concurso
-				cpActividad = Actividad.new
-				cpActividad.tipo_actividad_id = 8
-				cpActividad.actividad = params[:descripcion]
-				cpActividad.save
-				cpActividadAdecuacion = AdecuacionActividad.new
-				cpActividadAdecuacion.adecuacion_id = session[:adecuacion_id]
-				cpActividadAdecuacion.actividad_id = cpActividad.id
-				cpActividadAdecuacion.semestre = 0
-				cpActividadAdecuacion.save
-
-				# Docencia
-				cpActividad = Actividad.new
-				cpActividad.tipo_actividad_id = 1
-				cpActividad.actividad = params[:docencia]
-				cpActividad.save
-				cpActividadAdecuacion = AdecuacionActividad.new
-				cpActividadAdecuacion.adecuacion_id = session[:adecuacion_id]
-				cpActividadAdecuacion.actividad_id = cpActividad.id
-				cpActividadAdecuacion.semestre = 0
-				cpActividadAdecuacion.save
-
-				# Investigacion
-				cpActividad = Actividad.new
-				cpActividad.tipo_actividad_id = 2
-				cpActividad.actividad = params[:investigacion]
-				cpActividad.save
-				cpActividadAdecuacion = AdecuacionActividad.new
-				cpActividadAdecuacion.adecuacion_id = session[:adecuacion_id]
-				cpActividadAdecuacion.actividad_id = cpActividad.id
-				cpActividadAdecuacion.semestre = 0
-				cpActividadAdecuacion.save
-
-				# Formación y capacitación profesional
-				cpActividad = Actividad.new
-				cpActividad.tipo_actividad_id = 4
-				cpActividad.actividad = params[:formacion]
-				cpActividad.save
-				cpActividadAdecuacion = AdecuacionActividad.new
-				cpActividadAdecuacion.adecuacion_id = session[:adecuacion_id]
-				cpActividadAdecuacion.actividad_id = cpActividad.id
-				cpActividadAdecuacion.semestre = 0
-				cpActividadAdecuacion.save
-
-				# Extension
-				cpActividad = Actividad.new
-				cpActividad.tipo_actividad_id = 3
-				cpActividad.actividad = params[:extensión]
-				cpActividad.save
-				cpActividadAdecuacion = AdecuacionActividad.new
-				cpActividadAdecuacion.adecuacion_id = session[:adecuacion_id]
-				cpActividadAdecuacion.actividad_id = cpActividad.id
-				cpActividadAdecuacion.semestre = 0
-				cpActividadAdecuacion.save
-			end
-
 			if @modifique == true
 				if semestre == 1
 					flash[:success]= "La adecuación fue modificada y guardada correctamente"
@@ -603,6 +534,136 @@ class IniciotutorController < ApplicationController
 						
 			end
 			
+		else
+			redirect_to controller:"forminst", action: "index"
+		end
+	end
+
+	def guardar_primera_parte
+
+		if session[:usuario_id] && session[:tutor]
+			#Guardar primera parte del informe
+			if !params[:firtsPart].blank?
+
+				#Presentacion
+				if params[:presentacionId].blank?
+					cpActividad = Actividad.new
+					cpActividad.tipo_actividad_id = 9
+					cpActividad.actividad = params[:presentacion]
+					cpActividad.save
+					cpActividadAdecuacion = AdecuacionActividad.new
+					cpActividadAdecuacion.adecuacion_id = session[:adecuacion_id]
+					cpActividadAdecuacion.actividad_id = cpActividad.id
+					cpActividadAdecuacion.semestre = 0
+					cpActividadAdecuacion.save
+				end
+
+				# Descripción del Perfil del Ganador del concurso
+				if params[:descripcionId].blank?
+					cpActividad = Actividad.new
+					cpActividad.tipo_actividad_id = 8
+					cpActividad.actividad = params[:descripcion]
+					cpActividad.save
+					cpActividadAdecuacion = AdecuacionActividad.new
+					cpActividadAdecuacion.adecuacion_id = session[:adecuacion_id]
+					cpActividadAdecuacion.actividad_id = cpActividad.id
+					cpActividadAdecuacion.semestre = 0
+					cpActividadAdecuacion.save
+				end
+
+				# Docencia
+				if params[:docenciaId].blank?
+					cpActividad = Actividad.new
+					cpActividad.tipo_actividad_id = 1
+					cpActividad.actividad = params[:docencia]
+					cpActividad.save
+					cpActividadAdecuacion = AdecuacionActividad.new
+					cpActividadAdecuacion.adecuacion_id = session[:adecuacion_id]
+					cpActividadAdecuacion.actividad_id = cpActividad.id
+					cpActividadAdecuacion.semestre = 0
+					cpActividadAdecuacion.save
+				end
+
+				# Investigacion
+				if params[:investigacionId].blank?
+					cpActividad = Actividad.new
+					cpActividad.tipo_actividad_id = 2
+					cpActividad.actividad = params[:investigacion]
+					cpActividad.save
+					cpActividadAdecuacion = AdecuacionActividad.new
+					cpActividadAdecuacion.adecuacion_id = session[:adecuacion_id]
+					cpActividadAdecuacion.actividad_id = cpActividad.id
+					cpActividadAdecuacion.semestre = 0
+					cpActividadAdecuacion.save
+				end
+
+				# Formación y capacitación profesional
+				if params[:formacionId].blank?
+					cpActividad = Actividad.new
+					cpActividad.tipo_actividad_id = 4
+					cpActividad.actividad = params[:formacion]
+					cpActividad.save
+					cpActividadAdecuacion = AdecuacionActividad.new
+					cpActividadAdecuacion.adecuacion_id = session[:adecuacion_id]
+					cpActividadAdecuacion.actividad_id = cpActividad.id
+					cpActividadAdecuacion.semestre = 0
+					cpActividadAdecuacion.save
+				end
+
+				# Extension
+				if params[:extensionId].blank?
+					cpActividad = Actividad.new
+					cpActividad.tipo_actividad_id = 3
+					cpActividad.actividad = params[:extension]
+					cpActividad.save
+					cpActividadAdecuacion = AdecuacionActividad.new
+					cpActividadAdecuacion.adecuacion_id = session[:adecuacion_id]
+					cpActividadAdecuacion.actividad_id = cpActividad.id
+					cpActividadAdecuacion.semestre = 0
+					cpActividadAdecuacion.save
+				end
+
+				#Editar
+				j=0
+				i=:edit.to_s+j.to_s
+				@edit= params[i].to_s
+
+				while j < params[:cant_edit].to_i
+					puts "EL EDIT CONTIENE.................."
+					puts @edit
+					puts i
+					if @edit == "presentacion"
+						cpActividad = Actividad.find(params[:presentacionId])
+						cpActividad.actividad = params[:presentacion]
+						cpActividad.save
+					elsif @edit == "descripcion"
+						cpActividad = Actividad.find(params[:descripcionId])
+						cpActividad.actividad = params[:descripcion]
+						cpActividad.save
+					elsif @edit == "docencia"
+						cpActividad = Actividad.find(params[:docenciaId])
+						cpActividad.actividad = params[:docencia]
+						cpActividad.save
+					elsif @edit == "investigacion"
+						cpActividad = Actividad.find(params[:investigacionId])
+						cpActividad.actividad = params[:investigacion]
+						cpActividad.save
+					elsif @edit == "formacion"
+						cpActividad = Actividad.find(params[:formacionId])
+						cpActividad.actividad = params[:formacion]
+						cpActividad.save
+					elsif @edit == "extension"
+						cpActividad = Actividad.find(params[:extensionId])
+						cpActividad.actividad = params[:extension]
+						cpActividad.save
+					end
+
+					j+=1
+					i=:edit.to_s+j.to_s
+					@edit= params[i].to_s
+				end
+			end
+			redirect_to controller:"iniciotutor", action: "detalles_adecuacion2"
 		else
 			redirect_to controller:"forminst", action: "index"
 		end
@@ -654,7 +715,7 @@ class IniciotutorController < ApplicationController
 					elsif actividad.tipo_actividad_id == 4
 						@formacion = actividad.actividad	
 						@formacionId = actividad.id
-					elsif actividad.tipo_actividad_id == 5
+					elsif actividad.tipo_actividad_id == 3
 						@extension = actividad.actividad	
 						@extensionId = actividad.id
 					end

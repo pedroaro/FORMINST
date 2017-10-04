@@ -262,7 +262,8 @@
 </div>
 <br>
 
-<%= form_tag({controller: 'iniciotutor', action: 'ver_detalles_adecuacion'}) do%> 
+<%= form_tag({controller: 'iniciotutor', action: 'guardar_primera_parte'}) do%> 
+  <input id="cant_edit" type="hidden" name="cant_edit" value="0"/> 
   <input type="hidden" name="firtsPart" value="1">
   <div class= "row">
       <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
@@ -281,7 +282,7 @@
                       <td>
                         <center>
                           <input type="hidden" name="presentacionId" value="<%= @presentacionId %>">
-                          <a id = 'button1' rel='presentacion ' class="edit_act btn btn-default btn-lg" aria-label="Editar">
+                          <a id = 'buttonpresentacion' rel='presentacion ' class="edit_act btn btn-default btn-lg" aria-label="Editar">
                             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                           </a>
                         </center>
@@ -441,21 +442,7 @@
 <script type="text/javascript">
 
     $(document).ready(function() {
-      var cant_delete=0;
       var cant_edit=0;
-      var cant_docencia=0;
-      var cant_investigacion=0;
-      var cant_formacion=0;
-      var cant_extension=0;
-      var cant_otra=0;
-
-      $(".delete_act").click(function() {
-        var id_act = $(this).attr("rel");
-        $(this).parent().parent().append("<input type='hidden' name='delete"+cant_delete+"' value='"+id_act+"'>")
-        $(this).parent().parent().parent().hide();
-        cant_delete +=1;
-        $("#cant_delete").val(cant_delete);
-      });
 
       $(".edit_act").click(function() {
         var params = $(this).attr("rel");
@@ -467,108 +454,6 @@
         $(this).parent().parent().append("<input type='hidden' name='edit"+cant_edit+"' value='"+id+"'>")
         cant_edit +=1;
         $("#cant_edit").val(cant_edit);
-      });
-
-
-      $(".agregar_docencia").click(function() {
-        $("#lastactdoc").before('<tr>\
-                                <td>\
-                                  <textarea class="form-control" rows="2"  name="nuevadoc'+cant_docencia+'" required></textarea>\
-                                </td>\
-                                <td>\
-                                  <center>\
-                                    <button type="button" class="btn btn-default btn-lg" title="Eliminar" onclick = "eliminar(this)">\
-                                      <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>\
-                                    </button>\
-                                  </center>\
-                                </td>\
-                                <td>\
-                                </td>\
-                              </tr>');
-          cant_docencia = cant_docencia + 1;
-          console.log(cant_docencia);
-          $("#cant_docencia").val(cant_docencia);
-          
-      });
-
-      $(".agregar_investigacion").click(function() {
-        $("#lastactinv").before('<tr>\
-                                <td>\
-                                  <textarea class="form-control" rows="2"  name="nuevainv'+cant_investigacion+'" required></textarea>\
-                                </td>\
-                                <td>\
-                                  <center>\
-                                    <button type="button" class="btn btn-default btn-lg" title="Eliminar" onclick = "eliminar(this)">\
-                                      <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>\
-                                    </button>\
-                                  </center>\
-                                </td>\
-                                <td>\
-                                </td>\
-                              </tr>');
-          cant_investigacion = cant_investigacion + 1;
-          $("#cant_investigacion").val(cant_investigacion);
-          
-      });
-
-      $(".agregar_formacion").click(function() {
-        $("#lastactfor").before('<tr>\
-                                <td>\
-                                  <textarea class="form-control" rows="2"  name="nuevafor'+cant_formacion+'" required></textarea>\
-                                </td>\
-                                <td>\
-                                  <center>\
-                                    <button type="button" class="btn btn-default btn-lg" title="Eliminar" onclick = "eliminar(this)">\
-                                      <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>\
-                                    </button>\
-                                  </center>\
-                                </td>\
-                                <td>\
-                                </td>\
-                              </tr>');
-          cant_formacion = cant_formacion + 1;
-          $("#cant_formacion").val(cant_formacion);
-          
-      });
-
-      $(".agregar_extension").click(function() {
-        $("#lastactext").before('<tr>\
-                                <td>\
-                                  <textarea class="form-control" rows="2"  name="nuevaext'+cant_extension+'"></textarea>\
-                                </td>\
-                                <td>\
-                                  <center>\
-                                    <button type="button" class="btn btn-default btn-lg" title="Eliminar" onclick = "eliminar(this)">\
-                                      <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>\
-                                    </button>\
-                                  </center>\
-                                </td>\
-                                <td>\
-                                </td>\
-                              </tr>');
-          cant_extension = cant_extension + 1;
-          $("#cant_extension").val(cant_extension);
-          
-      });
-
-      $(".agregar_otra").click(function() {
-        $("#lastactotr").before('<tr>\
-                                <td>\
-                                  <textarea class="form-control" rows="2"  name="nuevaotr'+cant_otra+'"></textarea>\
-                                </td>\
-                                <td>\
-                                  <center>\
-                                    <button type="button" class="btn btn-default btn-lg" title="Eliminar" onclick = "eliminar(this)">\
-                                      <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>\
-                                    </button>\
-                                  </center>\
-                                </td>\
-                                <td>\
-                                </td>\
-                              </tr>');
-          cant_otra = cant_otra + 1;
-          $("#cant_otra").val(cant_otra);
-          
       });
 
     });
