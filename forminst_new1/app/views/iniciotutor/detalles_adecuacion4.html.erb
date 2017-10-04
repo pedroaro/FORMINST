@@ -149,7 +149,7 @@
 <div class="row">
   <div class="col-xs-12 col-md-12">
       <%if !session[:editar]%> 
-        <%= form_tag({controller: 'iniciotutor', action: 'detalles_adecuacion4',:class => "form-inline"}) do%>
+        <%= form_tag({controller: 'iniciotutor', action: 'detalles_adecuacion3',:class => "form-inline"}) do%>
           <input type="hidden" name="plan_id" value=<%= session[:plan_id] %>>
           <input type="hidden" name="editar" value='si'>
           <div class="btn-group" role="group">

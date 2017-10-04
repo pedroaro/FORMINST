@@ -879,7 +879,6 @@ class IniciotutorController < ApplicationController
 			@nombre = session[:nombre_usuario]
 			@instructorName = session[:instructorName]
 			@plan= Planformacion.find(session[:plan_id])
-
 			@planformacion = Planformacion.find(session[:plan_id])
 			if !@planformacion.blank?
 				#Ver si el informe fue rachazado

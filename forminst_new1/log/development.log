@@ -3082,4 +3082,1800 @@ Started GET "/assets/glyphicons-halflings-regular.woff2" for 190.169.74.220 at 2
 Cannot render console from 190.169.74.220! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
 Started GET "/iniciotutor/detalles_adecuacion5" for 190.169.74.220 at 2017-06-20 20:14:43 -0400
 Cannot render console from 190.169.74.220! Allowed networks: 127.0.0.1, ::1, 127.0.0.0/127.255.255.255
-Processing by IniciotutorController#detalles_adecuacion5
+Processing by IniciotutorController#detalles_adecuacion5DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/forminst_new1/config/routes.rb:6)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/forminst_new1/config/routes.rb:6)
+Started GET "/" for ::1 at 2017-10-04 14:35:37 -0400
+Processing by ForminstController#index as HTML
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (19.1ms)[0m  [1m[31mDELETE FROM `session` WHERE `session`.`id` = 107[0m
+  [1m[35m (44.6ms)[0m  [1m[35mCOMMIT[0m
+  Rendering forminst/index.html.erb within layouts/ec_aplanes
+  Rendered forminst/index.html.erb within layouts/ec_aplanes (17.9ms)
+Completed 200 OK in 2354ms (Views: 1777.9ms | ActiveRecord: 420.6ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (15.0ms)[0m  [1m[33mUPDATE `session` SET `data` = 'BAh7BkkiEF9jc3JmX3Rva2VuBjoGRUZJIjFTSGR3VFBBcTBraHN1Zm9XTXdy\nNGVINmRDOWN1ckVWc1Q5WXZLWkRUcDhZPQY7AEY=\n', `updated_at` = '2017-10-04 18:35:40' WHERE `session`.`id` = 108[0m
+  [1m[35m (46.0ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/images/nav.jpg" for ::1 at 2017-10-04 14:35:40 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/images/nav.jpg"):
+  
+actionpack (5.0.6) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.6) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.3) lib/rack/method_override.rb:22:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.6) lib/rails/engine.rb:522:in `call'
+puma (3.10.0) lib/puma/configuration.rb:225:in `call'
+puma (3.10.0) lib/puma/server.rb:605:in `handle_request'
+puma (3.10.0) lib/puma/server.rb:437:in `process_client'
+puma (3.10.0) lib/puma/server.rb:301:in `block in run'
+puma (3.10.0) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  Rendering /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout
+  Rendering /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (5.9ms)
+  Rendered collection of /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb [18 times] (63.4ms)
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (30.7ms)
+  Rendering /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (4.9ms)
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (143.8ms)
+Started POST "/forminst/autenticar" for ::1 at 2017-10-04 14:35:43 -0400
+Processing by ForminstController#autenticar as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"w18qmnzPRCvSoLccTJUHy5GzZA8pDve7hiHHjgV28B+LKFrWjOWWY74ZTQp/n/+z7y5v2AeistfJ9+inlaVX2Q==", "correo"=>"ana", "password"=>"[FILTERED]"}
+  [1m[36mUsuario Load (0.3ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`user` = 'ana' LIMIT 1[0m
+  [1m[36mUsuarioentidad Load (0.3ms)[0m  [1m[34mSELECT  `usuarioentidad`.* FROM `usuarioentidad` WHERE `usuarioentidad`.`usuario_id` = 38 LIMIT 1[0m
+  [1m[36mEntidad Load (0.3ms)[0m  [1m[34mSELECT  `entidad`.* FROM `entidad` WHERE `entidad`.`id` = 18 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `usuarioentidad`.* FROM `usuarioentidad` WHERE `usuarioentidad`.`usuario_id` = 38 LIMIT 1[0m  [["usuario_id", 38], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `entidad`.* FROM `entidad` WHERE `entidad`.`id` = 18 LIMIT 1[0m  [["id", 18], ["LIMIT", 1]]
+  [1m[36mPersona Load (1.2ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 38 LIMIT 1[0m
+Redirected to http://localhost:3000/iniciotutor
+Completed 302 Found in 184ms (ActiveRecord: 37.3ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[33mUPDATE `session` SET `data` = 'BAh7DUkiEF9jc3JmX3Rva2VuBjoGRUZJIjFTSGR3VFBBcTBraHN1Zm9XTXdy\nNGVINmRDOWN1ckVWc1Q5WXZLWkRUcDhZPQY7AEZJIg91c3VhcmlvX2lkBjsA\nRmkrSSITbm9tYnJlX3VzdWFyaW8GOwBGSSIQQW5hIE1vcmFsZXMGOwBUSSIS\nYWRtaW5pc3RyYWRvcgY7AEZGSSIKdHV0b3IGOwBGVEkiD2luc3RydWN0b3IG\nOwBGRkkiDGVudGlkYWQGOwBGRkkiCmZsYXNoBjsAVHsHSSIMZGlzY2FyZAY7\nAFRbAEkiDGZsYXNoZXMGOwBUewZJIgxzdWNjZXNzBjsARkkiHEJpZW52ZW5p\nZG8hIEFuYSBNb3JhbGVzBjsAVA==\n', `updated_at` = '2017-10-04 18:35:44' WHERE `session`.`id` = 108[0m
+  [1m[35m (46.5ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/iniciotutor" for ::1 at 2017-10-04 14:35:44 -0400
+Processing by IniciotutorController#index as HTML
+  [1m[36mNotificacion Load (0.4ms)[0m  [1m[34mSELECT `notificacion`.* FROM `notificacion` WHERE `notificacion`.`tutor_id` = 38[0m
+  Rendering iniciotutor/index.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/index.html.erb within layouts/ly_inicio_tutor (2.9ms)
+Completed 200 OK in 273ms (Views: 245.7ms | ActiveRecord: 1.8ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE `session` SET `data` = 'BAh7DEkiEF9jc3JmX3Rva2VuBjoGRUZJIjFTSGR3VFBBcTBraHN1Zm9XTXdy\nNGVINmRDOWN1ckVWc1Q5WXZLWkRUcDhZPQY7AEZJIg91c3VhcmlvX2lkBjsA\nRmkrSSITbm9tYnJlX3VzdWFyaW8GOwBGSSIQQW5hIE1vcmFsZXMGOwBUSSIS\nYWRtaW5pc3RyYWRvcgY7AEZGSSIKdHV0b3IGOwBGVEkiD2luc3RydWN0b3IG\nOwBGRkkiDGVudGlkYWQGOwBGRg==\n' WHERE `session`.`id` = 108[0m
+  [1m[35m (41.1ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/assets/banner.png" for ::1 at 2017-10-04 14:35:44 -0400
+Started GET "/assets/glyphicons-halflings-regular.woff2" for ::1 at 2017-10-04 14:35:44 -0400
+Started GET "/iniciotutor/favicon.ico" for ::1 at 2017-10-04 14:35:45 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/iniciotutor/favicon.ico"):
+  
+Started GET "/iniciotutor/planformacions" for ::1 at 2017-10-04 14:35:45 -0400
+actionpack (5.0.6) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.6) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.3) lib/rack/method_override.rb:22:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.6) lib/rails/engine.rb:522:in `call'
+puma (3.10.0) lib/puma/configuration.rb:225:in `call'
+puma (3.10.0) lib/puma/server.rb:605:in `handle_request'
+puma (3.10.0) lib/puma/server.rb:437:in `process_client'
+puma (3.10.0) lib/puma/server.rb:301:in `block in run'
+puma (3.10.0) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+Processing by IniciotutorController#planformacions as HTML
+  [1m[36mPersona Load (0.6ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 38 LIMIT 1[0m
+  Rendering /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout
+  Rendering /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.4ms)
+  Rendered collection of /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb [18 times] (6.4ms)
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.3ms)
+  Rendering /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (3.6ms)
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (35.1ms)
+  [1m[36mPlanformacion Load (0.3ms)[0m  [1m[34mSELECT `planformacion`.* FROM `planformacion` WHERE `planformacion`.`tutor_id` = 38[0m
+  [1m[36mPersona Load (0.3ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 39 LIMIT 1[0m
+  [1m[36mAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 15 LIMIT 1[0m
+  [1m[36mEstatusAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 19 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  Rendering iniciotutor/planformacions.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/planformacions.html.erb within layouts/ly_inicio_tutor (3.4ms)
+Completed 200 OK in 951ms (Views: 785.2ms | ActiveRecord: 6.4ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Started POST "/iniciotutor/ver_detalles_adecuacion" for ::1 at 2017-10-04 14:35:47 -0400
+Processing by IniciotutorController#ver_detalles_adecuacion as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"fiV9ugC0Cm6mD1qvXeODdjcR+FXsD2l0v/ETb3pIHio2Ug328J7YJsq2oLlu6XsOSYzzgsKjLBjwJzxG6pu57A==", "plan_id"=>"15", "editar"=>"no"}
+  [1m[36mPlanformacion Load (0.5ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 15 LIMIT 1[0m
+  [1m[36mUsuario Load (0.4ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 39 LIMIT 1[0m
+  [1m[36mPersona Load (0.3ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 39 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 15 LIMIT 1[0m  [["id", 15], ["LIMIT", 1]]
+  [1m[36mUsuarioentidad Load (0.3ms)[0m  [1m[34mSELECT  `usuarioentidad`.* FROM `usuarioentidad` WHERE `usuarioentidad`.`usuario_id` = 39 LIMIT 1[0m
+  [1m[36mEscuela Load (0.3ms)[0m  [1m[34mSELECT  `escuela`.* FROM `escuela` WHERE `escuela`.`id` = 2 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 39 LIMIT 1[0m  [["usuario_id", 39], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 39 LIMIT 1[0m  [["id", 39], ["LIMIT", 1]]
+  [1m[36mPersona Load (0.4ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 38 LIMIT 1[0m
+  [1m[36mUsuario Load (0.2ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 38 LIMIT 1[0m
+  [1m[36mAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 15 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 15 LIMIT 1[0m  [["id", 15], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `usuarioentidad`.* FROM `usuarioentidad` WHERE `usuarioentidad`.`usuario_id` = 39 LIMIT 1[0m  [["usuario_id", 39], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `escuela`.* FROM `escuela` WHERE `escuela`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 39 LIMIT 1[0m  [["usuario_id", 39], ["LIMIT", 1]]
+  Rendering iniciotutor/ver_detalles_adecuacion.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/ver_detalles_adecuacion.html.erb within layouts/ly_inicio_tutor (9.4ms)
+Completed 200 OK in 281ms (Views: 234.7ms | ActiveRecord: 5.9ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[33mUPDATE `session` SET `data` = 'BAh7EEkiEF9jc3JmX3Rva2VuBjoGRUZJIjFTSGR3VFBBcTBraHN1Zm9XTXdy\nNGVINmRDOWN1ckVWc1Q5WXZLWkRUcDhZPQY7AEZJIg91c3VhcmlvX2lkBjsA\nRmkrSSITbm9tYnJlX3VzdWFyaW8GOwBGSSIQQW5hIE1vcmFsZXMGOwBUSSIS\nYWRtaW5pc3RyYWRvcgY7AEZGSSIKdHV0b3IGOwBGVEkiD2luc3RydWN0b3IG\nOwBGRkkiDGVudGlkYWQGOwBGRkkiDHBsYW5faWQGOwBGSSIHMTUGOwBUSSIL\nZWRpdGFyBjsARkZJIhNpbnN0cnVjdG9yTmFtZQY7AEZJIglwZXBlBjsAVEki\nEmFkZWN1YWNpb25faWQGOwBGaRg=\n', `updated_at` = '2017-10-04 18:35:48' WHERE `session`.`id` = 108[0m
+  [1m[35m (191.8ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/assets/banner.png" for ::1 at 2017-10-04 14:35:48 -0400
+Started GET "/iniciotutor/detalles_adecuacion2" for ::1 at 2017-10-04 14:35:50 -0400
+Processing by IniciotutorController#detalles_adecuacion2 as HTML
+  [1m[36mPlanformacion Load (0.5ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 15 LIMIT 1[0m
+  [1m[36mUsuario Load (0.3ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 39 LIMIT 1[0m
+  [1m[36mAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 15 LIMIT 1[0m
+  [1m[36mAdecuacionActividad Load (0.3ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 19 AND `adecuacion_actividad`.`semestre` = 0[0m
+  [1m[36mEstatusAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 19 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 19 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m  [["adecuacion_id", 19], ["actual", 1], ["LIMIT", 1]]
+  Rendering iniciotutor/detalles_adecuacion2.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/detalles_adecuacion2.html.erb within layouts/ly_inicio_tutor (9.6ms)
+Completed 200 OK in 273ms (Views: 233.8ms | ActiveRecord: 2.9ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/iniciotutor/detalles_adecuacion3" for ::1 at 2017-10-04 14:35:54 -0400
+Processing by IniciotutorController#detalles_adecuacion3 as HTML
+  [1m[36mPlanformacion Load (0.3ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 15 LIMIT 1[0m
+  [1m[36mUsuario Load (0.2ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 39 LIMIT 1[0m
+  [1m[36mAdecuacion Load (0.2ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 15 LIMIT 1[0m
+  [1m[36mEstatusAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 19 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 15 LIMIT 1[0m  [["id", 15], ["LIMIT", 1]]
+  [1m[36mAdecuacionActividad Load (0.3ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 19 AND `adecuacion_actividad`.`semestre` = 1[0m
+  [1m[36mActividad Load (0.3ms)[0m  [1m[34mSELECT  `actividad`.* FROM `actividad` WHERE `actividad`.`id` = 561 LIMIT 1[0m
+  [1m[36mActividad Load (0.3ms)[0m  [1m[34mSELECT  `actividad`.* FROM `actividad` WHERE `actividad`.`id` = 562 LIMIT 1[0m
+  [1m[36mActividad Load (0.2ms)[0m  [1m[34mSELECT  `actividad`.* FROM `actividad` WHERE `actividad`.`id` = 563 LIMIT 1[0m
+  [1m[36mActividad Load (0.1ms)[0m  [1m[34mSELECT  `actividad`.* FROM `actividad` WHERE `actividad`.`id` = 564 LIMIT 1[0m
+  [1m[36mActividad Load (0.1ms)[0m  [1m[34mSELECT  `actividad`.* FROM `actividad` WHERE `actividad`.`id` = 565 LIMIT 1[0m
+  [1m[36mActividad Load (0.1ms)[0m  [1m[34mSELECT  `actividad`.* FROM `actividad` WHERE `actividad`.`id` = 566 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 19 AND `adecuacion_actividad`.`semestre` = 1[0m  [["adecuacion_id", 19], ["semestre", 1]]
+  [1m[36mObservacionActividadAdecuacion Load (0.3ms)[0m  [1m[34mSELECT `observacion_actividad_adecuacion`.* FROM `observacion_actividad_adecuacion` WHERE `observacion_actividad_adecuacion`.`adecuacionactividad_id` = 399[0m
+  [1m[36mObservacionActividadAdecuacion Load (0.2ms)[0m  [1m[34mSELECT `observacion_actividad_adecuacion`.* FROM `observacion_actividad_adecuacion` WHERE `observacion_actividad_adecuacion`.`adecuacionactividad_id` = 400[0m
+  [1m[36mObservacionActividadAdecuacion Load (0.2ms)[0m  [1m[34mSELECT `observacion_actividad_adecuacion`.* FROM `observacion_actividad_adecuacion` WHERE `observacion_actividad_adecuacion`.`adecuacionactividad_id` = 401[0m
+  [1m[36mObservacionActividadAdecuacion Load (0.2ms)[0m  [1m[34mSELECT `observacion_actividad_adecuacion`.* FROM `observacion_actividad_adecuacion` WHERE `observacion_actividad_adecuacion`.`adecuacionactividad_id` = 402[0m
+  [1m[36mObservacionActividadAdecuacion Load (0.2ms)[0m  [1m[34mSELECT `observacion_actividad_adecuacion`.* FROM `observacion_actividad_adecuacion` WHERE `observacion_actividad_adecuacion`.`adecuacionactividad_id` = 403[0m
+  [1m[36mObservacionActividadAdecuacion Load (0.1ms)[0m  [1m[34mSELECT `observacion_actividad_adecuacion`.* FROM `observacion_actividad_adecuacion` WHERE `observacion_actividad_adecuacion`.`adecuacionactividad_id` = 404[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 19 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m  [["adecuacion_id", 19], ["actual", 1], ["LIMIT", 1]]
+  Rendering iniciotutor/detalles_adecuacion3.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/detalles_adecuacion3.html.erb within layouts/ly_inicio_tutor (17.5ms)
+Completed 200 OK in 318ms (Views: 231.2ms | ActiveRecord: 6.5ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/iniciotutor/logout" for ::1 at 2017-10-04 14:35:57 -0400
+Processing by IniciotutorController#logout as HTML
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[31mDELETE FROM `session` WHERE `session`.`id` = 108[0m
+  [1m[35m (51.9ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 96ms (ActiveRecord: 85.3ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE `session` SET `data` = 'BAh7BkkiGV90dXJib2xpbmtzX2xvY2F0aW9uBjoGRUZJIhtodHRwOi8vbG9j\nYWxob3N0OjMwMDAvBjsAVA==\n' WHERE `session`.`id` = 109[0m
+  [1m[35m (37.9ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/" for ::1 at 2017-10-04 14:35:57 -0400
+Processing by ForminstController#index as HTML
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[31mDELETE FROM `session` WHERE `session`.`id` = 109[0m
+  [1m[35m (50.9ms)[0m  [1m[35mCOMMIT[0m
+  Rendering forminst/index.html.erb within layouts/ec_aplanes
+  Rendered forminst/index.html.erb within layouts/ec_aplanes (1.6ms)
+Completed 200 OK in 324ms (Views: 227.9ms | ActiveRecord: 91.1ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE `session` SET `data` = 'BAh7BkkiEF9jc3JmX3Rva2VuBjoGRUZJIjFwMFZXYVIzSjFJdUs1bm1xWm5W\nNXdQQmRHNUFxZHNDQm9Yem1vVzRTT1YwPQY7AEY=\n', `updated_at` = '2017-10-04 18:35:58' WHERE `session`.`id` = 110[0m
+  [1m[35m (37.6ms)[0m  [1m[35mCOMMIT[0m
+Started POST "/forminst/autenticar" for ::1 at 2017-10-04 14:39:04 -0400
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/forminst_new1/config/routes.rb:6)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/forminst_new1/config/routes.rb:6)
+Processing by ForminstController#autenticar as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ETaXQWvx1/rw2Na6f2Ecyu2WAdv+aDaTW6hvIlfysFG2c8EodjgDcXo+rxAZFGUKHcsaS9Qe9hL61ImDOeCJDA==", "correo"=>"secretaria.uno", "password"=>"[FILTERED]"}
+  [1m[36mUsuario Load (0.3ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`user` = 'secretaria.uno' LIMIT 1[0m
+  [1m[36mUsuarioentidad Load (0.3ms)[0m  [1m[34mSELECT  `usuarioentidad`.* FROM `usuarioentidad` WHERE `usuarioentidad`.`usuario_id` = 37 LIMIT 1[0m
+  [1m[36mEntidad Load (0.2ms)[0m  [1m[34mSELECT  `entidad`.* FROM `entidad` WHERE `entidad`.`id` = 8 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `usuarioentidad`.* FROM `usuarioentidad` WHERE `usuarioentidad`.`usuario_id` = 37 LIMIT 1[0m  [["usuario_id", 37], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `entidad`.* FROM `entidad` WHERE `entidad`.`id` = 8 LIMIT 1[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[36mPersona Load (0.3ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 37 LIMIT 1[0m
+Redirected to http://localhost:3000/secretarias
+Completed 302 Found in 73ms (ActiveRecord: 5.6ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE `session` SET `data` = 'BAh7DUkiEF9jc3JmX3Rva2VuBjoGRUZJIjFwMFZXYVIzSjFJdUs1bm1xWm5W\nNXdQQmRHNUFxZHNDQm9Yem1vVzRTT1YwPQY7AEZJIg91c3VhcmlvX2lkBjsA\nRmkqSSITbm9tYnJlX3VzdWFyaW8GOwBGSSIbU2VjcmV0YXJpYSBDb21wdXRh\nY2lvbgY7AFRJIhJhZG1pbmlzdHJhZG9yBjsARkZJIgp0dXRvcgY7AEZGSSIP\naW5zdHJ1Y3RvcgY7AEZGSSIMZW50aWRhZAY7AEZUSSIKZmxhc2gGOwBUewdJ\nIgxkaXNjYXJkBjsAVFsASSIMZmxhc2hlcwY7AFR7BkkiDHN1Y2Nlc3MGOwBG\nSSInQmllbnZlbmlkbyEgU2VjcmV0YXJpYSBDb21wdXRhY2lvbgY7AFQ=\n', `updated_at` = '2017-10-04 18:39:04' WHERE `session`.`id` = 110[0m
+  [1m[35m (37.7ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/secretarias" for ::1 at 2017-10-04 14:39:04 -0400
+Processing by SecretariasController#index as HTML
+  Rendering secretarias/index.html.erb within layouts/ly_inicio_entidad
+  Rendered secretarias/index.html.erb within layouts/ly_inicio_entidad (2.2ms)
+Completed 200 OK in 307ms (Views: 260.1ms | ActiveRecord: 0.3ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE `session` SET `data` = 'BAh7DEkiEF9jc3JmX3Rva2VuBjoGRUZJIjFwMFZXYVIzSjFJdUs1bm1xWm5W\nNXdQQmRHNUFxZHNDQm9Yem1vVzRTT1YwPQY7AEZJIg91c3VhcmlvX2lkBjsA\nRmkqSSITbm9tYnJlX3VzdWFyaW8GOwBGSSIbU2VjcmV0YXJpYSBDb21wdXRh\nY2lvbgY7AFRJIhJhZG1pbmlzdHJhZG9yBjsARkZJIgp0dXRvcgY7AEZGSSIP\naW5zdHJ1Y3RvcgY7AEZGSSIMZW50aWRhZAY7AEZU\n', `updated_at` = '2017-10-04 18:39:05' WHERE `session`.`id` = 110[0m
+  [1m[35m (67.4ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/assets/banner.png" for ::1 at 2017-10-04 14:39:05 -0400
+Started GET "/secretarias/agregarInstructor" for ::1 at 2017-10-04 14:39:09 -0400
+Processing by SecretariasController#agregarInstructor as HTML
+  [1m[36mPersona Load (1.6ms)[0m  [1m[34mSELECT `persona`.* FROM `persona`[0m
+Started GET "/secretarias/favicon.ico" for ::1 at 2017-10-04 14:39:09 -0400
+  [1m[36mUsuarioentidad Load (0.5ms)[0m  [1m[34mSELECT  `usuarioentidad`.* FROM `usuarioentidad` WHERE `usuarioentidad`.`usuario_id` = 37 LIMIT 1[0m
+  
+ActionController::RoutingError (No route matches [GET] "/secretarias/favicon.ico"):
+  
+actionpack (5.0.6) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.6) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.3) lib/rack/method_override.rb:22:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.6) lib/rails/engine.rb:522:in `call'
+puma (3.10.0) lib/puma/configuration.rb:225:in `call'
+puma (3.10.0) lib/puma/server.rb:605:in `handle_request'
+puma (3.10.0) lib/puma/server.rb:437:in `process_client'
+puma (3.10.0) lib/puma/server.rb:301:in `block in run'
+puma (3.10.0) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  Rendering /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout
+  Rendering /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.6ms)
+  Rendered collection of /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb [18 times] (9.9ms)
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (2.7ms)
+  Rendering /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (3.7ms)
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (45.7ms)
+  [1m[36mDepartamento Load (0.3ms)[0m  [1m[34mSELECT `departamento`.* FROM `departamento` WHERE `departamento`.`escuela_id` = 2[0m
+  [1m[36mUsuarioentidad Load (0.4ms)[0m  [1m[34mSELECT `usuarioentidad`.* FROM `usuarioentidad` WHERE `usuarioentidad`.`escuela_id` = 2 AND `usuarioentidad`.`entidad_id` = 18[0m
+  [1m[36mPersona Load (0.3ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 38 LIMIT 1[0m
+  Rendering secretarias/agregarInstructor.html.erb within layouts/ly_inicio_entidad
+  Rendered secretarias/agregarInstructor.html.erb within layouts/ly_inicio_entidad (6.4ms)
+Completed 200 OK in 476ms (Views: 273.5ms | ActiveRecord: 4.6ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (2.2ms)[0m  [1m[33mUPDATE `session` SET `data` = 'BAh7DUkiEF9jc3JmX3Rva2VuBjoGRUZJIjFwMFZXYVIzSjFJdUs1bm1xWm5W\nNXdQQmRHNUFxZHNDQm9Yem1vVzRTT1YwPQY7AEZJIg91c3VhcmlvX2lkBjsA\nRmkqSSITbm9tYnJlX3VzdWFyaW8GOwBGSSIbU2VjcmV0YXJpYSBDb21wdXRh\nY2lvbgY7AFRJIhJhZG1pbmlzdHJhZG9yBjsARkZJIgp0dXRvcgY7AEZGSSIP\naW5zdHJ1Y3RvcgY7AEZGSSIMZW50aWRhZAY7AEZUSSINcGVyc29uYXMGOwBG\nWwp7CEkiD3VzdWFyaW9faWQGOwBUaSlJIgxub21icmVzBjsAVEkiElNlY3Jl\ndGFyaWEgSi4GOwBUSSIOYXBlbGxpZG9zBjsAVEkiC1VubyBXLgY7AFR7CEAS\naTRAE0kiElNlY3JldGFyaWEgSi4GOwBUQBVJIg5CaW9sb2fDrWEGOwBUewhA\nEmkqQBNJIg9TZWNyZXRhcmlhBjsAVEAVSSIQQ29tcHV0YWNpb24GOwBUewhA\nEmkrQBNJIghhbmEGOwBUQBVJIgxtb3JhbGVzBjsAVHsIQBJpLEATSSIJcGVw\nZQY7AFRAFUkiDlJvZHJpZ3VlegY7AFQ=\n', `updated_at` = '2017-10-04 18:39:09' WHERE `session`.`id` = 110[0m
+  [1m[35m (80.7ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/assets/glyphicons-halflings-regular.woff2" for ::1 at 2017-10-04 14:39:09 -0400
+Started GET "/secretarias/guarda_instructor?FechaConcurso=2017-10-05&Nombre=pedro&Apellido=Rodriguez&CI=25&FechaNac=2017-09-27&Dir=la+trinidad&correo=pedro&Tlf=04126569878&OTlf=02125656987&GradoI=Bachiller&Area=Computaci%C3%B3n&Subarea=Computaci%C3%B3n&depto=9&UAI=Centro+de+Investigaci%C3%B3n+de+Comunicaciones+de+Comunicaciones+y+Redes+%28CICORE%29%2C+Laboratorio+ICARO&UAD=Escuela+de+Computacion&JRTutores=38&commit=Guardar" for ::1 at 2017-10-04 14:41:09 -0400
+Processing by SecretariasController#guarda_instructor as HTML
+  Parameters: {"FechaConcurso"=>"2017-10-05", "Nombre"=>"pedro", "Apellido"=>"Rodriguez", "CI"=>"25", "FechaNac"=>"2017-09-27", "Dir"=>"la trinidad", "correo"=>"pedro", "Tlf"=>"04126569878", "OTlf"=>"02125656987", "GradoI"=>"Bachiller", "Area"=>"Computación", "Subarea"=>"Computación", "depto"=>"9", "UAI"=>"Centro de Investigación de Comunicaciones de Comunicaciones y Redes (CICORE), Laboratorio ICARO", "UAD"=>"Escuela de Computacion", "JRTutores"=>"38", "commit"=>"Guardar"}
+  [1m[36mPersona Load (0.3ms)[0m  [1m[34mSELECT `persona`.* FROM `persona`[0m
+  [1m[36mUsuario Load (0.3ms)[0m  [1m[34mSELECT `usuario`.* FROM `usuario`[0m
+  [1m[36mUsuarioentidad Load (1.9ms)[0m  [1m[34mSELECT  `usuarioentidad`.* FROM `usuarioentidad` WHERE `usuarioentidad`.`usuario_id` = 38 LIMIT 1[0m
+  [1m[36mUsuarioentidad Load (0.5ms)[0m  [1m[34mSELECT  `usuarioentidad`.* FROM `usuarioentidad` WHERE `usuarioentidad`.`usuario_id` = 37 LIMIT 1[0m
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO `usuario` (`user`, `ldap`, `activo`, `password`, `email`, `tipo`) VALUES ('pedro', 0, 1, 'f6e1126cedebf23e1463aee73f9df08783640400', 'pedro', 'Docente')[0m
+  [1m[35m (74.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO `persona` (`usuario_id`, `nombres`, `apellidos`, `fecha_nacimiento`, `ci`, `telefono1`, `telefono2`, `direccion`, `grado_instruccion`, `area`, `subarea`) VALUES (40, 'pedro', 'Rodriguez', '2017-09-27', '25', '04126569878', '02125656987', 'la trinidad', 'Bachiller', 'Computación', 'Computación')[0m
+  [1m[35m (31.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO `usuarioentidad` (`id`, `usuario_id`, `entidad_id`, `escuela_id`, `departamento_id`) VALUES (40, 40, 19, 2, 9)[0m
+  [1m[35m (31.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO `planformacion` (`fecha_inicio`, `fecha_fin`, `activo`, `instructor_id`, `tutor_id`, `adscripcion_docencia`, `adscripcion_investigacion`) VALUES ('2017-10-05', '2019-10-05', 1, 40, 38, 'Escuela de Computacion', 'Centro de Investigación de Comunicaciones de Comunicaciones y Redes (CICORE), Laboratorio ICARO')[0m
+  [1m[35m (37.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO `adecuacion` (`planformacion_id`, `tutor_id`, `fecha_modificacion`, `fecha_creacion`) VALUES (16, 38, '2017-10-05', '2017-10-05')[0m
+  [1m[35m (31.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO `estatus_adecuacion` (`adecuacion_id`, `fecha`, `estatus_id`, `actual`) VALUES (20, '2017-10-04', 6, 1)[0m
+  [1m[35m (28.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mInstructortutor Load (0.4ms)[0m  [1m[34mSELECT  `instructortutor`.* FROM `instructortutor` WHERE `instructortutor`.`instructor_id` = 40 AND `instructortutor`.`tutor_id` = 38 LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[32mINSERT INTO `instructortutor` (`instructor_id`, `tutor_id`, `actual`) VALUES (40, 38, 1)[0m
+  [1m[35m (27.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mPersona Load (0.4ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 38 LIMIT 1[0m
+  [1m[36mAdecuacion Load (0.2ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mPlanformacion Load (0.2ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[32mINSERT INTO `notificacion` (`instructor_id`, `tutor_id`, `adecuacion_id`, `actual`, `mensaje`) VALUES (40, 38, 20, 1, '[2017-10-04] Se le ha asignado el Plan formación de Pedro Rodriguez, recuerde crear la adecuación correspondiente y enviarla.')[0m
+  [1m[35m (30.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[32mINSERT INTO `notificacion` (`instructor_id`, `tutor_id`, `adecuacion_id`, `actual`, `mensaje`) VALUES (40, 38, 20, 2, '[2017-10-04] ¡Bienvenido a FORMINST! Se le ha asignado a  Ana Morales como tutor de su Plan de formación.')[0m
+  [1m[35m (73.0ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mUsuario Load (0.5ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 38 LIMIT 1[0m
+  Rendering action_correo/creacion_de_instructor.html.erb
+  Rendered action_correo/creacion_de_instructor.html.erb (0.7ms)
+ActionCorreo#creacion_de_instructor: processed outbound mail in 331.7ms
+Sent mail to forminst.ciens@gmail.com, ana@ciens.ucv.ve (3359.4ms)
+Date: Wed, 04 Oct 2017 14:41:10 -0400
+From: FORMINST
+To: forminst.ciens@gmail.com, 
+ ana@ciens.ucv.ve
+Message-ID: <59d52b466cada_19b53fe3ecaa48fc3859d@cicore220.mail>
+Subject: =?UTF-8?Q?Nueva_Asignaci=C3=B3n_de_Instructor?=
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content=3D'text/html; charset=3DUTF-8' http-equiv=3D'Content-Ty=
+pe' />
+  </head>
+	<body>
+		<table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0">=
+
+		  <tr>
+		    <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D=
+"0">
+		      <tr>
+		        	<td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a=
+2a2a" style=3D"background-color:#2a2a2a; padding:10px; font-family:Georgi=
+a, 'Times New Roman', Times, serif; color:#43c1d7; font-size:20px;">Nueva=
+ Asignaci=C3=B3n de Instructor</td>
+		      </tr>
+		      <tr>
+		        <td width=3D"1000" align=3D"center" valign=3D"top" style=3D"pad=
+ding:12px; background-color:#ffffff;" bgcolor=3D"#ffffff;"><table width=3D=
+"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"4" style=3D"margin-b=
+ottom:20px;">
+		        </table>
+		          <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadd=
+ing=3D"4" style=3D"margin-bottom:20px;">
+		            <tr>
+		              <td align=3D"left" valign=3D"top" style=3D"font-family:Ve=
+rdana, Geneva, sans-serif; font-size:12px; color:#000000;">
+			              <div style=3D"color:#43c1d7; font-size:19px;"><b>Notific=
+aci=C3=B3n:</b><br>
+			              </div>
+			              <br>
+			              <div style=3D"color:#43c1d7;"><b>[2017-10-04] Se le ha a=
+signado el Plan formaci=C3=B3n de Pedro Rodriguez, recuerde crear la adec=
+uaci=C3=B3n correspondiente y enviarla.</b><br>
+			              </div>
+			              <br>
+			              <div style=3D"color:#6e6e6e;"> Para mayor informaci=C3=B3=
+n, por favor ingrese al Sitio web de FORMINST</div>
+			              <br>
+			              <br>
+		              </td>
+		            </tr>
+		            <tr>
+		              <td align=3D"center" valign=3D"top" style=3D"font-family:=
+Verdana, Geneva, sans-serif; font-size:12px; color:#000000;">
+			              <div style=3D"color:#6e6e6e;"> Universidad Central de Ve=
+nezuela</div>
+			              <div style=3D"color:#6e6e6e;"> Facultad de Ciencias</div=
+>
+			              <div style=3D"color:#6e6e6e;"> Sistema FORMINST</div>
+		              </td>
+		            </tr>
+		          </table>
+		        </table>
+		        </td>
+		      </tr>
+		      <tr>
+		      	<td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a2a=
+2a" style=3D"background-color:#2a2a2a; padding:10px; font-family:Georgia,=
+ 'Times New Roman', Times, serif; color:#43c1d7; font-size:20px;"></td>
+		      </tr>
+		    </table>
+		    <br>
+		    <br>
+		  </tr>
+		</table>
+	</body>
+</html>=
+
+  [1m[36mUsuario Load (0.4ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  Rendering action_correo/creacion_de_instructor.html.erb
+  Rendered action_correo/creacion_de_instructor.html.erb (0.1ms)
+ActionCorreo#creacion_de_instructor: processed outbound mail in 7.5ms
+Sent mail to forminst.ciens@gmail.com, pedro@ciens.ucv.ve (2915.0ms)
+Date: Wed, 04 Oct 2017 14:41:13 -0400
+From: FORMINST
+To: forminst.ciens@gmail.com, 
+ pedro@ciens.ucv.ve
+Message-ID: <59d52b49c1a92_19b53fe3ecaa48fc386df@cicore220.mail>
+Subject: =?UTF-8?Q?=C2=A1Bienvenido_a_FORMINST!?=
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content=3D'text/html; charset=3DUTF-8' http-equiv=3D'Content-Ty=
+pe' />
+  </head>
+	<body>
+		<table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"0">=
+
+		  <tr>
+		    <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D=
+"0">
+		      <tr>
+		        	<td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a=
+2a2a" style=3D"background-color:#2a2a2a; padding:10px; font-family:Georgi=
+a, 'Times New Roman', Times, serif; color:#43c1d7; font-size:20px;">=C2=A1=
+Bienvenido a FORMINST!</td>
+		      </tr>
+		      <tr>
+		        <td width=3D"1000" align=3D"center" valign=3D"top" style=3D"pad=
+ding:12px; background-color:#ffffff;" bgcolor=3D"#ffffff;"><table width=3D=
+"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D"4" style=3D"margin-b=
+ottom:20px;">
+		        </table>
+		          <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadd=
+ing=3D"4" style=3D"margin-bottom:20px;">
+		            <tr>
+		              <td align=3D"left" valign=3D"top" style=3D"font-family:Ve=
+rdana, Geneva, sans-serif; font-size:12px; color:#000000;">
+			              <div style=3D"color:#43c1d7; font-size:19px;"><b>Notific=
+aci=C3=B3n:</b><br>
+			              </div>
+			              <br>
+			              <div style=3D"color:#43c1d7;"><b>[2017-10-04] =C2=A1Bien=
+venido a FORMINST! Se le ha asignado a  Ana Morales como tutor de su Plan=
+ de formaci=C3=B3n.</b><br>
+			              </div>
+			              <br>
+			              <div style=3D"color:#6e6e6e;"> Para mayor informaci=C3=B3=
+n, por favor ingrese al Sitio web de FORMINST</div>
+			              <br>
+			              <br>
+		              </td>
+		            </tr>
+		            <tr>
+		              <td align=3D"center" valign=3D"top" style=3D"font-family:=
+Verdana, Geneva, sans-serif; font-size:12px; color:#000000;">
+			              <div style=3D"color:#6e6e6e;"> Universidad Central de Ve=
+nezuela</div>
+			              <div style=3D"color:#6e6e6e;"> Facultad de Ciencias</div=
+>
+			              <div style=3D"color:#6e6e6e;"> Sistema FORMINST</div>
+		              </td>
+		            </tr>
+		          </table>
+		        </table>
+		        </td>
+		      </tr>
+		      <tr>
+		      	<td colspan=3D"2" align=3D"left" valign=3D"top" bgcolor=3D"#2a2a=
+2a" style=3D"background-color:#2a2a2a; padding:10px; font-family:Georgia,=
+ 'Times New Roman', Times, serif; color:#43c1d7; font-size:20px;"></td>
+		      </tr>
+		    </table>
+		    <br>
+		    <br>
+		  </tr>
+		</table>
+	</body>
+</html>=
+
+Redirected to http://localhost:3000/secretarias
+Completed 302 Found in 7474ms (ActiveRecord: 379.5ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[33mUPDATE `session` SET `data` = 'BAh7DkkiEF9jc3JmX3Rva2VuBjoGRUZJIjFwMFZXYVIzSjFJdUs1bm1xWm5W\nNXdQQmRHNUFxZHNDQm9Yem1vVzRTT1YwPQY7AEZJIg91c3VhcmlvX2lkBjsA\nRmkqSSITbm9tYnJlX3VzdWFyaW8GOwBGSSIbU2VjcmV0YXJpYSBDb21wdXRh\nY2lvbgY7AFRJIhJhZG1pbmlzdHJhZG9yBjsARkZJIgp0dXRvcgY7AEZGSSIP\naW5zdHJ1Y3RvcgY7AEZGSSIMZW50aWRhZAY7AEZUSSINcGVyc29uYXMGOwBG\nWwp7CEkiD3VzdWFyaW9faWQGOwBUaSlJIgxub21icmVzBjsAVEkiElNlY3Jl\ndGFyaWEgSi4GOwBUSSIOYXBlbGxpZG9zBjsAVEkiC1VubyBXLgY7AFR7CEki\nD3VzdWFyaW9faWQGOwBUaTRJIgxub21icmVzBjsAVEkiElNlY3JldGFyaWEg\nSi4GOwBUSSIOYXBlbGxpZG9zBjsAVEkiDkJpb2xvZ8OtYQY7AFR7CEkiD3Vz\ndWFyaW9faWQGOwBUaSpJIgxub21icmVzBjsAVEkiD1NlY3JldGFyaWEGOwBU\nSSIOYXBlbGxpZG9zBjsAVEkiEENvbXB1dGFjaW9uBjsAVHsISSIPdXN1YXJp\nb19pZAY7AFRpK0kiDG5vbWJyZXMGOwBUSSIIYW5hBjsAVEkiDmFwZWxsaWRv\ncwY7AFRJIgxtb3JhbGVzBjsAVHsISSIPdXN1YXJpb19pZAY7AFRpLEkiDG5v\nbWJyZXMGOwBUSSIJcGVwZQY7AFRJIg5hcGVsbGlkb3MGOwBUSSIOUm9kcmln\ndWV6BjsAVEkiCmZsYXNoBjsAVHsHSSIMZGlzY2FyZAY7AFRbAEkiDGZsYXNo\nZXMGOwBUewZJIgxzdWNjZXNzBjsARkkiQVNlIGhhIGNyZWFkbyBlbCBpbnN0\ncnVjdG9yIFBlZHJvIFJvZHJpZ3VleiBkZSBtYW5lcmEgZXhpdG9zYQY7AFQ=\n', `updated_at` = '2017-10-04 18:41:16' WHERE `session`.`id` = 110[0m
+  [1m[35m (66.9ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/secretarias" for ::1 at 2017-10-04 14:41:16 -0400
+Processing by SecretariasController#index as HTML
+  Rendering secretarias/index.html.erb within layouts/ly_inicio_entidad
+  Rendered secretarias/index.html.erb within layouts/ly_inicio_entidad (2.1ms)
+Completed 200 OK in 221ms (Views: 218.7ms | ActiveRecord: 0.3ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[33mUPDATE `session` SET `data` = 'BAh7DUkiEF9jc3JmX3Rva2VuBjoGRUZJIjFwMFZXYVIzSjFJdUs1bm1xWm5W\nNXdQQmRHNUFxZHNDQm9Yem1vVzRTT1YwPQY7AEZJIg91c3VhcmlvX2lkBjsA\nRmkqSSITbm9tYnJlX3VzdWFyaW8GOwBGSSIbU2VjcmV0YXJpYSBDb21wdXRh\nY2lvbgY7AFRJIhJhZG1pbmlzdHJhZG9yBjsARkZJIgp0dXRvcgY7AEZGSSIP\naW5zdHJ1Y3RvcgY7AEZGSSIMZW50aWRhZAY7AEZUSSINcGVyc29uYXMGOwBG\nWwp7CEkiD3VzdWFyaW9faWQGOwBUaSlJIgxub21icmVzBjsAVEkiElNlY3Jl\ndGFyaWEgSi4GOwBUSSIOYXBlbGxpZG9zBjsAVEkiC1VubyBXLgY7AFR7CEki\nD3VzdWFyaW9faWQGOwBUaTRJIgxub21icmVzBjsAVEkiElNlY3JldGFyaWEg\nSi4GOwBUSSIOYXBlbGxpZG9zBjsAVEkiDkJpb2xvZ8OtYQY7AFR7CEkiD3Vz\ndWFyaW9faWQGOwBUaSpJIgxub21icmVzBjsAVEkiD1NlY3JldGFyaWEGOwBU\nSSIOYXBlbGxpZG9zBjsAVEkiEENvbXB1dGFjaW9uBjsAVHsISSIPdXN1YXJp\nb19pZAY7AFRpK0kiDG5vbWJyZXMGOwBUSSIIYW5hBjsAVEkiDmFwZWxsaWRv\ncwY7AFRJIgxtb3JhbGVzBjsAVHsISSIPdXN1YXJpb19pZAY7AFRpLEkiDG5v\nbWJyZXMGOwBUSSIJcGVwZQY7AFRJIg5hcGVsbGlkb3MGOwBUSSIOUm9kcmln\ndWV6BjsAVA==\n', `updated_at` = '2017-10-04 18:41:17' WHERE `session`.`id` = 110[0m
+  [1m[35m (32.7ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/assets/banner.png" for ::1 at 2017-10-04 14:41:17 -0400
+Started GET "/secretarias/logout" for ::1 at 2017-10-04 14:41:39 -0400
+Processing by SecretariasController#logout as HTML
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[31mDELETE FROM `session` WHERE `session`.`id` = 110[0m
+  [1m[35m (90.1ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 153ms (ActiveRecord: 147.2ms)
+
+
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE `session` SET `data` = 'BAh7BkkiGV90dXJib2xpbmtzX2xvY2F0aW9uBjoGRUZJIhtodHRwOi8vbG9j\nYWxob3N0OjMwMDAvBjsAVA==\n' WHERE `session`.`id` = 111[0m
+  [1m[35m (36.8ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/" for ::1 at 2017-10-04 14:41:39 -0400
+Processing by ForminstController#index as HTML
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.2ms)[0m  [1m[31mDELETE FROM `session` WHERE `session`.`id` = 111[0m
+  [1m[35m (59.3ms)[0m  [1m[35mCOMMIT[0m
+  Rendering forminst/index.html.erb within layouts/ec_aplanes
+  Rendered forminst/index.html.erb within layouts/ec_aplanes (1.7ms)
+Completed 200 OK in 301ms (Views: 196.4ms | ActiveRecord: 99.6ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE `session` SET `data` = 'BAh7BkkiEF9jc3JmX3Rva2VuBjoGRUZJIjFIaGtWczBsMExXRG9FY0tYcktp\nazBiT29mSnVHWWpZM0tzTTNoa3M2aGt3PQY7AEY=\n', `updated_at` = '2017-10-04 18:41:40' WHERE `session`.`id` = 112[0m
+  [1m[35m (35.6ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/images/nav.jpg" for ::1 at 2017-10-04 14:41:40 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/images/nav.jpg"):
+  
+actionpack (5.0.6) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.6) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.3) lib/rack/method_override.rb:22:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.6) lib/rails/engine.rb:522:in `call'
+puma (3.10.0) lib/puma/configuration.rb:225:in `call'
+puma (3.10.0) lib/puma/server.rb:605:in `handle_request'
+puma (3.10.0) lib/puma/server.rb:437:in `process_client'
+puma (3.10.0) lib/puma/server.rb:301:in `block in run'
+puma (3.10.0) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  Rendering /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout
+  Rendering /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.1ms)
+  Rendered collection of /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb [18 times] (7.2ms)
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.8ms)
+  Rendering /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (2.6ms)
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (44.2ms)
+Started POST "/forminst/autenticar" for ::1 at 2017-10-04 14:41:45 -0400
+Processing by ForminstController#autenticar as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"xXb/r2E9fImQ7aEZiA4/JlNwSyQAgaG7TyDYeYSpdjXbb+ocKElR6Xj8Y44kppv34Ng3v4bjl4xl4+//z5PweQ==", "correo"=>"ana", "password"=>"[FILTERED]"}
+  [1m[36mUsuario Load (0.4ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`user` = 'ana' LIMIT 1[0m
+  [1m[36mUsuarioentidad Load (1.9ms)[0m  [1m[34mSELECT  `usuarioentidad`.* FROM `usuarioentidad` WHERE `usuarioentidad`.`usuario_id` = 38 LIMIT 1[0m
+  [1m[36mEntidad Load (0.4ms)[0m  [1m[34mSELECT  `entidad`.* FROM `entidad` WHERE `entidad`.`id` = 18 LIMIT 1[0m
+  Rendering forminst/index.html.erb within layouts/ec_aplanes
+  Rendered forminst/index.html.erb within layouts/ec_aplanes (2.0ms)
+Completed 200 OK in 226ms (Views: 218.6ms | ActiveRecord: 3.0ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/forminst/favicon.ico" for ::1 at 2017-10-04 14:41:45 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/forminst/favicon.ico"):
+  
+actionpack (5.0.6) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.6) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.3) lib/rack/method_override.rb:22:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.6) lib/rails/engine.rb:522:in `call'
+puma (3.10.0) lib/puma/configuration.rb:225:in `call'
+puma (3.10.0) lib/puma/server.rb:605:in `handle_request'
+puma (3.10.0) lib/puma/server.rb:437:in `process_client'
+puma (3.10.0) lib/puma/server.rb:301:in `block in run'
+puma (3.10.0) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  Rendering /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout
+  Rendering /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.5ms)
+  Rendered collection of /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb [18 times] (6.2ms)
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.3ms)
+  Rendering /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (10.2ms)
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (55.9ms)
+Started POST "/forminst/autenticar" for ::1 at 2017-10-04 14:41:57 -0400
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/forminst_new1/config/routes.rb:6)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/forminst_new1/config/routes.rb:6)
+Processing by ForminstController#autenticar as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"/FqKHPlxy1PC0uEs80w+6pwTW5mG6rj0nGyJz9rgQ5/iQ5+vsAXmMyrDI7tf5Jo7L7snAgCIjsO2r75JkdrF0w==", "correo"=>"ana", "password"=>"[FILTERED]"}
+  [1m[36mUsuario Load (0.2ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`user` = 'ana' LIMIT 1[0m
+  [1m[36mUsuarioentidad Load (0.3ms)[0m  [1m[34mSELECT  `usuarioentidad`.* FROM `usuarioentidad` WHERE `usuarioentidad`.`usuario_id` = 38 LIMIT 1[0m
+  [1m[36mEntidad Load (0.2ms)[0m  [1m[34mSELECT  `entidad`.* FROM `entidad` WHERE `entidad`.`id` = 18 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `usuarioentidad`.* FROM `usuarioentidad` WHERE `usuarioentidad`.`usuario_id` = 38 LIMIT 1[0m  [["usuario_id", 38], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `entidad`.* FROM `entidad` WHERE `entidad`.`id` = 18 LIMIT 1[0m  [["id", 18], ["LIMIT", 1]]
+  [1m[36mPersona Load (0.3ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 38 LIMIT 1[0m
+Redirected to http://localhost:3000/iniciotutor
+Completed 302 Found in 76ms (ActiveRecord: 5.9ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE `session` SET `data` = 'BAh7DUkiEF9jc3JmX3Rva2VuBjoGRUZJIjFIaGtWczBsMExXRG9FY0tYcktp\nazBiT29mSnVHWWpZM0tzTTNoa3M2aGt3PQY7AEZJIg91c3VhcmlvX2lkBjsA\nRmkrSSITbm9tYnJlX3VzdWFyaW8GOwBGSSIQQW5hIE1vcmFsZXMGOwBUSSIS\nYWRtaW5pc3RyYWRvcgY7AEZGSSIKdHV0b3IGOwBGVEkiD2luc3RydWN0b3IG\nOwBGRkkiDGVudGlkYWQGOwBGRkkiCmZsYXNoBjsAVHsHSSIMZGlzY2FyZAY7\nAFRbAEkiDGZsYXNoZXMGOwBUewZJIgxzdWNjZXNzBjsARkkiHEJpZW52ZW5p\nZG8hIEFuYSBNb3JhbGVzBjsAVA==\n', `updated_at` = '2017-10-04 18:41:57' WHERE `session`.`id` = 112[0m
+  [1m[35m (36.0ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/iniciotutor" for ::1 at 2017-10-04 14:41:58 -0400
+Processing by IniciotutorController#index as HTML
+  [1m[36mNotificacion Load (0.4ms)[0m  [1m[34mSELECT `notificacion`.* FROM `notificacion` WHERE `notificacion`.`tutor_id` = 38[0m
+  Rendering iniciotutor/index.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/index.html.erb within layouts/ly_inicio_tutor (3.0ms)
+Completed 200 OK in 213ms (Views: 197.2ms | ActiveRecord: 0.8ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE `session` SET `data` = 'BAh7DEkiEF9jc3JmX3Rva2VuBjoGRUZJIjFIaGtWczBsMExXRG9FY0tYcktp\nazBiT29mSnVHWWpZM0tzTTNoa3M2aGt3PQY7AEZJIg91c3VhcmlvX2lkBjsA\nRmkrSSITbm9tYnJlX3VzdWFyaW8GOwBGSSIQQW5hIE1vcmFsZXMGOwBUSSIS\nYWRtaW5pc3RyYWRvcgY7AEZGSSIKdHV0b3IGOwBGVEkiD2luc3RydWN0b3IG\nOwBGRkkiDGVudGlkYWQGOwBGRg==\n', `updated_at` = '2017-10-04 18:41:58' WHERE `session`.`id` = 112[0m
+  [1m[35m (36.5ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/assets/banner.png" for ::1 at 2017-10-04 14:41:58 -0400
+Started GET "/assets/glyphicons-halflings-regular.woff2" for ::1 at 2017-10-04 14:41:58 -0400
+Started GET "/iniciotutor/planformacions" for ::1 at 2017-10-04 14:42:01 -0400
+Processing by IniciotutorController#planformacions as HTML
+  [1m[36mPersona Load (0.3ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 38 LIMIT 1[0m
+  [1m[36mPlanformacion Load (0.3ms)[0m  [1m[34mSELECT `planformacion`.* FROM `planformacion` WHERE `planformacion`.`tutor_id` = 38[0m
+  [1m[36mPersona Load (0.4ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 39 LIMIT 1[0m
+  [1m[36mAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 15 LIMIT 1[0m
+  [1m[36mEstatusAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 19 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  [1m[36mPersona Load (0.4ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 40 LIMIT 1[0m
+  [1m[36mAdecuacion Load (0.4ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mEstatusAdecuacion Load (0.2ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  Rendering iniciotutor/planformacions.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/planformacions.html.erb within layouts/ly_inicio_tutor (3.8ms)
+Completed 200 OK in 273ms (Views: 210.2ms | ActiveRecord: 6.9ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Started POST "/iniciotutor/ver_detalles_adecuacion" for ::1 at 2017-10-04 14:42:02 -0400
+Processing by IniciotutorController#ver_detalles_adecuacion as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"UlRYNqmzhEAvwlGQiMk0k+Piz4cYfN1Vl5XHxxrpAwBMTU2F4MepIMfTkwckYZBCUEqzHJ4e62K9VvBBUdOFTA==", "plan_id"=>"16", "editar"=>"no"}
+  [1m[36mPlanformacion Load (0.4ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mUsuario Load (0.2ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mPersona Load (0.2ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 40 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mUsuarioentidad Load (0.2ms)[0m  [1m[34mSELECT  `usuarioentidad`.* FROM `usuarioentidad` WHERE `usuarioentidad`.`usuario_id` = 40 LIMIT 1[0m
+  [1m[36mEscuela Load (0.4ms)[0m  [1m[34mSELECT  `escuela`.* FROM `escuela` WHERE `escuela`.`id` = 2 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 40 LIMIT 1[0m  [["usuario_id", 40], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m  [["id", 40], ["LIMIT", 1]]
+  [1m[36mPersona Load (0.4ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 38 LIMIT 1[0m
+  [1m[36mUsuario Load (0.2ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 38 LIMIT 1[0m
+  [1m[36mAdecuacion Load (0.2ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `usuarioentidad`.* FROM `usuarioentidad` WHERE `usuarioentidad`.`usuario_id` = 40 LIMIT 1[0m  [["usuario_id", 40], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `escuela`.* FROM `escuela` WHERE `escuela`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 40 LIMIT 1[0m  [["usuario_id", 40], ["LIMIT", 1]]
+  Rendering iniciotutor/ver_detalles_adecuacion.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/ver_detalles_adecuacion.html.erb within layouts/ly_inicio_tutor (8.3ms)
+Completed 200 OK in 253ms (Views: 214.0ms | ActiveRecord: 3.0ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[33mUPDATE `session` SET `data` = 'BAh7EEkiEF9jc3JmX3Rva2VuBjoGRUZJIjFIaGtWczBsMExXRG9FY0tYcktp\nazBiT29mSnVHWWpZM0tzTTNoa3M2aGt3PQY7AEZJIg91c3VhcmlvX2lkBjsA\nRmkrSSITbm9tYnJlX3VzdWFyaW8GOwBGSSIQQW5hIE1vcmFsZXMGOwBUSSIS\nYWRtaW5pc3RyYWRvcgY7AEZGSSIKdHV0b3IGOwBGVEkiD2luc3RydWN0b3IG\nOwBGRkkiDGVudGlkYWQGOwBGRkkiDHBsYW5faWQGOwBGSSIHMTYGOwBUSSIL\nZWRpdGFyBjsARkZJIhNpbnN0cnVjdG9yTmFtZQY7AEZJIgpwZWRybwY7AFRJ\nIhJhZGVjdWFjaW9uX2lkBjsARmkZ\n', `updated_at` = '2017-10-04 18:42:02' WHERE `session`.`id` = 112[0m
+  [1m[35m (82.2ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/assets/banner.png" for ::1 at 2017-10-04 14:42:02 -0400
+Started GET "/iniciotutor/detalles_adecuacion2" for ::1 at 2017-10-04 14:42:06 -0400
+Processing by IniciotutorController#detalles_adecuacion2 as HTML
+  [1m[36mPlanformacion Load (0.3ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mUsuario Load (0.3ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mAdecuacionActividad Load (0.9ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 0[0m
+  [1m[36mEstatusAdecuacion Load (0.8ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m  [["adecuacion_id", 20], ["actual", 1], ["LIMIT", 1]]
+  Rendering iniciotutor/detalles_adecuacion2.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/detalles_adecuacion2.html.erb within layouts/ly_inicio_tutor (11.3ms)
+Completed 200 OK in 244ms (Views: 218.2ms | ActiveRecord: 3.9ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/iniciotutor/detalles_adecuacion3" for ::1 at 2017-10-04 14:42:09 -0400
+Processing by IniciotutorController#detalles_adecuacion3 as HTML
+  [1m[36mPlanformacion Load (0.3ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mUsuario Load (0.2ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mEstatusAdecuacion Load (0.4ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mAdecuacionActividad Load (0.4ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 1[0m  [["adecuacion_id", 20], ["semestre", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m  [["adecuacion_id", 20], ["actual", 1], ["LIMIT", 1]]
+  Rendering iniciotutor/detalles_adecuacion3.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/detalles_adecuacion3.html.erb within layouts/ly_inicio_tutor (18.9ms)
+Completed 200 OK in 229ms (Views: 217.1ms | ActiveRecord: 2.1ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/iniciotutor/detalles_adecuacion4" for ::1 at 2017-10-04 14:42:12 -0400
+Processing by IniciotutorController#detalles_adecuacion4 as HTML
+  [1m[36mAdecuacion Load (0.4ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mEstatusAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  [1m[36mPlanformacion Load (0.3ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mUsuario Load (0.2ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mAdecuacionActividad Load (0.3ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 2[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m  [["adecuacion_id", 20], ["actual", 1], ["LIMIT", 1]]
+  Rendering iniciotutor/detalles_adecuacion4.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/detalles_adecuacion4.html.erb within layouts/ly_inicio_tutor (13.2ms)
+Completed 200 OK in 230ms (Views: 220.8ms | ActiveRecord: 1.9ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/iniciotutor/detalles_adecuacion5" for ::1 at 2017-10-04 14:42:13 -0400
+Processing by IniciotutorController#detalles_adecuacion5 as HTML
+  [1m[36mPlanformacion Load (0.4ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mUsuario Load (0.3ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mEstatusAdecuacion Load (0.2ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  [1m[36mAdecuacionActividad Load (0.2ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 3[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m  [["adecuacion_id", 20], ["actual", 1], ["LIMIT", 1]]
+  Rendering iniciotutor/detalles_adecuacion5.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/detalles_adecuacion5.html.erb within layouts/ly_inicio_tutor (13.2ms)
+Completed 200 OK in 237ms (Views: 210.8ms | ActiveRecord: 1.9ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/iniciotutor/detalles_adecuacion3" for ::1 at 2017-10-04 14:42:17 -0400
+Processing by IniciotutorController#detalles_adecuacion3 as HTML
+  [1m[36mPlanformacion Load (0.3ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mUsuario Load (0.4ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mEstatusAdecuacion Load (0.6ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mAdecuacionActividad Load (0.5ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 1[0m  [["adecuacion_id", 20], ["semestre", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m  [["adecuacion_id", 20], ["actual", 1], ["LIMIT", 1]]
+  Rendering iniciotutor/detalles_adecuacion3.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/detalles_adecuacion3.html.erb within layouts/ly_inicio_tutor (20.5ms)
+Completed 200 OK in 255ms (Views: 237.7ms | ActiveRecord: 2.7ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/iniciotutor/detalles_adecuacion4" for ::1 at 2017-10-04 14:42:26 -0400
+Processing by IniciotutorController#detalles_adecuacion4 as HTML
+  [1m[36mAdecuacion Load (0.4ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mEstatusAdecuacion Load (3.2ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  [1m[36mPlanformacion Load (2.1ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mUsuario Load (1.2ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mAdecuacionActividad Load (0.6ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 2[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m  [["adecuacion_id", 20], ["actual", 1], ["LIMIT", 1]]
+  Rendering iniciotutor/detalles_adecuacion4.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/detalles_adecuacion4.html.erb within layouts/ly_inicio_tutor (20.5ms)
+Completed 200 OK in 273ms (Views: 256.2ms | ActiveRecord: 8.0ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Started POST "/iniciotutor/detalles_adecuacion4?class=form-inline" for ::1 at 2017-10-04 14:42:27 -0400
+Processing by IniciotutorController#detalles_adecuacion4 as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"r3p+WcV5hK4Bdew9AQBMRcNCsW+IGkQ51+QdBKig4gGxY2vqjA2pzulkLqqtqOiUcOrN9A54cg79JyqC45pkTQ==", "plan_id"=>"16", "editar"=>"si", "class"=>"form-inline"}
+  [1m[36mAdecuacion Load (0.6ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mEstatusAdecuacion Load (0.5ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  [1m[36mPlanformacion Load (0.3ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mUsuario Load (0.4ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mAdecuacionActividad Load (0.8ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 2[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m  [["adecuacion_id", 20], ["actual", 1], ["LIMIT", 1]]
+  Rendering iniciotutor/detalles_adecuacion4.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/detalles_adecuacion4.html.erb within layouts/ly_inicio_tutor (13.6ms)
+Completed 200 OK in 229ms (Views: 215.2ms | ActiveRecord: 3.0ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/assets/banner.png" for ::1 at 2017-10-04 14:42:27 -0400
+Started POST "/iniciotutor/detalles_adecuacion4?class=form-inline" for ::1 at 2017-10-04 14:42:29 -0400
+Processing by IniciotutorController#detalles_adecuacion4 as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"WC5KBEZHAleiG998cFKHIXyuBE9aOC/FHOZtqj4yO+9GN1+3DzMvN0oKHevc+iPwzwZ41NxaGfI2JVosdQi9ow==", "plan_id"=>"16", "editar"=>"si", "class"=>"form-inline"}
+  [1m[36mAdecuacion Load (0.5ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mEstatusAdecuacion Load (0.8ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  [1m[36mPlanformacion Load (0.5ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mUsuario Load (0.3ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mAdecuacionActividad Load (0.3ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 2[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m  [["adecuacion_id", 20], ["actual", 1], ["LIMIT", 1]]
+  Rendering iniciotutor/detalles_adecuacion4.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/detalles_adecuacion4.html.erb within layouts/ly_inicio_tutor (14.4ms)
+Completed 200 OK in 236ms (Views: 225.7ms | ActiveRecord: 2.8ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/assets/banner.png" for ::1 at 2017-10-04 14:42:29 -0400
+Started POST "/iniciotutor/detalles_adecuacion4?class=form-inline" for ::1 at 2017-10-04 14:42:30 -0400
+Processing by IniciotutorController#detalles_adecuacion4 as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"UQ333isTh3Efdwh2UzzDyh2QMBgJh0i9ycISM0EwqypPFOJtYmeqEfdmyuH/lGcbrjhMg4/lforjASW1CgotZg==", "plan_id"=>"16", "editar"=>"si", "class"=>"form-inline"}
+  [1m[36mAdecuacion Load (1.4ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mEstatusAdecuacion Load (0.4ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  [1m[36mPlanformacion Load (0.3ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mUsuario Load (0.6ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mAdecuacionActividad Load (0.9ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 2[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m  [["adecuacion_id", 20], ["actual", 1], ["LIMIT", 1]]
+  Rendering iniciotutor/detalles_adecuacion4.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/detalles_adecuacion4.html.erb within layouts/ly_inicio_tutor (16.8ms)
+Completed 200 OK in 232ms (Views: 218.7ms | ActiveRecord: 4.2ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/assets/banner.png" for ::1 at 2017-10-04 14:42:30 -0400
+Started POST "/iniciotutor/detalles_adecuacion4?class=form-inline" for ::1 at 2017-10-04 14:42:30 -0400
+Processing by IniciotutorController#detalles_adecuacion4 as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uIexLlyqXUh7z8yfyqp7C6/UcyyNuik1Y506A2yoUjM+wt38AaEFcn+/aXTgg09nRctVzRU3pP/TUNuRognBA==", "plan_id"=>"16", "editar"=>"si", "class"=>"form-inline"}
+  [1m[36mAdecuacion Load (0.5ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mEstatusAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  [1m[36mPlanformacion Load (0.2ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mUsuario Load (0.2ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mAdecuacionActividad Load (0.6ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 2[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m  [["adecuacion_id", 20], ["actual", 1], ["LIMIT", 1]]
+  Rendering iniciotutor/detalles_adecuacion4.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/detalles_adecuacion4.html.erb within layouts/ly_inicio_tutor (14.3ms)
+Started POST "/iniciotutor/detalles_adecuacion4?class=form-inline" for ::1 at 2017-10-04 14:42:30 -0400
+Processing by IniciotutorController#detalles_adecuacion4 as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uIexLlyqXUh7z8yfyqp7C6/UcyyNuik1Y506A2yoUjM+wt38AaEFcn+/aXTgg09nRctVzRU3pP/TUNuRognBA==", "plan_id"=>"16", "editar"=>"si", "class"=>"form-inline"}
+  [1m[36mAdecuacion Load (6.7ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mEstatusAdecuacion Load (4.8ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  [1m[36mPlanformacion Load (1.6ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m  [["id", 16], ["LIMIT", 1]]
+Completed 200 OK in 275ms (Views: 263.3ms | ActiveRecord: 2.5ms)
+
+
+  [1m[36mUsuario Load (4.6ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[35m (0.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mAdecuacionActividad Load (1.0ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 2[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m  [["adecuacion_id", 20], ["actual", 1], ["LIMIT", 1]]
+  Rendering iniciotutor/detalles_adecuacion4.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/detalles_adecuacion4.html.erb within layouts/ly_inicio_tutor (14.9ms)
+Started POST "/iniciotutor/detalles_adecuacion4?class=form-inline" for ::1 at 2017-10-04 14:42:31 -0400
+Processing by IniciotutorController#detalles_adecuacion4 as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uIexLlyqXUh7z8yfyqp7C6/UcyyNuik1Y506A2yoUjM+wt38AaEFcn+/aXTgg09nRctVzRU3pP/TUNuRognBA==", "plan_id"=>"16", "editar"=>"si", "class"=>"form-inline"}
+  [1m[36mAdecuacion Load (2.5ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mEstatusAdecuacion Load (2.4ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  [1m[36mPlanformacion Load (2.4ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mUsuario Load (4.4ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mAdecuacionActividad Load (1.8ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 2[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m  [["adecuacion_id", 20], ["actual", 1], ["LIMIT", 1]]
+  Rendering iniciotutor/detalles_adecuacion4.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/detalles_adecuacion4.html.erb within layouts/ly_inicio_tutor (14.8ms)
+Completed 200 OK in 507ms (Views: 468.7ms | ActiveRecord: 21.7ms)
+
+
+  [1m[35m (3.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (14.9ms)[0m  [1m[35mCOMMIT[0m
+Started POST "/iniciotutor/detalles_adecuacion4?class=form-inline" for ::1 at 2017-10-04 14:42:31 -0400
+Processing by IniciotutorController#detalles_adecuacion4 as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"0uIexLlyqXUh7z8yfyqp7C6/UcyyNuik1Y506A2yoUjM+wt38AaEFcn+/aXTgg09nRctVzRU3pP/TUNuRognBA==", "plan_id"=>"16", "editar"=>"si", "class"=>"form-inline"}
+  [1m[36mAdecuacion Load (3.1ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mEstatusAdecuacion Load (3.1ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  [1m[36mPlanformacion Load (3.2ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mUsuario Load (3.0ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mAdecuacionActividad Load (1.6ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 2[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m  [["adecuacion_id", 20], ["actual", 1], ["LIMIT", 1]]
+  Rendering iniciotutor/detalles_adecuacion4.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/detalles_adecuacion4.html.erb within layouts/ly_inicio_tutor (15.2ms)
+Completed 200 OK in 555ms (Views: 516.7ms | ActiveRecord: 16.6ms)
+
+
+  [1m[35m (3.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCOMMIT[0m
+Completed 200 OK in 340ms (Views: 295.0ms | ActiveRecord: 20.8ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/assets/banner.png" for ::1 at 2017-10-04 14:42:31 -0400
+Started GET "/iniciotutor/detalles_adecuacion5" for ::1 at 2017-10-04 14:42:35 -0400
+Processing by IniciotutorController#detalles_adecuacion5 as HTML
+  [1m[36mPlanformacion Load (0.3ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mUsuario Load (0.3ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mEstatusAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  [1m[36mAdecuacionActividad Load (1.4ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 3[0m
+  [1m[36mCACHE (0.4ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m  [["adecuacion_id", 20], ["actual", 1], ["LIMIT", 1]]
+  Rendering iniciotutor/detalles_adecuacion5.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/detalles_adecuacion5.html.erb within layouts/ly_inicio_tutor (16.4ms)
+Completed 200 OK in 246ms (Views: 234.2ms | ActiveRecord: 3.3ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Started POST "/iniciotutor/detalles_adecuacion3?class=form-inline" for ::1 at 2017-10-04 14:42:36 -0400
+Processing by IniciotutorController#detalles_adecuacion3 as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"nJ02NkJ+H+7+VSqFd6pDwIufgdpEu4WKvkqu7BxGYVuChCOFCwoyjhZE6BLbAucRODf9QcLZs72UiZlqV3znFw==", "plan_id"=>"16", "editar"=>"si", "class"=>"form-inline"}
+  [1m[36mPlanformacion Load (0.5ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mPersona Load (3.5ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 40 LIMIT 1[0m
+  [1m[36mAdecuacion Load (0.5ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mUsuario Load (0.3ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m  [["planformacion_id", 16], ["LIMIT", 1]]
+  [1m[36mEstatusAdecuacion Load (0.9ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  [1m[36mPlanformacion Load (0.3ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mAdecuacionActividad Load (0.3ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 1[0m  [["adecuacion_id", 20], ["semestre", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m  [["adecuacion_id", 20], ["actual", 1], ["LIMIT", 1]]
+  Rendering iniciotutor/detalles_adecuacion3.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/detalles_adecuacion3.html.erb within layouts/ly_inicio_tutor (15.8ms)
+Completed 200 OK in 265ms (Views: 243.1ms | ActiveRecord: 6.8ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE `session` SET `data` = 'BAh7EEkiEF9jc3JmX3Rva2VuBjoGRUZJIjFIaGtWczBsMExXRG9FY0tYcktp\nazBiT29mSnVHWWpZM0tzTTNoa3M2aGt3PQY7AEZJIg91c3VhcmlvX2lkBjsA\nRmkrSSITbm9tYnJlX3VzdWFyaW8GOwBGSSIQQW5hIE1vcmFsZXMGOwBUSSIS\nYWRtaW5pc3RyYWRvcgY7AEZGSSIKdHV0b3IGOwBGVEkiD2luc3RydWN0b3IG\nOwBGRkkiDGVudGlkYWQGOwBGRkkiDHBsYW5faWQGOwBGaRVJIgtlZGl0YXIG\nOwBGVEkiE2luc3RydWN0b3JOYW1lBjsARkkiCnBlZHJvBjsAVEkiEmFkZWN1\nYWNpb25faWQGOwBGaRk=\n', `updated_at` = '2017-10-04 18:42:37' WHERE `session`.`id` = 112[0m
+  [1m[35m (86.3ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/assets/banner.png" for ::1 at 2017-10-04 14:42:37 -0400
+Started GET "/assets/glyphicons-halflings-regular.woff2" for ::1 at 2017-10-04 14:42:37 -0400
+Started GET "/iniciotutor/detalles_adecuacion6" for ::1 at 2017-10-04 14:49:02 -0400
+Processing by IniciotutorController#detalles_adecuacion6 as HTML
+  [1m[36mPlanformacion Load (0.2ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mUsuario Load (0.2ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mEstatusAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  [1m[36mAdecuacionActividad Load (0.2ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 4[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m  [["adecuacion_id", 20], ["actual", 1], ["LIMIT", 1]]
+  Rendering iniciotutor/detalles_adecuacion6.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/detalles_adecuacion6.html.erb within layouts/ly_inicio_tutor (12.7ms)
+Completed 200 OK in 246ms (Views: 223.3ms | ActiveRecord: 1.5ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/iniciotutor/planformacions" for ::1 at 2017-10-04 14:49:04 -0400
+Processing by IniciotutorController#planformacions as HTML
+  [1m[36mPersona Load (0.3ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 38 LIMIT 1[0m
+  [1m[36mPlanformacion Load (0.3ms)[0m  [1m[34mSELECT `planformacion`.* FROM `planformacion` WHERE `planformacion`.`tutor_id` = 38[0m
+  [1m[36mPersona Load (0.6ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 39 LIMIT 1[0m
+  [1m[36mAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 15 LIMIT 1[0m
+  [1m[36mEstatusAdecuacion Load (0.4ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 19 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  [1m[36mPersona Load (1.5ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 40 LIMIT 1[0m
+  [1m[36mAdecuacion Load (2.0ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mEstatusAdecuacion Load (1.2ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  Rendering iniciotutor/planformacions.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/planformacions.html.erb within layouts/ly_inicio_tutor (4.4ms)
+Completed 200 OK in 243ms (Views: 227.1ms | ActiveRecord: 7.1ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE `session` SET `data` = 'BAh7D0kiEF9jc3JmX3Rva2VuBjoGRUZJIjFIaGtWczBsMExXRG9FY0tYcktp\nazBiT29mSnVHWWpZM0tzTTNoa3M2aGt3PQY7AEZJIg91c3VhcmlvX2lkBjsA\nRmkrSSITbm9tYnJlX3VzdWFyaW8GOwBGSSIQQW5hIE1vcmFsZXMGOwBUSSIS\nYWRtaW5pc3RyYWRvcgY7AEZGSSIKdHV0b3IGOwBGVEkiD2luc3RydWN0b3IG\nOwBGRkkiDGVudGlkYWQGOwBGRkkiDHBsYW5faWQGOwBGaRVJIgtlZGl0YXIG\nOwBGVEkiE2luc3RydWN0b3JOYW1lBjsARkkiCnBlZHJvBjsAVA==\n', `updated_at` = '2017-10-04 18:49:05' WHERE `session`.`id` = 112[0m
+  [1m[35m (65.7ms)[0m  [1m[35mCOMMIT[0m
+Started POST "/iniciotutor/ver_detalles_adecuacion" for ::1 at 2017-10-04 14:49:06 -0400
+Processing by IniciotutorController#ver_detalles_adecuacion as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"PX0siuVHapf21Qztn+dk+fYhpviqam+7vPGCJaV4bnAjZDk5rDNH9x7EznozT8AoRYnaYywIWYyWMrWj7kLoPA==", "plan_id"=>"16", "editar"=>"no"}
+  [1m[36mPlanformacion Load (2.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mUsuario Load (0.3ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mPersona Load (0.3ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 40 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mUsuarioentidad Load (0.4ms)[0m  [1m[34mSELECT  `usuarioentidad`.* FROM `usuarioentidad` WHERE `usuarioentidad`.`usuario_id` = 40 LIMIT 1[0m
+  [1m[36mEscuela Load (0.5ms)[0m  [1m[34mSELECT  `escuela`.* FROM `escuela` WHERE `escuela`.`id` = 2 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 40 LIMIT 1[0m  [["usuario_id", 40], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m  [["id", 40], ["LIMIT", 1]]
+  [1m[36mPersona Load (0.5ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 38 LIMIT 1[0m
+  [1m[36mUsuario Load (0.2ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 38 LIMIT 1[0m
+  [1m[36mAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `usuarioentidad`.* FROM `usuarioentidad` WHERE `usuarioentidad`.`usuario_id` = 40 LIMIT 1[0m  [["usuario_id", 40], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `escuela`.* FROM `escuela` WHERE `escuela`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 40 LIMIT 1[0m  [["usuario_id", 40], ["LIMIT", 1]]
+  Rendering iniciotutor/ver_detalles_adecuacion.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/ver_detalles_adecuacion.html.erb within layouts/ly_inicio_tutor (8.3ms)
+Completed 200 OK in 244ms (Views: 223.9ms | ActiveRecord: 4.9ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[33mUPDATE `session` SET `data` = 'BAh7EEkiEF9jc3JmX3Rva2VuBjoGRUZJIjFIaGtWczBsMExXRG9FY0tYcktp\nazBiT29mSnVHWWpZM0tzTTNoa3M2aGt3PQY7AEZJIg91c3VhcmlvX2lkBjsA\nRmkrSSITbm9tYnJlX3VzdWFyaW8GOwBGSSIQQW5hIE1vcmFsZXMGOwBUSSIS\nYWRtaW5pc3RyYWRvcgY7AEZGSSIKdHV0b3IGOwBGVEkiD2luc3RydWN0b3IG\nOwBGRkkiDGVudGlkYWQGOwBGRkkiDHBsYW5faWQGOwBGSSIHMTYGOwBUSSIL\nZWRpdGFyBjsARkZJIhNpbnN0cnVjdG9yTmFtZQY7AEZJIgpwZWRybwY7AFRJ\nIhJhZGVjdWFjaW9uX2lkBjsARmkZ\n', `updated_at` = '2017-10-04 18:49:06' WHERE `session`.`id` = 112[0m
+  [1m[35m (75.9ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/assets/banner.png" for ::1 at 2017-10-04 14:49:07 -0400
+Started GET "/iniciotutor/detalles_adecuacion2" for ::1 at 2017-10-04 14:49:09 -0400
+Processing by IniciotutorController#detalles_adecuacion2 as HTML
+  [1m[36mPlanformacion Load (0.3ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mUsuario Load (0.2ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mAdecuacion Load (0.4ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mAdecuacionActividad Load (0.3ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 0[0m
+  [1m[36mEstatusAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m  [["adecuacion_id", 20], ["actual", 1], ["LIMIT", 1]]
+  Rendering iniciotutor/detalles_adecuacion2.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/detalles_adecuacion2.html.erb within layouts/ly_inicio_tutor (10.3ms)
+Completed 200 OK in 229ms (Views: 219.3ms | ActiveRecord: 1.8ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/iniciotutor/detalles_adecuacion3" for ::1 at 2017-10-04 14:49:11 -0400
+Processing by IniciotutorController#detalles_adecuacion3 as HTML
+  [1m[36mPlanformacion Load (0.4ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mUsuario Load (0.7ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mAdecuacion Load (0.5ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mEstatusAdecuacion Load (0.8ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mAdecuacionActividad Load (0.3ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 1[0m  [["adecuacion_id", 20], ["semestre", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m  [["adecuacion_id", 20], ["actual", 1], ["LIMIT", 1]]
+  Rendering iniciotutor/detalles_adecuacion3.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/detalles_adecuacion3.html.erb within layouts/ly_inicio_tutor (16.1ms)
+Completed 200 OK in 242ms (Views: 230.6ms | ActiveRecord: 3.1ms)
+
+
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/iniciotutor/detalles_adecuacion4" for ::1 at 2017-10-04 14:49:15 -0400
+Processing by IniciotutorController#detalles_adecuacion4 as HTML
+  [1m[36mAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mEstatusAdecuacion Load (1.0ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  [1m[36mPlanformacion Load (0.3ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mUsuario Load (0.2ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mAdecuacionActividad Load (0.3ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 2[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m  [["adecuacion_id", 20], ["actual", 1], ["LIMIT", 1]]
+  Rendering iniciotutor/detalles_adecuacion4.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/detalles_adecuacion4.html.erb within layouts/ly_inicio_tutor (13.3ms)
+Completed 200 OK in 231ms (Views: 219.1ms | ActiveRecord: 2.5ms)
+
+
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Started POST "/iniciotutor/detalles_adecuacion4?class=form-inline" for ::1 at 2017-10-04 14:49:17 -0400
+Processing by IniciotutorController#detalles_adecuacion4 as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"lckMAuNYNE2ZtUq4s1NWqk0fPXLRRiQxjk5BEb0GhtWL0BmxqiwZLXGkiC8f+/J7/rdB6VckEgakjXaX9jwAmQ==", "plan_id"=>"16", "editar"=>"si", "class"=>"form-inline"}
+  [1m[36mAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mEstatusAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  [1m[36mPlanformacion Load (0.4ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mUsuario Load (0.2ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mAdecuacionActividad Load (0.2ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 2[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m  [["adecuacion_id", 20], ["actual", 1], ["LIMIT", 1]]
+  Rendering iniciotutor/detalles_adecuacion4.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/detalles_adecuacion4.html.erb within layouts/ly_inicio_tutor (13.3ms)
+Completed 200 OK in 241ms (Views: 227.8ms | ActiveRecord: 2.6ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/assets/banner.png" for ::1 at 2017-10-04 14:49:18 -0400
+Started GET "/iniciotutor/detalles_adecuacion5" for ::1 at 2017-10-04 14:49:19 -0400
+Processing by IniciotutorController#detalles_adecuacion5 as HTML
+  [1m[36mPlanformacion Load (0.3ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mUsuario Load (0.3ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mAdecuacion Load (0.4ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mEstatusAdecuacion Load (0.4ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  [1m[36mAdecuacionActividad Load (0.3ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 3[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m  [["adecuacion_id", 20], ["actual", 1], ["LIMIT", 1]]
+  Rendering iniciotutor/detalles_adecuacion5.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/detalles_adecuacion5.html.erb within layouts/ly_inicio_tutor (16.6ms)
+Completed 200 OK in 225ms (Views: 216.0ms | ActiveRecord: 1.9ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/iniciotutor/detalles_adecuacion6" for ::1 at 2017-10-04 14:49:21 -0400
+Processing by IniciotutorController#detalles_adecuacion6 as HTML
+  [1m[36mPlanformacion Load (0.4ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mUsuario Load (0.3ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mEstatusAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  [1m[36mAdecuacionActividad Load (0.3ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 4[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m  [["adecuacion_id", 20], ["actual", 1], ["LIMIT", 1]]
+  Rendering iniciotutor/detalles_adecuacion6.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/detalles_adecuacion6.html.erb within layouts/ly_inicio_tutor (13.0ms)
+Completed 200 OK in 225ms (Views: 215.4ms | ActiveRecord: 2.2ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/iniciotutor/detalles_adecuacion5" for ::1 at 2017-10-04 14:49:22 -0400
+Processing by IniciotutorController#detalles_adecuacion5 as HTML
+  [1m[36mPlanformacion Load (1.1ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mUsuario Load (2.5ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mAdecuacion Load (0.4ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mEstatusAdecuacion Load (0.4ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  [1m[36mAdecuacionActividad Load (1.4ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 3[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m  [["adecuacion_id", 20], ["actual", 1], ["LIMIT", 1]]
+  Rendering iniciotutor/detalles_adecuacion5.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/detalles_adecuacion5.html.erb within layouts/ly_inicio_tutor (27.9ms)
+Completed 200 OK in 265ms (Views: 240.0ms | ActiveRecord: 6.6ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+Started POST "/iniciotutor/detalles_adecuacion3?class=form-inline" for ::1 at 2017-10-04 14:49:23 -0400
+Processing by IniciotutorController#detalles_adecuacion3 as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"FY1XH0RFfoPBx6RZSFCeDi7GAw3Xdqi3uIQetV3NrIwLlEKsDTFT4ynWZs7k+DrfnW5/llEUnoCSRykzFvcqwA==", "plan_id"=>"16", "editar"=>"si", "class"=>"form-inline"}
+  [1m[36mPlanformacion Load (1.4ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mPersona Load (0.4ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 40 LIMIT 1[0m
+  [1m[36mAdecuacion Load (0.2ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mUsuario Load (0.3ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m  [["planformacion_id", 16], ["LIMIT", 1]]
+  [1m[36mEstatusAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  [1m[36mPlanformacion Load (0.2ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mAdecuacionActividad Load (0.2ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 1[0m  [["adecuacion_id", 20], ["semestre", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m  [["adecuacion_id", 20], ["actual", 1], ["LIMIT", 1]]
+  Rendering iniciotutor/detalles_adecuacion3.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/detalles_adecuacion3.html.erb within layouts/ly_inicio_tutor (17.1ms)
+Completed 200 OK in 237ms (Views: 222.1ms | ActiveRecord: 3.5ms)
+
+
+  [1m[35m (0.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE `session` SET `data` = 'BAh7EEkiEF9jc3JmX3Rva2VuBjoGRUZJIjFIaGtWczBsMExXRG9FY0tYcktp\nazBiT29mSnVHWWpZM0tzTTNoa3M2aGt3PQY7AEZJIg91c3VhcmlvX2lkBjsA\nRmkrSSITbm9tYnJlX3VzdWFyaW8GOwBGSSIQQW5hIE1vcmFsZXMGOwBUSSIS\nYWRtaW5pc3RyYWRvcgY7AEZGSSIKdHV0b3IGOwBGVEkiD2luc3RydWN0b3IG\nOwBGRkkiDGVudGlkYWQGOwBGRkkiDHBsYW5faWQGOwBGaRVJIgtlZGl0YXIG\nOwBGVEkiE2luc3RydWN0b3JOYW1lBjsARkkiCnBlZHJvBjsAVEkiEmFkZWN1\nYWNpb25faWQGOwBGaRk=\n', `updated_at` = '2017-10-04 18:49:23' WHERE `session`.`id` = 112[0m
+  [1m[35m (65.7ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/assets/banner.png" for ::1 at 2017-10-04 14:49:24 -0400
+Started GET "/assets/glyphicons-halflings-regular.woff2" for ::1 at 2017-10-04 14:49:24 -0400
+Started GET "/iniciotutor/planformacions" for ::1 at 2017-10-04 14:55:15 -0400
+Processing by IniciotutorController#planformacions as HTML
+  [1m[36mPersona Load (0.4ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 38 LIMIT 1[0m
+  [1m[36mPlanformacion Load (0.3ms)[0m  [1m[34mSELECT `planformacion`.* FROM `planformacion` WHERE `planformacion`.`tutor_id` = 38[0m
+  [1m[36mPersona Load (0.3ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 39 LIMIT 1[0m
+  [1m[36mAdecuacion Load (0.4ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 15 LIMIT 1[0m
+  [1m[36mEstatusAdecuacion Load (0.4ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 19 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  [1m[36mPersona Load (0.3ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 40 LIMIT 1[0m
+  [1m[36mAdecuacion Load (0.4ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mEstatusAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  Rendering iniciotutor/planformacions.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/planformacions.html.erb within layouts/ly_inicio_tutor (4.4ms)
+Completed 200 OK in 223ms (Views: 208.3ms | ActiveRecord: 3.3ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[33mUPDATE `session` SET `data` = 'BAh7D0kiEF9jc3JmX3Rva2VuBjoGRUZJIjFIaGtWczBsMExXRG9FY0tYcktp\nazBiT29mSnVHWWpZM0tzTTNoa3M2aGt3PQY7AEZJIg91c3VhcmlvX2lkBjsA\nRmkrSSITbm9tYnJlX3VzdWFyaW8GOwBGSSIQQW5hIE1vcmFsZXMGOwBUSSIS\nYWRtaW5pc3RyYWRvcgY7AEZGSSIKdHV0b3IGOwBGVEkiD2luc3RydWN0b3IG\nOwBGRkkiDGVudGlkYWQGOwBGRkkiDHBsYW5faWQGOwBGaRVJIgtlZGl0YXIG\nOwBGVEkiE2luc3RydWN0b3JOYW1lBjsARkkiCnBlZHJvBjsAVA==\n', `updated_at` = '2017-10-04 18:55:15' WHERE `session`.`id` = 112[0m
+  [1m[35m (61.1ms)[0m  [1m[35mCOMMIT[0m
+Started POST "/iniciotutor/ver_detalles_adecuacion" for ::1 at 2017-10-04 14:55:17 -0400
+Processing by IniciotutorController#ver_detalles_adecuacion as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"6MpRc/vx9fmhbU8npJHoIaxPrIT22ap2LqzAJR4QH8D200TAsoXYmUl8jbAIOUzwH+fQH3C7nEEEb/ejVSqZjA==", "plan_id"=>"16", "editar"=>"no"}
+  [1m[36mPlanformacion Load (0.3ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mUsuario Load (1.1ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mPersona Load (0.6ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 40 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mUsuarioentidad Load (0.4ms)[0m  [1m[34mSELECT  `usuarioentidad`.* FROM `usuarioentidad` WHERE `usuarioentidad`.`usuario_id` = 40 LIMIT 1[0m
+  [1m[36mEscuela Load (0.3ms)[0m  [1m[34mSELECT  `escuela`.* FROM `escuela` WHERE `escuela`.`id` = 2 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 40 LIMIT 1[0m  [["usuario_id", 40], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m  [["id", 40], ["LIMIT", 1]]
+  [1m[36mPersona Load (0.9ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 38 LIMIT 1[0m
+  [1m[36mUsuario Load (0.5ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 38 LIMIT 1[0m
+  [1m[36mAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `usuarioentidad`.* FROM `usuarioentidad` WHERE `usuarioentidad`.`usuario_id` = 40 LIMIT 1[0m  [["usuario_id", 40], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `escuela`.* FROM `escuela` WHERE `escuela`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 40 LIMIT 1[0m  [["usuario_id", 40], ["LIMIT", 1]]
+  Rendering iniciotutor/ver_detalles_adecuacion.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/ver_detalles_adecuacion.html.erb within layouts/ly_inicio_tutor (10.2ms)
+Completed 200 OK in 240ms (Views: 222.8ms | ActiveRecord: 4.9ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[33mUPDATE `session` SET `data` = 'BAh7EEkiEF9jc3JmX3Rva2VuBjoGRUZJIjFIaGtWczBsMExXRG9FY0tYcktp\nazBiT29mSnVHWWpZM0tzTTNoa3M2aGt3PQY7AEZJIg91c3VhcmlvX2lkBjsA\nRmkrSSITbm9tYnJlX3VzdWFyaW8GOwBGSSIQQW5hIE1vcmFsZXMGOwBUSSIS\nYWRtaW5pc3RyYWRvcgY7AEZGSSIKdHV0b3IGOwBGVEkiD2luc3RydWN0b3IG\nOwBGRkkiDGVudGlkYWQGOwBGRkkiDHBsYW5faWQGOwBGSSIHMTYGOwBUSSIL\nZWRpdGFyBjsARkZJIhNpbnN0cnVjdG9yTmFtZQY7AEZJIgpwZWRybwY7AFRJ\nIhJhZGVjdWFjaW9uX2lkBjsARmkZ\n', `updated_at` = '2017-10-04 18:55:17' WHERE `session`.`id` = 112[0m
+  [1m[35m (72.5ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/assets/banner.png" for ::1 at 2017-10-04 14:55:17 -0400
+Started GET "/iniciotutor/detalles_adecuacion2" for ::1 at 2017-10-04 14:55:19 -0400
+Processing by IniciotutorController#detalles_adecuacion2 as HTML
+  [1m[36mPlanformacion Load (0.3ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mUsuario Load (0.3ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mAdecuacion Load (0.6ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mAdecuacionActividad Load (0.3ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 0[0m
+  [1m[36mEstatusAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m  [["adecuacion_id", 20], ["actual", 1], ["LIMIT", 1]]
+  Rendering iniciotutor/detalles_adecuacion2.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/detalles_adecuacion2.html.erb within layouts/ly_inicio_tutor (12.6ms)
+Completed 200 OK in 238ms (Views: 229.4ms | ActiveRecord: 2.1ms)
+
+
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/iniciotutor/detalles_adecuacion3" for ::1 at 2017-10-04 14:55:22 -0400
+Processing by IniciotutorController#detalles_adecuacion3 as HTML
+  [1m[36mPlanformacion Load (0.4ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mUsuario Load (0.7ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mAdecuacion Load (0.7ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mEstatusAdecuacion Load (0.8ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mAdecuacionActividad Load (0.6ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 1[0m  [["adecuacion_id", 20], ["semestre", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m  [["adecuacion_id", 20], ["actual", 1], ["LIMIT", 1]]
+  Rendering iniciotutor/detalles_adecuacion3.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/detalles_adecuacion3.html.erb within layouts/ly_inicio_tutor (15.4ms)
+Completed 200 OK in 238ms (Views: 224.9ms | ActiveRecord: 3.6ms)
+
+
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/iniciotutor/detalles_adecuacion6" for ::1 at 2017-10-04 14:55:23 -0400
+Processing by IniciotutorController#detalles_adecuacion6 as HTML
+  [1m[36mPlanformacion Load (0.2ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mUsuario Load (0.2ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mEstatusAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  [1m[36mAdecuacionActividad Load (0.3ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 4[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m  [["adecuacion_id", 20], ["actual", 1], ["LIMIT", 1]]
+  Rendering iniciotutor/detalles_adecuacion6.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/detalles_adecuacion6.html.erb within layouts/ly_inicio_tutor (15.7ms)
+Completed 200 OK in 221ms (Views: 210.7ms | ActiveRecord: 1.8ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Started POST "/iniciotutor/detalles_adecuacion3?class=form-inline" for ::1 at 2017-10-04 14:55:25 -0400
+Processing by IniciotutorController#detalles_adecuacion3 as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"WqTD38OqdkhPutm68dj6Cst13cKkZS/gpPhGSFMoQrdEvdZsit5bKKerGy1dcF7beN2hWSIHGdeOO3HOGBLE+w==", "plan_id"=>"16", "editar"=>"si", "class"=>"form-inline"}
+  [1m[36mPlanformacion Load (0.3ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mPersona Load (0.4ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 40 LIMIT 1[0m
+  [1m[36mAdecuacion Load (0.4ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mUsuario Load (0.3ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m  [["planformacion_id", 16], ["LIMIT", 1]]
+  [1m[36mEstatusAdecuacion Load (0.4ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  [1m[36mPlanformacion Load (0.2ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mAdecuacionActividad Load (0.2ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 1[0m  [["adecuacion_id", 20], ["semestre", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m  [["adecuacion_id", 20], ["actual", 1], ["LIMIT", 1]]
+  Rendering iniciotutor/detalles_adecuacion3.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/detalles_adecuacion3.html.erb within layouts/ly_inicio_tutor (24.3ms)
+Completed 200 OK in 235ms (Views: 220.9ms | ActiveRecord: 2.7ms)
+
+
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE `session` SET `data` = 'BAh7EEkiEF9jc3JmX3Rva2VuBjoGRUZJIjFIaGtWczBsMExXRG9FY0tYcktp\nazBiT29mSnVHWWpZM0tzTTNoa3M2aGt3PQY7AEZJIg91c3VhcmlvX2lkBjsA\nRmkrSSITbm9tYnJlX3VzdWFyaW8GOwBGSSIQQW5hIE1vcmFsZXMGOwBUSSIS\nYWRtaW5pc3RyYWRvcgY7AEZGSSIKdHV0b3IGOwBGVEkiD2luc3RydWN0b3IG\nOwBGRkkiDGVudGlkYWQGOwBGRkkiDHBsYW5faWQGOwBGaRVJIgtlZGl0YXIG\nOwBGVEkiE2luc3RydWN0b3JOYW1lBjsARkkiCnBlZHJvBjsAVEkiEmFkZWN1\nYWNpb25faWQGOwBGaRk=\n', `updated_at` = '2017-10-04 18:55:25' WHERE `session`.`id` = 112[0m
+  [1m[35m (45.6ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/assets/banner.png" for ::1 at 2017-10-04 14:55:25 -0400
+Started GET "/assets/glyphicons-halflings-regular.woff2" for ::1 at 2017-10-04 14:55:26 -0400
+Started GET "/iniciotutor/planformacions" for ::1 at 2017-10-04 14:55:27 -0400
+Processing by IniciotutorController#planformacions as HTML
+  [1m[36mPersona Load (0.3ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 38 LIMIT 1[0m
+  [1m[36mPlanformacion Load (0.3ms)[0m  [1m[34mSELECT `planformacion`.* FROM `planformacion` WHERE `planformacion`.`tutor_id` = 38[0m
+  [1m[36mPersona Load (0.2ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 39 LIMIT 1[0m
+  [1m[36mAdecuacion Load (0.2ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 15 LIMIT 1[0m
+  [1m[36mEstatusAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 19 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  [1m[36mPersona Load (0.3ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 40 LIMIT 1[0m
+  [1m[36mAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mEstatusAdecuacion Load (0.4ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  Rendering iniciotutor/planformacions.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/planformacions.html.erb within layouts/ly_inicio_tutor (4.1ms)
+Completed 200 OK in 221ms (Views: 207.4ms | ActiveRecord: 2.7ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE `session` SET `data` = 'BAh7D0kiEF9jc3JmX3Rva2VuBjoGRUZJIjFIaGtWczBsMExXRG9FY0tYcktp\nazBiT29mSnVHWWpZM0tzTTNoa3M2aGt3PQY7AEZJIg91c3VhcmlvX2lkBjsA\nRmkrSSITbm9tYnJlX3VzdWFyaW8GOwBGSSIQQW5hIE1vcmFsZXMGOwBUSSIS\nYWRtaW5pc3RyYWRvcgY7AEZGSSIKdHV0b3IGOwBGVEkiD2luc3RydWN0b3IG\nOwBGRkkiDGVudGlkYWQGOwBGRkkiDHBsYW5faWQGOwBGaRVJIgtlZGl0YXIG\nOwBGVEkiE2luc3RydWN0b3JOYW1lBjsARkkiCnBlZHJvBjsAVA==\n', `updated_at` = '2017-10-04 18:55:27' WHERE `session`.`id` = 112[0m
+  [1m[35m (35.8ms)[0m  [1m[35mCOMMIT[0m
+Started POST "/iniciotutor/ver_detalles_adecuacion" for ::1 at 2017-10-04 14:55:28 -0400
+Processing by IniciotutorController#ver_detalles_adecuacion as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"94DK0csHpOpTWIw6QSqHiutCrrDn5U7j15c9XvIlQZXpmd9ignOJirtJTq3tgiNbWOrSK2GHeNT9VArYuR/H2Q==", "plan_id"=>"16", "editar"=>"no"}
+  [1m[36mPlanformacion Load (0.3ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mUsuario Load (0.3ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mPersona Load (0.4ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 40 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mUsuarioentidad Load (0.4ms)[0m  [1m[34mSELECT  `usuarioentidad`.* FROM `usuarioentidad` WHERE `usuarioentidad`.`usuario_id` = 40 LIMIT 1[0m
+  [1m[36mEscuela Load (0.3ms)[0m  [1m[34mSELECT  `escuela`.* FROM `escuela` WHERE `escuela`.`id` = 2 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 40 LIMIT 1[0m  [["usuario_id", 40], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m  [["id", 40], ["LIMIT", 1]]
+  [1m[36mPersona Load (0.4ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 38 LIMIT 1[0m
+  [1m[36mUsuario Load (0.6ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 38 LIMIT 1[0m
+  [1m[36mAdecuacion Load (0.4ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `usuarioentidad`.* FROM `usuarioentidad` WHERE `usuarioentidad`.`usuario_id` = 40 LIMIT 1[0m  [["usuario_id", 40], ["LIMIT", 1]]
+  [1m[36mCACHE (0.1ms)[0m  [1m[34mSELECT  `escuela`.* FROM `escuela` WHERE `escuela`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 40 LIMIT 1[0m  [["usuario_id", 40], ["LIMIT", 1]]
+  Rendering iniciotutor/ver_detalles_adecuacion.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/ver_detalles_adecuacion.html.erb within layouts/ly_inicio_tutor (8.2ms)
+Completed 200 OK in 241ms (Views: 218.4ms | ActiveRecord: 3.7ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[33mUPDATE `session` SET `data` = 'BAh7EEkiEF9jc3JmX3Rva2VuBjoGRUZJIjFIaGtWczBsMExXRG9FY0tYcktp\nazBiT29mSnVHWWpZM0tzTTNoa3M2aGt3PQY7AEZJIg91c3VhcmlvX2lkBjsA\nRmkrSSITbm9tYnJlX3VzdWFyaW8GOwBGSSIQQW5hIE1vcmFsZXMGOwBUSSIS\nYWRtaW5pc3RyYWRvcgY7AEZGSSIKdHV0b3IGOwBGVEkiD2luc3RydWN0b3IG\nOwBGRkkiDGVudGlkYWQGOwBGRkkiDHBsYW5faWQGOwBGSSIHMTYGOwBUSSIL\nZWRpdGFyBjsARkZJIhNpbnN0cnVjdG9yTmFtZQY7AEZJIgpwZWRybwY7AFRJ\nIhJhZGVjdWFjaW9uX2lkBjsARmkZ\n', `updated_at` = '2017-10-04 18:55:29' WHERE `session`.`id` = 112[0m
+  [1m[35m (72.4ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/assets/banner.png" for ::1 at 2017-10-04 14:55:29 -0400
+Started GET "/iniciotutor/ver_detalles_adecuacion7" for ::1 at 2017-10-04 14:55:36 -0400
+  
+AbstractController::ActionNotFound (The action 'ver_detalles_adecuacion7' could not be found for IniciotutorController):
+  
+actionpack (5.0.6) lib/abstract_controller/base.rb:121:in `process'
+actionview (5.0.6) lib/action_view/rendering.rb:30:in `process'
+actionpack (5.0.6) lib/action_controller/metal.rb:190:in `dispatch'
+actionpack (5.0.6) lib/action_controller/metal.rb:262:in `dispatch'
+actionpack (5.0.6) lib/action_dispatch/routing/route_set.rb:50:in `dispatch'
+actionpack (5.0.6) lib/action_dispatch/routing/route_set.rb:32:in `serve'
+actionpack (5.0.6) lib/action_dispatch/journey/router.rb:39:in `block in serve'
+actionpack (5.0.6) lib/action_dispatch/journey/router.rb:26:in `each'
+actionpack (5.0.6) lib/action_dispatch/journey/router.rb:26:in `serve'
+actionpack (5.0.6) lib/action_dispatch/routing/route_set.rb:727:in `call'
+rack (2.0.3) lib/rack/etag.rb:25:in `call'
+rack (2.0.3) lib/rack/conditional_get.rb:25:in `call'
+rack (2.0.3) lib/rack/head.rb:12:in `call'
+rack (2.0.3) lib/rack/session/abstract/id.rb:232:in `context'
+rack (2.0.3) lib/rack/session/abstract/id.rb:226:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/cookies.rb:613:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/callbacks.rb:38:in `block in call'
+activesupport (5.0.6) lib/active_support/callbacks.rb:97:in `__run_callbacks__'
+activesupport (5.0.6) lib/active_support/callbacks.rb:750:in `_run_call_callbacks'
+activesupport (5.0.6) lib/active_support/callbacks.rb:90:in `run_callbacks'
+actionpack (5.0.6) lib/action_dispatch/middleware/callbacks.rb:36:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/remote_ip.rb:79:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/debug_exceptions.rb:49:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.6) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.3) lib/rack/method_override.rb:22:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.6) lib/rails/engine.rb:522:in `call'
+puma (3.10.0) lib/puma/configuration.rb:225:in `call'
+puma (3.10.0) lib/puma/server.rb:605:in `handle_request'
+puma (3.10.0) lib/puma/server.rb:437:in `process_client'
+puma (3.10.0) lib/puma/server.rb:301:in `block in run'
+puma (3.10.0) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  Rendering /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/unknown_action.html.erb within rescues/layout
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/unknown_action.html.erb within rescues/layout (0.6ms)
+Started GET "/iniciotutor/detalles_adecuacion7" for ::1 at 2017-10-04 14:55:40 -0400
+Processing by IniciotutorController#detalles_adecuacion7 as HTML
+  [1m[36mPlanformacion Load (0.4ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mUsuario Load (0.3ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mEstatusAdecuacion Load (0.2ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  [1m[36mAdecuacionActividad Load (0.2ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 5[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m  [["adecuacion_id", 20], ["actual", 1], ["LIMIT", 1]]
+  Rendering iniciotutor/detalles_adecuacion7.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/detalles_adecuacion7.html.erb within layouts/ly_inicio_tutor (10.0ms)
+Completed 200 OK in 241ms (Views: 216.4ms | ActiveRecord: 1.9ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/assets/banner.png" for ::1 at 2017-10-04 14:55:41 -0400
+Started POST "/iniciotutor/detalles_adecuacion3?class=form-inline" for ::1 at 2017-10-04 14:55:43 -0400
+Processing by IniciotutorController#detalles_adecuacion3 as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ILVsH3kcpo44xVeWZp1IrNRd3n1+AM5guft4XYBTtwQ+rHmsMGiL7tDUlQHKNex9Z/Wi5vhi+FeTOE/by2kxSA==", "plan_id"=>"16", "editar"=>"si", "class"=>"form-inline"}
+  [1m[36mPlanformacion Load (0.4ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mPersona Load (0.4ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 40 LIMIT 1[0m
+  [1m[36mAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mUsuario Load (0.2ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m  [["planformacion_id", 16], ["LIMIT", 1]]
+  [1m[36mEstatusAdecuacion Load (0.2ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  [1m[36mPlanformacion Load (0.9ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mAdecuacionActividad Load (0.3ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 1[0m  [["adecuacion_id", 20], ["semestre", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m  [["adecuacion_id", 20], ["actual", 1], ["LIMIT", 1]]
+  Rendering iniciotutor/detalles_adecuacion3.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/detalles_adecuacion3.html.erb within layouts/ly_inicio_tutor (18.1ms)
+Completed 200 OK in 266ms (Views: 251.6ms | ActiveRecord: 3.2ms)
+
+
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE `session` SET `data` = 'BAh7EEkiEF9jc3JmX3Rva2VuBjoGRUZJIjFIaGtWczBsMExXRG9FY0tYcktp\nazBiT29mSnVHWWpZM0tzTTNoa3M2aGt3PQY7AEZJIg91c3VhcmlvX2lkBjsA\nRmkrSSITbm9tYnJlX3VzdWFyaW8GOwBGSSIQQW5hIE1vcmFsZXMGOwBUSSIS\nYWRtaW5pc3RyYWRvcgY7AEZGSSIKdHV0b3IGOwBGVEkiD2luc3RydWN0b3IG\nOwBGRkkiDGVudGlkYWQGOwBGRkkiDHBsYW5faWQGOwBGaRVJIgtlZGl0YXIG\nOwBGVEkiE2luc3RydWN0b3JOYW1lBjsARkkiCnBlZHJvBjsAVEkiEmFkZWN1\nYWNpb25faWQGOwBGaRk=\n', `updated_at` = '2017-10-04 18:55:43' WHERE `session`.`id` = 112[0m
+  [1m[35m (78.9ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/assets/banner.png" for ::1 at 2017-10-04 14:55:43 -0400
+Started GET "/assets/glyphicons-halflings-regular.woff2" for ::1 at 2017-10-04 14:55:44 -0400
+Started GET "/iniciotutor/planformacions" for ::1 at 2017-10-04 15:02:14 -0400
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/forminst_new1/config/routes.rb:6)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/forminst_new1/config/routes.rb:6)
+Processing by IniciotutorController#planformacions as HTML
+  [1m[36mPersona Load (0.3ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 38 LIMIT 1[0m
+  [1m[36mPlanformacion Load (0.3ms)[0m  [1m[34mSELECT `planformacion`.* FROM `planformacion` WHERE `planformacion`.`tutor_id` = 38[0m
+  [1m[36mPersona Load (0.4ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 39 LIMIT 1[0m
+  [1m[36mAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 15 LIMIT 1[0m
+  [1m[36mEstatusAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 19 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  [1m[36mPersona Load (0.3ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 40 LIMIT 1[0m
+  [1m[36mAdecuacion Load (0.2ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mEstatusAdecuacion Load (0.2ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  Rendering iniciotutor/planformacions.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/planformacions.html.erb within layouts/ly_inicio_tutor (4.6ms)
+Completed 200 OK in 273ms (Views: 198.2ms | ActiveRecord: 7.0ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE `session` SET `data` = 'BAh7D0kiEF9jc3JmX3Rva2VuBjoGRUZJIjFIaGtWczBsMExXRG9FY0tYcktp\nazBiT29mSnVHWWpZM0tzTTNoa3M2aGt3PQY7AEZJIg91c3VhcmlvX2lkBjsA\nRmkrSSITbm9tYnJlX3VzdWFyaW8GOwBGSSIQQW5hIE1vcmFsZXMGOwBUSSIS\nYWRtaW5pc3RyYWRvcgY7AEZGSSIKdHV0b3IGOwBGVEkiD2luc3RydWN0b3IG\nOwBGRkkiDGVudGlkYWQGOwBGRkkiDHBsYW5faWQGOwBGaRVJIgtlZGl0YXIG\nOwBGVEkiE2luc3RydWN0b3JOYW1lBjsARkkiCnBlZHJvBjsAVA==\n', `updated_at` = '2017-10-04 19:02:14' WHERE `session`.`id` = 112[0m
+  [1m[35m (61.8ms)[0m  [1m[35mCOMMIT[0m
+Started POST "/iniciotutor/ver_detalles_adecuacion" for ::1 at 2017-10-04 15:02:36 -0400
+Processing by IniciotutorController#ver_detalles_adecuacion as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"RZNY2Rldpfch18b5aDxK5z8qpHzRBjkNyBu1093oW9Jbik1qUCmIl8nGBG7ElO42jILY51dkDzri2IJVltLdng==", "plan_id"=>"16", "editar"=>"no"}
+  [1m[36mPlanformacion Load (0.4ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mUsuario Load (2.6ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mPersona Load (0.4ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 40 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mUsuarioentidad Load (0.3ms)[0m  [1m[34mSELECT  `usuarioentidad`.* FROM `usuarioentidad` WHERE `usuarioentidad`.`usuario_id` = 40 LIMIT 1[0m
+  [1m[36mEscuela Load (0.3ms)[0m  [1m[34mSELECT  `escuela`.* FROM `escuela` WHERE `escuela`.`id` = 2 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 40 LIMIT 1[0m  [["usuario_id", 40], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m  [["id", 40], ["LIMIT", 1]]
+  [1m[36mPersona Load (0.4ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 38 LIMIT 1[0m
+  [1m[36mUsuario Load (0.2ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 38 LIMIT 1[0m
+  [1m[36mAdecuacion Load (0.2ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `usuarioentidad`.* FROM `usuarioentidad` WHERE `usuarioentidad`.`usuario_id` = 40 LIMIT 1[0m  [["usuario_id", 40], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `escuela`.* FROM `escuela` WHERE `escuela`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 40 LIMIT 1[0m  [["usuario_id", 40], ["LIMIT", 1]]
+  Rendering iniciotutor/ver_detalles_adecuacion.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/ver_detalles_adecuacion.html.erb within layouts/ly_inicio_tutor (7.5ms)
+Completed 200 OK in 277ms (Views: 215.0ms | ActiveRecord: 7.8ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[33mUPDATE `session` SET `data` = 'BAh7EEkiEF9jc3JmX3Rva2VuBjoGRUZJIjFIaGtWczBsMExXRG9FY0tYcktp\nazBiT29mSnVHWWpZM0tzTTNoa3M2aGt3PQY7AEZJIg91c3VhcmlvX2lkBjsA\nRmkrSSITbm9tYnJlX3VzdWFyaW8GOwBGSSIQQW5hIE1vcmFsZXMGOwBUSSIS\nYWRtaW5pc3RyYWRvcgY7AEZGSSIKdHV0b3IGOwBGVEkiD2luc3RydWN0b3IG\nOwBGRkkiDGVudGlkYWQGOwBGRkkiDHBsYW5faWQGOwBGSSIHMTYGOwBUSSIL\nZWRpdGFyBjsARkZJIhNpbnN0cnVjdG9yTmFtZQY7AEZJIgpwZWRybwY7AFRJ\nIhJhZGVjdWFjaW9uX2lkBjsARmkZ\n', `updated_at` = '2017-10-04 19:02:37' WHERE `session`.`id` = 112[0m
+  [1m[35m (82.3ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/assets/banner.png" for ::1 at 2017-10-04 15:02:37 -0400
+Started GET "/iniciotutor/detalles_adecuacion2" for ::1 at 2017-10-04 15:02:40 -0400
+Processing by IniciotutorController#detalles_adecuacion2 as HTML
+  [1m[36mPlanformacion Load (0.3ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mUsuario Load (0.4ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mAdecuacion Load (0.8ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mAdecuacionActividad Load (0.3ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 0[0m
+  [1m[36mEstatusAdecuacion Load (0.4ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m  [["adecuacion_id", 20], ["actual", 1], ["LIMIT", 1]]
+  Rendering iniciotutor/detalles_adecuacion2.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/detalles_adecuacion2.html.erb within layouts/ly_inicio_tutor (10.4ms)
+Completed 200 OK in 235ms (Views: 207.3ms | ActiveRecord: 13.7ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/iniciotutor/detalles_adecuacion3" for ::1 at 2017-10-04 15:02:47 -0400
+Processing by IniciotutorController#detalles_adecuacion3 as HTML
+  [1m[36mPlanformacion Load (0.4ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mUsuario Load (0.3ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mAdecuacion Load (0.4ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mEstatusAdecuacion Load (1.0ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mAdecuacionActividad Load (0.3ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 1[0m  [["adecuacion_id", 20], ["semestre", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m  [["adecuacion_id", 20], ["actual", 1], ["LIMIT", 1]]
+  Rendering iniciotutor/detalles_adecuacion3.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/detalles_adecuacion3.html.erb within layouts/ly_inicio_tutor (18.2ms)
+Completed 200 OK in 239ms (Views: 224.6ms | ActiveRecord: 2.8ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/iniciotutor/detalles_adecuacion4" for ::1 at 2017-10-04 15:02:49 -0400
+Processing by IniciotutorController#detalles_adecuacion4 as HTML
+  [1m[36mAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mEstatusAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  [1m[36mPlanformacion Load (0.2ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mUsuario Load (0.3ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mAdecuacionActividad Load (0.3ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 2[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m  [["adecuacion_id", 20], ["actual", 1], ["LIMIT", 1]]
+  Rendering iniciotutor/detalles_adecuacion4.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/detalles_adecuacion4.html.erb within layouts/ly_inicio_tutor (14.0ms)
+Completed 200 OK in 227ms (Views: 216.6ms | ActiveRecord: 1.9ms)
+
+
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Started POST "/iniciotutor/detalles_adecuacion4?class=form-inline" for ::1 at 2017-10-04 15:02:50 -0400
+Processing by IniciotutorController#detalles_adecuacion4 as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"BQ1KkItkps65r5zdiYALPJZYkeXQo5RZInZRAOYvqIwbFF8jwhCLrlG+XkolKK/tJfDtflbBom4ItWaGrRUuwA==", "plan_id"=>"16", "editar"=>"si", "class"=>"form-inline"}
+  [1m[36mAdecuacion Load (1.5ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mEstatusAdecuacion Load (0.4ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  [1m[36mPlanformacion Load (0.5ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mUsuario Load (0.3ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mAdecuacionActividad Load (0.3ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 2[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m  [["adecuacion_id", 20], ["actual", 1], ["LIMIT", 1]]
+  Rendering iniciotutor/detalles_adecuacion4.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/detalles_adecuacion4.html.erb within layouts/ly_inicio_tutor (13.4ms)
+Completed 200 OK in 239ms (Views: 227.6ms | ActiveRecord: 3.5ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/assets/banner.png" for ::1 at 2017-10-04 15:02:50 -0400
+Started GET "/iniciotutor/detalles_adecuacion3" for ::1 at 2017-10-04 15:02:56 -0400
+Processing by IniciotutorController#detalles_adecuacion3 as HTML
+  [1m[36mPlanformacion Load (0.3ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mUsuario Load (0.3ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mAdecuacion Load (0.4ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mEstatusAdecuacion Load (0.4ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mAdecuacionActividad Load (4.7ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 1[0m  [["adecuacion_id", 20], ["semestre", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m  [["adecuacion_id", 20], ["actual", 1], ["LIMIT", 1]]
+  Rendering iniciotutor/detalles_adecuacion3.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/detalles_adecuacion3.html.erb within layouts/ly_inicio_tutor (15.3ms)
+Completed 200 OK in 226ms (Views: 210.6ms | ActiveRecord: 6.6ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/iniciotutor/detalles_adecuacion4" for ::1 at 2017-10-04 15:02:57 -0400
+Processing by IniciotutorController#detalles_adecuacion4 as HTML
+  [1m[36mAdecuacion Load (0.4ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mEstatusAdecuacion Load (1.2ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  [1m[36mPlanformacion Load (0.3ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mUsuario Load (0.3ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mAdecuacionActividad Load (0.2ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 2[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m  [["adecuacion_id", 20], ["actual", 1], ["LIMIT", 1]]
+  Rendering iniciotutor/detalles_adecuacion4.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/detalles_adecuacion4.html.erb within layouts/ly_inicio_tutor (13.7ms)
+Completed 200 OK in 230ms (Views: 220.1ms | ActiveRecord: 2.8ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Started POST "/iniciotutor/detalles_adecuacion4?class=form-inline" for ::1 at 2017-10-04 15:03:16 -0400
+Processing by IniciotutorController#detalles_adecuacion4 as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"LEHw7ECElnevGOgiyeq8x7gH8rSpNzGHexdjpCPtcR0yWOVfCfC7F0cJKrVlQhgWC6+OLy9VB7BR1FQiaNf3UQ==", "plan_id"=>"16", "editar"=>"si", "class"=>"form-inline"}
+  [1m[36mAdecuacion Load (0.5ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mEstatusAdecuacion Load (0.4ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  [1m[36mPlanformacion Load (0.8ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mUsuario Load (0.3ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mAdecuacionActividad Load (0.2ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 2[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m  [["adecuacion_id", 20], ["actual", 1], ["LIMIT", 1]]
+  Rendering iniciotutor/detalles_adecuacion4.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/detalles_adecuacion4.html.erb within layouts/ly_inicio_tutor (13.3ms)
+Completed 200 OK in 233ms (Views: 223.4ms | ActiveRecord: 2.7ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/assets/banner.png" for ::1 at 2017-10-04 15:03:16 -0400
+Started GET "/iniciotutor/detalles_adecuacion3" for ::1 at 2017-10-04 15:06:48 -0400
+Processing by IniciotutorController#detalles_adecuacion3 as HTML
+  [1m[36mPlanformacion Load (0.3ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mUsuario Load (0.3ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mEstatusAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mAdecuacionActividad Load (0.4ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 1[0m  [["adecuacion_id", 20], ["semestre", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m  [["adecuacion_id", 20], ["actual", 1], ["LIMIT", 1]]
+  Rendering iniciotutor/detalles_adecuacion3.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/detalles_adecuacion3.html.erb within layouts/ly_inicio_tutor (15.7ms)
+Completed 200 OK in 239ms (Views: 228.4ms | ActiveRecord: 2.0ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/iniciotutor/detalles_adecuacion4" for ::1 at 2017-10-04 15:06:49 -0400
+Processing by IniciotutorController#detalles_adecuacion4 as HTML
+  [1m[36mAdecuacion Load (0.4ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mEstatusAdecuacion Load (0.6ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  [1m[36mPlanformacion Load (0.4ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mUsuario Load (0.2ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mAdecuacionActividad Load (0.3ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 2[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m  [["adecuacion_id", 20], ["actual", 1], ["LIMIT", 1]]
+  Rendering iniciotutor/detalles_adecuacion4.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/detalles_adecuacion4.html.erb within layouts/ly_inicio_tutor (16.0ms)
+Completed 200 OK in 222ms (Views: 213.0ms | ActiveRecord: 2.2ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Started POST "/iniciotutor/detalles_adecuacion4?class=form-inline" for ::1 at 2017-10-04 15:06:50 -0400
+Processing by IniciotutorController#detalles_adecuacion4 as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"vTMC7UjmFHGIoimsj5oeH2vJfwdhTd3+VH6R7I9d4jejKhdeAZI5EWCz6zsjMrrO2GEDnOcv68l+vaZqxGdkew==", "plan_id"=>"16", "editar"=>"si", "class"=>"form-inline"}
+  [1m[36mAdecuacion Load (3.5ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mEstatusAdecuacion Load (2.9ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  [1m[36mPlanformacion Load (0.4ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mUsuario Load (0.5ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mAdecuacionActividad Load (0.3ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 2[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m  [["adecuacion_id", 20], ["actual", 1], ["LIMIT", 1]]
+  Rendering iniciotutor/detalles_adecuacion4.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/detalles_adecuacion4.html.erb within layouts/ly_inicio_tutor (13.2ms)
+Completed 200 OK in 234ms (Views: 217.5ms | ActiveRecord: 8.2ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/assets/banner.png" for ::1 at 2017-10-04 15:06:51 -0400
+Started POST "/iniciotutor/detalles_adecuacion4?class=form-inline" for ::1 at 2017-10-04 15:06:53 -0400
+Processing by IniciotutorController#detalles_adecuacion4 as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"X/4YFuUv4PdWrN6xEdT17CzQtqyahzctHtZ8PVTa2UtB5w2lrFvNl769HCa9fFE9n3jKNxzlARo0FUu7H+BfBw==", "plan_id"=>"16", "editar"=>"si", "class"=>"form-inline"}
+  [1m[36mAdecuacion Load (0.4ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mEstatusAdecuacion Load (0.4ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  [1m[36mPlanformacion Load (0.4ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mUsuario Load (0.3ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mAdecuacionActividad Load (0.6ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 2[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m  [["adecuacion_id", 20], ["actual", 1], ["LIMIT", 1]]
+  Rendering iniciotutor/detalles_adecuacion4.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/detalles_adecuacion4.html.erb within layouts/ly_inicio_tutor (25.0ms)
+Completed 200 OK in 235ms (Views: 223.4ms | ActiveRecord: 2.9ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/assets/banner.png" for ::1 at 2017-10-04 15:06:53 -0400
+Started POST "/iniciotutor/detalles_adecuacion4?class=form-inline" for ::1 at 2017-10-04 15:06:54 -0400
+Processing by IniciotutorController#detalles_adecuacion4 as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"LgDiyXVjEff4uqlOihWE3+ZwrFpwimC6wCYIP8FeOGgwGfd6PBc8lxCra9kmvSAOVdjQwfboVo3q5T+5imS+JA==", "plan_id"=>"16", "editar"=>"si", "class"=>"form-inline"}
+  [1m[36mAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mEstatusAdecuacion Load (0.4ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  [1m[36mPlanformacion Load (0.5ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mUsuario Load (1.3ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mAdecuacionActividad Load (1.6ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 2[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m  [["adecuacion_id", 20], ["actual", 1], ["LIMIT", 1]]
+  Rendering iniciotutor/detalles_adecuacion4.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/detalles_adecuacion4.html.erb within layouts/ly_inicio_tutor (15.7ms)
+Completed 200 OK in 235ms (Views: 221.2ms | ActiveRecord: 4.6ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/assets/banner.png" for ::1 at 2017-10-04 15:06:54 -0400
+Started GET "/iniciotutor/detalles_adecuacion4?class=form-inline" for ::1 at 2017-10-04 15:15:19 -0400
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/forminst_new1/config/routes.rb:6)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/forminst_new1/config/routes.rb:6)
+Processing by IniciotutorController#detalles_adecuacion4 as HTML
+  Parameters: {"class"=>"form-inline"}
+  [1m[36mAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mEstatusAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  [1m[36mPlanformacion Load (0.2ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mUsuario Load (0.2ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mAdecuacionActividad Load (0.3ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 2[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m  [["adecuacion_id", 20], ["actual", 1], ["LIMIT", 1]]
+  Rendering iniciotutor/detalles_adecuacion4.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/detalles_adecuacion4.html.erb within layouts/ly_inicio_tutor (13.2ms)
+Completed 200 OK in 297ms (Views: 218.0ms | ActiveRecord: 6.2ms)
+
+
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/assets/banner.png" for ::1 at 2017-10-04 15:15:19 -0400
+Started GET "/iniciotutor/detalles_adecuacion3" for ::1 at 2017-10-04 15:15:20 -0400
+Processing by IniciotutorController#detalles_adecuacion3 as HTML
+  [1m[36mPlanformacion Load (0.3ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mUsuario Load (0.2ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mEstatusAdecuacion Load (0.4ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mAdecuacionActividad Load (0.4ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 1[0m  [["adecuacion_id", 20], ["semestre", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m  [["adecuacion_id", 20], ["actual", 1], ["LIMIT", 1]]
+  Rendering iniciotutor/detalles_adecuacion3.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/detalles_adecuacion3.html.erb within layouts/ly_inicio_tutor (22.4ms)
+Completed 200 OK in 260ms (Views: 249.5ms | ActiveRecord: 2.1ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/iniciotutor/detalles_adecuacion4" for ::1 at 2017-10-04 15:15:22 -0400
+Processing by IniciotutorController#detalles_adecuacion4 as HTML
+  [1m[36mAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mEstatusAdecuacion Load (0.4ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  [1m[36mPlanformacion Load (0.3ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mUsuario Load (0.3ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mAdecuacionActividad Load (0.3ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 2[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m  [["adecuacion_id", 20], ["actual", 1], ["LIMIT", 1]]
+  Rendering iniciotutor/detalles_adecuacion4.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/detalles_adecuacion4.html.erb within layouts/ly_inicio_tutor (16.3ms)
+Completed 200 OK in 245ms (Views: 234.1ms | ActiveRecord: 2.0ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/iniciotutor/detalles_adecuacion4" for ::1 at 2017-10-04 15:15:36 -0400
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/forminst_new1/config/routes.rb:6)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/forminst_new1/config/routes.rb:6)
+Processing by IniciotutorController#detalles_adecuacion4 as HTML
+  [1m[36mAdecuacion Load (0.4ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mEstatusAdecuacion Load (0.4ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  [1m[36mPlanformacion Load (0.5ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mUsuario Load (0.3ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mAdecuacionActividad Load (0.4ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 2[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m  [["adecuacion_id", 20], ["actual", 1], ["LIMIT", 1]]
+  Rendering iniciotutor/detalles_adecuacion4.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/detalles_adecuacion4.html.erb within layouts/ly_inicio_tutor (13.7ms)
+Completed 200 OK in 307ms (Views: 234.8ms | ActiveRecord: 2.4ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/assets/banner.png" for ::1 at 2017-10-04 15:15:36 -0400
+Started POST "/iniciotutor/detalles_adecuacion3?class=form-inline" for ::1 at 2017-10-04 15:15:39 -0400
+Processing by IniciotutorController#detalles_adecuacion3 as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"wevar2lrOcRBI3nhgLmBbmb9r5SiXlhFpMjUjsc5FlPf8s8cIB8UpKkyu3YsESW/1VXTDyQ8bnKOC+MIjAOQHw==", "plan_id"=>"16", "editar"=>"si", "class"=>"form-inline"}
+  [1m[36mPlanformacion Load (0.9ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mPersona Load (0.4ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 40 LIMIT 1[0m
+  [1m[36mAdecuacion Load (0.4ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mUsuario Load (0.3ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m  [["planformacion_id", 16], ["LIMIT", 1]]
+  [1m[36mEstatusAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  [1m[36mPlanformacion Load (0.2ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mAdecuacionActividad Load (0.3ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 1[0m  [["adecuacion_id", 20], ["semestre", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m  [["adecuacion_id", 20], ["actual", 1], ["LIMIT", 1]]
+  Rendering iniciotutor/detalles_adecuacion3.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/detalles_adecuacion3.html.erb within layouts/ly_inicio_tutor (14.0ms)
+Completed 200 OK in 255ms (Views: 223.0ms | ActiveRecord: 4.9ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE `session` SET `data` = 'BAh7EEkiEF9jc3JmX3Rva2VuBjoGRUZJIjFIaGtWczBsMExXRG9FY0tYcktp\nazBiT29mSnVHWWpZM0tzTTNoa3M2aGt3PQY7AEZJIg91c3VhcmlvX2lkBjsA\nRmkrSSITbm9tYnJlX3VzdWFyaW8GOwBGSSIQQW5hIE1vcmFsZXMGOwBUSSIS\nYWRtaW5pc3RyYWRvcgY7AEZGSSIKdHV0b3IGOwBGVEkiD2luc3RydWN0b3IG\nOwBGRkkiDGVudGlkYWQGOwBGRkkiDHBsYW5faWQGOwBGaRVJIgtlZGl0YXIG\nOwBGVEkiE2luc3RydWN0b3JOYW1lBjsARkkiCnBlZHJvBjsAVEkiEmFkZWN1\nYWNpb25faWQGOwBGaRk=\n', `updated_at` = '2017-10-04 19:15:39' WHERE `session`.`id` = 112[0m
+  [1m[35m (63.5ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/assets/banner.png" for ::1 at 2017-10-04 15:15:39 -0400
+Started GET "/assets/glyphicons-halflings-regular.woff2" for ::1 at 2017-10-04 15:15:39 -0400
