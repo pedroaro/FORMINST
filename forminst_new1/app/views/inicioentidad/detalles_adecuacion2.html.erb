@@ -1,0 +1,374 @@
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Mensaje de confirmación</h4>
+      </div>
+      <div class="modal-body">
+        <h5>Está seguro que desea enviar la adecuación?.</h5>
+      </div>
+      <div class="modal-footer">
+        <%= link_to "Aceptar", {controller: "inicioentidad", action: "cambiar_estatusA", :adecuacion_id => @adecuacion.id }, class: "btn btn-default" %>
+      
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="myModal2" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Mensaje de notificación</h4>
+      </div>
+      <div class="modal-body">
+        <h5>El adecuacion ya fue enviada.</h5>
+      </div>
+      <div class="modal-footer">
+    
+        <button type="button" class="btn btn-default" data-dismiss="modal">Aceptar</button>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+
+<div class="modal fade" id="myModal3" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Mensaje de notificación</h4>
+      </div>
+      <div class="modal-body">
+        <h5>No puede realizar ningún cambio debido a que la adecuación ya fue enviada.</h5>
+      </div>
+      <div class="modal-footer">
+    
+        <button type="button" class="btn btn-default" data-dismiss="modal">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="myModal4" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Mensaje de confirmación</h4>
+      </div>
+      <div class="modal-body text-center">
+        <h5 center>Seleccione la acción que desea realizar sobre la adecuación</h5>
+        <h9> (Si decide "Aprobado con Observaciones" la adecuación debe ser corregida por el tutor encargado)</h9>
+      </div>
+      <div class="modal-footer">
+        <center>
+          <%= link_to "Aprobar", {controller: "inicioentidad", action: "cambiar_estatusA", :adecuacion_id => @adecuacion.id, :rechazar => 0 }, class: "btn btn-default" %>
+          <%= link_to "Aprobar con Observaciones", {controller: "inicioentidad", action: "cambiar_estatusA", :adecuacion_id => @adecuacion.id, :rechazar => 2 }, class: "btn btn-default" %>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        </center>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+<div class = 'row'>
+  <div class="col-xs-12 col-md-12">
+      <ul class="nav nav-tabs">
+        <li><a href="../inicioentidad/index">Inicio</a></li>
+        <li><a href="../inicioentidad/listar_adecuaciones" class="active">Listar Adecuaciones</a></li>
+        <li><a href="../inicioentidad/listar_informes">Listar Informes</a></li>
+        <li><a href="../inicioentidad/prorroga">Prorroga</a></li>
+        <%if session[:entidad_id]==13 %>
+          <li><a href="../inicioentidad/reactivacion">Reactivación</a></li>
+        <%end%>
+        <li><a href="../inicioentidad/logout">Cerrar Sesión</a></li>
+      </ul>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12 col-md-12">
+    <div class="btn-group" role="group">
+       <button type="button" class="btn btn-default" onclick = " location.href = 'javascript:history.back(-1);'">Volver</button>
+        <%if @bool_enviado == 0 && @cjpTipo=="Institucional"%>
+          <%if session[:entidad_id]==13 %>
+             <button type="button" data-toggle="modal" data-target="#myModal4" class="btn btn-default">Aprobar</button>
+          <%else%>
+            <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-default">Enviar</button>
+          <%end%>
+        <%end%>
+      <%= link_to "Vista Previa", {controller: "inicioentidad", action: "vista_previa"}, class: "btn btn-default" %>
+      <%= link_to "Generar PDF", {controller: "adecuacions", action: "generar_pdf"},target: :_blank, class: "btn btn-default" %>
+      <%= link_to "Ver Soportes", {controller: "inicioentidad", action: "ver_soporte"}, class: "btn btn-default" %>
+      <%= link_to "Versiones Anteriores", {controller: "inicioentidad", action: "ver_respaldos"}, class: "btn btn-default" %>
+
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12 col-md-12 col-md-offset-0">
+    <div class="text-right">
+      <div id = "fechamuestra">
+        <h3> <%= Time.now.strftime("%d") %>
+          <% if Time.now.strftime("%m").to_i == 1 %>
+            de Enero del
+          <% elsif Time.now.strftime("%m").to_i == 2 %>
+            de Febrero del
+          <% elsif Time.now.strftime("%m").to_i == 3 %>
+            de Marzo del
+          <% elsif Time.now.strftime("%m").to_i == 4 %>
+            de Abril del
+          <% elsif Time.now.strftime("%m").to_i == 5 %>
+            de Mayo del
+          <% elsif Time.now.strftime("%m").to_i == 6 %>
+            de Junio del
+          <% elsif Time.now.strftime("%m").to_i == 7 %>
+            de Julio del
+          <% elsif Time.now.strftime("%m").to_i == 8 %>
+            de Agosto del
+          <% elsif Time.now.strftime("%m").to_i == 9 %>
+            de Septiembre del
+          <% elsif Time.now.strftime("%m").to_i == 10 %>
+            de Octubre del
+          <% elsif Time.now.strftime("%m").to_i == 11 %>
+            de Noviembre del
+          <% elsif Time.now.strftime("%m").to_i == 12 %>
+            de Diciembre del
+          <% end %>
+          <%= Time.now.strftime("%Y") %> 
+        </h3>
+      </div>
+      <%if @nombre%>
+        <div>
+          <h4><b><%=@nombre%></b></h4>
+        </div>
+      <%end%>
+
+      <%if @cjpTipo=="Institucional"%>
+        <p>Entidad</p>
+      <%else%>
+        <p>Vista</p>
+      <%end%>
+    </div>
+  </div>
+</div>
+
+<div class = 'row'>
+  <div class="col-xs-11 col-xs-offset-1 col-md-12 col-md-offset-0 text-justify">
+    <h1 class="text-left">Detalles de la Adecuación</h1>
+    <h4><b> Instructor :  <%=session[:instructorName]%></b></h4>
+  </div>
+</div>
+<br>
+
+<%= form_tag({controller: 'inicioentidad', action: 'guardar_obs_primera_parte'}) do%> 
+  <input id="cant_edit" type="hidden" name="cant_edit" value="0"/> 
+  <input type="hidden" name="firtsPart" value="1">
+  <input id="presentacionId" type="hidden" name="presentacionId" value="<%=@presentacionId%>"/> 
+  <input id="descripcionId" type="hidden" name="descripcionId" value="<%=@descripcionId%>"/> 
+  <input id="docenciaId" type="hidden" name="docenciaId" value="<%=@docenciaId%>"/> 
+  <input id="investigacionId" type="hidden" name="investigacionId" value="<%= @investigacionId %>"/>
+  <input id="formacionId" type="hidden" name="formacionId" value="<%= @formacionId %>">
+  <input id="extensionId" type="hidden" name="extensionId" value="<%= @extensionId %>">
+  <div class= "row">
+      <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
+          <div class="table-responsive">
+          	<table class="table table-bordered table-striped">
+  	          <tbody>
+  	            <tr>
+  	              <td class="text-left">5. Presentación</td>
+                  <td class="text-center" > Observaciones </td>
+                  <td class="text-center" style='width:10%;'> Más Observaciones </td>
+  	            </tr>
+  	            <tr>
+  	              <td class="text-left"><textarea name="presentacion" class="form-control" rows="2" id="presentacion" disabled><%= @presentacion %></textarea></td>  
+                  <td >
+                    <%if @bool_enviado==0 && @cjpTipo=="Institucional"%>
+                      <textarea class="form-control" rows="3" name='obsPresentacion' ><%=@obsPresentacion %></textarea>
+                    <%else%>
+                      <textarea class="form-control" rows="3" name='obsPresentacion' disabled><%=@obsPresentacion %></textarea>
+                    <%end%>
+                  </td>
+                  <td class="text-center">
+                    <center><%= link_to "Más obs.", {:controller => "iniciotutor", :action => "mas_observaciones3", :actividad_id => @presentacionId, :semestre => 0, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-default" %></center>
+                  </td>
+  	            </tr>
+  	            <tr>
+  	              <td class="text-left">6. Descripción del Perfil del Ganador del concurso</td>
+                  <td></td>
+
+  	            </tr>
+  	            <tr>
+  	              <td class="text-left"><textarea name="descripcion" class="form-control" rows="2" id="descripcion" disabled><%= @descripcion %></textarea></td>  
+                  <td >
+                    <%if @bool_enviado==0 && @cjpTipo=="Institucional"%>
+                      <textarea class="form-control" rows="3" name='obsDescripcion' ><%=@obsDescripcion %></textarea>
+                    <%else%>
+                      <textarea class="form-control" rows="3" name='obsDescripcion' disabled><%=@obsDescripcion %></textarea>
+                    <%end%>
+                  </td>
+                  <td class="text-center">
+                    <center><%= link_to "Más obs.", {:controller => "iniciotutor", :action => "mas_observaciones3", :actividad_id => @descripcionId, :semestre => 0, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-default" %></center> 
+                  </td>
+  	            </tr>
+  	            <tr>
+  	              <td class="text-left">7. Docencia</td>
+                  <td></td>
+  	            </tr>
+  	            <tr>
+  	              <td class="text-left"><textarea name="docencia" class="form-control" rows="2" id="docencia" disabled><%= @docencia %></textarea></td>
+                  <td >
+                    <%if @bool_enviado==0 && @cjpTipo=="Institucional"%>
+                      <textarea class="form-control" rows="3" name='obsDocencia' ><%=@obsDocencia %></textarea>
+                    <%else%>
+                      <textarea class="form-control" rows="3" name='obsDocencia' disabled><%=@obsDocencia %></textarea>
+                    <%end%>
+                  </td>
+                  <td class="text-center">
+                    <center><%= link_to "Más obs.", {:controller => "iniciotutor", :action => "mas_observaciones3", :actividad_id => @docenciaId, :semestre => 0, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-default" %></center>
+                  </td>
+  	            </tr>
+  	            <tr>
+  	              <td class="text-left">8. Investigación</td>
+                  <td></td>
+  	            </tr>
+  	            <tr>
+  	              <td class="text-left"><textarea name="investigacion" class="form-control" rows="2" id="investigacion" disabled><%= @investigacion %></textarea></td>
+                  <td >
+                    <%if @bool_enviado==0 && @cjpTipo=="Institucional"%>
+                      <textarea class="form-control" rows="3" name='obsInvestigacion' ><%=@obsInvestigacion %></textarea>
+                    <%else%>
+                      <textarea class="form-control" rows="3" name='obsInvestigacion' disabled><%=@obsInvestigacion %></textarea>
+                    <%end%>
+                  </td>
+                  <td class="text-center">
+                    <center><%= link_to "Más obs.", {:controller => "iniciotutor", :action => "mas_observaciones3", :actividad_id => @investigacionId, :semestre => 0, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-default" %></center>
+                  </td>
+  	            </tr>
+  	            <tr>
+  	              <td class="text-left">9. Formación y capacitación profesional</td>
+                  <td></td>
+  	            </tr>
+  	            <tr>
+  	              <td class="text-left"><textarea name="formacion" class="form-control" rows="2" id="formacion" disabled><%= @formacion %></textarea></td>
+                  <td >
+                    <%if @bool_enviado==0 && @cjpTipo=="Institucional"%>
+                      <textarea class="form-control" rows="3" name='obsFormacion' ><%=@obsFormacion %></textarea>
+                    <%else%>
+                      <textarea class="form-control" rows="3" name='obsFormacion' disabled><%=@obsFormacion %></textarea>
+                    <%end%>
+                  </td>
+                  <td class="text-center">
+                    <center><%= link_to "Más obs.", {:controller => "iniciotutor", :action => "mas_observaciones3", :actividad_id => @formacionId, :semestre => 0, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-default" %></center>
+                  </td>
+  	            </tr>
+  	            <tr>
+  	              <td class="text-left">10. Extension</td>
+                  <%if  session[:editar]%> 
+                      <td></td>
+                  <%end%>
+                  <td></td>
+  	            </tr>
+  	            <tr>
+  	              <td class="text-left"><textarea name="extension" class="form-control" rows="2" id="extension" disabled><%= @extension %></textarea></td>
+                  <td >
+                    <%if @bool_enviado==0 && @cjpTipo=="Institucional"%>
+                      <textarea class="form-control" rows="3" name='obsExtension' ><%=@obsExtension %></textarea>
+                    <%else%>
+                      <textarea class="form-control" rows="3" name='obsExtension' disabled><%=@obsExtension %></textarea>
+                    <%end%>
+                  </td>
+                  <td class="text-center">
+                    <center><%= link_to "Más obs.", {:controller => "iniciotutor", :action => "mas_observaciones3", :actividad_id => @extensionId, :semestre => 0, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-default" %></center>
+                  </td>
+  	            </tr>
+  	          </tbody>
+  	        </table>
+          </div>
+      </div>
+  </div>
+  
+  <%if @bool_enviado==0 && @cjpTipo=="Institucional"%> 
+        <div class = 'row'>
+          <%if @bool_enviado == 0 %>
+             <center><button type="submit" class="btn btn-forminst btn-lg">Guardar</button></center>
+          <%else%>
+            <center> <button type="button" data-toggle="modal" data-target="#myModal3" class="btn btn-forminst btn-lg" >Guardar</button></center>
+          <%end%> 
+        </div>
+  <%end%> 
+
+  <div class = 'row'>
+    <div class = 'col-xs-3 col-md-3 col-lg-3'>
+      <button type="button" class="btn btn-forminst" onclick = " location.href = 'javascript:history.back(-1);'">&lt;&lt; Volver</button>
+    </div>
+    <div class = 'col-xs-3 col-md-3 col-lg-3 col-xs-offset-4 col-md-offset-6 col-lg-offset-6'>
+       <%= link_to "Siguiente >>", {controller: "inicioentidad", action: "detalles_adecuacion3"}, class: "btn btn-forminst" %>
+    </div>
+  </div>
+<% end %>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h3 class="modal-title" id="myModalLabel">Eliminar Adecuación</h3>
+      </div>
+      <div class="modal-body">
+          <%= form_tag({controller: 'iniciotutor', action: 'eliminar_adecuacion'}) do%>
+            <div class="form-group">
+              <center>
+                <h5><strong>Está seguro que desea eliminar esta adecuación?</strong></h5>
+              </center>
+            </div>
+      </div>
+      <div class="modal-footer">
+          <button type="submit" class="btn btn-forminst">Si</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+      </div>
+      <%end%>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  function eliminar (elemento){
+    $(elemento).parent().parent().parent().remove();
+  }
+</script>
+
+<script type="text/javascript">
+
+    $(document).ready(function() {
+      var cant_edit=0;
+
+      $(".edit_act").click(function() {
+        var params = $(this).attr("rel");
+        var arr= params.split(' ');
+        var id = arr[0];
+        var text_act = arr[1];
+        $("#"+id).prop( "disabled", false );
+        $("#button"+id).prop( "disabled", true );
+        $(this).parent().parent().append("<input type='hidden' name='edit"+cant_edit+"' value='"+id+"'>")
+        cant_edit +=1;
+        $("#cant_edit").val(cant_edit);
+      });
+
+    });
+</script>

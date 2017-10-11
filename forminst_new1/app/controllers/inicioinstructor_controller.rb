@@ -838,6 +838,50 @@ end
 		end
 	end
 
+  def detalles_adecuacion2
+
+    if session[:usuario_id] && session[:instructor]
+      if params[:plan_id]
+        @planformacion = Planformacion.find(params[:plan_id])
+        session[:plan_id] = @planformacion.id
+        @adecuacion = Adecuacion.where(planformacion_id: session[:plan_id]).take
+        session[:adecuacion_id]= @adecuacion.id
+      else 
+        @planformacion = Planformacion.find(session[:plan_id])
+      end
+
+      @adecuacion = Adecuacion.where(planformacion_id: session[:plan_id]).take
+      actividades = AdecuacionActividad.where(adecuacion_id: session[:adecuacion_id], semestre: 0)
+      if !actividades.blank?
+        actividades.each do |actividadAde|
+          actividad = Actividad.find(actividadAde.actividad_id)
+          if actividad.tipo_actividad_id == 9
+            @presentacion = actividad.actividad
+            @presentacionId = actividad.id
+          elsif actividad.tipo_actividad_id == 8
+            @descripcion = actividad.actividad
+            @descripcionId = actividad.id
+          elsif actividad.tipo_actividad_id == 1
+            @docencia = actividad.actividad 
+            @docenciaId = actividad.id
+          elsif actividad.tipo_actividad_id == 2
+            @investigacion = actividad.actividad
+            @investigacionId = actividad.id
+          elsif actividad.tipo_actividad_id == 4
+            @formacion = actividad.actividad  
+            @formacionId = actividad.id
+          elsif actividad.tipo_actividad_id == 3
+            @extension = actividad.actividad  
+            @extensionId = actividad.id
+          end
+        end
+      end
+
+    else
+      redirect_to controller:"forminst", action: "index"
+    end
+  end
+
 	def detalles_adecuacion3
 		if session[:usuario_id] && session[:instructor]= true
       session[:informe_id] = nil
@@ -856,6 +900,7 @@ end
 			@actividadesaext= []
 			@actividadesafor= []
 			@actividadesaotr= []
+      @observacionesExtras= []
 			@actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 1).all
 			@actividadesa.each do |actade| 
 				@act= Actividad.find(actade.actividad_id)
@@ -890,6 +935,28 @@ end
 					end
 				end
 			end
+			@actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 1).all
+			@actividadesa.each do |actade| 
+				@cpObs= ObservacionActividadAdecuacion.where(adecuacionactividad_id: actade.id).all
+
+			    if @cpObs.blank?
+			    	@observacionesExtras[actade.id]="no"
+			    else
+
+					cpBool = 0
+					@cpObs.each do |probar|
+						if !probar.observaciones.blank?
+							cpBool = 1
+						end
+					end
+
+			    	if cpBool == 0
+			    		@observacionesExtras[actade.id]="no"
+			    	else
+			    		@observacionesExtras[actade.id]="si"
+			    	end
+			    end
+			end
 		else
 			redirect_to controller:"forminst", action: "index"
 		end
@@ -913,6 +980,7 @@ end
 			@actividadesaext= []
 			@actividadesafor= []
 			@actividadesaotr= []
+      @observacionesExtras= []
 			@actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 2).all
 			@actividadesa.each do |actade| 
 				@act= Actividad.find(actade.actividad_id)
@@ -947,6 +1015,28 @@ end
 					end
 				end
 			end
+			@actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 1).all
+			@actividadesa.each do |actade| 
+				@cpObs= ObservacionActividadAdecuacion.where(adecuacionactividad_id: actade.id).all
+
+			    if @cpObs.blank?
+			    	@observacionesExtras[actade.id]="no"
+			    else
+
+					cpBool = 0
+					@cpObs.each do |probar|
+						if !probar.observaciones.blank?
+							cpBool = 1
+						end
+					end
+
+			    	if cpBool == 0
+			    		@observacionesExtras[actade.id]="no"
+			    	else
+			    		@observacionesExtras[actade.id]="si"
+			    	end
+			    end
+			end
 		else
 			redirect_to controller:"forminst", action: "index"
 		end
@@ -970,6 +1060,7 @@ end
 			@actividadesaext= []
 			@actividadesafor= []
 			@actividadesaotr= []
+      @observacionesExtras= []
 			@actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 3).all
 			@actividadesa.each do |actade| 
 				@act= Actividad.find(actade.actividad_id)
@@ -1004,6 +1095,28 @@ end
 					end
 				end
 			end
+			@actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 1).all
+			@actividadesa.each do |actade| 
+				@cpObs= ObservacionActividadAdecuacion.where(adecuacionactividad_id: actade.id).all
+
+			    if @cpObs.blank?
+			    	@observacionesExtras[actade.id]="no"
+			    else
+
+					cpBool = 0
+					@cpObs.each do |probar|
+						if !probar.observaciones.blank?
+							cpBool = 1
+						end
+					end
+
+			    	if cpBool == 0
+			    		@observacionesExtras[actade.id]="no"
+			    	else
+			    		@observacionesExtras[actade.id]="si"
+			    	end
+			    end
+			end
 		else
 			redirect_to controller:"forminst", action: "index"
 		end
@@ -1027,6 +1140,7 @@ end
 			@actividadesaext= []
 			@actividadesafor= []
 			@actividadesaotr= []
+      @observacionesExtras= []
 			@actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 4).all
 			@actividadesa.each do |actade| 
 				@act= Actividad.find(actade.actividad_id)
@@ -1061,6 +1175,28 @@ end
 					end
 				end
 			end
+			@actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 1).all
+			@actividadesa.each do |actade| 
+				@cpObs= ObservacionActividadAdecuacion.where(adecuacionactividad_id: actade.id).all
+
+			    if @cpObs.blank?
+			    	@observacionesExtras[actade.id]="no"
+			    else
+
+					cpBool = 0
+					@cpObs.each do |probar|
+						if !probar.observaciones.blank?
+							cpBool = 1
+						end
+					end
+
+			    	if cpBool == 0
+			    		@observacionesExtras[actade.id]="no"
+			    	else
+			    		@observacionesExtras[actade.id]="si"
+			    	end
+			    end
+			end
 		else
 			redirect_to controller:"forminst", action: "index"
 		end
@@ -1086,6 +1222,7 @@ end
       @actividadesafor= []
       @actividadesaobli= []
       @actividadesaotr= []
+      @observacionesExtras= []
       @actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 5).all
       @actividadesa.each do |actade| 
         @act= Actividad.find(actade.actividad_id)
@@ -1096,6 +1233,28 @@ end
             @actividadesaobli.push(@act)
           end
       end
+		@actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 1).all
+		@actividadesa.each do |actade| 
+			@cpObs= ObservacionActividadAdecuacion.where(adecuacionactividad_id: actade.id).all
+
+		    if @cpObs.blank?
+		    	@observacionesExtras[actade.id]="no"
+		    else
+
+				cpBool = 0
+				@cpObs.each do |probar|
+					if !probar.observaciones.blank?
+						cpBool = 1
+					end
+				end
+
+		    	if cpBool == 0
+		    		@observacionesExtras[actade.id]="no"
+		    	else
+		    		@observacionesExtras[actade.id]="si"
+		    	end
+		    end
+		end
     else
       redirect_to controller:"forminst", action: "index"
     end

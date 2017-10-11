@@ -1,0 +1,137 @@
+<div class = 'row'>
+  <div class="col-xs-12 col-md-12">
+      <ul class="nav nav-tabs">
+        <li><a href="../inicioinstructor/index">Inicio</a></li>
+        <li><a href="#" class='active' >Adecuación del Plan</span></a></li>
+        <li><a href="../inicioinstructor/listar_informes">Informes</a></li>
+        <li><a href="../inicioinstructor/prorrogas">Prorrogas</a></li>
+        <li><a href="../inicioinstructor/logout">Cerrar Sesión</a></li>
+      </ul>
+  
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12 col-md-12">
+    <div class="btn-group" role="group">
+      <button type="button" class="btn btn-default" onclick = " location.href = 'javascript:history.back(-1);'">Volver</button>
+      <%= link_to "Vista Previa", {controller: "inicioinstructor", action: "vista_previa"}, class: "btn btn-default" %>
+      <%= link_to "Generar PDF", {controller: "adecuacions", action: "generar_pdf"},target: :_blank, class: "btn btn-default" %>
+      <%= link_to "Ver Soportes", {controller: "inicioinstructor", action: "ver_soporte"}, class: "btn btn-default" %>
+      <%= link_to "Versiones Anteriores", {controller: "inicioinstructor", action: "ver_respaldos"}, class: "btn btn-default" %>
+    </div>
+  </div>
+</div>
+
+<div class = 'row'>
+  <div class="col-xs-12 col-md-12">
+    <%if flash[:mensaje]%>
+      <div class="panel panel-warning">
+        <div class="panel-body">
+          <h5><b><%=flash[:mensaje]%></b></h5>
+        </div>
+      </div>
+    <%end%>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12 col-md-12 col-md-offset-0">
+    <div class="text-right">
+      <div id = "fechamuestra">
+        <h3> <%= Time.now.strftime("%d") %>
+          <% if Time.now.strftime("%m").to_i == 1 %>
+            de Enero del
+          <% elsif Time.now.strftime("%m").to_i == 2 %>
+            de Febrero del
+          <% elsif Time.now.strftime("%m").to_i == 3 %>
+            de Marzo del
+          <% elsif Time.now.strftime("%m").to_i == 4 %>
+            de Abril del
+          <% elsif Time.now.strftime("%m").to_i == 5 %>
+            de Mayo del
+          <% elsif Time.now.strftime("%m").to_i == 6 %>
+            de Junio del
+          <% elsif Time.now.strftime("%m").to_i == 7 %>
+            de Julio del
+          <% elsif Time.now.strftime("%m").to_i == 8 %>
+            de Agosto del
+          <% elsif Time.now.strftime("%m").to_i == 9 %>
+            de Septiembre del
+          <% elsif Time.now.strftime("%m").to_i == 10 %>
+            de Octubre del
+          <% elsif Time.now.strftime("%m").to_i == 11 %>
+            de Noviembre del
+          <% elsif Time.now.strftime("%m").to_i == 12 %>
+            de Diciembre del
+          <% end %>
+          <%= Time.now.strftime("%Y") %> 
+        </h3>
+      </div>
+      <%if @nombre%>
+        <div>
+          <h4><b><%=@nombre%></b></h4>
+        </div>
+      <%end%>
+    </div>
+  </div>
+</div>
+
+  <input id="cant_edit" type="hidden" name="cant_edit" value="0"/> 
+  <input type="hidden" name="firtsPart" value="1">
+  <div class= "row">
+      <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
+          <div class="table-responsive">
+          	<table class="table table-bordered table-striped">
+  	          <tbody>
+  	            <tr>
+  	              <td class="text-left">5. Presentación</td>
+  	            </tr>
+  	            <tr>
+  	              <td class="text-left"><textarea name="presentacion" class="form-control" rows="2" id="presentacion" disabled><%= @presentacion %></textarea></td>  
+  	            </tr>
+  	            <tr>
+  	              <td class="text-left">6. Descripción del Perfil del Ganador del concurso</td>
+
+  	            </tr>
+  	            <tr>
+  	              <td class="text-left"><textarea name="descripcion" class="form-control" rows="2" id="descripcion" disabled><%= @descripcion %></textarea></td>  
+  	            </tr>
+  	            <tr>
+  	              <td class="text-left">7. Docencia</td>
+  	            </tr>
+  	            <tr>
+  	              <td class="text-left"><textarea name="docencia" class="form-control" rows="2" id="docencia" disabled><%= @docencia %></textarea></td>
+  	            </tr>
+  	            <tr>
+  	              <td class="text-left">8. Investigación</td>
+  	            </tr>
+  	            <tr>
+  	              <td class="text-left"><textarea name="investigacion" class="form-control" rows="2" id="investigacion" disabled><%= @investigacion %></textarea></td>
+  	            </tr>
+  	            <tr>
+  	              <td class="text-left">9. Formación y capacitación profesional</td>
+  	            </tr>
+  	            <tr>
+  	              <td class="text-left"><textarea name="formacion" class="form-control" rows="2" id="formacion" disabled><%= @formacion %></textarea></td>
+  	            </tr>
+  	            <tr>
+  	              <td class="text-left">10. Extension</td>
+  	            </tr>
+  	            <tr>
+  	              <td class="text-left"><textarea name="extension" class="form-control" rows="2" id="extension" disabled><%= @extension %></textarea></td>
+  	            </tr>
+  	          </tbody>
+  	        </table>
+          </div>
+      </div>
+  </div>
+
+  <div class = 'row'>
+    <div class = 'col-xs-3 col-md-3 col-lg-3'>
+      <button type="button" class="btn btn-forminst" onclick = " location.href = 'javascript:history.back(-1);'">&lt;&lt; Volver</button>
+    </div>
+    <div class = 'col-xs-3 col-md-3 col-lg-3 col-xs-offset-4 col-md-offset-6 col-lg-offset-6'>
+       <%= link_to "Siguiente >>", {controller: "inicioinstructor", action: "detalles_adecuacion3"}, class: "btn btn-forminst" %>
+    </div>
+  </div>

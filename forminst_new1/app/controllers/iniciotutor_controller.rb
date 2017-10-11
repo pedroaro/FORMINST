@@ -546,6 +546,9 @@ class IniciotutorController < ApplicationController
 			if !params[:firtsPart].blank?
 
 				#Presentacion
+				puts "veeeeeeeeeeeeeeeeeeerrrrrrrrrrrrrrrrrrrrrrrrrrrrr"
+	        	puts @adecuacion.id
+	        	puts params[:presentacion_id]
 				if params[:presentacionId].blank?
 					cpActividad = Actividad.new
 					cpActividad.tipo_actividad_id = 9
@@ -835,7 +838,7 @@ class IniciotutorController < ApplicationController
 				@cpObs= ObservacionActividadAdecuacion.where(adecuacionactividad_id: actade.id).all
 
 			    if @cpObs.blank?
-			    	@observacionesExtras.push("no")
+			    	@observacionesExtras[actade.id]="no"
 			    else
 
 					cpBool = 0
@@ -846,9 +849,9 @@ class IniciotutorController < ApplicationController
 					end
 
 			    	if cpBool == 0
-			    		@observacionesExtras.push("no")
+			    		@observacionesExtras[actade.id]="no"
 			    	else
-			    		@observacionesExtras.push("si")
+			    		@observacionesExtras[actade.id]="si"
 			    	end
 			    end
 			end
@@ -897,6 +900,7 @@ class IniciotutorController < ApplicationController
 			@actividadesaext= []
 			@actividadesafor= []
 			@actividadesaotr= []
+			@observacionesExtras= []
 			@actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 2).all
 			@actividadesa.each do |actade| 
 				@act= Actividad.find(actade.actividad_id)
@@ -930,6 +934,28 @@ class IniciotutorController < ApplicationController
 						end
 					end
 				end
+			end
+			@actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 1).all
+			@actividadesa.each do |actade| 
+				@cpObs= ObservacionActividadAdecuacion.where(adecuacionactividad_id: actade.id).all
+
+			    if @cpObs.blank?
+			    	@observacionesExtras[actade.id]="no"
+			    else
+
+					cpBool = 0
+					@cpObs.each do |probar|
+						if !probar.observaciones.blank?
+							cpBool = 1
+						end
+					end
+
+			    	if cpBool == 0
+			    		@observacionesExtras[actade.id]="no"
+			    	else
+			    		@observacionesExtras[actade.id]="si"
+			    	end
+			    end
 			end
 			@bool_enviado = 0
 			estatus_adecuacion = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
@@ -972,6 +998,7 @@ class IniciotutorController < ApplicationController
 			@actividadesaext= []
 			@actividadesafor= []
 			@actividadesaotr= []
+			@observacionesExtras= []
 			@adecuacion = Adecuacion.where(planformacion_id: session[:plan_id]).take
 			@est= EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
 			if !session[:editar] && (@est.estatus_id == 6 || @est.estatus_id == 5)
@@ -1021,6 +1048,28 @@ class IniciotutorController < ApplicationController
 					end
 				end
 			end
+			@actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 1).all
+			@actividadesa.each do |actade| 
+				@cpObs= ObservacionActividadAdecuacion.where(adecuacionactividad_id: actade.id).all
+
+			    if @cpObs.blank?
+			    	@observacionesExtras[actade.id]="no"
+			    else
+
+					cpBool = 0
+					@cpObs.each do |probar|
+						if !probar.observaciones.blank?
+							cpBool = 1
+						end
+					end
+
+			    	if cpBool == 0
+			    		@observacionesExtras[actade.id]="no"
+			    	else
+			    		@observacionesExtras[actade.id]="si"
+			    	end
+			    end
+			end
 			if (a == true && b== true && c== true && d== true  && e== true)
 				puts "hahahahhajjj siiii"
 			else 
@@ -1066,6 +1115,7 @@ class IniciotutorController < ApplicationController
 			@actividadesaext= []
 			@actividadesafor= []
 			@actividadesaotr= []
+			@observacionesExtras= []
 			@adecuacion = Adecuacion.where(planformacion_id: session[:plan_id]).take
 			@est= EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
 			if !session[:editar] && (@est.estatus_id == 6 || @est.estatus_id == 5)
@@ -1111,6 +1161,28 @@ class IniciotutorController < ApplicationController
 					end
 				end
 			end
+			@actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 1).all
+			@actividadesa.each do |actade| 
+				@cpObs= ObservacionActividadAdecuacion.where(adecuacionactividad_id: actade.id).all
+
+			    if @cpObs.blank?
+			    	@observacionesExtras[actade.id]="no"
+			    else
+
+					cpBool = 0
+					@cpObs.each do |probar|
+						if !probar.observaciones.blank?
+							cpBool = 1
+						end
+					end
+
+			    	if cpBool == 0
+			    		@observacionesExtras[actade.id]="no"
+			    	else
+			    		@observacionesExtras[actade.id]="si"
+			    	end
+			    end
+			end
 			@bool_enviado = 0
 			estatus_adecuacion = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
 
@@ -1153,6 +1225,7 @@ class IniciotutorController < ApplicationController
 			@actividadesafor= []
 			@actividadesaotr= []
 			@actividadesaobli= []
+			@observacionesExtras= []
 			@adecuacion = Adecuacion.where(planformacion_id: session[:plan_id]).take
 			@est= EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
 			if !session[:editar] && (@est.estatus_id == 6 || @est.estatus_id == 5)
@@ -1173,6 +1246,28 @@ class IniciotutorController < ApplicationController
 					puts @act.actividad
 					@actividadesaobli.push(@act)
 				end
+			end
+			@actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 1).all
+			@actividadesa.each do |actade| 
+				@cpObs= ObservacionActividadAdecuacion.where(adecuacionactividad_id: actade.id).all
+
+			    if @cpObs.blank?
+			    	@observacionesExtras[actade.id]="no"
+			    else
+
+					cpBool = 0
+					@cpObs.each do |probar|
+						if !probar.observaciones.blank?
+							cpBool = 1
+						end
+					end
+
+			    	if cpBool == 0
+			    		@observacionesExtras[actade.id]="no"
+			    	else
+			    		@observacionesExtras[actade.id]="si"
+			    	end
+			    end
 			end
 			@bool_enviado = 0
 			estatus_adecuacion = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
@@ -1908,11 +2003,43 @@ class IniciotutorController < ApplicationController
 			        aob = 1
 				end
 
+				are = 0
+				@actividades4= AdecuacionActividad.where(adecuacion_id: @adecuacion_id, semestre: 0).all
+				@actividades4.each do |cpActividadAdecuacion|
+					cpActividad = Actividad.find(cpActividadAdecuacion.actividad_id)
+					if cpActividad.tipo_actividad_id == 9
+						are+=1
+					end
+					if cpActividad.tipo_actividad_id == 8
+						are+=1
+					end
+					if cpActividad.tipo_actividad_id == 1
+						are+=1
+					end
+					if cpActividad.tipo_actividad_id == 2
+						are+=1
+					end
+					if cpActividad.tipo_actividad_id == 3
+						are+=1
+					end
+					if cpActividad.tipo_actividad_id == 4
+						are+=1
+					end
+				end
+
+				if are != 6
+					g=1
+				end
+
 				if (g != 0)
-					if aob == 0
-						flash[:danger]="No puede enviar la adecuación sin haber llenado todos los semestres"
+					if are == 6
+						if aob == 0
+							flash[:danger]="No puede enviar la adecuación sin haber llenado todos los semestres"
+						else
+							flash[:danger]="No puede enviar la adecuación sin tener al menos una actividad obligatoria"
+						end
 					else
-						flash[:danger]="No puede enviar la adecuación sin tener al menos una actividad obligatoria"
+						flash[:danger]="No puede enviar la adecuación sin estar terminada"
 					end
 			   	   	redirect_to controller:"iniciotutor", action: "detalles_adecuacion3"
 			   	else
