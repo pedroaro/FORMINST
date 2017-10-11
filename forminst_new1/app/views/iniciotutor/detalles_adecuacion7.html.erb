@@ -306,9 +306,11 @@
                     <td></td>
                   <%end%>
                   <td >
-                  <center>
-                    <%= link_to "Ver observaciones ", {:controller => "iniciotutor", :action => "mas_observaciones3", :actividad_id => actdoc.id, :semestre => 4, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-default" %>
-                    </center>
+                  <% if @observacionesExtras[actdoc.id] == "si" %>
+                    <center><%= link_to "Ver observaciones ", {:controller => "iniciotutor", :action => "mas_observaciones3", :actividad_id => actdoc.id, :semestre => 5, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-warning" %></center>
+                  <% else %>
+                    <center><%= link_to "Ver observaciones ", {:controller => "iniciotutor", :action => "mas_observaciones3", :actividad_id => actdoc.id, :semestre => 5, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-default" %></center>
+                  <% end %>
                   </td>
                 </tr>
               <% end %>

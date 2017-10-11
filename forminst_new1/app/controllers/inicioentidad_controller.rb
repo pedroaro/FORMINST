@@ -471,6 +471,163 @@ end
 		end
 	end
 
+	def detalles_adecuacion2
+
+		if session[:usuario_id] && session[:entidad]
+			@cjpTipo=Usuario.find(session[:usuario_id]).tipo
+			if params[:plan_id]
+				@planformacion = Planformacion.find(params[:plan_id])
+				session[:editar]= true
+				session[:plan_id] = @planformacion.id
+				@instructorName = Persona.where(usuario_id: @planformacion.instructor_id).take.nombres
+				session[:instructorName] = @instructorName
+				@adecuacion = Adecuacion.where(planformacion_id: session[:plan_id]).take
+				session[:adecuacion_id]= @adecuacion.id
+			else 
+				@planformacion = Planformacion.find(session[:plan_id])
+			end
+			
+			if !@planformacion.blank?
+				#Ver si el informe fue rachazado
+				cpInstructor = Usuario.find(@planformacion.instructor_id)
+				if (cpInstructor.activo == false)
+					@cpBloquear = true
+				else
+					@cpBloquear = false
+				end
+				#fin
+			end
+
+			@adecuacion = Adecuacion.where(planformacion_id: session[:plan_id]).take
+			actividades = AdecuacionActividad.where(adecuacion_id: session[:adecuacion_id], semestre: 0)
+			if !actividades.blank?
+				actividades.each do |actividadAde|
+					actividad = Actividad.find(actividadAde.actividad_id)
+					if actividad.tipo_actividad_id == 9
+						@presentacion = actividad.actividad
+						@presentacionId = actividad.id
+					elsif actividad.tipo_actividad_id == 8
+						@descripcion = actividad.actividad
+						@descripcionId = actividad.id
+					elsif actividad.tipo_actividad_id == 1
+						@docencia = actividad.actividad	
+						@docenciaId = actividad.id
+					elsif actividad.tipo_actividad_id == 2
+						@investigacion = actividad.actividad
+						@investigacionId = actividad.id
+					elsif actividad.tipo_actividad_id == 4
+						@formacion = actividad.actividad	
+						@formacionId = actividad.id
+					elsif actividad.tipo_actividad_id == 3
+						@extension = actividad.actividad	
+						@extensionId = actividad.id
+					end
+				end
+			end
+
+			if params[:editar] == 'no' 
+				session[:editar]= false
+			end
+			@est= EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
+			if !session[:editar] && (@est.estatus_id == 6 || @est.estatus_id == 5)
+				flash.now[:info]= "Para editar la Adecuación debe seleccionar Modificar Adecuación"
+			end
+			
+			@bool_enviado = 0
+			if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12)
+			#Usuario comision
+				estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take #Estatus enviado a comision de investigacioni
+				if(estatusI.estatus_id != 3)
+				@bool_enviado = 1
+				end
+
+			else
+				if (session[:entidad_id] >= 14 && session[:entidad_id] <= 17)
+				#Consejo tecnico
+					estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
+					if(estatusI.estatus_id != 2)
+					@bool_enviado = 1
+					end
+				else
+					if (session[:entidad_id] >= 1 && session[:entidad_id] <= 6)
+					#Consejo de escuela
+						estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take 
+						if(estatusI.estatus_id != 8)
+						@bool_enviado = 1 #Estatus enviado a consejo escuela
+						
+						end
+					else
+						if (session[:entidad_id] == 13)
+						#Consejo de facultad
+							estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
+							if(estatusI.estatus_id != 4)
+							@bool_enviado = 1
+							end
+						end	
+					end
+				end
+			end
+
+			#Presentacion 
+			aa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 0, actividad_id: @presentacionId).take
+			if !aa.blank?
+				cp = ObservacionActividadAdecuacion.where(adecuacionactividad_id: aa.id, actual: 1).take
+				if !cp.blank?
+					@obsPresentacion = cp.observaciones
+				end
+			end
+
+			#Descripcion 
+			aa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 0, actividad_id: @descripcionId).take
+			if !aa.blank?
+				cp = ObservacionActividadAdecuacion.where(adecuacionactividad_id: aa.id, actual: 1).take
+				if !cp.blank?
+					@obsPresentacion = cp.observaciones
+				end
+			end
+
+			#Docencia 
+			aa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 0, actividad_id: @docenciaId).take
+			if !aa.blank?
+				cp = ObservacionActividadAdecuacion.where(adecuacionactividad_id: aa.id, actual: 1).take
+				if !cp.blank?
+					@obsPresentacion = cp.observaciones
+				end
+			end
+
+			#Investigacion
+			aa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 0, actividad_id: @investigacionId).take
+			if !aa.blank?
+				cp = ObservacionActividadAdecuacion.where(adecuacionactividad_id: aa.id, actual: 1).take
+				if !cp.blank?
+					@obsPresentacion = cp.observaciones
+				end
+			end
+
+			#Extension
+			aa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 0, actividad_id: @extensionId).take
+			if !aa.blank?
+				cp = ObservacionActividadAdecuacion.where(adecuacionactividad_id: aa.id, actual: 1).take
+				if !cp.blank?
+					@obsPresentacion = cp.observaciones
+				end
+			end
+
+			#Formacion
+			aa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 0, actividad_id: @formacionId).take
+			if !aa.blank?
+				cp = ObservacionActividadAdecuacion.where(adecuacionactividad_id: aa.id, actual: 1).take
+				if !cp.blank?
+					@obsPresentacion = cp.observaciones
+				end
+			end
+
+
+		else
+			redirect_to controller:"forminst", action: "index"
+		end
+	end
+
 	def detalles_adecuacion3
 		if session[:usuario_id] && session[:entidad]= true
 			@cjpTipo=Usuario.find(session[:usuario_id]).tipo
@@ -507,22 +664,22 @@ end
 					@obs= ObservacionActividadAdecuacion.where(adecuacionactividad_id: actade.id, revision_id: @revision.id).take
 		       
 			        if @obs==nil
-			          	@observaciont.push("")
+						@observaciont[@act.id] = ""
 			        else
-			          	@observaciont.push(@obs.observaciones)
+						@observaciont[@act.id] = @obs.observaciones
 			        end
 
 			        @cpObs= ObservacionActividadAdecuacion.where(adecuacionactividad_id: actade.id).where.not(revision_id: @revision.id).all
 				    if @cpObs.blank?
-				    	@observacionesExtras.push("no")
+				    	@observacionesExtras[@act.id]="no"
 				    else
-				    	@observacionesExtras.push("si")
+				    	@observacionesExtras[@act.id]="si"
 				    end
 				else 
 					@cpObs= ObservacionActividadAdecuacion.where(adecuacionactividad_id: actade.id).all
 
 				    if @cpObs.blank?
-				    	@observacionesExtras.push("no")
+				    	@observacionesExtras[@act.id]="no"
 				    else
 
 						cpBool = 0
@@ -533,9 +690,9 @@ end
 						end
 
 				    	if cpBool == 0
-				    		@observacionesExtras.push("no")
+				    		@observacionesExtras[@act.id]="no"
 				    	else
-				    		@observacionesExtras.push("si")
+				    		@observacionesExtras[@act.id]="si"
 				    	end
 				    end
 			    end
@@ -646,22 +803,22 @@ end
 					@obs= ObservacionActividadAdecuacion.where(adecuacionactividad_id: actade.id, revision_id: @revision.id).take
 		       
 			        if @obs==nil
-			          	@observaciont.push("")
+			          	@observaciont[@act.id]=""
 			        else
-			          	@observaciont.push(@obs.observaciones)
+			          	@observaciont[@act.id]=@obs.observaciones
 			        end
 
 			        @cpObs= ObservacionActividadAdecuacion.where(adecuacionactividad_id: actade.id).where.not(revision_id: @revision.id).all
 				    if @cpObs.blank?
-				    	@observacionesExtras.push("no")
+				    	@observacionesExtras[@act.id]="no"
 				    else
-				    	@observacionesExtras.push("si")
+				    	@observacionesExtras[@act.id]="si"
 				    end
 				else 
 					@cpObs= ObservacionActividadAdecuacion.where(adecuacionactividad_id: actade.id).all
 
 				    if @cpObs.blank?
-				    	@observacionesExtras.push("no")
+				    	@observacionesExtras[@act.id]="no"
 				    else
 
 						cpBool = 0
@@ -672,9 +829,9 @@ end
 						end
 
 				    	if cpBool == 0
-				    		@observacionesExtras.push("no")
+				    		@observacionesExtras[@act.id]="no"
 				    	else
-				    		@observacionesExtras.push("si")
+				    		@observacionesExtras[@act.id]="si"
 				    	end
 				    end
 			    end
@@ -785,22 +942,22 @@ end
 					@obs= ObservacionActividadAdecuacion.where(adecuacionactividad_id: actade.id, revision_id: @revision.id).take
 		       
 			        if @obs==nil
-			          	@observaciont.push("")
+			          	@observaciont[@act.id]=""
 			        else
-			          	@observaciont.push(@obs.observaciones)
+			          	@observaciont[@act.id]=@obs.observaciones
 			        end
 
 			        @cpObs= ObservacionActividadAdecuacion.where(adecuacionactividad_id: actade.id).where.not(revision_id: @revision.id).all
 				    if @cpObs.blank?
-				    	@observacionesExtras.push("no")
+				    	@observacionesExtras[@act.id]="no"
 				    else
-				    	@observacionesExtras.push("si")
+				    	@observacionesExtras[@act.id]="si"
 				    end
 				else 
 					@cpObs= ObservacionActividadAdecuacion.where(adecuacionactividad_id: actade.id).all
 
 				    if @cpObs.blank?
-				    	@observacionesExtras.push("no")
+				    	@observacionesExtras[@act.id]="no"
 				    else
 
 						cpBool = 0
@@ -811,9 +968,9 @@ end
 						end
 
 				    	if cpBool == 0
-				    		@observacionesExtras.push("no")
+				    		@observacionesExtras[@act.id]="no"
 				    	else
-				    		@observacionesExtras.push("si")
+				    		@observacionesExtras[@act.id]="si"
 				    	end
 				    end
 			    end
@@ -924,22 +1081,22 @@ end
 					@obs= ObservacionActividadAdecuacion.where(adecuacionactividad_id: actade.id, revision_id: @revision.id).take
 		       
 			        if @obs==nil
-			          	@observaciont.push("")
+			          	@observaciont[@act.id]=""
 			        else
-			          	@observaciont.push(@obs.observaciones)
+			          	@observaciont[@act.id]=@obs.observaciones
 			        end
 
 			        @cpObs= ObservacionActividadAdecuacion.where(adecuacionactividad_id: actade.id).where.not(revision_id: @revision.id).all
 				    if @cpObs.blank?
-				    	@observacionesExtras.push("no")
+				    	@observacionesExtras[@act.id]="no"
 				    else
-				    	@observacionesExtras.push("si")
+				    	@observacionesExtras[@act.id]="si"
 				    end
 				else 
 					@cpObs= ObservacionActividadAdecuacion.where(adecuacionactividad_id: actade.id).all
 
 				    if @cpObs.blank?
-				    	@observacionesExtras.push("no")
+				    	@observacionesExtras[@act.id]="no"
 				    else
 
 						cpBool = 0
@@ -950,9 +1107,9 @@ end
 						end
 
 				    	if cpBool == 0
-				    		@observacionesExtras.push("no")
+				    		@observacionesExtras[@act.id]="no"
 				    	else
-				    		@observacionesExtras.push("si")
+				    		@observacionesExtras[@act.id]="si"
 				    	end
 				    end
 			    end
@@ -1048,6 +1205,7 @@ end
 			@actividadesaext= []
 			@actividadesafor= []
 			@actividadesaotr= []
+			@observacionesExtras= []
 			@actividadesaobli= []
 			@observaciont= []
 			@j=0
@@ -1064,10 +1222,37 @@ end
 					@obs= ObservacionActividadAdecuacion.where(adecuacionactividad_id: actade.id, revision_id: @revision.id).take
 		       
 			        if @obs==nil
-			          	@observaciont.push("")
+			          	@observaciont[@act.id]=""
 			        else
-			          	@observaciont.push(@obs.observaciones)
+			          	@observaciont[@act.id]=@obs.observaciones
 			        end
+
+			        @cpObs= ObservacionActividadAdecuacion.where(adecuacionactividad_id: actade.id).where.not(revision_id: @revision.id).all
+			        if @cpObs.blank?
+				    	@observacionesExtras[@act.id]="no"
+				    else
+				    	@observacionesExtras[@act.id]="si"
+				    end
+				else
+					@cpObs= ObservacionActividadAdecuacion.where(adecuacionactividad_id: actade.id).all
+
+				    if @cpObs.blank?
+				    	@observacionesExtras[@act.id]="no"
+				    else
+
+						cpBool = 0
+						@cpObs.each do |probar|
+							if !probar.observaciones.blank?
+								cpBool = 1
+							end
+						end
+
+				    	if cpBool == 0
+				    		@observacionesExtras[@act.id]="no"
+				    	else
+				    		@observacionesExtras[@act.id]="si"
+				    	end
+				    end
 			    end
 
 				
@@ -2623,6 +2808,140 @@ end
 	              type: @document.content_type,
 	              filename: @document.filename)
   	end
+
+	def guardar_obs_primera_parte
+ 		if session[:usuario_id] && session[:entidad]== true
+ 			@semestre = params[:semestre].to_i
+ 			@vista_adecuacion = @semestre + 2
+		    @adecuacion= Adecuacion.find(session[:adecuacion_id])
+		    @estatus= EstatusAdecuacion.where(adecuacion_id: @adecuacion.id).take
+		
+
+
+
+			revision= Revision.where(usuario_id: session[:usuario_id], adecuacion_id: @adecuacion.id, estatus_id: @estatus.estatus_id, informe_id: nil).take 
+	     
+
+	        if(revision == nil || revision =="")
+
+		        revision = Revision.new
+		        revision.informe_id = nil
+	    	    revision.usuario_id = session[:usuario_id]
+	    	    revision.adecuacion_id = @adecuacion.id
+	    	    revision.estatus_id = @estatus.estatus_id
+	        	revision.fecha =  Time.now
+	        	revision.save
+			else
+				revision.fecha =  Time.now
+	        	revision.save
+
+        	end 
+
+        	#presentacion
+        	puts "veeeeeeeeeeeeeeeeeeerrrrrrrrrrrrrrrrrrrrrrrrrrrrr"
+        	puts @adecuacion.id
+        	puts params[:obsPresentacion]
+      		aa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 0, actividad_id: params[:presentacionId]).take
+      			oa= ObservacionActividadAdecuacion.where(adecuacionactividad_id: aa.id, revision_id: revision.id).take
+
+      		if(oa == nil || oa =="")
+	          	oa = ObservacionActividadAdecuacion.new
+	          	oa.adecuacionactividad_id = aa.id
+	          	oa.revision_id =  revision.id
+	          	oa.observaciones = params[:obsPresentacion]
+	          	oa.actual = 1
+	          	oa.save
+	        else
+	       		oa.observaciones = params[:obsPresentacion]
+	       		oa.save
+	       	end
+
+	       	#Descripcion
+      		aa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 0, actividad_id: params[:descripcionId]).take
+      			oa= ObservacionActividadAdecuacion.where(adecuacionactividad_id: aa, revision_id: revision.id).take
+
+      		if(oa == nil || oa =="")
+	          	oa = ObservacionActividadAdecuacion.new
+	          	oa.adecuacionactividad_id = aa.id
+	          	oa.revision_id =  revision.id
+	          	oa.observaciones = params[:obsDescripcion]
+	          	oa.actual = 1
+	          	oa.save
+	        else
+	       		oa.observaciones = params[:obsDescripcion]
+	       		oa.save
+	       	end
+
+	       	#Docencia
+      		aa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 0, actividad_id: params[:docenciaId]).take
+      			oa= ObservacionActividadAdecuacion.where(adecuacionactividad_id: aa, revision_id: revision.id).take
+
+      		if(oa == nil || oa =="")
+	          	oa = ObservacionActividadAdecuacion.new
+	          	oa.adecuacionactividad_id = aa.id
+	          	oa.revision_id =  revision.id
+	          	oa.observaciones = params[:obsDocencia]
+	          	oa.actual = 1
+	          	oa.save
+	        else
+	       		oa.observaciones = params[:obsDocencia]
+	       		oa.save
+	       	end
+
+	       	#Investigacion
+      		aa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 0, actividad_id: params[:investigacionId]).take
+      			oa= ObservacionActividadAdecuacion.where(adecuacionactividad_id: aa, revision_id: revision.id).take
+
+      		if(oa == nil || oa =="")
+	          	oa = ObservacionActividadAdecuacion.new
+	          	oa.adecuacionactividad_id = aa.id
+	          	oa.revision_id =  revision.id
+	          	oa.observaciones = params[:obsInvestigacion]
+	          	oa.actual = 1
+	          	oa.save
+	        else
+	       		oa.observaciones = params[:obsInvestigacion]
+	       		oa.save
+	       	end
+
+	       	#Formacion
+      		aa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 0, actividad_id: params[:formacionId]).take
+      			oa= ObservacionActividadAdecuacion.where(adecuacionactividad_id: aa, revision_id: revision.id).take
+
+      		if(oa == nil || oa =="")
+	          	oa = ObservacionActividadAdecuacion.new
+	          	oa.adecuacionactividad_id = aa.id
+	          	oa.revision_id =  revision.id
+	          	oa.observaciones = params[:obsFormacion]
+	          	oa.actual = 1
+	          	oa.save
+	        else
+	       		oa.observaciones = params[:obsFormacion]
+	       		oa.save
+	       	end
+
+	       	#Extension
+      		aa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 0, actividad_id: params[:extensionId]).take
+      			oa= ObservacionActividadAdecuacion.where(adecuacionactividad_id: aa, revision_id: revision.id).take
+
+      		if(oa == nil || oa =="")
+	          	oa = ObservacionActividadAdecuacion.new
+	          	oa.adecuacionactividad_id = aa.id
+	          	oa.revision_id =  revision.id
+	          	oa.observaciones = params[:obsExtension]
+	          	oa.actual = 1
+	          	oa.save
+	        else
+	       		oa.observaciones = params[:obsExtension]
+	       		oa.save
+	       	end
+
+	      
+
+	      	flash[:success]="Se han creado y/o modificado las observaciones satisfactoriamente"
+	      	redirect_to controller:"inicioentidad", action: "detalles_adecuacion2"
+ 		end
+ 	end
 
 	def guardar_observaciones2
  		if session[:usuario_id] && session[:entidad]== true

@@ -65,42 +65,22 @@ class SecretariasController < ApplicationController
 
 			haceralgo = "Si"
 
-			cjprpersonas = Persona.all
-			cjprpersonas.each do |personaactual|
-				puts personaactual.ci
-				if personaactual.ci == params[:CI].to_s
-					haceralgo = "No"
-				end
+			cjprpersonas = Persona.where(ci: params[:CI]).take
+			if !cjprpersonas.blank?
+				haceralgo = "No"
 			end
 
-			cjprusuario = Usuario.all
-			cjprusuario.each do |usuarioactual|
-				puts usuarioactual.user
-				if usuarioactual.email == params[:correo].to_s
-					haceralgo = "No"
-				end
-				puts usuarioactual.email
-				if usuarioactual.user == params[:correo].to_s
-					haceralgo = "No"
-				end
+			cjprpersonas = Usuario.where(email: params[:correo]).take
+			if !cjprpersonas.blank?
+				haceralgo = "No"
 			end
 
-			puts "holaaaaaaaaaaaaaaaa"
-			puts haceralgo
+			cjprpersonas = Usuario.where(user: params[:correo]).take
+			if !cjprpersonas.blank?
+				haceralgo = "No"
+			end
 			
 			if haceralgo == "Si"
-
-				puts params[:Nombre]
-				puts params[:Apellido]
-				puts params[:CI]
-				puts params[:correo]
-				puts params[:Tlf]
-				puts params[:OTlf]
-				puts params[:FechaNac]
-				puts params[:Dir]
-				puts params[:GradoI]
-				puts params[:Area]
-				puts params[:Subarea]
 			
 				if params[:depto].to_i != 0
 					cpSecretariaID = session[:usuario_id]
@@ -293,24 +273,19 @@ class SecretariasController < ApplicationController
 			nombre = "hola"
 			cpid = 1
 
-			cjprpersonas = Persona.all
-			cjprpersonas.each do |personaactual|
-				puts personaactual.ci
-				if personaactual.ci == params[:CI].to_s
-					haceralgo = "No"
-				end
+			cjprpersonas = Persona.where(ci: params[:CI]).take
+			if !cjprpersonas.blank?
+				haceralgo = "No"
 			end
 
-			cjprusuario = Usuario.all
-			cjprusuario.each do |usuarioactual|
-				puts usuarioactual.user
-				if usuarioactual.email == params[:correo].to_s
-					haceralgo = "No"
-				end
-				puts usuarioactual.email
-				if usuarioactual.user == params[:correo].to_s
-					haceralgo = "No"
-				end
+			cjprpersonas = Usuario.where(email: params[:correo]).take
+			if !cjprpersonas.blank?
+				haceralgo = "No"
+			end
+
+			cjprpersonas = Usuario.where(user: params[:correo]).take
+			if !cjprpersonas.blank?
+				haceralgo = "No"
 			end
 
 			puts "holaaaaaaaaaaaaaaaa"
@@ -690,22 +665,21 @@ class SecretariasController < ApplicationController
 			nombre = "hola"
 			cpid = 1
 
-			cjprpersonas = Persona.all
-			cjprpersonas.each do |personaactual|
-				puts personaactual.ci
-				if personaactual.ci == params[:CI].to_s && personaactual.ci != $cpcifija.to_s
+			if $cpcifija.to_s != params[:CI].to_s
+				cjprpersonas = Persona.where(ci: params[:CI]).take
+				if !cjprpersonas.blank?
 					haceralgo = "No"
 				end
 			end
 
-			cjprusuario = Usuario.all
-			cjprusuario.each do |usuarioactual|
-				puts usuarioactual.user
-				if usuarioactual.email == params[:correo].to_s && usuarioactual.email != $cpcorreofijo.to_s
+			if $cpcorreofijo.to_s != params[:correo].to_s
+				cjprpersonas = Usuario.where(email: params[:correo]).take
+				if !cjprpersonas.blank?
 					haceralgo = "No"
 				end
-				puts usuarioactual.email
-				if usuarioactual.user == params[:correo].to_s && usuarioactual.user != $cpcorreofijo.to_s
+
+				cjprpersonas = Usuario.where(user: params[:correo]).take
+				if !cjprpersonas.blank?
 					haceralgo = "No"
 				end
 			end
@@ -938,22 +912,21 @@ class SecretariasController < ApplicationController
 			nombre = "hola"
 			cpid = 1
 
-			cjprpersonas = Persona.all
-			cjprpersonas.each do |personaactual|
-				puts personaactual.ci
-				if personaactual.ci == params[:CI].to_s && personaactual.ci != $cpcifija.to_s
+			if $cpcifija.to_s != params[:CI].to_s
+				cjprpersonas = Persona.where(ci: params[:CI]).take
+				if !cjprpersonas.blank?
 					haceralgo = "No"
 				end
 			end
 
-			cjprusuario = Usuario.all
-			cjprusuario.each do |usuarioactual|
-				puts usuarioactual.user
-				if usuarioactual.email == params[:correo].to_s && usuarioactual.email != $cpcorreofijo.to_s
+			if $cpcorreofijo.to_s != params[:correo].to_s
+				cjprpersonas = Usuario.where(email: params[:correo]).take
+				if !cjprpersonas.blank?
 					haceralgo = "No"
 				end
-				puts usuarioactual.email
-				if usuarioactual.user == params[:correo].to_s && usuarioactual.user != $cpcorreofijo.to_s
+
+				cjprpersonas = Usuario.where(user: params[:correo]).take
+				if !cjprpersonas.blank?
 					haceralgo = "No"
 				end
 			end
