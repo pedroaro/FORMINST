@@ -2044,22 +2044,22 @@ class IniciotutorController < ApplicationController
 				@actividades4= AdecuacionActividad.where(adecuacion_id: @adecuacion_id, semestre: 0).all
 				@actividades4.each do |cpActividadAdecuacion|
 					cpActividad = Actividad.find(cpActividadAdecuacion.actividad_id)
-					if cpActividad.tipo_actividad_id == 9
+					if cpActividad.tipo_actividad_id == 9 && !cpActividad.actividad.blank?
 						are+=1
 					end
-					if cpActividad.tipo_actividad_id == 8
+					if cpActividad.tipo_actividad_id == 8 && !cpActividad.actividad.blank?
 						are+=1
 					end
-					if cpActividad.tipo_actividad_id == 1
+					if cpActividad.tipo_actividad_id == 1 && !cpActividad.actividad.blank?
 						are+=1
 					end
-					if cpActividad.tipo_actividad_id == 2
+					if cpActividad.tipo_actividad_id == 2 && !cpActividad.actividad.blank?
 						are+=1
 					end
-					if cpActividad.tipo_actividad_id == 3
+					if cpActividad.tipo_actividad_id == 3 && !cpActividad.actividad.blank?
 						are+=1
 					end
-					if cpActividad.tipo_actividad_id == 4
+					if cpActividad.tipo_actividad_id == 4 && !cpActividad.actividad.blank?
 						are+=1
 					end
 				end
