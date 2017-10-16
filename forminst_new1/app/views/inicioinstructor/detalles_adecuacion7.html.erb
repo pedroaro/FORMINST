@@ -101,16 +101,51 @@
             </tr>
             <tr>
 
-              <td class="text-center"><strong>Actividades para la Aprobación</strong></td>
+              <td class="text-center"><strong>Actividades de Docencia</strong></td>
             </tr>
-              <% @actividadesaobli.each_with_index do |actdoc, i| %>
+              <% @actividadesadoc.each_with_index do |actdoc, i| %>
                 <tr>
                   <td>
-                    <textarea class="form-control" rows="2"  name='<%= @obligatoria+actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
+                    <textarea class="form-control" rows="2"  name='<%= @docencia+actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
                     <input type="hidden" name="<%= @iddoc+i.to_s%> " value='<%= actdoc.id %>'>
                   </td>
                 </tr>
               <% end %>
+
+            <tr>
+
+              <td class="text-center"><strong>Actividades de Investigación</strong></td>
+            </tr>
+            <% @actividadesainv.each_with_index do |actdoc,i| %>
+              <tr>
+                <td>
+                  <textarea class="form-control" rows="2"  name='<%= @investigacion+actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
+                </td>
+              </tr>
+            <% end %>
+
+            <tr>
+              <td class="text-center"><strong>Actividades de Formación</strong></td>
+            </tr>
+            <% @actividadesafor.each_with_index do |actdoc,i| %>
+              <tr>
+                <td>
+                  <textarea class="form-control" rows="2"  name='<%= @formacion+actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
+                </td>
+              </tr>
+            <% end %>
+
+            <tr>
+              <td class="text-center"><strong>Actividades de Extensión</strong></td>
+            </tr>
+            <% @actividadesaext.each_with_index do |actdoc,i| %>
+              <tr>
+                <td>
+                  <textarea class="form-control" rows="2"  name='<%= @extension+actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
+                </td>
+              </tr>
+            <% end %>
+
           </tbody>
         </table>
     <% end %>

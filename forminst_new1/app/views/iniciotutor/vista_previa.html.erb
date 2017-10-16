@@ -644,14 +644,37 @@
             <td><b>ACTIVIDADES OBLIGATORIAS</b></td>
           </tr>
           <tr>
-            <td class="text-left"><b>12.- Actividades Obligatorias:</b></td>
+            <td class="text-left"><b>11.1.- Docencia:</b></td>
           </tr>
-            <% @actividades5obli.each_with_index do |actdoc, i| %>
+            <% @actividades5doc.each_with_index do |actdoc, i| %>
               <tr>
                 <td class="text-left"><%= actdoc.actividad %></td>
               </tr>
             <% end %>
           <tr>
+            <td class="text-left"><b>11.2.- Investigación:</b></td>
+          </tr>
+            <% @actividades5inv.each_with_index do |actdoc, i| %>
+                <tr>
+                  <td class="text-left"><%= actdoc.actividad %></td>
+                </tr>
+            <% end %>
+          <tr>
+            <td class="text-left"><b>11.3.- Formación:</b></td>
+          </tr>
+          <% @actividades5for.each_with_index do |actdoc, i| %>
+              <tr>
+                <td class="text-left"><%= actdoc.actividad %></td>
+              </tr>
+          <% end %>
+          <tr>
+            <td class="text-left"><b>11.4.- Extensión:</b></td>
+          </tr>
+          <% @actividades5ext.each_with_index do |actdoc, i| %>
+              <tr>
+                <td class="text-left"><%= actdoc.actividad %></td>
+              </tr>
+          <% end %>
         </tbody>
       </table>
     </div>

@@ -45,7 +45,10 @@ class AdecuacionsController < ApplicationController
     @cactv_formacion= []
     @cactv_extension=[]
     @cactv_otras=[]
-    @dactv_obligatorias=[]
+    @dactv_docencia= []
+    @dactv_investigacion= []
+    @dactv_formacion= []
+    @dactv_extension=[]
 
     @actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 1).all
     @actividadesa.each do |actade| 
@@ -191,10 +194,28 @@ class AdecuacionsController < ApplicationController
     @cactividadesa.each do |actade| 
       @act= Actividad.find(actade.actividad_id)
       tipo= @act.tipo_actividad_id
-      if tipo==7
+      if tipo==1
         puts "soy una actividad de docencia"
         puts @act.actividad
-        @dactv_obligatorias.push(@act)
+        @dactv_docencia.push(@act)
+      else
+        if tipo==2
+          puts "soy una actividad de investigacion"
+          puts @act.actividad
+          @dactv_investigacion.push(@act)
+        else
+          if tipo==3
+            puts "soy una actividad de extension"
+            puts @act.actividad
+            @dactv_extension.push(@act)
+          else
+            if tipo==4
+              puts "soy una actividad de formacion"
+              puts @act.actividad
+              @dactv_formacion.push(@act)
+            end
+          end
+        end
       end
     end
     @documents = []
@@ -211,7 +232,7 @@ class AdecuacionsController < ApplicationController
       end
     end
     # se llama a la función de "pedf_adecuacion" del modelo "pdf", pasando todas las variables correspondientes
-    Pdf.pdf_adecuacion(@actividades1, @planformacion, @adecuacion, @tutor, @instructor, @correoi, @correot, @escuela, @pactv_docencia, @pactv_investigacion, @pactv_extension, @pactv_formacion, @pactv_otras, @sactv_docencia, @sactv_investigacion, @sactv_extension, @sactv_formacion, @sactv_otras, @tactv_docencia, @tactv_investigacion, @tactv_extension, @tactv_formacion, @tactv_otras, @cactv_docencia, @cactv_investigacion, @cactv_extension, @cactv_formacion, @cactv_otras, @fechaActual, @fechaConcurso, @documents, @numeroDeVersion, @dactv_obligatorias)
+    Pdf.pdf_adecuacion(@actividades1, @planformacion, @adecuacion, @tutor, @instructor, @correoi, @correot, @escuela, @pactv_docencia, @pactv_investigacion, @pactv_extension, @pactv_formacion, @pactv_otras, @sactv_docencia, @sactv_investigacion, @sactv_extension, @sactv_formacion, @sactv_otras, @tactv_docencia, @tactv_investigacion, @tactv_extension, @tactv_formacion, @tactv_otras, @cactv_docencia, @cactv_investigacion, @cactv_extension, @cactv_formacion, @cactv_otras, @fechaActual, @fechaConcurso, @documents, @numeroDeVersion, @dactv_docencia, @dactv_investigacion, @dactv_extension, @dactv_formacion)
     @nombre_archivo= @instructor.ci.to_s+'-'+@fechaActual+'-adecuacion.pdf' # se arma el nombre del documento 
     act = "#{Rails.root}/tmp/PDFs/" + @nombre_archivo
     #act = @nombre_archivo        #PRODUCCION

@@ -1,7 +1,7 @@
 class Pdf 
 # estas funciones permite generar el cuerpo del documento en formato pdf
 
-	def self.pdf_adecuacion(actividades, plan, adecuacion, tutor, instructor, correoi, correot, escuela, pactv_docencia, pactv_investigacion, pactv_extension, pactv_formacion, pactv_otras, sactv_docencia, sactv_investigacion, sactv_extension, sactv_formacion, sactv_otras, tactv_docencia, tactv_investigacion, tactv_extension, tactv_formacion, tactv_otras, cactv_docencia, cactv_investigacion, cactv_extension, cactv_formacion, cactv_otras, fechaActual, fechaConcurso, soportes,numeroDeVersion, dactv_obligatorias)
+	def self.pdf_adecuacion(actividades, plan, adecuacion, tutor, instructor, correoi, correot, escuela, pactv_docencia, pactv_investigacion, pactv_extension, pactv_formacion, pactv_otras, sactv_docencia, sactv_investigacion, sactv_extension, sactv_formacion, sactv_otras, tactv_docencia, tactv_investigacion, tactv_extension, tactv_formacion, tactv_otras, cactv_docencia, cactv_investigacion, cactv_extension, cactv_formacion, cactv_otras, fechaActual, fechaConcurso, soportes,numeroDeVersion, dactv_docencia, dactv_investigacion, dactv_extension, dactv_formacion)
 	#def self.pdf_adecuacion(adecuacion, tutor, instructor, notificacion, perfil, pactv_docencia, pactv_investigacion, pactv_extension, pactv_formacion, pactv_otras, sactv_docencia, sactv_investigacion, sactv_extension, sactv_formacion, sactv_otras, tactv_docencia, tactv_investigacion, tactv_extension, tactv_formacion, tactv_otras, cactv_docencia, cactv_investigacion, cactv_extension, cactv_formacion, cactv_otras)
 		
 		# se invocan la bibliotecas
@@ -1084,21 +1084,21 @@ class Pdf
 				:align => { 0 => :left}
 			end
 							
-			data170=[[{:text=>"11.5.- OTRAS ACTIVIDADES:", :font_style => :bold}]] # datos que se desean en la tabla
+			data170 = [[{:text=>"ACTIVIDADES OBLIGATORIAS ", :font_style => :bold}], [{:text=>"11.1.- DOCENCIA:",:font_style => :bold }]] # datos que se desean en la tabla
 			
 			pdf.table data170, # lineas para generar la tabla en el docuemnto
-					:border_style => :grid, #:underline_header
-					:font_size  => 10, 
-					:horizontal_padding => 6,
-					:vertical_padding   => 3,
-					:border_width => 0.7, 
-					:column_widths => { 0 => 520}, 
-					:position => :left,
-					:align => { 0 => :left}
+			:border_style => :grid, #:underline_header
+			:font_size  => 10, 
+			:horizontal_padding => 6,
+			:vertical_padding   => 3,
+			:border_width => 0.7, 
+			:column_widths => { 0 => 520}, 
+			:position => :left,
+			:align => { 0 => :left}
 			
-			if cactv_otras != []
-				cactv_otras.each do |actv|
-					data171 =[[{:text => actv.actividad , :aling=> :left}]] # datos que se desean en la tabla
+			if dactv_docencia != []
+				dactv_docencia.each do |actv|
+					data171 = [[{:text=>  actv.actividad ,  :align=>:left}]] # datos que se desean en la tabla
 					
 					pdf.table data171, # lineas para generar la tabla en el docuemnto
 					:border_style => :grid, #:underline_header
@@ -1109,10 +1109,9 @@ class Pdf
 					:column_widths => { 0 => 520}, 
 					:position => :left,
 					:align => { 0 => :left}
-				end
+				end	
 			else
-				data171 =[[{:text => "No hubo." , :aling=> :left}]] # datos que se desean en la tabla
-				
+				data171 = [[{:text=>  "No hubo." ,  :align=>:left}]] # datos que se desean en la tabla
 				pdf.table data171, # lineas para generar la tabla en el docuemnto
 				:border_style => :grid, #:underline_header
 				:font_size  => 10, 
@@ -1123,25 +1122,10 @@ class Pdf
 				:position => :left,
 				:align => { 0 => :left}
 			end
-			#Actividades Obligatorias
-
-			data171 = [[{:text=>"ACTIVIDADES OBLIGATORIAS ", :font_style => :bold}], [{:text=>"12.- ACTIVIDADES OBLIGATORIAS:",:font_style => :bold }]] # datos que se desean en la tabla
 			
-			pdf.table data171, # lineas para generar la tabla en el docuemnto
-			:border_style => :grid, #:underline_header
-			:font_size  => 10, 
-			:horizontal_padding => 6,
-			:vertical_padding   => 3,
-			:border_width => 0.7, 
-			:column_widths => { 0 => 520}, 
-			:position => :left,
-			:align => { 0 => :left}
+			data172= [[{:text=>"11.2.- INVESTIGACIÓN:", :font_style => :bold}]] # datos que se desean en la tabla
 			
-			if dactv_obligatorias != []
-				dactv_obligatorias.each do |actv|
-					data172 = [[{:text=>  actv.actividad ,  :align=>:left}]] # datos que se desean en la tabla
-					
-					pdf.table data172, # lineas para generar la tabla en el docuemnto
+			pdf.table data172, # lineas para generar la tabla en el docuemnto
 					:border_style => :grid, #:underline_header
 					:font_size  => 10, 
 					:horizontal_padding => 6,
@@ -1150,10 +1134,107 @@ class Pdf
 					:column_widths => { 0 => 520}, 
 					:position => :left,
 					:align => { 0 => :left}
-				end	
+			
+			if dactv_investigacion != []
+				dactv_investigacion.each do |actv|
+					data173= [[{:text=>  actv.actividad , :align=>:left}]] # datos que se desean en la tabla
+					
+					pdf.table data173, # lineas para generar la tabla en el docuemnto
+					:border_style => :grid, #:underline_header
+					:font_size  => 10, 
+					:horizontal_padding => 6,
+					:vertical_padding   => 3,
+					:border_width => 0.7, 
+					:column_widths => { 0 => 520}, 
+					:position => :left,
+					:align => { 0 => :left}
+				end
 			else
-				data172 = [[{:text=>  "No hubo." ,  :align=>:left}]] # datos que se desean en la tabla
-				pdf.table data172, # lineas para generar la tabla en el docuemnto
+				data173= [[{:text=>  "No hubo." , :align=>:left}]] # datos que se desean en la tabla
+					
+					pdf.table data173, # lineas para generar la tabla en el docuemnto
+					:border_style => :grid, #:underline_header
+					:font_size  => 10, 
+					:horizontal_padding => 6,
+					:vertical_padding   => 3,
+					:border_width => 0.7, 
+					:column_widths => { 0 => 520}, 
+					:position => :left,
+					:align => { 0 => :left}
+			end
+			
+			data174=[[{:text=>"11.3.- FORMACIÓN:", :font_style => :bold}]] # datos que se desean en la tabla
+			
+			pdf.table data174, # lineas para generar la tabla en el docuemnto
+					:border_style => :grid, #:underline_header
+					:font_size  => 10, 
+					:horizontal_padding => 6,
+					:vertical_padding   => 3,
+					:border_width => 0.7, 
+					:column_widths => { 0 => 520}, 
+					:position => :left,
+					:align => { 0 => :left}
+			
+			
+			if dactv_formacion != []
+				dactv_formacion.each do |actv|
+					data175=[[{:text=> actv.actividad , :aling=> :left}]] # datos que se desean en la tabla
+						
+					pdf.table data175, # lineas para generar la tabla en el docuemnto
+					:border_style => :grid, #:underline_header
+					:font_size  => 10, 
+					:horizontal_padding => 6,
+					:vertical_padding   => 3,
+					:border_width => 0.7, 
+					:column_widths => { 0 => 520}, 
+					:position => :left,
+					:align => { 0 => :left}
+				end
+			else
+				data175=[[{:text=>  "No hubo." , :aling=> :left}]] # datos que se desean en la tabla
+					
+				pdf.table data175, # lineas para generar la tabla en el docuemnto
+				:border_style => :grid, #:underline_header
+				:font_size  => 10, 
+				:horizontal_padding => 6,
+				:vertical_padding   => 3,
+				:border_width => 0.7, 
+				:column_widths => { 0 => 520}, 
+				:position => :left,
+				:align => { 0 => :left}
+			end
+			
+			data176=[[{:text=>"11.4.- EXTENSIÓN:", :font_style => :bold}]] # datos que se desean en la tabla
+			
+			pdf.table data176, # lineas para generar la tabla en el docuemnto
+					:border_style => :grid, #:underline_header
+					:font_size  => 10, 
+					:horizontal_padding => 6,
+					:vertical_padding   => 3,
+					:border_width => 0.7, 
+					:column_widths => { 0 => 520}, 
+					:position => :left,
+					:align => { 0 => :left}
+			
+			if dactv_extension != []
+				dactv_extension.each do |actv|
+					data177=[[{:text=>  actv.actividad , :aling=> :left}]] # datos que se desean en la tabla
+					 
+					pdf.table data177,  # lineas para generar la tabla en el docuemnto
+					:border_style => :grid, #:underline_header
+					:font_size  => 10, 
+					:horizontal_padding => 6,
+					:vertical_padding   => 3,
+					:border_width => 0.7, 
+					:column_widths => { 0 => 520}, 
+					:position => :left,
+					:align => { 0 => :left}
+					
+				end			
+			else
+				data177=[[{:text=>  "No hubo." , :aling=> :left}]] # datos que se desean en la tabla
+					
+				pdf.table data177, # lineas para generar la tabla en el docuemnto
 				:border_style => :grid, #:underline_header
 				:font_size  => 10, 
 				:horizontal_padding => 6,

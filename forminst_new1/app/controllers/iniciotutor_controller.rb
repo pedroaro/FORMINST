@@ -945,7 +945,7 @@ class IniciotutorController < ApplicationController
 					end
 				end
 			end
-			@actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 1).all
+			@actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 2).all
 			@actividadesa.each do |actade| 
 				@cpObs= ObservacionActividadAdecuacion.where(adecuacionactividad_id: actade.id).all
 
@@ -1058,7 +1058,7 @@ class IniciotutorController < ApplicationController
 					end
 				end
 			end
-			@actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 1).all
+			@actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 3).all
 			@actividadesa.each do |actade| 
 				@cpObs= ObservacionActividadAdecuacion.where(adecuacionactividad_id: actade.id).all
 
@@ -1171,7 +1171,7 @@ class IniciotutorController < ApplicationController
 					end
 				end
 			end
-			@actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 1).all
+			@actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 4).all
 			@actividadesa.each do |actade| 
 				@cpObs= ObservacionActividadAdecuacion.where(adecuacionactividad_id: actade.id).all
 
@@ -1208,7 +1208,6 @@ class IniciotutorController < ApplicationController
 		if session[:usuario_id] && session[:tutor]
 			@iddoc= 'id_docencia'
 			@docencia='docencia'
-			@obligatoria='obligatoria'
 			@investigacion= 'investigacion'
 			@formacion= 'formacion'
 			@extension= 'extension'
@@ -1216,7 +1215,7 @@ class IniciotutorController < ApplicationController
 			@nombre = session[:nombre_usuario]
 			@instructorName = session[:instructorName]
 			@plan= Planformacion.find(session[:plan_id])
-			
+
 			@planformacion = Planformacion.find(session[:plan_id])
 			if !@planformacion.blank?
 				#Ver si el informe fue rachazado
@@ -1234,7 +1233,6 @@ class IniciotutorController < ApplicationController
 			@actividadesaext= []
 			@actividadesafor= []
 			@actividadesaotr= []
-			@actividadesaobli= []
 			@observacionesExtras= []
 			@adecuacion = Adecuacion.where(planformacion_id: session[:plan_id]).take
 			@est= EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
@@ -1251,13 +1249,37 @@ class IniciotutorController < ApplicationController
 				puts "HELLO1"
 				@act= Actividad.find(actade.actividad_id)
 				tipo= @act.tipo_actividad_id
-				if tipo==7
-					puts "HELLO15"
+				if tipo==1
+					puts "HELLO1"
 					puts @act.actividad
-					@actividadesaobli.push(@act)
+					@actividadesadoc.push(@act)
+				else
+					if tipo==2
+						puts "HELLO12"
+						puts @act.actividad
+						@actividadesainv.push(@act)
+					else
+						if tipo==3
+							puts "HELLO13"
+							puts @act.actividad
+							@actividadesaext.push(@act)
+						else
+							if tipo==4
+								puts "HELLO14"
+								puts @act.actividad
+								@actividadesafor.push(@act)
+							else
+								if tipo==5
+									puts "HELLO15"
+									puts @act.actividad
+									@actividadesaotr.push(@act)
+								end
+							end
+						end
+					end
 				end
 			end
-			@actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 1).all
+			@actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 5).all
 			@actividadesa.each do |actade| 
 				@cpObs= ObservacionActividadAdecuacion.where(adecuacionactividad_id: actade.id).all
 
@@ -1732,15 +1754,37 @@ class IniciotutorController < ApplicationController
 			end
 
 
-			@actividades5obli= []
+			@actividades5doc= []
+			@actividades5inv= []
+			@actividades5ext= []
+			@actividades5for= []
+			@actividades5otr= []
 			@actividades5= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 5).all
 			@actividades5.each do |actade| 
 				@act= Actividad.find(actade.actividad_id)
 				tipo= @act.tipo_actividad_id
-				if tipo == 7
-					puts "soy otro tipo de actividad"
+				if tipo==1
+					puts "soy una actividad de docencia"
 					puts @act.actividad
-					@actividades5obli.push(@act)
+					@actividades5doc.push(@act)
+				else
+					if tipo==2
+						puts "soy una actividad de investigacion"
+						puts @act.actividad
+						@actividades5inv.push(@act)
+					else
+						if tipo==3
+							puts "soy una actividad de extension"
+							puts @act.actividad
+							@actividades5ext.push(@act)
+						else
+							if tipo==4
+								puts "soy una actividad de formacion"
+								puts @act.actividad
+								@actividades5for.push(@act)
+							end
+						end
+					end
 				end
 			end
 		else 
@@ -2254,7 +2298,10 @@ class IniciotutorController < ApplicationController
     @cactv_formacion= []
     @cactv_extension=[]
     @cactv_otras=[]
-    @dactv_obligatorias=[]
+    @dactv_docencia= []
+    @dactv_investigacion= []
+    @dactv_formacion= []
+    @dactv_extension=[]
 
     @actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 1).all
     @actividadesa.each do |actade| 
@@ -2400,10 +2447,28 @@ class IniciotutorController < ApplicationController
     @cactividadesa.each do |actade| 
       @act= Actividad.find(actade.actividad_id)
       tipo= @act.tipo_actividad_id
-      if tipo==7
+      if tipo==1
         puts "soy una actividad de docencia"
         puts @act.actividad
-        @dactv_obligatorias.push(@act)
+        @dactv_docencia.push(@act)
+      else
+        if tipo==2
+          puts "soy una actividad de investigacion"
+          puts @act.actividad
+          @dactv_investigacion.push(@act)
+        else
+          if tipo==3
+            puts "soy una actividad de extension"
+            puts @act.actividad
+            @dactv_extension.push(@act)
+          else
+            if tipo==4
+              puts "soy una actividad de formacion"
+              puts @act.actividad
+              @dactv_formacion.push(@act)
+            end
+          end
+        end
       end
     end
     @documents = []
@@ -2420,7 +2485,7 @@ class IniciotutorController < ApplicationController
 	        @actividades1.push(actividad)
       	end
     end
-    Pdf.pdf_adecuacion(@actividades1, @planformacion, @adecuacion, @tutor, @instructor, @correoi, @correot, @escuela, @pactv_docencia, @pactv_investigacion, @pactv_extension, @pactv_formacion, @pactv_otras, @sactv_docencia, @sactv_investigacion, @sactv_extension, @sactv_formacion, @sactv_otras, @tactv_docencia, @tactv_investigacion, @tactv_extension, @tactv_formacion, @tactv_otras, @cactv_docencia, @cactv_investigacion, @cactv_extension, @cactv_formacion, @cactv_otras, @fechaActual, @fechaConcurso, @documents, @numeroDeVersion, @dactv_obligatorias)
+    Pdf.pdf_adecuacion(@actividades1, @planformacion, @adecuacion, @tutor, @instructor, @correoi, @correot, @escuela, @pactv_docencia, @pactv_investigacion, @pactv_extension, @pactv_formacion, @pactv_otras, @sactv_docencia, @sactv_investigacion, @sactv_extension, @sactv_formacion, @sactv_otras, @tactv_docencia, @tactv_investigacion, @tactv_extension, @tactv_formacion, @tactv_otras, @cactv_docencia, @cactv_investigacion, @cactv_extension, @cactv_formacion, @cactv_otras, @fechaActual, @fechaConcurso, @documents, @numeroDeVersion, @dactv_docencia, @dactv_investigacion, @dactv_extension, @dactv_formacion)
     @nombre_archivo= @instructor.ci.to_s+'-'+@fechaActual+'-adecuacionV'+@numeroDeVersion.to_s+'.pdf' # se arma el nombre del documento 
     act = "#{Rails.root}/tmp/PDFs" + @nombre_archivo
     puts @nombre_archivo

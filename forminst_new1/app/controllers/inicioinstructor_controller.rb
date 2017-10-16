@@ -1015,7 +1015,7 @@ end
 					end
 				end
 			end
-			@actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 1).all
+			@actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 2).all
 			@actividadesa.each do |actade| 
 				@cpObs= ObservacionActividadAdecuacion.where(adecuacionactividad_id: actade.id).all
 
@@ -1095,7 +1095,7 @@ end
 					end
 				end
 			end
-			@actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 1).all
+			@actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 3).all
 			@actividadesa.each do |actade| 
 				@cpObs= ObservacionActividadAdecuacion.where(adecuacionactividad_id: actade.id).all
 
@@ -1175,7 +1175,7 @@ end
 					end
 				end
 			end
-			@actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 1).all
+			@actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 4).all
 			@actividadesa.each do |actade| 
 				@cpObs= ObservacionActividadAdecuacion.where(adecuacionactividad_id: actade.id).all
 
@@ -1209,7 +1209,6 @@ end
       @docencia='docencia'
       @investigacion= 'investigacion'
       @formacion= 'formacion'
-      @obligatoria= 'obligatoria'
       @extension= 'extension'
       @otra= 'otra' 
       @nombre = session[:nombre_usuario]
@@ -1220,41 +1219,64 @@ end
       @actividadesainv= []
       @actividadesaext= []
       @actividadesafor= []
-      @actividadesaobli= []
       @actividadesaotr= []
       @observacionesExtras= []
       @actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 5).all
       @actividadesa.each do |actade| 
         @act= Actividad.find(actade.actividad_id)
         tipo= @act.tipo_actividad_id
-          if tipo==7
-            puts "soy otro tipo de actividad"
+        if tipo==1
+          puts "soy una actividad de docencia"
+          puts @act.actividad
+          @actividadesadoc.push(@act)
+        else
+          if tipo==2
+            puts "soy una actividad de investigacion"
             puts @act.actividad
-            @actividadesaobli.push(@act)
+            @actividadesainv.push(@act)
+          else
+            if tipo==3
+              puts "soy una actividad de extension"
+              puts @act.actividad
+              @actividadesaext.push(@act)
+            else
+              if tipo==4
+                puts "soy una actividad de formacion"
+                puts @act.actividad
+                @actividadesafor.push(@act)
+              else
+                if tipo==5
+                  puts "soy otro tipo de actividad"
+                  puts @act.actividad
+                  @actividadesaotr.push(@act)
+                end
+              end
+            end
+          end
+        end
+      end
+      @actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 5).all
+      @actividadesa.each do |actade| 
+        @cpObs= ObservacionActividadAdecuacion.where(adecuacionactividad_id: actade.id).all
+
+          if @cpObs.blank?
+            @observacionesExtras[actade.id]="no"
+          else
+
+          cpBool = 0
+          @cpObs.each do |probar|
+            if !probar.observaciones.blank?
+              cpBool = 1
+            end
+          end
+
+            if cpBool == 0
+              @observacionesExtras[actade.id]="no"
+            else
+              @observacionesExtras[actade.id]="si"
+            end
           end
       end
-		@actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 1).all
-		@actividadesa.each do |actade| 
-			@cpObs= ObservacionActividadAdecuacion.where(adecuacionactividad_id: actade.id).all
-
-		    if @cpObs.blank?
-		    	@observacionesExtras[actade.id]="no"
-		    else
-
-				cpBool = 0
-				@cpObs.each do |probar|
-					if !probar.observaciones.blank?
-						cpBool = 1
-					end
-				end
-
-		    	if cpBool == 0
-		    		@observacionesExtras[actade.id]="no"
-		    	else
-		    		@observacionesExtras[actade.id]="si"
-		    	end
-		    end
-		end
     else
       redirect_to controller:"forminst", action: "index"
     end
@@ -1472,17 +1494,45 @@ end
 			end
 		end
 
-		@actividades5obli= []
-		@actividades5= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 5).all
-		@actividades5.each do |actade| 
-			@act= Actividad.find(actade.actividad_id)
-			tipo= @act.tipo_actividad_id
-			if tipo==7
-				puts "soy otro tipo de actividad"
-				puts @act.actividad
-				@actividades5obli.push(@act)
-			end
-		end
+		@actividades5doc= []
+    @actividades5inv= []
+    @actividades5ext= []
+    @actividades5for= []
+    @actividades5otr= []
+    @actividades5= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 5).all
+    @actividades5.each do |actade| 
+      @act= Actividad.find(actade.actividad_id)
+      tipo= @act.tipo_actividad_id
+      if tipo==1
+        puts "soy una actividad de docencia"
+        puts @act.actividad
+        @actividades5doc.push(@act)
+      else
+        if tipo==2
+          puts "soy una actividad de investigacion"
+          puts @act.actividad
+          @actividades5inv.push(@act)
+        else
+          if tipo==3
+            puts "soy una actividad de extension"
+            puts @act.actividad
+            @actividades5ext.push(@act)
+          else
+            if tipo==4
+              puts "soy una actividad de formacion"
+              puts @act.actividad
+              @actividades5for.push(@act)
+            else
+              if tipo==5
+                puts "soy otro tipo de actividad"
+                puts @act.actividad
+                @actividades5otr.push(@act)
+              end
+            end
+          end
+        end
+      end
+    end
 
 	end
 
