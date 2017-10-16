@@ -849,6 +849,7 @@ end
       else 
         @planformacion = Planformacion.find(session[:plan_id])
       end
+      @observacionesExtras= []
 
       @adecuacion = Adecuacion.where(planformacion_id: session[:plan_id]).take
       actividades = AdecuacionActividad.where(adecuacion_id: session[:adecuacion_id], semestre: 0)
@@ -873,6 +874,25 @@ end
           elsif actividad.tipo_actividad_id == 3
             @extension = actividad.actividad  
             @extensionId = actividad.id
+          end
+        end
+      end
+      @actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 0).all
+      @actividadesa.each do |actade| 
+        @cpObs= ObservacionActividadAdecuacion.where(adecuacionactividad_id: actade.id).all
+        if @cpObs.blank?
+          @observacionesExtras[actade.id]="no"
+        else
+          cpBool = 0
+          @cpObs.each do |probar|
+            if !probar.observaciones.blank?
+              cpBool = 1
+            end
+          end
+          if cpBool == 0
+            @observacionesExtras[actade.id]="no"
+          else
+            @observacionesExtras[actade.id]="si"
           end
         end
       end
@@ -1768,6 +1788,66 @@ end
       redirect_to controller:"inicioinstructor", action: "index"
     else
       redirect_to controller:"forminst", action: "index"
+    end
+  end
+
+  def mas_observaciones3 #mas obs de actividades del informe
+
+    @adecuacion= Adecuacion.find(session[:adecuacion_id])
+    @planformacion=Planformacion.find(@adecuacion.planformacion_id)
+    if !@planformacion.blank?
+      #Ver si el informe fue rachazado
+      cpInstructor = Usuario.find(@planformacion.instructor_id)
+      if (cpInstructor.activo == false)
+        @cpBloquear = true
+      else
+        @cpBloquear = false
+      end
+      #fin
+    end
+
+    @semestre = params[:semestre].to_i
+    @actividad_id = params[:actividad_id].to_i
+    
+    aa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: @semestre, actividad_id: @actividad_id).take
+    
+    @observaciones = ObservacionActividadAdecuacion.where(adecuacionactividad_id: aa.id)
+
+    @observaciones.each do |obs|  
+      if(obs.observaciones != "")
+      @boolobs = 1
+      end
+    end
+      
+
+    @observaciones.each do |obs|
+
+      rev = Revision.find(obs.revision_id)
+    
+      entidad = Usuarioentidad.where(usuario_id: rev.usuario_id).take
+
+      
+      if (entidad.entidad_id  >= 7 && entidad.entidad_id  <= 12)
+      #comision investigacion   
+          @obs_inv = obs.observaciones  #Estatus enviado a comision de investigacion
+          
+      else
+        if (entidad.entidad_id  >= 14 && entidad.entidad_id  <= 17)
+        #Consejo tecnico
+          @obs_consejoT = obs.observaciones
+        else
+          if (entidad.entidad_id  >= 1 && entidad.entidad_id  <= 6)
+          #Consejo de escuela
+            @obs_consejoE = obs.observaciones
+          else
+            if (entidad.entidad_id  == 13)
+            #Consejo de facultad
+              @obs_consejoF =  obs.observaciones
+
+            end 
+          end
+        end
+      end
     end
   end
 

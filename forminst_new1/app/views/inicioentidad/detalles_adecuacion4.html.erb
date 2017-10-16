@@ -333,7 +333,7 @@
               </td>
               <td >
                   <%if @bool_enviado==0 && @cjpTipo=="Institucional"%>
-                    <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' ><%=@observaciont[actdoc.id %></textarea>
+                    <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' ><%=@observaciont[actdoc.id] %></textarea>
                   <%else%>
                     <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' disabled><%=@observaciont[actdoc.id] %></textarea>
                   <%end%>

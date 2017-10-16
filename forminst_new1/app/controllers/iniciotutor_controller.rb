@@ -546,9 +546,6 @@ class IniciotutorController < ApplicationController
 			if !params[:firtsPart].blank?
 
 				#Presentacion
-				puts "veeeeeeeeeeeeeeeeeeerrrrrrrrrrrrrrrrrrrrrrrrrrrrr"
-	        	puts @adecuacion.id
-	        	puts params[:presentacion_id]
 				if params[:presentacionId].blank?
 					puts params[:presentacionId]
 					puts "JAJAJAJA"

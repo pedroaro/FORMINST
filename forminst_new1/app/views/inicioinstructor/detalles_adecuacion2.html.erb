@@ -85,41 +85,89 @@
           	<table class="table table-bordered table-striped">
   	          <tbody>
   	            <tr>
-  	              <td class="text-left">5. Presentación</td>
+  	              <td class="text-left"  colspan="1">5. Presentación</td>
+                  <td class="text-center"  style='width:15%;'><strong>Observaciones</strong></td>
   	            </tr>
   	            <tr>
   	              <td class="text-left"><textarea name="presentacion" class="form-control" rows="2" id="presentacion" disabled><%= @presentacion %></textarea></td>  
-  	            </tr>
+                  <td >
+                    <% if @observacionesExtras[@presentacionId] == "si" %>
+                      <center><%= link_to "Ver observaciones ", {:controller => "inicioinstructor", :action => "mas_observaciones3", :actividad_id => @presentacionId, :semestre => 0, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-warning" %></center>
+                    <% else %>
+                      <center><%= link_to "Ver observaciones ", {:controller => "inicioinstructor", :action => "mas_observaciones3", :actividad_id => @presentacionId, :semestre => 0, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-default" %></center>
+                    <% end %>
+                  </td>  	            
+                </tr>
   	            <tr>
-  	              <td class="text-left">6. Descripción del Perfil del Ganador del concurso</td>
+  	              <td class="text-left" colspan="1">6. Descripción del Perfil del Ganador del concurso</td>
+                  <td class="text-center"  style='width:15%;'><strong>Observaciones</strong></td>
 
   	            </tr>
   	            <tr>
   	              <td class="text-left"><textarea name="descripcion" class="form-control" rows="2" id="descripcion" disabled><%= @descripcion %></textarea></td>  
+                  <td >
+                    <% if @observacionesExtras[@descripcionId] == "si" %>
+                      <center><%= link_to "Ver observaciones ", {:controller => "inicioinstructor", :action => "mas_observaciones3", :actividad_id => @descripcionId, :semestre => 0, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-warning" %></center>
+                    <% else %>
+                      <center><%= link_to "Ver observaciones ", {:controller => "inicioinstructor", :action => "mas_observaciones3", :actividad_id => @descripcionId, :semestre => 0, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-default" %></center>
+                    <% end %>
+                  </td> 
   	            </tr>
   	            <tr>
-  	              <td class="text-left">7. Docencia</td>
+  	              <td class="text-left" colspan="1">7. Docencia</td>
+                  <td class="text-center"  style='width:15%;'><strong>Observaciones</strong></td>
   	            </tr>
   	            <tr>
   	              <td class="text-left"><textarea name="docencia" class="form-control" rows="2" id="docencia" disabled><%= @docencia %></textarea></td>
-  	            </tr>
+  	             <td >
+                    <% if @observacionesExtras[@docenciaId] == "si" %>
+                      <center><%= link_to "Ver observaciones ", {:controller => "inicioinstructor", :action => "mas_observaciones3", :actividad_id => @docenciaId, :semestre => 0, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-warning" %></center>
+                    <% else %>
+                      <center><%= link_to "Ver observaciones ", {:controller => "inicioinstructor", :action => "mas_observaciones3", :actividad_id => @docenciaId, :semestre => 0, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-default" %></center>
+                    <% end %>
+                  </td> 
+                </tr>
   	            <tr>
-  	              <td class="text-left">8. Investigación</td>
+  	              <td class="text-left" colspan="1">8. Investigación</td>
+                  <td class="text-center"  style='width:15%;'><strong>Observaciones</strong></td>
   	            </tr>
   	            <tr>
   	              <td class="text-left"><textarea name="investigacion" class="form-control" rows="2" id="investigacion" disabled><%= @investigacion %></textarea></td>
+                  <td >
+                    <% if @observacionesExtras[@investigacionId] == "si" %>
+                      <center><%= link_to "Ver observaciones ", {:controller => "inicioinstructor", :action => "mas_observaciones3", :actividad_id => @investigacionId, :semestre => 0, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-warning" %></center>
+                    <% else %>
+                      <center><%= link_to "Ver observaciones ", {:controller => "inicioinstructor", :action => "mas_observaciones3", :actividad_id => @investigacionId, :semestre => 0, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-default" %></center>
+                    <% end %>
+                  </td> 
   	            </tr>
   	            <tr>
-  	              <td class="text-left">9. Formación y capacitación profesional</td>
+  	              <td class="text-left" colspan="1">9. Formación y capacitación profesional</td>
+                  <td class="text-center"  style='width:15%;'><strong>Observaciones</strong></td>
   	            </tr>
   	            <tr>
   	              <td class="text-left"><textarea name="formacion" class="form-control" rows="2" id="formacion" disabled><%= @formacion %></textarea></td>
+                  <td >
+                    <% if @observacionesExtras[@formacionId] == "si" %>
+                      <center><%= link_to "Ver observaciones ", {:controller => "inicioinstructor", :action => "mas_observaciones3", :actividad_id => @formacionId, :semestre => 0, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-warning" %></center>
+                    <% else %>
+                      <center><%= link_to "Ver observaciones ", {:controller => "inicioinstructor", :action => "mas_observaciones3", :actividad_id => @formacionId, :semestre => 0, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-default" %></center>
+                    <% end %>
+                  </td> 
   	            </tr>
   	            <tr>
-  	              <td class="text-left">10. Extension</td>
+  	              <td class="text-left" colspan="1">10. Extension</td>
+                  <td class="text-center"  style='width:15%;'><strong>Observaciones</strong></td>
   	            </tr>
   	            <tr>
   	              <td class="text-left"><textarea name="extension" class="form-control" rows="2" id="extension" disabled><%= @extension %></textarea></td>
+                  <td >
+                    <% if @observacionesExtras[@extensionId] == "si" %>
+                      <center><%= link_to "Ver observaciones ", {:controller => "inicioinstructor", :action => "mas_observaciones3", :actividad_id => @extensionId, :semestre => 0, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-warning" %></center>
+                    <% else %>
+                      <center><%= link_to "Ver observaciones ", {:controller => "inicioinstructor", :action => "mas_observaciones3", :actividad_id => @extensionId, :semestre => 0, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-default" %></center>
+                    <% end %>
+                  </td> 
   	            </tr>
   	          </tbody>
   	        </table>
