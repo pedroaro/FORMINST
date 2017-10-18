@@ -102,13 +102,13 @@
           <tbody>
             <tr></tr>
             <tr>
-              <td class="text-left" ><h5><strong>4. Actividades a realizar por el instructor</strong></h5></td>
+              <td class="text-left" colspan="2" ><h5><strong>4. Actividades a realizar por el instructor</strong></h5></td>
               
             </tr>
             <tr>
 
-              <td class="text-center" ><strong>Actividades de Docencia</strong></td>
-              
+              <td class="text-center"  colspan="1"><strong>Actividades de Docencia</strong></td>
+              <td class="text-center"  style='width:15%;'><strong>Observaciones</strong></td>
             </tr>
               <% @actividadesadoc.each_with_index do |actdoc, i| %>
                 <tr>
@@ -116,52 +116,88 @@
                     <textarea class="form-control" rows="2"  name='<%= @docencia+actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
                     <input type="hidden" name="<%= @iddoc+i.to_s%> " value='<%= actdoc.id %>'>
                   </td>
+                  <td >
+                    <% if @observacionesExtras[actdoc.id] == "si" %>
+                      <center><%= link_to "Ver observaciones ", {:controller => "inicioinstructor", :action => "mas_observaciones3", :actividad_id => actdoc.id, :semestre => 1, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-warning" %></center>
+                    <% else %>
+                      <center><%= link_to "Ver observaciones ", {:controller => "inicioinstructor", :action => "mas_observaciones3", :actividad_id => actdoc.id, :semestre => 1, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-default" %></center>
+                    <% end %>
+                  </td>
                 </tr>
               <% end %>
 
             <tr>
 
-              <td class="text-center"  ><strong>Actividades de Investigación</strong></td>
-              
+              <td class="text-center"  colspan="1"><strong>Actividades de Investigación</strong></td>
+              <td class="text-center"  style='width:15%;'><strong>Observaciones</strong></td>
             </tr>
             <% @actividadesainv.each_with_index do |actdoc,i| %>
               <tr>
                 <td>
                   <textarea class="form-control" rows="2"  name='<%= @investigacion+actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
                 </td>
+                <td >
+                  <% if @observacionesExtras[actdoc.id] == "si" %>
+                    <center><%= link_to "Ver observaciones ", {:controller => "inicioinstructor", :action => "mas_observaciones3", :actividad_id => actdoc.id, :semestre => 1, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-warning" %></center>
+                  <% else %>
+                    <center><%= link_to "Ver observaciones ", {:controller => "inicioinstructor", :action => "mas_observaciones3", :actividad_id => actdoc.id, :semestre => 1, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-default" %></center>
+                  <% end %>
+                </td>
               </tr>
             <% end %>
        
             <tr>
-              <td class="text-center"  ><strong>Actividades de Formación</strong></td>
-              
+              <td class="text-center" colspan="1" ><strong>Actividades de Formación</strong></td>
+              <td class="text-center"  style='width:15%;'><strong>Observaciones</strong></td>
             </tr>
             <% @actividadesafor.each_with_index do |actdoc,i| %>
               <tr>
                 <td>
                   <textarea class="form-control" rows="2"  name='<%= @formacion+actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
                 </td>
+                <td >
+                  <% if @observacionesExtras[actdoc.id] == "si" %>
+                    <center><%= link_to "Ver observaciones ", {:controller => "inicioinstructor", :action => "mas_observaciones3", :actividad_id => actdoc.id, :semestre => 1, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-warning" %></center>
+                  <% else %>
+                    <center><%= link_to "Ver observaciones ", {:controller => "inicioinstructor", :action => "mas_observaciones3", :actividad_id => actdoc.id, :semestre => 1, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-default" %></center>
+                  <% end %>
+                </td>
               </tr>
             <% end %>
             
             <tr>
-              <td class="text-center" ><strong>Actividades de Extensión</strong></td>
-              
+              <td class="text-center" colspan="1"><strong>Actividades de Extensión</strong></td>
+              <td class="text-center"  style='width:15%;'><strong>Observaciones</strong></td>
             </tr>
             <% @actividadesaext.each_with_index do |actdoc,i| %>
               <tr>
                 <td>
                   <textarea class="form-control" rows="2"  name='<%= @extension+actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
                 </td>
+                <td >
+                  <% if @observacionesExtras[actdoc.id] == "si" %>
+                    <center><%= link_to "Ver observaciones ", {:controller => "inicioinstructor", :action => "mas_observaciones3", :actividad_id => actdoc.id, :semestre => 1, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-warning" %></center>
+                  <% else %>
+                    <center><%= link_to "Ver observaciones ", {:controller => "inicioinstructor", :action => "mas_observaciones3", :actividad_id => actdoc.id, :semestre => 1, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-default" %></center>
+                  <% end %>
+                </td>
               </tr>
             <% end %>
             <tr>
-              <td class="text-center"><strong>Otras Actividades</strong></td>
+              <td class="text-center" colspan="1"><strong>Otras Actividades</strong></td>
+              <td class="text-center"  style='width:15%;'><strong>Observaciones</strong></td>
             </tr>
             <% @actividadesaotr.each_with_index do |actdoc,i| %>
               <tr>
                 <td>
                   <textarea class="form-control" rows="2"  name='<%= @otra+actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
+                </td>
+                <td >
+                  <% if @observacionesExtras[actdoc.id] == "si" %>
+                    <center><%= link_to "Ver observaciones ", {:controller => "inicioinstructor", :action => "mas_observaciones3", :actividad_id => actdoc.id, :semestre => 1, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-warning" %></center>
+                  <% else %>
+                    <center><%= link_to "Ver observaciones ", {:controller => "inicioinstructor", :action => "mas_observaciones3", :actividad_id => actdoc.id, :semestre => 1, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-default" %></center>
+                  <% end %>
                 </td>
               </tr>
             <% end %>

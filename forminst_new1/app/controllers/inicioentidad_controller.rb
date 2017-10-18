@@ -4069,7 +4069,7 @@ end
 									@document.estatus = "Aprobado por Consejo de Facultad"
 									@document.actual = 0
 									@document.save
-									flash[:info]="El informe ha sido aprobado por consejo de facultad"
+									flash[:info]="La adecuación ha sido aprobado por consejo de facultad"
 									notific = Notificacion.new
 							        notific.instructor_id = plan.instructor_id
 							        notific.tutor_id = plan.tutor_id
