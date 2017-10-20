@@ -1596,7 +1596,6 @@ class IniciotutorController < ApplicationController
 			@actividades5.each do |actade| 
 				@act= Actividad.find(actade.actividad_id)
 				tipo= @act.tipo_actividad_id
-<<<<<<< HEAD
 				if tipo==1
 					puts "soy una actividad de docencia"
 					puts @act.actividad
@@ -1619,10 +1618,6 @@ class IniciotutorController < ApplicationController
 							end
 						end
 					end
-=======
-				if tipo == 7
-					@actividades5obli.push(@act)
->>>>>>> 687fd543c3dac836d8fdfb307fc713e9b2d54c55
 				end
 			end
 		else 
@@ -2192,33 +2187,20 @@ class IniciotutorController < ApplicationController
     @cactividadesa.each do |actade| 
       @act= Actividad.find(actade.actividad_id)
       tipo= @act.tipo_actividad_id
-<<<<<<< HEAD
       if tipo==1
-        puts "soy una actividad de docencia"
-        puts @act.actividad
         @dactv_docencia.push(@act)
       else
         if tipo==2
-          puts "soy una actividad de investigacion"
-          puts @act.actividad
           @dactv_investigacion.push(@act)
         else
           if tipo==3
-            puts "soy una actividad de extension"
-            puts @act.actividad
             @dactv_extension.push(@act)
           else
             if tipo==4
-              puts "soy una actividad de formacion"
-              puts @act.actividad
               @dactv_formacion.push(@act)
             end
           end
         end
-=======
-      if tipo==7
-        @dactv_obligatorias.push(@act)
->>>>>>> 687fd543c3dac836d8fdfb307fc713e9b2d54c55
       end
     end
     @documents = []

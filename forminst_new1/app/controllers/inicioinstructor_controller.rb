@@ -1335,8 +1335,6 @@ end
 				end
 			end
 		end
-
-<<<<<<< HEAD
 		@actividades5doc= []
     @actividades5inv= []
     @actividades5ext= []
@@ -1347,46 +1345,21 @@ end
       @act= Actividad.find(actade.actividad_id)
       tipo= @act.tipo_actividad_id
       if tipo==1
-        puts "soy una actividad de docencia"
-        puts @act.actividad
         @actividades5doc.push(@act)
       else
         if tipo==2
-          puts "soy una actividad de investigacion"
-          puts @act.actividad
           @actividades5inv.push(@act)
         else
           if tipo==3
-            puts "soy una actividad de extension"
-            puts @act.actividad
             @actividades5ext.push(@act)
           else
             if tipo==4
-              puts "soy una actividad de formacion"
-              puts @act.actividad
               @actividades5for.push(@act)
-            else
-              if tipo==5
-                puts "soy otro tipo de actividad"
-                puts @act.actividad
-                @actividades5otr.push(@act)
-              end
             end
           end
         end
       end
     end
-=======
-		@actividades5obli= []
-		@actividades5= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 5).all
-		@actividades5.each do |actade| 
-			@act= Actividad.find(actade.actividad_id)
-			tipo= @act.tipo_actividad_id
-			if tipo==7
-				@actividades5obli.push(@act)
-			end
-		end
->>>>>>> 687fd543c3dac836d8fdfb307fc713e9b2d54c55
 
 	end
 
