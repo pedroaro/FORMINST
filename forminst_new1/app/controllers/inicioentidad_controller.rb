@@ -9,11 +9,6 @@ class InicioentidadController < ApplicationController
 			session[:informe_id]=nil
 			@cjpTipo=Usuario.find(session[:usuario_id]).tipo
 			@nombre = session[:nombre_usuario]
-			print "NO HAY USUARIO"
-			puts session[:entidad_id]
-			if not @nombre
-				print "NO HAY USUARIO"
-			end
 			@usu=Usuarioentidad.where(entidad_id: session[:entidad_id]).take
 			@entidad_escuela_id= @usu.escuela_id
 			@notificaciones1= []
@@ -21,9 +16,6 @@ class InicioentidadController < ApplicationController
 		    	@notificaciones = Notificacion.where(actual: 3).all
 		    	@notificaciones.each do |notificaciones|
 			    	@tutor_escuela = Usuarioentidad.where(usuario_id: notificaciones.tutor_id).take
-			    	puts @tutor_escuela.escuela_id
-			    	puts @entidad_escuela_id
-			    	puts notificaciones.actual
 			    	if (@tutor_escuela.escuela_id == @entidad_escuela_id) #Caso de notificaciones del Comision de investigación 
 			        	@notificaciones1.push(notificaciones)
 			        end
@@ -32,9 +24,6 @@ class InicioentidadController < ApplicationController
 		    	@notificaciones = Notificacion.where(actual: 4).all
 		    	@notificaciones.each do |notificaciones|
 			    	@tutor_escuela = Usuarioentidad.where(usuario_id: notificaciones.tutor_id).take
-			    	puts @tutor_escuela.escuela_id
-			    	puts @entidad_escuela_id
-			    	puts notificaciones.actual
 			    	if (@tutor_escuela.escuela_id == @entidad_escuela_id) #Caso de notificaciones del Comision de investigación 
 			        	@notificaciones1.push(notificaciones)
 			        end
@@ -63,11 +52,6 @@ class InicioentidadController < ApplicationController
 			session[:informe_id]=nil
 			@cjpTipo=Usuario.find(session[:usuario_id]).tipo
 			@nombre = session[:nombre_usuario]
-			print "NO HAY USUARIO"
-			puts session[:entidad_id]
-			if not @nombre
-				print "NO HAY USUARIO"
-			end
 			@usu=Usuarioentidad.where(entidad_id: session[:entidad_id]).take
 			@entidad_escuela_id= @usu.escuela_id
 			@usuarios = Usuario.where(activo: 0).all
@@ -215,11 +199,6 @@ class InicioentidadController < ApplicationController
 				else
 
 					@tutor_escuela = Usuarioentidad.where(usuario_id: @adec.tutor_id).take
-					puts @tutor_escuela.escuela_id
-					puts @entidad_escuela_id
-					puts @tutor_escuela.departamento_id
-					puts @entidad_departamento
-					puts "hola"
 					if @tutor_escuela.escuela_id == @entidad_escuela_id && (@tutor_escuela.departamento_id == @entidad_departamento || @entidad_departamento == nil)
 						
 						@adecuacion = true
@@ -698,29 +677,19 @@ end
 			    end
 
 				if tipo==1
-					puts "soy una actividad de docencia"
-					puts @act.actividad
 					@actividadesadoc.push(@act)
 
 				else
 					if tipo==2
-						puts "soy una actividad de investigacion"
-						puts @act.actividad
 						@actividadesainv.push(@act)
 					else
 						if tipo==3
-							puts "soy una actividad de extension"
-							puts @act.actividad
 							@actividadesaext.push(@act)
 						else
 							if tipo==4
-								puts "soy una actividad de formacion"
-								puts @act.actividad
 								@actividadesafor.push(@act)
 							else
 								if tipo==5
-									puts "soy otro tipo de actividad"
-									puts @act.actividad
 									@actividadesaotr.push(@act)
 								end
 							end
@@ -837,29 +806,19 @@ end
 			    end
 
 				if tipo==1
-					puts "soy una actividad de docencia"
-					puts @act.actividad
 					@actividadesadoc.push(@act)
 
 				else
 					if tipo==2
-						puts "soy una actividad de investigacion"
-						puts @act.actividad
 						@actividadesainv.push(@act)
 					else
 						if tipo==3
-							puts "soy una actividad de extension"
-							puts @act.actividad
 							@actividadesaext.push(@act)
 						else
 							if tipo==4
-								puts "soy una actividad de formacion"
-								puts @act.actividad
 								@actividadesafor.push(@act)
 							else
 								if tipo==5
-									puts "soy otro tipo de actividad"
-									puts @act.actividad
 									@actividadesaotr.push(@act)
 								end
 							end
@@ -976,29 +935,19 @@ end
 			    end
 
 				if tipo==1
-					puts "soy una actividad de docencia"
-					puts @act.actividad
 					@actividadesadoc.push(@act)
 
 				else
 					if tipo==2
-						puts "soy una actividad de investigacion"
-						puts @act.actividad
 						@actividadesainv.push(@act)
 					else
 						if tipo==3
-							puts "soy una actividad de extension"
-							puts @act.actividad
 							@actividadesaext.push(@act)
 						else
 							if tipo==4
-								puts "soy una actividad de formacion"
-								puts @act.actividad
 								@actividadesafor.push(@act)
 							else
 								if tipo==5
-									puts "soy otro tipo de actividad"
-									puts @act.actividad
 									@actividadesaotr.push(@act)
 								end
 							end
@@ -1115,29 +1064,19 @@ end
 			    end
 
 				if tipo==1
-					puts "soy una actividad de docencia"
-					puts @act.actividad
 					@actividadesadoc.push(@act)
 
 				else
 					if tipo==2
-						puts "soy una actividad de investigacion"
-						puts @act.actividad
 						@actividadesainv.push(@act)
 					else
 						if tipo==3
-							puts "soy una actividad de extension"
-							puts @act.actividad
 							@actividadesaext.push(@act)
 						else
 							if tipo==4
-								puts "soy una actividad de formacion"
-								puts @act.actividad
 								@actividadesafor.push(@act)
 							else
 								if tipo==5
-									puts "soy otro tipo de actividad"
-									puts @act.actividad
 									@actividadesaotr.push(@act)
 								end
 							end
@@ -1257,8 +1196,6 @@ end
 
 				
 				if tipo==7
-					puts "soy otro tipo de actividad"
-					puts @act.actividad
 					@actividadesaobli.push(@act)
 				end
 			end
@@ -1463,12 +1400,6 @@ end
 		      	@planformacion = Planformacion.find(@informe.planformacion_id)
 		      	@persona = Persona.where(usuario_id: @planformacion.tutor_id).take
 		      	@instructor = Persona.where(usuario_id: @planformacion.instructor_id).take
-		      	puts @planformacion.tutor_id
-				puts @planformacion.instructor_id
-				puts @planformacion.tutor_id
-				puts @planformacion.instructor_id
-				puts @planformacion.tutor_id
-				puts @planformacion.instructor_id
     			@periodo = @informe.fecha_inicio.to_s + " al " + @informe.fecha_fin.to_s
 
 		      	if (@informe.numero == 1 || @informe.numero == 3)
@@ -1585,7 +1516,6 @@ end
 	        	@res= Resultado.where(informe_actividad_id: actade.id).all
 	        	@resultados.push(@res)
 	        	@actividadese.push("")
-	        	puts "Heyyyyyyyyyyyyyyyyyy"
 	        	@res.each do |cpresultado| 
 		        	@cparray = ["a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a"]
 		        	@cparray[0] = cpresultado.titulo
@@ -1620,24 +1550,17 @@ end
 		        	@cparray[29] = cpresultado.ISBN
 		        	@cparray[30] = cpresultado.universidad
 		        	@cparray[31] = cpresultado.url
-		        	puts "holaaaaaaaaaaaaaa"
 		       		if !@cparray.blank?
 			        	@noemptyarray = @cparray - ["", nil]
 			        	if !@resultados2
 				        	@noemptyarray = @cparray - ["", nil]
 				        	if !@noemptyarray.join(',').blank?
-				        		puts @noemptyarray.join(',')
 					        	@resultados2 = @noemptyarray.join(',')
-					        	puts "a"
-					        	puts @resultados2
 					        end
 				        else
 				        	@noemptyarray = @cparray - ["", nil]
 				        	if !@noemptyarray.join(',').blank?
-					        	puts @noemptyarray.join(',')
 					        	@resultados2 = @noemptyarray.join(',')
-					        	puts "b"
-					        	puts @resultados2
 				        	end
 			        	end
 			        	@resultados2b.push(@resultados2)
@@ -1710,8 +1633,6 @@ end
 		        @act= Actividad.find(actade.actividad_id)
 		        tipo= @act.tipo_actividad_id
 		        @res= Resultado.where(informe_actividad_id: actade.id).all
-	        	puts "HOLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-	        	puts actade.id
 		        if !@res.blank?
 		          	@resultados.push(@res)
 		        	@res.each do |cpresultado| 
@@ -1748,24 +1669,17 @@ end
 			        	@cparray[29] = cpresultado.ISBN
 			        	@cparray[30] = cpresultado.universidad
 			        	@cparray[31] = cpresultado.url
-			        	puts "holaaaaaaaaaaaaaa"
 			       		if !@cparray.blank?
 				        	@noemptyarray = @cparray - ["", nil]
 				        	if !@resultados2
 					        	@noemptyarray = @cparray - ["", nil]
 					        	if !@noemptyarray.join(',').blank?
-					        		puts @noemptyarray.join(',')
 						        	@resultados2 = @noemptyarray.join(',')
-						        	puts "a"
-						        	puts @resultados2
 						        end
 					        else
 					        	@noemptyarray = @cparray - ["", nil]
 					        	if !@noemptyarray.join(',').blank?
-						        	puts @noemptyarray.join(',')
 						        	@resultados2 = @noemptyarray.join(',')
-						        	puts "b"
-						        	puts @resultados2
 					        	end
 				        	end
 				        	@resultados2b.push(@resultados2)
@@ -1781,8 +1695,6 @@ end
 		        	@actividadese.push("")
 		        else
 		        	
-		        puts "ACAAAAAAAAAAAAAAAAAAA!!!!!!!"
-		        puts actade.id
 		        	@actividadese.push(@ae)
 		        end
 
@@ -1944,33 +1856,22 @@ end
 	      @act= Actividad.find(actade.actividad_id)
 	      tipo= @act.tipo_actividad_id
 	      if tipo==1
-	        puts "soy una actividad de docencia"
-	        puts @act.actividad
 	        @actividades1doc.push(@act)
 	      else
 	        if tipo==2
-	          puts "soy una actividad de investigacion"
 	          if @informe.numero == 1
 	            @resActi= InformeActividad.where(informe_id: @informe.id, actividad_id: @act.id).take
-	            puts "HELLOOOOO"
 	            @res= Resultado.where(informe_actividad_id: @resActi.id).all
-	            puts @res
 	          end
 	          @actividades1inv.push(@act)
 	        else
 	          if tipo==3
-	            puts "soy una actividad de extension"
-	            puts @act.actividad
 	            @actividades1ext.push(@act)
 	          else
 	            if tipo==4
-	              puts "soy una actividad de formacion"
-	              puts @act.actividad
 	              @actividades1for.push(@act)
 	            else
 	              if tipo==5
-	                puts "soy otro tipo de actividad"
-	                puts @act.actividad
 	                @actividades1otr.push(@act)
 	              end
 	            end
@@ -1988,28 +1889,18 @@ end
 	    @act= Actividad.find(actade.actividad_id)
 	    tipo= @act.tipo_actividad_id
 	      if tipo==1
-	        puts "soy una actividad de docencia"
-	        puts @act.actividad
 	        @actividades2doc.push(@act)
 	      else
 	        if tipo==2
-	          puts "soy una actividad de investigacion"
-	          puts @act.actividad
 	          @actividades2inv.push(@act)
 	        else
 	          if tipo==3
-	            puts "soy una actividad de extension"
-	            puts @act.actividad
 	            @actividades2ext.push(@act)
 	          else
 	            if tipo==4
-	              puts "soy una actividad de formacion"
-	              puts @act.actividad
 	              @actividades2for.push(@act)
 	            else
 	              if tipo==5
-	                puts "soy otro tipo de actividad"
-	                puts @act.actividad
 	                @actividades2otr.push(@act)
 	              end
 	            end
@@ -2029,28 +1920,18 @@ end
 	      @act= Actividad.find(actade.actividad_id)
 	      tipo= @act.tipo_actividad_id
 	      if tipo==1
-	        puts "soy una actividad de docencia"
-	        puts @act.actividad
 	        @actividades3doc.push(@act)
 	      else
 	        if tipo==2
-	          puts "soy una actividad de investigacion"
-	          puts @act.actividad
 	          @actividades3inv.push(@act)
 	        else
 	          if tipo==3
-	            puts "soy una actividad de extension"
-	            puts @act.actividad
 	            @actividades3ext.push(@act)
 	          else
 	            if tipo==4
-	              puts "soy una actividad de formacion"
-	              puts @act.actividad
 	              @actividades3for.push(@act)
 	            else
 	              if tipo==5
-	                puts "soy otro tipo de actividad"
-	                puts @act.actividad
 	                @actividades3otr.push(@act)
 	              end
 	            end
@@ -2070,28 +1951,18 @@ end
 	      @act= Actividad.find(actade.actividad_id)
 	      tipo= @act.tipo_actividad_id
 	      if tipo==1
-	        puts "soy una actividad de docencia"
-	        puts @act.actividad
 	        @actividades4doc.push(@act)
 	      else
 	        if tipo==2
-	          puts "soy una actividad de investigacion"
-	          puts @act.actividad
 	          @actividades4inv.push(@act)
 	        else
 	          if tipo==3
-	            puts "soy una actividad de extension"
-	            puts @act.actividad
 	            @actividades4ext.push(@act)
 	          else
 	            if tipo==4
-	              puts "soy una actividad de formacion"
-	              puts @act.actividad
 	              @actividades4for.push(@act)
 	            else
 	              if tipo==5
-	                puts "soy otro tipo de actividad"
-	                puts @act.actividad
 	                @actividades4otr.push(@act)
 	              end
 	            end
@@ -2106,8 +1977,6 @@ end
 	      @act= Actividad.find(actade.actividad_id)
 	      tipo= @act.tipo_actividad_id
           if tipo==7
-            puts "soy otro tipo de actividad"
-            puts @act.actividad
             @actividades5obli.push(@act)
           end
 	    end
@@ -2181,18 +2050,12 @@ end
 	              if !@resultados2
 	                @noemptyarray = @cparray - ["", nil]
 	                if !@noemptyarray.join(',').blank?
-	                  puts @noemptyarray.join(',')
 	                  @resultados2 = "* " + @noemptyarray
-	                  puts "a"
-	                  puts @resultados2
 	                end
 	              else
 	                @noemptyarray = @cparray - ["", nil]
 	                if !@noemptyarray.join(',').blank?
-	                  puts @noemptyarray.join(', ')
 	                  @resultados2 = @resultados2 + @noemptyarray.join(', ')
-	                  puts "b"
-	                  puts @resultados2
 	                end
 	              end
 	            end
@@ -2258,18 +2121,12 @@ end
 	              if !@resultados2
 	                @noemptyarray = @cparray - ["", nil]
 	                if !@noemptyarray.join(',').blank?
-	                  puts @noemptyarray.join(',')
 	                  @resultados2 = "* " + @noemptyarray
-	                  puts "a"
-	                  puts @resultados2
 	                end
 	              else
 	                @noemptyarray = @cparray - ["", nil]
 	                if !@noemptyarray.join(',').blank?
-	                  puts @noemptyarray.join(', ')
 	                  @resultados2 = @resultados2 + @noemptyarray.join(', ')
-	                  puts "b"
-	                  puts @resultados2
 	                end
 	              end
 	            end
@@ -2481,7 +2338,6 @@ end
 			 
 			        ia = InformeActividad.where(informe_id: @informe.id, resultado_id:  @id_resultado).take     
 
-			        puts ia 
 		          	oa = ObservacionActividadInforme.where(informe_actividad_id: ia.id, revision_id: revision.id).take
 		          	if(oa == nil || oa =="")
 			          	oa = ObservacionActividadInforme.new
@@ -2522,13 +2378,10 @@ end
 			    end
 
 			#Comienza actividades de docencia
-				puts "comienza actividades de docencia"
-				puts @cant_obli
 		      	j=0
 			    i=:obli.to_s+j.to_s
 			    @act = params[i].to_i
 		      	while j <  @cant_obli
-		      		puts j
 		        	ia = InformeActividad.where(informe_id: @informe.id,actividad_id: @act).take     
 		        	observacion =:observacion.to_s+@act.to_s
 		        	
@@ -2550,7 +2403,6 @@ end
 
 
 			#Comienzan Otras actividades
-				puts "comienza otras actividades"
 		      	j=0
 		      	i=:otr.to_s+j.to_s
 		      	@act = params[i].to_i
@@ -2794,15 +2646,11 @@ end
 	end
 
 	def show
-		puts params[:adecuacion_id]
-		puts params[:version]
 
 		if params[:informe_id].blank?
 			@document = Respaldo.where(adecuacion_id: params[:adecuacion_id], informe_id: nil, version: params[:version].to_i, filename: params[:namefile]).take
-			puts "no informe"
 		else
 			@document = Respaldo.where(adecuacion_id: params[:adecuacion_id], informe_id: params[:informe_id],version: params[:version].to_i, filename: params[:namefile]).take
-			puts "informe"
 		end
 	    send_data(@document.file_contents,
 	              type: @document.content_type,
@@ -2838,9 +2686,6 @@ end
         	end 
 
         	#presentacion
-        	puts "veeeeeeeeeeeeeeeeeeerrrrrrrrrrrrrrrrrrrrrrrrrrrrr"
-        	puts @adecuacion.id
-        	puts params[:obsPresentacion]
       		aa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 0, actividad_id: params[:presentacionId]).take
       			oa= ObservacionActividadAdecuacion.where(adecuacionactividad_id: aa.id, revision_id: revision.id).take
 
@@ -2963,9 +2808,6 @@ end
 			revision= Revision.where(usuario_id: session[:usuario_id], adecuacion_id: @adecuacion.id, estatus_id: @estatus.estatus_id, informe_id: nil).take 
 
 
-			puts  session[:usuario_id]
-			puts  @adecuacion.id
-			puts  @estatus.estatus_id
 	     
 
 	        if(revision == nil || revision =="")
@@ -3596,28 +3438,18 @@ end
 			@act= Actividad.find(actade.actividad_id)
 			tipo= @act.tipo_actividad_id
 			if tipo==1
-				puts "soy una actividad de docencia"
-				puts @act.actividad
 				@actividades1doc.push(@act)
 			else
 				if tipo==2
-					puts "soy una actividad de investigacion"
-					puts @act.actividad
 					@actividades1inv.push(@act)
 				else
 					if tipo==3
-						puts "soy una actividad de extension"
-						puts @act.actividad
 						@actividades1ext.push(@act)
 					else
 						if tipo==4
-							puts "soy una actividad de formacion"
-							puts @act.actividad
 							@actividades1for.push(@act)
 						else
 							if tipo==5
-								puts "soy otro tipo de actividad"
-								puts @act.actividad
 								@actividades1otr.push(@act)
 							end
 						end
@@ -3636,28 +3468,18 @@ end
 			@act= Actividad.find(actade.actividad_id)
 			tipo= @act.tipo_actividad_id
 			if tipo==1
-				puts "soy una actividad de docencia"
-				puts @act.actividad
 				@actividades2doc.push(@act)
 			else
 				if tipo==2
-					puts "soy una actividad de investigacion"
-					puts @act.actividad
 					@actividades2inv.push(@act)
 				else
 					if tipo==3
-						puts "soy una actividad de extension"
-						puts @act.actividad
 						@actividades2ext.push(@act)
 					else
 						if tipo==4
-							puts "soy una actividad de formacion"
-							puts @act.actividad
 							@actividades2for.push(@act)
 						else
 							if tipo==5
-								puts "soy otro tipo de actividad"
-								puts @act.actividad
 								@actividades2otr.push(@act)
 							end
 						end
@@ -3676,28 +3498,18 @@ end
 			@act= Actividad.find(actade.actividad_id)
 			tipo= @act.tipo_actividad_id
 			if tipo==1
-				puts "soy una actividad de docencia"
-				puts @act.actividad
 				@actividades3doc.push(@act)
 			else
 				if tipo==2
-					puts "soy una actividad de investigacion"
-					puts @act.actividad
 					@actividades3inv.push(@act)
 				else
 					if tipo==3
-						puts "soy una actividad de extension"
-						puts @act.actividad
 						@actividades3ext.push(@act)
 					else
 						if tipo==4
-							puts "soy una actividad de formacion"
-							puts @act.actividad
 							@actividades3for.push(@act)
 						else
 							if tipo==5
-								puts "soy otro tipo de actividad"
-								puts @act.actividad
 								@actividades3otr.push(@act)
 							end
 						end
@@ -3716,28 +3528,18 @@ end
 			@act= Actividad.find(actade.actividad_id)
 			tipo= @act.tipo_actividad_id
 			if tipo==1
-				puts "soy una actividad de docencia"
-				puts @act.actividad
 				@actividades4doc.push(@act)
 			else
 				if tipo==2
-					puts "soy una actividad de investigacion"
-					puts @act.actividad
 					@actividades4inv.push(@act)
 				else
 					if tipo==3
-						puts "soy una actividad de extension"
-						puts @act.actividad
 						@actividades4ext.push(@act)
 					else
 						if tipo==4
-							puts "soy una actividad de formacion"
-							puts @act.actividad
 							@actividades4for.push(@act)
 						else
 							if tipo==5
-								puts "soy otro tipo de actividad"
-								puts @act.actividad
 								@actividades4otr.push(@act)
 							end
 						end
@@ -3752,8 +3554,6 @@ end
 			@act= Actividad.find(actade.actividad_id)
 			tipo= @act.tipo_actividad_id
 			if tipo==7
-				puts "soy otro tipo de actividad"
-				puts @act.actividad
 				@actividades5obli.push(@act)
 			end
 		end
@@ -3833,7 +3633,6 @@ end
 		        notific.adecuacion_id = session[:adecuacion_id]
 		        notific.informe_id = nil
 		        notific.actual = 1
-		        puts "JAJAJA"
 		        person = Persona.where(usuario_id: plan.instructor_id).take
 		        notificacionfecha = Date.current.to_s 
 	        	notific.mensaje = "[" + notificacionfecha + "] La adecuación de "+ person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " ha sido aprobada por Comisión de Investigación y fue enviada a Consejo de Escuela."
@@ -4091,7 +3890,6 @@ end
 		if session[:usuario_id] && session[:entidad]= true
 			@noti= params[:noti]
 			@cjpTipo=Usuario.find(session[:usuario_id]).tipo
-			puts @noti
     		notaeliminar = Notificacion.where(id: @noti ).take
     		if notaeliminar.blank?
     			flash[:danger] = "Ha ocurrido un error al eliminar (notificacion no existente)"

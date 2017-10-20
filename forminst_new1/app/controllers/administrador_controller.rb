@@ -56,12 +56,6 @@ class AdministradorController < ApplicationController
 	def guardar_secretaria
 		session[:administrador]
 		if session[:usuario_id]=="-2552" && session[:administrador] && session[:nombre_usuario]=="Administrador"
-			puts params[:Nombre]
-			puts params[:Apellido]
-			puts params[:CI]
-			puts params[:correo]
-			puts params[:escuela]
-			puts params[:entidad]
 			clave = params[:CI].to_s
 			cpusuario = Usuario.new
 			cpusuario.user = params[:correo]
@@ -122,14 +116,12 @@ class AdministradorController < ApplicationController
 	def modificar_email
 		session[:administrador]
 		if session[:usuario_id]=="-2552" && session[:administrador] && session[:nombre_usuario]=="Administrador"
-			puts params[:jrentidades]
 			cjpUsuarios = Usuarioentidad.where(entidad_id: params[:jrentidades])
 			cjpUsuarios.each do |uentidad|
 				if Usuario.where(id: uentidad.usuario_id).take.tipo == "Institucional"
 					$id = uentidad.usuario_id
 				end
 			end
-			puts $id
 			@email = Usuario.where(id: $id).take.user
 
 		else

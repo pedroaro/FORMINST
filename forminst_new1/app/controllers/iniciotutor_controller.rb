@@ -15,7 +15,6 @@ class IniciotutorController < ApplicationController
 			@notificaciones1= []
 		    @notificaciones = Notificacion.where(tutor_id: session[:usuario_id]).all
 		    @notificaciones.each do |notificaciones|
-		        puts notificaciones.actual
 		        if notificaciones.actual == 1        #Caso de notificaciones del tutor
 		        	@notificaciones1.push(notificaciones)
 		        end
@@ -31,7 +30,6 @@ class IniciotutorController < ApplicationController
 	end
 
 	def planformacions
-		puts "entre a plan formacion"
 		if session[:usuario_id] && session[:tutor]
 			session[:adecuacion_id] = nil
 			@persona = Persona.where(usuario_id: session[:usuario_id]).take
@@ -40,10 +38,7 @@ class IniciotutorController < ApplicationController
 			@status = []
 			@cpenviado = []
 			@planformacions.each do |plan|
-				puts "entre al for each"
 				@person= Persona.where(usuario_id: plan.instructor_id).take
-				puts "deberia colocar en el arreglo el nombre"
-				puts @person.nombres
 				@nombreinstructor.push(@tutor = @person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + @person.apellidos.to_s.split.map(&:capitalize).join(' '))
 
 				adecuacion = Adecuacion.where(planformacion_id: plan.id).take
@@ -82,8 +77,6 @@ class IniciotutorController < ApplicationController
 				end
 
 			end
-			puts "soy el tamano del arreglo de nombre"
-			puts @nombreinstructor.size()
 			@nombre = session[:nombre_usuario]
 			if not @nombre
 				print "NO HAY USUARIO"
@@ -96,25 +89,15 @@ class IniciotutorController < ApplicationController
 	def prorroga
 		if session[:usuario_id] && session[:tutor]
 			session[:adecuacion_id] = nil
-			puts "UNO"
 			@persona = Persona.where(usuario_id: session[:usuario_id]).take
-			puts "DOS"
 			@nombre = session[:nombre_usuario]
-			puts "TRES"
-			puts session[:plan_id]
 			@planformacion = session[:plan_id]
 			if not @planformacion
-				puts "NO HAY Planformacion"
 			end
 			@instructorName = session[:instructorName]
 			if not @instructorName
-				puts "NO HAY instructorName"
 			end
 			
-			puts "********-**************"
-			puts @planformacion
-			puts @instructorName
-			puts "*********-**************"
 
 			if not @nombre
 				print "NO HAY USUARIO"
@@ -256,8 +239,6 @@ class IniciotutorController < ApplicationController
 			else
 				@escuela= Escuela.where(id: @userentidad.escuela_id).take
 			end
-			puts "id del instructor"
-			puts @plan.instructor_id
 			@instructor= Persona.where(usuario_id: @plan.instructor_id).take
 
 			@actividadesadoc= []
@@ -266,9 +247,6 @@ class IniciotutorController < ApplicationController
 			@actividadesafor= []
 			@actividadesaotr= []
 
-			puts "------"
-			puts @cant_edit.to_i
-			puts "------"
 
 
 			if @cant_edit.to_i > 0
@@ -279,8 +257,6 @@ class IniciotutorController < ApplicationController
 
 				while j < @cant_edit.to_i
 					@act= Actividad.find(@edit)
-					puts "jlaaajlsajlsjklajsdlashkdsklahfd"
-					puts @edit
 					tipo= @act.tipo_actividad_id
 
 					if tipo==1
@@ -347,9 +323,6 @@ class IniciotutorController < ApplicationController
 					a.tipo_actividad_id = 1
 					a.actividad = @docencias
 					a.save
-					puts @adecuacion.id
-					puts a.id
-					puts semestre
 					adac = AdecuacionActividad.new
 					adac.adecuacion_id = @adecuacion.id
 					adac.actividad_id = a.id
@@ -377,9 +350,6 @@ class IniciotutorController < ApplicationController
 					a.tipo_actividad_id = 7
 					a.actividad = @obliga
 					a.save
-					puts @adecuacion.id
-					puts a.id
-					puts semestre
 					adac = AdecuacionActividad.new
 					adac.adecuacion_id = @adecuacion.id
 					adac.actividad_id = a.id
@@ -406,9 +376,6 @@ class IniciotutorController < ApplicationController
 					a.tipo_actividad_id = 2
 					a.actividad = @invest
 					a.save
-					puts @adecuacion.id
-					puts a.id
-					puts semestre
 					adac = AdecuacionActividad.new
 					adac.adecuacion_id = @adecuacion.id
 					adac.actividad_id = a.id
@@ -435,9 +402,6 @@ class IniciotutorController < ApplicationController
 					a.tipo_actividad_id = 4
 					a.actividad = @formacion
 					a.save
-					puts @adecuacion.id
-					puts a.id
-					puts semestre
 					adac = AdecuacionActividad.new
 					adac.adecuacion_id = @adecuacion.id
 					adac.actividad_id = a.id
@@ -464,9 +428,6 @@ class IniciotutorController < ApplicationController
 					a.tipo_actividad_id = 3
 					a.actividad = @extension
 					a.save
-					puts @adecuacion.id
-					puts a.id
-					puts semestre
 					adac = AdecuacionActividad.new
 					adac.adecuacion_id = @adecuacion.id
 					adac.actividad_id = a.id
@@ -493,9 +454,6 @@ class IniciotutorController < ApplicationController
 					a.tipo_actividad_id = 5
 					a.actividad = @otra
 					a.save
-					puts @adecuacion.id
-					puts a.id
-					puts semestre
 					adac = AdecuacionActividad.new
 					adac.adecuacion_id = @adecuacion.id
 					adac.actividad_id = a.id
@@ -547,8 +505,6 @@ class IniciotutorController < ApplicationController
 
 				#Presentacion
 				if params[:presentacionId].blank?
-					puts params[:presentacionId]
-					puts "JAJAJAJA"
 					cpActividad = Actividad.new
 					cpActividad.tipo_actividad_id = 9
 					cpActividad.actividad = params[:presentacion]
@@ -631,9 +587,6 @@ class IniciotutorController < ApplicationController
 				@edit= params[i].to_s
 
 				while j < params[:cant_edit].to_i
-					puts "EL EDIT CONTIENE.................."
-					puts @edit
-					puts i
 					if @edit == "presentacion"
 						if !params[:presentacionId].blank?
 							cpActividad = Actividad.find(params[:presentacionId])
@@ -758,11 +711,9 @@ class IniciotutorController < ApplicationController
 	def detalles_adecuacion3
 
 		if session[:usuario_id] && session[:tutor]
-			puts "BBBBBB"
 			if params[:plan_id]
 				@planformacion = Planformacion.find(params[:plan_id])
 				session[:editar]= true
-				puts "it's me"
 				session[:plan_id] = @planformacion.id
 				@instructorName = Persona.where(usuario_id: @planformacion.instructor_id).take.nombres
 				session[:instructorName] = @instructorName
@@ -784,9 +735,7 @@ class IniciotutorController < ApplicationController
 			end
 
 			@adecuacion = Adecuacion.where(planformacion_id: session[:plan_id]).take
-				puts "AAAAA"
 			if params[:editar] == 'no' 
-				puts "HAHAJKLASCNKJC"
 				session[:editar]= false
 			end
 			@est= EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
@@ -815,28 +764,18 @@ class IniciotutorController < ApplicationController
 				@act= Actividad.find(actade.actividad_id)
 				tipo= @act.tipo_actividad_id
 				if tipo==1
-					puts "soy una actividad de docencia"
-					puts @act.actividad
 					@actividadesadoc.push(@act)
 				else
 					if tipo==2
-						puts "soy una actividad de investigacion"
-						puts @act.actividad
 						@actividadesainv.push(@act)
 					else
 						if tipo==3
-							puts "soy una actividad de extension"
-							puts @act.actividad
 							@actividadesaext.push(@act)
 						else
 							if tipo==4
-								puts "soy una actividad de formacion"
-								puts @act.actividad
 								@actividadesafor.push(@act)
 							else
 								if tipo==5
-									puts "soy otro tipo de actividad"
-									puts @act.actividad
 									@actividadesaotr.push(@act)
 								end
 							end
@@ -916,28 +855,18 @@ class IniciotutorController < ApplicationController
 				@act= Actividad.find(actade.actividad_id)
 				tipo= @act.tipo_actividad_id
 				if tipo==1
-					puts "soy una actividad de docencia"
-					puts @act.actividad
 					@actividadesadoc.push(@act)
 				else
 					if tipo==2
-						puts "soy una actividad de investigacion"
-						puts @act.actividad
 						@actividadesainv.push(@act)
 					else
 						if tipo==3
-							puts "soy una actividad de extension"
-							puts @act.actividad
 							@actividadesaext.push(@act)
 						else
 							if tipo==4
-								puts "soy una actividad de formacion"
-								puts @act.actividad
 								@actividadesafor.push(@act)
 							else
 								if tipo==5
-									puts "soy otro tipo de actividad"
-									puts @act.actividad
 									@actividadesaotr.push(@act)
 								end
 							end
@@ -1024,32 +953,22 @@ class IniciotutorController < ApplicationController
 				@act= Actividad.find(actade.actividad_id)
 				tipo= @act.tipo_actividad_id
 				if tipo==1
-					puts "soy una actividad de docenciaaa"
-					puts @act.actividad
 					@actividadesadoc.push(@act)
 					a = true
 				else
 					if tipo==2
-						puts "soy una actividad de investigacion"
-						puts @act.actividad
 						@actividadesainv.push(@act)
 						b = true
 					else
 						if tipo==3
-							puts "soy una actividad de extension"
-							puts @act.actividad
 							@actividadesaext.push(@act)
 							c = true
 						else
 							if tipo==4
-								puts "soy una actividad de formacion"
-								puts @act.actividad
 								@actividadesafor.push(@act)
 								d = true
 							else
 								if tipo==5
-									puts "soy otro tipo de actividad"
-									puts @act.actividad
 									@actividadesaotr.push(@act)
 									e = true
 								end
@@ -1081,9 +1000,7 @@ class IniciotutorController < ApplicationController
 			    end
 			end
 			if (a == true && b== true && c== true && d== true  && e== true)
-				puts "hahahahhajjj siiii"
 			else 
-				puts "oh nooo"
 			end
 			@bool_enviado = 0
 			estatus_adecuacion = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
@@ -1132,38 +1049,24 @@ class IniciotutorController < ApplicationController
 				flash.now[:info]= "Para editar la Adecuación debe seleccionar Modificar Adecuación"
 			end
 			@actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 4).all
-			puts "GyyyGHELLO1"
-			puts @actividadesa
 			if @actividadesa.blank?
-				puts "GGHELLO1"
 			end
 			@actividadesa.each do |actade| 
-				puts "HELLO1"
 				@act= Actividad.find(actade.actividad_id)
 				tipo= @act.tipo_actividad_id
 				if tipo==1
-					puts "HELLO1"
-					puts @act.actividad
 					@actividadesadoc.push(@act)
 				else
 					if tipo==2
-						puts "HELLO12"
-						puts @act.actividad
 						@actividadesainv.push(@act)
 					else
 						if tipo==3
-							puts "HELLO13"
-							puts @act.actividad
 							@actividadesaext.push(@act)
 						else
 							if tipo==4
-								puts "HELLO14"
-								puts @act.actividad
 								@actividadesafor.push(@act)
 							else
 								if tipo==5
-									puts "HELLO15"
-									puts @act.actividad
 									@actividadesaotr.push(@act)
 								end
 							end
@@ -1242,18 +1145,12 @@ class IniciotutorController < ApplicationController
 				flash.now[:info]= "Para editar la Adecuación debe seleccionar Modificar Adecuación"
 			end
 			@actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 5).all
-			puts "GyyyGHELLO1"
-			puts @actividadesa
 			if @actividadesa.blank?
-				puts "GGHELLO1"
 			end
 			@actividadesa.each do |actade| 
-				puts "HELLO1"
 				@act= Actividad.find(actade.actividad_id)
 				tipo= @act.tipo_actividad_id
 				if tipo==7
-					puts "HELLO15"
-					puts @act.actividad
 					@actividadesaobli.push(@act)
 				end
 			end
@@ -1292,7 +1189,6 @@ class IniciotutorController < ApplicationController
 
 	def guardar_adecuacion
 		if session[:usuario_id] && session[:tutor]
-			puts "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
 			semestre = params[:semestre].to_i
 			cant_docencia = params[:cant_docencia]
 			cant_investigacion = params[:cant_investigacion]
@@ -1331,27 +1227,21 @@ class IniciotutorController < ApplicationController
 				@docencias = params[i]
 
 				while j < cant_docencia.to_i
-					puts @docencias
 
 					if  @docencias!=nil && @docencias!=""
 						if @docencias!=nil && @docencias!=""
-							puts "------------"
 						end
-						puts "entre al if"
-						puts @docencias
 
 						a = Actividad.new
 						a.tipo_actividad_id = 1
 						a.actividad = @docencias
 						a.save
-						puts "guarde la actividad de docencia: " + @docencias
 
 						adac = AdecuacionActividad.new
 						adac.adecuacion_id = ad.id
 						adac.actividad_id = a.id
 						adac.semestre = semestre
 						adac.save
-						puts "guarde la adecuacion actividad: "
 					end
 					j = j + 1
 					i=:docencia.to_s+j.to_s;
@@ -1362,7 +1252,6 @@ class IniciotutorController < ApplicationController
 				i=:investigacion.to_s+j.to_s;
 				investigacion = params[i]
 				while j < cant_investigacion.to_i
-					puts investigacion
 					if  investigacion!=nil && investigacion!=""
 							
 						a = Actividad.new
@@ -1370,7 +1259,6 @@ class IniciotutorController < ApplicationController
 						a.actividad = investigacion
 						a.save
 
-						puts "guarde la actividad de investigacion: "+investigacion
 
 						adac = AdecuacionActividad.new
 						adac.adecuacion_id = ad.id
@@ -1389,7 +1277,6 @@ class IniciotutorController < ApplicationController
 				i=:extension.to_s+j.to_s;
 				extension = params[i]
 				while j < cant_extension.to_i
-					puts extension
 					if  extension!=nil && extension!=""
 
 						a = Actividad.new
@@ -1397,7 +1284,6 @@ class IniciotutorController < ApplicationController
 						a.actividad = extension
 						a.save
 
-						puts "guarde la actividad de extension: "+extension
 						adac = AdecuacionActividad.new
 						adac.adecuacion_id = ad.id
 						adac.actividad_id = a.id
@@ -1416,7 +1302,6 @@ class IniciotutorController < ApplicationController
 				i=:formacion.to_s+j.to_s;
 				formacion = params[i]
 				while j < cant_formacion.to_i
-					puts formacion
 					if  formacion!=nil && formacion!=""
 						
 						a = Actividad.new
@@ -1424,7 +1309,6 @@ class IniciotutorController < ApplicationController
 						a.actividad = formacion
 						a.save
 
-						puts "guarde la actividad de formacion: "+formacion
 						adac = AdecuacionActividad.new
 						adac.adecuacion_id = ad.id
 						adac.actividad_id = a.id
@@ -1442,7 +1326,6 @@ class IniciotutorController < ApplicationController
 				i=:otra.to_s+j.to_s;
 				otra = params[i]
 				while j < cant_otra.to_i
-					puts otra
 					if  otra!=nil && otra!=""
 						
 						a = Actividad.new
@@ -1450,7 +1333,6 @@ class IniciotutorController < ApplicationController
 						a.actividad = otra
 						a.save
 
-						puts "guarde la actividad de otra: "+otra
 						adac = AdecuacionActividad.new
 						adac.adecuacion_id = ad.id
 						adac.actividad_id = a.id
@@ -1482,7 +1364,6 @@ class IniciotutorController < ApplicationController
 	def eliminar_adecuacion
 		if session[:usuario_id] && session[:tutor]
 			@adecuacion= Adecuacion.find(session[:adecuacion_id])
-			puts "asdasdasd"
 			@est= EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
 			if @est.estatus_id == 6
 	      		@documents = Document.where(adecuacion_id: session[:adecuacion_id]).all
@@ -1581,28 +1462,18 @@ class IniciotutorController < ApplicationController
 				@act= Actividad.find(actade.actividad_id)
 				tipo= @act.tipo_actividad_id
 				if tipo==1
-					puts "soy una actividad de docencia"
-					puts @act.actividad
 					@actividades1doc.push(@act)
 				else
 					if tipo==2
-						puts "soy una actividad de investigacion"
-						puts @act.actividad
 						@actividades1inv.push(@act)
 					else
 						if tipo==3
-							puts "soy una actividad de extension"
-							puts @act.actividad
 							@actividades1ext.push(@act)
 						else
 							if tipo==4
-								puts "soy una actividad de formacion"
-								puts @act.actividad
 								@actividades1for.push(@act)
 							else
 								if tipo==5
-									puts "soy otro tipo de actividad"
-									puts @act.actividad
 									@actividades1otr.push(@act)
 								end
 							end
@@ -1621,28 +1492,18 @@ class IniciotutorController < ApplicationController
 				@act= Actividad.find(actade.actividad_id)
 				tipo= @act.tipo_actividad_id
 				if tipo==1
-					puts "soy una actividad de docencia"
-					puts @act.actividad
 					@actividades2doc.push(@act)
 				else
 					if tipo==2
-						puts "soy una actividad de investigacion"
-						puts @act.actividad
 						@actividades2inv.push(@act)
 					else
 						if tipo==3
-							puts "soy una actividad de extension"
-							puts @act.actividad
 							@actividades2ext.push(@act)
 						else
 							if tipo==4
-								puts "soy una actividad de formacion"
-								puts @act.actividad
 								@actividades2for.push(@act)
 							else
 								if tipo==5
-									puts "soy otro tipo de actividad"
-									puts @act.actividad
 									@actividades2otr.push(@act)
 								end
 							end
@@ -1661,28 +1522,18 @@ class IniciotutorController < ApplicationController
 				@act= Actividad.find(actade.actividad_id)
 				tipo= @act.tipo_actividad_id
 				if tipo==1
-					puts "soy una actividad de docencia"
-					puts @act.actividad
 					@actividades3doc.push(@act)
 				else
 					if tipo==2
-						puts "soy una actividad de investigacion"
-						puts @act.actividad
 						@actividades3inv.push(@act)
 					else
 						if tipo==3
-							puts "soy una actividad de extension"
-							puts @act.actividad
 							@actividades3ext.push(@act)
 						else
 							if tipo==4
-								puts "soy una actividad de formacion"
-								puts @act.actividad
 								@actividades3for.push(@act)
 							else
 								if tipo==5
-									puts "soy otro tipo de actividad"
-									puts @act.actividad
 									@actividades3otr.push(@act)
 								end
 							end
@@ -1701,28 +1552,18 @@ class IniciotutorController < ApplicationController
 				@act= Actividad.find(actade.actividad_id)
 				tipo= @act.tipo_actividad_id
 				if tipo==1
-					puts "soy una actividad de docencia"
-					puts @act.actividad
 					@actividades4doc.push(@act)
 				else
 					if tipo==2
-						puts "soy una actividad de investigacion"
-						puts @act.actividad
 						@actividades4inv.push(@act)
 					else
 						if tipo==3
-							puts "soy una actividad de extension"
-							puts @act.actividad
 							@actividades4ext.push(@act)
 						else
 							if tipo==4
-								puts "soy una actividad de formacion"
-								puts @act.actividad
 								@actividades4for.push(@act)
 							else
 								if tipo==5
-									puts "soy otro tipo de actividad"
-									puts @act.actividad
 									@actividades4otr.push(@act)
 								end
 							end
@@ -1738,8 +1579,6 @@ class IniciotutorController < ApplicationController
 				@act= Actividad.find(actade.actividad_id)
 				tipo= @act.tipo_actividad_id
 				if tipo == 7
-					puts "soy otro tipo de actividad"
-					puts @act.actividad
 					@actividades5obli.push(@act)
 				end
 			end
@@ -1759,8 +1598,6 @@ class IniciotutorController < ApplicationController
 			@actividades1otr= []
 			g=0;
 		    cambio_act = EstatusAdecuacion.where(adecuacion_id: @adecuacion_id, actual: 1).take
-		    puts cambio_act.estatus_id
-		    puts "JAJAA"
 
 			if (cambio_act.estatus_id != 6 && cambio_act.estatus_id != 5)
 		    	flash[:info]="Esta adecuación ya habia sido enviada"
@@ -1779,28 +1616,18 @@ class IniciotutorController < ApplicationController
 					@act= Actividad.find(actade.actividad_id)
 					tipo= @act.tipo_actividad_id
 					if tipo==1
-						puts "soy una actividad de docencia"
-						puts @act.actividad
 						a = true
 					else
 						if tipo==2
-							puts "soy una actividad de investigacion"
-							puts @act.actividad
 							b = true
 						else
 							if tipo==3
-								puts "soy una actividad de extension"
-								puts @act.actividad
 								c = true
 							else
 								if tipo==4
-									puts "soy una actividad de formacion"
-									puts @act.actividad
 									d = true
 								else
 									if tipo==5
-										puts "soy otro tipo de actividad"
-										puts @act.actividad
 										e = true
 									end
 								end
@@ -1809,7 +1636,6 @@ class IniciotutorController < ApplicationController
 					end
 				end
 				if (a == true && b== true && c== true && d== true  && e== true)
-						puts "hahahahhajjj siiii"
 				elsif ( a == true && b== true && c== true && d== true  && e== false)
 					a = Actividad.new
 					a.tipo_actividad_id = 5
@@ -1822,7 +1648,6 @@ class IniciotutorController < ApplicationController
 					adac.semestre = 1
 					adac.save
 				else 
-					puts "oh nooo"
 					g = g + 1
 				end
 
@@ -1844,32 +1669,22 @@ class IniciotutorController < ApplicationController
 					@act= Actividad.find(actade.actividad_id)
 					tipo= @act.tipo_actividad_id
 					if tipo==1
-						puts "soy una actividad de docencia"
-						puts @act.actividad
 						@actividades2doc.push(@act)
 						a = true
 					else
 						if tipo==2
-							puts "soy una actividad de investigacion"
-							puts @act.actividad
 							@actividades2inv.push(@act)
 							b = true
 						else
 							if tipo==3
-								puts "soy una actividad de extension"
-								puts @act.actividad
 								@actividades2ext.push(@act)
 								c = true
 							else
 								if tipo==4
-									puts "soy una actividad de formacion"
-									puts @act.actividad
 									@actividades2for.push(@act)
 									d = true
 								else
 									if tipo==5
-										puts "soy otro tipo de actividad"
-										puts @act.actividad
 										@actividades2otr.push(@act)
 										e = true
 									end
@@ -1879,7 +1694,6 @@ class IniciotutorController < ApplicationController
 					end
 				end
 				if (a == true && b== true && c== true && d== true  && e== true)
-					puts "hahahahhajjj siiii"
 				elsif ( a == true && b== true && c== true && d== true  && e== false)
 					a = Actividad.new
 					a.tipo_actividad_id = 5
@@ -1892,7 +1706,6 @@ class IniciotutorController < ApplicationController
 					adac.semestre = 2
 					adac.save
 				else 
-					puts "oh nooo"
 					g = g + 1
 				end
 				@actividades3doc= []
@@ -1913,32 +1726,22 @@ class IniciotutorController < ApplicationController
 					@act= Actividad.find(actade.actividad_id)
 					tipo= @act.tipo_actividad_id
 					if tipo==1
-						puts "soy una actividad de docencia"
-						puts @act.actividad
 						@actividades3doc.push(@act)
 						a = true
 					else
 						if tipo==2
-							puts "soy una actividad de investigacion"
-							puts @act.actividad
 							@actividades3inv.push(@act)
 							b = true
 						else
 							if tipo==3
-								puts "soy una actividad de extension"
-								puts @act.actividad
 								@actividades3ext.push(@act)
 								c = true
 							else
 								if tipo==4
-									puts "soy una actividad de formacion"
-									puts @act.actividad
 									@actividades3for.push(@act)
 									d = true
 								else
 									if tipo==5
-										puts "soy otro tipo de actividad"
-										puts @act.actividad
 										@actividades3otr.push(@act)
 										e = true
 									end
@@ -1948,7 +1751,6 @@ class IniciotutorController < ApplicationController
 					end
 				end
 				if (a == true && b== true && c== true && d== true  && e== true)
-					puts "hahahahhajjj siiii"
 				elsif ( a == true && b== true && c== true && d== true  && e== false)
 					a = Actividad.new
 					a.tipo_actividad_id = 5
@@ -1961,7 +1763,6 @@ class IniciotutorController < ApplicationController
 					adac.semestre = 3
 					adac.save
 				else 
-					puts "oh nooo"
 					g = g + 1
 				end
 				@actividades4doc= []
@@ -1982,32 +1783,22 @@ class IniciotutorController < ApplicationController
 					@act= Actividad.find(actade.actividad_id)
 					tipo= @act.tipo_actividad_id
 					if tipo==1
-						puts "soy una actividad de docencia"
-						puts @act.actividad
 						@actividades4doc.push(@act)
 						a = true
 					else
 						if tipo==2
-							puts "soy una actividad de investigacion"
-							puts @act.actividad
 							@actividades4inv.push(@act)
 							b = true
 						else
 							if tipo==3
-								puts "soy una actividad de extension"
-								puts @act.actividad
 								@actividades4ext.push(@act)
 								c = true
 							else
 								if tipo==4
-									puts "soy una actividad de formacion"
-									puts @act.actividad
 									@actividades4for.push(@act)
 									d = true
 								else
 									if tipo==5
-										puts "soy otro tipo de actividad"
-										puts @act.actividad
 										@actividades4otr.push(@act)
 										e = true
 									end
@@ -2017,7 +1808,6 @@ class IniciotutorController < ApplicationController
 					end
 				end
 				if (a == true && b== true && c== true && d== true  && e== true)
-						puts "hahahahhajjj siiii"
 				elsif ( a == true && b== true && c== true && d== true  && e== false)
 					a = Actividad.new
 					a.tipo_actividad_id = 5
@@ -2030,7 +1820,6 @@ class IniciotutorController < ApplicationController
 					adac.semestre = 4
 					adac.save
 				else 
-						puts "oh nooo"
 						g = g + 1
 				end
 				aob = 0
@@ -2084,7 +1873,6 @@ class IniciotutorController < ApplicationController
 			       	cambio_act.actual = 0
 			      	cambio_act.save
 			        cambio_est = EstatusAdecuacion.new 
-		        	puts plan.instructor_id
 			        cambio_est.adecuacion_id = @adecuacion_id
 			        cambio_est.fecha = Time.now 
 					notific = Notificacion.new
@@ -2127,7 +1915,6 @@ class IniciotutorController < ApplicationController
 			        	notific3.mensaje = "[" + notificacionfecha + "] Se ha recibido una nueva Adecuación: "+ person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + ", favor revisar."
 			        end
 		        	notific3.save
-		        	puts notific.mensaje
 			        notific.save
     				respaldos = []
 				    respaldos = Respaldo.where(adecuacion_id: @adecuacion_id, informe_id: nil).all
@@ -2210,7 +1997,6 @@ class IniciotutorController < ApplicationController
  	end 
 
   def generar_pdf() # es función permite generar el documento pdf de la adecuación
-    puts session[:adecuacion_id]
     @adecuacion= Adecuacion.find(session[:adecuacion_id]) # se obtienen la información de la adecuación seleccionada
     @planformacion= Planformacion.find(@adecuacion.planformacion_id)
     @fechaConcurso = @planformacion.fecha_inicio
@@ -2261,28 +2047,18 @@ class IniciotutorController < ApplicationController
       @act= Actividad.find(actade.actividad_id)
       tipo= @act.tipo_actividad_id
       if tipo==1
-        puts "soy una actividad de docencia"
-        puts @act.actividad
         @pactv_docencia.push(@act)
       else
         if tipo==2
-          puts "soy una actividad de investigacion"
-          puts @act.actividad
           @pactv_investigacion.push(@act)
         else
           if tipo==3
-            puts "soy una actividad de extension"
-            puts @act.actividad
             @pactv_extension.push(@act)
           else
             if tipo==4
-              puts "soy una actividad de formacion"
-              puts @act.actividad
               @pactv_formacion.push(@act)
             else
               if tipo==5
-                puts "soy otro tipo de actividad"
-                puts @act.actividad
                 @pactv_otras.push(@act)
               end
             end
@@ -2296,28 +2072,18 @@ class IniciotutorController < ApplicationController
       @act= Actividad.find(actade.actividad_id)
       tipo= @act.tipo_actividad_id
       if tipo==1
-        puts "soy una actividad de docencia"
-        puts @act.actividad
         @sactv_docencia.push(@act)
       else
         if tipo==2
-          puts "soy una actividad de investigacion"
-          puts @act.actividad
           @sactv_investigacion.push(@act)
         else
           if tipo==3
-            puts "soy una actividad de extension"
-            puts @act.actividad
             @sactv_extension.push(@act)
           else
             if tipo==4
-              puts "soy una actividad de formacion"
-              puts @act.actividad
               @sactv_formacion.push(@act)
             else
               if tipo==5
-                puts "soy otro tipo de actividad"
-                puts @act.actividad
                 @sactv_otras.push(@act)
               end
             end
@@ -2331,28 +2097,18 @@ class IniciotutorController < ApplicationController
       @act= Actividad.find(actade.actividad_id)
       tipo= @act.tipo_actividad_id
       if tipo==1
-        puts "soy una actividad de docencia"
-        puts @act.actividad
         @tactv_docencia.push(@act)
       else
         if tipo==2
-          puts "soy una actividad de investigacion"
-          puts @act.actividad
           @tactv_investigacion.push(@act)
         else
           if tipo==3
-            puts "soy una actividad de extension"
-            puts @act.actividad
             @tactv_extension.push(@act)
           else
             if tipo==4
-              puts "soy una actividad de formacion"
-              puts @act.actividad
               @tactv_formacion.push(@act)
             else
               if tipo==5
-                puts "soy otro tipo de actividad"
-                puts @act.actividad
                 @tactv_otras.push(@act)
               end
             end
@@ -2366,28 +2122,18 @@ class IniciotutorController < ApplicationController
       @act= Actividad.find(actade.actividad_id)
       tipo= @act.tipo_actividad_id
       if tipo==1
-        puts "soy una actividad de docencia"
-        puts @act.actividad
         @cactv_docencia.push(@act)
       else
         if tipo==2
-          puts "soy una actividad de investigacion"
-          puts @act.actividad
           @cactv_investigacion.push(@act)
         else
           if tipo==3
-            puts "soy una actividad de extension"
-            puts @act.actividad
             @cactv_extension.push(@act)
           else
             if tipo==4
-              puts "soy una actividad de formacion"
-              puts @act.actividad
               @cactv_formacion.push(@act)
             else
               if tipo==5
-                puts "soy otro tipo de actividad"
-                puts @act.actividad
                 @cactv_otras.push(@act)
               end
             end
@@ -2401,8 +2147,6 @@ class IniciotutorController < ApplicationController
       @act= Actividad.find(actade.actividad_id)
       tipo= @act.tipo_actividad_id
       if tipo==7
-        puts "soy una actividad de docencia"
-        puts @act.actividad
         @dactv_obligatorias.push(@act)
       end
     end
@@ -2423,7 +2167,6 @@ class IniciotutorController < ApplicationController
     Pdf.pdf_adecuacion(@actividades1, @planformacion, @adecuacion, @tutor, @instructor, @correoi, @correot, @escuela, @pactv_docencia, @pactv_investigacion, @pactv_extension, @pactv_formacion, @pactv_otras, @sactv_docencia, @sactv_investigacion, @sactv_extension, @sactv_formacion, @sactv_otras, @tactv_docencia, @tactv_investigacion, @tactv_extension, @tactv_formacion, @tactv_otras, @cactv_docencia, @cactv_investigacion, @cactv_extension, @cactv_formacion, @cactv_otras, @fechaActual, @fechaConcurso, @documents, @numeroDeVersion, @dactv_obligatorias)
     @nombre_archivo= @instructor.ci.to_s+'-'+@fechaActual+'-adecuacionV'+@numeroDeVersion.to_s+'.pdf' # se arma el nombre del documento 
     act = "#{Rails.root}/tmp/PDFs" + @nombre_archivo
-    puts @nombre_archivo
     return @nombre_archivo # se retorna el nombre del archivo
   end
 
@@ -2513,15 +2256,11 @@ class IniciotutorController < ApplicationController
 	end
 
 	def show
-		puts params[:adecuacion_id]
-		puts params[:version]
 
 		if params[:informe_id].blank?
 			@document = Respaldo.where(adecuacion_id: params[:adecuacion_id], informe_id: nil, version: params[:version].to_i, filename: params[:namefile]).take
-			puts "no informe"
 		else
 			@document = Respaldo.where(adecuacion_id: params[:adecuacion_id], informe_id: params[:informe_id],version: params[:version].to_i, filename: params[:namefile]).take
-			puts "informe"
 		end
 	    send_data(@document.file_contents,
 	              type: @document.content_type,
@@ -2531,8 +2270,6 @@ class IniciotutorController < ApplicationController
 	def borrar_notificaciones #mas obs de actividades del informe
 		if session[:usuario_id] && session[:tutor]
 			@noti= params[:noti]
-			puts "lalalala"
-			puts @noti
     		notaeliminar = Notificacion.where(id: @noti ).take
     		if notaeliminar.blank?
     			flash[:danger] = "Ha ocurrido un error al eliminar (notificacion no existente)"
@@ -2548,8 +2285,6 @@ class IniciotutorController < ApplicationController
 	def borrar_notificaciones1 #mas obs de actividades del informe
 		if session[:usuario_id] && session[:tutor]
 			@noti= params[:noti]
-			puts "lalalala"
-			puts @noti
     		notaeliminar = Notificacion.where(id: @noti ).take
     		if notaeliminar.blank?
     			flash[:danger] = "Ha ocurrido un error al eliminar (notificacion no existente)"
