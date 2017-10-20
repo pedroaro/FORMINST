@@ -15,10 +15,6 @@ class ForminstController < ApplicationController
 		correo= params[:correo] # se toma el valor correo del ususario
 		clave= params[:password] # se toma el valor password del usuario
 		# se realiza la busqueda del correo y la clave ingresada en la interfaz
-		puts "SOOOOOOY el correo"
-		puts correo
-		puts "SOOOOY LA CLAVE"
-		puts clave
 
 		#Si es un Administrados
 		if correo == "Administrador" && params[:password]=="1"
@@ -30,9 +26,6 @@ class ForminstController < ApplicationController
 			session[:instructor] = false
 			session[:entidad] = false
 			flash[:success] = "Bienvenido! Administrador"
-			puts "******"
-			puts "El usuario se autentico correctamente y es tutor"
-			puts "******"
 			redirect_to controller:"administrador", action: "index"
 
 		elsif correo!=nil && correo!="" && clave!=nil && clave!=""
@@ -43,7 +36,6 @@ class ForminstController < ApplicationController
 			@usuario= Usuario.where(user: correo).take
 #     @usuario= Usuario.where(user: correo).take
 
-			puts "****************+SOOOY EL USUARIO activooo"
 			if @usuario
 	      		tipo=@usuario.tipo
 				@usuarioe= Usuarioentidad.where(usuario_id: @usuario.id).take
@@ -61,7 +53,6 @@ class ForminstController < ApplicationController
 							session[:instructor]= false
 							session[:entidad]= true
 							flash[:success]= "Bienvenido! " + session[:nombre_usuario] = @persona.nombres.titleize+' '+@persona.apellidos.titleize
-							puts "El usuario se autentico correctamente y es instructor"
 							redirect_to controller:"secretarias", action: "index"
 						elsif tipo == "Docente"
 							if @entidad.nombre=="tutor"
@@ -73,7 +64,6 @@ class ForminstController < ApplicationController
 								session[:instructor]= false
 								session[:entidad]= false
 								flash[:success]= "Bienvenido! " + session[:nombre_usuario] = @persona.nombres.titleize+' '+@persona.apellidos.titleize
-								puts "El usuario se autentico correctamente y es un tutor"
 								redirect_to controller:"iniciotutor", action: "index"
 							elsif @entidad.nombre=="instructor"
 								session[:usuario_id] = @usuario.id
@@ -83,7 +73,6 @@ class ForminstController < ApplicationController
 								session[:tutor]= false
 								session[:instructor]= true
 								session[:entidad]= false
-								puts "El usuario se autentico correctamente y es un instructoraa"
 								flash[:success]= "Bienvenido! " + session[:nombre_usuario] = @persona.nombres.titleize+' '+@persona.apellidos.titleize
 								redirect_to controller:"inicioinstructor", action: "index"
 							end
@@ -98,19 +87,13 @@ class ForminstController < ApplicationController
 								session[:entidad]= true
 								flash[:success]= "Bienvenido! " + session[:nombre_usuario] = @persona.nombres.titleize+' '+@persona.apellidos.titleize
 
-								puts "El usuario se autentico correctamente y es una entidad"
 								redirect_to controller:"forminst", action: "index"
 							else
-								puts "No soy ni docente ni Institucional"
 								flash.now[:mensaje] = 'Su contraseña o correo electrónico es incorrecto.'
 								redirect_to controller:"forminst", action: "index"
 							end
 						end
 					else
-						puts'--------'
-						puts @usuario.email
-						puts correo
-						puts'--------'
 						clave = Digest::SHA1.hexdigest(clave)
 						if @usuario.email == correo
 							if @usuario.password == clave
@@ -125,7 +108,6 @@ class ForminstController < ApplicationController
 									session[:instructor]= false
 									session[:entidad]= true
 									flash[:success]= "Bienvenido! " + session[:nombre_usuario] = @persona.nombres.titleize+' '+@persona.apellidos.titleize
-									puts "El usuario se autentico correctamente y es instructor"
 									redirect_to controller:"secretarias", action: "index"
 								elsif tipo == "Docente"
 									if @entidad.nombre=="tutor"
@@ -137,7 +119,6 @@ class ForminstController < ApplicationController
 										session[:instructor]= false
 										session[:entidad]= false
 										flash[:success]= "Bienvenido! " + session[:nombre_usuario] = @persona.nombres.titleize+' '+@persona.apellidos.titleize
-										puts "El usuario se autentico correctamente y es un tutor"
 										redirect_to controller:"iniciotutor", action: "index"
 									else
 										if @entidad.nombre="instructor"
@@ -148,7 +129,6 @@ class ForminstController < ApplicationController
 											session[:tutor]= false
 											session[:instructor]= true
 											session[:entidad]= false
-											puts "El usuario se autentico correctamente y es un instructoraa"
 											flash[:success]= "Bienvenido! " + session[:nombre_usuario] = @persona.nombres.titleize+' '+@persona.apellidos.titleize
 											redirect_to controller:"inicioinstructor", action: "index"
 										else
@@ -161,7 +141,6 @@ class ForminstController < ApplicationController
 											session[:entidad]= true
 											flash[:success]= "Bienvenido! " + session[:nombre_usuario] = @persona.nombres.titleize+' '+@persona.apellidos.titleize
 
-											puts "El usuario se autentico correctamente y es una entidad"
 											redirect_to controller:"forminst", action: "index"
 										end
 									end
@@ -172,36 +151,29 @@ class ForminstController < ApplicationController
 									session[:instructor]= false
 									session[:entidad]= true
 									session[:entidad_id] = @entidad.id
-									puts (session[:entidad_id])
 									session[:nombre_usuario] = @entidad.nombre
 									flash[:success]= "Bienvenido al " + @entidad.nombre
-									puts "El usuario se autentico correctamente y es una entidad"
 									redirect_to controller:"inicioentidad", action: "index"
 								end
 							else
 								flash.now[:danger]="Su usuario o contraseña son incorrectas"
-								puts "No se autentico debido a que la contraseña es incorrecta"
 								render 'index'
 							end
 						else
 							flash.now[:danger]="Su usuario o contraseña son incorrectas"
-							puts "No se autentico debido a que el correo es incorrecto"
 							render 'index'
 						end
 					end
 				else
 					flash.now[:danger]= "El usuario no está activo en el sistema"
-					puts "El usuario no está activo"
 					render 'index'
 				end
 			else
-				puts "La persona no está registrada en la BD local"
 				flash[:danger]= "El usuario o la contraseña son incorrectas"
 				render 'index'
 			end
 			
 		else
-			puts "La persona no está registrada en el ldap2"
 			flash[:danger]= "El usuario o la contraseña son incorrectas"
 			render "index"
 		end

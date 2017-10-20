@@ -1,7 +1,6 @@
 class AdecuacionsController < ApplicationController
 
   def generar_pdf() # es función permite generar el documento pdf de la adecuación
-    puts session[:adecuacion_id]
     @adecuacion= Adecuacion.find(session[:adecuacion_id]) # se obtienen la información de la adecuación seleccionada
     @planformacion= Planformacion.find(@adecuacion.planformacion_id)
     @fechaConcurso = @planformacion.fecha_inicio
@@ -55,28 +54,18 @@ class AdecuacionsController < ApplicationController
       @act= Actividad.find(actade.actividad_id)
       tipo= @act.tipo_actividad_id
       if tipo==1
-        puts "soy una actividad de docencia"
-        puts @act.actividad
         @pactv_docencia.push(@act)
       else
         if tipo==2
-          puts "soy una actividad de investigacion"
-          puts @act.actividad
           @pactv_investigacion.push(@act)
         else
           if tipo==3
-            puts "soy una actividad de extension"
-            puts @act.actividad
             @pactv_extension.push(@act)
           else
             if tipo==4
-              puts "soy una actividad de formacion"
-              puts @act.actividad
               @pactv_formacion.push(@act)
             else
               if tipo==5
-                puts "soy otro tipo de actividad"
-                puts @act.actividad
                 @pactv_otras.push(@act)
               end
             end
@@ -90,28 +79,18 @@ class AdecuacionsController < ApplicationController
       @act= Actividad.find(actade.actividad_id)
       tipo= @act.tipo_actividad_id
       if tipo==1
-        puts "soy una actividad de docencia"
-        puts @act.actividad
         @sactv_docencia.push(@act)
       else
         if tipo==2
-          puts "soy una actividad de investigacion"
-          puts @act.actividad
           @sactv_investigacion.push(@act)
         else
           if tipo==3
-            puts "soy una actividad de extension"
-            puts @act.actividad
             @sactv_extension.push(@act)
           else
             if tipo==4
-              puts "soy una actividad de formacion"
-              puts @act.actividad
               @sactv_formacion.push(@act)
             else
               if tipo==5
-                puts "soy otro tipo de actividad"
-                puts @act.actividad
                 @sactv_otras.push(@act)
               end
             end
@@ -125,28 +104,18 @@ class AdecuacionsController < ApplicationController
       @act= Actividad.find(actade.actividad_id)
       tipo= @act.tipo_actividad_id
       if tipo==1
-        puts "soy una actividad de docencia"
-        puts @act.actividad
         @tactv_docencia.push(@act)
       else
         if tipo==2
-          puts "soy una actividad de investigacion"
-          puts @act.actividad
           @tactv_investigacion.push(@act)
         else
           if tipo==3
-            puts "soy una actividad de extension"
-            puts @act.actividad
             @tactv_extension.push(@act)
           else
             if tipo==4
-              puts "soy una actividad de formacion"
-              puts @act.actividad
               @tactv_formacion.push(@act)
             else
               if tipo==5
-                puts "soy otro tipo de actividad"
-                puts @act.actividad
                 @tactv_otras.push(@act)
               end
             end
@@ -160,28 +129,18 @@ class AdecuacionsController < ApplicationController
       @act= Actividad.find(actade.actividad_id)
       tipo= @act.tipo_actividad_id
       if tipo==1
-        puts "soy una actividad de docencia"
-        puts @act.actividad
         @cactv_docencia.push(@act)
       else
         if tipo==2
-          puts "soy una actividad de investigacion"
-          puts @act.actividad
           @cactv_investigacion.push(@act)
         else
           if tipo==3
-            puts "soy una actividad de extension"
-            puts @act.actividad
             @cactv_extension.push(@act)
           else
             if tipo==4
-              puts "soy una actividad de formacion"
-              puts @act.actividad
               @cactv_formacion.push(@act)
             else
               if tipo==5
-                puts "soy otro tipo de actividad"
-                puts @act.actividad
                 @cactv_otras.push(@act)
               end
             end
@@ -194,6 +153,7 @@ class AdecuacionsController < ApplicationController
     @cactividadesa.each do |actade| 
       @act= Actividad.find(actade.actividad_id)
       tipo= @act.tipo_actividad_id
+<<<<<<< HEAD
       if tipo==1
         puts "soy una actividad de docencia"
         puts @act.actividad
@@ -216,6 +176,10 @@ class AdecuacionsController < ApplicationController
             end
           end
         end
+=======
+      if tipo==7
+        @dactv_obligatorias.push(@act)
+>>>>>>> 687fd543c3dac836d8fdfb307fc713e9b2d54c55
       end
     end
     @documents = []
@@ -226,8 +190,6 @@ class AdecuacionsController < ApplicationController
     if !actividades.blank?
       actividades.each do |actividadAde|
         actividad = Actividad.find(actividadAde.actividad_id)
-        puts actividad.actividad
-        puts "helloooo"
           @actividades1.push(actividad)
       end
     end
@@ -241,14 +203,12 @@ class AdecuacionsController < ApplicationController
       filename: @nombre_archivo,
       type: "application/pdf"
     )
-    puts @nombre_archivo
     return @nombre_archivo # se retorna el nombre del archivo
   end
 
 ####################################################################################  
   def descargar_pdf # esta función permite la generación y descarga del archivo PDF del documento
     require 'prawn'
-    puts "entre a descargar"
     pdf = Prawn::Document.new
     pdf.text "Hello It's me"
     pdf.render_file "example.pdf"

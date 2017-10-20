@@ -13230,3 +13230,115 @@ Processing by DocumentsController#create as HTML
 DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/Desktop/Forminst 0.86/FORMINST/forminst_new1/config/routes.rb:5)
 DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/Desktop/Forminst 0.86/FORMINST/forminst_new1/config/routes.rb:6)
 DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/Desktop/Forminst 0.86/FORMINST/forminst_new1/config/routes.rb:6)
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/Desktop/Forminst 0.86/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/Desktop/Forminst 0.86/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/Desktop/Forminst 0.86/FORMINST/forminst_new1/config/routes.rb:6)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/Desktop/Forminst 0.86/FORMINST/forminst_new1/config/routes.rb:6)
+Started GET "/" for ::1 at 2017-10-20 08:41:37 -0400
+Processing by ForminstController#index as HTML
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (11.9ms)[0m  [1m[31mDELETE FROM `session` WHERE `session`.`id` = 247[0m
+  [1m[35m (67.9ms)[0m  [1m[35mCOMMIT[0m
+  Rendering forminst/index.html.erb within layouts/ec_aplanes
+  Rendered forminst/index.html.erb within layouts/ec_aplanes (16.4ms)
+Completed 200 OK in 3085ms (Views: 2637.3ms | ActiveRecord: 286.0ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (35.7ms)[0m  [1m[33mUPDATE `session` SET `data` = 'BAh7BkkiEF9jc3JmX3Rva2VuBjoGRUZJIjFiRFBpMmVETDZkT1pVdE52OFlD\nTWpVeXpHTGV0SWxuZ3dKb1M2U0l5aTFNPQY7AEY=\n', `updated_at` = '2017-10-20 12:41:40' WHERE `session`.`id` = 248[0m
+  [1m[35m (107.4ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/assets/actividadejecutadas.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2017-10-20 08:41:40 -0400
+Started GET "/assets/actividads.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2017-10-20 08:41:40 -0400
+Started GET "/assets/adecuacionactividads.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2017-10-20 08:41:40 -0400
+Started GET "/assets/adecuacions.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2017-10-20 08:41:40 -0400
+Started GET "/assets/documentoinformes.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2017-10-20 08:41:40 -0400
+Started GET "/assets/documentoplans.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2017-10-20 08:41:40 -0400
+Started GET "/assets/documentos.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2017-10-20 08:41:40 -0400
+Started GET "/assets/documents.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2017-10-20 08:41:40 -0400
+Started GET "/assets/download.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2017-10-20 08:41:40 -0400
+Started GET "/assets/entidads.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2017-10-20 08:41:40 -0400
+Started GET "/assets/estatusadecuacions.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2017-10-20 08:41:40 -0400
+Started GET "/assets/escuelas.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2017-10-20 08:41:40 -0400
+Started GET "/assets/estatusinformes.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2017-10-20 08:41:40 -0400
+Started GET "/assets/forminst.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2017-10-20 08:41:40 -0400
+Started GET "/assets/informeactividads.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2017-10-20 08:41:40 -0400
+Started GET "/assets/informes.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2017-10-20 08:41:40 -0400
+Started GET "/assets/observacionactividadinformes.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2017-10-20 08:41:40 -0400
+Started GET "/assets/observaciontutors.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2017-10-20 08:41:40 -0400
+Started GET "/assets/observacionactividadadecuacions.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2017-10-20 08:41:40 -0400
+Started GET "/assets/permisologia.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2017-10-20 08:41:40 -0400
+Started GET "/assets/permisos.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2017-10-20 08:41:40 -0400
+Started GET "/assets/personas.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2017-10-20 08:41:40 -0400
+Started GET "/assets/planformacions.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2017-10-20 08:41:40 -0400
+Started GET "/assets/prorrogas.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2017-10-20 08:41:40 -0400
+Started GET "/assets/resultados.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2017-10-20 08:41:40 -0400
+Started GET "/assets/revisions.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2017-10-20 08:41:40 -0400
+Started GET "/assets/tipoactividads.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2017-10-20 08:41:40 -0400
+Started GET "/assets/usuarioentidads.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2017-10-20 08:41:40 -0400
+Started GET "/assets/usuarios.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2017-10-20 08:41:40 -0400
+Started GET "/assets/tipoestatuses.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2017-10-20 08:41:40 -0400
+Started GET "/assets/tiporesultados.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2017-10-20 08:41:40 -0400
+Started GET "/images/nav.jpg" for ::1 at 2017-10-20 08:41:41 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/images/nav.jpg"):
+  
+actionpack (5.0.6) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.6) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.3) lib/rack/method_override.rb:22:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.6) lib/rails/engine.rb:522:in `call'
+puma (3.10.0) lib/puma/configuration.rb:225:in `call'
+puma (3.10.0) lib/puma/server.rb:605:in `handle_request'
+puma (3.10.0) lib/puma/server.rb:437:in `process_client'
+puma (3.10.0) lib/puma/server.rb:301:in `block in run'
+puma (3.10.0) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  Rendering /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout
+  Rendering /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.5ms)
+  Rendered collection of /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb [18 times] (52.4ms)
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (115.8ms)
+  Rendering /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (2.7ms)
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (345.1ms)
+Started POST "/forminst/autenticar" for ::1 at 2017-10-20 08:41:45 -0400
+Processing by ForminstController#autenticar as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"bLTY+jNUA4d2j48Mhfd+zSUbICquplakHEaxgGphApoAhzoj05/qVO/dXGN0d/JAaag4nQOED0Tc3KNpSFOJyQ==", "correo"=>"secretaria.uno", "password"=>"[FILTERED]"}
+  [1m[36mUsuario Load (0.3ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`user` = 'secretaria.uno' LIMIT 1[0m
+  [1m[36mUsuarioentidad Load (0.3ms)[0m  [1m[34mSELECT  `usuarioentidad`.* FROM `usuarioentidad` WHERE `usuarioentidad`.`usuario_id` = 37 LIMIT 1[0m
+  [1m[36mEntidad Load (0.3ms)[0m  [1m[34mSELECT  `entidad`.* FROM `entidad` WHERE `entidad`.`id` = 2 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `usuarioentidad`.* FROM `usuarioentidad` WHERE `usuarioentidad`.`usuario_id` = 37 LIMIT 1[0m  [["usuario_id", 37], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `entidad`.* FROM `entidad` WHERE `entidad`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mPersona Load (0.3ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 37 LIMIT 1[0m
+Redirected to http://localhost:3000/secretarias
+Completed 302 Found in 157ms (ActiveRecord: 20.0ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[33mUPDATE `session` SET `data` = 'BAh7DUkiEF9jc3JmX3Rva2VuBjoGRUZJIjFiRFBpMmVETDZkT1pVdE52OFlD\nTWpVeXpHTGV0SWxuZ3dKb1M2U0l5aTFNPQY7AEZJIg91c3VhcmlvX2lkBjsA\nRmkqSSITbm9tYnJlX3VzdWFyaW8GOwBGSSITU2VjcmV0YXJpYSBVbm8GOwBU\nSSISYWRtaW5pc3RyYWRvcgY7AEZGSSIKdHV0b3IGOwBGRkkiD2luc3RydWN0\nb3IGOwBGRkkiDGVudGlkYWQGOwBGVEkiCmZsYXNoBjsAVHsHSSIMZGlzY2Fy\nZAY7AFRbAEkiDGZsYXNoZXMGOwBUewZJIgxzdWNjZXNzBjsARkkiH0JpZW52\nZW5pZG8hIFNlY3JldGFyaWEgVW5vBjsAVA==\n', `updated_at` = '2017-10-20 12:41:45' WHERE `session`.`id` = 248[0m
+  [1m[35m (37.3ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/secretarias" for ::1 at 2017-10-20 08:41:45 -0400
+Processing by SecretariasController#index as HTML
+  Rendering secretarias/index.html.erb within layouts/ly_inicio_entidad
+  Rendered secretarias/index.html.erb within layouts/ly_inicio_entidad (2.5ms)
+Completed 200 OK in 283ms (Views: 271.9ms | ActiveRecord: 0.4ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE `session` SET `data` = 'BAh7DEkiEF9jc3JmX3Rva2VuBjoGRUZJIjFiRFBpMmVETDZkT1pVdE52OFlD\nTWpVeXpHTGV0SWxuZ3dKb1M2U0l5aTFNPQY7AEZJIg91c3VhcmlvX2lkBjsA\nRmkqSSITbm9tYnJlX3VzdWFyaW8GOwBGSSITU2VjcmV0YXJpYSBVbm8GOwBU\nSSISYWRtaW5pc3RyYWRvcgY7AEZGSSIKdHV0b3IGOwBGRkkiD2luc3RydWN0\nb3IGOwBGRkkiDGVudGlkYWQGOwBGVA==\n' WHERE `session`.`id` = 248[0m
+  [1m[35m (53.4ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/assets/banner.png" for ::1 at 2017-10-20 08:41:45 -0400
