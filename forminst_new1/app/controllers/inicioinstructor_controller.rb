@@ -1646,46 +1646,91 @@ end
       end
       #fin
     end
+    if ( params[:informe_id].blank?)
+      @semestre = params[:semestre].to_i
+      @actividad_id = params[:actividad_id].to_i
+      
+      aa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: @semestre, actividad_id: @actividad_id).take
+      
+      @observaciones = ObservacionActividadAdecuacion.where(adecuacionactividad_id: aa.id)
 
-    @semestre = params[:semestre].to_i
-    @actividad_id = params[:actividad_id].to_i
-    
-    aa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: @semestre, actividad_id: @actividad_id).take
-    
-    @observaciones = ObservacionActividadAdecuacion.where(adecuacionactividad_id: aa.id)
-
-    @observaciones.each do |obs|  
-      if(obs.observaciones != "")
-      @boolobs = 1
+      @observaciones.each do |obs|  
+        if(obs.observaciones != "")
+        @boolobs = 1
+        end
       end
-    end
+        
+
+      @observaciones.each do |obs|
+
+        rev = Revision.find(obs.revision_id)
       
+        entidad = Usuarioentidad.where(usuario_id: rev.usuario_id).take
 
-    @observaciones.each do |obs|
-
-      rev = Revision.find(obs.revision_id)
-    
-      entidad = Usuarioentidad.where(usuario_id: rev.usuario_id).take
-
-      
-      if (entidad.entidad_id  >= 7 && entidad.entidad_id  <= 12)
-      #comision investigacion   
-          @obs_inv = obs.observaciones  #Estatus enviado a comision de investigacion
-          
-      else
-        if (entidad.entidad_id  >= 14 && entidad.entidad_id  <= 17)
-        #Consejo tecnico
-          @obs_consejoT = obs.observaciones
+        
+        if (entidad.entidad_id  >= 7 && entidad.entidad_id  <= 12)
+        #comision investigacion   
+            @obs_inv = obs.observaciones  #Estatus enviado a comision de investigacion
+            
         else
-          if (entidad.entidad_id  >= 1 && entidad.entidad_id  <= 6)
-          #Consejo de escuela
-            @obs_consejoE = obs.observaciones
+          if (entidad.entidad_id  >= 14 && entidad.entidad_id  <= 17)
+          #Consejo tecnico
+            @obs_consejoT = obs.observaciones
           else
-            if (entidad.entidad_id  == 13)
-            #Consejo de facultad
-              @obs_consejoF =  obs.observaciones
+            if (entidad.entidad_id  >= 1 && entidad.entidad_id  <= 6)
+            #Consejo de escuela
+              @obs_consejoE = obs.observaciones
+            else
+              if (entidad.entidad_id  == 13)
+              #Consejo de facultad
+                @obs_consejoF =  obs.observaciones
 
-            end 
+              end 
+            end
+          end
+        end
+      end
+    else
+      @informe_id = params[:informe_id].to_i
+      @actividad_id = params[:actividad_id].to_i
+      
+      aa= InformeActividad.where(informe_id: @informe_id, actividad_id: @actividad_id).take
+      
+      @observaciones = ObservacionActividadInforme.where(informe_actividad_id: aa.id)
+
+      @observaciones.each do |obs|  
+        if(obs.observaciones != "")
+        @boolobs = 1
+        end
+      end
+        
+
+      @observaciones.each do |obs|
+
+        rev = Revision.find(obs.revision_id)
+      
+        entidad = Usuarioentidad.where(usuario_id: rev.usuario_id).take
+
+        
+        if (entidad.entidad_id  >= 7 && entidad.entidad_id  <= 12)
+        #comision investigacion   
+            @obs_inv = obs.observaciones  #Estatus enviado a comision de investigacion
+            
+        else
+          if (entidad.entidad_id  >= 14 && entidad.entidad_id  <= 17)
+          #Consejo tecnico
+            @obs_consejoT = obs.observaciones
+          else
+            if (entidad.entidad_id  >= 1 && entidad.entidad_id  <= 6)
+            #Consejo de escuela
+              @obs_consejoE = obs.observaciones
+            else
+              if (entidad.entidad_id  == 13)
+              #Consejo de facultad
+                @obs_consejoF =  obs.observaciones
+
+              end 
+            end
           end
         end
       end
