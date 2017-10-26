@@ -380,6 +380,10 @@ text-decoration: none;
 border-radius: 6px 0 0 0;
 }
 
+.letraBlanca{
+	color: white;
+}
+
 
 .CSSTableGenerator {
 	margin:0px;padding:0px;
