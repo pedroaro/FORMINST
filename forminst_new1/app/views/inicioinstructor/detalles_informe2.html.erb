@@ -105,6 +105,12 @@
                 <td class="text-center"  style='width:30%;'><strong>Soportes</strong></td>
               </tr>
                 <% @actividadesadoc.each_with_index do |actdoc, i| %>
+                  <% if @semestres[actdoc.id] == 5 && @CJagregado[0]== "no" %>
+                    <tr class='title-table'>
+                      <td class="text-center" colspan="5"> <strong>Obligatorias</strong> </td>
+                    <tr>
+                    <% @CJagregado[0]= "si" %>
+                  <% end %>
                   <tr>
                     <td>
                       <textarea class="form-control" rows="3" name='docencia<%= actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
@@ -138,7 +144,13 @@
               </tr>
 
               <% @actividadesainv.each_with_index do |actdoc,i| %>
-                <tr>
+                  <% if @semestres[actdoc.id] == 5 && @CJagregado[1]== "no" %>
+                    <tr class='title-table'>
+                      <td class="text-center" colspan="5"> <strong>Obligatorias</strong> </td>
+                    <tr>
+                    <% @CJagregado[1]= "si" %>
+                  <% end %>
+                  <tr>
                   <td>
                       <textarea class="form-control" rows="3" name='investigacion<%= actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
                     </td>
@@ -201,6 +213,12 @@
                 <td class="text-center"  style='width:30%;'><strong>Soportes</strong></td>
               </tr>
               <% @actividadesafor.each_with_index do |actdoc,i| %>
+                  <% if @semestres[actdoc.id] == 5 && @CJagregado[2]== "no" %>
+                    <tr class='title-table'>
+                      <td class="text-center" colspan="5"> <strong>Obligatorias</strong> </td>
+                    <tr>
+                    <% @CJagregado[2]= "si" %>
+                  <% end %>
                 <tr>
                   <td>
                       <textarea class="form-control" rows="3" name='formacion<%= actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
@@ -232,6 +250,12 @@
                 <td class="text-center"  style='width:30%;'><strong>Soportes</strong></td>
               </tr>
               <% @actividadesaext.each_with_index do |actdoc,i| %>
+                  <% if @semestres[actdoc.id] == 5 && @CJagregado[3]== "no" %>
+                    <tr class='title-table'>
+                      <td class="text-center" colspan="5"> <strong>Obligatorias</strong> </td>
+                    <tr>
+                    <% @CJagregado[3]= "si" %>
+                  <% end %>
                 <tr>
                   <td>
                       <textarea class="form-control" rows="3" name='extension<%= actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>

@@ -14,8 +14,6 @@ class InformesController < ApplicationController
         if session[:adecuacion_id]
           @adecuacion= Adecuacion.find(session[:adecuacion_id])
           esta = EstatusAdecuacion.where(adecuacion_id: session[:adecuacion_id], actual: 1).take
-          puts "crear informe"
-          puts esta.estatus_id
           if esta.estatus_id == 6 
             flash[:danger]= "La adecuaciÃ³n debe ser enviada/aproabada para poder crear algun informe"
             redirect_to controller:"informes", action: "listar_informes"
@@ -315,15 +313,14 @@ class InformesController < ApplicationController
   def detalles_informe2
     if session[:usuario_id] && session[:tutor]
       @nombre = session[:nombre_usuario]   
+      @CJagregado = ["no","no","no","no"]
       if not @nombre
         print "NO HAY USUARIO"
       end
       @persona = Persona.where(usuario_id: session[:usuario_id]).take
       if session[:plan_id]
-        puts "HAY SESION PLAN"
         @planformacion = Planformacion.find(session[:plan_id])
       else
-        puts "NO HAY SESION PLAN"
         @planformacion = Planformacion.find(session[:plan_id])
       end
 
@@ -360,6 +357,7 @@ class InformesController < ApplicationController
         @actividadesafor= []
         @actividadesaotr= []
         @actividadesaobli= []
+        @semestres=[]
         @resultados= []
         @resultados2= ""
         @resultados2a= []
@@ -418,24 +416,17 @@ class InformesController < ApplicationController
                 @cparray[29] = cpresultado.ISBN
                 @cparray[30] = cpresultado.universidad
                 @cparray[31] = cpresultado.url
-                puts "holaaaaaaaaaaaaaa"
                 if !@cparray.blank?
                   @noemptyarray = @cparray - ["", nil]
                   if !@resultados2
                     @noemptyarray = @cparray - ["", nil]
                     if !@noemptyarray.join(',').blank?
-                      puts @noemptyarray.join(',')
                       @resultados2 = @noemptyarray.join(',')
-                      puts "a"
-                      puts @resultados2
                     end
                   else
                     @noemptyarray = @cparray - ["", nil]
                     if !@noemptyarray.join(',').blank?
-                      puts @noemptyarray.join(',')
                       @resultados2 = @noemptyarray.join(',')
-                      puts "b"
-                      puts @resultados2
                     end
                   end
                   @resultados2b.push(@resultados2)
@@ -489,24 +480,17 @@ class InformesController < ApplicationController
                 @cparray[29] = cpresultado.ISBN
                 @cparray[30] = cpresultado.universidad
                 @cparray[31] = cpresultado.url
-                puts "holaaaaaaaaaaaaaa"
                 if !@cparray.blank?
                   @noemptyarray = @cparray - ["", nil]
                   if !@resultados2
                     @noemptyarray = @cparray - ["", nil]
                     if !@noemptyarray.join(',').blank?
-                      puts @noemptyarray.join(',')
                       @resultados2 = @noemptyarray.join(',')
-                      puts "a"
-                      puts @resultados2
                     end
                   else
                     @noemptyarray = @cparray - ["", nil]
                     if !@noemptyarray.join(',').blank?
-                      puts @noemptyarray.join(',')
                       @resultados2 = @noemptyarray.join(',')
-                      puts "b"
-                      puts @resultados2
                     end
                   end
                   @resultados2b.push(@resultados2)
@@ -559,6 +543,8 @@ class InformesController < ApplicationController
                 end
               end
             end
+            semestre = AdecuacionActividad.where(actividad_id: @act.id).take.semestre
+            @semestres[@act.id]=semestre
             if tipo==1
               @actividadesadoc.push(@act)
             else
@@ -642,33 +628,22 @@ def vista_previa
       @act= Actividad.find(actade.actividad_id)
       tipo= @act.tipo_actividad_id
       if tipo==1
-        puts "soy una actividad de docencia"
-        puts @act.actividad
         @actividades1doc.push(@act)
       else
         if tipo==2
-          puts "soy una actividad de investigacion"
           if @informe.numero == 1
             @resActi= InformeActividad.where(informe_id: @informe.id, actividad_id: @act.id).take
-            puts "HELLOOOOO"
             @res= Resultado.where(informe_actividad_id: @resActi.id).all
-            puts @res
           end
           @actividades1inv.push(@act)
         else
           if tipo==3
-            puts "soy una actividad de extension"
-            puts @act.actividad
             @actividades1ext.push(@act)
           else
             if tipo==4
-              puts "soy una actividad de formacion"
-              puts @act.actividad
               @actividades1for.push(@act)
             else
               if tipo==5
-                puts "soy otro tipo de actividad"
-                puts @act.actividad
                 @actividades1otr.push(@act)
               end
             end
@@ -686,28 +661,18 @@ def vista_previa
     @act= Actividad.find(actade.actividad_id)
     tipo= @act.tipo_actividad_id
       if tipo==1
-        puts "soy una actividad de docencia"
-        puts @act.actividad
         @actividades2doc.push(@act)
       else
         if tipo==2
-          puts "soy una actividad de investigacion"
-          puts @act.actividad
           @actividades2inv.push(@act)
         else
           if tipo==3
-            puts "soy una actividad de extension"
-            puts @act.actividad
             @actividades2ext.push(@act)
           else
             if tipo==4
-              puts "soy una actividad de formacion"
-              puts @act.actividad
               @actividades2for.push(@act)
             else
               if tipo==5
-                puts "soy otro tipo de actividad"
-                puts @act.actividad
                 @actividades2otr.push(@act)
               end
             end
@@ -727,28 +692,18 @@ def vista_previa
       @act= Actividad.find(actade.actividad_id)
       tipo= @act.tipo_actividad_id
       if tipo==1
-        puts "soy una actividad de docencia"
-        puts @act.actividad
         @actividades3doc.push(@act)
       else
         if tipo==2
-          puts "soy una actividad de investigacion"
-          puts @act.actividad
           @actividades3inv.push(@act)
         else
           if tipo==3
-            puts "soy una actividad de extension"
-            puts @act.actividad
             @actividades3ext.push(@act)
           else
             if tipo==4
-              puts "soy una actividad de formacion"
-              puts @act.actividad
               @actividades3for.push(@act)
             else
               if tipo==5
-                puts "soy otro tipo de actividad"
-                puts @act.actividad
                 @actividades3otr.push(@act)
               end
             end
@@ -768,28 +723,18 @@ def vista_previa
       @act= Actividad.find(actade.actividad_id)
       tipo= @act.tipo_actividad_id
       if tipo==1
-        puts "soy una actividad de docencia"
-        puts @act.actividad
         @actividades4doc.push(@act)
       else
         if tipo==2
-          puts "soy una actividad de investigacion"
-          puts @act.actividad
           @actividades4inv.push(@act)
         else
           if tipo==3
-            puts "soy una actividad de extension"
-            puts @act.actividad
             @actividades4ext.push(@act)
           else
             if tipo==4
-              puts "soy una actividad de formacion"
-              puts @act.actividad
               @actividades4for.push(@act)
             else
               if tipo==5
-                puts "soy otro tipo de actividad"
-                puts @act.actividad
                 @actividades4otr.push(@act)
               end
             end
@@ -799,15 +744,33 @@ def vista_previa
     end
 
 
-    @actividades5obli= []
+    @actividades5doc= []
+    @actividades5inv= []
+    @actividades5ext= []
+    @actividades5for= []
+    @actividades5otr= []
     @actividades5= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 5).all
     @actividades5.each do |actade| 
       @act= Actividad.find(actade.actividad_id)
       tipo= @act.tipo_actividad_id
-      if tipo==7
-        puts "soy otro tipo de actividad"
-        puts @act.actividad
-        @actividades5obli.push(@act)
+      if tipo==1
+        @actividades5doc.push(@act)
+      else
+        if tipo==2
+          @actividades5inv.push(@act)
+        else
+          if tipo==3
+            @actividades5ext.push(@act)
+          else
+            if tipo==4
+              @actividades5for.push(@act)
+            else
+              if tipo==5
+                @actividades5otr.push(@act)
+              end
+            end
+          end
+        end
       end
     end
 
@@ -827,6 +790,8 @@ def vista_previa
     @actividadesaobli= []
     @actividadesaotr= []
     @resultados= []
+    @semestres= []
+    @CJagregado=["no","no","no","no"]
     @actividadese= []
     @observaciont= []
     @resultTP = []
@@ -881,18 +846,12 @@ def vista_previa
               if !@resultados2
                 @noemptyarray = @cparray - ["", nil]
                 if !@noemptyarray.join(',').blank?
-                  puts @noemptyarray.join(',')
                   @resultados2 = "* " + @noemptyarray
-                  puts "a"
-                  puts @resultados2
                 end
               else
                 @noemptyarray = @cparray - ["", nil]
                 if !@noemptyarray.join(',').blank?
-                  puts @noemptyarray.join(', ')
                   @resultados2 = @resultados2 + @noemptyarray.join(', ')
-                  puts "b"
-                  puts @resultados2
                 end
               end
             end
@@ -958,18 +917,12 @@ def vista_previa
               if !@resultados2
                 @noemptyarray = @cparray - ["", nil]
                 if !@noemptyarray.join(',').blank?
-                  puts @noemptyarray.join(',')
                   @resultados2 = "* " + @noemptyarray
-                  puts "a"
-                  puts @resultados2
                 end
               else
                 @noemptyarray = @cparray - ["", nil]
                 if !@noemptyarray.join(',').blank?
-                  puts @noemptyarray.join(', ')
                   @resultados2 = @resultados2 + @noemptyarray.join(', ')
-                  puts "b"
-                  puts @resultados2
                 end
               end
             end
@@ -1000,6 +953,8 @@ def vista_previa
       else
         @observaciont.push(@obs.observaciones)
       end
+	  semestre = AdecuacionActividad.where(actividad_id: @act.id).take.semestre
+	  @semestres[@act.id]=semestre
       if tipo==1
         @actividadesadoc.push(@act)
       elsif tipo==2
@@ -1024,15 +979,10 @@ end
 
     if session[:usuario_id] && session[:tutor]
       @nombre = session[:nombre_usuario]   
-      if not @nombre
-        print "NO HAY USUARIO"
-      end
       @persona = Persona.where(usuario_id: session[:usuario_id]).take
       if session[:plan_id]
-        puts "HAY SESION PLAN"
         @planformacion = Planformacion.find(session[:plan_id])
       else
-        puts "NO HAY SESION PLAN"
         @planformacion = Planformacion.find(session[:plan_id])
       end
 
@@ -1048,13 +998,10 @@ end
       end
           
       if params[:informe_id]
-        puts "HAY SESION PLAN"
         session[:informe_id] = params[:informe_id]
       end
 
       if session[:informe_id]
-        puts "Informe"
-        puts session[:informe_id]
 
         @instructor = Persona.where(usuario_id: @planformacion.instructor_id).take
         @informe= Informe.find(session[:informe_id])
@@ -1110,8 +1057,6 @@ end
 
         @userentidad= Usuarioentidad.where(usuario_id: @planformacion.instructor_id).take
         @entidad= Entidad.find(@userentidad.entidad_id)
-        puts "entidaaaaaaaaaad"
-        puts @entidad
         @escuela= Escuela.find(@userentidad.escuela_id)
         session[:nombre_informe] = @nombre_informe
         session[:status_informe] = @status.concepto
@@ -1141,10 +1086,8 @@ end
       @persona = Persona.where(usuario_id: session[:usuario_id]).take
 
       if session[:plan_id]
-        puts "HAY SESION PLAN"
         @planformacion = Planformacion.find(session[:plan_id])
       else
-        puts "NO HAY SESION PLAN"
         @planformacion = Planformacion.find(session[:plan_id])
       end
 
@@ -1206,7 +1149,6 @@ end
   	    informe.fecha_fin = informe2.fecha_fin 
   	  end
       informe.save
-      puts "Se guarda informe"
 
       ei = EstatusInforme.new
       ei.informe_id = informe.id
@@ -1214,14 +1156,11 @@ end
       ei.estatus_id = 6
       ei.actual = 1
       ei.save
-      puts "Se guarda estatus"
       
 
       @estado =EstatusInforme.where(informe_id: informe.id, actual: 1).take
-      puts @estado
       informe.estado = @estado.id
       informe.save
-      puts "Se guarda el estatus en el informe"
 
 
       #Comienza actividades de docencia
@@ -1330,8 +1269,6 @@ end
           # trabajos publicados
           if (@tipo == 1) 
             @tipo_publicacion = params[:resultado_tipos.to_s+cpi.to_s+j.to_s].to_i
-            puts "holaaaaaaaaaaaaaaaaaaaaaa"
-            puts @tipo_publicacion
 
             # libro
             if (@tipo_publicacion == 1) 
@@ -1416,8 +1353,6 @@ end
               @pais = params[:gpais.to_s+cpi.to_s+j.to_s]
               @infoafiliaion = params[:ginfoafiliacion.to_s+cpi.to_s+j.to_s]
               @universidad = params[:guniversidad.to_s+cpi.to_s+j.to_s]
-              puts "HOLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-              puts params[:gtipotesis.to_s+cpi.to_s+j.to_s]
               @cptipo = params[:gtipotesis.to_s+cpi.to_s+j.to_s]
 
             #acta de conferencia
@@ -1733,6 +1668,11 @@ def generar_pdf() # es funciÃ³n permite generar el documento pdf de la adecuaciÃ
     @instructor= Persona.where(usuario_id: @id_instructor).take
     @fechaActual = Date.current.to_s
     @userentidad= Usuarioentidad.where(usuario_id: @planformacion.instructor_id).take
+    @dactv_docencia=[]
+    @dactv_investigacion=[]
+    @dactv_extension=[]
+    @dactv_formacion=[]
+    @semestres=[]
     if @userentidad.escuela_id == nil
       @userentidad.escuela_id=12
       @userentidad.save
@@ -1766,6 +1706,7 @@ def generar_pdf() # es funciÃ³n permite generar el documento pdf de la adecuaciÃ
     @cactv_extension=[]
     @cactv_otras=[]
     @factv_obligatoria=[]
+    @semestres=[]
 
     @aactv_docencia= []
     @aactv_investigacion= []
@@ -1778,43 +1719,32 @@ def generar_pdf() # es funciÃ³n permite generar el documento pdf de la adecuaciÃ
       @act= Actividad.find(actade.actividad_id)
       tipo= @act.tipo_actividad_id
       if tipo==1
-        puts "soy una actividad de docencia"
-        puts @act.actividad
         if @informe.numero == 1
           @aactv_docencia.push(@act)
         end
         @pactv_docencia.push(@act)
       else
         if tipo==2
-          puts "soy una actividad de investigacion"
-          puts @act.actividad
           if @informe.numero == 1
             @resActi= InformeActividad.where(informe_id: @informe.id, actividad_id: @act.id).take
-            puts "HELLOOOOO"
             @res= Resultado.where(informe_actividad_id: @resActi.id).all
             @aactv_investigacion.push(@act)
           end
           @pactv_investigacion.push(@act)
         else
           if tipo==3
-            puts "soy una actividad de extension"
-            puts @act.actividad
             if @informe.numero == 1
               @aactv_formacion.push(@act)
             end
             @pactv_extension.push(@act)
           else
             if tipo==4
-              puts "soy una actividad de formacion"
-              puts @act.actividad
               if @informe.numero == 1
                 @aactv_extension.push(@act)
               end
               @pactv_formacion.push(@act)
             else
               if tipo==5
-                puts "soy otro tipo de actividad"
-                puts @act.actividad
                 if @informe.numero == 1
                   @aactv_otras.push(@act)
                 end
@@ -1831,43 +1761,32 @@ def generar_pdf() # es funciÃ³n permite generar el documento pdf de la adecuaciÃ
       @act= Actividad.find(actade.actividad_id)
       tipo= @act.tipo_actividad_id
       if tipo==1
-        puts "soy una actividad de docencia"
-        puts @act.actividad
         if @informe.numero == 2
           @aactv_docencia.push(@act)
         end
         @sactv_docencia.push(@act)
       else
         if tipo==2
-          puts "soy una actividad de investigacion"
-          puts @act.actividad
           if @informe.numero == 2
             @resActi= InformeActividad.where(informe_id: @informe.id, actividad_id: @act.id).take
-            puts "HELLOOOOO"
             @res= Resultado.where(informe_actividad_id: @resActi.id).all
             @aactv_investigacion.push(@act)
           end
           @sactv_investigacion.push(@act)
         else
           if tipo==3
-            puts "soy una actividad de extension"
-            puts @act.actividad
             if @informe.numero == 2
               @aactv_formacion.push(@act)
             end
             @sactv_extension.push(@act)
           else
             if tipo==4
-              puts "soy una actividad de formacion"
-              puts @act.actividad
               if @informe.numero == 2
                 @aactv_extension.push(@act)
               end
               @sactv_formacion.push(@act)
             else
               if tipo==5
-                puts "soy otro tipo de actividad"
-                puts @act.actividad
                 if @informe.numero == 2
                   @aactv_otras.push(@act)
                 end
@@ -1884,43 +1803,32 @@ def generar_pdf() # es funciÃ³n permite generar el documento pdf de la adecuaciÃ
       @act= Actividad.find(actade.actividad_id)
       tipo= @act.tipo_actividad_id
       if tipo==1
-        puts "soy una actividad de docencia"
-        puts @act.actividad
         if @informe.numero == 4
           @aactv_docencia.push(@act)
         end
         @tactv_docencia.push(@act)
       else
         if tipo==2
-          puts "soy una actividad de investigacion"
-          puts @act.actividad
           if @informe.numero == 4
             @resActi= InformeActividad.where(informe_id: @informe.id, actividad_id: @act.id).take
-            puts "HELLOOOOO"
             @res= Resultado.where(informe_actividad_id: @resActi.id).all
             @aactv_investigacion.push(@act)
           end
           @tactv_investigacion.push(@act)
         else
           if tipo==3
-            puts "soy una actividad de extension"
-            puts @act.actividad
             if @informe.numero == 4
               @aactv_formacion.push(@act)
             end
             @tactv_extension.push(@act)
           else
             if tipo==4
-              puts "soy una actividad de formacion"
-              puts @act.actividad
               if @informe.numero == 4
                 @aactv_extension.push(@act)
               end
               @tactv_formacion.push(@act)
             else
               if tipo==5
-                puts "soy otro tipo de actividad"
-                puts @act.actividad
                 if @informe.numero == 4
                   @aactv_otras.push(@act)
                 end
@@ -1937,38 +1845,26 @@ def generar_pdf() # es funciÃ³n permite generar el documento pdf de la adecuaciÃ
       @act= Actividad.find(actade.actividad_id)
       tipo= @act.tipo_actividad_id
       if tipo==1
-        puts "soy una actividad de docencia"
-        puts @act.actividad
         if @informe.numero == 5
           @aactv_docencia.push(@act)
         end
         @cactv_docencia.push(@act)
       else
         if tipo==2
-          puts "soy una actividad de investigacion"
-          puts @act.actividad
           if @informe.numero == 5
             @resActi= InformeActividad.where(informe_id: @informe.id, actividad_id: @act.id).take
-            puts "HELLOOOOO"
             @res= Resultado.where(informe_actividad_id: @resActi.id).all
-            puts "holaaaaaaaaaaaaaa"
             if !@cparray.blank?
               @noemptyarray = @cparray - ["", nil]
               if !@resultados2
                 @noemptyarray = @cparray - ["", nil]
                 if !@noemptyarray.join(',').blank?
-                  puts @noemptyarray.join(',')
                   @resultados2 = "* " + @noemptyarray
-                  puts "a"
-                  puts @resultados2
                 end
               else
                 @noemptyarray = @cparray - ["", nil]
                 if !@noemptyarray.join(',').blank?
-                  puts @noemptyarray.join(',')
                   @resultados2 = @resultados2 + "\n" + "* " + @noemptyarray.join(',')
-                  puts "b"
-                  puts @resultados2
                 end
               end
             end
@@ -1977,24 +1873,18 @@ def generar_pdf() # es funciÃ³n permite generar el documento pdf de la adecuaciÃ
           @cactv_investigacion.push(@act)
         else
           if tipo==3
-            puts "soy una actividad de extension"
-            puts @act.actividad
             if @informe.numero == 5
               @aactv_formacion.push(@act)
             end
             @cactv_extension.push(@act)
           else
             if tipo==4
-              puts "soy una actividad de formacion"
-              puts @act.actividad
               if @informe.numero == 5
                 @aactv_extension.push(@act)
               end
               @cactv_formacion.push(@act)
             else
               if tipo==5
-                puts "soy otro tipo de actividad"
-                puts @act.actividad
                 if @informe.numero == 5
                   @aactv_otras.push(@act)
                 end
@@ -2010,12 +1900,58 @@ def generar_pdf() # es funciÃ³n permite generar el documento pdf de la adecuaciÃ
     @cactividadesa.each do |actade| 
       @act= Actividad.find(actade.actividad_id)
       tipo= @act.tipo_actividad_id
-      if tipo==7
-        puts "soy una actividad de docencia"
-        puts @act.actividad
-        @factv_obligatoria.push(@act)
+      if tipo==1
+        if @informe.numero == 5
+          @aactv_docencia.push(@act)
+        end
+        @dactv_docencia.push(@act)
+      else
+        if tipo==2
+          if @informe.numero == 5
+            @resActi= InformeActividad.where(informe_id: @informe.id, actividad_id: @act.id).take
+            @res= Resultado.where(informe_actividad_id: @resActi.id).all
+            if !@cparray.blank?
+              @noemptyarray = @cparray - ["", nil]
+              if !@resultados2
+                @noemptyarray = @cparray - ["", nil]
+                if !@noemptyarray.join(',').blank?
+                  @resultados2 = "* " + @noemptyarray
+                end
+              else
+                @noemptyarray = @cparray - ["", nil]
+                if !@noemptyarray.join(',').blank?
+                  @resultados2 = @resultados2 + "\n" + "* " + @noemptyarray.join(',')
+                end
+              end
+            end
+            @aactv_investigacion.push(@act)
+          end
+          @dactv_investigacion.push(@act)
+        else
+          if tipo==3
+            if @informe.numero == 5
+              @aactv_formacion.push(@act)
+            end
+            @dactv_extension.push(@act)
+          else
+            if tipo==4
+              if @informe.numero == 5
+                @aactv_extension.push(@act)
+              end
+              @dactv_formacion.push(@act)
+            else
+              if tipo==5
+                if @informe.numero == 5
+                  @aactv_otras.push(@act)
+                end
+                @dactv_otras.push(@act)
+              end
+            end
+          end
+        end
       end
     end
+
     @actividadesa= InformeActividad.where(informe_id: @informe.id).all
     @actividadesadoc= []
     @actividadesainv= []
@@ -2079,18 +2015,12 @@ def generar_pdf() # es funciÃ³n permite generar el documento pdf de la adecuaciÃ
               if !@resultados2
                 @noemptyarray = @cparray - ["", nil]
                 if !@noemptyarray.join(',').blank?
-                  puts @noemptyarray.join(',')
                   @resultados2 = "* " + @noemptyarray
-                  puts "a"
-                  puts @resultados2
                 end
               else
                 @noemptyarray = @cparray - ["", nil]
                 if !@noemptyarray.join(',').blank?
-                  puts @noemptyarray.join(', ')
                   @resultados2 = @resultados2 + @noemptyarray.join(', ')
-                  puts "b"
-                  puts @resultados2
                 end
               end
             end
@@ -2156,18 +2086,12 @@ def generar_pdf() # es funciÃ³n permite generar el documento pdf de la adecuaciÃ
               if !@resultados2
                 @noemptyarray = @cparray - ["", nil]
                 if !@noemptyarray.join(',').blank?
-                  puts @noemptyarray.join(',')
                   @resultados2 = "* " + @noemptyarray
-                  puts "a"
-                  puts @resultados2
                 end
               else
                 @noemptyarray = @cparray - ["", nil]
                 if !@noemptyarray.join(',').blank?
-                  puts @noemptyarray.join(', ')
                   @resultados2 = @resultados2 + @noemptyarray.join(', ')
-                  puts "b"
-                  puts @resultados2
                 end
               end
             end
@@ -2197,6 +2121,8 @@ def generar_pdf() # es funciÃ³n permite generar el documento pdf de la adecuaciÃ
       else
         @observaciont.push(@obs.observaciones)
       end
+	  semestre = AdecuacionActividad.where(actividad_id: @act.id).take.semestre
+	  @semestres[@act.id]=semestre
       if tipo==1
         @actividadesadoc.push(@act)
       elsif tipo==2
@@ -2215,15 +2141,11 @@ def generar_pdf() # es funciÃ³n permite generar el documento pdf de la adecuaciÃ
     
     @documents = []
     @documents = Document.where(adecuacion_id: @adecuacion.id, informe_id: session[:informe_id] ).all
-    puts "hellooooo"
     respaldos = []
     respaldos = Respaldo.where(adecuacion_id: @adecuacion.id, informe_id: session[:informe_id] ).all
     @numeroDeVersion = respaldos.size + 1
     # se llama a la funciÃ³n de "pedf_adecuacion" del modelo "pdf", pasando todas las variables correspondientes
-    puts "hola que tal"
-    puts @TipoSemestre.tipo
-    @nombre_archivo= Pdf.pdf_informe(@TipoSemestre, @escuela, @informe, @adecuacion, @tutor, @instructor, @pactv_docencia, @pactv_investigacion, @pactv_extension, @pactv_formacion, @pactv_otras, @sactv_docencia, @sactv_investigacion, @sactv_extension, @sactv_formacion, @sactv_otras, @tactv_docencia, @tactv_investigacion, @tactv_extension, @tactv_formacion, @tactv_otras, @cactv_docencia, @cactv_investigacion, @cactv_extension, @cactv_formacion, @cactv_otras, @actividadesadoc, @actividadesainv, @actividadesafor, @actividadesaext, @actividadesaotr,@res,@resultados,@actividadese,@observaciont,@resultTP,@resultPP,@resultO,@resultAEC,@resultOEC,@resultDCS, @documents, @numeroDeVersion, @factv_obligatoria, @actividadesaobli)
-    puts @nombre_archivo
+    @nombre_archivo= Pdf.pdf_informe(@TipoSemestre, @escuela, @informe, @adecuacion, @tutor, @instructor, @pactv_docencia, @pactv_investigacion, @pactv_extension, @pactv_formacion, @pactv_otras, @sactv_docencia, @sactv_investigacion, @sactv_extension, @sactv_formacion, @sactv_otras, @tactv_docencia, @tactv_investigacion, @tactv_extension, @tactv_formacion, @tactv_otras, @cactv_docencia, @cactv_investigacion, @cactv_extension, @cactv_formacion, @cactv_otras, @actividadesadoc, @actividadesainv, @actividadesafor, @actividadesaext, @actividadesaotr,@res,@resultados,@actividadese,@observaciont,@resultTP,@resultPP,@resultO,@resultAEC,@resultOEC,@resultDCS, @documents, @numeroDeVersion, @factv_obligatoria, @actividadesaobli, @dactv_docencia, @dactv_investigacion, @dactv_extension, @dactv_formacion, @semestres)
     act = "#{Rails.root}/tmp/PDFs/" + @nombre_archivo
     #act = @nombre_archivo
     send_file(
@@ -2235,8 +2157,6 @@ def generar_pdf() # es funciÃ³n permite generar el documento pdf de la adecuaciÃ
   end
 
   def actualizar_informe
-    puts "acaaaaaaaaaaaa estaaaaaaaa"
-    puts params[:archivo]
     @informe= Informe.find(session[:informe_id])
     @informe.fecha_modificacion = Time.now
     @cant_doc= params[:cant_docencia].to_i
@@ -2377,8 +2297,6 @@ def generar_pdf() # es funciÃ³n permite generar el documento pdf de la adecuaciÃ
           # trabajos publicados
           if (@tipo == 1) 
             @tipo_publicacion = params[:resultado_tipos.to_s+cpi.to_s+j.to_s].to_i
-            puts "holaaaaaaaaaaaaaaaaaaaaaa"
-            puts @tipo_publicacion
 
             # libro
             if (@tipo_publicacion == 1) 
@@ -2463,8 +2381,6 @@ def generar_pdf() # es funciÃ³n permite generar el documento pdf de la adecuaciÃ
               @pais = params[:gpais.to_s+cpi.to_s+j.to_s]
               @infoafiliaion = params[:ginfoafiliacion.to_s+cpi.to_s+j.to_s]
               @universidad = params[:guniversidad.to_s+cpi.to_s+j.to_s]
-              puts "HOLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
-              puts params[:gtipotesis.to_s+cpi.to_s+j.to_s]
               @cptipo = params[:gtipotesis.to_s+cpi.to_s+j.to_s]
 
             #acta de conferencia
@@ -2751,8 +2667,6 @@ def generar_pdf() # es funciÃ³n permite generar el documento pdf de la adecuaciÃ
         ia = InformeActividad.where(informe_id: @informe.id,actividad_id: @act).take
         ejecutada =:ejecutada.to_s+@act.to_s
         if params[ejecutada]!=nil && params[ejecutada]!=""
-          puts "jajajajaja"
-          puts ia.id
           ae = ActividadEjecutada.where(informe_actividad_id: ia.id, actual: 1).take
           if ae.blank?
             ae = ActividadEjecutada.new
@@ -2856,7 +2770,6 @@ def generar_pdf() # es funciÃ³n permite generar el documento pdf de la adecuaciÃ
         cpActividadE = ActividadEjecutada.where(informe_actividad_id: actividadV.id, actual: 1).take
         if cpActividadE.blank?
           cpenviar = "no4"
-          puts actividadV.id
         elsif cpActividadE.descripcion.blank?
           cpenviar = "no5"
         end
@@ -2867,9 +2780,6 @@ def generar_pdf() # es funciÃ³n permite generar el documento pdf de la adecuaciÃ
     if cpSoporteVerificar.blank?
       cpenviar = "no6"
     end
-
-    puts "pendiente!!!!!!!!!!!!!!!!!!!"
-    puts cpenviar
 
     if cpenviar == "si"
 
@@ -2948,7 +2858,6 @@ def generar_pdf() # es funciÃ³n permite generar el documento pdf de la adecuaciÃ
           notific.adecuacion_id = session[:adecuacion_id]
           notific.informe_id = @informe_id
           notific.actual = 1
-          puts "JAJAJA"
           person = Persona.where(usuario_id: plan.instructor_id).take
           notificacionfecha = Date.current.to_s 
           if (cambio_act.estatus_id == 6)
@@ -3016,14 +2925,20 @@ def generar_pdf() # es funciÃ³n permite generar el documento pdf de la adecuaciÃ
           ActionCorreo.envio_informe(remitente, notific3.mensaje,0).deliver
           flash[:success]="El informe se ha envÃ­ado a comision de investigacion"
         else
-            flash[:info]="Debe enviar los informes en orden"
+            flash[:warning]="Debe enviar los informes en orden"
         end
       else 
-        flash[:info]="Debe introducir una fecha de inicio"
+        flash[:warning]="Debe introducir una fecha de inicio"
       end
       redirect_to controller:"informes", action: "listar_informes"
     else
-      flash[:info]="El informe no se puede enviar sin terminar"
+      if cpenviar=="no1"
+        flash[:warning]="Debe esperar a que la adecuaciÃ³n sea aprobada por consejo de facultad"
+      elsif cpenviar=="no2" || cpenviar=="no3" || cpenviar=="no4" || cpenviar=="no5"
+        flash[:warning]="El informe no se puede enviar sin terminar"
+      else
+        flash[:warning]="El informe no se puede enviar sin agregar soporte"
+      end
       redirect_to controller:"informes", action: "listar_informes"
     end
   end

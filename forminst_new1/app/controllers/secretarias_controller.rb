@@ -288,8 +288,6 @@ class SecretariasController < ApplicationController
 				haceralgo = "No"
 			end
 
-			puts "holaaaaaaaaaaaaaaaa"
-			puts haceralgo
 			
 			if haceralgo == "Si"	
 				if params[:JRTutores].to_s != "0" && params[:depto].to_i != 0
@@ -298,7 +296,6 @@ class SecretariasController < ApplicationController
 						cpelAno = params[:FechaConcurso][0..3]
 						cpanoIncrementado = cpelAno.to_i + 2
 						cpGuardar = cpanoIncrementado.to_s + params[:FechaConcurso][4..params[:FechaConcurso].mb_chars.length]
-						puts cpGuardar
 
 						cpSecretariaID = session[:usuario_id]
 						cpSecretaria = Usuarioentidad.where(usuario_id: cpSecretariaID).take
@@ -646,17 +643,6 @@ class SecretariasController < ApplicationController
 	def guarda_instructor_modificado
 		if session[:usuario_id]	
 
-			puts params[:Nombre]
-			puts params[:Apellido]
-			puts params[:CI]
-			puts params[:correo]
-			puts params[:Tlf]
-			puts params[:OTlf]
-			puts params[:FechaNac]
-			puts params[:Dir]
-			puts params[:GradoI]
-			puts params[:Area]
-			puts params[:Subarea]
 
 			haceralgo = "Si"
 				
@@ -684,8 +670,6 @@ class SecretariasController < ApplicationController
 				end
 			end
 
-			puts "holaaaaaaaaaaaaaaaa"
-			puts haceralgo
 			
 			if haceralgo == "Si"
 
@@ -893,17 +877,6 @@ class SecretariasController < ApplicationController
 	def guarda_tutor_modificado
 		if session[:usuario_id]	
 
-				puts params[:Nombre]
-				puts params[:Apellido]
-				puts params[:CI]
-				puts params[:correo]
-				puts params[:Tlf]
-				puts params[:OTlf]
-				puts params[:FechaNac]
-				puts params[:Dir]
-				puts params[:GradoI]
-				puts params[:Area]
-				puts params[:Subarea]
 
 			haceralgo = "Si"
 				
@@ -931,8 +904,6 @@ class SecretariasController < ApplicationController
 				end
 			end
 
-			puts "holaaaaaaaaaaaaaaaa"
-			puts haceralgo
 			
 			if haceralgo == "Si"
 
