@@ -428,12 +428,36 @@
             <td><b>ACTIVIDADES OBLIGATORIAS</b></td>
           </tr>
           <tr>
-            <td class="text-left"><b>2.1.- Actividades Obligatorias:</b></td>
+            <td class="text-left"><b>3.1.- Docencia:</b></td>
           </tr>
-          <% @actividades5obli.each_with_index do |actdoc, i| %>
-            <tr>
-              <td class="text-left"><%= actdoc.actividad %></td>
-            </tr>
+            <% @actividades5doc.each_with_index do |actdoc, i| %>
+              <tr>
+                <td class="text-left"><%= actdoc.actividad %></td>
+              </tr>
+            <% end %>
+          <tr>
+            <td class="text-left"><b>3.2.- Investigación:</b></td>
+          </tr>
+            <% @actividades5inv.each_with_index do |actdoc, i| %>
+                <tr>
+                  <td class="text-left"><%= actdoc.actividad %></td>
+                </tr>
+            <% end %>
+          <tr>
+            <td class="text-left"><b>3.3.- Formación:</b></td>
+          </tr>
+          <% @actividades5for.each_with_index do |actdoc, i| %>
+              <tr>
+                <td class="text-left"><%= actdoc.actividad %></td>
+              </tr>
+          <% end %>
+          <tr>
+            <td class="text-left"><b>4.4.- Extensión:</b></td>
+          </tr>
+          <% @actividades5ext.each_with_index do |actdoc, i| %>
+              <tr>
+                <td class="text-left"><%= actdoc.actividad %></td>
+              </tr>
           <% end %>
         </tbody>
       </table>
@@ -458,6 +482,12 @@
         </thead>
         <tbody>
           <% @actividadesadoc.each_with_index do |actividadesadoc, i| %> 
+            <% if @semestres[actividadesadoc.id] == 5 && @CJagregado[0]== "no" %>
+              <tr>
+                <td class="text-center" colspan="5"> <strong>OBLIGATORIAS</strong> </td>
+              <tr>
+              <% @CJagregado[0]= "si" %>
+            <% end %>
             <tr>
               <td class="text-center"><%= actividadesadoc.actividad %></td>
               <td class="text-center">
@@ -485,6 +515,12 @@
         </thead>
         <tbody>
           <% @actividadesainv.each_with_index do |actividadesainv, i| %> 
+            <% if @semestres[actividadesainv.id] == 5 && @CJagregado[1]== "no" %>
+              <tr>
+                <td class="text-center" colspan="5"> <strong>OBLIGATORIAS</strong> </td>
+              <tr>
+              <% @CJagregado[1]= "si" %>
+            <% end %>
             <tr>
               <td class="text-center"><%= actividadesainv.actividad %></td>
               <td class="text-center">
@@ -581,6 +617,12 @@
         </thead>
         <tbody>
           <% @actividadesafor.each_with_index do |actividadesafor, i| %> 
+            <% if @semestres[actividadesafor.id] == 5 && @CJagregado[2]== "no" %>
+              <tr>
+                <td class="text-center" colspan="5"> <strong>OBLIGATORIAS</strong> </td>
+              <tr>
+              <% @CJagregado[2]= "si" %>
+            <% end %>
             <tr>
               <td class="text-center"><%= actividadesafor.actividad %></td>
               <td class="text-center">
@@ -608,6 +650,12 @@
         </thead>
         <tbody>
           <% @actividadesaext.each_with_index do |actividadesaext, i| %> 
+            <% if @semestres[actividadesaext.id] == 5 && @CJagregado[3]== "no" %>
+              <tr>
+                <td class="text-center" colspan="5"> <strong>OBLIGATORIAS</strong> </td>
+              <tr>
+              <% @CJagregado[3]= "si" %>
+            <% end %>
             <tr>
               <td class="text-center"><%= actividadesaext.actividad %></td>
               <td class="text-center">

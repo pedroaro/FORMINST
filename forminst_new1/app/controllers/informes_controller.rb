@@ -313,6 +313,7 @@ class InformesController < ApplicationController
   def detalles_informe2
     if session[:usuario_id] && session[:tutor]
       @nombre = session[:nombre_usuario]   
+      @CJagregado = ["no","no","no","no"]
       if not @nombre
         print "NO HAY USUARIO"
       end
@@ -356,6 +357,7 @@ class InformesController < ApplicationController
         @actividadesafor= []
         @actividadesaotr= []
         @actividadesaobli= []
+        @semestres=[]
         @resultados= []
         @resultados2= ""
         @resultados2a= []
@@ -541,6 +543,8 @@ class InformesController < ApplicationController
                 end
               end
             end
+            semestre = AdecuacionActividad.where(actividad_id: @act.id).take.semestre
+            @semestres[@act.id]=semestre
             if tipo==1
               @actividadesadoc.push(@act)
             else
@@ -740,13 +744,25 @@ def vista_previa
     end
 
 
-    @actividades5obli= []
+    @actividades5doc= []
+    @actividades5inv= []
+    @actividades5ext= []
+    @actividades5for= []
+    @actividades5otr= []
     @actividades5= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 5).all
     @actividades5.each do |actade| 
       @act= Actividad.find(actade.actividad_id)
       tipo= @act.tipo_actividad_id
-      if tipo==7
-        @actividades5obli.push(@act)
+      if tipo==1
+        @actividades5doc.push(@act)
+      elsif tipo==2
+        @actividades5inv.push(@act)
+      elsif tipo==3
+        @actividades5ext.push(@act)
+      elsif tipo==4
+        @actividades5for.push(@act)
+      elsif tipo==5
+        @actividades5otr.push(@act)
       end
     end
 
@@ -766,6 +782,8 @@ def vista_previa
     @actividadesaobli= []
     @actividadesaotr= []
     @resultados= []
+    @semestres= []
+    @CJagregado=["no","no","no","no"]
     @actividadese= []
     @observaciont= []
     @resultTP = []
@@ -927,6 +945,8 @@ def vista_previa
       else
         @observaciont.push(@obs.observaciones)
       end
+	  semestre = AdecuacionActividad.where(actividad_id: @act.id).take.semestre
+	  @semestres[@act.id]=semestre
       if tipo==1
         @actividadesadoc.push(@act)
       elsif tipo==2
@@ -951,9 +971,6 @@ end
 
     if session[:usuario_id] && session[:tutor]
       @nombre = session[:nombre_usuario]   
-      if not @nombre
-        print "NO HAY USUARIO"
-      end
       @persona = Persona.where(usuario_id: session[:usuario_id]).take
       if session[:plan_id]
         @planformacion = Planformacion.find(session[:plan_id])
@@ -1643,6 +1660,11 @@ def generar_pdf() # es funciÃ³n permite generar el documento pdf de la adecuaciÃ
     @instructor= Persona.where(usuario_id: @id_instructor).take
     @fechaActual = Date.current.to_s
     @userentidad= Usuarioentidad.where(usuario_id: @planformacion.instructor_id).take
+    @dactv_docencia=[]
+    @dactv_investigacion=[]
+    @dactv_extension=[]
+    @dactv_formacion=[]
+    @semestres=[]
     if @userentidad.escuela_id == nil
       @userentidad.escuela_id=12
       @userentidad.save
@@ -1676,6 +1698,7 @@ def generar_pdf() # es funciÃ³n permite generar el documento pdf de la adecuaciÃ
     @cactv_extension=[]
     @cactv_otras=[]
     @factv_obligatoria=[]
+    @semestres=[]
 
     @aactv_docencia= []
     @aactv_investigacion= []
@@ -1869,10 +1892,58 @@ def generar_pdf() # es funciÃ³n permite generar el documento pdf de la adecuaciÃ
     @cactividadesa.each do |actade| 
       @act= Actividad.find(actade.actividad_id)
       tipo= @act.tipo_actividad_id
-      if tipo==7
-        @factv_obligatoria.push(@act)
+      if tipo==1
+        if @informe.numero == 5
+          @aactv_docencia.push(@act)
+        end
+        @dactv_docencia.push(@act)
+      else
+        if tipo==2
+          if @informe.numero == 5
+            @resActi= InformeActividad.where(informe_id: @informe.id, actividad_id: @act.id).take
+            @res= Resultado.where(informe_actividad_id: @resActi.id).all
+            if !@cparray.blank?
+              @noemptyarray = @cparray - ["", nil]
+              if !@resultados2
+                @noemptyarray = @cparray - ["", nil]
+                if !@noemptyarray.join(',').blank?
+                  @resultados2 = "* " + @noemptyarray
+                end
+              else
+                @noemptyarray = @cparray - ["", nil]
+                if !@noemptyarray.join(',').blank?
+                  @resultados2 = @resultados2 + "\n" + "* " + @noemptyarray.join(',')
+                end
+              end
+            end
+            @aactv_investigacion.push(@act)
+          end
+          @dactv_investigacion.push(@act)
+        else
+          if tipo==3
+            if @informe.numero == 5
+              @aactv_formacion.push(@act)
+            end
+            @dactv_extension.push(@act)
+          else
+            if tipo==4
+              if @informe.numero == 5
+                @aactv_extension.push(@act)
+              end
+              @dactv_formacion.push(@act)
+            else
+              if tipo==5
+                if @informe.numero == 5
+                  @aactv_otras.push(@act)
+                end
+                @dactv_otras.push(@act)
+              end
+            end
+          end
+        end
       end
     end
+
     @actividadesa= InformeActividad.where(informe_id: @informe.id).all
     @actividadesadoc= []
     @actividadesainv= []
@@ -2042,6 +2113,8 @@ def generar_pdf() # es funciÃ³n permite generar el documento pdf de la adecuaciÃ
       else
         @observaciont.push(@obs.observaciones)
       end
+	  semestre = AdecuacionActividad.where(actividad_id: @act.id).take.semestre
+	  @semestres[@act.id]=semestre
       if tipo==1
         @actividadesadoc.push(@act)
       elsif tipo==2
@@ -2064,7 +2137,7 @@ def generar_pdf() # es funciÃ³n permite generar el documento pdf de la adecuaciÃ
     respaldos = Respaldo.where(adecuacion_id: @adecuacion.id, informe_id: session[:informe_id] ).all
     @numeroDeVersion = respaldos.size + 1
     # se llama a la funciÃ³n de "pedf_adecuacion" del modelo "pdf", pasando todas las variables correspondientes
-    @nombre_archivo= Pdf.pdf_informe(@TipoSemestre, @escuela, @informe, @adecuacion, @tutor, @instructor, @pactv_docencia, @pactv_investigacion, @pactv_extension, @pactv_formacion, @pactv_otras, @sactv_docencia, @sactv_investigacion, @sactv_extension, @sactv_formacion, @sactv_otras, @tactv_docencia, @tactv_investigacion, @tactv_extension, @tactv_formacion, @tactv_otras, @cactv_docencia, @cactv_investigacion, @cactv_extension, @cactv_formacion, @cactv_otras, @actividadesadoc, @actividadesainv, @actividadesafor, @actividadesaext, @actividadesaotr,@res,@resultados,@actividadese,@observaciont,@resultTP,@resultPP,@resultO,@resultAEC,@resultOEC,@resultDCS, @documents, @numeroDeVersion, @factv_obligatoria, @actividadesaobli)
+    @nombre_archivo= Pdf.pdf_informe(@TipoSemestre, @escuela, @informe, @adecuacion, @tutor, @instructor, @pactv_docencia, @pactv_investigacion, @pactv_extension, @pactv_formacion, @pactv_otras, @sactv_docencia, @sactv_investigacion, @sactv_extension, @sactv_formacion, @sactv_otras, @tactv_docencia, @tactv_investigacion, @tactv_extension, @tactv_formacion, @tactv_otras, @cactv_docencia, @cactv_investigacion, @cactv_extension, @cactv_formacion, @cactv_otras, @actividadesadoc, @actividadesainv, @actividadesafor, @actividadesaext, @actividadesaotr,@res,@resultados,@actividadese,@observaciont,@resultTP,@resultPP,@resultO,@resultAEC,@resultOEC,@resultDCS, @documents, @numeroDeVersion, @factv_obligatoria, @actividadesaobli, @dactv_docencia, @dactv_investigacion, @dactv_extension, @dactv_formacion, @semestres)
     act = "#{Rails.root}/tmp/PDFs/" + @nombre_archivo
     #act = @nombre_archivo
     send_file(
@@ -2700,7 +2773,6 @@ def generar_pdf() # es funciÃ³n permite generar el documento pdf de la adecuaciÃ
       cpenviar = "no6"
     end
 
-
     if cpenviar == "si"
 
       @informe_id = params[:informe_id].to_i
@@ -2845,14 +2917,20 @@ def generar_pdf() # es funciÃ³n permite generar el documento pdf de la adecuaciÃ
           ActionCorreo.envio_informe(remitente, notific3.mensaje,0).deliver
           flash[:success]="El informe se ha envÃ­ado a comision de investigacion"
         else
-            flash[:info]="Debe enviar los informes en orden"
+            flash[:warning]="Debe enviar los informes en orden"
         end
       else 
-        flash[:info]="Debe introducir una fecha de inicio"
+        flash[:warning]="Debe introducir una fecha de inicio"
       end
       redirect_to controller:"informes", action: "listar_informes"
     else
-      flash[:info]="El informe no se puede enviar sin terminar"
+      if cpenviar=="no1"
+        flash[:warning]="Debe esperar a que la adecuaciÃ³n sea aprobada por consejo de facultad"
+      elsif cpenviar=="no2" || cpenviar=="no3" || cpenviar=="no4" || cpenviar=="no5"
+        flash[:warning]="El informe no se puede enviar sin terminar"
+      else
+        flash[:warning]="El informe no se puede enviar sin agregar soporte"
+      end
       redirect_to controller:"informes", action: "listar_informes"
     end
   end

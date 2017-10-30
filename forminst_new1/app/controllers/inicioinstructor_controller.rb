@@ -1,32 +1,38 @@
 ﻿class InicioinstructorController < ApplicationController
 	layout 'ly_inicio_entidad'
 
-	def index
-		if session[:usuario_id] && session[:instructor]= true
-      plan = Planformacion.where(instructor_id: session[:usuario_id]).take
-      session[:adecuacion_id] = Adecuacion.where(planformacion_id: plan.id).take.id
-			session[:plan_id] = plan.id
-			session[:instructorName] = nil
+	#Inicio del Modulo del Instructor
+  def index
+	if session[:usuario_id] && session[:instructor]= true #verificar que no ingresara con el link del modulo
+      plan = Planformacion.where(instructor_id: session[:usuario_id]).take #Se busca  el plan de formación del instructor
+      session[:adecuacion_id] = Adecuacion.where(planformacion_id: plan.id).take.id #se busca la adecuacion del instructor
+	  session[:plan_id] = plan.id #se alamacena el plan de formación
+	  session[:instructorName] = nil
       session[:informe_id] = nil
-			@nombre = session[:nombre_usuario]
+	  @nombre = session[:nombre_usuario]
+	  #almacenar las notificaciones del usuario para mostrarlas
       @notificaciones1= []
       @notificaciones = Notificacion.where(instructor_id: session[:usuario_id]).all
       @notificaciones.each do |notificaciones|
         if notificaciones.actual == 2        #Caso de notificaciones del instructor
           @notificaciones1.push(notificaciones)
         end
-      end
-		else
-			redirect_to controller:"forminst", action: "index"
-		end
+  	  end
+  	#si intenta ingresar por la direccion del url
+	else
+		redirect_to controller:"forminst", action: "index"
 	end
+  end
 
+  #Vista de los soportes agregados
   def ver_soporte
-    @plan = Planformacion.where(id: session[:plan_id]).take
+    @plan = Planformacion.where(id: session[:plan_id]).take #buscar planformacion de instructor
     $actividad = params[:actividad_id].to_i
     @documents = []
+    #si son los soportes de un informe
     if !session[:informe_id].blank?
       @documents = Document.where(adecuacion_id: session[:adecuacion_id], informe_id: session[:informe_id], actividad_id: $actividad).all
+    #si son los soporter de una adecuacion
     else
       @documents = Document.where(adecuacion_id: session[:adecuacion_id], informe_id: nil).all
     end
@@ -57,28 +63,36 @@
       @plan = Planformacion.where(id: session[:plan_id]).take
       @documents = []
       adec = Adecuacion.where(planformacion_id: session[:plan_id]).take
+      #si se desea saber el respaldo de los informes
       if !session[:informe_id].blank?
         @documents = Respaldo.where(adecuacion_id: adec.id, informe_id: session[:informe_id]).all
+      #si se desea saber el respaldo de las adecuaciones
       else
         @documents = Respaldo.where(adecuacion_id: adec.id, informe_id: nil).all
       end
+    #si intenta ingresar mediante el link
     else
       redirect_to controller:"forminst", action: "index"
     end
   end
 
-  def show
+    #mostrar el pdf del respaldo
+  	def show
 
-    if params[:informe_id].blank?
-      @document = Respaldo.where(adecuacion_id: params[:adecuacion_id], informe_id: nil, version: params[:version].to_i, filename: params[:namefile]).take
-    else
-      @document = Respaldo.where(adecuacion_id: params[:adecuacion_id], informe_id: params[:informe_id],version: params[:version].to_i, filename: params[:namefile]).take
-    end
-      send_data(@document.file_contents,
-                type: @document.content_type,
-                filename: @document.filename)
+  		#si es informe
+	    if params[:informe_id].blank?
+	      @document = Respaldo.where(adecuacion_id: params[:adecuacion_id], informe_id: nil, version: params[:version].to_i, filename: params[:namefile]).take
+	    #si es adecuacion
+	    else
+	      @document = Respaldo.where(adecuacion_id: params[:adecuacion_id], informe_id: params[:informe_id],version: params[:version].to_i, filename: params[:namefile]).take
+	    end
+	    #abrir el documento
+	    send_data(@document.file_contents,
+        type: @document.content_type,
+        filename: @document.filename)
     end
 
+    #modulo de prorroga (fuera de funcionamiento)
 	def prorrogas
 		if session[:usuario_id] && session[:instructor]= true
 	      @persona = Persona.where(usuario_id: session[:usuario_id]).take
@@ -113,8 +127,10 @@
 	    end
 	end
 
+#Vista previa del Informe
 def vista_previa1  
   if !session[:informe_id].blank?
+ 	#Obtener todos los datos importantes de la base de datos 
     @informe= Informe.find(session[:informe_id])
     @TipoSemestre=TipoInforme.where(id: @informe.tipo_id).take
     @fechaActual = Date.current.to_s
@@ -137,10 +153,11 @@ def vista_previa1
     @formacion= 'formacion'
     @extension= 'extension'
     @otra= 'otra' 
+    @CJagregado=["no","no","no","no"]
+    @semestres = []
 
     @nombre = session[:nombre_usuario]
     @instructorName = session[:instructorName]
-
 
     @actividades1doc= []
     @actividades1inv= []
@@ -268,13 +285,23 @@ def vista_previa1
       end
     end
 
-    @actividades5obli= []
+    @actividades5doc= []
+    @actividades5inv= []
+    @actividades5ext= []
+    @actividades5for= []
+    @actividades5otr= []
     @actividades5= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 5).all
     @actividades5.each do |actade| 
       @act= Actividad.find(actade.actividad_id)
       tipo= @act.tipo_actividad_id
-      if tipo==7
-        @actividades5obli.push(@act)
+      if tipo==1
+        @actividades5doc.push(@act)
+      elsif tipo==2
+          @actividades5inv.push(@act)
+      elsif tipo==3
+          @actividades5ext.push(@act)
+      elsif tipo==4
+          @actividades5for.push(@act)
       end
     end
 
@@ -449,6 +476,8 @@ def vista_previa1
       @ae= ActividadEjecutada.where(informe_actividad_id: actade.id).take
       @actividadese.push(@ae)
       @obs= ObservacionTutor.where(informe_actividad_id: actade.id).take
+	  semestre = AdecuacionActividad.where(actividad_id: @act.id).take.semestre
+	  @semestres[@act.id]=semestre
       if @obs==nil
         @observaciont.push("")
       else
@@ -473,55 +502,52 @@ def vista_previa1
     redirect_to controller: "inicioinstructor", action: "listar_informes"
   end
 end
-
+	
+	#listar todos los informes del instructor
 	def listar_informes
 	    if session[:usuario_id] && session[:instructor]= true
 
-	      @persona = Persona.where(usuario_id: session[:usuario_id]).take
 	      @nombre = session[:nombre_usuario]
 	      @planformacion = Planformacion.where(instructor_id: session[:usuario_id]).take
-	      #@tutor = Persona.where(usuario_id: @adecuacion.tutor_id).take.nombres
 	      @informes = Informe.where(planformacion_id: @planformacion)
-	      @informe = Informe.where(planformacion_id: @planformacion).take
-        @status = []
+          @status = []
 	      session[:informe_id] = nil
 	      @tipos= []
 	      @informes.each do |inf|
-          si = EstatusInforme.where(informe_id: inf.id, actual: 1).take
-          if(si.estatus_id==1)
-            @st = "APROBADO POR CONSEJO DE FACULTAD"
-          elsif(si.estatus_id==2)
-            @st = "ENVIADO A CONSEJO TÉCNICO"
-          elsif(si.estatus_id==3)
-            @st = "ENVIADO A COMISION DE INVESTIGACIÓN"
-          elsif(si.estatus_id==4)
-            @st = "ENVIADO A CONSEJO DE FACULTAD"
-          elsif(si.estatus_id==5)
-            @st = "APROBADO CON OBSERVACIONES POR CONSEJO DE FACULTAD"
-          elsif(si.estatus_id==6)
-           @st = "GUARDADO"
-          elsif(si.estatus_id==8)
-            @st = "ENVIADO A CONSEJO DE ESCUELA"
-          elsif(si.estatus_id==9)
-            @st = "RECHAZADO POR CONSEJO DE FACULTAD"
-          end
-          @status.push(@st)
-	        if inf.tipo_id == 1
-	          @tipos.push('Semestral')
-	        else
-	          if inf.tipo_id ==2
-	            @tipos.push('Anual')
-	          else
-	            if inf.tipo_id==3
-	              @tipos.push('Final')
-	            end
+	          si = EstatusInforme.where(informe_id: inf.id, actual: 1).take
+	          #Status a mostrar segun el informe 
+	          if(si.estatus_id==1)
+	            @st = "APROBADO POR CONSEJO DE FACULTAD"
+	          elsif(si.estatus_id==2)
+	            @st = "ENVIADO A CONSEJO TÉCNICO"
+	          elsif(si.estatus_id==3)
+	            @st = "ENVIADO A COMISION DE INVESTIGACIÓN"
+	          elsif(si.estatus_id==4)
+	            @st = "ENVIADO A CONSEJO DE FACULTAD"
+	          elsif(si.estatus_id==5)
+	            @st = "APROBADO CON OBSERVACIONES POR CONSEJO DE FACULTAD"
+	          elsif(si.estatus_id==6)
+	           @st = "GUARDADO"
+	          elsif(si.estatus_id==8)
+	            @st = "ENVIADO A CONSEJO DE ESCUELA"
+	          elsif(si.estatus_id==9)
+	            @st = "RECHAZADO POR CONSEJO DE FACULTAD"
 	          end
-	        end
+	          #Tipo de los informes
+	          @status.push(@st)
+		      if inf.tipo_id == 1
+		        @tipos.push('Semestral')
+		      else
+		        if inf.tipo_id ==2
+		          @tipos.push('Anual')
+		        else
+		          if inf.tipo_id==3
+		            @tipos.push('Final')
+		          end
+		        end
+		      end
 	      end
-	      
-	      if not @nombre
-	        print "NO HAY USUARIO"
-	      end
+	    #si intenta ingresar con el link 
 	    else
 	      redirect_to controller:"forminst", action: "index"
 	    end
@@ -535,10 +561,18 @@ end
 
 	def ver_detalles_adecuacion
 		if session[:usuario_id] && session[:instructor]= true
+
+			@plan_formacion = Planformacion.where(instructor_id: session[:usuario_id]).take
+			@adecuacion = Adecuacion.where(planformacion_id: @plan_formacion).take
+			@status_adecuacion = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
+			@tipo_status = TipoEstatus.where(id: @status_adecuacion.estatus_id, ).take.concepto
+
+
+
 			@nombre = session[:nombre_usuario]
 			@instructorName = session[:nombre_usuario]
 			@modifique=false
-      session[:informe_id] = nil
+      		session[:informe_id] = nil
 			@cant_delete= params[:cant_delete]
 			@cant_edit= params[:cant_edit]
 			@cant_doc= params[:cant_docencia]
@@ -549,10 +583,10 @@ end
 			semestre= params[:semestre].to_i
 
 			if params[:adecuacion_id]!=nil
-				session[:adecuacion_id]= params[:adecuacion_id]
+				session[:adecuacion_id]= @adecuacion.id
 			end
       
-      @tutoresAnteriores = Instructortutor.where(instructor_id: session[:usuario_id], actual: 0)
+      		@tutoresAnteriores = Instructortutor.where(instructor_id: session[:usuario_id], actual: 0)
 			@adecuacion= Adecuacion.find(session[:adecuacion_id])
 			@plan = Planformacion.where(instructor_id: session[:usuario_id]).take
 			@userentidad= Usuarioentidad.where(usuario_id: session[:usuario_id]).take
@@ -1437,7 +1471,8 @@ end
 
 	def detalles_informe2
     if !session[:informe_id].blank?
-      @nombre = session[:nombre_usuario]   
+      @nombre = session[:nombre_usuario]  
+      @CJagregado = ["no","no","no","no"] 
         if not @nombre
           print "NO HAY USUARIO"
         end
@@ -1458,6 +1493,8 @@ end
       @actividadesaobli= []
       @actividadesaotr= []
       @resultados= []
+      @semestres=[]
+      @CJagregado=["no","no","no","no"]
       @resultados2= ""
       @resultados2a= []
       @resultados2b= []
@@ -1588,6 +1625,8 @@ end
           else
             @observaciont.push(@obs.observaciones)
           end
+          semestre = AdecuacionActividad.where(actividad_id: @act.id).take.semestre
+          @semestres[@act.id]=semestre
           if tipo==1
             @actividadesadoc.push(@act)
           else

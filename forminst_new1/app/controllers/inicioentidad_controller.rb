@@ -748,7 +748,6 @@ end
 					    	end
 					    end
 				    end
-
 					if tipo==1
 						@actividadesadoc.push(@act)
 					elsif tipo==2
@@ -866,7 +865,6 @@ end
 					    	end
 					    end
 				    end
-
 					if tipo==1
 						@actividadesadoc.push(@act)
 					elsif tipo==2
@@ -1355,6 +1353,8 @@ end
     	@actividadesafor= []
     	@actividadesaotr= []
     	@actividadesaobli= []
+    	@semestres=[]
+      	@CJagregado=["no","no","no","no"]
     	@resultados= []
     	@resultados2= ""
     	@resultados2a= []
@@ -1611,6 +1611,8 @@ end
 					    end
 					end
 		        end
+		          semestre = AdecuacionActividad.where(actividad_id: @act.id).take.semestre
+		          @semestres[@act.id]=semestre
 		        if tipo==1
 		          	@actividadesadoc.push(@act)
 		        elsif tipo==2
@@ -1679,6 +1681,9 @@ end
 	    @obligatoria= 'obligatoria'
 	    @extension= 'extension'
 	    @otra= 'otra' 
+	    @CJagregado=["no","no","no","no"]
+	    @semestres = []
+
 
 	    @nombre = session[:nombre_usuario]
 	    @instructorName = session[:instructorName]
@@ -1778,14 +1783,24 @@ end
 			end
 	    end
 
-	    @actividades5obli= []
+	    @actividades5doc= []
+	    @actividades5inv= []
+	    @actividades5ext= []
+	    @actividades5for= []
+	    @actividades5otr= []
 	    @actividades5= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 5).all
 	    @actividades5.each do |actade| 
 	      @act= Actividad.find(actade.actividad_id)
 	      tipo= @act.tipo_actividad_id
-          if tipo==7
-            @actividades5obli.push(@act)
-          end
+	      if tipo==1
+	        @actividades5doc.push(@act)
+	      elsif tipo==2
+	          @actividades5inv.push(@act)
+	      elsif tipo==3
+	        @actividades5ext.push(@act)
+	      elsif tipo==4
+	        @actividades5for.push(@act)
+	      end
 	    end
 
 	    @bool_enviado = 0
@@ -1959,6 +1974,8 @@ end
 	      @ae= ActividadEjecutada.where(informe_actividad_id: actade.id).take
 	      @actividadese.push(@ae)
 	      @obs= ObservacionTutor.where(informe_actividad_id: actade.id).take
+		  semestre = AdecuacionActividad.where(actividad_id: @act.id).take.semestre
+		  @semestres[@act.id]=semestre
 	      if @obs==nil
 	        @observaciont.push("")
 	      else
