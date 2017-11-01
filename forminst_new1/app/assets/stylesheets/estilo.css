@@ -25,7 +25,8 @@ input[type=number] {
 }
 
 body {
-
+width: 100%;
+height: 100%;
 font-family:  Arial, Geneva, Helvetica, sans-serif;
 font-size: 12px;
 line-height: 18px;
@@ -542,6 +543,10 @@ background-color: #CCCC99;
   background-color: #CCCC99;
   border-color: #CCCC99;
 }*/
+.btn-default{
+	margin-bottom: 1%;
+}
+
 .open > a {
   outline: 0;
   background-color: #CCCC99;
