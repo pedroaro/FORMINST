@@ -25696,3 +25696,622 @@ Completed 200 OK in 333ms (Views: 310.5ms | ActiveRecord: 5.8ms)
   [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
 Started GET "/assets/estilo.self-f4a267f6351bbb906e118f80ea50255524ff6691337d30e79ca555884aff440e.css?body=1" for ::1 at 2017-11-01 08:46:50 -0400
 Started GET "/assets/banner.png" for ::1 at 2017-11-01 08:46:50 -0400
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/forminst_new1/config/routes.rb:6)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/FORMINST/forminst_new1/config/routes.rb:6)
+Started GET "/inicioinstructor/detalles_adecuacion3" for ::1 at 2017-11-01 13:44:57 -0400
+Processing by InicioinstructorController#detalles_adecuacion3 as HTML
+  [1m[36mAdecuacion Load (2.4ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`id` = 20 LIMIT 1[0m
+  [1m[36mPlanformacion Load (0.3ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`instructor_id` = 40 LIMIT 1[0m
+  [1m[36mAdecuacionActividad Load (0.4ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 1[0m
+  [1m[36mActividad Load (0.3ms)[0m  [1m[34mSELECT  `actividad`.* FROM `actividad` WHERE `actividad`.`id` = 583 LIMIT 1[0m
+  [1m[36mActividad Load (0.4ms)[0m  [1m[34mSELECT  `actividad`.* FROM `actividad` WHERE `actividad`.`id` = 584 LIMIT 1[0m
+  [1m[36mActividad Load (0.2ms)[0m  [1m[34mSELECT  `actividad`.* FROM `actividad` WHERE `actividad`.`id` = 585 LIMIT 1[0m
+  [1m[36mActividad Load (0.1ms)[0m  [1m[34mSELECT  `actividad`.* FROM `actividad` WHERE `actividad`.`id` = 586 LIMIT 1[0m
+  [1m[36mActividad Load (0.1ms)[0m  [1m[34mSELECT  `actividad`.* FROM `actividad` WHERE `actividad`.`id` = 587 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 1[0m  [["adecuacion_id", 20], ["semestre", 1]]
+  [1m[36mObservacionActividadAdecuacion Load (0.3ms)[0m  [1m[34mSELECT `observacion_actividad_adecuacion`.* FROM `observacion_actividad_adecuacion` WHERE `observacion_actividad_adecuacion`.`adecuacionactividad_id` = 421[0m
+  [1m[36mObservacionActividadAdecuacion Load (0.4ms)[0m  [1m[34mSELECT `observacion_actividad_adecuacion`.* FROM `observacion_actividad_adecuacion` WHERE `observacion_actividad_adecuacion`.`adecuacionactividad_id` = 422[0m
+  [1m[36mObservacionActividadAdecuacion Load (0.3ms)[0m  [1m[34mSELECT `observacion_actividad_adecuacion`.* FROM `observacion_actividad_adecuacion` WHERE `observacion_actividad_adecuacion`.`adecuacionactividad_id` = 423[0m
+  [1m[36mObservacionActividadAdecuacion Load (0.2ms)[0m  [1m[34mSELECT `observacion_actividad_adecuacion`.* FROM `observacion_actividad_adecuacion` WHERE `observacion_actividad_adecuacion`.`adecuacionactividad_id` = 424[0m
+  [1m[36mObservacionActividadAdecuacion Load (0.2ms)[0m  [1m[34mSELECT `observacion_actividad_adecuacion`.* FROM `observacion_actividad_adecuacion` WHERE `observacion_actividad_adecuacion`.`adecuacionactividad_id` = 425[0m
+  Rendering inicioinstructor/detalles_adecuacion3.html.erb within layouts/ly_inicio_entidad
+  Rendered inicioinstructor/detalles_adecuacion3.html.erb within layouts/ly_inicio_entidad (12.3ms)
+Completed 200 OK in 836ms (Views: 712.0ms | ActiveRecord: 12.9ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/assets/estilo.self-067b84372af810102b5be2fdaba4f9922a326259c6cc3ba6a566a60f68597f74.css?body=1" for ::1 at 2017-11-01 13:44:58 -0400
+Started GET "/assets/banner.png" for ::1 at 2017-11-01 13:44:58 -0400
+Started GET "/inicioinstructor/detalles_adecuacion3" for ::1 at 2017-11-01 13:45:35 -0400
+Processing by InicioinstructorController#detalles_adecuacion3 as HTML
+  [1m[36mAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`id` = 20 LIMIT 1[0m
+  [1m[36mPlanformacion Load (1.8ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`instructor_id` = 40 LIMIT 1[0m
+  [1m[36mAdecuacionActividad Load (0.5ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 1[0m
+  [1m[36mActividad Load (0.2ms)[0m  [1m[34mSELECT  `actividad`.* FROM `actividad` WHERE `actividad`.`id` = 583 LIMIT 1[0m
+  [1m[36mActividad Load (0.3ms)[0m  [1m[34mSELECT  `actividad`.* FROM `actividad` WHERE `actividad`.`id` = 584 LIMIT 1[0m
+  [1m[36mActividad Load (0.6ms)[0m  [1m[34mSELECT  `actividad`.* FROM `actividad` WHERE `actividad`.`id` = 585 LIMIT 1[0m
+  [1m[36mActividad Load (2.9ms)[0m  [1m[34mSELECT  `actividad`.* FROM `actividad` WHERE `actividad`.`id` = 586 LIMIT 1[0m
+  [1m[36mActividad Load (0.4ms)[0m  [1m[34mSELECT  `actividad`.* FROM `actividad` WHERE `actividad`.`id` = 587 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`adecuacion_id` = 20 AND `adecuacion_actividad`.`semestre` = 1[0m  [["adecuacion_id", 20], ["semestre", 1]]
+  [1m[36mObservacionActividadAdecuacion Load (0.4ms)[0m  [1m[34mSELECT `observacion_actividad_adecuacion`.* FROM `observacion_actividad_adecuacion` WHERE `observacion_actividad_adecuacion`.`adecuacionactividad_id` = 421[0m
+  [1m[36mObservacionActividadAdecuacion Load (0.3ms)[0m  [1m[34mSELECT `observacion_actividad_adecuacion`.* FROM `observacion_actividad_adecuacion` WHERE `observacion_actividad_adecuacion`.`adecuacionactividad_id` = 422[0m
+  [1m[36mObservacionActividadAdecuacion Load (0.6ms)[0m  [1m[34mSELECT `observacion_actividad_adecuacion`.* FROM `observacion_actividad_adecuacion` WHERE `observacion_actividad_adecuacion`.`adecuacionactividad_id` = 423[0m
+  [1m[36mObservacionActividadAdecuacion Load (2.3ms)[0m  [1m[34mSELECT `observacion_actividad_adecuacion`.* FROM `observacion_actividad_adecuacion` WHERE `observacion_actividad_adecuacion`.`adecuacionactividad_id` = 424[0m
+  [1m[36mObservacionActividadAdecuacion Load (0.4ms)[0m  [1m[34mSELECT `observacion_actividad_adecuacion`.* FROM `observacion_actividad_adecuacion` WHERE `observacion_actividad_adecuacion`.`adecuacionactividad_id` = 425[0m
+  Rendering inicioinstructor/detalles_adecuacion3.html.erb within layouts/ly_inicio_entidad
+  Rendered inicioinstructor/detalles_adecuacion3.html.erb within layouts/ly_inicio_entidad (12.5ms)
+Completed 200 OK in 270ms (Views: 241.0ms | ActiveRecord: 11.5ms)
+
+
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/assets/banner.png" for ::1 at 2017-11-01 13:45:35 -0400
+Started GET "/inicioinstructor/logout" for ::1 at 2017-11-01 13:45:46 -0400
+Processing by InicioinstructorController#logout as HTML
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (1.0ms)[0m  [1m[31mDELETE FROM `session` WHERE `session`.`id` = 190[0m
+  [1m[35m (42.2ms)[0m  [1m[35mCOMMIT[0m
+Redirected to http://localhost:3000/
+Completed 302 Found in 82ms (ActiveRecord: 74.3ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE `session` SET `data` = 'BAh7BkkiGV90dXJib2xpbmtzX2xvY2F0aW9uBjoGRUZJIhtodHRwOi8vbG9j\nYWxob3N0OjMwMDAvBjsAVA==\n' WHERE `session`.`id` = 191[0m
+  [1m[35m (29.2ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/" for ::1 at 2017-11-01 13:45:46 -0400
+Processing by ForminstController#index as HTML
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[31mDELETE FROM `session` WHERE `session`.`id` = 191[0m
+  [1m[35m (71.2ms)[0m  [1m[35mCOMMIT[0m
+  Rendering forminst/index.html.erb within layouts/ec_aplanes
+  Rendered forminst/index.html.erb within layouts/ec_aplanes (1.7ms)
+Completed 200 OK in 373ms (Views: 229.6ms | ActiveRecord: 136.7ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.9ms)[0m  [1m[33mUPDATE `session` SET `data` = 'BAh7BkkiEF9jc3JmX3Rva2VuBjoGRUZJIjFZRVo2bFVFcXQ4L2VZd3lyM29D\nem1vV1dZbk9RWTF4WVBaaU9CZFVzUzQ0PQY7AEY=\n', `updated_at` = '2017-11-01 17:45:47' WHERE `session`.`id` = 192[0m
+  [1m[35m (43.2ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/images/nav.jpg" for ::1 at 2017-11-01 13:45:47 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/images/nav.jpg"):
+  
+actionpack (5.0.6) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.6) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.3) lib/rack/method_override.rb:22:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.6) lib/rails/engine.rb:522:in `call'
+puma (3.10.0) lib/puma/configuration.rb:225:in `call'
+puma (3.10.0) lib/puma/server.rb:605:in `handle_request'
+puma (3.10.0) lib/puma/server.rb:437:in `process_client'
+puma (3.10.0) lib/puma/server.rb:301:in `block in run'
+puma (3.10.0) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  Rendering /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout
+  Rendering /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.0ms)
+  Rendered collection of /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb [18 times] (10.8ms)
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (7.5ms)
+  Rendering /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (3.4ms)
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (55.1ms)
+Started GET "/assets/bootstrap.css.map" for ::1 at 2017-11-01 13:45:54 -0400
+Started GET "/" for ::1 at 2017-11-01 13:47:39 -0400
+Processing by ForminstController#index as HTML
+  [1m[35m (0.8ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (1.0ms)[0m  [1m[31mDELETE FROM `session` WHERE `session`.`id` = 192[0m
+  [1m[35m (38.9ms)[0m  [1m[35mCOMMIT[0m
+  Rendering forminst/index.html.erb within layouts/ec_aplanes
+  Rendered forminst/index.html.erb within layouts/ec_aplanes (9.7ms)
+Completed 200 OK in 418ms (Views: 285.8ms | ActiveRecord: 121.9ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE `session` SET `data` = 'BAh7BkkiEF9jc3JmX3Rva2VuBjoGRUZJIjFrd2VtREl3S3ZpZkt6Z2wzbUxR\naFF4eVZVQllxQkFodHhzYkpENUhTUW5BPQY7AEY=\n' WHERE `session`.`id` = 193[0m
+  [1m[35m (48.0ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/assets/estilo.self-4293666f0bc60a456bfe03f4ee9ba8cd69adc50f1027b605141d52e308dcdf84.css?body=1" for ::1 at 2017-11-01 13:47:39 -0400
+Started GET "/images/nav.jpg" for ::1 at 2017-11-01 13:47:40 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/images/nav.jpg"):
+  
+actionpack (5.0.6) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.6) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.3) lib/rack/method_override.rb:22:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.6) lib/rails/engine.rb:522:in `call'
+puma (3.10.0) lib/puma/configuration.rb:225:in `call'
+puma (3.10.0) lib/puma/server.rb:605:in `handle_request'
+puma (3.10.0) lib/puma/server.rb:437:in `process_client'
+puma (3.10.0) lib/puma/server.rb:301:in `block in run'
+puma (3.10.0) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  Rendering /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout
+  Rendering /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (4.4ms)
+  Rendered collection of /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb [18 times] (9.8ms)
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (3.7ms)
+  Rendering /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (4.0ms)
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (68.6ms)
+Started GET "/assets/bootstrap.css.map" for ::1 at 2017-11-01 13:47:40 -0400
+Started GET "/" for ::1 at 2017-11-01 13:47:45 -0400
+Processing by ForminstController#index as HTML
+  [1m[35m (0.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[31mDELETE FROM `session` WHERE `session`.`id` = 193[0m
+  [1m[35m (35.0ms)[0m  [1m[35mCOMMIT[0m
+  Rendering forminst/index.html.erb within layouts/ec_aplanes
+  Rendered forminst/index.html.erb within layouts/ec_aplanes (1.6ms)
+Completed 200 OK in 356ms (Views: 280.9ms | ActiveRecord: 67.3ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE `session` SET `data` = 'BAh7BkkiEF9jc3JmX3Rva2VuBjoGRUZJIjFvMld6TDB5bkovQXFhV21Gcjha\nNEVIN2RjZE1DYUdobXlON0RRUTZ4VS84PQY7AEY=\n', `updated_at` = '2017-11-01 17:47:46' WHERE `session`.`id` = 194[0m
+  [1m[35m (45.4ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/assets/estilo.self-fc943a51f97670a31d7b9216a5a3b2f96067d950030e618297599d2deff91185.css?body=1" for ::1 at 2017-11-01 13:47:46 -0400
+Started GET "/images/nav.jpg" for ::1 at 2017-11-01 13:47:46 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/images/nav.jpg"):
+  
+actionpack (5.0.6) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.6) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.3) lib/rack/method_override.rb:22:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.6) lib/rails/engine.rb:522:in `call'
+puma (3.10.0) lib/puma/configuration.rb:225:in `call'
+puma (3.10.0) lib/puma/server.rb:605:in `handle_request'
+puma (3.10.0) lib/puma/server.rb:437:in `process_client'
+puma (3.10.0) lib/puma/server.rb:301:in `block in run'
+puma (3.10.0) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  Rendering /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout
+  Rendering /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.6ms)
+  Rendered collection of /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb [18 times] (6.4ms)
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (2.5ms)
+  Rendering /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (6.0ms)
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (63.8ms)
+Started GET "/assets/bootstrap.css.map" for ::1 at 2017-11-01 13:47:46 -0400
+Started GET "/assets/bootstrap.css.map" for ::1 at 2017-11-01 13:47:56 -0400
+Started GET "/" for ::1 at 2017-11-01 13:48:19 -0400
+Processing by ForminstController#index as HTML
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.5ms)[0m  [1m[31mDELETE FROM `session` WHERE `session`.`id` = 194[0m
+  [1m[35m (87.7ms)[0m  [1m[35mCOMMIT[0m
+  Rendering forminst/index.html.erb within layouts/ec_aplanes
+  Rendered forminst/index.html.erb within layouts/ec_aplanes (1.8ms)
+Completed 200 OK in 374ms (Views: 233.9ms | ActiveRecord: 128.3ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.3ms)[0m  [1m[33mUPDATE `session` SET `data` = 'BAh7BkkiEF9jc3JmX3Rva2VuBjoGRUZJIjFuUk5QNnkwdGliSGZPSjhpWE90\ndFA0bWFhMnJGV1NTalVyRVk2VDFxS1FnPQY7AEY=\n' WHERE `session`.`id` = 195[0m
+  [1m[35m (40.5ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/images/nav.jpg" for ::1 at 2017-11-01 13:48:19 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/images/nav.jpg"):
+  
+actionpack (5.0.6) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.6) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.3) lib/rack/method_override.rb:22:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.6) lib/rails/engine.rb:522:in `call'
+puma (3.10.0) lib/puma/configuration.rb:225:in `call'
+puma (3.10.0) lib/puma/server.rb:605:in `handle_request'
+puma (3.10.0) lib/puma/server.rb:437:in `process_client'
+puma (3.10.0) lib/puma/server.rb:301:in `block in run'
+puma (3.10.0) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  Rendering /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout
+  Rendering /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.6ms)
+  Rendered collection of /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb [18 times] (19.6ms)
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (2.7ms)
+  Rendering /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (5.4ms)
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (70.7ms)
+Started GET "/" for ::1 at 2017-11-01 13:48:25 -0400
+Processing by ForminstController#index as HTML
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.6ms)[0m  [1m[31mDELETE FROM `session` WHERE `session`.`id` = 195[0m
+  [1m[35m (49.0ms)[0m  [1m[35mCOMMIT[0m
+  Rendering forminst/index.html.erb within layouts/ec_aplanes
+  Rendered forminst/index.html.erb within layouts/ec_aplanes (1.7ms)
+Completed 200 OK in 449ms (Views: 351.8ms | ActiveRecord: 89.7ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE `session` SET `data` = 'BAh7BkkiEF9jc3JmX3Rva2VuBjoGRUZJIjEyV2xjWFh6L3dwMmh6NE03SEJm\nWlJseW1xcC9lbm5EaUtTMUh5MlJwNUtjPQY7AEY=\n', `updated_at` = '2017-11-01 17:48:26' WHERE `session`.`id` = 196[0m
+  [1m[35m (49.1ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/assets/estilo.self-44199ded91c815646a25fae815151b456eb59c28b7b597b141b0887c880b9d10.css?body=1" for ::1 at 2017-11-01 13:48:26 -0400
+Started GET "/images/nav.jpg" for ::1 at 2017-11-01 13:48:26 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/images/nav.jpg"):
+  
+actionpack (5.0.6) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.6) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.3) lib/rack/method_override.rb:22:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.6) lib/rails/engine.rb:522:in `call'
+puma (3.10.0) lib/puma/configuration.rb:225:in `call'
+puma (3.10.0) lib/puma/server.rb:605:in `handle_request'
+puma (3.10.0) lib/puma/server.rb:437:in `process_client'
+puma (3.10.0) lib/puma/server.rb:301:in `block in run'
+puma (3.10.0) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  Rendering /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout
+  Rendering /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.2ms)
+  Rendered collection of /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb [18 times] (12.4ms)
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (2.0ms)
+  Rendering /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (36.2ms)
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (92.6ms)
+Started GET "/assets/bootstrap.css.map" for ::1 at 2017-11-01 13:48:47 -0400
+Started POST "/forminst/autenticar" for ::1 at 2017-11-01 13:49:34 -0400
+Processing by ForminstController#autenticar as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"5vffO8Qfi91rmBx9WCfPdxpyulmoY808PIP8nGI68jQ/noNmuOBJQMpXn0ZEMBYxRtQQxnb9vd4VrrtXBlMWkw==", "correo"=>"ana", "password"=>"[FILTERED]"}
+  [1m[36mUsuario Load (0.3ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`user` = 'ana' LIMIT 1[0m
+  [1m[36mUsuarioentidad Load (0.3ms)[0m  [1m[34mSELECT  `usuarioentidad`.* FROM `usuarioentidad` WHERE `usuarioentidad`.`usuario_id` = 38 LIMIT 1[0m
+  [1m[36mEntidad Load (0.2ms)[0m  [1m[34mSELECT  `entidad`.* FROM `entidad` WHERE `entidad`.`id` = 18 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `usuarioentidad`.* FROM `usuarioentidad` WHERE `usuarioentidad`.`usuario_id` = 38 LIMIT 1[0m  [["usuario_id", 38], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `entidad`.* FROM `entidad` WHERE `entidad`.`id` = 18 LIMIT 1[0m  [["id", 18], ["LIMIT", 1]]
+  [1m[36mPersona Load (0.4ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 38 LIMIT 1[0m
+Redirected to http://localhost:3000/iniciotutor
+Completed 302 Found in 65ms (ActiveRecord: 6.3ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE `session` SET `data` = 'BAh7DUkiEF9jc3JmX3Rva2VuBjoGRUZJIjEyV2xjWFh6L3dwMmh6NE03SEJm\nWlJseW1xcC9lbm5EaUtTMUh5MlJwNUtjPQY7AEZJIg91c3VhcmlvX2lkBjsA\nRmkrSSITbm9tYnJlX3VzdWFyaW8GOwBGSSIQQW5hIE1vcmFsZXMGOwBUSSIS\nYWRtaW5pc3RyYWRvcgY7AEZGSSIKdHV0b3IGOwBGVEkiD2luc3RydWN0b3IG\nOwBGRkkiDGVudGlkYWQGOwBGRkkiCmZsYXNoBjsAVHsHSSIMZGlzY2FyZAY7\nAFRbAEkiDGZsYXNoZXMGOwBUewZJIgxzdWNjZXNzBjsARkkiHEJpZW52ZW5p\nZG8hIEFuYSBNb3JhbGVzBjsAVA==\n', `updated_at` = '2017-11-01 17:49:34' WHERE `session`.`id` = 196[0m
+  [1m[35m (30.5ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/iniciotutor" for ::1 at 2017-11-01 13:49:34 -0400
+Processing by IniciotutorController#index as HTML
+  [1m[36mNotificacion Load (0.4ms)[0m  [1m[34mSELECT `notificacion`.* FROM `notificacion` WHERE `notificacion`.`tutor_id` = 38[0m
+  Rendering iniciotutor/index.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/index.html.erb within layouts/ly_inicio_tutor (5.7ms)
+Completed 200 OK in 258ms (Views: 237.2ms | ActiveRecord: 1.7ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE `session` SET `data` = 'BAh7DEkiEF9jc3JmX3Rva2VuBjoGRUZJIjEyV2xjWFh6L3dwMmh6NE03SEJm\nWlJseW1xcC9lbm5EaUtTMUh5MlJwNUtjPQY7AEZJIg91c3VhcmlvX2lkBjsA\nRmkrSSITbm9tYnJlX3VzdWFyaW8GOwBGSSIQQW5hIE1vcmFsZXMGOwBUSSIS\nYWRtaW5pc3RyYWRvcgY7AEZGSSIKdHV0b3IGOwBGVEkiD2luc3RydWN0b3IG\nOwBGRkkiDGVudGlkYWQGOwBGRg==\n', `updated_at` = '2017-11-01 17:49:35' WHERE `session`.`id` = 196[0m
+  [1m[35m (40.1ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/assets/banner.png" for ::1 at 2017-11-01 13:49:35 -0400
+Started GET "/assets/glyphicons-halflings-regular.woff2" for ::1 at 2017-11-01 13:49:35 -0400
+Started GET "/iniciotutor/planformacions" for ::1 at 2017-11-01 13:49:36 -0400
+Processing by IniciotutorController#planformacions as HTML
+  [1m[36mPersona Load (0.4ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 38 LIMIT 1[0m
+  [1m[36mPlanformacion Load (0.8ms)[0m  [1m[34mSELECT `planformacion`.* FROM `planformacion` WHERE `planformacion`.`tutor_id` = 38[0m
+  [1m[36mPersona Load (1.6ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 39 LIMIT 1[0m
+  [1m[36mAdecuacion Load (0.5ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 15 LIMIT 1[0m
+  [1m[36mEstatusAdecuacion Load (0.4ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 19 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  [1m[36mPersona Load (0.5ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 40 LIMIT 1[0m
+  [1m[36mAdecuacion Load (0.4ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mEstatusAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  Rendering iniciotutor/planformacions.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/planformacions.html.erb within layouts/ly_inicio_tutor (4.3ms)
+Completed 200 OK in 267ms (Views: 234.6ms | ActiveRecord: 6.5ms)
+
+
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Started POST "/iniciotutor/ver_detalles_adecuacion" for ::1 at 2017-11-01 13:49:38 -0400
+Processing by IniciotutorController#ver_detalles_adecuacion as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"z5XtWtyyaDCy5iRNHRvErFf97ca57ioj2OkcDZGtv0oW/LEHoE2qrRMpp3YBDB3qC1tHWWdwWsHxxFvG9cRb7Q==", "plan_id"=>"16", "editar"=>"no"}
+  [1m[36mPlanformacion Load (0.8ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mUsuario Load (0.5ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mPersona Load (0.4ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 40 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mUsuarioentidad Load (0.3ms)[0m  [1m[34mSELECT  `usuarioentidad`.* FROM `usuarioentidad` WHERE `usuarioentidad`.`usuario_id` = 40 LIMIT 1[0m
+  [1m[36mEscuela Load (0.3ms)[0m  [1m[34mSELECT  `escuela`.* FROM `escuela` WHERE `escuela`.`id` = 2 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 40 LIMIT 1[0m  [["usuario_id", 40], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m  [["id", 40], ["LIMIT", 1]]
+  [1m[36mPersona Load (0.4ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 38 LIMIT 1[0m
+  [1m[36mUsuario Load (0.2ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 38 LIMIT 1[0m
+  [1m[36mAdecuacion Load (0.2ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `usuarioentidad`.* FROM `usuarioentidad` WHERE `usuarioentidad`.`usuario_id` = 40 LIMIT 1[0m  [["usuario_id", 40], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `escuela`.* FROM `escuela` WHERE `escuela`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 40 LIMIT 1[0m  [["usuario_id", 40], ["LIMIT", 1]]
+  Rendering iniciotutor/ver_detalles_adecuacion.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/ver_detalles_adecuacion.html.erb within layouts/ly_inicio_tutor (8.3ms)
+Completed 200 OK in 273ms (Views: 234.4ms | ActiveRecord: 5.9ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE `session` SET `data` = 'BAh7EEkiEF9jc3JmX3Rva2VuBjoGRUZJIjEyV2xjWFh6L3dwMmh6NE03SEJm\nWlJseW1xcC9lbm5EaUtTMUh5MlJwNUtjPQY7AEZJIg91c3VhcmlvX2lkBjsA\nRmkrSSITbm9tYnJlX3VzdWFyaW8GOwBGSSIQQW5hIE1vcmFsZXMGOwBUSSIS\nYWRtaW5pc3RyYWRvcgY7AEZGSSIKdHV0b3IGOwBGVEkiD2luc3RydWN0b3IG\nOwBGRkkiDGVudGlkYWQGOwBGRkkiDHBsYW5faWQGOwBGSSIHMTYGOwBUSSIL\nZWRpdGFyBjsARkZJIhNpbnN0cnVjdG9yTmFtZQY7AEZJIgpwZWRybwY7AFRJ\nIhJhZGVjdWFjaW9uX2lkBjsARmkZ\n', `updated_at` = '2017-11-01 17:49:38' WHERE `session`.`id` = 196[0m
+  [1m[35m (37.0ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/assets/banner.png" for ::1 at 2017-11-01 13:49:38 -0400
+Started GET "/iniciotutor/ver_detalles_adecuacion" for ::1 at 2017-11-01 13:49:46 -0400
+Processing by IniciotutorController#ver_detalles_adecuacion as HTML
+  [1m[36mPlanformacion Load (0.4ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mUsuario Load (0.3ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mPersona Load (0.4ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 40 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mUsuarioentidad Load (0.5ms)[0m  [1m[34mSELECT  `usuarioentidad`.* FROM `usuarioentidad` WHERE `usuarioentidad`.`usuario_id` = 40 LIMIT 1[0m
+  [1m[36mEscuela Load (0.3ms)[0m  [1m[34mSELECT  `escuela`.* FROM `escuela` WHERE `escuela`.`id` = 2 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 40 LIMIT 1[0m  [["usuario_id", 40], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m  [["id", 40], ["LIMIT", 1]]
+  [1m[36mPersona Load (0.3ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 38 LIMIT 1[0m
+  [1m[36mUsuario Load (0.2ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 38 LIMIT 1[0m
+  [1m[36mAdecuacion Load (0.2ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m  [["id", 16], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `usuarioentidad`.* FROM `usuarioentidad` WHERE `usuarioentidad`.`usuario_id` = 40 LIMIT 1[0m  [["usuario_id", 40], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `escuela`.* FROM `escuela` WHERE `escuela`.`id` = 2 LIMIT 1[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 40 LIMIT 1[0m  [["usuario_id", 40], ["LIMIT", 1]]
+  Rendering iniciotutor/ver_detalles_adecuacion.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/ver_detalles_adecuacion.html.erb within layouts/ly_inicio_tutor (9.7ms)
+Completed 200 OK in 258ms (Views: 237.7ms | ActiveRecord: 3.4ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/informes/listar_informes" for ::1 at 2017-11-01 13:50:42 -0400
+Processing by InformesController#listar_informes as HTML
+Started GET "/informes/favicon.ico" for ::1 at 2017-11-01 13:50:42 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/informes/favicon.ico"):
+  
+actionpack (5.0.6) lib/action_dispatch/middleware/debug_exceptions.rb:53:in `call'
+web-console (3.5.1) lib/web_console/middleware.rb:135:in `call_app'
+web-console (3.5.1) lib/web_console/middleware.rb:28:in `block in call'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `catch'
+web-console (3.5.1) lib/web_console/middleware.rb:18:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/show_exceptions.rb:31:in `call'
+railties (5.0.6) lib/rails/rack/logger.rb:36:in `call_app'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `block in call'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `block in tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:26:in `tagged'
+activesupport (5.0.6) lib/active_support/tagged_logging.rb:69:in `tagged'
+railties (5.0.6) lib/rails/rack/logger.rb:24:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/request_id.rb:24:in `call'
+rack (2.0.3) lib/rack/method_override.rb:22:in `call'
+rack (2.0.3) lib/rack/runtime.rb:22:in `call'
+activesupport (5.0.6) lib/active_support/cache/strategy/local_cache_middleware.rb:28:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/executor.rb:12:in `call'
+actionpack (5.0.6) lib/action_dispatch/middleware/static.rb:136:in `call'
+rack (2.0.3) lib/rack/sendfile.rb:111:in `call'
+railties (5.0.6) lib/rails/engine.rb:522:in `call'
+puma (3.10.0) lib/puma/configuration.rb:225:in `call'
+puma (3.10.0) lib/puma/server.rb:605:in `handle_request'
+puma (3.10.0) lib/puma/server.rb:437:in `process_client'
+puma (3.10.0) lib/puma/server.rb:301:in `block in run'
+puma (3.10.0) lib/puma/thread_pool.rb:120:in `block in spawn_thread'
+  [1m[36mPersona Load (0.7ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 38 LIMIT 1[0m
+  Rendering /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout
+  Rendering /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.3ms)
+  Rendered collection of /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/routes/_route.html.erb [18 times] (5.7ms)
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/routes/_table.html.erb (1.3ms)
+  Rendering /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (3.3ms)
+  Rendered /home/administrador/.rvm/gems/ruby-2.4.0/gems/actionpack-5.0.6/lib/action_dispatch/middleware/templates/rescues/routing_error.html.erb within rescues/layout (34.6ms)
+  [1m[36mInforme Load (0.3ms)[0m  [1m[34mSELECT  `informe`.* FROM `informe` WHERE `informe`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mInforme Load (0.4ms)[0m  [1m[34mSELECT `informe`.* FROM `informe` WHERE `informe`.`planformacion_id` = 16[0m
+  [1m[36mEstatusInforme Load (0.3ms)[0m  [1m[34mSELECT  `estatus_informe`.* FROM `estatus_informe` WHERE `estatus_informe`.`informe_id` = 58 AND `estatus_informe`.`actual` = 1 LIMIT 1[0m
+  [1m[36mEstatusInforme Load (1.0ms)[0m  [1m[34mSELECT  `estatus_informe`.* FROM `estatus_informe` WHERE `estatus_informe`.`informe_id` = 59 AND `estatus_informe`.`actual` = 1 LIMIT 1[0m
+  Rendering informes/listar_informes.html.erb within layouts/ly_inicio_tutor
+  Rendered informes/listar_informes.html.erb within layouts/ly_inicio_tutor (13.8ms)
+Completed 200 OK in 401ms (Views: 245.6ms | ActiveRecord: 11.1ms)
+
+
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Started POST "/informes/ver_detalles_informe" for ::1 at 2017-11-01 13:50:44 -0400
+Processing by InformesController#ver_detalles_informe as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"dUFYkvuL7y6QbTVVDvlDsWjKKw/9MYktzcv2RwbZZb2sKATPh3QtszGitm4S7pr3NGyBkCOv+c/k5rGMYrCBGg==", "informe_id"=>"59"}
+  [1m[36mPersona Load (0.4ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 38 LIMIT 1[0m
+  [1m[36mPlanformacion Load (0.3ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mUsuario Load (0.3ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mPersona Load (0.2ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 40 LIMIT 1[0m
+  [1m[36mInforme Load (0.3ms)[0m  [1m[34mSELECT  `informe`.* FROM `informe` WHERE `informe`.`id` = 59 LIMIT 1[0m
+  [1m[36mEstatusInforme Load (0.5ms)[0m  [1m[34mSELECT  `estatus_informe`.* FROM `estatus_informe` WHERE `estatus_informe`.`informe_id` = 59 AND `estatus_informe`.`actual` = 1 LIMIT 1[0m
+  [1m[36mTipoEstatus Load (0.2ms)[0m  [1m[34mSELECT  `tipo_estatus`.* FROM `tipo_estatus` WHERE `tipo_estatus`.`id` = 6 LIMIT 1[0m
+  [1m[36mUsuarioentidad Load (0.6ms)[0m  [1m[34mSELECT  `usuarioentidad`.* FROM `usuarioentidad` WHERE `usuarioentidad`.`usuario_id` = 40 LIMIT 1[0m
+  [1m[36mEntidad Load (0.4ms)[0m  [1m[34mSELECT  `entidad`.* FROM `entidad` WHERE `entidad`.`id` = 19 LIMIT 1[0m
+  [1m[36mEscuela Load (0.2ms)[0m  [1m[34mSELECT  `escuela`.* FROM `escuela` WHERE `escuela`.`id` = 2 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `estatus_informe`.* FROM `estatus_informe` WHERE `estatus_informe`.`informe_id` = 59 AND `estatus_informe`.`actual` = 1 LIMIT 1[0m  [["informe_id", 59], ["actual", 1], ["LIMIT", 1]]
+  Rendering informes/ver_detalles_informe.html.erb within layouts/ly_inicio_tutor
+  Rendered informes/ver_detalles_informe.html.erb within layouts/ly_inicio_tutor (7.5ms)
+Completed 200 OK in 285ms (Views: 234.2ms | ActiveRecord: 5.4ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.7ms)[0m  [1m[33mUPDATE `session` SET `data` = 'BAh7FEkiEF9jc3JmX3Rva2VuBjoGRUZJIjEyV2xjWFh6L3dwMmh6NE03SEJm\nWlJseW1xcC9lbm5EaUtTMUh5MlJwNUtjPQY7AEZJIg91c3VhcmlvX2lkBjsA\nRmkrSSITbm9tYnJlX3VzdWFyaW8GOwBGSSIQQW5hIE1vcmFsZXMGOwBUSSIS\nYWRtaW5pc3RyYWRvcgY7AEZGSSIKdHV0b3IGOwBGVEkiD2luc3RydWN0b3IG\nOwBGRkkiDGVudGlkYWQGOwBGRkkiDHBsYW5faWQGOwBGSSIHMTYGOwBUSSIL\nZWRpdGFyBjsARkZJIhNpbnN0cnVjdG9yTmFtZQY7AEZJIgpwZWRybwY7AFRJ\nIhJhZGVjdWFjaW9uX2lkBjsARmkZSSIPaW5mb3JtZV9pZAY7AEZJIgc1OQY7\nAFRJIhNudW1lcm9faW5mb3JtZQY7AEZpB0kiE25vbWJyZV9pbmZvcm1lBjsA\nRkkiHlNlZ3VuZG8gSW5mb3JtZSBTZW1lc3RyYWwGOwBUSSITc3RhdHVzX2lu\nZm9ybWUGOwBGSSINR1VBUkRBRE8GOwBU\n', `updated_at` = '2017-11-01 17:50:44' WHERE `session`.`id` = 196[0m
+  [1m[35m (96.3ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/assets/banner.png" for ::1 at 2017-11-01 13:50:44 -0400
+Started GET "/iniciotutor/planformacions" for ::1 at 2017-11-01 13:50:49 -0400
+Processing by IniciotutorController#planformacions as HTML
+  [1m[36mPersona Load (0.3ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 38 LIMIT 1[0m
+  [1m[36mPlanformacion Load (0.4ms)[0m  [1m[34mSELECT `planformacion`.* FROM `planformacion` WHERE `planformacion`.`tutor_id` = 38[0m
+  [1m[36mPersona Load (1.3ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 39 LIMIT 1[0m
+  [1m[36mAdecuacion Load (0.5ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 15 LIMIT 1[0m
+  [1m[36mEstatusAdecuacion Load (0.3ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 19 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  [1m[36mPersona Load (0.2ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 40 LIMIT 1[0m
+  [1m[36mAdecuacion Load (0.2ms)[0m  [1m[34mSELECT  `adecuacion`.* FROM `adecuacion` WHERE `adecuacion`.`planformacion_id` = 16 LIMIT 1[0m
+  [1m[36mEstatusAdecuacion Load (0.2ms)[0m  [1m[34mSELECT  `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`adecuacion_id` = 20 AND `estatus_adecuacion`.`actual` = 1 LIMIT 1[0m
+  Rendering iniciotutor/planformacions.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/planformacions.html.erb within layouts/ly_inicio_tutor (5.2ms)
+Completed 200 OK in 255ms (Views: 240.9ms | ActiveRecord: 4.0ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[33mUPDATE `session` SET `data` = 'BAh7E0kiEF9jc3JmX3Rva2VuBjoGRUZJIjEyV2xjWFh6L3dwMmh6NE03SEJm\nWlJseW1xcC9lbm5EaUtTMUh5MlJwNUtjPQY7AEZJIg91c3VhcmlvX2lkBjsA\nRmkrSSITbm9tYnJlX3VzdWFyaW8GOwBGSSIQQW5hIE1vcmFsZXMGOwBUSSIS\nYWRtaW5pc3RyYWRvcgY7AEZGSSIKdHV0b3IGOwBGVEkiD2luc3RydWN0b3IG\nOwBGRkkiDGVudGlkYWQGOwBGRkkiDHBsYW5faWQGOwBGSSIHMTYGOwBUSSIL\nZWRpdGFyBjsARkZJIhNpbnN0cnVjdG9yTmFtZQY7AEZJIgpwZWRybwY7AFRJ\nIg9pbmZvcm1lX2lkBjsARkkiBzU5BjsAVEkiE251bWVyb19pbmZvcm1lBjsA\nRmkHSSITbm9tYnJlX2luZm9ybWUGOwBGSSIeU2VndW5kbyBJbmZvcm1lIFNl\nbWVzdHJhbAY7AFRJIhNzdGF0dXNfaW5mb3JtZQY7AEZJIg1HVUFSREFETwY7\nAFQ=\n', `updated_at` = '2017-11-01 17:50:49' WHERE `session`.`id` = 196[0m
+  [1m[35m (44.1ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/informes/detalles_informe2" for ::1 at 2017-11-01 13:50:51 -0400
+Processing by InformesController#detalles_informe2 as HTML
+  [1m[36mPersona Load (1.1ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 38 LIMIT 1[0m
+  [1m[36mPlanformacion Load (0.3ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mUsuario Load (0.2ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mInforme Load (0.2ms)[0m  [1m[34mSELECT  `informe`.* FROM `informe` WHERE `informe`.`id` = 59 LIMIT 1[0m
+  [1m[36mEstatusInforme Load (0.3ms)[0m  [1m[34mSELECT  `estatus_informe`.* FROM `estatus_informe` WHERE `estatus_informe`.`informe_id` = 59 AND `estatus_informe`.`actual` = 1 LIMIT 1[0m
+  [1m[36mTipoEstatus Load (0.2ms)[0m  [1m[34mSELECT  `tipo_estatus`.* FROM `tipo_estatus` WHERE `tipo_estatus`.`id` = 6 LIMIT 1[0m
+  [1m[36mEstatusInforme Load (0.6ms)[0m  [1m[34mSELECT  `estatus_informe`.* FROM `estatus_informe` WHERE `estatus_informe`.`informe_id` = 59 LIMIT 1[0m
+  [1m[36mInformeActividad Load (11.5ms)[0m  [1m[34mSELECT `informe_actividad`.* FROM `informe_actividad` WHERE `informe_actividad`.`informe_id` = 59[0m
+  [1m[36mActividad Load (0.3ms)[0m  [1m[34mSELECT  `actividad`.* FROM `actividad` WHERE `actividad`.`id` = 588 LIMIT 1[0m
+  [1m[36mActividadEjecutada Load (7.1ms)[0m  [1m[34mSELECT  `actividad_ejecutada`.* FROM `actividad_ejecutada` WHERE `actividad_ejecutada`.`informe_actividad_id` = 495 LIMIT 1[0m
+  [1m[36mObservacionTutor Load (17.6ms)[0m  [1m[34mSELECT  `observacion_tutor`.* FROM `observacion_tutor` WHERE `observacion_tutor`.`informe_actividad_id` = 495 LIMIT 1[0m
+  [1m[36mObservacionActividadInforme Load (14.9ms)[0m  [1m[34mSELECT `observacion_actividad_informe`.* FROM `observacion_actividad_informe` WHERE `observacion_actividad_informe`.`informe_actividad_id` = 495[0m
+  [1m[36mAdecuacionActividad Load (0.3ms)[0m  [1m[34mSELECT  `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`actividad_id` = 588 LIMIT 1[0m
+  [1m[36mActividad Load (0.2ms)[0m  [1m[34mSELECT  `actividad`.* FROM `actividad` WHERE `actividad`.`id` = 589 LIMIT 1[0m
+  [1m[36mActividadEjecutada Load (0.2ms)[0m  [1m[34mSELECT  `actividad_ejecutada`.* FROM `actividad_ejecutada` WHERE `actividad_ejecutada`.`informe_actividad_id` = 496 LIMIT 1[0m
+  [1m[36mObservacionTutor Load (0.2ms)[0m  [1m[34mSELECT  `observacion_tutor`.* FROM `observacion_tutor` WHERE `observacion_tutor`.`informe_actividad_id` = 496 LIMIT 1[0m
+  [1m[36mObservacionActividadInforme Load (0.3ms)[0m  [1m[34mSELECT `observacion_actividad_informe`.* FROM `observacion_actividad_informe` WHERE `observacion_actividad_informe`.`informe_actividad_id` = 496[0m
+  [1m[36mAdecuacionActividad Load (0.2ms)[0m  [1m[34mSELECT  `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`actividad_id` = 589 LIMIT 1[0m
+  [1m[36mActividad Load (0.2ms)[0m  [1m[34mSELECT  `actividad`.* FROM `actividad` WHERE `actividad`.`id` = 590 LIMIT 1[0m
+  [1m[36mActividadEjecutada Load (0.4ms)[0m  [1m[34mSELECT  `actividad_ejecutada`.* FROM `actividad_ejecutada` WHERE `actividad_ejecutada`.`informe_actividad_id` = 497 LIMIT 1[0m
+  [1m[36mObservacionTutor Load (0.2ms)[0m  [1m[34mSELECT  `observacion_tutor`.* FROM `observacion_tutor` WHERE `observacion_tutor`.`informe_actividad_id` = 497 LIMIT 1[0m
+  [1m[36mObservacionActividadInforme Load (0.2ms)[0m  [1m[34mSELECT `observacion_actividad_informe`.* FROM `observacion_actividad_informe` WHERE `observacion_actividad_informe`.`informe_actividad_id` = 497[0m
+  [1m[36mAdecuacionActividad Load (0.2ms)[0m  [1m[34mSELECT  `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`actividad_id` = 590 LIMIT 1[0m
+  [1m[36mActividad Load (0.2ms)[0m  [1m[34mSELECT  `actividad`.* FROM `actividad` WHERE `actividad`.`id` = 591 LIMIT 1[0m
+  [1m[36mActividadEjecutada Load (0.2ms)[0m  [1m[34mSELECT  `actividad_ejecutada`.* FROM `actividad_ejecutada` WHERE `actividad_ejecutada`.`informe_actividad_id` = 498 LIMIT 1[0m
+  [1m[36mObservacionTutor Load (0.2ms)[0m  [1m[34mSELECT  `observacion_tutor`.* FROM `observacion_tutor` WHERE `observacion_tutor`.`informe_actividad_id` = 498 LIMIT 1[0m
+  [1m[36mObservacionActividadInforme Load (0.3ms)[0m  [1m[34mSELECT `observacion_actividad_informe`.* FROM `observacion_actividad_informe` WHERE `observacion_actividad_informe`.`informe_actividad_id` = 498[0m
+  [1m[36mAdecuacionActividad Load (0.3ms)[0m  [1m[34mSELECT  `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`actividad_id` = 591 LIMIT 1[0m
+  [1m[36mActividad Load (0.2ms)[0m  [1m[34mSELECT  `actividad`.* FROM `actividad` WHERE `actividad`.`id` = 592 LIMIT 1[0m
+  [1m[36mActividadEjecutada Load (0.2ms)[0m  [1m[34mSELECT  `actividad_ejecutada`.* FROM `actividad_ejecutada` WHERE `actividad_ejecutada`.`informe_actividad_id` = 499 LIMIT 1[0m
+  [1m[36mObservacionTutor Load (0.2ms)[0m  [1m[34mSELECT  `observacion_tutor`.* FROM `observacion_tutor` WHERE `observacion_tutor`.`informe_actividad_id` = 499 LIMIT 1[0m
+  [1m[36mObservacionActividadInforme Load (0.2ms)[0m  [1m[34mSELECT `observacion_actividad_informe`.* FROM `observacion_actividad_informe` WHERE `observacion_actividad_informe`.`informe_actividad_id` = 499[0m
+  [1m[36mAdecuacionActividad Load (0.2ms)[0m  [1m[34mSELECT  `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`actividad_id` = 592 LIMIT 1[0m
+  Rendering informes/detalles_informe2.html.erb within layouts/ly_inicio_tutor
+  [1m[36mResultado Load (0.5ms)[0m  [1m[34mSELECT `resultado`.* FROM `resultado` WHERE `resultado`.`informe_actividad_id` = 496[0m
+  Rendered informes/detalles_informe2.html.erb within layouts/ly_inicio_tutor (189.5ms)
+Completed 200 OK in 670ms (Views: 412.8ms | ActiveRecord: 154.5ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/assets/glyphicons-halflings-regular.woff2" for ::1 at 2017-11-01 13:50:52 -0400
+Started GET "/informes/detalles_informe2" for ::1 at 2017-11-01 13:51:03 -0400
+Processing by InformesController#detalles_informe2 as HTML
+  [1m[36mPersona Load (0.3ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 38 LIMIT 1[0m
+  [1m[36mPlanformacion Load (1.0ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mUsuario Load (0.6ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mInforme Load (2.0ms)[0m  [1m[34mSELECT  `informe`.* FROM `informe` WHERE `informe`.`id` = 59 LIMIT 1[0m
+  [1m[36mEstatusInforme Load (0.6ms)[0m  [1m[34mSELECT  `estatus_informe`.* FROM `estatus_informe` WHERE `estatus_informe`.`informe_id` = 59 AND `estatus_informe`.`actual` = 1 LIMIT 1[0m
+  [1m[36mTipoEstatus Load (0.9ms)[0m  [1m[34mSELECT  `tipo_estatus`.* FROM `tipo_estatus` WHERE `tipo_estatus`.`id` = 6 LIMIT 1[0m
+  [1m[36mEstatusInforme Load (2.8ms)[0m  [1m[34mSELECT  `estatus_informe`.* FROM `estatus_informe` WHERE `estatus_informe`.`informe_id` = 59 LIMIT 1[0m
+  [1m[36mInformeActividad Load (1.0ms)[0m  [1m[34mSELECT `informe_actividad`.* FROM `informe_actividad` WHERE `informe_actividad`.`informe_id` = 59[0m
+  [1m[36mActividad Load (0.6ms)[0m  [1m[34mSELECT  `actividad`.* FROM `actividad` WHERE `actividad`.`id` = 588 LIMIT 1[0m
+  [1m[36mActividadEjecutada Load (0.9ms)[0m  [1m[34mSELECT  `actividad_ejecutada`.* FROM `actividad_ejecutada` WHERE `actividad_ejecutada`.`informe_actividad_id` = 495 LIMIT 1[0m
+  [1m[36mObservacionTutor Load (0.3ms)[0m  [1m[34mSELECT  `observacion_tutor`.* FROM `observacion_tutor` WHERE `observacion_tutor`.`informe_actividad_id` = 495 LIMIT 1[0m
+  [1m[36mObservacionActividadInforme Load (0.3ms)[0m  [1m[34mSELECT `observacion_actividad_informe`.* FROM `observacion_actividad_informe` WHERE `observacion_actividad_informe`.`informe_actividad_id` = 495[0m
+  [1m[36mAdecuacionActividad Load (0.3ms)[0m  [1m[34mSELECT  `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`actividad_id` = 588 LIMIT 1[0m
+  [1m[36mActividad Load (0.2ms)[0m  [1m[34mSELECT  `actividad`.* FROM `actividad` WHERE `actividad`.`id` = 589 LIMIT 1[0m
+  [1m[36mActividadEjecutada Load (0.3ms)[0m  [1m[34mSELECT  `actividad_ejecutada`.* FROM `actividad_ejecutada` WHERE `actividad_ejecutada`.`informe_actividad_id` = 496 LIMIT 1[0m
+  [1m[36mObservacionTutor Load (0.3ms)[0m  [1m[34mSELECT  `observacion_tutor`.* FROM `observacion_tutor` WHERE `observacion_tutor`.`informe_actividad_id` = 496 LIMIT 1[0m
+  [1m[36mObservacionActividadInforme Load (0.2ms)[0m  [1m[34mSELECT `observacion_actividad_informe`.* FROM `observacion_actividad_informe` WHERE `observacion_actividad_informe`.`informe_actividad_id` = 496[0m
+  [1m[36mAdecuacionActividad Load (0.2ms)[0m  [1m[34mSELECT  `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`actividad_id` = 589 LIMIT 1[0m
+  [1m[36mActividad Load (0.2ms)[0m  [1m[34mSELECT  `actividad`.* FROM `actividad` WHERE `actividad`.`id` = 590 LIMIT 1[0m
+  [1m[36mActividadEjecutada Load (0.2ms)[0m  [1m[34mSELECT  `actividad_ejecutada`.* FROM `actividad_ejecutada` WHERE `actividad_ejecutada`.`informe_actividad_id` = 497 LIMIT 1[0m
+  [1m[36mObservacionTutor Load (0.2ms)[0m  [1m[34mSELECT  `observacion_tutor`.* FROM `observacion_tutor` WHERE `observacion_tutor`.`informe_actividad_id` = 497 LIMIT 1[0m
+  [1m[36mObservacionActividadInforme Load (0.2ms)[0m  [1m[34mSELECT `observacion_actividad_informe`.* FROM `observacion_actividad_informe` WHERE `observacion_actividad_informe`.`informe_actividad_id` = 497[0m
+  [1m[36mAdecuacionActividad Load (0.2ms)[0m  [1m[34mSELECT  `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`actividad_id` = 590 LIMIT 1[0m
+  [1m[36mActividad Load (0.2ms)[0m  [1m[34mSELECT  `actividad`.* FROM `actividad` WHERE `actividad`.`id` = 591 LIMIT 1[0m
+  [1m[36mActividadEjecutada Load (0.3ms)[0m  [1m[34mSELECT  `actividad_ejecutada`.* FROM `actividad_ejecutada` WHERE `actividad_ejecutada`.`informe_actividad_id` = 498 LIMIT 1[0m
+  [1m[36mObservacionTutor Load (0.3ms)[0m  [1m[34mSELECT  `observacion_tutor`.* FROM `observacion_tutor` WHERE `observacion_tutor`.`informe_actividad_id` = 498 LIMIT 1[0m
+  [1m[36mObservacionActividadInforme Load (0.3ms)[0m  [1m[34mSELECT `observacion_actividad_informe`.* FROM `observacion_actividad_informe` WHERE `observacion_actividad_informe`.`informe_actividad_id` = 498[0m
+  [1m[36mAdecuacionActividad Load (0.3ms)[0m  [1m[34mSELECT  `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`actividad_id` = 591 LIMIT 1[0m
+  [1m[36mActividad Load (0.2ms)[0m  [1m[34mSELECT  `actividad`.* FROM `actividad` WHERE `actividad`.`id` = 592 LIMIT 1[0m
+  [1m[36mActividadEjecutada Load (0.3ms)[0m  [1m[34mSELECT  `actividad_ejecutada`.* FROM `actividad_ejecutada` WHERE `actividad_ejecutada`.`informe_actividad_id` = 499 LIMIT 1[0m
+  [1m[36mObservacionTutor Load (0.2ms)[0m  [1m[34mSELECT  `observacion_tutor`.* FROM `observacion_tutor` WHERE `observacion_tutor`.`informe_actividad_id` = 499 LIMIT 1[0m
+  [1m[36mObservacionActividadInforme Load (0.2ms)[0m  [1m[34mSELECT `observacion_actividad_informe`.* FROM `observacion_actividad_informe` WHERE `observacion_actividad_informe`.`informe_actividad_id` = 499[0m
+  [1m[36mAdecuacionActividad Load (0.2ms)[0m  [1m[34mSELECT  `adecuacion_actividad`.* FROM `adecuacion_actividad` WHERE `adecuacion_actividad`.`actividad_id` = 592 LIMIT 1[0m
+  Rendering informes/detalles_informe2.html.erb within layouts/ly_inicio_tutor
+  [1m[36mResultado Load (0.5ms)[0m  [1m[34mSELECT `resultado`.* FROM `resultado` WHERE `resultado`.`informe_actividad_id` = 496[0m
+  Rendered informes/detalles_informe2.html.erb within layouts/ly_inicio_tutor (199.5ms)
+Completed 200 OK in 462ms (Views: 416.3ms | ActiveRecord: 17.1ms)
+
+
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
+Started GET "/informes/ver_detalles_informe" for ::1 at 2017-11-01 13:51:09 -0400
+Processing by InformesController#ver_detalles_informe as HTML
+  [1m[36mPersona Load (0.5ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 38 LIMIT 1[0m
+  [1m[36mPlanformacion Load (0.3ms)[0m  [1m[34mSELECT  `planformacion`.* FROM `planformacion` WHERE `planformacion`.`id` = 16 LIMIT 1[0m
+  [1m[36mUsuario Load (0.2ms)[0m  [1m[34mSELECT  `usuario`.* FROM `usuario` WHERE `usuario`.`id` = 40 LIMIT 1[0m
+  [1m[36mPersona Load (0.3ms)[0m  [1m[34mSELECT  `persona`.* FROM `persona` WHERE `persona`.`usuario_id` = 40 LIMIT 1[0m
+  [1m[36mInforme Load (0.2ms)[0m  [1m[34mSELECT  `informe`.* FROM `informe` WHERE `informe`.`id` = 59 LIMIT 1[0m
+  [1m[36mEstatusInforme Load (0.3ms)[0m  [1m[34mSELECT  `estatus_informe`.* FROM `estatus_informe` WHERE `estatus_informe`.`informe_id` = 59 AND `estatus_informe`.`actual` = 1 LIMIT 1[0m
+  [1m[36mTipoEstatus Load (0.2ms)[0m  [1m[34mSELECT  `tipo_estatus`.* FROM `tipo_estatus` WHERE `tipo_estatus`.`id` = 6 LIMIT 1[0m
+  [1m[36mUsuarioentidad Load (1.0ms)[0m  [1m[34mSELECT  `usuarioentidad`.* FROM `usuarioentidad` WHERE `usuarioentidad`.`usuario_id` = 40 LIMIT 1[0m
+  [1m[36mEntidad Load (1.9ms)[0m  [1m[34mSELECT  `entidad`.* FROM `entidad` WHERE `entidad`.`id` = 19 LIMIT 1[0m
+  [1m[36mEscuela Load (1.6ms)[0m  [1m[34mSELECT  `escuela`.* FROM `escuela` WHERE `escuela`.`id` = 2 LIMIT 1[0m
+  [1m[36mCACHE (0.0ms)[0m  [1m[34mSELECT  `estatus_informe`.* FROM `estatus_informe` WHERE `estatus_informe`.`informe_id` = 59 AND `estatus_informe`.`actual` = 1 LIMIT 1[0m  [["informe_id", 59], ["actual", 1], ["LIMIT", 1]]
+  Rendering informes/ver_detalles_informe.html.erb within layouts/ly_inicio_tutor
+  Rendered informes/ver_detalles_informe.html.erb within layouts/ly_inicio_tutor (15.2ms)
+Completed 200 OK in 301ms (Views: 278.5ms | ActiveRecord: 6.9ms)
+
+
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (0.1ms)[0m  [1m[35mCOMMIT[0m
