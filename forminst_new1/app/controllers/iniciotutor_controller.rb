@@ -184,6 +184,8 @@ class IniciotutorController < ApplicationController
 			end
 			if params[:editar] == 'no' 
 				session[:editar]= false
+			else
+				session[:editar]= true
 			end
 			@tutoresAnteriores = Instructortutor.where(instructor_id: session[:usuario_id], actual: 0)
 			@nombre = session[:nombre_usuario]
@@ -262,29 +264,21 @@ class IniciotutorController < ApplicationController
 					if tipo==1
 						m=:docencia.to_s+@edit.to_s
 						text= params[m]
-					else
-						if tipo==2
-							m=:investigacion.to_s+@edit.to_s
-							text= params[m]
-						else
-							if tipo==3
-								m=:extension.to_s+@edit.to_s
-								text= params[m]
-							else
-								if tipo==4
-									m=:formacion.to_s+@edit.to_s
-									text= params[m]
-								else
-									if tipo==5
-										m=:otra.to_s+@edit.to_s
-										text= params[m]
-									elsif tipo==7
-										m=:obligatoria.to_s+@edit.to_s
-										text= params[m]
-									end
-								end
-							end
-						end
+					elsif tipo==2
+						m=:investigacion.to_s+@edit.to_s
+						text= params[m]
+					elsif tipo==3
+						m=:extension.to_s+@edit.to_s
+						text= params[m]
+					elsif tipo==4
+						m=:formacion.to_s+@edit.to_s
+						text= params[m]
+					elsif tipo==5
+						m=:otra.to_s+@edit.to_s
+						text= params[m]
+					elsif tipo==7
+						m=:obligatoria.to_s+@edit.to_s
+						text= params[m]
 					end
 					@act.actividad= text
 					@adecuacion.fecha_modificacion = Time.now
@@ -641,7 +635,6 @@ class IniciotutorController < ApplicationController
 		if session[:usuario_id] && session[:tutor]
 			if params[:plan_id]
 				@planformacion = Planformacion.find(params[:plan_id])
-				session[:editar]= true
 				session[:plan_id] = @planformacion.id
 				@instructorName = Persona.where(usuario_id: @planformacion.instructor_id).take.nombres
 				session[:instructorName] = @instructorName
