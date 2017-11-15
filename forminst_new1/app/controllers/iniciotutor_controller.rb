@@ -202,7 +202,8 @@ class IniciotutorController < ApplicationController
 				#fin
 			end
 
-			@instructorName = Persona.where(usuario_id: @planformacion.instructor_id).take.nombres
+			@inst = Persona.where(usuario_id: @planformacion.instructor_id).take
+			@instructorName = @inst.nombres.to_s.split.map(&:capitalize).join(' ') + " " + @inst.apellidos.to_s.split.map(&:capitalize).join(' ')
 			session[:instructorName] = @instructorName
 			@instructorName = session[:instructorName]
 			@modifique=false
@@ -684,7 +685,8 @@ class IniciotutorController < ApplicationController
 			if params[:plan_id]
 				@planformacion = Planformacion.find(params[:plan_id])
 				session[:plan_id] = @planformacion.id
-				@instructorName = Persona.where(usuario_id: @planformacion.instructor_id).take.nombres
+				@inst = Persona.where(usuario_id: @planformacion.instructor_id).take
+				@instructorName = @inst.nombres.to_s.split.map(&:capitalize).join(' ') + " " + @inst.apellidos.to_s.split.map(&:capitalize).join(' ')
 				session[:instructorName] = @instructorName
 				@adecuacion = Adecuacion.where(planformacion_id: session[:plan_id]).take
 				session[:adecuacion_id]= @adecuacion.id

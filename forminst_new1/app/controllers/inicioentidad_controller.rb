@@ -1830,6 +1830,71 @@ end
 	    if (estatus_informe.estatus_id != 6 && estatus_informe.estatus_id != 5)
 	      @bool_enviado = 1
 	    end
+
+	    actividades = AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 0)
+	    actividades1 = []
+	    if !actividades.blank?
+	      actividades.each do |actividadAde|
+	        actividad = Actividad.find(actividadAde.actividad_id)
+	        actividades1.push(actividad)
+	      end
+	    end
+	    @presentacion = ""
+	    @descripcion = ""
+	    @docencia = [] 
+	    @investigacion = []
+	    @formacion = []  
+	    @extension = []
+
+	    if !actividades1.blank?
+	      actividades1.each do |actividadAde|
+	        if actividadAde.tipo_actividad_id == 9
+	          if actividadAde.actividad.blank?
+	            @presentacion = " "
+	          else
+	            @presentacion = actividadAde.actividad 
+	          end
+	        elsif actividadAde.tipo_actividad_id == 8
+	          if actividadAde.actividad.blank?
+	            @descripcion = " "
+	          else
+	            @descripcion = actividadAde.actividad  
+	          end
+	        elsif actividadAde.tipo_actividad_id == 1
+	          if actividadAde.actividad.blank?
+	            @docencia.push(" ")
+	          else
+	            @docencia.push(actividadAde)
+	          end
+	        elsif actividadAde.tipo_actividad_id == 2
+	          if actividadAde.actividad.blank?
+	            @investigacion.push(" ")
+	          else
+	            @investigacion.push(actividadAde)
+	          end
+	        elsif actividadAde.tipo_actividad_id == 4
+	          if actividadAde.actividad.blank?
+	            @formacion.push(" ")
+	          else
+	            @formacion.push(actividadAde)  
+	          end
+	        elsif actividadAde.tipo_actividad_id == 3
+	          if actividadAde.actividad.blank?
+	            @extension.push(" ")
+	          else
+	            @extension.push(actividadAde)
+	          end
+	        end
+	      end
+	    else
+	      @presentacion = " "
+	      @descripcion = " "
+	      @docencia = [" "]  
+	      @investigacion = [" "]
+	      @formacion = [" "] 
+	      @extension = [" "] 
+	    end
+
 	    @j = 0
 	    @i = 0
 	    @actividadesa= InformeActividad.where(informe_id: @informe.id).all
