@@ -10,10 +10,10 @@ class Pdf
 
 		presentacion = ""
 		descripcion = ""
-		docencia = ""	
-		investigacion = ""
-		formacion = ""	
-		extension = ""
+		docencia = []	
+		investigacion = []
+		formacion = []	
+		extension = []
 
 		if !actividades.blank?
 			puts "entroooo"
@@ -32,37 +32,37 @@ class Pdf
 					end
 				elsif actividadAde.tipo_actividad_id == 1
 					if actividadAde.actividad.blank?
-						docencia = " "
+						docencia.push(" ")
 					else
-						docencia = actividadAde.actividad	
+						docencia.push(actividadAde)
 					end
 				elsif actividadAde.tipo_actividad_id == 2
 					if actividadAde.actividad.blank?
-						investigacion = " "
+						investigacion.push(" ")
 					else
-						investigacion = actividadAde.actividad	
+						investigacion.push(actividadAde)
 					end
 				elsif actividadAde.tipo_actividad_id == 4
 					if actividadAde.actividad.blank?
-						formacion = " "
+						formacion.push(" ")
 					else
-						formacion = actividadAde.actividad	
+						formacion.push(actividadAde)	
 					end
 				elsif actividadAde.tipo_actividad_id == 3
 					if actividadAde.actividad.blank?
-						extension = " "
+						extension.push(" ")
 					else
-						extension = actividadAde.actividad	
+						extension.push(actividadAde)
 					end
 				end
 			end
 		else
 			presentacion = " "
 			descripcion = " "
-			docencia = " "	
-			investigacion = " "
-			formacion = " "	
-			extension = " "	
+			docencia = [" "]	
+			investigacion = [" "]
+			formacion = [" "]	
+			extension = [" "]	
 		end
 
 
@@ -255,67 +255,126 @@ class Pdf
 
 			pdf.text("\n")
 			pdf.text("7.- DOCENCIA", :style => :bold, :size  => 10)
-			
-			data351 = [[{:text=> docencia   ,  :align=>:left}]] # datos que se desean en la tabla
 
-				
-			pdf.table data351,  # lineas para generar la tabla en el docuemnto
-			:border_style => :grid, #:underline_header
-			:font_size  => 10, 
-			:horizontal_padding => 6,
-			:vertical_padding   => 3,
-			:border_width => 0.7, 
-			:column_widths => { 0 => 520}, 
-			:position => :left,
-			:align => { 0 => :left}
+			if docencia != []
+				docencia.each do |actv|
+					data5 = [[{:text=>  actv.actividad ,  :align=>:left}]] # datos que se desean en la tabla
+					
+					pdf.table data5, # lineas para generar la tabla en el docuemnto
+					:border_style => :grid, #:underline_header
+					:font_size  => 10, 
+					:horizontal_padding => 6,
+					:vertical_padding   => 3,
+					:border_width => 0.7, 
+					:column_widths => { 0 => 520}, 
+					:position => :left,
+					:align => { 0 => :left}
+				end	
+			else
+				data5 = [[{:text=>  "No hubo." ,  :align=>:left}]] # datos que se desean en la tabla
+				pdf.table data5, # lineas para generar la tabla en el docuemnto
+				:border_style => :grid, #:underline_header
+				:font_size  => 10, 
+				:horizontal_padding => 6,
+				:vertical_padding   => 3,
+				:border_width => 0.7, 
+				:column_widths => { 0 => 520}, 
+				:position => :left,
+				:align => { 0 => :left}
+			end
 
 
 			pdf.text("\n")
 			pdf.text("8.- INVESTIGACIÓN", :style => :bold, :size  => 10)
-			
-			data352 = [[{:text=> investigacion  ,  :align=>:left}]] # datos que se desean en la tabla
-				
-			pdf.table data352,  # lineas para generar la tabla en el docuemnto
-			:border_style => :grid, #:underline_header
-			:font_size  => 10, 
-			:horizontal_padding => 6,
-			:vertical_padding   => 3,
-			:border_width => 0.7, 
-			:column_widths => { 0 => 520}, 
-			:position => :left,
-			:align => { 0 => :left}
+
+			if investigacion != []
+				investigacion.each do |actv|
+					data5 = [[{:text=>  actv.actividad ,  :align=>:left}]] # datos que se desean en la tabla
+					
+					pdf.table data5, # lineas para generar la tabla en el docuemnto
+					:border_style => :grid, #:underline_header
+					:font_size  => 10, 
+					:horizontal_padding => 6,
+					:vertical_padding   => 3,
+					:border_width => 0.7, 
+					:column_widths => { 0 => 520}, 
+					:position => :left,
+					:align => { 0 => :left}
+				end	
+			else
+				data5 = [[{:text=>  "No hubo." ,  :align=>:left}]] # datos que se desean en la tabla
+				pdf.table data5, # lineas para generar la tabla en el docuemnto
+				:border_style => :grid, #:underline_header
+				:font_size  => 10, 
+				:horizontal_padding => 6,
+				:vertical_padding   => 3,
+				:border_width => 0.7, 
+				:column_widths => { 0 => 520}, 
+				:position => :left,
+				:align => { 0 => :left}
+			end
 
 
 			pdf.text("\n")
 			pdf.text("9.- FORMACIÓN Y CAPACITACIÓN PROFESIONAL", :style => :bold, :size  => 10)
-			
-			data353 = [[{:text=>  formacion  ,  :align=>:left}]] # datos que se desean en la tabla
-				
-			pdf.table data353,  # lineas para generar la tabla en el docuemnto
-			:border_style => :grid, #:underline_header
-			:font_size  => 10, 
-			:horizontal_padding => 6,
-			:vertical_padding   => 3,
-			:border_width => 0.7, 
-			:column_widths => { 0 => 520}, 
-			:position => :left,
-			:align => { 0 => :left}
+
+			if formacion != []
+				formacion.each do |actv|
+					data5 = [[{:text=>  actv.actividad ,  :align=>:left}]] # datos que se desean en la tabla
+					
+					pdf.table data5, # lineas para generar la tabla en el docuemnto
+					:border_style => :grid, #:underline_header
+					:font_size  => 10, 
+					:horizontal_padding => 6,
+					:vertical_padding   => 3,
+					:border_width => 0.7, 
+					:column_widths => { 0 => 520}, 
+					:position => :left,
+					:align => { 0 => :left}
+				end	
+			else
+				data5 = [[{:text=>  "No hubo." ,  :align=>:left}]] # datos que se desean en la tabla
+				pdf.table data5, # lineas para generar la tabla en el docuemnto
+				:border_style => :grid, #:underline_header
+				:font_size  => 10, 
+				:horizontal_padding => 6,
+				:vertical_padding   => 3,
+				:border_width => 0.7, 
+				:column_widths => { 0 => 520}, 
+				:position => :left,
+				:align => { 0 => :left}
+			end
 
 
 			pdf.text("\n")
 			pdf.text("10.- EXTENSION", :style => :bold, :size  => 10)
-			
-			data354 = [[{:text=>  extension  ,  :align=>:left}]] # datos que se desean en la tabla
-				
-			pdf.table data354,  # lineas para generar la tabla en el docuemnto
-			:border_style => :grid, #:underline_header
-			:font_size  => 10, 
-			:horizontal_padding => 6,
-			:vertical_padding   => 3,
-			:border_width => 0.7, 
-			:column_widths => { 0 => 520}, 
-			:position => :left,
-			:align => { 0 => :left}
+
+			if extension != []
+				extension.each do |actv|
+					data5 = [[{:text=>  actv.actividad ,  :align=>:left}]] # datos que se desean en la tabla
+					
+					pdf.table data5, # lineas para generar la tabla en el docuemnto
+					:border_style => :grid, #:underline_header
+					:font_size  => 10, 
+					:horizontal_padding => 6,
+					:vertical_padding   => 3,
+					:border_width => 0.7, 
+					:column_widths => { 0 => 520}, 
+					:position => :left,
+					:align => { 0 => :left}
+				end	
+			else
+				data5 = [[{:text=>  "No hubo." ,  :align=>:left}]] # datos que se desean en la tabla
+				pdf.table data5, # lineas para generar la tabla en el docuemnto
+				:border_style => :grid, #:underline_header
+				:font_size  => 10, 
+				:horizontal_padding => 6,
+				:vertical_padding   => 3,
+				:border_width => 0.7, 
+				:column_widths => { 0 => 520}, 
+				:position => :left,
+				:align => { 0 => :left}
+			end
 
 			salto='\n'
 			pdf.text("\n")
