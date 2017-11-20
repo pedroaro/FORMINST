@@ -3254,31 +3254,45 @@ end
 		@instructorName = session[:instructorName]
 
 		actividades = AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 0)
-		if !actividades.blank?
-			actividades.each do |actividadAde|
-				actividad = Actividad.find(actividadAde.actividad_id)
-				if actividad.tipo_actividad_id == 9
-					@presentacion = actividad.actividad
-				elsif actividad.tipo_actividad_id == 8
-					@descripcion = actividad.actividad
-				elsif actividad.tipo_actividad_id == 1
-					@docencia = actividad.actividad	
-				elsif actividad.tipo_actividad_id == 2
-					@investigacion = actividad.actividad
-				elsif actividad.tipo_actividad_id == 4
-					@formacion = actividad.actividad	
-				elsif actividad.tipo_actividad_id == 3
-					@extension = actividad.actividad	
+			if !actividades.blank?
+				actividades.each do |actividadAde|
+					actividad = Actividad.find(actividadAde.actividad_id)
+					if actividad.tipo_actividad_id == 9
+						@presentacion = actividad.actividad
+					elsif actividad.tipo_actividad_id == 8
+						@descripcion = actividad.actividad
+					end
+				end
+			else
+				@presentacion = " "
+				@descripcion = " "	
+			end
+
+			@actividades0doc= []
+			@actividades0inv= []
+			@actividades0ext= []
+			@actividades0for= []
+			@actividades0otr= []
+			@actividades0= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 0).all
+			@actividades0.each do |actade| 
+				@act= Actividad.find(actade.actividad_id)
+				tipo= @act.tipo_actividad_id
+				if tipo==1
+					@actividades0doc.push(@act)
+				else
+					if tipo==2
+						@actividades0inv.push(@act)
+					else
+						if tipo==3
+							@actividades0ext.push(@act)
+						else
+							if tipo==4
+								@actividades0for.push(@act)
+							end
+						end
+					end
 				end
 			end
-		else
-			@presentacion = " "
-			@descripcion = " "
-			@docencia = " "	
-			@investigacion = " "
-			@formacion = " "	
-			@extension = " "	
-		end
 
 		@actividades1doc= []
 		@actividades1inv= []

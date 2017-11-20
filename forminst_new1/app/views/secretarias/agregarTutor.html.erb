@@ -7,7 +7,8 @@
             <ul class="dropdown-menu nav" role="menu">
               <li></li>
               <li><a href="#" class = 'active'>Agregar Tutor</a></li>
-              <li><%= link_to 'Modificar Tutor', :controller => 'secretarias', :action => 'modificarTutor' %></li>
+              <li><%= link_to 'Modificar Tutor', :controller => 'secretarias', :action => 'modificarTutor', :ver => 'no' %></li>
+              <li><%= link_to 'Información Tutor', :controller => 'secretarias', :action => 'modificarTutor', :ver => 'si' %></li>
             </ul>
         </li>
         <li class="dropdown">
@@ -15,7 +16,8 @@
             <ul class="dropdown-menu nav" role="menu">
               <li></li>
               <li><%= link_to 'Agregar Instructor', :controller => 'secretarias', :action => 'agregarInstructor'%></li>
-              <li><%= link_to 'Modificar Instructor', :controller => 'secretarias', :action => 'modificarInstructor' %></li>
+              <li><%= link_to 'Modificar Instructor', :controller => 'secretarias', :action => 'modificarInstructor', :ver => 'no' %></li>
+              <li><%= link_to 'Información Instructor', :controller => 'secretarias', :action => 'modificarInstructor', :ver => 'si' %></li>
             </ul>
         </li>
         <li><a href="../secretarias/logout">Cerrar Sesión</a></li>
