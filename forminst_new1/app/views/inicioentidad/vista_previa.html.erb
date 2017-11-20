@@ -349,9 +349,11 @@
       <b><p>7.- DOCENCIA</p></b>
       <table class="table table-black">
         <tbody>
-          <tr>
-            <td class="text-left"><%=  @docencia %></td>
-          </tr>
+          <% @actividades0doc.each_with_index do |actdoc, i| %>
+            <tr>
+              <td class="text-left"><%= actdoc.actividad %></td>
+            </tr>
+          <% end %>
         </tbody>
       </table>
     </div>
@@ -364,9 +366,11 @@
       <b><p>8.- INVESTIGACIÓN</p></b>
       <table class="table table-black">
         <tbody>
-          <tr>
-            <td class="text-left"><%=  @investigacion %></td>
-          </tr>
+          <% @actividades0inv.each_with_index do |actdoc, i| %>
+              <tr>
+                <td class="text-left"><%= actdoc.actividad %></td>
+              </tr>
+          <% end %>
         </tbody>
       </table>
     </div>
@@ -379,9 +383,11 @@
       <b><p>9.- FORMACIÓN Y CAPACITACIÓN PROFESIONAL</p></b>
       <table class="table table-black">
         <tbody>
-          <tr>
-            <td class="text-left"><%=  @formacion %></td>
-          </tr>
+          <% @actividades0for.each_with_index do |actdoc, i| %>
+              <tr>
+                <td class="text-left"><%= actdoc.actividad %></td>
+              </tr>
+          <% end %>
         </tbody>
       </table>
     </div>
@@ -394,9 +400,11 @@
       <b><p>10.- EXTENSION</p></b>
       <table class="table table-black">
         <tbody>
-          <tr>
-            <td class="text-left"><%=  @extension %></td>
-          </tr>
+          <% @actividades1ext.each_with_index do |actdoc, i| %>
+              <tr>
+                <td class="text-left"><%= actdoc.actividad %></td>
+              </tr>
+          <% end %>
         </tbody>
       </table>
     </div>

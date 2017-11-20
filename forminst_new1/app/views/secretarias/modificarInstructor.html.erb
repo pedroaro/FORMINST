@@ -7,7 +7,8 @@
             <ul class="dropdown-menu nav" role="menu">
               <li></li>
               <li><%= link_to 'Agregar Tutor', :controller => 'secretarias', :action => 'agregarTutor'%></li>
-              <li><%= link_to 'Modificar Tutor', :controller => 'secretarias', :action => 'modificarTutor' %></li>
+              <li><%= link_to 'Modificar Tutor', :controller => 'secretarias', :action => 'modificarTutor', :ver => 'no' %></li>
+              <li><%= link_to 'Información Tutor', :controller => 'secretarias', :action => 'modificarTutor', :ver => 'si' %></li>
             </ul>
         </li>
         <li class="dropdown">
@@ -15,7 +16,13 @@
             <ul class="dropdown-menu nav" role="menu">
               <li></li>
               <li><%= link_to 'Agregar Instructor', :controller => 'secretarias', :action => 'agregarInstructor'%></li>
-             <li><a href="#" class = 'active'>Modificar Instructor</a></li>
+              <% if @ver == "si" %>
+                <li><%= link_to 'Modificar Instructor', :controller => 'secretarias', :action => 'modificarInstructor', :ver => 'no' %></li>
+                <li><a href="#" class = 'active'>Información Instructor</a></li>
+              <% else %>
+                <li><a href="#" class = 'active'>Modificar Instructor</a></li>
+                <li><%= link_to 'Información Instructor', :controller => 'secretarias', :action => 'modificarInstructor', :ver => 'si' %></li>
+              <% end %>
             </ul>
         </li>
         <li><a href="../secretarias/logout">Cerrar Sesión</a></li>
@@ -71,10 +78,15 @@
       <table class="table table-bordered table-striped">
         <tbody>
           <tr>
-            <td class="text-center"><strong>Modificar Instructor</strong></td>
+            <% if @ver=="si" %>
+              <td class="text-center"><strong>Información Instructor</strong></td>
+            <% else %>
+              <td class="text-center"><strong>Modificar Instructor</strong></td>
+            <% end %>
           </tr>
           <tr> 
             <td class="text-center">
+              <input type="hidden" name="ver" id="ver" value="<%= @ver %>">
               <%= select_tag(:cptutores, options_for_select(@cptutores), {:class => "form-control", :name=> "JRTutores", :style => "width:100%;" }) %>
             </td>
           </tr>
