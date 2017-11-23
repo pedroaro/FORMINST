@@ -284,6 +284,13 @@
               <td class="text-center"  style='width:15%;'><strong>Observaciones</strong></td>
             <%end%>   
             </tr>
+            <% if !session[:editar] && @actividadesadoc.blank?%>
+              <tr>
+                <td colspan="3">
+                  <textarea class="form-control" style="text-align: center" rows="2"  name='nohay' id ='nohay1' disabled>No hay</textarea>
+                </td>
+              </tr>
+            <%end%>
               <% @actividadesadoc.each_with_index do |actdoc, i| %>
                 <tr>
                   <td style='width:80%;'>
@@ -326,6 +333,13 @@
                 <td class="text-center"  style='width:15%;'><strong>Observaciones</strong></td>
               <%end%> 
             </tr>
+            <% if !session[:editar] && @actividadesainv.blank?%>
+              <tr>
+                <td colspan="3">
+                  <textarea class="form-control" style="text-align: center" rows="2"  name='nohay' id ='nohay2' disabled>No hay</textarea>
+                </td>
+              </tr>
+            <%end%>
             <% @actividadesainv.each_with_index do |actdoc,i| %>
               <tr>
                 <td>
@@ -368,6 +382,13 @@
                 <td class="text-center"  style='width:15%;'><strong>Observaciones</strong></td>
               <%end%>               
             </tr>
+            <% if !session[:editar] && @actividadesafor.blank?%>
+              <tr>
+                <td colspan="3">
+                  <textarea class="form-control" style="text-align: center" rows="2"  name='nohay' id ='nohay3' disabled>No hay</textarea>
+                </td>
+              </tr>
+            <%end%>
             <% @actividadesafor.each_with_index do |actdoc,i| %>
               <tr>
                 <td>
@@ -413,6 +434,13 @@
               <%end%> 
               
             </tr>
+            <% if !session[:editar] && @actividadesaext.blank?%>
+              <tr>
+                <td colspan="3">
+                  <textarea class="form-control" style="text-align: center" rows="2"  name='nohay' id ='nohay4' disabled>No hay</textarea>
+                </td>
+              </tr>
+            <%end%>
             <% @actividadesaext.each_with_index do |actdoc,i| %>
               <tr>
                 <td>
@@ -456,6 +484,13 @@
               <%end%> 
             
             </tr>
+            <% if !session[:editar] && @actividadesaotr.blank?%>
+              <tr>
+                <td colspan="3">
+                  <textarea class="form-control" style="text-align: center" rows="2"  name='nohay' id ='nohay5' disabled>No hay</textarea>
+                </td>
+              </tr>
+            <%end%>
             <% @actividadesaotr.each_with_index do |actdoc,i| %>
               <tr>
                 <td>
@@ -492,25 +527,26 @@
           </tbody>
         </table>
 
-      <div class = 'row'>              
-        <%if session[:editar]%> 
-          <%if @bool_enviado == 0 %>
-            <center><button type="submit" class="btn btn-forminst btn-lg">Guardar</button></center>
-          <%else%>
-            <center> <button type="button" data-toggle="modal" data-target="#myModal3" class="btn btn-forminst btn-lg" >Guardar</button></center>
-          <%end%> 
-        <%end%>
-      </div>
+      <div class = 'row'>
+          <div class = 'col-xs-3 col-md-3 col-lg-3'>
+            <button type="button" class="btn btn-forminst" onclick = " location.href = 'javascript:history.back(-1);'">&lt;&lt; Volver</button>
+          </div>
+          <div class = 'col-xs-6 col-md-6 col-lg-6'>
+            <%if session[:editar]%> 
+              <div class = 'row'>
+                <%if @bool_enviado == 0 %>
+                  <center><button type="submit" class="btn btn-forminst btn-lg" style="margin-top: 3px;">Guardar</button></center>
+                <%else%>
+                  <center> <button type="button" data-toggle="modal" data-target="#myModal3" class="btn btn-forminst btn-lg"  style="margin-top: 3px;">Guardar</button></center>
+                <%end%> 
+              </div>
+            <%end%>
+          </div>
+          <div class = 'col-xs-3 col-md-3 col-lg-3 text-right'>
+             <%= link_to "Siguiente >>", {controller: "iniciotutor", action: "detalles_adecuacion6"}, class: "btn btn-forminst" %>
+          </div>
+        </div>
     <% end %>
-  </div>
-</div>
-
-<div class = 'row'>
-  <div class = 'col-xs-3 col-md-3 col-lg-3'>
-      <button type="button" class="btn btn-forminst" onclick = " location.href = 'javascript:history.back(-1);'">&lt;&lt; Volver</button>
-  </div>
-  <div class = 'col-xs-3 col-md-3 col-lg-3 col-xs-offset-4 col-md-offset-6 col-lg-offset-6  text-right'>
-     <%= link_to "Siguiente >>", {controller: "iniciotutor", action: "detalles_adecuacion6"}, class: "btn btn-forminst" %>
   </div>
 </div>
 

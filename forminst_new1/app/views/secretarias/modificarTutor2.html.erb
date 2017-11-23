@@ -7,7 +7,13 @@
             <ul class="dropdown-menu nav" role="menu">
               <li></li>
               <li><%= link_to 'Agregar Tutor', :controller => 'secretarias', :action => 'agregarTutor'%></li>
-              <li><a href="#" class = 'active'>Modificar Tutor</a></li>
+              <% if @ver=="si" %>
+                <li><%= link_to 'Modificar Tutor', :controller => 'secretarias', :action => 'modificarTutor', :ver => 'no' %></li>
+                <li><a href="#" class = 'active'>Información Tutor</a></li>
+              <% else %>
+                <li><a href="#" class = 'active'>Modificar Tutor</a></li>
+                <li><%= link_to 'Información Tutor', :controller => 'secretarias', :action => 'modificarTutor', :ver => 'si' %></li>
+              <% end %>
             </ul>
         </li>
         <li class="dropdown">
@@ -15,7 +21,8 @@
             <ul class="dropdown-menu nav" role="menu">
               <li></li>
               <li><%= link_to 'Agregar Instructor', :controller => 'secretarias', :action => 'agregarInstructor'%></li>
-              <li><%= link_to 'Modificar Instructor', :controller => 'secretarias', :action => 'modificarInstructor' %></li>
+              <li><%= link_to 'Modificar Instructor', :controller => 'secretarias', :action => 'modificarInstructor', :ver => 'no'  %></li>
+              <li><%= link_to 'Información Instructor', :controller => 'secretarias', :action => 'modificarInstructor', :ver => 'si' %></li>
             </ul>
         </li>
         <li><a href="../secretarias/logout">Cerrar Sesión</a></li>
@@ -65,7 +72,11 @@
 </div>
 <div class = 'row'>
   <div class="col-xs-11 col-xs-offset-1 col-md-12 col-md-offset-0 text-center">
-    <h5><strong>MODIFICAR TUTOR</strong></h5>
+    <%if @ver=="si"%>
+      <h5><strong>INFORMACIÓN TUTOR</strong></h5>
+    <%else%>
+      <h5><strong>MODIFICAR TUTOR</strong></h5>
+    <%end%>
   </div>
 </div>
 
@@ -101,10 +112,10 @@
 
             <tr>
               <td class="text-center">
-                <input type="text" name="Nombre" class="form-control"  value="<%=$cpnombre%>" required  oninvalid="setCustomValidity('Ingrese un nombre válido')" onchange="try{setCustomValidity('')}catch(e){}">
+                <input type="text" name="Nombre" class="form-control"  value="<%=$cpnombre%>" required  oninvalid="setCustomValidity('Ingrese un nombre válido')" onchange="try{setCustomValidity('')}catch(e){}" <% if @ver=="si" %> disabled <% end %>>
               </td>
               <td class="text-center">
-                <input type="text" name="Apellido" class="form-control"  value="<%=$cpapellido%>" required  oninvalid="setCustomValidity('Ingrese un apellido válido')" onchange="try{setCustomValidity('')}catch(e){}">
+                <input type="text" name="Apellido" class="form-control"  value="<%=$cpapellido%>" required  oninvalid="setCustomValidity('Ingrese un apellido válido')" onchange="try{setCustomValidity('')}catch(e){}" <% if @ver=="si" %> disabled <% end %>>
               </td>
             </tr>
 
@@ -116,11 +127,11 @@
 
             <tr>
               <td class="text-center">
-                <input type="number" name="CI" class="form-control" min="0" step="0"  value="<%=$cpci%>" required oninvalid="setCustomValidity('Ingrese una cédula válida')" onchange="try{setCustomValidity('')}catch(e){}">
+                <input type="number" name="CI" class="form-control" min="0" step="0"  value="<%=$cpci%>" required oninvalid="setCustomValidity('Ingrese una cédula válida')" onchange="try{setCustomValidity('')}catch(e){}" <% if @ver=="si" %> disabled <% end %>>
               </td>
               <td class="text-center">
                 <div class="input-group">
-                <input type="text" name="correo" class="form-control" value="<%=$cpcorreo%>" required oninvalid="setCustomValidity('Ingrese un correo electrónico válido')" onchange="try{setCustomValidity('')}catch(e){}"> 
+                <input type="text" name="correo" class="form-control" value="<%=$cpcorreo%>" required oninvalid="setCustomValidity('Ingrese un correo electrónico válido')" onchange="try{setCustomValidity('')}catch(e){}" <% if @ver=="si" %> disabled <% end %>> 
                 <div class="input-group-addon">@ciens.ucv.ve</div>
                 </div>
               </td>
@@ -133,10 +144,10 @@
 
             <tr>
               <td class="text-center">
-                <input type="number" name="Tlf" class="form-control" min="1000000000" max="9999999999" step="0" value="<%=$cptlf%>" required oninvalid="setCustomValidity('Ingrese un número de teléfono válido')" onchange="try{setCustomValidity('')}catch(e){}">
+                <input type="number" name="Tlf" class="form-control" min="1000000000" max="9999999999" step="0" value="<%=$cptlf%>" required oninvalid="setCustomValidity('Ingrese un número de teléfono válido')" onchange="try{setCustomValidity('')}catch(e){}" <% if @ver=="si" %> disabled <% end %>>
               </td>
               <td class="text-center">
-                <input type="number" name="OTlf" class="form-control" min="1000000000" max="9999999999" step="0" value="<%=$cpotlf%>" required oninvalid="setCustomValidity('Ingrese un número de teléfono válido')" onchange="try{setCustomValidity('')}catch(e){}">
+                <input type="number" name="OTlf" class="form-control" min="1000000000" max="9999999999" step="0" value="<%=$cpotlf%>" required oninvalid="setCustomValidity('Ingrese un número de teléfono válido')" onchange="try{setCustomValidity('')}catch(e){}" <% if @ver=="si" %> disabled <% end %>>
               </td>
             </tr>
 
@@ -149,12 +160,12 @@
               <td class="text-center">
                 <div id="sandbox-container">
                   <div class="input-group date">
-                    <input type="text" class="form-control" name="FechaNac" value="<%=$cpfechanac%>" required oninvalid="setCustomValidity('Ingrese una fecha de nacimiento válida')" onchange="try{setCustomValidity('')}catch(e){}"><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                    <input type="text" class="form-control" name="FechaNac" value="<%=$cpfechanac%>" required oninvalid="setCustomValidity('Ingrese una fecha de nacimiento válida')" onchange="try{setCustomValidity('')}catch(e){}" <% if @ver=="si" %> disabled <% end %>><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
                   </div>
                 </div>
               </td>
               <td class="text-center">
-                <input type="text" name="Dir" class="form-control" value="<%=$cpdir%>" required oninvalid="setCustomValidity('Ingrese una dirección válida')" onchange="try{setCustomValidity('')}catch(e){}">
+                <input type="text" name="Dir" class="form-control" value="<%=$cpdir%>" required oninvalid="setCustomValidity('Ingrese una dirección válida')" onchange="try{setCustomValidity('')}catch(e){}" <% if @ver=="si" %> disabled <% end %>>
               </td>
             </tr>
 
@@ -165,10 +176,10 @@
 
             <tr>
               <td class="text-center">
-                <input type="text" name="GradoI" class="form-control" value="<%=$cpgradoi%>" required oninvalid="setCustomValidity('Ingrese un grado de instrucción válido')" onchange="try{setCustomValidity('')}catch(e){}">
+                <input type="text" name="GradoI" class="form-control" value="<%=$cpgradoi%>" required oninvalid="setCustomValidity('Ingrese un grado de instrucción válido')" onchange="try{setCustomValidity('')}catch(e){}" <% if @ver=="si" %> disabled <% end %>>
               </td>
               <td class="text-center">
-                <input type="text" name="Area" class="form-control" value="<%=$cparea%>" required oninvalid="setCustomValidity('Ingrese una área válida')" onchange="try{setCustomValidity('')}catch(e){}">
+                <input type="text" name="Area" class="form-control" value="<%=$cparea%>" required oninvalid="setCustomValidity('Ingrese una área válida')" onchange="try{setCustomValidity('')}catch(e){}" <% if @ver=="si" %> disabled <% end %>>
               </td>
             </tr>
             <tr>
@@ -176,7 +187,7 @@
             </tr>
             <tr> 
               <td class="text-center">
-                <input type="text" name="Subarea" class="form-control" value="<%=$cpsubarea%>" required oninvalid="setCustomValidity('Ingrese una subárea válida')" onchange="try{setCustomValidity('')}catch(e){}">
+                <input type="text" name="Subarea" class="form-control" value="<%=$cpsubarea%>" required oninvalid="setCustomValidity('Ingrese una subárea válida')" onchange="try{setCustomValidity('')}catch(e){}" <% if @ver=="si" %> disabled <% end %>>
               </td>
             </tr>
           </tbody>
@@ -185,7 +196,9 @@
     </div>
   </div>
 
-<center><input name="commit" type="submit" class="btn btn-info btn-lg" value="Guardar" /></center>
+  <% if @ver!="si" %> 
+    <center><input name="commit" type="submit" class="btn btn-info btn-lg" value="Guardar" /></center>
+  <% end %>
 </form>
 
 <br><br> 

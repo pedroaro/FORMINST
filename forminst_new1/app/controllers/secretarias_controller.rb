@@ -90,7 +90,7 @@ class SecretariasController < ApplicationController
 					cpusuario = Usuario.new
 					cpusuario.user = params[:correo].to_s
 					cpusuario.password = Digest::SHA1.hexdigest(params[:CI])
-					cpusuario.ldap = 0
+					cpusuario.ldap = 1
 					cpusuario.activo = 1
 					cpusuario.tipo = "Docente"
 					cpusuario.email = params[:correo].to_s
@@ -304,7 +304,7 @@ class SecretariasController < ApplicationController
 						cpusuario = Usuario.new
 						cpusuario.user = params[:correo]
 						cpusuario.password = Digest::SHA1.hexdigest(params[:CI])
-						cpusuario.ldap = 0
+						cpusuario.ldap = 1
 						cpusuario.activo = 1
 						cpusuario.tipo = "Docente"
 						cpusuario.email = params[:correo]
@@ -362,6 +362,7 @@ class SecretariasController < ApplicationController
 							cpinstructortutor.tutor_id = params[:JRTutores]
 							cpinstructortutor.instructor_id = cpplanformacion.instructor_id
 							cpinstructortutor.actual = 1
+							cpinstructortutor.fecha_inicio = params[:FechaConcurso]
 						else
 							cpinstructortutor.actual = 1
 						end
@@ -484,7 +485,7 @@ class SecretariasController < ApplicationController
 				$cpuad = nil
 				$cpuai = nil
 			end
-
+			@ver = params[:ver]
 			$modulo = "modificarInstructor"
 
 			i = 1
@@ -555,6 +556,7 @@ class SecretariasController < ApplicationController
 				cpusuario = Usuario.find_by id: params[:JRTutores]
 				cpuentidad = Usuarioentidad.find_by usuario_id: params[:JRTutores]
 				cpplanformacion = Planformacion.find_by instructor_id: params[:JRTutores]
+				@ver = params[:ver]
 
 				i = 1
 				j = 1
@@ -586,6 +588,10 @@ class SecretariasController < ApplicationController
 						cpcontador = cpcontador + 1
 					end
 				end
+
+				#informacion
+				@tutoreDeInstructor = Persona.where(usuario_id: cpplanformacion.tutor_id).take
+				@tutoreDeInstructorUsu = Usuario.where(id: cpplanformacion.tutor_id).take
 
 				
 
@@ -706,6 +712,7 @@ class SecretariasController < ApplicationController
 						cpinstructortutor = Instructortutor.where(instructor_id: cpplanformacion.instructor_id, tutor_id: cpplanformacion.tutor_id).take
 
 						cpinstructortutor.actual = 0
+						cpinstructortutor.fecha_fin = Time.now.strftime("%Y") + "-" + Time.now.strftime("%m") + "-" + Time.now.strftime("%d")
 						cpinstructortutor.save
 
 						cpinstructortutor = Instructortutor.where(instructor_id: cpplanformacion.instructor_id, tutor_id: params[:JRTutores]).take
@@ -714,6 +721,7 @@ class SecretariasController < ApplicationController
 							cpinstructortutor.tutor_id = params[:JRTutores]
 							cpinstructortutor.instructor_id = cpplanformacion.instructor_id
 							cpinstructortutor.actual = 1
+							cpinstructortutor.fecha_inicio = Time.now.strftime("%Y") + "-" + Time.now.strftime("%m") + "-" + Time.now.strftime("%d")
 							cpplanformacion.tutor_id = params[:JRTutores]
 						else
 							cpinstructortutor.actual = 1
@@ -779,7 +787,7 @@ class SecretariasController < ApplicationController
 				$cpuad = nil
 				$cpuai = nil
 			end
-
+			@ver = params[:ver]
 			$modulo = "modificarTutor"
 				
 			i = 1
@@ -846,6 +854,7 @@ class SecretariasController < ApplicationController
 				cppersona = Persona.find_by usuario_id: params[:JRTutores].to_s
 				cpusuario = Usuario.find_by id: params[:JRTutores].to_s
 				cpuentidad = Usuarioentidad.find_by usuario_id: params[:JRTutores].to_s
+				@ver = params[:ver]
 
 				$cpnombre = cppersona.nombres
 				$cpapellido = cppersona.apellidos

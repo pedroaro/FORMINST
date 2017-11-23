@@ -310,6 +310,70 @@ def vista_previa1
     if (estatus_informe.estatus_id != 6 && estatus_informe.estatus_id != 5)
       @bool_enviado = 1
     end
+
+    actividades = AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 0)
+    actividades1 = []
+    if !actividades.blank?
+      actividades.each do |actividadAde|
+        actividad = Actividad.find(actividadAde.actividad_id)
+        actividades1.push(actividad)
+      end
+    end
+    @presentacion = ""
+    @descripcion = ""
+    @docencia = [] 
+    @investigacion = []
+    @formacion = []  
+    @extension = []
+
+    if !actividades1.blank?
+      actividades1.each do |actividadAde|
+        if actividadAde.tipo_actividad_id == 9
+          if actividadAde.actividad.blank?
+            @presentacion = " "
+          else
+            @presentacion = actividadAde.actividad 
+          end
+        elsif actividadAde.tipo_actividad_id == 8
+          if actividadAde.actividad.blank?
+            @descripcion = " "
+          else
+            @descripcion = actividadAde.actividad  
+          end
+        elsif actividadAde.tipo_actividad_id == 1
+          if actividadAde.actividad.blank?
+            @docencia.push(" ")
+          else
+            @docencia.push(actividadAde)
+          end
+        elsif actividadAde.tipo_actividad_id == 2
+          if actividadAde.actividad.blank?
+            @investigacion.push(" ")
+          else
+            @investigacion.push(actividadAde)
+          end
+        elsif actividadAde.tipo_actividad_id == 4
+          if actividadAde.actividad.blank?
+            @formacion.push(" ")
+          else
+            @formacion.push(actividadAde)  
+          end
+        elsif actividadAde.tipo_actividad_id == 3
+          if actividadAde.actividad.blank?
+            @extension.push(" ")
+          else
+            @extension.push(actividadAde)
+          end
+        end
+      end
+    else
+      @presentacion = " "
+      @descripcion = " "
+      @docencia = [" "]  
+      @investigacion = [" "]
+      @formacion = [" "] 
+      @extension = [" "] 
+    end
     @j = 0
     @i = 0
     @actividadesa= InformeActividad.where(informe_id: @informe.id).all
@@ -787,61 +851,104 @@ end
   def detalles_adecuacion2
 
     if session[:usuario_id] && session[:instructor]
-      if params[:plan_id]
-        @planformacion = Planformacion.find(params[:plan_id])
-        session[:plan_id] = @planformacion.id
-        @adecuacion = Adecuacion.where(planformacion_id: session[:plan_id]).take
-        session[:adecuacion_id]= @adecuacion.id
-      else 
-        @planformacion = Planformacion.find(session[:plan_id])
-      end
-      @observacionesExtras= []
+			if params[:plan_id]
+			    @planformacion = Planformacion.find(params[:plan_id])
+			    session[:plan_id] = @planformacion.id
+			    @adecuacion = Adecuacion.where(planformacion_id: session[:plan_id]).take
+			    session[:adecuacion_id]= @adecuacion.id
+			else 
+			    @planformacion = Planformacion.find(session[:plan_id])
+			end
+			if !@planformacion.blank?
+			#Ver si el informe fue rachazado
+			cpInstructor = Usuario.find(@planformacion.instructor_id)
+			if (cpInstructor.activo == false)
+				@cpBloquear = true
+			else
+				@cpBloquear = false
+			end
+			#fin
+		end
 
-      @adecuacion = Adecuacion.where(planformacion_id: session[:plan_id]).take
-      actividades = AdecuacionActividad.where(adecuacion_id: session[:adecuacion_id], semestre: 0)
-      if !actividades.blank?
-        actividades.each do |actividadAde|
-          actividad = Actividad.find(actividadAde.actividad_id)
-          if actividad.tipo_actividad_id == 9
-            @presentacion = actividad.actividad
-            @presentacionId = actividad.id
-          elsif actividad.tipo_actividad_id == 8
-            @descripcion = actividad.actividad
-            @descripcionId = actividad.id
-          elsif actividad.tipo_actividad_id == 1
-            @docencia = actividad.actividad 
-            @docenciaId = actividad.id
-          elsif actividad.tipo_actividad_id == 2
-            @investigacion = actividad.actividad
-            @investigacionId = actividad.id
-          elsif actividad.tipo_actividad_id == 4
-            @formacion = actividad.actividad  
-            @formacionId = actividad.id
-          elsif actividad.tipo_actividad_id == 3
-            @extension = actividad.actividad  
-            @extensionId = actividad.id
-          end
-        end
-      end
-      @actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 0).all
-      @actividadesa.each do |actade| 
-        @cpObs= ObservacionActividadAdecuacion.where(adecuacionactividad_id: actade.id).all
-        if @cpObs.blank?
-          @observacionesExtras[actade.id]="no"
-        else
-          cpBool = 0
-          @cpObs.each do |probar|
-            if !probar.observaciones.blank?
-              cpBool = 1
-            end
-          end
-          if cpBool == 0
-            @observacionesExtras[actade.id]="no"
-          else
-            @observacionesExtras[actade.id]="si"
-          end
-        end
-      end
+		@adecuacion = Adecuacion.where(planformacion_id: session[:plan_id]).take
+		if params[:editar] == 'no' 
+			session[:editar]= false
+		end
+		@est= EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
+		if !session[:editar] && (@est.estatus_id == 6 || @est.estatus_id == 5)
+			flash.now[:info]= "Para editar la Adecuación debe seleccionar Modificar Adecuación"
+		end
+		@adecuaciones = Adecuacion.where(planformacion_id: session[:plan_id])
+		@iddoc= 'id_docencia'
+		@docencia='docencia'
+		@desc='descripcion'
+		@pres='presentacion'
+		@investigacion= 'investigacion'
+		@formacion= 'formacion'
+		@extension= 'extension'
+		@otra= 'otra' 
+		@nombre = session[:nombre_usuario]
+		@instructorName = session[:instructorName]
+		@plan= Planformacion.find(session[:plan_id])
+		@actividadesadoc= []
+		@actividadesainv= []
+		@actividadesaext= []
+		@actividadesafor= []
+		@actividadesaotr= []
+		@observacionesExtras= []
+		@j=0
+		@actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 0).all
+		@actividadesa.each do |actade| 
+			@act= Actividad.find(actade.actividad_id)
+			tipo= @act.tipo_actividad_id
+			if tipo==1
+				@actividadesadoc.push(@act)
+			else
+				if tipo==2
+					@actividadesainv.push(@act)
+				else
+					if tipo==3
+						@actividadesaext.push(@act)
+					else
+						if tipo==4
+							@actividadesafor.push(@act)
+						else
+							if tipo==5
+								@actividadesaotr.push(@act)
+							elsif tipo==8
+								@descripcion=@act.actividad
+								@descripcionId=@act.id
+							elsif tipo==9
+								@presentacion=@act.actividad
+								@presentacionId=@act.id
+							end
+						end
+					end
+				end
+			end
+		end
+		@actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 0).all
+		@actividadesa.each do |actade| 
+			@cpObs= ObservacionActividadAdecuacion.where(adecuacionactividad_id: actade.id).all
+
+		    if @cpObs.blank?
+		    	@observacionesExtras[actade.id]="no"
+		    else
+
+				cpBool = 0
+				@cpObs.each do |probar|
+					if !probar.observaciones.blank?
+						cpBool = 1
+					end
+				end
+
+		    	if cpBool == 0
+		    		@observacionesExtras[actade.id]="no"
+		    	else
+		    		@observacionesExtras[actade.id]="si"
+		    	end
+		    end
+		end
 
     else
       redirect_to controller:"forminst", action: "index"
@@ -1224,31 +1331,45 @@ end
 		@nombre = session[:nombre_usuario]
 		@instructorName = session[:instructorName]
     actividades = AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 0)
-    if !actividades.blank?
-      actividades.each do |actividadAde|
-        actividad = Actividad.find(actividadAde.actividad_id)
-        if actividad.tipo_actividad_id == 9
-          @presentacion = actividad.actividad
-        elsif actividad.tipo_actividad_id == 8
-          @descripcion = actividad.actividad
-        elsif actividad.tipo_actividad_id == 1
-          @docencia = actividad.actividad 
-        elsif actividad.tipo_actividad_id == 2
-          @investigacion = actividad.actividad
-        elsif actividad.tipo_actividad_id == 4
-          @formacion = actividad.actividad  
-        elsif actividad.tipo_actividad_id == 3
-          @extension = actividad.actividad  
+      if !actividades.blank?
+        actividades.each do |actividadAde|
+          actividad = Actividad.find(actividadAde.actividad_id)
+          if actividad.tipo_actividad_id == 9
+            @presentacion = actividad.actividad
+          elsif actividad.tipo_actividad_id == 8
+            @descripcion = actividad.actividad
+          end
+        end
+      else
+        @presentacion = " "
+        @descripcion = " "  
+      end
+
+      @actividades0doc= []
+      @actividades0inv= []
+      @actividades0ext= []
+      @actividades0for= []
+      @actividades0otr= []
+      @actividades0= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 0).all
+      @actividades0.each do |actade| 
+        @act= Actividad.find(actade.actividad_id)
+        tipo= @act.tipo_actividad_id
+        if tipo==1
+          @actividades0doc.push(@act)
+        else
+          if tipo==2
+            @actividades0inv.push(@act)
+          else
+            if tipo==3
+              @actividades0ext.push(@act)
+            else
+              if tipo==4
+                @actividades0for.push(@act)
+              end
+            end
+          end
         end
       end
-    else
-      @presentacion = " "
-      @descripcion = " "
-      @docencia = " " 
-      @investigacion = " "
-      @formacion = " "  
-      @extension = " "  
-    end
 
 		@actividades1doc= []
 		@actividades1inv= []

@@ -176,11 +176,11 @@ CREATE TABLE `document` (
   KEY `documentadecuacion` (`adecuacion_id`),
   KEY `documentinforme` (`informe_id`),
   KEY `documentactividad` (`actividad_id`),
-  CONSTRAINT `documentinstructor` FOREIGN KEY (`instructor_id`) REFERENCES `usuario` (`id`),
-  CONSTRAINT `documenttutor` FOREIGN KEY (`tutor_id`) REFERENCES `usuario` (`id`),
-  CONSTRAINT `documentadecuacion` FOREIGN KEY (`adecuacion_id`) REFERENCES `adecuacion` (`id`),
-  CONSTRAINT `documentinforme` FOREIGN KEY (`informe_id`) REFERENCES `informe` (`id`),
-  CONSTRAINT `documentactividad` FOREIGN KEY (`actividad_id`) REFERENCES `actividad` (`id`)
+  CONSTRAINT `documentinstructor` FOREIGN KEY (`instructor_id`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `documenttutor` FOREIGN KEY (`tutor_id`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `documentadecuacion` FOREIGN KEY (`adecuacion_id`) REFERENCES `adecuacion` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `documentinforme` FOREIGN KEY (`informe_id`) REFERENCES `informe` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `documentactividad` FOREIGN KEY (`actividad_id`) REFERENCES `actividad` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -514,10 +514,10 @@ CREATE TABLE `notificacion` (
   KEY `notificaciontutor` (`tutor_id`),
   KEY `notificacionadecuacion` (`adecuacion_id`),
   KEY `notificacioninforme` (`informe_id`),
-  CONSTRAINT `notificacioninstructor` FOREIGN KEY (`instructor_id`) REFERENCES `usuario` (`id`),
-  CONSTRAINT `notificaciontutor` FOREIGN KEY (`tutor_id`) REFERENCES `usuario` (`id`),
-  CONSTRAINT `notificacionadecuacion` FOREIGN KEY (`adecuacion_id`) REFERENCES `adecuacion` (`id`),
-  CONSTRAINT `notificacioninforme` FOREIGN KEY (`informe_id`) REFERENCES `informe` (`id`)
+  CONSTRAINT `notificacioninstructor` FOREIGN KEY (`instructor_id`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `notificaciontutor` FOREIGN KEY (`tutor_id`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `notificacionadecuacion` FOREIGN KEY (`adecuacion_id`) REFERENCES `adecuacion` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `notificacioninforme` FOREIGN KEY (`informe_id`) REFERENCES `informe` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -539,8 +539,8 @@ CREATE TABLE `instructortutor` (
   PRIMARY KEY (`id`),
   KEY `instructortutorinstructorid` (`instructor_id`),
   KEY `instructortutortutorid` (`tutor_id`),
-  CONSTRAINT `instructortutorinstructorid` FOREIGN KEY (`instructor_id`) REFERENCES `usuario` (`id`),
-  CONSTRAINT `instructortutortutorid` FOREIGN KEY (`tutor_id`) REFERENCES `usuario` (`id`)
+  CONSTRAINT `instructortutorinstructorid` FOREIGN KEY (`instructor_id`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `instructortutortutorid` FOREIGN KEY (`tutor_id`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -752,7 +752,7 @@ CREATE TABLE `planformacion` (
   KEY `PlanFormacionTutor` (`tutor_id`),
   CONSTRAINT `PlanFormacionInstructor` FOREIGN KEY (`instructor_id`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `PlanFormacionTutor` FOREIGN KEY (`tutor_id`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -818,10 +818,10 @@ CREATE TABLE `respaldo` (
   KEY `respaldotutor` (`tutor_id`),
   KEY `respaldoadecuacion` (`adecuacion_id`),
   KEY `respaldoinforme` (`informe_id`),
-  CONSTRAINT `respaldoinstructor` FOREIGN KEY (`instructor_id`) REFERENCES `usuario` (`id`),
-  CONSTRAINT `respaldotutor` FOREIGN KEY (`tutor_id`) REFERENCES `usuario` (`id`),
-  CONSTRAINT `respaldoadecuacion` FOREIGN KEY (`adecuacion_id`) REFERENCES `adecuacion` (`id`),
-  CONSTRAINT `respaldoinforme` FOREIGN KEY (`informe_id`) REFERENCES `informe` (`id`)
+  CONSTRAINT `respaldoinstructor` FOREIGN KEY (`instructor_id`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `respaldotutor` FOREIGN KEY (`tutor_id`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `respaldoadecuacion` FOREIGN KEY (`adecuacion_id`) REFERENCES `adecuacion` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `respaldoinforme` FOREIGN KEY (`informe_id`) REFERENCES `informe` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
@@ -1066,7 +1066,7 @@ CREATE TABLE `usuarioentidad` (
   KEY `usuarioEntidadUsuario` (`usuario_id`),
   KEY `usuarioEscuela` (`escuela_id`),
   KEY `departamentoUsuario` (`departamento_id`),
-  CONSTRAINT `usuarioEscuela` FOREIGN KEY (`escuela_id`) REFERENCES `escuela` (`id`),
+  CONSTRAINT `usuarioEscuela` FOREIGN KEY (`escuela_id`) REFERENCES `escuela` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `usuarioEntidadEntidad` FOREIGN KEY (`entidad_id`) REFERENCES `entidad` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `usuarioEntidadUsuario` FOREIGN KEY (`usuario_id`) REFERENCES `usuario` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `departamentoUsuario` FOREIGN KEY (`departamento_id`) REFERENCES `departamento` (`id`) ON DELETE CASCADE ON UPDATE CASCADE

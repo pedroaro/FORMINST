@@ -615,6 +615,70 @@ def vista_previa
 
     @nombre = session[:nombre_usuario]
     @instructorName = session[:instructorName]
+    actividades = AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 0)
+    actividades1 = []
+    if !actividades.blank?
+      actividades.each do |actividadAde|
+        actividad = Actividad.find(actividadAde.actividad_id)
+        actividades1.push(actividad)
+      end
+    end
+    @presentacion = ""
+    @descripcion = ""
+    @docencia = [] 
+    @investigacion = []
+    @formacion = []  
+    @extension = []
+
+    if !actividades1.blank?
+      puts "entroooo"
+      actividades1.each do |actividadAde|
+        if actividadAde.tipo_actividad_id == 9
+          if actividadAde.actividad.blank?
+            @presentacion = " "
+          else
+            @presentacion = actividadAde.actividad 
+          end
+        elsif actividadAde.tipo_actividad_id == 8
+          if actividadAde.actividad.blank?
+            @descripcion = " "
+          else
+            @descripcion = actividadAde.actividad  
+          end
+        elsif actividadAde.tipo_actividad_id == 1
+          if actividadAde.actividad.blank?
+            @docencia.push(" ")
+          else
+            @docencia.push(actividadAde)
+          end
+        elsif actividadAde.tipo_actividad_id == 2
+          if actividadAde.actividad.blank?
+            @investigacion.push(" ")
+          else
+            @investigacion.push(actividadAde)
+          end
+        elsif actividadAde.tipo_actividad_id == 4
+          if actividadAde.actividad.blank?
+            @formacion.push(" ")
+          else
+            @formacion.push(actividadAde)  
+          end
+        elsif actividadAde.tipo_actividad_id == 3
+          if actividadAde.actividad.blank?
+            @extension.push(" ")
+          else
+            @extension.push(actividadAde)
+          end
+        end
+      end
+    else
+      @presentacion = " "
+      @descripcion = " "
+      @docencia = [" "]  
+      @investigacion = [" "]
+      @formacion = [" "] 
+      @extension = [" "] 
+    end
 
     @periodo = @informe.fecha_inicio.to_s + " al " + @informe.fecha_fin.to_s
     @actividades1doc= []
@@ -2136,8 +2200,17 @@ def generar_pdf() # es función permite generar el documento pdf de la adecuaci�
     respaldos = []
     respaldos = Respaldo.where(adecuacion_id: @adecuacion.id, informe_id: session[:informe_id] ).all
     @numeroDeVersion = respaldos.size + 1
+
+    @actividades1 = []
+    actividades = AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 0)
+    if !actividades.blank?
+      actividades.each do |actividadAde|
+        actividad = Actividad.find(actividadAde.actividad_id)
+        @actividades1.push(actividad)
+      end
+    end
     # se llama a la función de "pedf_adecuacion" del modelo "pdf", pasando todas las variables correspondientes
-    @nombre_archivo= Pdf.pdf_informe(@TipoSemestre, @escuela, @informe, @adecuacion, @tutor, @instructor, @pactv_docencia, @pactv_investigacion, @pactv_extension, @pactv_formacion, @pactv_otras, @sactv_docencia, @sactv_investigacion, @sactv_extension, @sactv_formacion, @sactv_otras, @tactv_docencia, @tactv_investigacion, @tactv_extension, @tactv_formacion, @tactv_otras, @cactv_docencia, @cactv_investigacion, @cactv_extension, @cactv_formacion, @cactv_otras, @actividadesadoc, @actividadesainv, @actividadesafor, @actividadesaext, @actividadesaotr,@res,@resultados,@actividadese,@observaciont,@resultTP,@resultPP,@resultO,@resultAEC,@resultOEC,@resultDCS, @documents, @numeroDeVersion, @factv_obligatoria, @actividadesaobli, @dactv_docencia, @dactv_investigacion, @dactv_extension, @dactv_formacion, @semestres)
+    @nombre_archivo= Pdf.pdf_informe(@actividades1,@TipoSemestre, @escuela, @informe, @adecuacion, @tutor, @instructor, @pactv_docencia, @pactv_investigacion, @pactv_extension, @pactv_formacion, @pactv_otras, @sactv_docencia, @sactv_investigacion, @sactv_extension, @sactv_formacion, @sactv_otras, @tactv_docencia, @tactv_investigacion, @tactv_extension, @tactv_formacion, @tactv_otras, @cactv_docencia, @cactv_investigacion, @cactv_extension, @cactv_formacion, @cactv_otras, @actividadesadoc, @actividadesainv, @actividadesafor, @actividadesaext, @actividadesaotr,@res,@resultados,@actividadese,@observaciont,@resultTP,@resultPP,@resultO,@resultAEC,@resultOEC,@resultDCS, @documents, @numeroDeVersion, @factv_obligatoria, @actividadesaobli, @dactv_docencia, @dactv_investigacion, @dactv_extension, @dactv_formacion, @semestres)
     act = "#{Rails.root}/tmp/PDFs/" + @nombre_archivo
     #act = @nombre_archivo
     send_file(
