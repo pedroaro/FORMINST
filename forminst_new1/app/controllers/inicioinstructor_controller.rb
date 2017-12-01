@@ -646,9 +646,9 @@ end
 			@cant_otr= params[:cant_otra]
 			semestre= params[:semestre].to_i
 
-			if params[:adecuacion_id]!=nil
+			#if params[:adecuacion_id]!=nil
 				session[:adecuacion_id]= @adecuacion.id
-			end
+			#end
       
       		@tutoresAnteriores = Instructortutor.where(instructor_id: session[:usuario_id], actual: 0)
 			@adecuacion= Adecuacion.find(session[:adecuacion_id])
