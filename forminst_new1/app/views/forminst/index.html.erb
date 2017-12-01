@@ -29,6 +29,10 @@
       </div>
       <div class="modal-body">
           <%= form_tag({controller: 'forminst', action: 'autenticar'}) do%>
+            <input type="hidden" name="accion" class="form-control" value="<%= @accion %>">
+            <input type="hidden" name="param1" class="form-control" value="<%= @param1 %>">
+            <input type="hidden" name="param2" class="form-control" value="<%= @param2 %>">
+            <input type="hidden" name="param3" class="form-control" value="<%= @param3 %>">
             <div class="form-group">
               <label>
               Usuario:</label>
