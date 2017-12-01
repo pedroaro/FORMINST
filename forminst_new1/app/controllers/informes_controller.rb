@@ -2849,7 +2849,8 @@ def generar_pdf() # es funci√≥n permite generar el documento pdf de la adecuaci√
       cambio_est.informe_id = @informe_id
       cambio_est.fecha = Time.now 
       error = 0
-      plan = Planformacion.find(session[:plan_id])
+      plan = Planformacion.where(id: session[:plan_id]).take
+      adec = Adecuacion.where(planformacion_id: session[:plan_id]).take
       informesAdecuacion = Informe.where(id: @informe_id).take
       informesAdecuaciones = Informe.where(planformacion_id: session[:plan_id]).all
       contador = 0
@@ -2977,13 +2978,14 @@ def generar_pdf() # es funci√≥n permite generar el documento pdf de la adecuaci√
               end
             end  
           end
-          linkT = 
+          linkTeI = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar informe&param1=" + plan.id.to_s + "&param2="+ @informe_id.to_s
+          linkE = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar informe&param1=" + plan.id.to_s+ "&param2="+@informe_id.to_s+"&param3="+adec.id.to_s
           remitente3 = Usuario.where(id: session[:usuario_id]).take
-          ActionCorreo.envio_informe(remitente3, notific.mensaje,2).deliver
+          ActionCorreo.envio_informe(remitente3, notific.mensaje,2,linkTeI).deliver
           remitente2 = Usuario.where(id: plan.instructor_id).take
-          ActionCorreo.envio_informe(remitente2, notific2.mensaje,1).deliver
+          ActionCorreo.envio_informe(remitente2, notific2.mensaje,1,linkTeI).deliver
           remitente = Usuario.where(id: uentidad.usuario_id).take
-          ActionCorreo.envio_informe(remitente, notific3.mensaje,0).deliver
+          ActionCorreo.envio_informe(remitente, notific3.mensaje,0,linkE).deliver
           flash[:success]="El informe se ha env√≠ado a comision de investigacion"
         else
             flash[:warning]="Debe enviar los informes en orden"

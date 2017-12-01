@@ -21,7 +21,6 @@ class ForminstController < ApplicationController
 		ldap= Net::LDAP.new(:host=>"ciens.ucv.ve",:port=>389, :auth=>{:method=> :simple, :username=>"cn=vmail,dc=ciens,dc=ucv,dc=ve", :password => "Gu4B37hpi5mgdJzkucj4OoszKYoPG1"})
 		correo= params[:correo] # se toma el valor correo del ususario
 		clave= params[:password] # se toma el valor password del usuario
-
 		#Si es un Administrados
 		if correo == "Administrador" && params[:password]=="1"
 
@@ -33,6 +32,7 @@ class ForminstController < ApplicationController
 			session[:entidad] = false
 			flash[:success] = "Bienvenido! Administrador"
 			redirect_to controller:"administrador", action: "index" #Mostrar el modulo del administrador
+
 
 		elsif correo!=nil && correo!="" && clave!=nil && clave!="" #verificar que el correo no sea nulo
 		result = ldap.bind_as(:base => "dc=ciens, dc=ucv, dc=ve", :filter => "(uid=#{correo})", :password => clave) #Se busca el usuario en el ldap
@@ -66,7 +66,20 @@ class ForminstController < ApplicationController
 								session[:instructor]= false
 								session[:entidad]= false
 								if params[:accion] == "mostrar adecuacion"
-									if session[:usuario_id] == Planformacion.where(id: params[:param1]).take.tutor_id
+									plan = Planformacion.where(id: params[:param1].to_i).take
+									if session[:usuario_id] == plan.tutor_id
+										session[:plan_id] = plan.id
+										if params[:param2] == 'no' 
+											session[:editar]= false
+										else
+											session[:editar]= true
+										end
+										plan = Planformacion.where(id: session[:plan_id]).take
+										@inst = Persona.where(usuario_id: plan.instructor_id).take
+										@instructorName = @inst.nombres.to_s.split.map(&:capitalize).join(' ') + " " + @inst.apellidos.to_s.split.map(&:capitalize).join(' ')
+										session[:instructorName] = @instructorName
+										@instructorName = session[:instructorName]
+										session[:adecuacion_id] = Adecuacion.where(planformacion_id: session[:plan_id]).take.id
 										flash[:success]= "Bienvenido! " + session[:nombre_usuario] = @persona.nombres.titleize+' '+@persona.apellidos.titleize
 										redirect_to controller:"iniciotutor", action: "ver_detalles_adecuacion", plan_id: params[:param1], editar: params[:param2]
 									else
@@ -74,8 +87,17 @@ class ForminstController < ApplicationController
 										redirect_to controller:"iniciotutor", action: "index"
 									end
 								elsif params[:accion] == "mostrar informe"
-									if session[:usuario_id] == Informe.where(id: params[:param2]).take.tutor_id
-										session[:plan_id] = params[:param1]
+									@inform = Informe.where(id: params[:param2].to_i).take
+									if session[:usuario_id] == @inform.tutor_id
+										session[:plan_id] = params[:param1].to_i
+										session[:informe_id] = @inform.id
+										plan = Planformacion.where(id: session[:plan_id]).take
+										@inst = Persona.where(usuario_id: plan.instructor_id).take
+										@instructorName = @inst.nombres.to_s.split.map(&:capitalize).join(' ') + " " + @inst.apellidos.to_s.split.map(&:capitalize).join(' ')
+										session[:instructorName] = @instructorName
+										@instructorName = session[:instructorName]
+										puts session[:instructorName]
+										session[:adecuacion_id] = Adecuacion.where(planformacion_id: session[:plan_id]).take.id
 										flash[:success]= "Bienvenido! " + session[:nombre_usuario] = @persona.nombres.titleize+' '+@persona.apellidos.titleize
 										redirect_to controller:"informes", action: "ver_detalles_informe", informe_id: params[:param2]
 									else
@@ -86,6 +108,7 @@ class ForminstController < ApplicationController
 									flash[:success]= "Bienvenido! " + session[:nombre_usuario] = @persona.nombres.titleize+' '+@persona.apellidos.titleize
 									redirect_to controller:"iniciotutor", action: "index"
 								end
+
 							elsif @entidad.nombre=="instructor"
 								session[:usuario_id] = @usuario.id
 								@persona = Persona.where(usuario_id: session[:usuario_id]).take
@@ -119,14 +142,61 @@ class ForminstController < ApplicationController
 						else
 							if tipo=="Institucional" || tipo=="Vista"
 								session[:usuario_id]= @usuario.id
-								@persona = Persona.where(usuario_id: session[:usuario_id]).take
-								session[:nombre_usuario] = @persona.nombres.titleize+' '+@persona.apellidos.titleize
 								session[:administrador] = false
 								session[:tutor]= false
 								session[:instructor]= false
 								session[:entidad]= true
-								flash[:success]= "Bienvenido! " + session[:nombre_usuario] = @persona.nombres.titleize+' '+@persona.apellidos.titleize
-
+								session[:entidad_id] = @entidad.id
+								session[:nombre_usuario] = @entidad.nombre
+								
+								if params[:accion] == "mostrar adecuacion"
+									ea = EstatusAdecuacion.where(adecuacion_id: params[:param3], actual: 1).take.estatus_id
+									a = [3,2,8,4,1,5,9]
+									b = [2,8,4,1,5,9]
+									c = [8,4,1,5,9]
+									d = [4,1,5,9]
+									if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12 && (a.include? ea)) || (session[:entidad_id] >= 14 && session[:entidad_id] <= 17 && (b.include? ea))  || (session[:entidad_id] >= 1 && session[:entidad_id] <= 6 && (c.include? ea)) || (session[:entidad_id] == 13 && (d.include? ea))
+										session[:plan_id] = plan.id
+										plan = Planformacion.where(id: session[:plan_id]).take
+										@inst = Persona.where(usuario_id: plan.instructor_id).take
+										@instructorName = @inst.nombres.to_s.split.map(&:capitalize).join(' ') + " " + @inst.apellidos.to_s.split.map(&:capitalize).join(' ')
+										session[:instructorName] = @instructorName
+										@instructorName = session[:instructorName]
+										session[:adecuacion_id] = Adecuacion.where(planformacion_id: session[:plan_id]).take.id
+										flash[:success]= "Bienvenido al " + @entidad.nombre
+										redirect_to controller:"inicioentidad", action: "ver_detalles_adecuacion", adecuacion_id: params[:param3]
+									else
+										flash[:success]= "Bienvenido al " + @entidad.nombre
+										redirect_to controller:"inicioentidad", action: "index"
+									end
+								elsif params[:accion] == "mostrar informe"
+									
+									ea = EstatusAdecuacion.where(adecuacion_id: params[:param3], actual: 1).take.estatus_id
+									ea = ea.to_s
+									a = ["3","2","8","4","1","5","9"]
+									b = ["2","8","4","1","5","9"]
+									c = ["8","4","1","5","9"]
+									d = ["4","1","5","9"]
+									if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12 && (a.include? ea)) || (session[:entidad_id] >= 14 && session[:entidad_id] <= 17 && (b.include? ea))  || (session[:entidad_id] >= 1 && session[:entidad_id] <= 6 && (c.include? ea)) || (session[:entidad_id] == 13 && (d.include? ea))
+										@inform = Informe.where(id: params[:param2].to_i).take
+										session[:plan_id] = params[:param1].to_i
+										session[:informe_id] = @inform.id
+										plan = Planformacion.where(id: session[:plan_id]).take
+										@inst = Persona.where(usuario_id: plan.instructor_id).take
+										@instructorName = @inst.nombres.to_s.split.map(&:capitalize).join(' ') + " " + @inst.apellidos.to_s.split.map(&:capitalize).join(' ')
+										session[:instructorName] = @instructorName
+										@instructorName = session[:instructorName]
+										session[:adecuacion_id] = Adecuacion.where(planformacion_id: session[:plan_id]).take.id
+										flash[:success]= "Bienvenido al " + @entidad.nombre
+										redirect_to controller:"inicioentidad", action: "ver_detalles_informe", informe_id: params[:param2].to_i
+									else
+										flash[:success]= "Bienvenido al " + @entidad.nombre
+										redirect_to controller:"inicioentidad", action: "index"
+									end
+								else
+									flash[:success]= "Bienvenido al " + @entidad.nombre
+									redirect_to controller:"inicioentidad", action: "index"
+								end
 								redirect_to controller:"forminst", action: "index"
 							else
 								flash.now[:mensaje] = 'Su contraseña o correo electrónico es incorrecto.'
@@ -160,7 +230,20 @@ class ForminstController < ApplicationController
 										session[:instructor]= false
 										session[:entidad]= false
 										if params[:accion] == "mostrar adecuacion"
-											if session[:usuario_id] == Planformacion.where(id: params[:param1]).take.tutor_id
+											plan = Planformacion.where(id: params[:param1].to_i).take
+											if session[:usuario_id] == plan.tutor_id
+												session[:plan_id] = plan.id
+												if params[:param2] == 'no' 
+													session[:editar]= false
+												else
+													session[:editar]= true
+												end
+												plan = Planformacion.where(id: session[:plan_id]).take
+												@inst = Persona.where(usuario_id: plan.instructor_id).take
+												@instructorName = @inst.nombres.to_s.split.map(&:capitalize).join(' ') + " " + @inst.apellidos.to_s.split.map(&:capitalize).join(' ')
+												session[:instructorName] = @instructorName
+												@instructorName = session[:instructorName]
+												session[:adecuacion_id] = Adecuacion.where(planformacion_id: session[:plan_id]).take.id
 												flash[:success]= "Bienvenido! " + session[:nombre_usuario] = @persona.nombres.titleize+' '+@persona.apellidos.titleize
 												redirect_to controller:"iniciotutor", action: "ver_detalles_adecuacion", plan_id: params[:param1], editar: params[:param2]
 											else
@@ -168,8 +251,17 @@ class ForminstController < ApplicationController
 												redirect_to controller:"iniciotutor", action: "index"
 											end
 										elsif params[:accion] == "mostrar informe"
-											if session[:usuario_id] == Informe.where(id: params[:param2]).take.tutor_id
-												session[:plan_id] = params[:param1]
+											@inform = Informe.where(id: params[:param2].to_i).take
+											if session[:usuario_id] == @inform.tutor_id
+												session[:plan_id] = params[:param1].to_i
+												session[:informe_id] = @inform.id
+												plan = Planformacion.where(id: session[:plan_id]).take
+												@inst = Persona.where(usuario_id: plan.instructor_id).take
+												@instructorName = @inst.nombres.to_s.split.map(&:capitalize).join(' ') + " " + @inst.apellidos.to_s.split.map(&:capitalize).join(' ')
+												session[:instructorName] = @instructorName
+												@instructorName = session[:instructorName]
+												puts session[:instructorName]
+												session[:adecuacion_id] = Adecuacion.where(planformacion_id: session[:plan_id]).take.id
 												flash[:success]= "Bienvenido! " + session[:nombre_usuario] = @persona.nombres.titleize+' '+@persona.apellidos.titleize
 												redirect_to controller:"informes", action: "ver_detalles_informe", informe_id: params[:param2]
 											else
@@ -239,6 +331,13 @@ class ForminstController < ApplicationController
 										c = [8,4,1,5,9]
 										d = [4,1,5,9]
 										if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12 && (a.include? ea)) || (session[:entidad_id] >= 14 && session[:entidad_id] <= 17 && (b.include? ea))  || (session[:entidad_id] >= 1 && session[:entidad_id] <= 6 && (c.include? ea)) || (session[:entidad_id] == 13 && (d.include? ea))
+											session[:plan_id] = plan.id
+											plan = Planformacion.where(id: session[:plan_id]).take
+											@inst = Persona.where(usuario_id: plan.instructor_id).take
+											@instructorName = @inst.nombres.to_s.split.map(&:capitalize).join(' ') + " " + @inst.apellidos.to_s.split.map(&:capitalize).join(' ')
+											session[:instructorName] = @instructorName
+											@instructorName = session[:instructorName]
+											session[:adecuacion_id] = Adecuacion.where(planformacion_id: session[:plan_id]).take.id
 											flash[:success]= "Bienvenido al " + @entidad.nombre
 											redirect_to controller:"inicioentidad", action: "ver_detalles_adecuacion", adecuacion_id: params[:param3]
 										else
@@ -246,6 +345,7 @@ class ForminstController < ApplicationController
 											redirect_to controller:"inicioentidad", action: "index"
 										end
 									elsif params[:accion] == "mostrar informe"
+										
 										ea = EstatusAdecuacion.where(adecuacion_id: params[:param3], actual: 1).take.estatus_id
 										ea = ea.to_s
 										a = ["3","2","8","4","1","5","9"]
@@ -253,9 +353,17 @@ class ForminstController < ApplicationController
 										c = ["8","4","1","5","9"]
 										d = ["4","1","5","9"]
 										if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12 && (a.include? ea)) || (session[:entidad_id] >= 14 && session[:entidad_id] <= 17 && (b.include? ea))  || (session[:entidad_id] >= 1 && session[:entidad_id] <= 6 && (c.include? ea)) || (session[:entidad_id] == 13 && (d.include? ea))
-											session[:plan_id] = params[:param1]
+											@inform = Informe.where(id: params[:param2].to_i).take
+											session[:plan_id] = params[:param1].to_i
+											session[:informe_id] = @inform.id
+											plan = Planformacion.where(id: session[:plan_id]).take
+											@inst = Persona.where(usuario_id: plan.instructor_id).take
+											@instructorName = @inst.nombres.to_s.split.map(&:capitalize).join(' ') + " " + @inst.apellidos.to_s.split.map(&:capitalize).join(' ')
+											session[:instructorName] = @instructorName
+											@instructorName = session[:instructorName]
+											session[:adecuacion_id] = Adecuacion.where(planformacion_id: session[:plan_id]).take.id
 											flash[:success]= "Bienvenido al " + @entidad.nombre
-											redirect_to controller:"inicioentidad", action: "ver_detalles_informe", informe_id: params[:param2]
+											redirect_to controller:"inicioentidad", action: "ver_detalles_informe", informe_id: params[:param2].to_i
 										else
 											flash[:success]= "Bienvenido al " + @entidad.nombre
 											redirect_to controller:"inicioentidad", action: "index"

@@ -1218,7 +1218,7 @@ end
 					elsif(si.estatus_id==9)
 						@st = "RECHAZADO POR CONSEJO DE FACULTAD"
 					end
-					if tipo_id == 1
+					if @inf.tipo_id == 1
 			          	@tipos.push('Semestral')
 			        elsif @inf.tipo_id ==2
 			            @tipos.push('Anual')
@@ -1356,162 +1356,44 @@ end
 	def detalles_informe2
 		@cjpTipo=Usuario.find(session[:usuario_id]).tipo
 		@nombre = session[:nombre_usuario]
-    	@informe= Informe.find(session[:informe_id])
-    	@est= EstatusInforme.where(informe_id: @informe.id, actual: 1).take
-    	@status= TipoEstatus.find(@est.estatus_id)
-    	@adecuacion = Adecuacion.where(planformacion_id: @informe.planformacion_id).take
-    	@modificar= false
-    	if @est.estatus_id == 6
-    	  @modificar=true
-    	end
-    	@docencia= "docencia"
-    	@cp=0
-    	@j= 0
-    	@k=0
-    	@actividadesa= InformeActividad.where(informe_id: @informe.id).all
-    	@actividadesadoc= []
-    	@actividadesainv= []
-    	@actividadesaext= []
-    	@actividadesafor= []
-    	@actividadesaotr= []
-    	@actividadesaobli= []
-    	@semestres=[]
-      	@CJagregado=["no","no","no","no"]
-    	@resultados= []
-    	@resultados2= ""
-    	@resultados2a= []
-    	@resultados2b= []
-    	@actividadese= []
-    	@observaciont= []
-    	@observacionesExtras = []
-    	@revision= Revision.where(informe_id: @informe.id, usuario_id: session[:usuario_id], adecuacion_id: @adecuacion.id).take
-    	@actividadesa.each do |actade| 
-    		if @resultados2b != []
-    			@resultados2b= Array.new(0) { |i|  }
-    		end
-	      	if actade.actividad_id == nil #Es el caso que es un resultado no contemplado en el plan de formacion o un avancwe de postgrado
-	        	@res= Resultado.where(informe_actividad_id: actade.id).all
-	        	@resultados.push(@res)
-	        	@actividadese.push("")
-	        	@res.each do |cpresultado| 
-		        	@cparray = ["a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a"]
-		        	@cparray[0] = cpresultado.titulo
-		        	@cparray[1] = cpresultado.autor
-		        	@cparray[2] = cpresultado.nombre_capitulo
-		        	@cparray[3] = cpresultado.autor_capitulo
-		        	@cparray[4] = cpresultado.dia
-		        	@cparray[5] = cpresultado.mes
-		        	@cparray[6] = cpresultado.ano
-		        	@cparray[7] = cpresultado.ciudad
-		        	@cparray[8] = cpresultado.estado
-		        	@cparray[9] = cpresultado.pais
-		        	@cparray[10] = cpresultado.organizador
-		        	@cparray[11] = cpresultado.duracion
-		        	@cparray[12] = cpresultado.editor
-		        	@cparray[13] = cpresultado.titulo_libro
-		        	@cparray[14] = cpresultado.autor_libro
-		        	@cparray[15] = cpresultado.nombre_revista
-		        	@cparray[16] = cpresultado.nombre_periodico
-		        	@cparray[17] = cpresultado.nombre_acto
-		        	@cparray[18] = cpresultado.paginas
-		        	@cparray[19] = cpresultado.nombre_paginaw
-		        	@cparray[20] = cpresultado.sitio_paginaw
-		        	@cparray[21] = cpresultado.infoafiliaion
-		        	@cparray[22] = cpresultado.cptipo
-		        	@cparray[23] = cpresultado.nombre
-		        	@cparray[24] = cpresultado.ISSN_impreso
-		        	@cparray[25] = cpresultado.ISSN_electro
-		        	@cparray[26] = cpresultado.volumen
-		        	@cparray[27] = cpresultado.edicion
-		        	@cparray[28] = cpresultado.DOI
-		        	@cparray[29] = cpresultado.ISBN
-		        	@cparray[30] = cpresultado.universidad
-		        	@cparray[31] = cpresultado.url
-		       		if !@cparray.blank?
-			        	@noemptyarray = @cparray - ["", nil]
-			        	if !@resultados2
-				        	@noemptyarray = @cparray - ["", nil]
-				        	if !@noemptyarray.join(',').blank?
-					        	@resultados2 = @noemptyarray.join(',')
-					        end
-				        else
-				        	@noemptyarray = @cparray - ["", nil]
-				        	if !@noemptyarray.join(',').blank?
-					        	@resultados2 = @noemptyarray.join(',')
-				        	end
-			        	end
-			        	@resultados2b.push(@resultados2)
-		        	end
-
-			    end
-			    @resultados2a.push(@resultados2b)
-
-	        	if @revision == nil || @revision == ""
-		        	@obs=nil
-
-		        else
-		        	@obs= ObservacionActividadInforme.where(informe_actividad_id: actade.id, revision_id: @revision.id).take
-
-		        end	  
-		        @cpObs2= ObservacionTutor.where(informe_actividad_id: actade.id).take 
-		        cpVerificar = "si"
-		        if !@cpObs2.blank? && !@cpObs2.observaciones.blank? 
-		        	@observacionesExtras.push("si")
-		        	cpVerificar = "no"
-		        end
-		        if @obs==nil
-		          	@observaciont.push("")
-
-		          	if cpVerificar == "si"
-			          	@cpObs= ObservacionActividadInforme.where(informe_actividad_id: actade.id).all
-					    if @cpObs.blank?
-					    	@observacionesExtras.push("no")
-					    else
-
-							cpBool = 0
-							@cpObs.each do |probar|
-								if !probar.observaciones.blank?
-									cpBool = 1
-								end
-							end
-
-					    	if cpBool == 0
-					    		@observacionesExtras.push("no")
-					    	else
-					    		@observacionesExtras.push("si")
-					    	end
-					    end
-					end
-		        else
-		          	@observaciont.push(@obs.observaciones)
-
-		          	if cpVerificar == "si"
-			          	@cpObs= ObservacionActividadInforme.where(informe_actividad_id: actade.id).where.not(revision_id: @revision.id).all
-					    if @cpObs.blank?
-					    	@observacionesExtras.push("no")
-					    else
-							cpBool = 0
-							@cpObs.each do |probar|
-								if !probar.observaciones.blank?
-									cpBool = 1
-								end
-							end
-
-					    	if cpBool == 0
-					    		@observacionesExtras.push("no")
-					    	else
-					    		@observacionesExtras.push("si")
-					    	end
-					    end
-					end
-		        end
-
-	     	else
-		        @act= Actividad.find(actade.actividad_id)
-		        tipo= @act.tipo_actividad_id
-		        @res= Resultado.where(informe_actividad_id: actade.id).all
-		        if !@res.blank?
-		          	@resultados.push(@res)
+		if !session[:informe_id].blank?
+	    	@informe= Informe.find(session[:informe_id])
+	    	@est= EstatusInforme.where(informe_id: @informe.id, actual: 1).take
+	    	@status= TipoEstatus.find(@est.estatus_id)
+	    	@adecuacion = Adecuacion.where(planformacion_id: @informe.planformacion_id).take
+	    	@modificar= false
+	    	if @est.estatus_id == 6
+	    	  @modificar=true
+	    	end
+	    	@docencia= "docencia"
+	    	@cp=0
+	    	@j= 0
+	    	@k=0
+	    	@actividadesa= InformeActividad.where(informe_id: @informe.id).all
+	    	@actividadesadoc= []
+	    	@actividadesainv= []
+	    	@actividadesaext= []
+	    	@actividadesafor= []
+	    	@actividadesaotr= []
+	    	@actividadesaobli= []
+	    	@semestres=[]
+	      	@CJagregado=["no","no","no","no"]
+	    	@resultados= []
+	    	@resultados2= ""
+	    	@resultados2a= []
+	    	@resultados2b= []
+	    	@actividadese= []
+	    	@observaciont= []
+	    	@observacionesExtras = []
+	    	@revision= Revision.where(informe_id: @informe.id, usuario_id: session[:usuario_id], adecuacion_id: @adecuacion.id).take
+	    	@actividadesa.each do |actade| 
+	    		if @resultados2b != []
+	    			@resultados2b= Array.new(0) { |i|  }
+	    		end
+		      	if actade.actividad_id == nil #Es el caso que es un resultado no contemplado en el plan de formacion o un avancwe de postgrado
+		        	@res= Resultado.where(informe_actividad_id: actade.id).all
+		        	@resultados.push(@res)
+		        	@actividadese.push("")
 		        	@res.each do |cpresultado| 
 			        	@cparray = ["a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a"]
 			        	@cparray[0] = cpresultado.titulo
@@ -1561,121 +1443,244 @@ end
 				        	end
 				        	@resultados2b.push(@resultados2)
 			        	end
+
+				    end
+				    @resultados2a.push(@resultados2b)
+
+		        	if @revision == nil || @revision == ""
+			        	@obs=nil
+
+			        else
+			        	@obs= ObservacionActividadInforme.where(informe_actividad_id: actade.id, revision_id: @revision.id).take
+
+			        end	  
+			        @cpObs2= ObservacionTutor.where(informe_actividad_id: actade.id).take 
+			        cpVerificar = "si"
+			        if !@cpObs2.blank? && !@cpObs2.observaciones.blank? 
+			        	@observacionesExtras.push("si")
+			        	cpVerificar = "no"
 			        end
-		        else
-		          	@resultados.push(nil)
-		        end
-		        @resultados2a.push(@resultados2b)
-		        @ae= ActividadEjecutada.where(informe_actividad_id: actade.id).take
-		        if @ae==nil || @ae== ""
-		        	
-		        	@actividadese.push("")
-		        else
-		        	
-		        	@actividadese.push(@ae)
-		        end
+			        if @obs==nil
+			          	@observaciont.push("")
 
-		        if @revision == nil || @revision == ""
-		        	@obs=nil
-		        else
-		        	@obs= ObservacionActividadInforme.where(informe_actividad_id: actade.id, revision_id: @revision.id).take
-		        end
+			          	if cpVerificar == "si"
+				          	@cpObs= ObservacionActividadInforme.where(informe_actividad_id: actade.id).all
+						    if @cpObs.blank?
+						    	@observacionesExtras.push("no")
+						    else
 
-		        @cpObs2= ObservacionTutor.where(informe_actividad_id: actade.id).take 
-		        cpVerificar = "si"
-		        if !@cpObs2.blank? && !@cpObs2.observaciones.blank? 
-		        	@observacionesExtras.push("si")
-		        	cpVerificar = "no"
-		        end
-		        if @obs==nil
-		          	@observaciont.push("")
-
-		          	if cpVerificar == "si"
-			          	@cpObs= ObservacionActividadInforme.where(informe_actividad_id: actade.id).all
-					    if @cpObs.blank?
-					    	@observacionesExtras.push("no")
-					    else
-
-							cpBool = 0
-							@cpObs.each do |probar|
-								if !probar.observaciones.blank?
-									cpBool = 1
+								cpBool = 0
+								@cpObs.each do |probar|
+									if !probar.observaciones.blank?
+										cpBool = 1
+									end
 								end
-							end
 
-					    	if cpBool == 0
-					    		@observacionesExtras.push("no")
-					    	else
-					    		@observacionesExtras.push("si")
-					    	end
-					    end
-					end
-		        else
-		          	@observaciont.push(@obs.observaciones)
+						    	if cpBool == 0
+						    		@observacionesExtras.push("no")
+						    	else
+						    		@observacionesExtras.push("si")
+						    	end
+						    end
+						end
+			        else
+			          	@observaciont.push(@obs.observaciones)
 
-		          	if cpVerificar == "si"
-			          	@cpObs= ObservacionActividadInforme.where(informe_actividad_id: actade.id).where.not(revision_id: @revision.id).all
-					    if @cpObs.blank?
-					    	@observacionesExtras.push("no")
-					    else
-							cpBool = 0
-							@cpObs.each do |probar|
-								if !probar.observaciones.blank?
-									cpBool = 1
+			          	if cpVerificar == "si"
+				          	@cpObs= ObservacionActividadInforme.where(informe_actividad_id: actade.id).where.not(revision_id: @revision.id).all
+						    if @cpObs.blank?
+						    	@observacionesExtras.push("no")
+						    else
+								cpBool = 0
+								@cpObs.each do |probar|
+									if !probar.observaciones.blank?
+										cpBool = 1
+									end
 								end
-							end
 
-					    	if cpBool == 0
-					    		@observacionesExtras.push("no")
-					    	else
-					    		@observacionesExtras.push("si")
-					    	end
-					    end
-					end
-		        end
-		          semestre = AdecuacionActividad.where(actividad_id: @act.id).take.semestre
-		          @semestres[@act.id]=semestre
-		        if tipo==1
-		          	@actividadesadoc.push(@act)
-		        elsif tipo==2
-		            @actividadesainv.push(@act)
-		        elsif tipo==3
-			        @actividadesaext.push(@act)
-			    elsif tipo==4
-		            @actividadesafor.push(@act)
-          		elsif tipo==5
-              		@actividadesaotr.push(@act)
-              	elsif tipo==7
-              		@actividadesaobli.push(@act)
-            	end
-      		end
-    	end
-    	@bool_enviado = 0
-		if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12)
-			#Usuario comision
-			estatusI = EstatusInforme.where(informe_id: @informe.id, actual: 1).take #Estatus enviado a comision de investigacioni
-			if(estatusI.estatus_id != 3)
-				@bool_enviado = 1
+						    	if cpBool == 0
+						    		@observacionesExtras.push("no")
+						    	else
+						    		@observacionesExtras.push("si")
+						    	end
+						    end
+						end
+			        end
+
+		     	else
+			        @act= Actividad.find(actade.actividad_id)
+			        tipo= @act.tipo_actividad_id
+			        @res= Resultado.where(informe_actividad_id: actade.id).all
+			        if !@res.blank?
+			          	@resultados.push(@res)
+			        	@res.each do |cpresultado| 
+				        	@cparray = ["a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a"]
+				        	@cparray[0] = cpresultado.titulo
+				        	@cparray[1] = cpresultado.autor
+				        	@cparray[2] = cpresultado.nombre_capitulo
+				        	@cparray[3] = cpresultado.autor_capitulo
+				        	@cparray[4] = cpresultado.dia
+				        	@cparray[5] = cpresultado.mes
+				        	@cparray[6] = cpresultado.ano
+				        	@cparray[7] = cpresultado.ciudad
+				        	@cparray[8] = cpresultado.estado
+				        	@cparray[9] = cpresultado.pais
+				        	@cparray[10] = cpresultado.organizador
+				        	@cparray[11] = cpresultado.duracion
+				        	@cparray[12] = cpresultado.editor
+				        	@cparray[13] = cpresultado.titulo_libro
+				        	@cparray[14] = cpresultado.autor_libro
+				        	@cparray[15] = cpresultado.nombre_revista
+				        	@cparray[16] = cpresultado.nombre_periodico
+				        	@cparray[17] = cpresultado.nombre_acto
+				        	@cparray[18] = cpresultado.paginas
+				        	@cparray[19] = cpresultado.nombre_paginaw
+				        	@cparray[20] = cpresultado.sitio_paginaw
+				        	@cparray[21] = cpresultado.infoafiliaion
+				        	@cparray[22] = cpresultado.cptipo
+				        	@cparray[23] = cpresultado.nombre
+				        	@cparray[24] = cpresultado.ISSN_impreso
+				        	@cparray[25] = cpresultado.ISSN_electro
+				        	@cparray[26] = cpresultado.volumen
+				        	@cparray[27] = cpresultado.edicion
+				        	@cparray[28] = cpresultado.DOI
+				        	@cparray[29] = cpresultado.ISBN
+				        	@cparray[30] = cpresultado.universidad
+				        	@cparray[31] = cpresultado.url
+				       		if !@cparray.blank?
+					        	@noemptyarray = @cparray - ["", nil]
+					        	if !@resultados2
+						        	@noemptyarray = @cparray - ["", nil]
+						        	if !@noemptyarray.join(',').blank?
+							        	@resultados2 = @noemptyarray.join(',')
+							        end
+						        else
+						        	@noemptyarray = @cparray - ["", nil]
+						        	if !@noemptyarray.join(',').blank?
+							        	@resultados2 = @noemptyarray.join(',')
+						        	end
+					        	end
+					        	@resultados2b.push(@resultados2)
+				        	end
+				        end
+			        else
+			          	@resultados.push(nil)
+			        end
+			        @resultados2a.push(@resultados2b)
+			        @ae= ActividadEjecutada.where(informe_actividad_id: actade.id).take
+			        if @ae==nil || @ae== ""
+			        	
+			        	@actividadese.push("")
+			        else
+			        	
+			        	@actividadese.push(@ae)
+			        end
+
+			        if @revision == nil || @revision == ""
+			        	@obs=nil
+			        else
+			        	@obs= ObservacionActividadInforme.where(informe_actividad_id: actade.id, revision_id: @revision.id).take
+			        end
+
+			        @cpObs2= ObservacionTutor.where(informe_actividad_id: actade.id).take 
+			        cpVerificar = "si"
+			        if !@cpObs2.blank? && !@cpObs2.observaciones.blank? 
+			        	@observacionesExtras.push("si")
+			        	cpVerificar = "no"
+			        end
+			        if @obs==nil
+			          	@observaciont.push("")
+
+			          	if cpVerificar == "si"
+				          	@cpObs= ObservacionActividadInforme.where(informe_actividad_id: actade.id).all
+						    if @cpObs.blank?
+						    	@observacionesExtras.push("no")
+						    else
+
+								cpBool = 0
+								@cpObs.each do |probar|
+									if !probar.observaciones.blank?
+										cpBool = 1
+									end
+								end
+
+						    	if cpBool == 0
+						    		@observacionesExtras.push("no")
+						    	else
+						    		@observacionesExtras.push("si")
+						    	end
+						    end
+						end
+			        else
+			          	@observaciont.push(@obs.observaciones)
+
+			          	if cpVerificar == "si"
+				          	@cpObs= ObservacionActividadInforme.where(informe_actividad_id: actade.id).where.not(revision_id: @revision.id).all
+						    if @cpObs.blank?
+						    	@observacionesExtras.push("no")
+						    else
+								cpBool = 0
+								@cpObs.each do |probar|
+									if !probar.observaciones.blank?
+										cpBool = 1
+									end
+								end
+
+						    	if cpBool == 0
+						    		@observacionesExtras.push("no")
+						    	else
+						    		@observacionesExtras.push("si")
+						    	end
+						    end
+						end
+			        end
+			          semestre = AdecuacionActividad.where(actividad_id: @act.id).take.semestre
+			          @semestres[@act.id]=semestre
+			        if tipo==1
+			          	@actividadesadoc.push(@act)
+			        elsif tipo==2
+			            @actividadesainv.push(@act)
+			        elsif tipo==3
+				        @actividadesaext.push(@act)
+				    elsif tipo==4
+			            @actividadesafor.push(@act)
+	          		elsif tipo==5
+	              		@actividadesaotr.push(@act)
+	              	elsif tipo==7
+	              		@actividadesaobli.push(@act)
+	            	end
+	      		end
+	    	end
+	    	@bool_enviado = 0
+			if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12)
+				#Usuario comision
+				estatusI = EstatusInforme.where(informe_id: @informe.id, actual: 1).take #Estatus enviado a comision de investigacioni
+				if(estatusI.estatus_id != 3)
+					@bool_enviado = 1
+				end
+			elsif (session[:entidad_id] >= 14 && session[:entidad_id] <= 17)
+				#Consejo tecnico
+				estatusI = EstatusInforme.where(informe_id: @informe.id, actual: 1).take
+				if(estatusI.estatus_id != 2)
+					@bool_enviado = 1
+				end
+			elsif (session[:entidad_id] >= 1 && session[:entidad_id] <= 6)
+				#Consejo de escuela
+				estatusI = EstatusInforme.where(informe_id: @informe.id, actual: 1).take 
+				if(estatusI.estatus_id != 8)
+					@bool_enviado = 1 #Estatus enviado a consejo escuela
+				end
+			elsif (session[:entidad_id] == 13)
+				#Consejo de facultad
+				estatusI = EstatusInforme.where(informe_id: @informe.id, actual: 1).take
+				if(estatusI.estatus_id != 4)
+					@bool_enviado = 1
+				end
 			end
-		elsif (session[:entidad_id] >= 14 && session[:entidad_id] <= 17)
-			#Consejo tecnico
-			estatusI = EstatusInforme.where(informe_id: @informe.id, actual: 1).take
-			if(estatusI.estatus_id != 2)
-				@bool_enviado = 1
-			end
-		elsif (session[:entidad_id] >= 1 && session[:entidad_id] <= 6)
-			#Consejo de escuela
-			estatusI = EstatusInforme.where(informe_id: @informe.id, actual: 1).take 
-			if(estatusI.estatus_id != 8)
-				@bool_enviado = 1 #Estatus enviado a consejo escuela
-			end
-		elsif (session[:entidad_id] == 13)
-			#Consejo de facultad
-			estatusI = EstatusInforme.where(informe_id: @informe.id, actual: 1).take
-			if(estatusI.estatus_id != 4)
-				@bool_enviado = 1
-			end
-		end
+		else
+		    flash[:info]= "Seleccione un informe"
+		    redirect_to controller:"inicioentidad", action: "listar_informes"
+		end	
  	end
 
 	def vista_previa1  
@@ -3043,14 +3048,14 @@ end
 			elsif(user.escuela_id == 10)
 				uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 6).take
 			end
-			linkT = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar informe&param1="+ plan.id.to_s +"&param2="+ @informe_id.to_s
-			linkI = "http://formacion.ciens.ucv.ve/"
+			linkTeI = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar informe&param1=" + plan.id.to_s + "&param2="+ @informe_id.to_s
+        	linkE = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar informe&param1=" + plan.id.to_s+ "&param2="+@informe_id.to_s+"&param3="+adec.id.to_s
 	          remitente3 = Usuario.where(id: informeAct.tutor_id).take
-		      ActionCorreo.envio_informe(remitente3, notific.mensaje,2,linkT).deliver
+		      ActionCorreo.envio_informe(remitente3, notific.mensaje,2,linkTeI).deliver
 		      remitente2 = Usuario.where(id: plan.instructor_id).take
-		      ActionCorreo.envio_informe(remitente2, notific2.mensaje,1,linkI).deliver
+		      ActionCorreo.envio_informe(remitente2, notific2.mensaje,1,linkTeI).deliver
 		      remitente = Usuario.where(id: uentidad.usuario_id).take
-		      ActionCorreo.envio_informe(remitente, notific3.mensaje,0,linkI).deliver
+		      ActionCorreo.envio_informe(remitente, notific3.mensaje,0,linkE).deliver
 	          flash[:success]="El informe se ha envíado a consejo de escuela"
 		elsif (session[:entidad_id] >= 14 && session[:entidad_id] <= 17)
 			#Consejo tecnico
@@ -3098,13 +3103,13 @@ end
 			notific3.save
 			uentidad = Usuarioentidad.where(entidad_id: 13).take
 			remitente3 = Usuario.where(id: informeAct.tutor_id).take
-			linkT = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar informe&param1="+ plan.id.to_s +"&param2="+ @informe_id.to_s
-			linkI = "http://formacion.ciens.ucv.ve/"
-			ActionCorreo.envio_informe(remitente3, notific.mensaje,2,linkT).deliver
+			linkTeI = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar informe&param1=" + plan.id.to_s + "&param2="+ @informe_id.to_s
+        	linkE = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar informe&param1=" + plan.id.to_s+ "&param2="+@informe_id.to_s+"&param3="+adec.id.to_s
+			ActionCorreo.envio_informe(remitente3, notific.mensaje,2,linkTeI).deliver
 			remitente2 = Usuario.where(id: plan.instructor_id).take
-			ActionCorreo.envio_informe(remitente2, notific2.mensaje,1,linkI).deliver
+			ActionCorreo.envio_informe(remitente2, notific2.mensaje,1,linkTeI).deliver
 			remitente = Usuario.where(id: uentidad.usuario_id).take
-			ActionCorreo.envio_informe(remitente, notific3.mensaje,0,linkI).deliver
+			ActionCorreo.envio_informe(remitente, notific3.mensaje,0,linkE).deliver
 			flash[:success]="El informe se ha envíado a consejo de facultad"
 		elsif (session[:entidad_id] == 13)
 			#Consejo de facultad
@@ -3137,8 +3142,7 @@ end
 			inf = Informe.where(id: @informe_id).take
 			cambio_est.fecha = Time.now 
 			plan = Planformacion.find(session[:plan_id])
-			linkT = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar informe&param1="+ plan.id.to_s +"&param2="+ @informe_id.to_s
-			linkI = "http://formacion.ciens.ucv.ve/"
+			linkTeI = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar informe&param1=" + plan.id.to_s + "&param2="+ @informe_id.to_s
 			if(rechazar == 1)
 				@document = Respaldo.where(adecuacion_id: session[:adecuacion_id], informe_id: @informe_id, actual: 1).take
 				@document.estatus = "Rechazado por Consejo de Facultad"
@@ -3164,9 +3168,9 @@ end
 				notific2.mensaje = "[" + notificacionfecha + "] El " + session[:nombre_informe] + " ha sido rechazado por Consejo de Facultad."
 				notific2.save
 				remitente3 = Usuario.where(id: informeAct.tutor_id).take
-				ActionCorreo.envio_informe(remitente3, notific.mensaje,2,linkT).deliver
+				ActionCorreo.envio_informe(remitente3, notific.mensaje,2,linkTeI).deliver
 				remitente2 = Usuario.where(id: plan.instructor_id).take
-				ActionCorreo.envio_informe(remitente2, notific2.mensaje,1,linkI).deliver
+				ActionCorreo.envio_informe(remitente2, notific2.mensaje,1,linkTeI).deliver
 				cpusuario = Usuario.where(id: plan.instructor_id).take
 				cpusuario.activo = 0
 				cpusuario.save
@@ -3195,9 +3199,9 @@ end
 				notific2.mensaje = "[" + notificacionfecha + "] El " + session[:nombre_informe] + " ha sido aprobado con observaciones por Consejo de Facultad."
 				notific2.save
 				remitente3 = Usuario.where(id: informeAct.tutor_id).take
-				ActionCorreo.envio_informe(remitente3, notific.mensaje,2,linkT).deliver
+				ActionCorreo.envio_informe(remitente3, notific.mensaje,2,linkTeI).deliver
 				remitente2 = Usuario.where(id: plan.instructor_id).take
-				ActionCorreo.envio_informe(remitente2, notific2.mensaje,1,linkI).deliver
+				ActionCorreo.envio_informe(remitente2, notific2.mensaje,1,linkTeI).deliver
 			else
 				@document = Respaldo.where(adecuacion_id: session[:adecuacion_id], informe_id: @informe_id, actual: 1).take
 				@document.estatus = "Aprobado por Consejo de Facultad"
@@ -3223,9 +3227,9 @@ end
 				notific2.mensaje = "[" + notificacionfecha + "] ¡Felicitaciones! El " + session[:nombre_informe] + " ha sido aprobado por Consejo de Facultad."
 				notific2.save	
 				remitente3 = Usuario.where(id: informeAct.tutor_id).take
-				ActionCorreo.envio_informe(remitente3, notific.mensaje,2,linkT).deliver
+				ActionCorreo.envio_informe(remitente3, notific.mensaje,2,linkTeI).deliver
 				remitente2 = Usuario.where(id: plan.instructor_id).take
-				ActionCorreo.envio_informe(remitente2, notific2.mensaje,1,linkI).deliver
+				ActionCorreo.envio_informe(remitente2, notific2.mensaje,1,linkTeI).deliver
 			end
 		end	
 		redirect_to controller:"inicioentidad", action: "listar_informes"
@@ -3522,13 +3526,14 @@ end
 	            end  
 	          end
 				linkT = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar adecuacion&param1=" + plan.id.to_s + "&param2=no"
-			    linkI = "http://formacion.ciens.ucv.ve/"				
+			    linkI = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar adecuacion"			
+				linkE = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar adecuacion&param3=" + @adecuacion_id 
 			    remitente3 = Usuario.where(id: plan.tutor_id).take
 				ActionCorreo.envio_adecuacion(remitente3, notific.mensaje,2,linkT).deliver
 				remitente2 = Usuario.where(id: plan.instructor_id).take
 				ActionCorreo.envio_adecuacion(remitente2, notific2.mensaje,1,linkI).deliver
 				remitente = Usuario.where(id: uentidad.usuario_id).take
-				ActionCorreo.envio_adecuacion(remitente, notific3.mensaje,0,linkI).deliver
+				ActionCorreo.envio_adecuacion(remitente, notific3.mensaje,0,linkE).deliver
 
 			flash[:success]="La adecuación se ha envíado a consejo de escuela"
 		elsif (session[:entidad_id] >= 14 && session[:entidad_id] <= 17)
@@ -3587,13 +3592,14 @@ end
         	notific3.save
        		uentidad = Usuarioentidad.where(entidad_id: 13).take
        		linkT = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar adecuacion&param1=" + plan.id.to_s + "&param2=no"
-			linkI = "http://formacion.ciens.ucv.ve/"
+		    linkI = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar adecuacion"			
+			linkE = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar adecuacion&param3=" + @adecuacion_id 
 			remitente3 = Usuario.where(id: plan.tutor_id).take
 			ActionCorreo.envio_adecuacion(remitente3, notific.mensaje,2,linkT).deliver
 			remitente2 = Usuario.where(id: plan.instructor_id).take
 			ActionCorreo.envio_adecuacion(remitente2, notific2.mensaje,1,linkI).deliver
 			remitente = Usuario.where(id: uentidad.usuario_id).take
-			ActionCorreo.envio_adecuacion(remitente, notific3.mensaje,0,linkI).deliver
+			ActionCorreo.envio_adecuacion(remitente, notific3.mensaje,0,linkE).deliver
 
 			flash[:success]="La adecuación se ha envíado a consejo de facultad"
 		elsif (session[:entidad_id] == 13)
@@ -3625,8 +3631,8 @@ end
 			
 			adec = Adecuacion.where(id: @adecuacion_id).take
 			plan = Planformacion.where(id: adec.planformacion_id).take
-			linkT = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar adecuacion&param1=" + plan.id.to_s + "&param2=no"
-			linkI = "http://formacion.ciens.ucv.ve/"
+       		linkT = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar adecuacion&param1=" + plan.id.to_s + "&param2=no"
+		    linkI = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar adecuacion"			
 
 			if(rechazar == 1)
 				@document = Respaldo.where(adecuacion_id: session[:adecuacion_id], informe_id: nil, actual: 1).take
