@@ -18,7 +18,9 @@
 			</div>
 		</div>
 		<div class="row">
-			<div id="menu3">
+			<div class="col-xs-12 col-md-12">
+				<div id="menu4">
+				</div>
 			</div>
 			<%if flash[:mensaje]%>
 				<div id="notice">
@@ -26,7 +28,7 @@
 				</div>
 			<%end%>
 		</div>
-		
+		<br>
 		<%# binding.pry %>
 		<% flash.each do |name,value| %>
 		  <div class='alert alert-<%= name %>'>

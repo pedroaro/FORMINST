@@ -388,10 +388,12 @@ class SecretariasController < ApplicationController
 				        notificacionfecha = Date.current.to_s 
 			        	notific2.mensaje = "[" + notificacionfecha + "] ¡Bienvenido a FORMINST! Se le ha asignado a  " + profe.nombres.to_s.split.map(&:capitalize).join(' ') + " " + profe.apellidos.to_s.split.map(&:capitalize).join(' ') + " como tutor de su Plan de formación."
 			        	notific2.save
+			        	linkT = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar adecuacion&param1=" + cpAdecuacion.planformacion_id.to_s + "&param2=no"
+			        	linkI = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar adecuacion"
 						remitente3 = Usuario.where(id: notific.tutor_id).take
-						ActionCorreo.creacion_de_instructor(remitente3, notific.mensaje,1).deliver
+						ActionCorreo.creacion_de_instructor(remitente3, notific.mensaje,1,linkT).deliver
 						remitente2 = Usuario.where(id: plan.instructor_id).take
-						ActionCorreo.creacion_de_instructor(remitente2, notific2.mensaje,0).deliver
+						ActionCorreo.creacion_de_instructor(remitente2, notific2.mensaje,0,linkI).deliver
 			        	flash[:success] = "Se ha creado el instructor " + cppersona.nombres.to_s.split.map(&:capitalize).join(' ') + " " + cppersona.apellidos.to_s.split.map(&:capitalize).join(' ') + " de manera exitosa"
 						redirect_to controller:"secretarias", action: "index"
 					else

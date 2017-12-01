@@ -30,7 +30,7 @@ height: 100%;
 font-family:  Arial, Geneva, Helvetica, sans-serif;
 font-size: 12px;
 line-height: 18px;
-color: #333333;;
+color: #333333;
 }
 
 img { border: none; }
@@ -143,6 +143,11 @@ text-align:right;
 	line-height: 10px;
 	margin: 0 auto;
 	width: 97.5%;
+}
+
+#menu4{
+	background-color: #CCCC99;
+	padding:10px;
 }
 
 #menu {
@@ -347,15 +352,12 @@ color:black;
 
 #footer {
 background: #CCCC99;
-border-top: 2px solid #000000;
+border: 1px solid #333333;
 margin-top: 20px;
 text-align: center;
 color: #333;
 font-size: 11px;
 padding: 10px;
-border-bottom:2px solid #333333;
-border-left:2px solid #333333;
-border-right:2px solid #333333;
 margin: 0 auto;
 }
 
