@@ -2841,11 +2841,6 @@ def generar_pdf() # es funci√≥n permite generar el documento pdf de la adecuaci√
       end
     end
 
-    cpSoporteVerificar = Document.where(informe_id: params[:informe_id].to_i, adecuacion_id: session[:adecuacion_id])
-    if cpSoporteVerificar.blank?
-      cpenviar = "no6"
-    end
-
     if cpenviar == "si"
 
       @informe_id = params[:informe_id].to_i
@@ -2982,6 +2977,7 @@ def generar_pdf() # es funci√≥n permite generar el documento pdf de la adecuaci√
               end
             end  
           end
+          linkT = 
           remitente3 = Usuario.where(id: session[:usuario_id]).take
           ActionCorreo.envio_informe(remitente3, notific.mensaje,2).deliver
           remitente2 = Usuario.where(id: plan.instructor_id).take
@@ -3001,8 +2997,6 @@ def generar_pdf() # es funci√≥n permite generar el documento pdf de la adecuaci√
         flash[:warning]="Debe esperar a que la adecuaci√≥n sea aprobada por consejo de facultad"
       elsif cpenviar=="no2" || cpenviar=="no3" || cpenviar=="no4" || cpenviar=="no5"
         flash[:warning]="El informe no se puede enviar sin terminar"
-      else
-        flash[:warning]="El informe no se puede enviar sin agregar soporte"
       end
       redirect_to controller:"informes", action: "listar_informes"
     end

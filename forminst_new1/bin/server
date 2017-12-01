@@ -292,11 +292,13 @@ while true
 				notific3.actual = 5   #Consejo de Facultad
 				notific3.mensaje = "[" + notificacionfecha + "] Ha recibido un nuevo Informe: ' " + nombre_informe + " ' de " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + ", revisar."
 				notific3.save
-
+				linkT = "http://formacion.ciens.ucv.ve/forminst?accion=listar informe"
+				linkI = "http://localhost:3000/forminst?accion=mostrar adecuacion&plan="+plan.id +"&editar=no"
+				linkI = "http://formacion.ciens.ucv.ve/inicioinstructor/ver_detalles_adecuacion"
 				uentidad = Usuarioentidad.where(entidad_id: 13).take
-				remitente3 = Usuario.where(id: informe.tutor_id).take
+				remitente3 = Usuario.where(id: informe.tutor_id,linkT).take
 				ActionCorreo.envio_informe(remitente3, notific.mensaje,2).deliver
-				remitente2 = Usuario.where(id: plan.instructor_id).take
+				remitente2 = Usuario.where(id: plan.instructor_id,linkI).take
 				ActionCorreo.envio_informe(remitente2, notific2.mensaje,1).deliver
 				remitente = Usuario.where(id: uentidad.usuario_id).take
 				ActionCorreo.envio_informe(remitente, notific3.mensaje,0).deliver
@@ -334,14 +336,15 @@ while true
 			notific2.adecuacion_id = adecuacion.id
 			notific2.actual = 2
 			notificacionfecha = Date.current.to_s 
-			notific2.mensaje = "[" + notificacionfecha + "] " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') + " su tutor " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +" aun no ha enviado el primer informe semestral, dispone de un mes para enviarlo."
+			notific2.mensaje = "[" + notificacionfecha + "] " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') + " su tutor " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +" dispone de un mes para enviar el primer informe semestral."
 			notific2.save
-
+			linkT = "http://formacion.ciens.ucv.ve/forminst?accion=listar informe"
+			linkI = "http://formacion.ciens.ucv.ve/inicioinstructor/ver_detalles_adecuacion"
 			remitente4 = Usuario.where(id: plan.instructor_id).take
-			ActionCorreo.retraso_informe(remitente4, notific2.mensaje).deliver
+			ActionCorreo.retraso_informe(remitente4, notific2.mensaje,linkI).deliver
 
 			remitente3 = Usuario.where(id: plan.tutor_id).take
-			ActionCorreo.retraso_informe(remitente3, notific.mensaje).deliver
+			ActionCorreo.retraso_informe(remitente3, notific.mensaje,linkT).deliver
 			plan.mensaje = 1
 			plan.save
 		end
@@ -366,14 +369,16 @@ while true
 			notific2.adecuacion_id = adecuacion.id
 			notific2.actual = 2
 			notificacionfecha = Date.current.to_s 
-			notific2.mensaje = "[" + notificacionfecha + "] " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') + " su tutor " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +" aun no ha enviado el segundo informe semestral junto con el primer informe anual, dispone de un mes para enviarlo."
+			notific2.mensaje = "[" + notificacionfecha + "] " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') + " su tutor " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +" dispone de un mes para enviar el segundo informe semestral junto con el primer informe anual."
 			notific2.save
 
+			linkT = "http://formacion.ciens.ucv.ve/forminst?accion=listar informe"
+			linkI = "http://formacion.ciens.ucv.ve/inicioinstructor/ver_detalles_adecuacion"
 			remitente4 = Usuario.where(id: plan.instructor_id).take
-			ActionCorreo.retraso_informe(remitente4, notific2.mensaje).deliver
+			ActionCorreo.retraso_informe(remitente4, notific2.mensaje,linkI).deliver
 
 			remitente3 = Usuario.where(id: plan.tutor_id).take
-			ActionCorreo.retraso_informe(remitente3, notific.mensaje).deliver
+			ActionCorreo.retraso_informe(remitente3, notific.mensaje,linkT).deliver
 
 			plan.mensaje = 3
 			plan.save
@@ -400,14 +405,16 @@ while true
 			notific2.adecuacion_id = adecuacion.id
 			notific2.actual = 2
 			notificacionfecha = Date.current.to_s 
-			notific2.mensaje = "[" + notificacionfecha + "] " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') + " su tutor " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +" aun no ha enviado el tercer informe semestral, dispone de un mes para enviarlo."
+			notific2.mensaje = "[" + notificacionfecha + "] " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') + " su tutor " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +" dispone de un mes para enviar el tercer informe semestral ."
 			notific2.save
 
+			linkT = "http://formacion.ciens.ucv.ve/forminst?accion=listar informe"
+			linkI = "http://formacion.ciens.ucv.ve/inicioinstructor/ver_detalles_adecuacion"
 			remitente4 = Usuario.where(id: plan.instructor_id).take
-			ActionCorreo.retraso_informe(remitente4, notific2.mensaje).deliver
+			ActionCorreo.retraso_informe(remitente4, notific2.mensaje,linkI).deliver
 
 			remitente3 = Usuario.where(id: plan.tutor_id).take
-			ActionCorreo.retraso_informe(remitente3, notific.mensaje).deliver
+			ActionCorreo.retraso_informe(remitente3, notific.mensaje,linkT).deliver
 
 			plan.mensaje = 5
 			plan.save
@@ -434,14 +441,16 @@ while true
 			notific2.adecuacion_id = adecuacion.id
 			notific2.actual = 2
 			notificacionfecha = Date.current.to_s 
-			notific2.mensaje = "[" + notificacionfecha + "] " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') + " su tutor " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +" aun no ha enviado el cuarto informe semestral junto con el segundo informe anual y el final, dispone de un mes para enviarlo."
+			notific2.mensaje = "[" + notificacionfecha + "] " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') + " su tutor " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +" dispone de un mes para enviarlo el cuarto informe semestral junto con el segundo informe anual y el final."
 			notific2.save
 
+			linkT = "http://formacion.ciens.ucv.ve/forminst?accion=listar informe"
+			linkI = "http://formacion.ciens.ucv.ve/inicioinstructor/ver_detalles_adecuacion"
 			remitente4 = Usuario.where(id: plan.instructor_id).take
-			ActionCorreo.retraso_informe(remitente4, notific2.mensaje).deliver
+			ActionCorreo.retraso_informe(remitente4, notific2.mensaje,linkI).deliver
 
 			remitente3 = Usuario.where(id: plan.tutor_id).take
-			ActionCorreo.retraso_informe(remitente3, notific.mensaje).deliver
+			ActionCorreo.retraso_informe(remitente3, notific.mensaje,linkT).deliver
 
 			plan.mensaje = 7
 			plan.save
@@ -519,11 +528,13 @@ while true
 			notific2.mensaje = "[" + notificacionfecha + "] " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') + " su tutor " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +"  ha excedido en 15 dias el dia tope de entrega del primer informe semestral, enviar en la brevedad posible."
 			notific2.save
 
+			linkT = "http://formacion.ciens.ucv.ve/forminst?accion=listar informe"
+			linkI = "http://formacion.ciens.ucv.ve/inicioinstructor/ver_detalles_adecuacion"
 			remitente4 = Usuario.where(id: plan.instructor_id).take
-			ActionCorreo.retraso_informe(remitente4, notific2.mensaje).deliver
+			ActionCorreo.retraso_informe(remitente4, notific2.mensaje,linkI).deliver
 
 			remitente3 = Usuario.where(id: plan.tutor_id).take
-			ActionCorreo.retraso_informe(remitente3, notific.mensaje).deliver
+			ActionCorreo.retraso_informe(remitente3, notific.mensaje,linkT).deliver
 			plan.mensaje = 2
 			plan.save
 		end
@@ -559,11 +570,13 @@ while true
 			end
 			notific2.save
 
+			linkT = "http://formacion.ciens.ucv.ve/forminst?accion=listar informe"
+			linkI = "http://formacion.ciens.ucv.ve/inicioinstructor/ver_detalles_adecuacion"
 			remitente4 = Usuario.where(id: plan.instructor_id).take
-			ActionCorreo.retraso_informe(remitente4, notific2.mensaje).deliver
+			ActionCorreo.retraso_informe(remitente4, notific2.mensaje,linkI).deliver
 
 			remitente3 = Usuario.where(id: plan.tutor_id).take
-			ActionCorreo.retraso_informe(remitente3, notific.mensaje).deliver
+			ActionCorreo.retraso_informe(remitente3, notific.mensaje,linkT).deliver
 
 			plan.mensaje = 4
 			plan.save
@@ -593,11 +606,13 @@ while true
 			notific2.mensaje = "[" + notificacionfecha + "] " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') + " su tutor " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +"  ha excedido en 15 dias el dia tope de entrega del tercer informe semestral, enviar en la brevedad posible."
 			notific2.save
 
+			linkT = "http://formacion.ciens.ucv.ve/forminst?accion=listar informe"
+			linkI = "http://formacion.ciens.ucv.ve/inicioinstructor/ver_detalles_adecuacion/"
 			remitente4 = Usuario.where(id: plan.instructor_id).take
-			ActionCorreo.retraso_informe(remitente4, notific2.mensaje).deliver
+			ActionCorreo.retraso_informe(remitente4, notific2.mensaje,linkI).deliver
 
 			remitente3 = Usuario.where(id: plan.tutor_id).take
-			ActionCorreo.retraso_informe(remitente3, notific.mensaje).deliver
+			ActionCorreo.retraso_informe(remitente3, notific.mensaje,linkT).deliver
 
 			plan.mensaje = 6
 			plan.save
@@ -639,11 +654,13 @@ while true
 			end
 			notific2.save
 
+			linkT = "http://formacion.ciens.ucv.ve/forminst?accion=listar informe"
+			linkI = "http://formacion.ciens.ucv.ve/inicioinstructor/ver_detalles_adecuacion"
 			remitente4 = Usuario.where(id: plan.instructor_id).take
-			ActionCorreo.retraso_informe(remitente4, notific2.mensaje).deliver
+			ActionCorreo.retraso_informe(remitente4, notific2.mensaje,linkI).deliver
 
 			remitente3 = Usuario.where(id: plan.tutor_id).take
-			ActionCorreo.retraso_informe(remitente3, notific.mensaje).deliver
+			ActionCorreo.retraso_informe(remitente3, notific.mensaje,linkT).deliver
 
 			plan.mensaje = 8
 			plan.save

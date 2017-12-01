@@ -45,31 +45,31 @@ class IniciotutorController < ApplicationController
 				@est= EstatusAdecuacion.where(adecuacion_id: adecuacion.id, actual: 1).take
 				if !@est.blank?
 					if @est.estatus_id == 1
-						@status.push("APROBADO POR CONSEJO DE FACULTAD")
+						@status.push("[" + @est.fecha.to_s  + "]: APROBADO POR CONSEJO DE FACULTAD")
 						@cpenviado.push(1)
 					elsif @est.estatus_id == 2
-						@status.push("ENVIADO A CONSEJO TECNICO")
+						@status.push("[" + @est.fecha.to_s  + "]: ENVIADO A CONSEJO TECNICO")
 						@cpenviado.push(1)
 					elsif @est.estatus_id == 3
-						@status.push("ENVIADO A COMISIÓN DE INVESTIGACIÓN")
+						@status.push("[" + @est.fecha.to_s  + "]: ENVIADO A COMISIÓN DE INVESTIGACIÓN")
 						@cpenviado.push(1)
 					elsif @est.estatus_id == 4
-						@status.push("ENVIADO A CONSEJO DE FACULTAD")
+						@status.push("[" + @est.fecha.to_s  + "]: ENVIADO A CONSEJO DE FACULTAD")
 						@cpenviado.push(1)
 					elsif @est.estatus_id == 5
-						@status.push("APROBADO CON OBSERVACIONES POR CONSEJO DE FACULTAD")
+						@status.push("[" + @est.fecha.to_s  + "]: APROBADO CON OBSERVACIONES POR CONSEJO DE FACULTAD")
 						@cpenviado.push(0)
 					elsif @est.estatus_id == 6
-						@status.push("GUARDADO")
+						@status.push("[" + @est.fecha.to_s  + "]: GUARDADO")
 						@cpenviado.push(0)
 					elsif @est.estatus_id == 7
-						@status.push("EN REVISIÓN MENOR POR COMISIÓN DE INVESTIGACIÓN")
+						@status.push("[" + @est.fecha.to_s  + "]: EN REVISIÓN MENOR POR COMISIÓN DE INVESTIGACIÓN")
 						@cpenviado.push(1)
 					elsif @est.estatus_id == 8
-						@status.push("ENVIADO A CONSEJO DE ESCUELA")
+						@status.push("[" + @est.fecha.to_s  + "]: ENVIADO A CONSEJO DE ESCUELA")
 						@cpenviado.push(1)
 					elsif @est.estatus_id == 9
-						@status.push("RECHAZADO POR CONSEJO DE FACULTAD")
+						@status.push("[" + @est.fecha.to_s  + "]: RECHAZADO POR CONSEJO DE FACULTAD")
 						@cpenviado.push(1)
 					end
 				else
@@ -2107,21 +2107,23 @@ class IniciotutorController < ApplicationController
 		                elsif(user.escuela_id == 10)
 		                    uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 12).take
 		                end
-
+		                #CORREO EDITAAAAAAR
+			        	linkT = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar adecuacion&param1=" + plan.id.to_s + "&param2=no"
+			        	linkI = "http://formacion.ciens.ucv.ve/"
 						remitente3 = Usuario.where(id: session[:usuario_id]).take
-						ActionCorreo.envio_adecuacion(remitente3, notific.mensaje,2).deliver
+						ActionCorreo.envio_adecuacion(remitente3, notific.mensaje,2,linkT).deliver
 						remitente2 = Usuario.where(id: plan.instructor_id).take
-						ActionCorreo.envio_adecuacion(remitente2, notific2.mensaje,1).deliver
+						ActionCorreo.envio_adecuacion(remitente2, notific2.mensaje,1,linkI).deliver
 						remitente = Usuario.where(id: uentidad.usuario_id).take
-						ActionCorreo.envio_adecuacion(remitente, notific3.mensaje,0).deliver
+						ActionCorreo.envio_adecuacion(remitente, notific3.mensaje,0,linkI).deliver
 			        elsif (cambio_act.estatus_id == 5)
 			        	uentidad = Usuarioentidad.where(entidad_id: 13).take
 			        	remitente3 = Usuario.where(id: session[:usuario_id]).take
-						ActionCorreo.envio_adecuacion(remitente3, notific.mensaje,2).deliver
+						ActionCorreo.envio_adecuacion(remitente3, notific.mensaje,2, linkT).deliver
 						remitente2 = Usuario.where(id: plan.instructor_id).take
-						ActionCorreo.envio_adecuacion(remitente2, notific2.mensaje,1).deliver
+						ActionCorreo.envio_adecuacion(remitente2, notific2.mensaje,1, linkI).deliver
 						remitente = Usuario.where(id: uentidad.usuario_id).take
-						ActionCorreo.envio_adecuacion(remitente, notific3.mensaje,0).deliver
+						ActionCorreo.envio_adecuacion(remitente, notific3.mensaje,0, linkT).deliver
 			        end
 
 			        if(cambio_act.estatus_id == 5)
