@@ -2980,12 +2980,13 @@ def generar_pdf() # es función permite generar el documento pdf de la adecuaci�
           end
           linkTeI = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar informe&param1=" + plan.id.to_s + "&param2="+ @informe_id.to_s
           linkE = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar informe&param1=" + plan.id.to_s+ "&param2="+@informe_id.to_s+"&param3="+adec.id.to_s
+          @document = Respaldo.where(id: respaldo.id).take
           remitente3 = Usuario.where(id: session[:usuario_id]).take
-          ActionCorreo.envio_informe(remitente3, notific.mensaje,2,linkTeI).deliver
+          ActionCorreo.envio_informe(remitente3, notific.mensaje,2,linkTeI,@document).deliver
           remitente2 = Usuario.where(id: plan.instructor_id).take
-          ActionCorreo.envio_informe(remitente2, notific2.mensaje,1,linkTeI).deliver
+          ActionCorreo.envio_informe(remitente2, notific2.mensaje,1,linkTeI,@document).deliver
           remitente = Usuario.where(id: uentidad.usuario_id).take
-          ActionCorreo.envio_informe(remitente, notific3.mensaje,0,linkE).deliver
+          ActionCorreo.envio_informe(remitente, notific3.mensaje,0,linkE,@document).deliver
           flash[:success]="El informe se ha envíado a comision de investigacion"
         else
             flash[:warning]="Debe enviar los informes en orden"
