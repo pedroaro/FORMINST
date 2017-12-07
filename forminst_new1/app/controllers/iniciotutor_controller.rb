@@ -2090,7 +2090,7 @@ class IniciotutorController < ApplicationController
 
 			        cambio_est.actual = 1
 			        cambio_est.save
-
+					@document = Respaldo.where(id: respaldo.id).take											
 			        if (cambio_act.estatus_id == 6)
 			          	userr= Usuario.where(id: session[:usuario_id]).take
 			         	 user =Usuarioentidad.where(usuario_id: userr.id).take
@@ -2112,19 +2112,19 @@ class IniciotutorController < ApplicationController
 			        	linkI = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar adecuacion"
 			        	linkE = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar adecuacion&param3=" + plan.id.to_s
 						remitente3 = Usuario.where(id: session[:usuario_id]).take
-						ActionCorreo.envio_adecuacion(remitente3, notific.mensaje,2,linkT).deliver
+						ActionCorreo.envio_adecuacion(remitente3, notific.mensaje,2,linkT,@document).deliver
 						remitente2 = Usuario.where(id: plan.instructor_id).take
-						ActionCorreo.envio_adecuacion(remitente2, notific2.mensaje,1,linkI).deliver
+						ActionCorreo.envio_adecuacion(remitente2, notific2.mensaje,1,linkI,@document).deliver
 						remitente = Usuario.where(id: uentidad.usuario_id).take
-						ActionCorreo.envio_adecuacion(remitente, notific3.mensaje,0,linkI).deliver
+						ActionCorreo.envio_adecuacion(remitente, notific3.mensaje,0,linkI,@document).deliver
 			        elsif (cambio_act.estatus_id == 5)
 			        	uentidad = Usuarioentidad.where(entidad_id: 13).take
 			        	remitente3 = Usuario.where(id: session[:usuario_id]).take
-						ActionCorreo.envio_adecuacion(remitente3, notific.mensaje,2, linkT).deliver
+						ActionCorreo.envio_adecuacion(remitente3, notific.mensaje,2, linkT,@document).deliver
 						remitente2 = Usuario.where(id: plan.instructor_id).take
-						ActionCorreo.envio_adecuacion(remitente2, notific2.mensaje,1, linkI).deliver
+						ActionCorreo.envio_adecuacion(remitente2, notific2.mensaje,1, linkI,@document).deliver
 						remitente = Usuario.where(id: uentidad.usuario_id).take
-						ActionCorreo.envio_adecuacion(remitente, notific3.mensaje,0, linkE).deliver
+						ActionCorreo.envio_adecuacion(remitente, notific3.mensaje,0, linkE,@document).deliver
 			        end
 
 			        if(cambio_act.estatus_id == 5)
