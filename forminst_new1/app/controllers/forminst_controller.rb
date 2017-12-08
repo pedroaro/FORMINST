@@ -72,9 +72,14 @@ class ForminstController < ApplicationController
 										if params[:param2] == 'no' 
 											session[:editar]= false
 										else
-											session[:editar]= true
+											ade = Adecuacion.where(planformacion_id: plan.id).take
+											esta = EstatusAdecuacion.where(adecuacion_id: ade.id, actual: 1).take
+											if (esta.estatus_id==6)
+												session[:editar] = false
+											else
+												session[:editar] = true
+											end
 										end
-										plan = Planformacion.where(id: session[:plan_id]).take
 										@inst = Persona.where(usuario_id: plan.instructor_id).take
 										@instructorName = @inst.nombres.to_s.split.map(&:capitalize).join(' ') + " " + @inst.apellidos.to_s.split.map(&:capitalize).join(' ')
 										session[:instructorName] = @instructorName
@@ -233,12 +238,6 @@ class ForminstController < ApplicationController
 											plan = Planformacion.where(id: params[:param1].to_i).take
 											if session[:usuario_id] == plan.tutor_id
 												session[:plan_id] = plan.id
-												if params[:param2] == 'no' 
-													session[:editar]= false
-												else
-													session[:editar]= true
-												end
-												plan = Planformacion.where(id: session[:plan_id]).take
 												@inst = Persona.where(usuario_id: plan.instructor_id).take
 												@instructorName = @inst.nombres.to_s.split.map(&:capitalize).join(' ') + " " + @inst.apellidos.to_s.split.map(&:capitalize).join(' ')
 												session[:instructorName] = @instructorName
