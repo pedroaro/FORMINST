@@ -181,7 +181,7 @@ while true
 		end
 	#FIN clualizar los estatus de las adecuaciones luego de haber pasado dos semana---------------------------------------------
 
-	#Nuevo Aclualizar los estatus de los informes luego de haber pasado dos semana-----------------------------------------------
+	#Aclualizar los estatus de los informes luego de haber pasado dos semana-----------------------------------------------
 	estatus_informes = EstatusInforme.where(actual: 1).all
 	fecha = Time.now.strftime("%Y-%m-%d")
 	fecha2 = Time.now

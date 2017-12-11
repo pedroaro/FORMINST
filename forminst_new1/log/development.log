@@ -11083,4 +11083,11 @@ Processing by InformesController#vista_previa as HTML
   [1m[36mResultado Load (0.2ms)[0m  [1m[34mSELECT `resultado`.* FROM `resultado` WHERE `resultado`.`informe_actividad_id` = 502[0m
   [1m[36mActividadEjecutada Load (0.2ms)[0m  [1m[34mSELECT  `actividad_ejecutada`.* FROM `actividad_ejecutada` WHERE `actividad_ejecutada`.`informe_actividad_id` = 502 LIMIT 1[0m
   [1m[36mObservacionTutor Load (0.2ms)[0m  [1m[34mSELECT  `observacion_tutor`.* FROM `observacion_tutor` WHERE `observacion_tutor`.`informe_actividad_id` = 502 LIMIT 1[0m
-  [1m[36mAdecuacionActividad Load (0.
+  [1m[36mAdecuacionActividad Load (0.DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/Desktop/Forminst 0.90/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/Desktop/Forminst 0.90/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/Desktop/Forminst 0.90/FORMINST/forminst_new1/config/routes.rb:6)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/Desktop/Forminst 0.90/FORMINST/forminst_new1/config/routes.rb:6)
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/Desktop/Forminst 0.90/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/Desktop/Forminst 0.90/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/Desktop/Forminst 0.90/FORMINST/forminst_new1/config/routes.rb:6)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/Desktop/Forminst 0.90/FORMINST/forminst_new1/config/routes.rb:6)
