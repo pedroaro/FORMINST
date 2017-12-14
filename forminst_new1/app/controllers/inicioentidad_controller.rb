@@ -2,7 +2,7 @@ class InicioentidadController < ApplicationController
 	layout 'ly_inicio_entidad'
 
 	def index
-		if session[:usuario_id] && session[:entidad]= true
+		if session[:usuario_id] && session[:entidad] == true
 			session[:adecuacion_id] = nil
 			session[:plan_id] = nil
 			session[:instructorName] = nil
@@ -48,7 +48,7 @@ class InicioentidadController < ApplicationController
 			enti = Usuarioentidad.where(usuario_id: session[:usuario_id]).take
 		end
 		#Solamente el consejo de facultad tiene la posibilidad de reactivar instructores
-		if session[:usuario_id] && session[:entidad]= true && session[:entidad]= true && enti.entidad_id == 13
+		if session[:usuario_id] && session[:entidad] == true && enti.entidad_id == 13
 			session[:adecuacion_id] = nil
 			session[:plan_id] = nil
 			session[:instructorName] = nil
@@ -295,7 +295,7 @@ end
 
 	#Modulo para ver la primera pestaña de las adecuaciones
 	def ver_detalles_adecuacion
-		if session[:usuario_id] && session[:entidad]= true
+		if session[:usuario_id] && session[:entidad] == true
 			if (!session[:adecuacion_id].blank? || !params[:adecuacion_id].blank?)
 				@cjpTipo=Usuario.find(session[:usuario_id]).tipo
 				@nombre = session[:nombre_usuario]
@@ -424,6 +424,7 @@ end
 				else 
 					@planformacion = Planformacion.find(session[:plan_id])
 				end
+				@nombre = session[:nombre_usuario]
 				@semestre="0"
 				@actividadesadoc= []
 				@actividadesainv= []
@@ -584,7 +585,7 @@ end
 
 	#Modulo para ver la tercera pestaña de las adecuaciones
 	def detalles_adecuacion3
-		if session[:usuario_id] && session[:entidad]= true
+		if session[:usuario_id] && session[:entidad] == true
 			if !session[:adecuacion_id].blank?
 				@cjpTipo=Usuario.find(session[:usuario_id]).tipo
 				@semestre = 1
@@ -702,7 +703,7 @@ end
 
 	#Modulo para ver la cuarta pestaña de las adecuaciones
 	def detalles_adecuacion4
-		if session[:usuario_id] && session[:entidad]= true
+		if session[:usuario_id] && session[:entidad] == true
 			if !session[:adecuacion_id].blank?
 				@cjpTipo=Usuario.find(session[:usuario_id]).tipo
 				@semestre = 2
@@ -819,7 +820,7 @@ end
 
 	#Modulo para ver la quinta pestaña de las adecuaciones
 	def detalles_adecuacion5
-		if session[:usuario_id] && session[:entidad]= true
+		if session[:usuario_id] && session[:entidad] == true
 			if !session[:adecuacion_id].blank?
 				@cjpTipo=Usuario.find(session[:usuario_id]).tipo
 				@semestre = 3
@@ -934,7 +935,7 @@ end
 	end
 
 	def detalles_adecuacion6
-		if session[:usuario_id] && session[:entidad]= true
+		if session[:usuario_id] && session[:entidad] == true
 			if !session[:adecuacion_id].blank?
 				@cjpTipo=Usuario.find(session[:usuario_id]).tipo
 				@semestre = 4
@@ -1051,7 +1052,7 @@ end
 	end
 
 	def detalles_adecuacion7
-		if session[:usuario_id] && session[:entidad]= true
+		if session[:usuario_id] && session[:entidad]== true
 			if !session[:adecuacion_id].blank?
 				@cjpTipo=Usuario.find(session[:usuario_id]).tipo
 				@semestre = 5
@@ -1070,7 +1071,6 @@ end
 				@actividadesainv= []
 				@actividadesaext= []
 				@actividadesafor= []
-				@actividadesaotr= []
 				@observaciont= []
 				@observacionesExtras= []
 				@j=0
@@ -1168,7 +1168,8 @@ end
 
 #Modulo para mostrar los informes enviados a comision de investigacion o aprobadas por el mismo
 	def listar_informes
-	    if session[:usuario_id] && session[:entidad]= true
+	    if session[:usuario_id] && session[:entidad]== true
+
 			@cjpTipo=Usuario.find(session[:usuario_id]).tipo
 	    	session[:informe_id]=nil
 	    	@nombre = session[:nombre_usuario]
@@ -1271,7 +1272,7 @@ end
     	end
   	end
 	def ver_detalles_informe
-	    if session[:usuario_id] && session[:entidad]= true
+	    if session[:usuario_id] && session[:entidad] == true
 			@cjpTipo=Usuario.find(session[:usuario_id]).tipo
 	      	@nombre = session[:nombre_usuario]
 	      	if params[:informe_id]!=nil
@@ -2123,7 +2124,7 @@ end
 
 	#Funcion para guardar observaciones
  	def guardar_observaciones
- 		if session[:usuario_id] && session[:entidad]= true
+ 		if session[:usuario_id] && session[:entidad] == true
 			@cjpTipo=Usuario.find(session[:usuario_id]).tipo
  
  			@informe = Informe.find(session[:informe_id])
@@ -3529,7 +3530,7 @@ end
 	          end
 				linkT = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar adecuacion&param1=" + plan.id.to_s + "&param2=no"
 			    linkI = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar adecuacion"			
-				linkE = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar adecuacion&param3=" + @adecuacion_id 
+				linkE = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar adecuacion&param3=" + @adecuacion_id.to_s  
 			    remitente3 = Usuario.where(id: plan.tutor_id).take
 				ActionCorreo.envio_adecuacion(remitente3, notific.mensaje,2,linkT,@document).deliver
 				remitente2 = Usuario.where(id: plan.instructor_id).take
@@ -3595,7 +3596,7 @@ end
        		uentidad = Usuarioentidad.where(entidad_id: 13).take
        		linkT = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar adecuacion&param1=" + plan.id.to_s + "&param2=no"
 		    linkI = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar adecuacion"			
-			linkE = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar adecuacion&param3=" + @adecuacion_id 
+			linkE = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar adecuacion&param3=" + @adecuacion_id.to_s
 			remitente3 = Usuario.where(id: plan.tutor_id).take
 			ActionCorreo.envio_adecuacion(remitente3, notific.mensaje,2,linkT,@document).deliver
 			remitente2 = Usuario.where(id: plan.instructor_id).take
@@ -3735,7 +3736,7 @@ end
 	end 
 
 	def borrar_notificaciones #Funcion para borrar las notificaciones
-		if session[:usuario_id] && session[:entidad]= true
+		if session[:usuario_id] && session[:entidad] == true
 			@noti= params[:noti]
 			@cjpTipo=Usuario.find(session[:usuario_id]).tipo
     		notaeliminar = Notificacion.where(id: @noti ).take

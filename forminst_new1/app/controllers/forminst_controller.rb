@@ -22,7 +22,15 @@ class ForminstController < ApplicationController
 		correo= params[:correo] # se toma el valor correo del ususario
 		clave= params[:password] # se toma el valor password del usuario
 		#Si es un Administrados
-		if correo == "Administrador" && params[:password]=="1"
+
+		#Descomentar el codigo siempre que se desee encriptar todas las contraseñas de la base de datos
+		#usu = Usuario.all
+		#usu.each do |u|
+			#u.password = Digest::SHA1.hexdigest(u.password)
+			#u.save
+		#end
+
+		if correo == "Administrador" && params[:password]=="ANCAPE"
 
 			session[:usuario_id] = "-2552" #número de usuario para el administrador (usado para no ingresar al modulo con el link)
 			session[:nombre_usuario] = "Administrador" #usado para no ingresar al modulo con el link
@@ -69,17 +77,6 @@ class ForminstController < ApplicationController
 									plan = Planformacion.where(id: params[:param1].to_i).take
 									if session[:usuario_id] == plan.tutor_id
 										session[:plan_id] = plan.id
-										if params[:param2] == 'no' 
-											session[:editar]= false
-										else
-											ade = Adecuacion.where(planformacion_id: plan.id).take
-											esta = EstatusAdecuacion.where(adecuacion_id: ade.id, actual: 1).take
-											if (esta.estatus_id==6)
-												session[:editar] = false
-											else
-												session[:editar] = true
-											end
-										end
 										@inst = Persona.where(usuario_id: plan.instructor_id).take
 										@instructorName = @inst.nombres.to_s.split.map(&:capitalize).join(' ') + " " + @inst.apellidos.to_s.split.map(&:capitalize).join(' ')
 										session[:instructorName] = @instructorName
@@ -109,6 +106,9 @@ class ForminstController < ApplicationController
 										flash[:success]= "Bienvenido! " + session[:nombre_usuario] = @persona.nombres.titleize+' '+@persona.apellidos.titleize
 										redirect_to controller:"iniciotutor", action: "index"
 									end
+								elsif params[:accion] == "listar informes"
+									flash[:success]= "Bienvenido! " + session[:nombre_usuario] = @persona.nombres.titleize+' '+@persona.apellidos.titleize
+									redirect_to controller:"inicioinstructor", action: "listar_informes"
 								else
 									flash[:success]= "Bienvenido! " + session[:nombre_usuario] = @persona.nombres.titleize+' '+@persona.apellidos.titleize
 									redirect_to controller:"iniciotutor", action: "index"
@@ -139,6 +139,9 @@ class ForminstController < ApplicationController
 										flash[:success]= "Bienvenido! " + session[:nombre_usuario] = @persona.nombres.titleize+' '+@persona.apellidos.titleize
 										redirect_to controller:"inicioinstructor", action: "index"
 									end
+								elsif params[:accion] == "listar informes"
+									flash[:success]= "Bienvenido! " + session[:nombre_usuario] = @persona.nombres.titleize+' '+@persona.apellidos.titleize
+									redirect_to controller:"inicioinstructor", action: "listar_informes"
 								else
 									flash[:success]= "Bienvenido! " + session[:nombre_usuario] = @persona.nombres.titleize+' '+@persona.apellidos.titleize
 									redirect_to controller:"inicioinstructor", action: "index"
@@ -267,6 +270,9 @@ class ForminstController < ApplicationController
 												flash[:success]= "Bienvenido! " + session[:nombre_usuario] = @persona.nombres.titleize+' '+@persona.apellidos.titleize
 												redirect_to controller:"iniciotutor", action: "index"
 											end
+										elsif params[:accion] == "listar informes"
+											flash[:success]= "Bienvenido! " + session[:nombre_usuario] = @persona.nombres.titleize+' '+@persona.apellidos.titleize
+											redirect_to controller:"inicioinstructor", action: "listar_informes"
 										else
 											flash[:success]= "Bienvenido! " + session[:nombre_usuario] = @persona.nombres.titleize+' '+@persona.apellidos.titleize
 											redirect_to controller:"iniciotutor", action: "index"
@@ -297,6 +303,9 @@ class ForminstController < ApplicationController
 													flash[:success]= "Bienvenido! " + session[:nombre_usuario] = @persona.nombres.titleize+' '+@persona.apellidos.titleize
 													redirect_to controller:"inicioinstructor", action: "index"
 												end
+											elsif params[:accion] == "listar informes"
+												flash[:success]= "Bienvenido! " + session[:nombre_usuario] = @persona.nombres.titleize+' '+@persona.apellidos.titleize
+												redirect_to controller:"inicioinstructor", action: "listar_informes"
 											else
 												flash[:success]= "Bienvenido! " + session[:nombre_usuario] = @persona.nombres.titleize+' '+@persona.apellidos.titleize
 												redirect_to controller:"inicioinstructor", action: "index"
