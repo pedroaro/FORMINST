@@ -396,7 +396,7 @@
                       <%= link_to "Soportes", {:controller => "inicioentidad", :action => "ver_soporte", :actividad_id => actdoc.id }, class: "pad add btn btn-default" %>
                     </td>
                     
-                    <input type="hidden" name="ext<%=i.to_s%>" value='<%= actdoc.id %>'>
+                    <input type="hidden" name="for<%=i.to_s%>" value='<%= actdoc.id %>'>
                 </tr>
                 <% @j= @j +1 %>
               <% end %>
@@ -445,7 +445,7 @@
                       <%= link_to "Soportes", {:controller => "inicioentidad", :action => "ver_soporte", :actividad_id => actdoc.id }, class: "pad add btn btn-default" %>
                     </td>
                     
-                    <input type="hidden" name="for<%=i.to_s%>" value='<%= actdoc.id %>'>
+                    <input type="hidden" name="ext<%=i.to_s%>" value='<%= actdoc.id %>'>
                 </tr>
                 <% @j= @j +1 %>
               <% end %>
@@ -531,7 +531,7 @@
               </tr>
               <tr>
                 <td colspan="4">
-                    <textareaname="conclusiones" class="form-control" rows="3" disabled><%= @informe.conclusiones%></textarea>
+                    <textarea name="conclusiones" class="form-control" rows="3" disabled><%= @informe.conclusiones%></textarea>
                 </td>
               </tr>
               <tr>

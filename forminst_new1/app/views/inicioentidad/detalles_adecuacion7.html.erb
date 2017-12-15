@@ -195,7 +195,6 @@
           <input id="cant_investigacion" type="hidden" name="cant_investigacion" value="<%=@actividadesainv.size()%>"/>
           <input id="cant_formacion" type="hidden" name="cant_formacion" value="<%=@actividadesafor.size()%>"/> 
           <input id="cant_extension" type="hidden" name="cant_extension" value="<%=@actividadesaext.size()%>"/> 
-          <input id="cant_otra" type="hidden" name="cant_otra" value="<%=@actividadesaotr.size()%>"/> 
           <input id="cant_otra" type="hidden" name="semestre" value="<%=@semestre%>"/> 
           <input id="cant_otra" type="hidden" name="adecuacion_id" value="<%=@adecuacion.id%>"/> 
         <table class="table table-bordered table-striped">
@@ -318,35 +317,6 @@
                   <% end %>
                 </td>
                <input type="hidden" name="ext<%=i.to_s%>" value='<%= actdoc.id %>'>
-            </tr>
-                <% @j= @j +1 %>
-          <% end %>
-
-          <tr>
-            <td class="text-center" colspan="3" ><strong>Otras Actividades</strong></td>
-            <td class="text-center"   ><strong>Observaciones</strong></td>
-            <td class="text-center"  style='width:10%;'><strong>Mas observaciones</strong></td>
-          </tr>
-          <% @actividadesaotr.each_with_index do |actdoc,i| %>
-            <tr>
-              <td colspan="3">
-                <textarea class="form-control" rows="2"  name='<%= @otra+actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
-              </td>
-              <td >
-                  <%if @bool_enviado==0 && @cjpTipo=="Institucional"%>
-                    <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' ><%=@observaciont[actdoc.id] %></textarea>
-                  <%else%>
-                    <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' disabled><%=@observaciont[actdoc.id] %></textarea>
-                  <%end%>
-                </td>
-                <td >
-                  <% if @observacionesExtras[actdoc.id] == "si" %>                  
-                    <%= link_to "Más obs. ", {:controller => "inicioentidad", :action => "mas_observaciones3", :actividad_id => actdoc.id, :semestre => @semestre, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-warning" %>
-                  <% else %>
-                    <%= link_to "Más obs. ", {:controller => "inicioentidad", :action => "mas_observaciones3", :actividad_id => actdoc.id, :semestre => @semestre, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-default" %>
-                  <% end %>
-                </td>
-                 <input type="hidden" name="otr<%=i.to_s%>" value='<%= actdoc.id %>'>
             </tr>
                 <% @j= @j +1 %>
           <% end %>
