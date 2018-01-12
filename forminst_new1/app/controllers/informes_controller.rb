@@ -2771,21 +2771,21 @@ def generar_pdf() # es función permite generar el documento pdf de la adecuaci�
       @informes.each do |inf|
         si = EstatusInforme.where(informe_id: inf.id, actual: 1).take
         if(si.estatus_id==1)
-          @st = "APROBADO POR CONSEJO DE FACULTAD"
+          @st = "[" + si.fecha.to_s  + "]: APROBADO POR CONSEJO DE FACULTAD"
         elsif(si.estatus_id==2)
-          @st = "ENVIADO A CONSEJO TÉCNICO"
+          @st = "[" + si.fecha.to_s  + "]: ENVIADO A CONSEJO TÉCNICO"
         elsif(si.estatus_id==3)
-          @st = "ENVIADO A COMISION DE INVESTIGACIÓN"
+          @st = "[" + si.fecha.to_s  + "]: ENVIADO A COMISION DE INVESTIGACIÓN"
         elsif(si.estatus_id==4)
-          @st = "ENVIADO A CONSEJO DE FACULTAD"
+          @st = "[" + si.fecha.to_s  + "]: ENVIADO A CONSEJO DE FACULTAD"
         elsif(si.estatus_id==5)
-          @st = "APROBADO CON OBSERVACIONES POR CONSEJO DE FACULTAD"
+          @st = "[" + si.fecha.to_s  + "]: APROBADO CON OBSERVACIONES POR CONSEJO DE FACULTAD"
         elsif(si.estatus_id==6)
          @st = "GUARDADO"
         elsif(si.estatus_id==8)
-          @st = "ENVIADO A CONSEJO DE ESCUELA"
+          @st = "[" + si.fecha.to_s  + "]: ENVIADO A CONSEJO DE ESCUELA"
         elsif(si.estatus_id==9)
-          @st = "RECHAZADO POR CONSEJO DE FACULTAD"
+          @st = "[" + si.fecha.to_s  + "]: RECHAZADO POR CONSEJO DE FACULTAD"
         end
         @status.push(@st)
 
