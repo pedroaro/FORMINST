@@ -1,6 +1,7 @@
 class Document < ActiveRecord::Base
 
   validate :file_size_under_one_mb
+  validate :only_pdf
 
   def initialize(params = {})
     @file = params.delete(:file)
@@ -24,6 +25,12 @@ class Document < ActiveRecord::Base
     def file_size_under_one_mb
       if (@file.size.to_f / NUM_BYTES_IN_MEGABYTE) > 1
         errors.add(:file, 'El tamaño del archivo no puede ser mayor a 1 MB.')
+      end
+    end
+
+    def only_pdf
+      if (@file.content_type != "application/pdf")
+        errors.add(:file, 'El archivo solo puede ser PDF')
       end
     end
 

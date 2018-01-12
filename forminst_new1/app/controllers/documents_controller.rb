@@ -5,6 +5,9 @@ class DocumentsController < ApplicationController
   # GET /documents
   # GET /documents.json
   def index
+    #pdf_filename = File.join(Rails.root, "tmp/PDFs/18810993-2017-07-02-adecuacion.pdf")
+    #send_file(pdf_filename, :filename => "18810993-2017-07-02-adecuacion.pdf", :disposition => 'inline', :type => "application/pdf")
+
 
     #validar si se envio la adecuacion
     @bool_enviado = 0
@@ -44,12 +47,15 @@ class DocumentsController < ApplicationController
     end
   end
 
-  # GET /documents/1
   # GET /documents/1.json
   def show
+    puts "holaaaaaaaaaaaaaaaaaaaaaa"
+    puts params[:commit]
+    puts @document.filename
     send_data(@document.file_contents,
-              type: @document.content_type,
-              filename: @document.filename)
+            type: @document.content_type,
+            filename: @document.filename,
+            disposition: 'inline')
   end
 
   # GET /documents/new
@@ -92,7 +98,7 @@ class DocumentsController < ApplicationController
 			flash[:success]="El documento se ha subido con exito"
 			redirect_to controller:"documents", action: "index", :actividad_id => $actividad
 			else
-			flash[:danger]="El documento no se ha cargado, recuerde que debe pesar menos de 1MB"
+			flash[:danger]="Error: Recuerde que el documento debe ser un pdf que ocupe menos de 1MB"
 			redirect_to controller:"documents", action: "new"
 			end
 		else

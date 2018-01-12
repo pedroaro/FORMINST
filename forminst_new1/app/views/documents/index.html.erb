@@ -300,7 +300,7 @@
       <thead>
         <tr>
           <th class="text-center">Nombre del Archivo</th>
-          <th class="text-center">Descargar</th>
+          <th class="text-center">Mostrar</th>
           <% if @bool_enviado == 0 %>
             <th class="text-center">Borrar</th>
           <% end %>
@@ -310,7 +310,11 @@
         <% @documents.each do |document| %>
           <tr>
             <td class = "text-center"><%= document.filename %></td>
-            <td class = "text-center" ><%= button_to 'Descargar', document, method: :get , class: "btn btn-info"%></td>
+            <td class = "text-center" >
+            	<form class="button_to" method="get" action="<%= '/documents/' + document.id.to_s + ' ' + document.filename%>">
+            	<input type="submit" class="btn btn-info" value="Mostrar">
+            	</form>
+            </td>
             <% if @bool_enviado == 0 %>
               <td class = "text-center"><%= button_to 'Borrar', document, method: :delete, data: { confirm: '¿Estás seguro?' }, class: "btn btn-danger" %></td>
             <% end %>
