@@ -18,7 +18,7 @@ class ForminstController < ApplicationController
 	def autenticar
 
 		#Conectar con el servidor ldap
-		ldap= Net::LDAP.new(:host=>"ciens.ucv.ve",:port=>389, :auth=>{:method=> :simple, :username=>"cn=vmail,dc=ciens,dc=ucv,dc=ve", :password => "Gu4B37hpi5mgdJzkucj4OoszKYoPG1"})
+		ldap= Net::LDAP.new(:host=>"correo.ciens.ucv.ve",:port=>389, :auth=>{:method=> :simple, :username=>"cn=vmail,dc=ciens,dc=ucv,dc=ve", :password => "Gu4B37hpi5mgdJzkucj4OoszKYoPG1"})
 		correo= params[:correo] # se toma el valor correo del ususario
 		clave= params[:password] # se toma el valor password del usuario
 		#Si es un Administrados
@@ -43,7 +43,11 @@ class ForminstController < ApplicationController
 
 
 		elsif correo!=nil && correo!="" && clave!=nil && clave!="" #verificar que el correo no sea nulo
-		result = ldap.bind_as(:base => "dc=ciens, dc=ucv, dc=ve", :filter => "(uid=#{correo})", :password => clave) #Se busca el usuario en el ldap
+		begin
+			result = ldap.bind_as(:base => "dc=ciens, dc=ucv, dc=ve", :filter => "(uid=#{correo})", :password => clave)
+		rescue  => error
+			result = nil
+		end
 		@usuario= Usuario.where(user: correo).take #buscar el usuario en la base de datos
 			if @usuario #Si el usuario esta registrado
 	      		tipo=@usuario.tipo #Guardar el tipo de usuario "Secretaria, Entidad, Vista(No poder modificar en la entidad), tutor e instructor"
