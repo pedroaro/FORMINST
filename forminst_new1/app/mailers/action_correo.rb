@@ -10,6 +10,12 @@ class ActionCorreo < ActionMailer::Base
 		@link = link
 		attachments[document.filename] = document.file_contents		
 		if id == 0		##ENTIDAD
+			uEntidad = Usuarioentidad.where(usuario_id: remitente.id).take
+			pertenecientes = Aenviar.where(entidad_id: uEntidad.entidad_id)
+			nombreEntidad = Entidad.find(uEntidad.entidad_id).nombre
+			pertenecientes.each do |email|
+				mail(to: [@user_email,email], subject: nombreEntidad + ': Ha recibido una nueva Adecuación')
+			end
 			mail(to: [@user_email,@email], subject: 'Ha recibido un nuevo Informe')
 		else			##TUTOR O INSTRUCTOR
 			mail(to: [@user_email,@email], subject: 'Avance de Informe')
@@ -25,6 +31,12 @@ class ActionCorreo < ActionMailer::Base
 		@link = link
 		attachments[document.filename] = document.file_contents				
 		if id == 0		##ENTIDAD
+			uEntidad = Usuarioentidad.where(usuario_id: remitente.id).take
+			pertenecientes = Aenviar.where(entidad_id: uEntidad.entidad_id)
+			nombreEntidad = Entidad.find(uEntidad.entidad_id).nombre
+			pertenecientes.each do |email|
+				mail(to: [@user_email,email], subject: nombreEntidad + ': Ha recibido una nueva Adecuación')
+			end
 			mail(to: [@user_email,@email], subject: 'Ha recibido una nueva Adecuación')
 		else			##TUTOR O INSTRUCTOR
 			mail(to: [@user_email,@email], subject: 'Avance de Adecuación')

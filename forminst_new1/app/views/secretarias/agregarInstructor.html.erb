@@ -6,18 +6,18 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Tutor <span class="caret"></span></a>
             <ul class="dropdown-menu nav" role="menu">
               <li></li>
-              <li><%= link_to 'Agregar Tutor', :controller => 'secretarias', :action => 'agregarTutor'%></li>
-              <li><%= link_to 'Modificar Tutor', :controller => 'secretarias', :action => 'modificarTutor', :ver => 'no' %></li>
-              <li><%= link_to 'Información Tutor', :controller => 'secretarias', :action => 'modificarTutor', :ver => 'si' %></li>
+              <li><%= link_to 'Agregar Información', :controller => 'secretarias', :action => 'agregarTutor'%></li>
+              <li><%= link_to 'Modificar Información', :controller => 'secretarias', :action => 'modificarTutor', :ver => 'no' %></li>
+              <li><%= link_to 'Consultar Información', :controller => 'secretarias', :action => 'modificarTutor', :ver => 'si' %></li>
             </ul>
         </li>
         <li class="dropdown">
             <a href="#" class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-expanded="false">Instructor <span class="caret"></span></a>
             <ul class="dropdown-menu nav" role="menu">
               <li></li>
-              <li><a href="#" class = 'active'>Agregar Instructor</a></li>
-              <li><%= link_to 'Modificar Instructor', :controller => 'secretarias', :action => 'modificarInstructor', :ver => 'no' %></li>
-              <li><%= link_to 'Información Instructor', :controller => 'secretarias', :action => 'modificarInstructor', :ver => 'si' %></li>
+              <li><a href="#" class = 'active'>Agregar Información</a></li>
+              <li><%= link_to 'Modificar Información', :controller => 'secretarias', :action => 'modificarInstructor', :ver => 'no' %></li>
+              <li><%= link_to 'Consultar Información', :controller => 'secretarias', :action => 'modificarInstructor', :ver => 'si' %></li>
             </ul>
         </li>
         <li><a href="../secretarias/logout">Cerrar Sesión</a></li>

@@ -41,7 +41,6 @@ class ForminstController < ApplicationController
 			flash[:success] = "Bienvenido! Administrador"
 			redirect_to controller:"administrador", action: "index" #Mostrar el modulo del administrador
 
-
 		elsif correo!=nil && correo!="" && clave!=nil && clave!="" #verificar que el correo no sea nulo
 		begin
 			result = ldap.bind_as(:base => "dc=ciens, dc=ucv, dc=ve", :filter => "(uid=#{correo})", :password => clave)
@@ -57,7 +56,6 @@ class ForminstController < ApplicationController
 					if @usuario.ldap==true && !result.blank? #si el usuario se encuentra en el ldap entonces
 						@usuario.password = Digest::SHA1.hexdigest(clave) #Se encripta la clave del usuario para almacenarlo en la base de datos (se usa cuando no funciona el ldap)
 						@usuario.save
-
 						#segun el usuario se muestra su modulo y se almacenan los datos de las sesiones
 						if tipo=="Secretaria"
 							session[:usuario_id]= @usuario.id
