@@ -190,7 +190,6 @@ class IniciotutorController < ApplicationController
 
 	def ver_detalles_adecuacion
 		if session[:usuario_id] && session[:tutor]
-			session[:informe_id] = nil
 			if !params[:plan_id].blank?
 				session[:plan_id] = params[:plan_id]
 			end
@@ -261,7 +260,7 @@ class IniciotutorController < ApplicationController
 			@actividadesaext= []
 			@actividadesafor= []
 			@actividadesaotr= []
-
+			j=0
 			if params[:primera_parte] == "si"
 				#Presentacion
 				if params[:presentacionId].blank?
@@ -314,7 +313,9 @@ class IniciotutorController < ApplicationController
 				end
 			end
 
-
+			j=0
+			i=:edit.to_s+j.to_s
+			@edit= params[i].to_s
 			if @cant_edit.to_i > 0
 				@modifique= true
 
@@ -698,9 +699,8 @@ class IniciotutorController < ApplicationController
 				@planformacion = Planformacion.find(params[:plan_id])
 				session[:plan_id] = @planformacion.id
 				@inst = Persona.where(usuario_id: @planformacion.instructor_id).take
-				@instructorName = @inst.nombres.to_s.split.map(&:capitalize).join(' ') + " " + @inst.apellidos.to_s.split.map(&:capitalize).join(' ')
-				session[:instructorName] = @instructorName
 				@adecuacion = Adecuacion.where(planformacion_id: session[:plan_id]).take
+				session[:editar]= true
 				session[:adecuacion_id]= @adecuacion.id
 			else 
 				@planformacion = Planformacion.find(session[:plan_id])
@@ -814,8 +814,6 @@ class IniciotutorController < ApplicationController
 				@planformacion = Planformacion.find(params[:plan_id])
 				session[:editar]= true
 				session[:plan_id] = @planformacion.id
-				@instructorName = Persona.where(usuario_id: @planformacion.instructor_id).take.nombres
-				session[:instructorName] = @instructorName
 				@adecuacion = Adecuacion.where(planformacion_id: session[:plan_id]).take
 				session[:adecuacion_id]= @adecuacion.id
 			else 
@@ -1767,22 +1765,14 @@ class IniciotutorController < ApplicationController
 					tipo= @act.tipo_actividad_id
 					if tipo==1
 						a = true
-					else
-						if tipo==2
-							b = true
-						else
-							if tipo==3
-								c = true
-							else
-								if tipo==4
-									d = true
-								else
-									if tipo==5
-										e = true
-									end
-								end
-							end
-						end
+					elsif tipo==2
+						b = true
+					elsif tipo==3
+						c = true
+					elsif tipo==4
+						d = true
+					elsif tipo==5
+						e = true
 					end
 				end
 				if (a == true && b== true && c== true && d== true  && e== true)
@@ -1801,11 +1791,6 @@ class IniciotutorController < ApplicationController
 					g = g + 1
 				end
 
-				@actividades2doc= []
-				@actividades2inv= []
-				@actividades2ext= []
-				@actividades2for= []
-				@actividades2otr= []
 				@actividades2= AdecuacionActividad.where(adecuacion_id: @adecuacion_id, semestre: 2).all
 				if @actividades2.blank?
 					g = g + 1
@@ -1819,28 +1804,15 @@ class IniciotutorController < ApplicationController
 					@act= Actividad.find(actade.actividad_id)
 					tipo= @act.tipo_actividad_id
 					if tipo==1
-						@actividades2doc.push(@act)
 						a = true
-					else
-						if tipo==2
-							@actividades2inv.push(@act)
-							b = true
-						else
-							if tipo==3
-								@actividades2ext.push(@act)
-								c = true
-							else
-								if tipo==4
-									@actividades2for.push(@act)
-									d = true
-								else
-									if tipo==5
-										@actividades2otr.push(@act)
-										e = true
-									end
-								end
-							end
-						end
+					elsif tipo==2
+						b = true
+					elsif tipo==3
+						c = true
+					elsif tipo==4
+						d = true
+					elsif tipo==5
+						e = true
 					end
 				end
 				if (a == true && b== true && c== true && d== true  && e== true)
@@ -1858,11 +1830,6 @@ class IniciotutorController < ApplicationController
 				else 
 					g = g + 1
 				end
-				@actividades3doc= []
-				@actividades3inv= []
-				@actividades3ext= []
-				@actividades3for= []
-				@actividades3otr= []
 				@actividades3= AdecuacionActividad.where(adecuacion_id: @adecuacion_id, semestre: 3).all
 				if @actividades3.blank?
 			        g = g + 1
@@ -1876,28 +1843,15 @@ class IniciotutorController < ApplicationController
 					@act= Actividad.find(actade.actividad_id)
 					tipo= @act.tipo_actividad_id
 					if tipo==1
-						@actividades3doc.push(@act)
 						a = true
-					else
-						if tipo==2
-							@actividades3inv.push(@act)
-							b = true
-						else
-							if tipo==3
-								@actividades3ext.push(@act)
-								c = true
-							else
-								if tipo==4
-									@actividades3for.push(@act)
-									d = true
-								else
-									if tipo==5
-										@actividades3otr.push(@act)
-										e = true
-									end
-								end
-							end
-						end
+					elsif tipo==2
+						b = true
+					elsif tipo==3
+						c = true
+					elsif tipo==4
+						d = true
+					elsif tipo==5
+						e = true
 					end
 				end
 				if (a == true && b== true && c== true && d== true  && e== true)
@@ -1915,11 +1869,6 @@ class IniciotutorController < ApplicationController
 				else 
 					g = g + 1
 				end
-				@actividades4doc= []
-				@actividades4inv= []
-				@actividades4ext= []
-				@actividades4for= []
-				@actividades4otr= []
 				@actividades4= AdecuacionActividad.where(adecuacion_id: @adecuacion_id, semestre: 4).all
 				if @actividades4.blank?
 			        g = g + 1
@@ -1933,28 +1882,15 @@ class IniciotutorController < ApplicationController
 					@act= Actividad.find(actade.actividad_id)
 					tipo= @act.tipo_actividad_id
 					if tipo==1
-						@actividades4doc.push(@act)
 						a = true
-					else
-						if tipo==2
-							@actividades4inv.push(@act)
-							b = true
-						else
-							if tipo==3
-								@actividades4ext.push(@act)
-								c = true
-							else
-								if tipo==4
-									@actividades4for.push(@act)
-									d = true
-								else
-									if tipo==5
-										@actividades4otr.push(@act)
-										e = true
-									end
-								end
-							end
-						end
+					elsif tipo==2
+						b = true
+					elsif tipo==3
+						c = true
+					elsif tipo==4
+						d = true
+					elsif tipo==5
+						e = true
 					end
 				end
 				if (a == true && b== true && c== true && d== true  && e== true)
@@ -1973,10 +1909,54 @@ class IniciotutorController < ApplicationController
 						g = g + 1
 				end
 				aob = 0
+				a= false
+				b= false
+				c= false
+				d= false
+				e= false
 				@actividades4= AdecuacionActividad.where(adecuacion_id: @adecuacion_id, semestre: 5).all
-				if @actividades4.blank?
-			        g = g + 1
-			        aob = 1
+				@actividades4.each do |actade| 
+					@act= Actividad.find(actade.actividad_id)
+					tipo= @act.tipo_actividad_id
+					if tipo==1
+						a = true
+					elsif tipo==2
+						b = true
+					elsif tipo==3
+						c = true
+					elsif tipo==4
+						d = true
+					end
+				end
+
+				if (a && b && c && d)
+				elsif ( a && c )
+					if(!b)
+						a = Actividad.new
+						a.tipo_actividad_id = 2
+						a.actividad = "Ninguna"
+						a.save
+
+						adac = AdecuacionActividad.new
+						adac.adecuacion_id = @adecuacion_id
+						adac.actividad_id = a.id
+						adac.semestre = 5
+						adac.save
+					end
+					if(!d)
+						a = Actividad.new
+						a.tipo_actividad_id = 4
+						a.actividad = "Ninguna"
+						a.save
+
+						adac = AdecuacionActividad.new
+						adac.adecuacion_id = @adecuacion_id
+						adac.actividad_id = a.id
+						adac.semestre = 5
+						adac.save
+					end
+				else 
+					g = g + 1
 				end
 
 				are1 = 0
@@ -1985,6 +1965,7 @@ class IniciotutorController < ApplicationController
 				are4 = 0
 				are5 = 0
 				are6 = 0
+				are7 = 0
 				@actividades4= AdecuacionActividad.where(adecuacion_id: @adecuacion_id, semestre: 0).all
 				@actividades4.each do |cpActividadAdecuacion|
 					cpActividad = Actividad.find(cpActividadAdecuacion.actividad_id)
@@ -2006,18 +1987,21 @@ class IniciotutorController < ApplicationController
 					if cpActividad.tipo_actividad_id == 4 && !cpActividad.actividad.blank?
 						are6+=1
 					end
+					if cpActividad.tipo_actividad_id == 5 && !cpActividad.actividad.blank?
+						are7+=1
+					end
 				end
 
-				if are1 == 0 && are2 == 0 && are3 == 0 && are3 == 0 && are4 == 0 && are5 == 0 && are6 == 0
+				if are1 == 0 || are2 == 0 || are3 == 0 || are3 == 0 || are4 == 0 || are5 == 0 || are6 == 0 || are7 == 0
 					g=1
 				end
 
 				if (g != 0)
-					if are1 == 0 && are2 == 0 && are3 == 0 && are3 == 0 && are4 == 0 && are5 == 0 && are6 == 0
+					if are1 == 0 || are2 == 0 || are3 == 0 || are3 == 0 || are4 == 0 || are5 == 0 || are6 == 0
 						if aob == 0
 							flash[:danger]="No puede enviar la adecuación sin haber llenado todos los semestres"
 						else
-							flash[:danger]="No puede enviar la adecuación sin tener al menos una actividad obligatoria"
+							flash[:danger]="No puede enviar la adecuación sin tener al menos una actividad obligatoria de docencia e investigación"
 						end
 					else
 						flash[:danger]="No puede enviar la adecuación sin estar terminada"
