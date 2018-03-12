@@ -29,18 +29,6 @@ class IniciotutorController < ApplicationController
 		redirect_to controller: "forminst", action: "index"
 	end
 
-	def destroyNotifications
-		@post = Notificacion.find(params[:id])
-		respond_to do |format|
-			if @post.destroy
-				format.html { redirect_to :back }
-			else
-				flash[:notice] = "Post failed to delete."
-				format.html { redirect_to :back }
-			end
-		end
-	end
-
 	def planformacions
 		if session[:usuario_id] && session[:tutor]
 			session[:adecuacion_id] = nil
@@ -288,38 +276,46 @@ class IniciotutorController < ApplicationController
 					cpActividadAdecuacion.save
 				end
 
+
 				j=0
+				@modifique= true
 				i=:edit.to_s+j.to_s
 				@edit= params[i].to_s
 
-				while j < params[:cant_edit].to_i
-					if @edit == "presentacion"
-						if !params[:presentacionId].blank?
-							cpActividad = Actividad.find(params[:presentacionId])
-							cpActividad.actividad = params[:presentacion]
-							cpActividad.save
+				if @edit == "presentacion" || @edit == "descripcion"
+					while j < params[:cant_edit].to_i
+						if @edit == "presentacion"
+							if !params[:presentacionId].blank?
+								cpActividad = Actividad.find(params[:presentacionId])
+								cpActividad.actividad = params[:presentacion]
+								cpActividad.save
+							end
+						elsif @edit == "descripcion"
+							if !params[:presentacionId].blank?
+								cpActividad = Actividad.find(params[:descripcionId])
+								cpActividad.actividad = params[:descripcion]
+								cpActividad.save
+							end
 						end
-					elsif @edit == "descripcion"
-						if !params[:presentacionId].blank?
-							cpActividad = Actividad.find(params[:descripcionId])
-							cpActividad.actividad = params[:descripcion]
-							cpActividad.save
-						end
+						j+=1
+						i=:edit.to_s+j.to_s
+						@edit= params[i].to_s
 					end
-
-					j+=1
-					i=:edit.to_s+j.to_s
-					@edit= params[i].to_s
 				end
 			end
 
-			j=0
-			i=:edit.to_s+j.to_s
-			@edit= params[i].to_s
 			if @cant_edit.to_i > 0
-				@modifique= true
+				if params[:primera_parte] != "si"
+					j=0
+					@modifique= true
+					i=:edit.to_s+j.to_s
+					@edit= params[i].to_s
+				end
 
 				while j < @cant_edit.to_i
+					@modifique= true
+					i=:edit.to_s+j.to_s
+					@edit= params[i]
 					@act= Actividad.find(@edit)
 					tipo= @act.tipo_actividad_id
 

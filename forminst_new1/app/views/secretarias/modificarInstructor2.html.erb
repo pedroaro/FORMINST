@@ -15,13 +15,13 @@
             <a href="#" class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-expanded="false">Instructor <span class="caret"></span></a>
             <ul class="dropdown-menu nav" role="menu">
               <li></li>
-              <li><%= link_to 'Agregar Instructor', :controller => 'secretarias', :action => 'agregarInstructor'%></li>
+              <li><%= link_to 'Agregar Información', :controller => 'secretarias', :action => 'agregarInstructor'%></li>
               <% if @ver == "si" %>
-                <li><%= link_to 'Modificar Instructor', :controller => 'secretarias', :action => 'modificarInstructor', :ver => 'no' %></li>
+                <li><%= link_to 'Modificar Información', :controller => 'secretarias', :action => 'modificarInstructor', :ver => 'no' %></li>
                 <li><a href="#" class = 'active'>Información Instructor</a></li>
               <% else %>
                 <li><a href="#" class = 'active'>Modificar Instructor</a></li>
-                <li><%= link_to 'Información Instructor', :controller => 'secretarias', :action => 'modificarInstructor', :ver => 'si' %></li>
+                <li><%= link_to 'Consultar Información', :controller => 'secretarias', :action => 'modificarInstructor', :ver => 'si' %></li>
               <% end %>
             </ul>
         </li>

@@ -53,6 +53,51 @@ class AdministradorController < ApplicationController
 		end
 	end
 
+	def agregar_participante_entidad
+		session[:administrador]
+		if session[:usuario_id]=="-2552" && session[:administrador] && session[:nombre_usuario]=="Administrador"
+
+			#Todas las Entidades
+			cpentidad = Entidad.all
+			cpcontador = 0
+			@cpentidades = []
+			@cpentidades[cpcontador] = Array.new(2) { |i|  }
+			@cpentidades[cpcontador][0] =  "Seleccione una entidad"
+			@cpentidades[cpcontador][1] = 0
+			cpcontador = cpcontador + 1
+
+			cpentidad.each do |entidad|
+				if entidad.nombre != "tutor" && entidad.nombre != "instructor"
+					@cpentidades[cpcontador] = Array.new(2) { |i|  }
+					@cpentidades[cpcontador][0] =  entidad.nombre
+					@cpentidades[cpcontador][1] = entidad.id
+					cpcontador = cpcontador + 1
+				end
+			end
+
+			#Todas las Escuelas
+			cpescuela = Escuela.all
+			cpcontador = 0
+			@cpescuelas = []
+			@cpescuelas[cpcontador] = Array.new(2) { |i|  }
+			@cpescuelas[cpcontador][0] =  "Seleccione una escuela"
+			@cpescuelas[cpcontador][1] = 0
+			cpcontador = cpcontador + 1
+
+			cpescuela.each do |escuela|
+				if escuela.nombre != "Desconocida"
+					@cpescuelas[cpcontador] = Array.new(2) { |i|  }
+					@cpescuelas[cpcontador][0] =  escuela.nombre
+					@cpescuelas[cpcontador][1] = escuela.id
+					cpcontador = cpcontador + 1
+				end
+			end
+
+		else
+			redirect_to controller:"forminst", action: "index"
+		end
+	end
+
 	def guardar_secretaria
 		session[:administrador]
 		if session[:usuario_id]=="-2552" && session[:administrador] && session[:nombre_usuario]=="Administrador"
@@ -116,6 +161,7 @@ class AdministradorController < ApplicationController
 	def modificar_email
 		session[:administrador]
 		if session[:usuario_id]=="-2552" && session[:administrador] && session[:nombre_usuario]=="Administrador"
+			@entidadId = params[:jrentidades]
 			cjpUsuarios = Usuarioentidad.where(entidad_id: params[:jrentidades])
 			cjpUsuarios.each do |uentidad|
 				if Usuario.where(id: uentidad.usuario_id).take.tipo == "Institucional"
@@ -124,6 +170,43 @@ class AdministradorController < ApplicationController
 			end
 			@email = Usuario.where(id: $id).take.user
 
+		else
+			redirect_to controller:"forminst", action: "index"
+		end
+	end
+
+	def nuevo_participante
+		session[:administrador]
+		if session[:usuario_id]=="-2552" && session[:administrador] && session[:nombre_usuario]=="Administrador"
+			@entidadId = params[:jrentidades]
+		else
+			redirect_to controller:"forminst", action: "index"
+		end
+	end
+
+	def seleccionar_participante
+		session[:administrador]
+		if session[:usuario_id]=="-2552" && session[:administrador] && session[:nombre_usuario]=="Administrador"
+			envio = Aenviar.where(entidad_id: params[:jrentidades])
+			envio.each do |enviar|
+				@cpentidades[cpcontador] = Array.new(2) { |i|  }
+				@cpentidades[cpcontador][0] =  enviar.nombre
+				@cpentidades[cpcontador][1] = enviar.entidad_id
+				cpcontador = cpcontador + 1
+			end
+		else
+			redirect_to controller:"forminst", action: "index"
+		end
+	end
+
+	def guardar_participante
+		session[:administrador]
+		if session[:usuario_id]=="-2552" && session[:administrador] && session[:nombre_usuario]=="Administrador"
+			envio = Aenviar.new
+			envio.entidad_id = params[:jrentidades]
+			envio.email = params[:email]
+			envio.save
+			redirect_to controller:"administrador", action: "index"
 		else
 			redirect_to controller:"forminst", action: "index"
 		end

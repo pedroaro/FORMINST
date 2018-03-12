@@ -68,10 +68,13 @@
 		        <tbody>
 		        	<% if !@notificaciones1.blank? %>
 			          	<% @notificaciones1.reverse_each.each_with_index do |notificaciones1| %> 
-										<tr id='<%= notificaciones1.id %>'>
-											<td class="text-left"><%= notificaciones1.mensaje %></td>
-											<td><%= link_to '', {:controller => 'iniciotutor', :action => 'destroyNotifications', :id => notificaciones1.id, method: :delete}, :remote => true , :class => "eliminarN glyphicon glyphicon-trash" %></td>
-										</tr>
+							<%= form_tag({controller: 'inicioinstructor', action: 'borrar_notificaciones'}) do%>
+							<input id="noti" type="hidden" name="noti" value='<%= notificaciones1.id %>'/>
+				            <tr>
+				              <td class="text-left"><%= notificaciones1.mensaje %></td>
+				              <td><button type="submit" class="glyphicon glyphicon-trash" aria-hidden="true"></button></td>
+				            </tr>
+			        		<% end %>
 		          		<% end %>
 		          	<% else %>
 		          		<tr>
