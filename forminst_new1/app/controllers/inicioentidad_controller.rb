@@ -452,6 +452,8 @@ end
 				end
 
 				@adecuacion = Adecuacion.where(planformacion_id: session[:plan_id]).take
+				@est= EstatusAdecuacion.where(adecuacion_id: @adecuacion.id).take
+				@revision= Revision.where(usuario_id: session[:usuario_id], adecuacion_id: @adecuacion.id, estatus_id: @est.estatus_id, informe_id: nil).take
 				actividades = AdecuacionActividad.where(adecuacion_id: session[:adecuacion_id], semestre: 0)
 				if !actividades.blank?
 					actividades.each do |actividadAde|
@@ -459,9 +461,29 @@ end
 						if actividad.tipo_actividad_id == 9
 							@presentacion = actividad.actividad
 							@presentacionId = actividad.id
+							if(@revision!=nil && @revision != "")
+								@cpObs= ObservacionActividadAdecuacion.where(adecuacionactividad_id: @presentacionId).where.not(revision_id: @revision.id).all
+							else
+								@cpObs= ObservacionActividadAdecuacion.where(adecuacionactividad_id: @presentacionId).all
+							end
+						    if @cpObs.blank?
+						    	@observacionesExtras[@presentacionId]="no"
+						    else
+						    	@observacionesExtras[@presentacionId]="si"
+						    end
 						elsif actividad.tipo_actividad_id == 8
 							@descripcion = actividad.actividad
 							@descripcionId = actividad.id
+							if(@revision!=nil && @revision != "")
+								@cpObs= ObservacionActividadAdecuacion.where(adecuacionactividad_id: @descripcionId).where.not(revision_id: @revision.id).all
+							else
+								@cpObs= ObservacionActividadAdecuacion.where(adecuacionactividad_id: @descripcionId).all
+							end
+						    if @cpObs.blank?
+						    	@observacionesExtras[@descripcionId]="no"
+						    else
+						    	@observacionesExtras[@descripcionId]="si"
+						    end
 						end
 					end
 				end

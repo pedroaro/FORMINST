@@ -113,7 +113,6 @@
         <%end%>
       <%= link_to "Vista Previa", {controller: "inicioentidad", action: "vista_previa"}, class: "btn btn-default" %>
       <%= link_to "Generar PDF", {controller: "adecuacions", action: "generar_pdf"},target: :_blank, class: "btn btn-default" %>
-      <%= link_to "Ver Soportes", {controller: "inicioentidad", action: "ver_soporte"}, class: "btn btn-default" %>
       <%= link_to "Versiones Anteriores", {controller: "inicioentidad", action: "ver_respaldos"}, class: "btn btn-default" %>
 
     </div>
@@ -193,8 +192,8 @@
         <input id="cant_formacion" type="hidden" name="cant_formacion" value="<%=@actividadesafor.size()%>"/> 
         <input id="cant_extension" type="hidden" name="cant_extension" value="<%=@actividadesaext.size()%>"/> 
         <input id="cant_otra" type="hidden" name="cant_otra" value="<%=@actividadesaotr.size()%>"/> 
-         <input id="cant_otra" type="hidden" name="semestre" value="<%=@semestre%>"/> 
-              <input id="cant_otra" type="hidden" name="adecuacion_id" value="<%=@adecuacion.id%>"/> 
+        <input id="cant_otra" type="hidden" name="semestre" value="<%=@semestre%>"/> 
+        <input id="cant_otra" type="hidden" name="adecuacion_id" value="<%=@adecuacion.id%>"/> 
 
   
       <table class="table table-bordered table-striped">

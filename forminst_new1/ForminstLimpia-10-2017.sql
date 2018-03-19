@@ -103,6 +103,32 @@ LOCK TABLES `adecuacion` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `aenviar`
+--
+
+DROP TABLE IF EXISTS `aenviar`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `aenviar` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `entidad_id` int(11) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `aEnviarUsuario` (`entidad_id`),
+  CONSTRAINT `aEnviarUsuario` FOREIGN KEY (`entidad_id`) REFERENCES `entidad` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=0 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `aenviar`
+--
+
+LOCK TABLES `aenviar` WRITE;
+/*!40000 ALTER TABLE `aenviar` DISABLE KEYS */;
+/*!40000 ALTER TABLE `aenviar` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `adecuacion_actividad`
 --
 
@@ -1044,7 +1070,7 @@ CREATE TABLE `usuario` (
 
 LOCK TABLES `usuario` WRITE;
 /*!40000 ALTER TABLE `usuario` DISABLE KEYS */;
-INSERT INTO `usuario` VALUES (1, "departamento.biologia.celular",0,1,"dbc","departamento.biologia.celular","Institucional"), (2, "departamento.botanica",0,1,"db","departamento.botanica","Institucional"), (3, "departamento.ecologia",0,1,"de","departamento.ecologia","Institucional"), (4, "departamento.tecnologia.alimentos",0,1,"dta","departamento.tecnologia.alimentos","Institucional"), (5, "departamento.zoologia",0,1,"dz","departamento.zoologia","Institucional"), (6, "centro.microscopia.electronica",0,1,"cme","centro.microscopia.electronica","Institucional"), (7, "escuela.biologia",0,1,"eb","escuela.biologia","Institucional"), (8, "comision.investigacion.fisica",0,1,"cif","comision.investigacion.fisica","Institucional"), (9, "consejo.escuela.fisica",0,1,"cef","consejo.escuela.fisica","Institucional"), (10, "comision.investigacion.quimica",0,1,"ciq","comision.investigacion.quimica","Institucional"), (11, "consejo.escuela.quimica",0,1,"ceq","consejo.escuela.quimica","Institucional"), (12, "comision.investigacion.computacion",0,1,"cic","comision.investigacion.computacion","Institucional"), (13, "consejo.escuela.computacion",0,1,"cec","consejo.escuela.computacion","Institucional"), (14, "comision.investigacion.geoquimica",0,1,"cig","comision.investigacion.geoquimica","Institucional"), (15, "consejo.escuela.geoquimica",0,1,"ceg","consejo.escuela.geoquimica","Institucional"), (16, "comision.investigacion.matematica",0,1,"cim","comision.investigacion.matematica","Institucional"), (17, "consejo.escuela.matematica",0,1,"cem","consejo.escuela.matematica","Institucional"), (18, "consejo.facultad",0,1,"cf","consejo.facultad","Institucional"), (19, "consejo.ibe",0,1,"cibe","consejo.ibe","Institucional"), (20, "consejo.ict",0,1,"cict","consejo.ict","Institucional"), (21, "consejo.icta",0,1,"cicta","consejo.icta","Institucional"), (22, "consejo.izet",0,1,"izet","consejo.izet","Institucional");
+INSERT INTO `usuario` VALUES (1, "departamento.biologia.celular",0,1,"0204377e9168c677a39dbaffb85737cd4bf4237a","departamento.biologia.celular","Institucional"), (2, "departamento.botanica",0,1,"0352a8acc949c7df21fec16e566ba9a74e797a97","departamento.botanica","Institucional"), (3, "departamento.ecologia",0,1,"600ccd1b71569232d01d110bc63e906beab04d8c","departamento.ecologia","Institucional"), (4, "departamento.tecnologia.alimentos",0,1,"bf363938bec235cd63b5463ee6032683dd929456","departamento.tecnologia.alimentos","Institucional"), (5, "departamento.zoologia",0,1,"57f378cca8e1bd5ea94400ff922e6451409e0765","departamento.zoologia","Institucional"), (6, "centro.microscopia.electronica",0,1,"4216716639747b2338a739c4ffd649afa7ae1894","centro.microscopia.electronica","Institucional"), (7, "escuela.biologia",0,1,"97a02664f35ad0c9cbf2121dceebca2d7373e34a","escuela.biologia","Institucional"), (8, "comision.investigacion.fisica",0,1,"8a6a1e7193def937c9a3253912592714a439057b","comision.investigacion.fisica","Institucional"), (9, "consejo.escuela.fisica",0,1,"bfb672d79fc9fcca32fa7d450bb9fe7912479bf3","consejo.escuela.fisica","Institucional"), (10, "comision.investigacion.quimica",0,1,"908271003ed7a4fd3ee7d0da7d4eef142dcfe6e2","comision.investigacion.quimica","Institucional"), (11, "consejo.escuela.quimica",0,1,"2d137c726b3d1a587e82dd8df824e3fdd7f579c1","consejo.escuela.quimica","Institucional"), (12, "comision.investigacion.computacion",0,1,"b0096e0c0be45b11a10cec30e461fbe9398b2ce1","comision.investigacion.computacion","Institucional"), (13, "consejo.escuela.computacion",0,1,"6f34a195f81f9358c170ca11c035c211ba2345b1","consejo.escuela.computacion","Institucional"), (14, "comision.investigacion.geoquimica",0,1,"5457903442ff879646b2bab28e94c8f7129e3dd6","comision.investigacion.geoquimica","Institucional"), (15, "consejo.escuela.geoquimica",0,1,"798ca43748d9c4ca355aaadfeef67d585693e625","consejo.escuela.geoquimica","Institucional"), (16, "comision.investigacion.matematica",0,1,"3a5e2f520b038d308f4486613a6a6bbd3ab3c860","comision.investigacion.matematica","Institucional"), (17, "consejo.escuela.matematica",0,1,"baa3cdac49150ef6689c8016eab0ce257d183a8f","consejo.escuela.matematica","Institucional"), (18, "consejo.facultad",0,1,"f78b64c9e0f2ea24fddce2b0d809cb2855fed1a6","consejo.facultad","Institucional"), (19, "consejo.ibe",0,1,"d05953bd367da5dffba84a0a8804fe2a38fb419b","consejo.ibe","Institucional"), (20, "consejo.ict",0,1,"98f0ac20af4aa077629025fee6e8bd550b035cd7","consejo.ict","Institucional"), (21, "consejo.icta",0,1,"55d21c6805f9f5153ea01ca10d14852ed359baea","consejo.icta","Institucional"), (22, "consejo.izet",0,1,"d89ddae18d1c1affe121b80e7fefe9349fed4bcd","consejo.izet","Institucional");
 /*!40000 ALTER TABLE `usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 

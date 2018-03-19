@@ -26,8 +26,8 @@ class ForminstController < ApplicationController
 		#Descomentar el codigo siempre que se desee encriptar todas las contraseñas de la base de datos
 		#usu = Usuario.all
 		#usu.each do |u|
-			#u.password = Digest::SHA1.hexdigest(u.password)
-			#u.save
+		#	u.password = Digest::SHA1.hexdigest(u.password)
+		#	u.save
 		#end
 
 		if correo == "Administrador" && params[:password]=="ANCAPE"
