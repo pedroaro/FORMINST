@@ -351,6 +351,35 @@
                   </tr>
                       <% @j= @j +1 %>
                 <% end %>
+                <tr>
+                  <td class="text-left">11. Culminación</td>
+                  <%if  session[:editar]%> 
+                      <td></td>
+                  <%end%>
+                  <td></td>
+                </tr>
+                <% @actividadesaotr.each_with_index do |actdoc,i| %>
+                  <tr>
+                    <td>
+                      <textarea class="form-control" rows="2"  name='<%= @otra+actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
+                    </td>
+                    <td >
+                        <%if @bool_enviado==0 && @cjpTipo=="Institucional"%>
+                          <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' ><%=@observaciont[actdoc.id] %></textarea>
+                        <%else%>
+                          <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' disabled><%=@observaciont[actdoc.id] %></textarea>
+                        <%end%>
+                      </td>
+                      <td >
+                        <% if @observacionesExtras[actdoc.id] == "si" %>                  
+                          <%= link_to "Más obs. ", {:controller => "inicioentidad", :action => "mas_observaciones3", :actividad_id => actdoc.id, :semestre => @semestre, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-warning" %>
+                        <% else %>
+                          <%= link_to "Más obs. ", {:controller => "inicioentidad", :action => "mas_observaciones3", :actividad_id => actdoc.id, :semestre => @semestre, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-default" %>
+                        <% end %>
+                      </td>
+                     <input type="hidden" name="otr<%=i.to_s%>" value='<%= actdoc.id %>'>
+                  </tr>
+                <% end %>
   	          </tbody>
   	        </table>
           </div>

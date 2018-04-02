@@ -12,7 +12,7 @@
 /db/*.sqlite3-journal
 
 # Ignore all logfiles and tempfiles.
-/forminst_new1/log/*.log
+/forminst_new1/log/
 /forminst_new1/tmp
 
 # PEdro lo logro
