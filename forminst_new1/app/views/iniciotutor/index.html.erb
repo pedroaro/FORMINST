@@ -6,7 +6,6 @@
 				<li><a href="../iniciotutor/planformacions">Plan de Formación</a></li>
 				<li><a href="../iniciotutor/notificaciones">Notificaciones</a></li>
 				<li><a href="../iniciotutor/logout">Cerrar Sesión</a></li>
-				<li><%#= link_to 'Cerrar Sesión', :controller => 'iniciotutor', :action => 'logout', :salida => '1' %></li>
 			</ul>
 		
 	</div>
@@ -71,20 +70,17 @@
 		        </thead>
 		        <tbody>
 		        	<% if !@notificaciones1.blank? %>
-			          	<% @notificaciones1.reverse_each.each_with_index do |notificaciones1| %> 
-							<%= form_tag({controller: 'iniciotutor', action: 'borrar_notificaciones1'}) do%>
-							<input id="noti" type="hidden" name="noti" value='<%= notificaciones1.id %>'/>
-				            <tr>
-				              <td class="text-left"><%= notificaciones1.mensaje %></td>
-				              <td><button type="submit" class="glyphicon glyphicon-trash" aria-hidden="true"></button></td>
-				            </tr>
-			        		<% end %>
-		          		<% end %>
-		          	<% else %>
-		          		<tr>
-				              <td class="text-center">No tienes nuevas notificaciones, vuelve mas tarde</td>
-				        </tr>
-		          	<% end %>
+								<% @notificaciones1.reverse_each.each_with_index do |notificaciones1| %>
+									<tr id='<%= notificaciones1.id %>'>
+										<td class="text-left"><%= notificaciones1.mensaje %></td>
+										<td><%= link_to '', {:controller => 'iniciotutor', :action => 'destroyNotifications', :id => notificaciones1.id, method: :delete}, :remote => true , :class => "eliminarN glyphicon glyphicon-trash" %></td>
+									</tr>
+								<% end %>
+							<% else %>
+								<tr>
+									<td class="text-center">No tienes nuevas notificaciones, vuelve mas tarde</td>
+								</tr>
+		          <% end %>
 		        </tbody>
 		      </table>
 		    </div>

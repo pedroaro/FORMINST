@@ -3769,4 +3769,15 @@ end
 		end
 	end
 
+	def destroyNotifications
+		@post = Notificacion.find(params[:id])
+		respond_to do |format|
+			if @post.destroy
+				format.html { redirect_to :back }
+			else
+				flash[:notice] = "Post failed to delete."
+				format.html { redirect_to :back }
+			end
+		end
+	end
 end

@@ -3,25 +3,37 @@
 
 	#Inicio del Modulo del Instructor
   def index
-	if session[:usuario_id] && session[:instructor] == true #verificar que no ingresara con el link del modulo
+    if session[:usuario_id] && session[:instructor] == true #verificar que no ingresara con el link del modulo
       plan = Planformacion.where(instructor_id: session[:usuario_id]).take #Se busca  el plan de formación del instructor
       session[:adecuacion_id] = Adecuacion.where(planformacion_id: plan.id).take.id #se busca la adecuacion del instructor
-	  session[:plan_id] = plan.id #se alamacena el plan de formación
-	  session[:instructorName] = nil
+      session[:plan_id] = plan.id #se alamacena el plan de formación
+      session[:instructorName] = nil
       session[:informe_id] = nil
-	  @nombre = session[:nombre_usuario]
-	  #almacenar las notificaciones del usuario para mostrarlas
+      @nombre = session[:nombre_usuario]
+      #almacenar las notificaciones del usuario para mostrarlas
       @notificaciones1= []
       @notificaciones = Notificacion.where(instructor_id: session[:usuario_id]).all
       @notificaciones.each do |notificaciones|
         if notificaciones.actual == 2        #Caso de notificaciones del instructor
           @notificaciones1.push(notificaciones)
         end
-  	  end
-  	#si intenta ingresar por la direccion del url
-	else
-		redirect_to controller:"forminst", action: "index"
-	end
+      end
+      #si intenta ingresar por la direccion del url
+    else
+      redirect_to controller:"forminst", action: "index"
+    end
+  end
+
+  def destroyNotifications
+    @post = Notificacion.find(params[:id])
+    respond_to do |format|
+    	if @post.destroy
+    		format.html { redirect_to :back }
+    	else
+    		flash[:notice] = "Post failed to delete."
+    		format.html { redirect_to :back }
+    	end
+    end
   end
 
   #Vista de los soportes agregados
