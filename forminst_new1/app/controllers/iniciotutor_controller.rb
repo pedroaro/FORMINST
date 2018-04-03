@@ -29,6 +29,18 @@ class IniciotutorController < ApplicationController
 		redirect_to controller: "forminst", action: "index"
 	end
 
+	def destroyNotifications
+		@post = Notificacion.find(params[:id])
+		respond_to do |format|
+			if @post.destroy
+				format.html { redirect_to :back }
+			else
+				flash[:notice] = "Post failed to delete."
+				format.html { redirect_to :back }
+			end
+		end
+	end
+
 	def planformacions
 		if session[:usuario_id] && session[:tutor]
 			session[:adecuacion_id] = nil
@@ -1557,19 +1569,15 @@ class IniciotutorController < ApplicationController
 				tipo= @act.tipo_actividad_id
 				if tipo==1
 					@actividades0doc.push(@act)
-				else
-					if tipo==2
-						@actividades0inv.push(@act)
-					else
-						if tipo==3
-							@actividades0ext.push(@act)
-						else
-							if tipo==4
-								@actividades0for.push(@act)
-							end
-						end
+					elsif tipo==2
+					@actividades0inv.push(@act)
+					elsif tipo==3
+					@actividades0ext.push(@act)
+					elsif tipo==4
+					@actividades0for.push(@act)
+					elsif tipo==5
+					@actividades0otr.push(@act)
 					end
-				end
 			end
 
 			@actividades1doc= []
