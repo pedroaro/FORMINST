@@ -1,0 +1,37 @@
+<%= form_for(@estatusinforme) do |f| %>
+  <% if @estatusinforme.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@estatusinforme.errors.count, "error") %> prohibited this estatusinforme from being saved:</h2>
+
+      <ul>
+      <% @estatusinforme.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :id %><br>
+    <%= f.number_field :id %>
+  </div>
+  <div class="field">
+    <%= f.label :informeId %><br>
+    <%= f.number_field :informeId %>
+  </div>
+  <div class="field">
+    <%= f.label :fecha %><br>
+    <%= f.date_select :fecha %>
+  </div>
+  <div class="field">
+    <%= f.label :estatusId %><br>
+    <%= f.number_field :estatusId %>
+  </div>
+  <div class="field">
+    <%= f.label :actual %><br>
+    <%= f.check_box :actual %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

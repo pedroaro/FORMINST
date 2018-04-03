@@ -1,0 +1,2 @@
+module ObservacionactividadadecuacionsHelper
+end

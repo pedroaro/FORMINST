@@ -1,0 +1,25 @@
+<%= form_for(@tipoestatus) do |f| %>
+  <% if @tipoestatus.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@tipoestatus.errors.count, "error") %> prohibited this tipoestatus from being saved:</h2>
+
+      <ul>
+      <% @tipoestatus.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :id %><br>
+    <%= f.number_field :id %>
+  </div>
+  <div class="field">
+    <%= f.label :informeId %><br>
+    <%= f.text_field :informeId %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

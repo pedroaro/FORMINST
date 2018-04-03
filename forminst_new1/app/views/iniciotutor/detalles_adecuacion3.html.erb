@@ -1,0 +1,706 @@
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Mensaje de confirmación</h4>
+      </div>
+      <div class="modal-body">
+      <center>
+        <h5>¿Está seguro que desea enviar esta adecuación?</h5>
+      </center>
+      </div>
+      <div class="modal-footer">
+        <%= link_to "Aceptar", {controller: "iniciotutor", action: "cambiar_estatusA", :adecuacion_id => @adecuacion.id }, class: "btn btn-default" %>
+      
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+<div class="modal fade" id="myModalEliminar" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h3 class="modal-title" id="myModalLabel">Eliminar Adecuación</h3>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <center>
+            <h5>¿Está seguro que desea eliminar esta adecuación?</h5>
+          </center>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <%= link_to "Aceptar", {controller: "iniciotutor", action: "eliminar_adecuacion" }, class: "btn btn-default" %>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="myModal2" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Mensaje de notificación</h4>
+      </div>
+      <div class="modal-body">
+        <h5>La adecuación ya fue enviada.</h5>
+      </div>
+      <div class="modal-footer">
+    
+        <button type="button" class="btn btn-default" data-dismiss="modal">Aceptar</button>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+
+
+<div class="modal fade" id="myModal3" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Mensaje de notificación</h4>
+      </div>
+      <div class="modal-body">
+        <h5>No puede realizar ningún cambio debido a que la adecuación ya fue enviada.</h5>
+      </div>
+      <div class="modal-footer">
+    
+        <button type="button" class="btn btn-default" data-dismiss="modal">Aceptar</button>
+      </div>
+    </div>
+    
+  </div>
+</div>
+
+
+<div class = 'row'>
+  <div class="col-xs-12 col-md-12">
+      <ul class="nav nav-tabs">
+        <li><a href="../iniciotutor/index">Inicio</a></li>
+        <li><a href="../iniciotutor/planformacions" class='active'>Plan de Formación</a></li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Informes <span class="caret"></span></a>
+            <ul class="dropdown-menu nav" role="menu">
+              <li></li>
+              
+              <%if @cpBloquear%>
+                <li><a href="#" style="color:gray">Crear Informe</a></li>
+              <%else%>
+              <li><a href="#" data-toggle="modal" data-target="#selectInforme">
+                Crear Informe
+              </a></li>
+              <%end%>
+
+              <li><%= link_to 'Listar Informes', :controller => 'informes', :action => 'listar_informes' %></li>
+            </ul>
+        </li>
+        <li><%= link_to 'Prórroga', :controller => 'iniciotutor', :action => 'prorroga' %></li>
+        <li><a href="../iniciotutor/logout">Cerrar Sesión</a></li>
+      </ul>
+  
+  </div>
+</div>
+
+<div class="modal fade" id="selectInforme" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h3 class="modal-title" id="myModalLabel">Crear Informe</h3>
+      </div>
+      <div class="modal-body">
+        <h5>Seleccione el informe a crear</h5>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-xs-1"></div>
+          <div class="col-xs-5 text-center">
+          <%= link_to "Primer Informe Semestral", {controller: "informes", action: "ver_crear_informe", :informe_id => 1 }, class: "btn btn-forminst-blue btn-block" %>
+          <%= link_to "Segundo Informe Semestral", {controller: "informes", action: "ver_crear_informe", :informe_id => 2 }, class: "btn btn-forminst-blue btn-block" %>
+          <%= link_to "Tercer Informe Semestral", {controller: "informes", action: "ver_crear_informe", :informe_id => 4 }, class: "btn btn-forminst-blue btn-block" %>
+          <%= link_to "Cuarto Informe Semestral", {controller: "informes", action: "ver_crear_informe", :informe_id => 5 }, class: "btn btn-forminst-blue btn-block" %>
+          <br /><br />
+          </div>
+          <div class="col-xs-1"></div>
+            <div class="col-xs-4 text-center">
+            <%= link_to "Primer Informe Anual", {controller: "informes", action: "ver_crear_informe", :informe_id => 3 }, class: "btn btn-forminst-blue btn-block" %>
+            <%= link_to "Segundo Informe Anual", {controller: "informes", action: "ver_crear_informe", :informe_id => 6 }, class: "btn btn-forminst-blue btn-block" %>
+            <%= link_to "Informe Final", {controller: "informes", action: "ver_crear_informe", :informe_id => 7 }, class: "btn btn-forminst-blue btn-block" %>
+            <button type="button" class="btn btn-default btn-block" data-dismiss="modal">Cancelar</button>
+            <br /><br />
+          </div>
+          <div class="col-xs-1"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12 col-md-12">
+      <%if !session[:editar]%> 
+        <%= form_tag({controller: 'iniciotutor', action: 'detalles_adecuacion3',:class => "form-inline"}) do%>
+          <input type="hidden" name="plan_id" value=<%= session[:plan_id] %>>
+          <input type="hidden" name="editar" value='si'>
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default" onclick = " location.href = 'javascript:history.back(-1);'">Volver</button>
+            <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-default">Enviar</button>
+            <%= link_to "Vista Previa", {controller: "iniciotutor", action: "vista_previa"}, class: "btn btn-default" %>
+            <%= link_to "Generar PDF", {controller: "adecuacions", action: "generar_pdf"},target: :_blank, class: "btn btn-default" %>
+            <%= link_to "Versiones Anteriores", {controller: "iniciotutor", action: "ver_respaldos"}, class: "btn btn-default" %>
+            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModalEliminar">Eliminar Adecuación</button>
+            <% if @bool_enviado == 0%>
+              <button type="submit" class="btn btn-forminst-blue" style="color: white" >Modificar Adecuación</button>
+            <% else%>
+              <button type="submit" class="btn btn-forminst-blue" disabled>Modificar Adecuación</button>
+            <% end%>
+          </div>
+        <%end%>
+      <%else%>
+        <div class="btn-group" role="group">
+          <button type="button" class="btn btn-default" onclick = " location.href = 'javascript:history.back(-1);'">Volver</button>
+          <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-default">Enviar</button>
+          <%= link_to "Vista Previa", {controller: "iniciotutor", action: "vista_previa"}, class: "btn btn-default" %>
+          <%= link_to "Generar PDF", {controller: "adecuacions", action: "generar_pdf"},target: :_blank, class: "btn btn-default" %>
+          <%= link_to "Versiones Anteriores", {controller: "iniciotutor", action: "ver_respaldos"}, class: "btn btn-default" %>
+          <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModalEliminar">Eliminar Adecuación</button>
+        </div>
+      <%end%>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12 col-md-12 col-md-offset-0">
+    <div class= "text-left">
+      <%if @nombre%>
+        <div>
+         <span><%= link_to 'Plan Formación', :controller => 'iniciotutor', :action => 'planformacions' %></span>
+          <p style="display:inline"> / </p>
+          <%if !session[:editar]%> 
+            <span><%= link_to session[:instructorName] , :controller => 'iniciotutor', :action => 'ver_detalles_adecuacion', :editar => 'no'%></span>
+            <p style="display:inline"> /  Detalles 1er Semestre  </p>
+          <%else %>
+            <span><%= link_to session[:instructorName] , :controller => 'iniciotutor', :action => 'ver_detalles_adecuacion' , :editar => 'si'%></span>
+            <p style="display:inline"> / Modificar 1er Semestre </p>
+          <%end%>   
+        </div>
+      <%end%>
+    </div>
+    <div class="text-right">
+      <div id = "fechamuestra">
+        <h3> <%= Time.now.strftime("%d") %>
+          <% if Time.now.strftime("%m").to_i == 1 %>
+            de Enero del
+          <% elsif Time.now.strftime("%m").to_i == 2 %>
+            de Febrero del
+          <% elsif Time.now.strftime("%m").to_i == 3 %>
+            de Marzo del
+          <% elsif Time.now.strftime("%m").to_i == 4 %>
+            de Abril del
+          <% elsif Time.now.strftime("%m").to_i == 5 %>
+            de Mayo del
+          <% elsif Time.now.strftime("%m").to_i == 6 %>
+            de Junio del
+          <% elsif Time.now.strftime("%m").to_i == 7 %>
+            de Julio del
+          <% elsif Time.now.strftime("%m").to_i == 8 %>
+            de Agosto del
+          <% elsif Time.now.strftime("%m").to_i == 9 %>
+            de Septiembre del
+          <% elsif Time.now.strftime("%m").to_i == 10 %>
+            de Octubre del
+          <% elsif Time.now.strftime("%m").to_i == 11 %>
+            de Noviembre del
+          <% elsif Time.now.strftime("%m").to_i == 12 %>
+            de Diciembre del
+          <% end %>
+          <%= Time.now.strftime("%Y") %> 
+        </h3>
+      </div>
+      <%if @nombre%>
+        <div>
+          <h4><b><%=@nombre%></b></h4>
+        </div>
+      <%end%>
+    </div>
+  </div>
+</div>
+
+<div class = 'row'>
+  <div class="col-xs-11 col-xs-offset-1 col-md-12 col-md-offset-0 text-justify">
+    <h1 class="text-left">Detalles de la Adecuación</h1>
+    <h4><b> Instructor :  <%=session[:instructorName]%></b></h4>
+  </div>
+</div>
+<br>
+<div class = 'row'>
+  <div class = 'col-xs-12 col-md-12 col-lg-12'>
+      <ul class="tabs">
+        <li class="activa"><a href="#">1° Semestre</a></li>
+        <li><%= link_to '2° Semestre', :controller => 'iniciotutor', :action => 'detalles_adecuacion4' %></li>
+        <li><%= link_to '3° Semestre', :controller => 'iniciotutor', :action => 'detalles_adecuacion5' %></li>
+        <li><%= link_to '4° Semestre', :controller => 'iniciotutor', :action => 'detalles_adecuacion6' %></li>
+        <li><%= link_to 'Obligatorias', :controller => 'iniciotutor', :action => 'detalles_adecuacion7' %></li>
+      </ul>
+  </div>
+</div>
+<div class= "row">
+  <div class="col-xs-12 col-md-12 col-lg-12">
+    <%= form_tag({controller: 'iniciotutor', action: 'ver_detalles_adecuacion'}) do%>
+        <input id="cant_delete" type="hidden" name="cant_delete" value="0"/>
+        <input id="cant_edit" type="hidden" name="cant_edit" value="0"/> 
+        <input id="cant_docencia" type="hidden" name="cant_docencia" value="0"/> 
+        <input id="cant_investigacion" type="hidden" name="cant_investigacion" value="0"/> 
+        <input id="cant_formacion" type="hidden" name="cant_formacion" value="0"/> 
+        <input id="cant_extension" type="hidden" name="cant_extension" value="0"/> 
+        <input id="cant_otra" type="hidden" name="cant_otra" value="0"/> 
+        <input id="semestre" type="hidden" name="semestre" value="1"/> 
+        <table class="table table-bordered table-striped">
+          <tbody>
+            <tr></tr>
+            <tr>
+              <td class="text-left" colspan="3"><h5><strong>4. Actividades a realizar por el instructor</strong></h5></td>
+              
+            </tr>
+            <tr>
+
+              <td class="text-center" colspan="2"><strong>Actividades de Docencia</strong></td>
+              <%if session[:editar]%> 
+                <td class="text-center"  style='width:10%;'><strong>Observaciones</strong></td>
+              <%else%>
+                <td class="text-center"  style='width:15%;'><strong>Observaciones</strong></td>
+              <%end%>
+              
+            </tr>
+             <% if !session[:editar] && @actividadesadoc.blank?%>
+              <tr>
+                <td colspan="3">
+                  <textarea class="form-control" style="text-align: center" rows="2"  name='nohay' id ='nohay1' disabled>No hay</textarea>
+                </td>
+              </tr>
+            <%end%>
+              <% @actividadesadoc.each_with_index do |actdoc, i| %>
+                <tr>
+                  <td style='width:80%;'>
+                    <textarea class="form-control" rows="2"  name='<%= @docencia+actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
+                    <input type="hidden" name="<%= @iddoc+i.to_s%> " value='<%= actdoc.id %>'>
+                  </td>
+                  <%if session[:editar]%> 
+                    <td>
+                      <center>
+                        <a id = 'button<%= actdoc.id %>' rel='<%= actdoc.id %> <%= actdoc.actividad %>' class="edit_act btn btn-default btn-lg" aria-label="Editar">
+                          <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                        </a>
+                         <a id = 'delete<%= actdoc.id %>' rel='<%= actdoc.id %>' class="delete_act btn btn-default btn-lg" aria-label="Eliminar"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                      </center>
+                    </td>
+                  <%else%>
+                    <td></td>
+                  <%end%>
+                  <td >
+                  <% if @observacionesExtras[actdoc.id] == "si" %>
+                    <center><%= link_to "Ver observaciones ", {:controller => "iniciotutor", :action => "mas_observaciones3", :actividad_id => actdoc.id, :semestre => 1, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-warning" %></center>
+                  <% else %>
+                    <center><%= link_to "Ver observaciones ", {:controller => "iniciotutor", :action => "mas_observaciones3", :actividad_id => actdoc.id, :semestre => 1, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-default" %></center>
+                  <% end %>
+                  <% @j= @j +1 %>
+                  </td>
+                </tr>
+              <% end %>
+          <tr id="lastactdoc">
+            <%if session[:editar]%> 
+              <td  colspan="3"><a class="agregar_docencia add btn btn-default"><span class="glyphicon glyphicon-plus"></span> Agregar otra actividad de docencia</a>
+              </td>
+            <%end%>
+          </tr>
+            <tr>
+
+              <td class="text-center"  colspan="2"><strong>Actividades de Investigación</strong></td>
+              <td class="text-center"  style='width:10%;'><strong>Observaciones</strong></td>
+              
+            </tr>
+            <% if !session[:editar] && @actividadesainv.blank?%>
+              <tr>
+                <td colspan="3">
+                  <textarea class="form-control" style="text-align: center" rows="2"  name='nohay' id ='nohay2' disabled>No hay</textarea>
+                </td>
+              </tr>
+            <%end%>
+            <% @actividadesainv.each_with_index do |actdoc,i| %>
+              <tr>
+                <td>
+                  <textarea class="form-control" rows="2"  name='<%= @investigacion+actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
+                </td>
+                <%if session[:editar]%> 
+                    <td>
+                      <center>
+                        <a id = 'button<%= actdoc.id %>' rel='<%= actdoc.id %> <%= actdoc.actividad %>' class="edit_act btn btn-default btn-lg" aria-label="Editar">
+                          <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                        </a>
+                         <a id = 'delete<%= actdoc.id %>' rel='<%= actdoc.id %>' class="delete_act btn btn-default btn-lg" aria-label="Eliminar"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                      </center>
+                    </td>
+                  <%else%>
+                    <td></td>
+                  <%end%>
+                <td >
+                  <% if @observacionesExtras[actdoc.id] == "si" %>
+                    <center><%= link_to "Ver observaciones ", {:controller => "iniciotutor", :action => "mas_observaciones3", :actividad_id => actdoc.id, :semestre => 1, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-warning" %></center>
+                  <% else %>
+                    <center><%= link_to "Ver observaciones ", {:controller => "iniciotutor", :action => "mas_observaciones3", :actividad_id => actdoc.id, :semestre => 1, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-default" %></center>
+                  <% end %>
+                  <% @j= @j +1 %>
+                </td>
+
+              </tr>
+            <% end %>
+            <tr id="lastactinv">
+              <%if session[:editar]%> 
+                <td  colspan="3"><a class="agregar_investigacion add btn btn-default"><span class="glyphicon glyphicon-plus"></span> Agregar otra actividad de investigación</a>
+                </td>
+              <%end%>
+            </tr>
+            
+            <tr>
+              <td class="text-center"  colspan="2"><strong>Actividades de Formación</strong></td>
+              <td class="text-center"  style='width:10%;'><strong>Observaciones</strong></td>
+              
+            </tr>
+            <% if !session[:editar] && @actividadesafor.blank?%>
+              <tr>
+                <td colspan="3">
+                  <textarea class="form-control" style="text-align: center" rows="2"  name='nohay' id ='nohay3' disabled>No hay</textarea>
+                </td>
+              </tr>
+            <%end%>
+            <% @actividadesafor.each_with_index do |actdoc,i| %>
+              <tr>
+                <td>
+                  <textarea class="form-control" rows="2"  name='<%= @formacion+actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
+                </td>
+                <%if session[:editar]%> 
+                    <td>
+                      <center>
+                        <a id = 'button<%= actdoc.id %>' rel='<%= actdoc.id %> <%= actdoc.actividad %>' class="edit_act btn btn-default btn-lg" aria-label="Editar">
+                          <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                        </a>
+                         <a id = 'delete<%= actdoc.id %>' rel='<%= actdoc.id %>' class="delete_act btn btn-default btn-lg" aria-label="Eliminar"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                      </center>
+                    </td>
+                  <%else%>
+                    <td></td>
+                  <%end%>
+                <td >
+                  <% if @observacionesExtras[actdoc.id] == "si" %>
+                    <center><%= link_to "Ver observaciones ", {:controller => "iniciotutor", :action => "mas_observaciones3", :actividad_id => actdoc.id, :semestre => 1, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-warning" %></center>
+                  <% else %>
+                    <center><%= link_to "Ver observaciones ", {:controller => "iniciotutor", :action => "mas_observaciones3", :actividad_id => actdoc.id, :semestre => 1, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-default" %></center>
+                  <% end %>
+                  <% @j= @j +1 %>
+                </td>
+              </tr>
+            <% end %>
+
+            <tr id="lastactfor">
+              <%if session[:editar]%> 
+                <td  colspan="3"><a class="agregar_formacion add btn btn-default"><span class="glyphicon glyphicon-plus"></span> Agregar otra actividad de formación</a>
+              </td>
+              <%end%>
+            </td>
+            <tr>
+              <td class="text-center" colspan="2"><strong>Actividades de Extensión</strong></td>
+              <td class="text-center"  style='width:10%;'><strong>Observaciones</strong></td>
+              
+            </tr>
+            <% if !session[:editar] && @actividadesaext.blank?%>
+              <tr>
+                <td colspan="3">
+                  <textarea class="form-control" style="text-align: center" rows="2"  name='nohay' id ='nohay4' disabled>No hay</textarea>
+                </td>
+              </tr>
+            <%end%>
+            <% @actividadesaext.each_with_index do |actdoc,i| %>
+              <tr>
+                <td>
+                  <textarea class="form-control" rows="2"  name='<%= @extension+actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
+                </td>
+                <%if session[:editar]%> 
+                    <td>
+                      <center>
+                        <a id = 'button<%= actdoc.id %>' rel='<%= actdoc.id %> <%= actdoc.actividad %>' class="edit_act btn btn-default btn-lg" aria-label="Editar">
+                          <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                        </a>
+                         <a id = 'delete<%= actdoc.id %>' rel='<%= actdoc.id %>' class="delete_act btn btn-default btn-lg" aria-label="Eliminar"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                      </center>
+                    </td>
+                  <%else%>
+                    <td></td>
+                  <%end%>
+                  <% @j= @j +1 %>
+                <td >
+                  <% if @observacionesExtras[actdoc.id] == "si" %>
+                    <center><%= link_to "Ver observaciones ", {:controller => "iniciotutor", :action => "mas_observaciones3", :actividad_id => actdoc.id, :semestre => 1, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-warning" %></center>
+                  <% else %>
+                    <center><%= link_to "Ver observaciones ", {:controller => "iniciotutor", :action => "mas_observaciones3", :actividad_id => actdoc.id, :semestre => 1, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-default" %></center>
+                  <% end %>
+                  <% @j= @j +1 %>
+                </td>
+              </tr>
+            <% end %>
+
+            <tr id="lastactext">
+              <%if session[:editar]%> 
+                <td colspan="3"><a class="agregar_extension add btn btn-default"><span class="glyphicon glyphicon-plus"></span> Agregar otra actividad de extensión</a>
+                </td>
+              <%end%>
+            </tr>
+
+            <tr>
+              <td colspan="2" class="text-center"><strong>Otras Actividades</strong></td>
+              <td class="text-center"  style='width:10%;'><strong>Observaciones</strong></td>
+            
+            </tr>
+            <% if !session[:editar] && @actividadesaotr.blank?%>
+              <tr>
+                <td colspan="3">
+                  <textarea class="form-control" style="text-align: center" rows="2"  name='nohay' id ='nohay5' disabled>No hay</textarea>
+                </td>
+              </tr>
+            <%end%>
+            <% @actividadesaotr.each_with_index do |actdoc,i| %>
+              <tr>
+                <td>
+                  <textarea class="form-control" rows="2"  name='<%= @otra+actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
+                </td>
+                <%if session[:editar]%> 
+                    <td>
+                      <center>
+                        <a id = 'button<%= actdoc.id %>' rel='<%= actdoc.id %> <%= actdoc.actividad %>' class="edit_act btn btn-default btn-lg" aria-label="Editar">
+                          <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                        </a>
+                         <a id = 'delete<%= actdoc.id %>' rel='<%= actdoc.id %>' class="delete_act btn btn-default btn-lg" aria-label="Eliminar"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></a>
+                      </center>
+                    </td>
+                  <%else%>
+                    <td></td>
+                  <%end%>
+                <td >
+                  <% if @observacionesExtras[actdoc.id] == "si" %>
+                    <center><%= link_to "Ver observaciones ", {:controller => "iniciotutor", :action => "mas_observaciones3", :actividad_id => actdoc.id, :semestre => 1, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-warning" %></center>
+                  <% else %>
+                    <center><%= link_to "Ver observaciones ", {:controller => "iniciotutor", :action => "mas_observaciones3", :actividad_id => actdoc.id, :semestre => 1, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-default" %></center>
+                  <% end %>
+                  <% @j= @j +1 %>
+                </td>
+              </tr>
+            <% end %>
+            <tr id="lastactotr">
+              <%if session[:editar]%> 
+                <td colspan="3"><a class="agregar_otra add btn btn-default"><span class="glyphicon glyphicon-plus"></span> Agregar otra actividad</a>
+                </td>
+              <%end%>
+            </tr>
+
+          </tbody>
+        </table>
+        <div class = 'row'>
+          <div class = 'col-xs-3 col-md-3 col-lg-3'>
+            <button type="button" class="btn btn-forminst" onclick = " location.href = 'javascript:history.back(-1);'">&lt;&lt; Volver</button>
+          </div>
+          <div class = 'col-xs-6 col-md-6 col-lg-6'>
+            <%if session[:editar]%> 
+              <div class = 'row'>
+                <%if @bool_enviado == 0 %>
+                  <center><button type="submit" class="btn btn-forminst btn-lg" style="margin-top: 3px;">Guardar</button></center>
+                <%else%>
+                  <center> <button type="button" data-toggle="modal" data-target="#myModal3" class="btn btn-forminst btn-lg"  style="margin-top: 3px;">Guardar</button></center>
+                <%end%> 
+              </div>
+            <%end%>
+          </div>
+          <div class = 'col-xs-3 col-md-3 col-lg-3 text-right'>
+             <%= link_to "Siguiente >>", {controller: "iniciotutor", action: "detalles_adecuacion4"}, class: "btn btn-forminst" %>
+          </div>
+        </div>
+    <% end %>
+  </div>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h3 class="modal-title" id="myModalLabel">Eliminar Adecuación</h3>
+      </div>
+      <div class="modal-body">
+          <%= form_tag({controller: 'iniciotutor', action: 'eliminar_adecuacion'}) do%>
+            <div class="form-group">
+              <center>
+                <h5><strong>Está seguro que desea eliminar esta adecuación?</strong></h5>
+              </center>
+            </div>
+      </div>
+      <div class="modal-footer">
+          <button type="submit" class="btn btn-forminst">Si</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+      </div>
+      <%end%>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  function eliminar (elemento){
+    $(elemento).parent().parent().parent().remove();
+  }
+</script>
+
+<script type="text/javascript">
+
+    $(document).ready(function() {
+      var cant_delete=0;
+      var cant_edit=0;
+      var cant_docencia=0;
+      var cant_investigacion=0;
+      var cant_formacion=0;
+      var cant_extension=0;
+      var cant_otra=0;
+
+      $(".delete_act").click(function() {
+        var id_act = $(this).attr("rel");
+        $(this).parent().parent().append("<input type='hidden' name='delete"+cant_delete+"' value='"+id_act+"'>")
+        $(this).parent().parent().parent().hide();
+        cant_delete +=1;
+        $("#cant_delete").val(cant_delete);
+      });
+
+      $(".edit_act").click(function() {
+        var params = $(this).attr("rel");
+        var arr= params.split(' ');
+        var id = arr[0];
+        var text_act = arr[1];
+        $("#"+id).prop( "disabled", false );
+        $("#button"+id).prop( "disabled", true );
+        $(this).parent().parent().append("<input type='hidden' name='edit"+cant_edit+"' value='"+id+"'>")
+        cant_edit +=1;
+        $("#cant_edit").val(cant_edit);
+      });
+
+
+      $(".agregar_docencia").click(function() {
+        $("#lastactdoc").before('<tr>\
+                                <td>\
+                                  <textarea class="form-control" rows="2"  name="nuevadoc'+cant_docencia+'" required></textarea>\
+                                </td>\
+                                <td>\
+                                  <center>\
+                                    <button type="button" class="btn btn-default btn-lg" title="Eliminar" onclick = "eliminar(this)">\
+                                      <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>\
+                                    </button>\
+                                  </center>\
+                                </td>\
+                                <td>\
+                                </td>\
+                              </tr>');
+          cant_docencia = cant_docencia + 1;
+          console.log(cant_docencia);
+          $("#cant_docencia").val(cant_docencia);
+          
+      });
+
+      $(".agregar_investigacion").click(function() {
+        $("#lastactinv").before('<tr>\
+                                <td>\
+                                  <textarea class="form-control" rows="2"  name="nuevainv'+cant_investigacion+'" required></textarea>\
+                                </td>\
+                                <td>\
+                                  <center>\
+                                    <button type="button" class="btn btn-default btn-lg" title="Eliminar" onclick = "eliminar(this)">\
+                                      <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>\
+                                    </button>\
+                                  </center>\
+                                </td>\
+                                <td>\
+                                </td>\
+                              </tr>');
+          cant_investigacion = cant_investigacion + 1;
+          $("#cant_investigacion").val(cant_investigacion);
+          
+      });
+
+      $(".agregar_formacion").click(function() {
+        $("#lastactfor").before('<tr>\
+                                <td>\
+                                  <textarea class="form-control" rows="2"  name="nuevafor'+cant_formacion+'" required></textarea>\
+                                </td>\
+                                <td>\
+                                  <center>\
+                                    <button type="button" class="btn btn-default btn-lg" title="Eliminar" onclick = "eliminar(this)">\
+                                      <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>\
+                                    </button>\
+                                  </center>\
+                                </td>\
+                                <td>\
+                                </td>\
+                              </tr>');
+          cant_formacion = cant_formacion + 1;
+          $("#cant_formacion").val(cant_formacion);
+          
+      });
+
+      $(".agregar_extension").click(function() {
+        $("#lastactext").before('<tr>\
+                                <td>\
+                                  <textarea class="form-control" rows="2"  name="nuevaext'+cant_extension+'"></textarea>\
+                                </td>\
+                                <td>\
+                                  <center>\
+                                    <button type="button" class="btn btn-default btn-lg" title="Eliminar" onclick = "eliminar(this)">\
+                                      <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>\
+                                    </button>\
+                                  </center>\
+                                </td>\
+                                <td>\
+                                </td>\
+                              </tr>');
+          cant_extension = cant_extension + 1;
+          $("#cant_extension").val(cant_extension);
+          
+      });
+
+      $(".agregar_otra").click(function() {
+        $("#lastactotr").before('<tr>\
+                                <td>\
+                                  <textarea class="form-control" rows="2"  name="nuevaotr'+cant_otra+'"></textarea>\
+                                </td>\
+                                <td>\
+                                  <center>\
+                                    <button type="button" class="btn btn-default btn-lg" title="Eliminar" onclick = "eliminar(this)">\
+                                      <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>\
+                                    </button>\
+                                  </center>\
+                                </td>\
+                                <td>\
+                                </td>\
+                              </tr>');
+          cant_otra = cant_otra + 1;
+          $("#cant_otra").val(cant_otra);
+          
+      });
+
+    });
+</script>

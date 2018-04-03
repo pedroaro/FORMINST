@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Id:</strong>
+  <%= @permisologium.id %>
+</p>
+
+<p>
+  <strong>Permisosid:</strong>
+  <%= @permisologium.permisosId %>
+</p>
+
+<p>
+  <strong>Usuarioid:</strong>
+  <%= @permisologium.usuarioId %>
+</p>
+
+<p>
+  <strong>Attribute:</strong>
+  <%= @permisologium.attribute %>
+</p>
+
+<p>
+  <strong>Read:</strong>
+  <%= @permisologium.read %>
+</p>
+
+<p>
+  <strong>Write:</strong>
+  <%= @permisologium.write %>
+</p>
+
+<%= link_to 'Edit', edit_permisologium_path(@permisologium) %> |
+<%= link_to 'Back', permisologia_path %>

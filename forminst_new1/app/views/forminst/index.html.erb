@@ -1,0 +1,113 @@
+
+<div class="row">
+  <div class="col-xs-5 col-xs-offset-1 col-md-13 col-md-offset-0">
+    <div class="text-left">
+      <div id = "fechamuestra">
+        <script languaje="JavaScript">
+          fecha();
+        </script> 
+      </div>
+    </div>
+  </div>
+   
+
+  <div class="text-right">
+    <div class = 'col-xs-5 col-xs-offset-1 col-md-6'>
+      <button type="button" class="btn btn-forminst btn-lg " style="background-color: rgb(204, 204, 153);" data-toggle="modal" data-target="#myModal">
+        Iniciar Sesión
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h3 class="modal-title" id="myModalLabel">Iniciar Sesión</h3>
+      </div>
+      <div class="modal-body">
+          <%= form_tag({controller: 'forminst', action: 'autenticar'}) do%>            
+            <input type="hidden" name="accion" class="form-control" value="<%= @accion %>">
+            <input type="hidden" name="param1" class="form-control" value="<%= @param1 %>">
+            <input type="hidden" name="param2" class="form-control" value="<%= @param2 %>">
+            <input type="hidden" name="param3" class="form-control" value="<%= @param3 %>">
+            <div class="form-group">
+              <label>
+              Usuario:</label>
+              <div class="input-group">
+              <input type="text" name="correo" class="form-control" required>
+              <div class="input-group-addon">@ciens.ucv.ve</div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Contraseña:</label>
+                <input type="password" name="password" class="form-control" required>
+            </div>
+                <br/>  
+            <a href="#" data-toggle="modal" data-target="#ModalO"> ¿Olvidó su contraseña? </a>
+            <button type="submit" class="btn btn-forminst">Iniciar Sesión</button>
+          <%end%>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+      </div>
+          
+    </div>
+  </div>
+</div>
+
+<div class="row"> 
+  <div class = 'col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0 text-justify'>
+    <h2>Descripción del sistema: </h2>
+    <p>&nbsp;</p>
+    <p>FORMINST es un sistema que permite a los Tutores y a las autoridades de la Facultad de Ciencias, UCV, a manejar el flujo de informes durante la ejecución de planes de formación de los Instructores. </p>
+    <h2>Cómo entrar: </h2><p>&nbsp;</p>
+    <p><b>Tutores y Entidades:</b></p>
+    <p> Para poder ingresar al sistema debe colocar su nombre de usuario institucional, es decir el correspondiente a su correo institucional (@ciens.ucv.ve), seguidamente debe colocar su contraseña correspondiente, la cual es la misma que utiliza para ingresar a su correo institucional.</p>
+    <p><b>Instructores:</b></p>
+    <p> Para poder ingresar al sistema debe colocar su correo (ejemplo@servidor.com) con que el tutor lo registró, seguidamente debe colocar la contraseña que le fue otorgada automáticamente por el sistema al momento de ser registrado por su Tutor, la cual fue enviada a su correo electrónico.</p>
+  </div>
+</div>
+<br/>
+<br/>
+
+<div class="modal fade" id="ModalO" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h3 class="modal-title" id="myModalLabel">¿Olvidó su contraseña?</h3>
+      </div>
+      <div class="modal-body">
+        <p><b>Tutores y Entidades:</b></p>
+        <br>
+        <p>En el caso de que usted olvidara su contraseña, favor de dirigirse al Centro de Computación para el restablecimiento de su contraseña.</p>
+        <br>
+        <p>Dirección del Centro de Computación:</p>
+        <p>Urb. Valle Abajo, Paseo Los Ilustres, Universidad Central de Venezuela, Facultad de Ciencias. Planta baja, diagonal a Control de Estudios.</p>
+        <br>
+        <br>
+
+        <p><b>Instructores:</b></p>
+        <br>
+        <p>PASO 1:</p>
+        <p>En caso de que usted olvidara su contraseña, por favor revise en su correo electrónico el mail enviado por el sistema cuando fue ingresado al mismo. En caso de no encontrarlo favor realizar el siguiente paso.</p> 
+        <br>
+        <p>PASO 2:</p>
+        <%= form_tag(:action=> 'reenviar_clave') do%>
+            <div class="form-group">
+              <label>
+              Por favor de ingrese su número de cédula en el siguiente cuadro y se le enviará un correo indicándole la pista de su contraseña:</label>
+              <%= text_field_tag :cedula,nil, :class=> 'form-control' %>
+            </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Enviar</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+      </div>
+        <%end%>
+    </div>
+  </div>
+</div>

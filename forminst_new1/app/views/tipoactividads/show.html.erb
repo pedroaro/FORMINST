@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Id:</strong>
+  <%= @tipoactividad.id %>
+</p>
+
+<p>
+  <strong>Concepto:</strong>
+  <%= @tipoactividad.concepto %>
+</p>
+
+<p>
+  <strong>Grupoactividadesid:</strong>
+  <%= @tipoactividad.grupoActividadesId %>
+</p>
+
+<p>
+  <strong>Subgrupoactividadid:</strong>
+  <%= @tipoactividad.subGrupoActividadId %>
+</p>
+
+<%= link_to 'Edit', edit_tipoactividad_path(@tipoactividad) %> |
+<%= link_to 'Back', tipoactividads_path %>

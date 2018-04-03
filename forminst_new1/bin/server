@@ -1,0 +1,710 @@
+#!/usr/bin/env ruby
+ENV['RAILS_ENV'] = ARGV.first || ENV['RAILS_ENV'] || 'development'
+require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
+
+# Change the following to reflect your database settings
+ActiveRecord::Base.establish_connection(
+  adapter:  'mysql2', # or 'postgresql' or 'sqlite3' or 'oracle_enhanced'
+  host:     'localhost',
+  database: 'FORMIST',
+  username: 'root',
+  password: '2552'
+)
+
+while true
+	puts "ejecutando..."
+	#Aclualizar los estatus de las adecuaciones luego de haber pasado dos semana-----------------------------------------------
+	estatus_adecuacion = EstatusAdecuacion.where(actual: 1).all
+	fecha = Time.now.strftime("%Y-%m-%d")
+	fecha2 = Time.now
+	estatus_adecuacion.each do |status|
+		if status.fecha + 3.week <= fecha2
+			@adecuacion_id = status.adecuacion_id.to_i
+			if (status.estatus_id == 3 || status.estatus_id == 13)
+			#Usuario comision
+				cambio_act = EstatusAdecuacion.where(adecuacion_id: @adecuacion_id, actual: 1).take
+		  		cambio_act.actual = 0
+		  		cambio_act.save
+				cambio_est = EstatusAdecuacion.new 
+				cambio_est.adecuacion_id = @adecuacion_id
+				cambio_est.fecha = Time.now 
+				cambio_est.estatus_id = 18
+				cambio_est.actual = 1
+				cambio_est.save
+				cambio_est.fecha = Time.now 
+				adac = AdecuacionActividad.where(adecuacion_id: @adecuacion_id).all
+				adac.each do |adaa|
+					oa = ObservacionActividadAdecuacion.where(adecuacionactividad_id: adaa.id, actual: 1).all
+					oa.each do |oaa|
+						oaa.fecha = Time.now 
+						oaa.actual = 0
+						oaa.save
+					end
+				end
+
+				cjAdecuacion = Adecuacion.find(@adecuacion_id)
+				plan= Planformacion.find(cjAdecuacion.planformacion_id)
+				notific = Notificacion.new
+				@document = Respaldo.where(adecuacion_id: @adecuacion_id, informe_id: nil, actual: 1).take
+				@document.estatus = "Enviado a Consejo de Escuela Sin Revisión"
+				@document.save
+
+		        notific.instructor_id = plan.instructor_id
+		        notific.tutor_id = plan.tutor_id
+		        notific.adecuacion_id = @adecuacion_id
+		        notific.informe_id = nil
+		        notific.actual = 1
+		        person = Persona.where(usuario_id: plan.instructor_id).take
+		        notificacionfecha = Date.current.to_s 
+		    	notific.mensaje = "[" + notificacionfecha + "] La adecuación de "+ person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " fue enviada a Consejo de Escuela sin ser revisado."
+		    	notific.save
+		    	notific2 = Notificacion.new
+		        notific2.instructor_id = plan.instructor_id
+		        notific2.tutor_id = plan.tutor_id
+		        notific2.adecuacion_id = @adecuacion_id
+		        notific2.informe_id = nil
+		        notific2.actual = 2
+		    	notific2.mensaje = "[" + notificacionfecha + "] Su adecuación fue enviada a Consejo de Escuela sin ser revisada"
+		    	notific2.save
+		    	notific3 = Notificacion.new
+		        notific3.instructor_id = plan.instructor_id
+		        notific3.tutor_id = plan.tutor_id
+		        notific3.adecuacion_id = @adecuacion_id
+		        notific3.informe_id = nil
+		        notific3.actual = 4		#Consejo de Escuela
+		    	notific3.mensaje = "[" + notificacionfecha + "] Se ha recibido una nueva Adecuación: "+ person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + ", favor aprobar y enviar a la siguiente entidad."
+		    	notific3.save
+
+				 user =Usuarioentidad.where(usuario_id: plan.instructor_id).take
+		          if(user.escuela_id == 1)
+		            uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 1).take
+		          else
+		            if(user.escuela_id == 2)
+		              uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 2).take
+		            else
+		              if(user.escuela_id == 3)
+		                uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 3).take
+		              else
+		                if(user.escuela_id == 4)
+		                uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 4).take
+		                else
+		                  if(user.escuela_id == 9)
+		                    uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 5).take
+		                  else
+		                    if(user.escuela_id == 10)
+		                      uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 6).take
+		                    end
+		                  end
+		                end
+		              end
+		            end  
+		          end
+		          	#linkT = link a mostrarle al tutor
+		          	#linkI = link a mostrarle al instructor
+		          	#linkE = link a mostrarle al entidade
+		          	linkT = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar adecuacion&plan="+plan.id.to_s+"&editar=no"
+				    linkI = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar%20adecuacion"
+				    linkE = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar%20adecuacion&param3="+plan.id.to_s				
+				    remitente3 = Usuario.where(id: plan.tutor_id).take
+					ActionCorreo.envio_adecuacion(remitente3, notific.mensaje,2,linkT).deliver
+					remitente2 = Usuario.where(id: plan.instructor_id).take
+					ActionCorreo.envio_adecuacion(remitente2, notific2.mensaje,1,linkI).deliver
+					remitente = Usuario.where(id: uentidad.usuario_id).take
+					ActionCorreo.envio_adecuacion(remitente, notific3.mensaje,0,linkE).deliver
+
+			elsif (status.estatus_id == 8 || status.estatus_id == 18)
+			#Consejo de escuela
+				adac = AdecuacionActividad.where(adecuacion_id: @adecuacion_id).all
+				adac.each do |adaa|
+					oa = ObservacionActividadAdecuacion.where(adecuacionactividad_id: adaa.id, actual: 1).all
+					oa.each do |oaa|
+						oaa.fecha = Time.now 
+						oaa.actual = 0
+						oaa.save
+					end
+				end
+				@document = Respaldo.where(adecuacion_id: @adecuacion_id, informe_id: nil, actual: 1).take
+				@document.estatus = "Enviado a Consejo de Facultad"
+				@document.save
+				cambio_act = EstatusAdecuacion.where(adecuacion_id: @adecuacion_id, actual: 1).take
+					cambio_act.actual = 0
+					cambio_act.save
+				cambio_est = EstatusAdecuacion.new 
+				cambio_est.adecuacion_id = @adecuacion_id
+				cambio_est.fecha = Time.now 
+				cambio_est.estatus_id = 14
+				cambio_est.actual = 1
+				cambio_est.save
+				cambio_est.fecha = Time.now 
+				cjAdecuacion = Adecuacion.find(@adecuacion_id)
+				plan= Planformacion.find(cjAdecuacion.planformacion_id)
+				notific = Notificacion.new
+		        notific.instructor_id = plan.instructor_id
+		        notific.tutor_id = plan.tutor_id
+		        notific.adecuacion_id = @adecuacion_id
+		        notific.informe_id = nil
+		        notific.actual = 1
+		        person = Persona.where(usuario_id: plan.instructor_id).take
+		        notificacionfecha = Date.current.to_s 
+	        	notific.mensaje = "[" + notificacionfecha + "] La adecuación de "+ person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " fue enviada a Consejo de Facultad sin ser revisado."
+	        	notific.save
+	        	notific2 = Notificacion.new
+		        notific2.instructor_id = plan.instructor_id
+		        notific2.tutor_id = plan.tutor_id
+		        notific2.adecuacion_id = @adecuacion_id
+		        notific2.informe_id = nil
+		        notific2.actual = 2
+	        	notific2.mensaje = "[" + notificacionfecha + "] Su adecuación fue enviada a Consejo de Facultad sin ser revisado"
+	        	notific2.save
+	        	notific3 = Notificacion.new
+		        notific3.instructor_id = plan.instructor_id
+		        notific3.tutor_id = plan.tutor_id
+		        notific3.adecuacion_id = @adecuacion_id
+		        notific3.informe_id = nil
+		        notific3.actual = 5		#Consejo de Escuela
+	        	notific3.mensaje = "[" + notificacionfecha + "] Se ha recibido una nueva Adecuación: "+ person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + ", Revisar."
+	        	notific3.save
+	       		uentidad = Usuarioentidad.where(entidad_id: 13).take
+	       		#linkT = link a mostrarle al tutor
+	          	#linkI = link a mostrarle al instructor
+	          	#linkE = link a mostrarle al entidade
+	          	linkT = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar adecuacion&plan="+plan.id.to_s+"&editar=no"
+			    linkI = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar%20adecuacion"
+			    linkE = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar%20adecuacion&param3="+plan.id.to_s
+				remitente3 = Usuario.where(id: plan.tutor_id).take
+				ActionCorreo.envio_adecuacion(remitente3, notific.mensaje,2,linkT).deliver
+				remitente2 = Usuario.where(id: plan.instructor_id).take
+				ActionCorreo.envio_adecuacion(remitente2, notific2.mensaje,1,linkI).deliver
+				remitente = Usuario.where(id: uentidad.usuario_id).take
+				ActionCorreo.envio_adecuacion(remitente, notific3.mensaje,0,linkI).deliver
+			end	
+		end
+	#FIN clualizar los estatus de las adecuaciones luego de haber pasado dos semana---------------------------------------------
+
+	#Aclualizar los estatus de los informes luego de haber pasado dos semana-----------------------------------------------
+	estatus_informes = EstatusInforme.where(actual: 1).all
+	fecha = Time.now.strftime("%Y-%m-%d")
+	fecha2 = Time.now
+	estatus_informes.each do |status|
+		if status.fecha + 3.week <= fecha2
+			@informe_id = status.informe_id.to_i
+			informeAct = Informe.where(id: @informe_id).take
+			plan_id = informeAct.planformacion_id
+			adec = Adecuacion.where(planformacion_id: informeAct.planformacion_id).take
+			adecuacion_id = adec.id
+			if (status.estatus_id == 3 || status.estatus_id == 13)
+				@document = Respaldo.where(adecuacion_id: adecuacion_id, informe_id: @informe_id, actual: 1).take
+				@document.estatus = "Enviado a Consejo de Escuela Sin Revisión"
+				@document.save
+				cambio_act = EstatusInforme.where(informe_id: @informe_id, actual: 1).take
+		      	cambio_act.actual = 0
+		      	cambio_act.save
+				cambio_est = EstatusInforme.new 
+				cambio_est.informe_id = @informe_id
+				cambio_est.fecha = Time.now 
+				cambio_est.estatus_id = 18
+				cambio_est.actual = 1
+				cambio_est.save
+				if (informe.numero == 1 || informe.numero == 3)
+		        	nombre_informe= "PRIMER INFORME "
+		      	elsif (informe.numero == 2 || informe.numero == 6)
+		         	nombre_informe= "SEGUNDO INFORME "
+		        elsif informe.numero == 4
+	            	nombre_informe= "TERCER INFORME "
+				elsif informe.numero == 5
+	            	nombre_informe= "CUARTO INFORME "
+		      	end
+
+		      	if informe.tipo_id == 1
+		        	nombre_informe = nombre_informe+"SEMESTRAL"
+		      	else
+		        	if informe.tipo_id == 2
+		          		nombre_informe = nombre_informe+"ANUAL"
+		        	else
+		          		nombre_informe = nombre_informe+"FINAL"
+		        	end
+		      	end
+				plan = Planformacion.find(plan_id)
+				cambio_est.fecha = Time.now 
+				notific = Notificacion.new
+				notific.instructor_id = plan.instructor_id
+				notific.tutor_id = informeAct.tutor_id
+				notific.adecuacion_id = adecuacion_id
+				notific.informe_id = @informe_id
+				notific.actual = 1
+				person = Persona.where(usuario_id: plan.instructor_id).take
+				notificacionfecha = Date.current.to_s 
+				notific.mensaje = "[" + notificacionfecha + "] El " + nombre_informe + " de " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " ha sido aprobado por Comisión de Investigación y fue enviada a Consejo de Escuela."
+				notific.save
+				notific2 = Notificacion.new
+				notific2.instructor_id = plan.instructor_id
+				notific2.tutor_id = informeAct.tutor_id
+				notific2.adecuacion_id = adecuacion_id
+				notific2.informe_id = @informe_id
+				notific2.actual = 2
+				notific2.mensaje = "[" + notificacionfecha + "] El " + nombre_informe + " ha sido aprobado por Comisión de Investigación y fue enviada a Consejo de Escuela."
+				notific2.save
+				notific3 = Notificacion.new
+				notific3.instructor_id = plan.instructor_id
+				notific3.tutor_id = informeAct.tutor_id
+				notific3.adecuacion_id = adecuacion_id
+				notific3.informe_id = @informe_id
+				notific3.actual = 4   #Consejo de Escuela
+				notific3.mensaje = "[" + notificacionfecha + "] Ha recibido un nuevo Informe: ' " + nombre_informe + " ' de " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + ", favor aprobar y enviar a la siguiente entidad."
+				notific3.save
+		        user =Usuarioentidad.where(usuario_id: plan.instructor_id).take
+				if(user.escuela_id == 1)
+					uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 1).take
+				elsif(user.escuela_id == 2)
+					uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 2).take
+				elsif(user.escuela_id == 3)
+					uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 3).take
+				elsif(user.escuela_id == 4)
+					uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 4).take
+				elsif(user.escuela_id == 9)
+				    uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 5).take
+				elsif(user.escuela_id == 10)
+					uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 6).take
+				end
+				#linkT = link a mostrarle al tutor
+	          	#linkI = link a mostrarle al instructor
+	          	#linkE = link a mostrarle al entidade
+	          	linkT = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar%20informe&param1="+plan.id.to_s+"&param2="+@informe_id
+			    linkI = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar%20informe&param1="+plan.id.to_s+"&param2="+@informe_id
+			    linkE = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar%20informe&param1="+plan.id.to_s+"&param2="+@informe_id+"&param3="+adecuacion_id
+		          remitente3 = Usuario.where(id: informeAct.tutor_id).take
+			      ActionCorreo.envio_informe(remitente3, notific.mensaje,2,linkT).deliver
+			      remitente2 = Usuario.where(id: plan.instructor_id).take
+			      ActionCorreo.envio_informe(remitente2, notific2.mensaje,1,linkI).deliver
+			      remitente = Usuario.where(id: uentidad.usuario_id).take
+			      ActionCorreo.envio_informe(remitente, notific3.mensaje,0,linkI).deliver
+		          flash[:success]="El informe se ha envíado a consejo de escuela"
+			elsif (session[:entidad_id] >= 1 && session[:entidad_id] <= 6)
+				#Consejo de escuela
+				@documentere little bit older, both sprung
+				I g = Respaldo.where(adecuacion_id: adecuacion_id, informe_id: @informe_id, actual: 1).take
+				@document.estatus = "Enviado a Consejo de Facultad Sin Revisión"
+				@document.save
+				cambio_act = EstatusInforme.where(informe_id: @informe_id, actual: 1).take
+		      	cambio_act.actual = 0
+		      	cambio_act.save
+				cambio_est = EstatusInforme.new 
+				cambio_est.informe_id = @informe_id
+				cambio_est.fecha = Time.now 
+				cambio_est.estatus_id = 14
+				cambio_est.actual = 1
+				cambio_est.save
+				informe = Informe.where(id: status.informe_id).take
+				if (informe.numero == 1 || informe.numero == 3)
+		        	nombre_informe= "PRIMER INFORME "
+		      	elsif (informe.numero == 2 || informe.numero == 6)
+		         	nombre_informe= "SEGUNDO INFORME "
+		        elsif informe.numero == 4
+	            	nombre_informe= "TERCER INFORME "
+				elsif informe.numero == 5
+	            	nombre_informe= "CUARTO INFORME "
+		      	end
+
+		      	if informe.tipo_id == 1
+		        	nombre_informe = nombre_informe+"SEMESTRAL"
+		      	else
+		        	if informe.tipo_id == 2
+		          		nombre_informe = nombre_informe+"ANUAL"
+		        	else
+		          		nombre_informe = nombre_informe+"FINAL"
+		        	end
+		      	end
+				plan = Planformacion.find(plan_id)
+				cambio_est.fecha = Time.now 
+				notific = Notificacion.new
+				notific.instructor_id = plan.instructor_id
+				notific.tutor_id = informeAct.tutor_id
+				notific.adecuacion_id = adecuacion_id
+				notific.informe_id = @informe_id
+				notific.actual = 1
+				person = Persona.where(usuario_id: plan.instructor_id).take
+				notificacionfecha = Date.current.to_s 
+				notific.mensaje = "[" + notificacionfecha + "] El " + nombre_informe + " de " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " ha sido aprobado por Consejo de Escuela y fue enviada a Consejo de Facultad."
+				notific.save
+				notific2 = Notificacion.new
+				notific2.instructor_id = plan.instructor_id
+				notific2.tutor_id = informeAct.tutor_id
+				notific2.adecuacion_id = adecuacion_id
+				notific2.informe_id = @informe_id
+				notific2.actual = 2
+				notific2.mensaje = "[" + notificacionfecha + "] El " + nombre_informe + " ha sido aprobado por Consejo de Escuela y fue enviada a Consejo de Facultad."
+				notific2.save
+				notific3 = Notificacion.new
+				notific3.instructor_id = plan.instructor_id
+				notific3.tutor_id = informeAct.tutor_id
+				notific3.adecuacion_id = adecuacion_id
+				notific3.informe_id = @informe_id
+				notific3.actual = 5   #Consejo de Facultad
+				notific3.mensaje = "[" + notificacionfecha + "] Ha recibido un nuevo Informe: ' " + nombre_informe + " ' de " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + ", revisar."
+				notific3.save
+				uentidad = Usuarioentidad.where(entidad_id: 13).take
+				remitente3 = Usuario.where(id: informeAct.tutor_id).take
+				#linkT = link a mostrarle al tutor
+	          	#linkI = link a mostrarle al instructor
+	          	#linkE = link a mostrarle al entidade
+	          	linkT = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar%20informe&param1="+plan.id.to_s+"&param2="+@informe_id
+			    linkI = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar%20informe&param1="+plan.id.to_s+"&param2="+@informe_id
+			    linkE = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar%20informe&param1="+plan.id.to_s+"&param2="+@informe_id+"&param3="+adecuacion_id
+				ActionCorreo.envio_informe(remitente3, notific.mensaje,2,linkT).deliver
+				remitente2 = Usuario.where(id: plan.instructor_id).take
+				ActionCorreo.envio_informe(remitente2, notific2.mensaje,1,linkI).deliver
+				remitente = Usuario.where(id: uentidad.usuario_id).take
+				ActionCorreo.envio_informe(remitente, notific3.mensaje,0,linkI).deliver
+			end
+		end
+
+	end
+	#FIN aclualizar los estatus de los informes luego de haber pasado dos semana--------------------------------------------
+
+	#Enviar correo de notificacion de informes------------------------------------------------------------------------------
+	planFormacion = Planformacion.all
+	fecha = Time.now.strftime("%Y-%m-%d")
+	fecha2 = Time.now
+	puts "inicio"
+	planFormacion.each do |plan|
+		puts plan.fecha_inicio
+		if plan.fecha_inicio + 5.month <= fecha2 && plan.fecha_inicio + 11.month >= fecha2 && plan.mensaje.blank?
+			puts plan.fecha_inicio
+			adecuacion = Adecuacion.where(planformacion_id: plan.id).take
+			notific = Notificacion.new
+			notific.instructor_id = plan.instructor_id
+			notific.tutor_id = plan.tutor_id
+			notific.adecuacion_id = adecuacion.id
+			notific.actual = 1
+			person = Persona.where(usuario_id: plan.tutor_id).take
+			person2 = Persona.where(usuario_id: plan.instructor_id).take
+			notificacionfecha = Date.current.to_s 
+			notific.mensaje = "[" + notificacionfecha + "] " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " usted posee un mes para enviar el primer informe semestral de " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +"."
+			notific.save
+
+			notific2 = Notificacion.new
+			notific2.instructor_id = plan.instructor_id
+			notific2.tutor_id = plan.tutor_id
+			notific2.adecuacion_id = adecuacion.id
+			notific2.actual = 2
+			notificacionfecha = Date.current.to_s 
+			notific2.mensaje = "[" + notificacionfecha + "] " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') + " su tutor " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +" dispone de un mes para enviar el primer informe semestral."
+			notific2.save
+			linkTeI = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar informe"
+			remitente4 = Usuario.where(id: plan.instructor_id).take
+			ActionCorreo.retraso_informe(remitente4, notific2.mensaje,linkTeI).deliver
+			remitente3 = Usuario.where(id: plan.tutor_id).take
+			ActionCorreo.retraso_informe(remitente3, notific.mensaje,linkTeI).deliver
+			plan.mensaje = 1
+			plan.save
+		end
+
+		if plan.fecha_inicio + 11.month <= fecha2 && plan.fecha_inicio + 17.month >= fecha2 && (plan.mensaje == 1 || plan.mensaje == 2)
+			puts plan.fecha_inicio
+			adecuacion = Adecuacion.where(planformacion_id: plan.id).take
+			notific = Notificacion.new
+			notific.instructor_id = plan.instructor_id
+			notific.tutor_id = plan.tutor_id
+			notific.adecuacion_id = adecuacion.id
+			notific.actual = 1
+			person = Persona.where(usuario_id: plan.tutor_id).take
+			person2 = Persona.where(usuario_id: plan.instructor_id).take
+			notificacionfecha = Date.current.to_s 
+			notific.mensaje = "[" + notificacionfecha + "] " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " usted posee un mes para enviar el segundo informe semestral junto con el primer informe anual de " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +"."
+			notific.save
+
+			notific2 = Notificacion.new
+			notific2.instructor_id = plan.instructor_id
+			notific2.tutor_id = plan.tutor_id
+			notific2.adecuacion_id = adecuacion.id
+			notific2.actual = 2
+			notificacionfecha = Date.current.to_s 
+			notific2.mensaje = "[" + notificacionfecha + "] " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') + " su tutor " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +" dispone de un mes para enviar el segundo informe semestral junto con el primer informe anual."
+			notific2.save
+			linkTeI = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar informe"			
+			remitente4 = Usuario.where(id: plan.instructor_id).take
+			ActionCorreo.retraso_informe(remitente4, notific2.mensaje,linkTeI).deliver
+
+			remitente3 = Usuario.where(id: plan.tutor_id).take
+			ActionCorreo.retraso_informe(remitente3, notific.mensaje,linkTeI).deliver
+
+			plan.mensaje = 3
+			plan.save
+		end
+
+		if plan.fecha_inicio + 17.month <= fecha2 && plan.fecha_inicio + 23.month >= fecha2 && (plan.mensaje == 3 || plan.mensaje == 4)
+			puts plan.fecha_inicio
+
+			adecuacion = Adecuacion.where(planformacion_id: plan.id).take
+			notific = Notificacion.new
+			notific.instructor_id = plan.instructor_id
+			notific.tutor_id = plan.tutor_id
+			notific.adecuacion_id = adecuacion.id
+			notific.actual = 1
+			person = Persona.where(usuario_id: plan.tutor_id).take
+			person2 = Persona.where(usuario_id: plan.instructor_id).take
+			notificacionfecha = Date.current.to_s 
+			notific.mensaje = "[" + notificacionfecha + "] " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " usted posee un mes para enviar el tercer informe semestral de " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +"."
+			notific.save
+
+			notific2 = Notificacion.new
+			notific2.instructor_id = plan.instructor_id
+			notific2.tutor_id = plan.tutor_id
+			notific2.adecuacion_id = adecuacion.id
+			notific2.actual = 2
+			notificacionfecha = Date.current.to_s 
+			notific2.mensaje = "[" + notificacionfecha + "] " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') + " su tutor " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +" dispone de un mes para enviar el tercer informe semestral ."
+			notific2.save
+			linkTeI = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar informe"						
+			remitente4 = Usuario.where(id: plan.instructor_id).take
+			ActionCorreo.retraso_informe(remitente4, notific2.mensaje,linkTeI).deliver
+
+			remitente3 = Usuario.where(id: plan.tutor_id).take
+			ActionCorreo.retraso_informe(remitente3, notific.mensaje,linkTeI).deliver
+
+			plan.mensaje = 5
+			plan.save
+		end
+
+		if plan.fecha_inicio + 23.month <= fecha2 && (plan.mensaje == 5 || plan.mensaje == 6)
+			puts plan.fecha_inicio
+
+			adecuacion = Adecuacion.where(planformacion_id: plan.id).take
+			notific = Notificacion.new
+			notific.instructor_id = plan.instructor_id
+			notific.tutor_id = plan.tutor_id
+			notific.adecuacion_id = adecuacion.id
+			notific.actual = 1
+			person = Persona.where(usuario_id: plan.tutor_id).take
+			person2 = Persona.where(usuario_id: plan.instructor_id).take
+			notificacionfecha = Date.current.to_s 
+			notific.mensaje = "[" + notificacionfecha + "] " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " usted posee un mes para enviar el cuarto informe semestral junto con el segundo informe anual y el final de " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +"."
+			notific.save
+
+			notific2 = Notificacion.new
+			notific2.instructor_id = plan.instructor_id
+			notific2.tutor_id = plan.tutor_id
+			notific2.adecuacion_id = adecuacion.id
+			notific2.actual = 2
+			notificacionfecha = Date.current.to_s 
+			notific2.mensaje = "[" + notificacionfecha + "] " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') + " su tutor " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +" dispone de un mes para enviarlo el cuarto informe semestral junto con el segundo informe anual y el final."
+			notific2.save
+			linkTeI = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar informe"									
+			remitente4 = Usuario.where(id: plan.instructor_id).take
+			ActionCorreo.retraso_informe(remitente4, notific2.mensaje,linkTeI).deliver
+
+			remitente3 = Usuario.where(id: plan.tutor_id).take
+			ActionCorreo.retraso_informe(remitente3, notific.mensaje,linkTeI).deliver
+
+			plan.mensaje = 7
+			plan.save
+		end
+
+		info = Informe.where(planformacion_id: plan.id).all
+
+		infor1 = 0
+		infor2 = 0
+		infor3 = 0
+		infor4 = 0
+		infor5 = 0
+		infor6 = 0
+		infor7 = 0
+		info.each do |inf|
+			#Se ven los informe enviados
+			if inf.numero == 1
+				est_inf = EstatusInforme.where(informe_id: inf.id).take
+				if (est_inf.estatus_id != 6 && est_inf.estatus_id != 9)
+					infor1 = 1
+				end
+			elsif inf.numero == 2
+				est_inf = EstatusInforme.where(informe_id: inf.id).take
+				if (est_inf.estatus_id != 6 && est_inf.estatus_id != 9)
+					infor2 = 1
+				end
+			elsif inf.numero == 3
+				est_inf = EstatusInforme.where(informe_id: inf.id).take
+				if (est_inf.estatus_id != 6 && est_inf.estatus_id != 9)
+					infor3 = 1
+				end
+			elsif inf.numero == 4
+				est_inf = EstatusInforme.where(informe_id: inf.id).take
+				if (est_inf.estatus_id != 6 && est_inf.estatus_id != 9)
+					infor4 = 1
+				end
+			elsif inf.numero == 5
+				est_inf = EstatusInforme.where(informe_id: inf.id).take
+				if (est_inf.estatus_id != 6 && est_inf.estatus_id != 9)
+					infor5 = 1
+				end
+			elsif inf.numero == 6
+				est_inf = EstatusInforme.where(informe_id: inf.id).take
+				if (est_inf.estatus_id != 6 && est_inf.estatus_id != 9)
+					infor6 = 1
+				end
+			elsif inf.numero == 7
+				est_inf = EstatusInforme.where(informe_id: inf.id).take
+				if (est_inf.estatus_id != 6 && est_inf.estatus_id != 9)
+					infor7 = 1
+				end
+			end
+		end
+
+		if plan.fecha_inicio + 6.month + 15.day <= fecha2 && plan.fecha_inicio + 11.month >= fecha2 && plan.mensaje == 1 && infor1 == 0
+			puts plan.fecha_inicio
+			adecuacion = Adecuacion.where(planformacion_id: plan.id).take
+			notific = Notificacion.new
+			notific.instructor_id = plan.instructor_id
+			notific.tutor_id = plan.tutor_id
+			notific.adecuacion_id = adecuacion.id
+			notific.actual = 1
+			person = Persona.where(usuario_id: plan.tutor_id).take
+			person2 = Persona.where(usuario_id: plan.instructor_id).take
+			notificacionfecha = Date.current.to_s 
+			notific.mensaje = "[" + notificacionfecha + "] " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " ha excedido en 15 dias el dia tope de entrega del primer informe semestral de " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +", enviar en la brevedad posible."
+			notific.save
+
+			notific2 = Notificacion.new
+			notific2.instructor_id = plan.instructor_id
+			notific2.tutor_id = plan.tutor_id
+			notific2.adecuacion_id = adecuacion.id
+			notific2.actual = 2
+			notificacionfecha = Date.current.to_s 
+			notific2.mensaje = "[" + notificacionfecha + "] " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') + " su tutor " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +"  ha excedido en 15 dias el dia tope de entrega del primer informe semestral, enviar en la brevedad posible."
+			notific2.save
+			linkTeI = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar informe"												
+			remitente4 = Usuario.where(id: plan.instructor_id).take
+			ActionCorreo.retraso_informe(remitente4, notific2.mensaje,linkTeI).deliver
+
+			remitente3 = Usuario.where(id: plan.tutor_id).take
+			ActionCorreo.retraso_informe(remitente3, notific.mensaje,linkTeI).deliver
+			plan.mensaje = 2
+			plan.save
+		end
+
+		if plan.fecha_inicio + 12.month + 15.day <= fecha2 && plan.fecha_inicio + 17.month >= fecha2 && plan.mensaje == 3 && (infor2 == 0 || infor3 == 0)
+			puts plan.fecha_inicio
+			adecuacion = Adecuacion.where(planformacion_id: plan.id).take
+			notific = Notificacion.new
+			notific.instructor_id = plan.instructor_id
+			notific.tutor_id = plan.tutor_id
+			notific.adecuacion_id = adecuacion.id
+			notific.actual = 1
+			person = Persona.where(usuario_id: plan.tutor_id).take
+			person2 = Persona.where(usuario_id: plan.instructor_id).take
+			notificacionfecha = Date.current.to_s 
+			if infor2 == 0
+				notific.mensaje = "[" + notificacionfecha + "] " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + "  ha excedido en 15 dias el dia tope de entrega del segundo informe semestral y con el primer informe anual de " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +", enviar en la brevedad posible."
+			else
+				notific.mensaje = "[" + notificacionfecha + "] " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + "  ha excedido en 15 dias el dia tope de entrega del primer informe anual de " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +", enviar en la brevedad posible."
+			end
+			notific.save
+
+			notific2 = Notificacion.new
+			notific2.instructor_id = plan.instructor_id
+			notific2.tutor_id = plan.tutor_id
+			notific2.adecuacion_id = adecuacion.id
+			notific2.actual = 2
+			notificacionfecha = Date.current.to_s 
+			if infor2 == 0
+				notific2.mensaje = "[" + notificacionfecha + "] " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') + " su tutor " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +"  ha excedido en 15 dias el dia tope de entrega del segundo informe semestral y con el primer informe anual, enviar en la brevedad posible."
+			else
+				notific2.mensaje = "[" + notificacionfecha + "] " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') + " su tutor " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +"  ha excedido en 15 dias el dia tope de entrega del primer informe anual, enviar en la brevedad posible."
+			end
+			notific2.save
+			linkTeI = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar informe"															
+			remitente4 = Usuario.where(id: plan.instructor_id).take
+			ActionCorreo.retraso_informe(remitente4, notific2.mensaje,linkTeI).deliver
+
+			remitente3 = Usuario.where(id: plan.tutor_id).take
+			ActionCorreo.retraso_informe(remitente3, notific.mensaje,linkTeI).deliver
+
+			plan.mensaje = 4
+			plan.save
+		end
+
+		if plan.fecha_inicio + 18.month + 15.day <= fecha2 && plan.fecha_inicio + 23.month >= fecha2 && plan.mensaje == 5 && infor4 == 0
+			puts plan.fecha_inicio
+
+			adecuacion = Adecuacion.where(planformacion_id: plan.id).take
+			notific = Notificacion.new
+			notific.instructor_id = plan.instructor_id
+			notific.tutor_id = plan.tutor_id
+			notific.adecuacion_id = adecuacion.id
+			notific.actual = 1
+			person = Persona.where(usuario_id: plan.tutor_id).take
+			person2 = Persona.where(usuario_id: plan.instructor_id).take
+			notificacionfecha = Date.current.to_s 
+			notific.mensaje = "[" + notificacionfecha + "] " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + "  ha excedido en 15 dias el dia tope de entrega del tercer informe semestral de " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +", enviar en la brevedad posible."
+			notific.save
+
+			notific2 = Notificacion.new
+			notific2.instructor_id = plan.instructor_id
+			notific2.tutor_id = plan.tutor_id
+			notific2.adecuacion_id = adecuacion.id
+			notific2.actual = 2
+			notificacionfecha = Date.current.to_s 
+			notific2.mensaje = "[" + notificacionfecha + "] " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') + " su tutor " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +"  ha excedido en 15 dias el dia tope de entrega del tercer informe semestral, enviar en la brevedad posible."
+			notific2.save
+			linkTeI = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar informe"															
+			remitente4 = Usuario.where(id: plan.instructor_id).take
+			ActionCorreo.retraso_informe(remitente4, notific2.mensaje,linkTeI).deliver
+
+			remitente3 = Usuario.where(id: plan.tutor_id).take
+			ActionCorreo.retraso_informe(remitente3, notific.mensaje,linkTeI).deliver
+
+			plan.mensaje = 6
+			plan.save
+		end
+
+		if plan.fecha_inicio + 24.month + 15.day <= fecha2 && plan.mensaje == 7 && (infor5 == 0 || infor6 == 0 ||  infor7 == 0)
+			puts plan.fecha_inicio
+
+			adecuacion = Adecuacion.where(planformacion_id: plan.id).take
+			notific = Notificacion.new
+			notific.instructor_id = plan.instructor_id
+			notific.tutor_id = plan.tutor_id
+			notific.adecuacion_id = adecuacion.id
+			notific.actual = 1
+			person = Persona.where(usuario_id: plan.tutor_id).take
+			person2 = Persona.where(usuario_id: plan.instructor_id).take
+			notificacionfecha = Date.current.to_s 
+			if infor5 == 0
+				notific.mensaje = "[" + notificacionfecha + "] " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " ha excedido en 15 dias el dia tope de entrega del cuarto informe semestral, el segundo informe anual y el final de " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +", enviar en la brevedad posible."
+			elsif infor6 == 0
+				notific.mensaje = "[" + notificacionfecha + "] " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + "  ha excedido en 15 dias el dia tope de entrega del segundo informe anual y el final de " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +", enviar en la brevedad posible."
+			else
+				notific.mensaje = "[" + notificacionfecha + "] " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + "  ha excedido en 15 dias el dia tope de entrega del informe final de " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +", enviar en la brevedad posible."
+			end
+			notific.save
+
+			notific2 = Notificacion.new
+			notific2.instructor_id = plan.instructor_id
+			notific2.tutor_id = plan.tutor_id
+			notific2.adecuacion_id = adecuacion.id
+			notific2.actual = 2
+			notificacionfecha = Date.current.to_s 
+			if infor5 == 0
+				notific2.mensaje = "[" + notificacionfecha + "] " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') + " su tutor " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +"  ha excedido en 15 dias el dia tope de entrega del cuarto informe semestral, con el primer informe anual y el iforme final, enviar en la brevedad posible."
+			elsif infor6 == 0
+				notific2.mensaje = "[" + notificacionfecha + "] " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') + " su tutor " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +"  ha excedido en 15 dias el dia tope de entrega del segundo informe final y con el informe final, enviar en la brevedad posible."
+			else
+				notific2.mensaje = "[" + notificacionfecha + "] " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') + " su tutor " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +"  ha excedido en 15 dias el dia tope de entrega del informe final, enviar en la brevedad posible."
+			end
+			notific2.save
+			linkTeI = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar informe"															
+			remitente4 = Usuario.where(id: plan.instructor_id).take
+			ActionCorreo.retraso_informe(remitente4, notific2.mensaje,linkTeI).deliver
+
+			remitente3 = Usuario.where(id: plan.tutor_id).take
+			ActionCorreo.retraso_informe(remitente3, notific.mensaje,linkTeI).deliver
+
+			plan.mensaje = 8
+			plan.save
+		end
+	end
+
+
+	#FIN Enviar correo de notificacion de informes--------------------------------------------------------------------------
+	puts "fin"
+	sleep(1.day)
+end

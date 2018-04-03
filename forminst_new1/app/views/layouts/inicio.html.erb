@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>Inicio</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag    "estilo", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+
+</head>
+<body>
+
+	<div class="row">
+		<div class="row">
+			<%= image_tag "banner.png", id:"logo" %>
+		</div>
+	</div>
+	<div class="row">
+		<div id="menu3">
+		</div>
+		<%if flash[:mensaje]%>
+			<div id="notice">
+			<p><%=flash[:mensaje]%></p>
+			</div>
+		<%end%>
+	</div>
+
+<div id="wrap">
+
+
+	<% flash.each do |name,value| %>
+	  <div class='alert alert-<%= name %>'>
+	    <%= value %>
+	  </div>
+	<% end %>
+
+<div class="row">
+	<br>
+	<div class="col-xs-12 col-md-12">
+		<div class="text-left">
+			<div id = "fechamuestra">
+				<script languaje="JavaScript">
+					fecha();
+				</script> 
+			</div>
+		</div>
+	</div>
+</div>
+
+<%= yield %>
+
+</div>
+
+<div class="row">
+	<div id="footer">
+	  <p>Universidad Central de Venezuela</p>
+	  <p>Facultad de Ciencasdfias  </p>
+	</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,41 @@
+<%= form_for(@permisologium) do |f| %>
+  <% if @permisologium.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@permisologium.errors.count, "error") %> prohibited this permisologium from being saved:</h2>
+
+      <ul>
+      <% @permisologium.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :id %><br>
+    <%= f.number_field :id %>
+  </div>
+  <div class="field">
+    <%= f.label :permisosId %><br>
+    <%= f.number_field :permisosId %>
+  </div>
+  <div class="field">
+    <%= f.label :usuarioId %><br>
+    <%= f.number_field :usuarioId %>
+  </div>
+  <div class="field">
+    <%= f.label :attribute %><br>
+    <%= f.text_field :attribute %>
+  </div>
+  <div class="field">
+    <%= f.label :read %><br>
+    <%= f.check_box :read %>
+  </div>
+  <div class="field">
+    <%= f.label :write %><br>
+    <%= f.check_box :write %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

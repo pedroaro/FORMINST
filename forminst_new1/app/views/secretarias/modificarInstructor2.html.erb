@@ -1,0 +1,433 @@
+<div class = 'row'>
+  <div class="col-xs-12 col-md-12">
+      <ul class="nav nav-tabs">
+        <li><a href="../secretarias/index">Inicio</a></li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Tutor <span class="caret"></span></a>
+            <ul class="dropdown-menu nav" role="menu">
+              <li></li>
+              <li><%= link_to 'Agregar Tutor', :controller => 'secretarias', :action => 'agregarTutor'%></li>
+              <li><%= link_to 'Modificar Tutor', :controller => 'secretarias', :action => 'modificarTutor', :ver => 'no' %></li>
+              <li><%= link_to 'Información Tutor', :controller => 'secretarias', :action => 'modificarTutor', :ver => 'si' %></li>
+            </ul>
+        </li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-expanded="false">Instructor <span class="caret"></span></a>
+            <ul class="dropdown-menu nav" role="menu">
+              <li></li>
+              <li><%= link_to 'Agregar Información', :controller => 'secretarias', :action => 'agregarInstructor'%></li>
+              <% if @ver == "si" %>
+                <li><%= link_to 'Modificar Información', :controller => 'secretarias', :action => 'modificarInstructor', :ver => 'no' %></li>
+                <li><a href="#" class = 'active'>Información Instructor</a></li>
+              <% else %>
+                <li><a href="#" class = 'active'>Modificar Instructor</a></li>
+                <li><%= link_to 'Consultar Información', :controller => 'secretarias', :action => 'modificarInstructor', :ver => 'si' %></li>
+              <% end %>
+            </ul>
+        </li>
+        <li><a href="../secretarias/logout">Cerrar Sesión</a></li>
+      </ul>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12 col-md-12">
+    <div class="text-right">
+      <div id = "fechamuestra">
+        <h3> <%= Time.now.strftime("%d") %>
+          <% if Time.now.strftime("%m").to_i == 1 %>
+            de Enero del
+          <% elsif Time.now.strftime("%m").to_i == 2 %>
+            de Febrero del
+          <% elsif Time.now.strftime("%m").to_i == 3 %>
+            de Marzo del
+          <% elsif Time.now.strftime("%m").to_i == 4 %>
+            de Abril del
+          <% elsif Time.now.strftime("%m").to_i == 5 %>
+            de Mayo del
+          <% elsif Time.now.strftime("%m").to_i == 6 %>
+            de Junio del
+          <% elsif Time.now.strftime("%m").to_i == 7 %>
+            de Julio del
+          <% elsif Time.now.strftime("%m").to_i == 8 %>
+            de Agosto del
+          <% elsif Time.now.strftime("%m").to_i == 9 %>
+            de Septiembre del
+          <% elsif Time.now.strftime("%m").to_i == 10 %>
+            de Octubre del
+          <% elsif Time.now.strftime("%m").to_i == 11 %>
+            de Noviembre del
+          <% elsif Time.now.strftime("%m").to_i == 12 %>
+            de Diciembre del
+          <% end %>
+          <%= Time.now.strftime("%Y") %> 
+        </h3>
+      </div>
+      <%if @nombre%>
+        <div>
+          <h4><b><%=@nombre%></b></h4>
+        </div>
+      <%end%>
+    </div>
+  </div>
+</div>
+<div class = 'row'>
+  <div class="col-xs-11 col-xs-offset-1 col-md-12 col-md-offset-0 text-center">
+    <% if @ver=="si" %>
+      <h3><strong>Información Instructor</strong></h3>
+    <% else %>
+      <h3><strong>Modificar Instructor</strong></h3>
+    <% end %>
+  </div>
+</div>
+<br>
+
+<form accept-charset="UTF-8" controller ="secretarias" action="guarda_instructor_modificado">
+
+
+<div class= "row">
+    <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
+        <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+          <tbody>
+            <tr>
+              <td class="text-left"></td>
+            </tr>
+
+            <tr>
+              <td class="text-left"><h5><strong>1. Datos del Instructor en Formación</strong></h5></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class= "row">
+    <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
+        <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+          <tbody>
+
+            <tr>
+              <td style='width:50%;' class="text-center"><strong>Fecha del Concurso de Oposición</strong></td>
+              <td style='width:50%;' class="text-center"><strong>Nombres</strong></td>
+            </tr>
+
+            <tr>
+              <td class="text-center">
+                <div id="sandbox-container">
+                  <div class="input-group date">
+                    <input type="text" class="form-control" name="FechaConcurso" value="<%=$cpfechaconcurso%>" required oninvalid="setCustomValidity('Ingrese una fecha del concurso de oposición válida')" onchange="try{setCustomValidity('')}catch(e){}" <% if @ver=="si" %> disabled <% end %>></i></span><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                  </div>
+                </div>
+              </td>
+              <td class="text-center">
+                <input type="text" name="Nombre" class="form-control" value="<%=$cpnombre%>" required oninvalid="setCustomValidity('Ingrese un nombre válido')" onchange="try{setCustomValidity('')}catch(e){}" <% if @ver=="si" %> disabled <% end %>>
+              </td>
+            </tr>
+
+
+            <tr>
+              <td style='width:50%;' class="text-center"><strong>Apellidos</strong></td>
+              <td style='width:50%;' class="text-center"><strong>Cédula de Identidad</strong></td>
+            </tr>
+
+            <tr>
+              <td class="text-center">
+                <input type="text" name="Apellido" class="form-control" value="<%=$cpapellido%>" required oninvalid="setCustomValidity('Ingrese un apellido válido')" onchange="try{setCustomValidity('')}catch(e){}" <% if @ver=="si" %> disabled <% end %>>
+              </td>
+              <td class="text-center">
+                <input type="number" name="CI" class="form-control" min="0" step="0" value="<%=$cpci%>" required oninvalid="setCustomValidity('Ingrese un número de cedula válido')" onchange="try{setCustomValidity('')}catch(e){}" <% if @ver=="si" %> disabled <% end %>> 
+              </td>
+            </tr>
+
+            <tr>
+              <td style='width:50%;' class="text-center"><strong>Fecha de Nacimiento</strong></td>
+              <td style='width:50%;' class="text-center"><strong>Direccion</strong></td>
+            </tr>
+
+            <tr>
+              <td class="text-center">
+                <div id="sandbox-container">
+                  <div class="input-group date">
+                    <input type="text" class="form-control" name="FechaNac" value="<%=$cpfechanac%>" required oninvalid="setCustomValidity('Ingrese una fecha de nacimiento válida')" onchange="try{setCustomValidity('')}catch(e){}" <% if @ver=="si" %> disabled <% end %>><span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                  </div>
+                </div>
+              </td>
+              </td>
+              <td class="text-center">
+                <input type="text" name="Dir" class="form-control" value="<%=$cpdir%>" required oninvalid="setCustomValidity('Ingrese una dirección válida')" onchange="try{setCustomValidity('')}catch(e){}" <% if @ver=="si" %> disabled <% end %>>
+              </td>
+            </tr>
+
+            <tr>
+              <td style='width:50%;' class="text-center"><strong>Correo Electrónico</strong></td>
+              <td style='width:50%;' class="text-center"><strong>Teléfono Celular</strong></td>
+            </tr>
+
+            <tr>
+              <td class="text-center">
+                <div class="input-group">
+                <input type="text" name="correo" class="form-control" value="<%=$cpcorreo%>" required oninvalid="setCustomValidity('Ingrese un correo electrónico válido')" onchange="try{setCustomValidity('')}catch(e){}" <% if @ver=="si" %> disabled <% end %>>
+                <div class="input-group-addon">@ciens.ucv.ve</div>
+                </div>
+              </td>
+              <td class="text-center">
+                <input type="number" name="Tlf" class="form-control" min="1000000000" max="9999999999" step="0" value="<%=$cptlf%>" required oninvalid="setCustomValidity('Ingrese un número de teléfono válido')" onchange="try{setCustomValidity('')}catch(e){}" <% if @ver=="si" %> disabled <% end %>>
+              </td>
+            </tr>
+            </tr>
+            <tr>
+              <td class="text-center"><strong>Otro Teléfono</strong></td>
+            </tr>
+            <tr> 
+              <td class="text-center">
+                <input type="number" name="OTlf" class="form-control" min="1000000000" max="9999999999" step="0" value="<%=$cpotlf%>" required oninvalid="setCustomValidity('Ingrese un número de teléfono válido')" onchange="try{setCustomValidity('')}catch(e){}" <% if @ver=="si" %> disabled <% end %>>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class= "row">
+    <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
+        <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+          <tbody>
+            <tr>
+              <td class="text-left"></td>
+            </tr>
+
+            <tr>
+              <td class="text-left"><h5><strong>2. Perfil del Instructor en Formación</strong></h5></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class= "row">
+    <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
+        <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+          <tbody>
+
+            <tr>
+              <td style='width:50%;' class="text-center"><strong>Grado de Instrucción</strong></td>
+              <td style='width:50%;' class="text-center"><strong>Área</strong></td>
+            </tr>
+
+            <tr>
+              <td class="text-center">
+                <input type="text" name="GradoI" class="form-control" value="<%=$cpgradoi%>" required oninvalid="setCustomValidity('Ingrese un grado de instrucción válido')" onchange="try{setCustomValidity('')}catch(e){}" <% if @ver=="si" %> disabled <% end %>>
+              </td>
+              <td class="text-center">
+                <input type="text" name="Area" class="form-control" value="<%=$cparea%>" required  oninvalid="setCustomValidity('Ingrese una área válida')" onchange="try{setCustomValidity('')}catch(e){}" <% if @ver=="si" %> disabled <% end %>>
+              </td>
+            </tr>
+            <tr>
+              <td class="text-center"><strong>Subárea</strong></td>
+            </tr>
+            <tr> 
+              <td class="text-center">
+                <input type="text" name="Subarea" class="form-control" value="<%=$cpsubarea%>" required oninvalid="setCustomValidity('Ingrese una subárea válida')" onchange="try{setCustomValidity('')}catch(e){}" <% if @ver=="si" %> disabled <% end %>>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+<div class= "row">
+    <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
+        <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+          <tbody>
+            <tr>
+              <td class="text-left"></td>
+            </tr>
+
+            <tr>
+              <td class="text-left"><h5><strong>3. Datos de la dependencia</strong></h5></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class= "row">
+    <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
+        <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+          <tbody>
+
+            <tr>
+              <td class="text-center"><strong>Unidad de Adscripción de Investigación</strong></td>
+              <td style='width:50%;' class="text-center"><strong>Unidad de Adscripción de Docencia</strong></td>
+            </tr>
+
+            <tr>
+              <td class="text-center">
+                <input type="text" name="UAI" class="form-control" value="<%=$cpuai%>" required oninvalid="setCustomValidity('Ingrese una unidad de adscripción de investigación válida')" onchange="try{setCustomValidity('')}catch(e){}" <% if @ver=="si" %> disabled <% end %>>
+              </td>
+              <td class="text-center">
+                <input type="text" name="UAD" class="form-control" value="<%=$cpuad%>" required oninvalid="setCustomValidity('Ingrese una unidad de adscripción de docencia válida')" onchange="try{setCustomValidity('')}catch(e){}" <% if @ver=="si" %> disabled <% end %>>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <div class= "row">
+    <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
+        <div class="table-responsive">
+        <table class="table table-bordered table-striped">
+          <tbody>
+            <tr>
+              <td class="text-left" colspan="2"></td>
+            </tr>
+
+            <tr>
+              <td class="text-left" colspan="2"><h5><strong>4. Datos del Tutor</strong></h5></td>
+            </tr>
+
+            <tr>
+              <td style='width:50%;' class="text-center"><strong>Nombres</strong></td>
+              <td style='width:50%;' class="text-center"><strong>Apellidos</strong></td>
+            </tr>
+
+            <tr>
+              <td class="text-left">
+                <%= @tutoreDeInstructor.nombres %>
+              </td>
+              <td class="text-left">
+                <%= @tutoreDeInstructor.apellidos %>
+              </td>
+            </tr>
+
+
+            <tr>
+              <td style='width:50%;' class="text-center"><strong>Cédula de Identidad</strong></td>
+              <td style='width:50%;' class="text-center"><strong>Correo Electrónico</strong></td>
+            </tr>
+
+            <tr>
+              <td class="text-left">
+                <%= @tutoreDeInstructor.ci %>
+              </td>
+              <td class="text-left">
+                <%= @tutoreDeInstructorUsu.email + "@ciens.ucv.ve" %>
+              </td>
+            </tr>
+
+            <tr>
+              <td style='width:50%;' class="text-center"><strong>Teléfono Celular</strong></td>
+              <td style='width:50%;' class="text-center"><strong>Otro Teléfono</strong></td>
+            </tr>
+
+            <tr>
+              <td class="text-left">
+                <%= @tutoreDeInstructor.telefono1 %>
+              </td>
+              <td class="text-left">
+                <%= @tutoreDeInstructor.telefono2 %>
+              </td>
+            </tr>
+
+            <tr>
+              <td style='width:50%;' class="text-center"><strong>Fecha de Nacimiento</strong></td>
+              <td style='width:50%;' class="text-center"><strong>Direccion</strong></td>
+            </tr>
+
+            <tr>
+              <td class="text-left">
+                <%= @tutoreDeInstructor.fecha_nacimiento %>
+              </td>
+              <td class="text-left">
+                <%= @tutoreDeInstructor.direccion %>
+              </td>
+            </tr>
+
+            <tr>
+              <td style='width:50%;' class="text-center"><strong>Grado de Instruccion</strong></td>
+              <td style='width:50%;' class="text-center"><strong>Area</strong></td>
+            </tr>
+
+            <tr>
+              <td class="text-left">
+                <%= @tutoreDeInstructor.grado_instruccion %>
+              </td>
+              <td class="text-left">
+                <%= @tutoreDeInstructor.area %>
+              </td>
+            </tr>
+            <tr>
+              <td class="text-left"><strong>Subarea</strong></td>
+              <td class="text-left"></td>
+            </tr>
+            <tr> 
+              <td class="text-left">
+                <%= @tutoreDeInstructor.subarea %>
+              </td>
+              <td class="text-center">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <% if @ver!="si" %>
+    <div class= "row">
+      <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
+        <div class="table-responsive">
+          <table class="table table-bordered table-striped">
+            <tbody>
+              <tr>
+                <td class="text-center">
+                </td>
+              </tr>
+              <tr>
+                <td class="text-left"><h5><strong>5. Cambiar Tutor (opcional) </strong></h5></td>
+              </tr>
+              <tr>
+                <td class="text-center"><strong>Cambiar Tutor</strong></td>
+              </tr>
+              <tr> 
+                <td class="text-center">
+                  <%= select_tag(:cptutores, options_for_select(@cptutores), {:class => "form-control", :name=> "JRTutores", :style => "width:100%;"}) %> 
+                  <button type="button" class="btn btn-forminst" onclick = " location.href = '../secretarias/tutores_asignados'">Tutores Asignados</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+<% if @ver!="si" %>
+  <center><input name="commit" type="submit" class="btn btn-info btn-lg" value="Guardar" /></center>
+<% end %>
+</form>
+
+<br><br> 
+
+
+
+<script type="text/javascript">
+    $('#sandbox-container .input-group.date').datepicker({
+        format: "yyyy-mm-dd", 
+        language: "es",
+        keyboardNavigation: false,
+        autoclose: true});
+</script>
