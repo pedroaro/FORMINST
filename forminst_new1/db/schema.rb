@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170626120312) do
+ActiveRecord::Schema.define(version: 20171004212709) do
 
   create_table "actividad", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "tipo_actividad_id"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20170626120312) do
     t.date    "fecha_modificacion"
     t.date    "fecha_creacion"
     t.string  "estado"
+    t.integer "mensaje"
     t.index ["planformacion_id"], name: "adecuacionPlanformacion", using: :btree
     t.index ["tutor_id"], name: "adecuacionUsuario", using: :btree
   end
@@ -46,6 +47,17 @@ ActiveRecord::Schema.define(version: 20170626120312) do
     t.index ["adecuacion_id"], name: "adecuacionactividadAdecuacion", using: :btree
   end
 
+  create_table "area", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "departamento", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string  "nombre"
+    t.integer "escuela_id"
+    t.index ["escuela_id"], name: "escuelaDepartamento", using: :btree
+  end
+
   create_table "document", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "filename"
     t.string   "content_type"
@@ -56,6 +68,8 @@ ActiveRecord::Schema.define(version: 20170626120312) do
     t.integer  "tutor_id"
     t.integer  "adecuacion_id"
     t.integer  "informe_id"
+    t.integer  "actividad_id"
+    t.index ["actividad_id"], name: "documentactividad", using: :btree
     t.index ["adecuacion_id"], name: "documentadecuacion", using: :btree
     t.index ["informe_id"], name: "documentinforme", using: :btree
     t.index ["instructor_id"], name: "documentinstructor", using: :btree
@@ -82,6 +96,11 @@ ActiveRecord::Schema.define(version: 20170626120312) do
 
   create_table "entidad", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "nombre"
+  end
+
+  create_table "entidads", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "escuela", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -132,6 +151,7 @@ ActiveRecord::Schema.define(version: 20170626120312) do
     t.date    "fecha_fin"
     t.date    "fecha_modificacion"
     t.integer "tipo_id"
+    t.text    "justificaciones",    limit: 4294967295
     t.index ["planformacion_id"], name: "informePlanFormacion", using: :btree
     t.index ["tipo_id"], name: "informetipo", using: :btree
     t.index ["tutor_id"], name: "informeusuario", using: :btree
@@ -142,6 +162,11 @@ ActiveRecord::Schema.define(version: 20170626120312) do
     t.integer "actividad_id"
     t.index ["actividad_id"], name: "informeActividadActividad", using: :btree
     t.index ["informe_id"], name: "informeActividadinforme", using: :btree
+  end
+
+  create_table "instructors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "instructortutor", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -232,6 +257,7 @@ ActiveRecord::Schema.define(version: 20170626120312) do
     t.date    "fecha_modificacion"
     t.string  "adscripcion_docencia"
     t.string  "adscripcion_investigacion"
+    t.integer "mensaje"
     t.index ["instructor_id"], name: "PlanFormacionInstructor", using: :btree
     t.index ["tutor_id"], name: "PlanFormacionTutor", using: :btree
   end
@@ -302,6 +328,20 @@ ActiveRecord::Schema.define(version: 20170626120312) do
     t.index ["tipo_resultado_id"], name: "resultadoTipoResultado", using: :btree
   end
 
+  create_table "resume", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.string   "name"
+    t.string   "attachment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "resumes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.string   "name"
+    t.string   "attachment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "revision", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "informe_id"
     t.date    "fecha"
@@ -339,6 +379,11 @@ ActiveRecord::Schema.define(version: 20170626120312) do
     t.text "concepto", limit: 4294967295
   end
 
+  create_table "tutors", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "usuario", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string  "user"
     t.boolean "ldap"
@@ -352,9 +397,16 @@ ActiveRecord::Schema.define(version: 20170626120312) do
     t.integer "usuario_id"
     t.integer "entidad_id"
     t.integer "escuela_id"
+    t.integer "departamento_id"
+    t.index ["departamento_id"], name: "departamentoUsuario", using: :btree
     t.index ["entidad_id"], name: "usuarioEntidadEntidad", using: :btree
     t.index ["escuela_id"], name: "usuarioEscuela", using: :btree
     t.index ["usuario_id"], name: "usuarioEntidadUsuario", using: :btree
+  end
+
+  create_table "usuarios", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_foreign_key "actividad", "tipo_actividad", name: "actividadTipoactividad", on_update: :cascade, on_delete: :cascade
@@ -363,6 +415,8 @@ ActiveRecord::Schema.define(version: 20170626120312) do
   add_foreign_key "adecuacion", "usuario", column: "tutor_id", name: "adecuacionUsuario", on_update: :cascade, on_delete: :cascade
   add_foreign_key "adecuacion_actividad", "actividad", name: "adecuacionactividadActividad", on_update: :cascade, on_delete: :cascade
   add_foreign_key "adecuacion_actividad", "adecuacion", name: "adecuacionactividadAdecuacion", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "departamento", "escuela", name: "escuelaDepartamento", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "document", "actividad", name: "documentactividad"
   add_foreign_key "document", "adecuacion", name: "documentadecuacion"
   add_foreign_key "document", "informe", name: "documentinforme"
   add_foreign_key "document", "usuario", column: "instructor_id", name: "documentinstructor"
@@ -408,6 +462,7 @@ ActiveRecord::Schema.define(version: 20170626120312) do
   add_foreign_key "revision", "informe", name: "revisioninforme", on_update: :cascade, on_delete: :cascade
   add_foreign_key "revision", "tipo_estatus", column: "estatus_id", name: "revisionTipoEstatus", on_update: :cascade, on_delete: :cascade
   add_foreign_key "revision", "usuario", name: "revisionusuario", on_update: :cascade, on_delete: :cascade
+  add_foreign_key "usuarioentidad", "departamento", name: "departamentoUsuario", on_update: :cascade, on_delete: :cascade
   add_foreign_key "usuarioentidad", "entidad", name: "usuarioEntidadEntidad", on_update: :cascade, on_delete: :cascade
   add_foreign_key "usuarioentidad", "escuela", name: "usuarioEscuela"
   add_foreign_key "usuarioentidad", "usuario", name: "usuarioEntidadUsuario", on_update: :cascade, on_delete: :cascade
