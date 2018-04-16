@@ -19415,3 +19415,22 @@ Processing by IniciotutorController#detalles_adecuacion4 as HTML
   Rendering iniciotutor/detalles_adecuacion4.html.erb within layouts/ly_inicio_tutor
   Rendered iniciotutor/detalles_adecuacion4.html.erb within layouts/ly_inicio_tutor (14.7ms)
 Completed 200 OK in 208ms (Views: 189.6ms | ActiveRecord: 5.6ms)
+Started POST "/iniciotutor/ver_detalles_adecuacion" for 190.169.65.95 at 2018-04-16 04:22:56 -0400
+Processing by IniciotutorController#ver_detalles_adecuacion as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"rP8U/2fEXHOJr0jKnA277o56vg9fgzrxuhlyDmqrp5nMjNBpZcjjePE3dN/6h9Wzip1h2oLFaPSMPyYm5cbMQA==", "cant_delete"=>"0", "cant_edit"=>"0", "cant_docencia"=>"2", "cant_investigacion"=>"1", "cant_formacion"=>"1", "cant_extension"=>"1", "cant_otra"=>"0", "semestre"=>"2", "nuevadoc0"=>"Dictado de la asignatura Principios de Química I. ", "nuevainv0"=>"Estudio de formación de complejos binarios de Al(III) con los aminoácidos α-alanina, glicina, prolina, valina, serina y treonina, empleando medidas de emf(H) en NaCl 3.0 M a 25 °C.", "nuevafor0"=>"Docente: iniciar el módulo I de capacitación docente, si está disponible", "nuevaext0"=>"Participar como tutor o jurado de un estudiante que le asigne la Comisión de Servicio Comunitario por la Escuela de Química"}
+Redirected to http://formacion.ciens.ucv.ve/iniciotutor/detalles_adecuacion4
+Completed 302 Found in 233ms (ActiveRecord: 192.0ms)
+Started GET "/iniciotutor/detalles_adecuacion4" for 190.169.65.95 at 2018-04-16 04:22:56 -0400
+Processing by IniciotutorController#detalles_adecuacion4 as HTML
+  Rendering iniciotutor/detalles_adecuacion4.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/detalles_adecuacion4.html.erb within layouts/ly_inicio_tutor (12.8ms)
+Completed 200 OK in 230ms (Views: 209.1ms | ActiveRecord: 8.2ms)
+Started GET "/assets/actividadejecutadas.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 190.169.65.95 at 2018-04-16 04:22:57 -0400
+Started GET "/assets/adecuacionactividads.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 190.169.65.95 at 2018-04-16 04:22:57 -0400
+Started GET "/assets/actividads.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for 190.169.65.95 at 2018-04-16 04:22:57 -0400
+Started GET "/assets/banner.png" for 190.169.65.95 at 2018-04-16 04:22:57 -0400
+Started GET "/iniciotutor/detalles_adecuacion5" for 190.169.65.95 at 2018-04-16 04:23:01 -0400
+Processing by IniciotutorController#detalles_adecuacion5 as HTML
+  Rendering iniciotutor/detalles_adecuacion5.html.erb within layouts/ly_inicio_tutor
+  Rendered iniciotutor/detalles_adecuacion5.html.erb within layouts/ly_inicio_tutor (12.3ms)
+Completed 200 OK in 202ms (Views: 186.5ms | ActiveRecord: 3.3ms)
