@@ -144,9 +144,15 @@
                     <td>
                       <textarea class="form-control" rows="3" name='docencia<%= actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
                     </td>
-                    <td>
-                      <textarea class="form-control" rows="3" name='ejecutada<%= actdoc.id.to_s%>' ></textarea>
-                    </td>
+                    <% if  (@numero_informe == 3 || @numero_informe == 6 || @numero_informe == 7 ) &&  @actividadesadocejec[i] != []%>
+                      <td>
+                        <textarea class="form-control" rows="3" name='ejecutada<%= actdoc.id.to_s%>' ><%= @actividadesadocejec[i].descripcion%></textarea>
+                      </td>
+                    <% else %>
+                      <td>
+                        <textarea class="form-control" rows="3" name='ejecutada<%= actdoc.id.to_s%>' ></textarea>
+                      </td>
+                    <% end %>
                     <td>
                       <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' ></textarea>
                     </td>
@@ -168,9 +174,15 @@
                   <td>
                       <textarea class="form-control" rows="3" name='investigacion<%= actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
                     </td>
-                    <td>
-                      <textarea class="form-control" rows="3" name='ejecutada<%= actdoc.id.to_s%>' ></textarea>
-                    </td>
+                    <% if  (@numero_informe == 3 || @numero_informe == 6 || @numero_informe == 7 ) &&  @actividadesainvejec[i] != []%>
+                      <td>
+                        <textarea class="form-control" rows="3" name='ejecutada<%= actdoc.id.to_s%>' ><%= @actividadesainvejec[i].descripcion%></textarea>
+                      </td>
+                    <% else %>
+                      <td>
+                        <textarea class="form-control" rows="3" name='ejecutada<%= actdoc.id.to_s%>' ></textarea>
+                      </td>
+                    <% end %>
                     <td>
                       <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' ></textarea>
                     </td>
@@ -209,9 +221,15 @@
                   <td>
                       <textarea class="form-control" rows="3" name='formacion<%= actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
                     </td>
-                    <td>
-                      <textarea class="form-control" rows="3" name='ejecutada<%= actdoc.id.to_s%>' ></textarea>
-                    </td>
+                    <% if (@numero_informe == 3 || @numero_informe == 6 || @numero_informe == 7 ) &&  @actividadesaforejec[i] != [] %>
+                      <td>
+                        <textarea class="form-control" rows="3" name='ejecutada<%= actdoc.id.to_s%>' ><%= @actividadesaforejec[i].descripcion%></textarea>
+                      </td>
+                    <% else %>
+                      <td>
+                        <textarea class="form-control" rows="3" name='ejecutada<%= actdoc.id.to_s%>' ></textarea>
+                      </td>
+                    <% end %>
                     <td>
                       <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' ></textarea>
                     </td>
@@ -231,9 +249,15 @@
                   <td>
                       <textarea class="form-control" rows="3" name='extension<%= actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
                     </td>
-                    <td>
-                      <textarea class="form-control" rows="3" name='ejecutada<%= actdoc.id.to_s%>' ></textarea>
-                    </td>
+                    <% if (@numero_informe == 3 || @numero_informe == 6 || @numero_informe == 7 ) &&  @actividadesaextejec[i] != [] %>
+                      <td>
+                        <textarea class="form-control" rows="3" name='ejecutada<%= actdoc.id.to_s%>' ><%= @actividadesaextejec[i].descripcion%></textarea>
+                      </td>
+                    <% else %>
+                      <td>
+                        <textarea class="form-control" rows="3" name='ejecutada<%= actdoc.id.to_s%>' ></textarea>
+                      </td>
+                    <% end %>
                     <td>
                       <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' ></textarea>
                     </td>
@@ -242,7 +266,7 @@
               <% end %>
 
               <% if @actividadesaobli != [] %>
-              <tr><td colspan="3"></td></tr>
+                <tr><td colspan="3"></td></tr>
                 <tr  class='title-table'>
                   <td class="text-center"><strong>Actividad para la Aprobación</strong></td>
                   <td class="text-center"><strong>Actividad para la Aprobación Ejecutada</strong></td>
@@ -276,9 +300,15 @@
                   <td colspan="2">
                     <textarea class="form-control" rows="3"  name='otra<%= actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
                   </td>
-                  <td colspan="2">
-                    <textarea class="form-control" rows="3" name='ejecutada<%= actdoc.id.to_s%>' ></textarea>
-                  </td>
+                  <% if (@numero_informe == 3 || @numero_informe == 6 || @numero_informe == 7 ) &&  @actividadesaotrejec[i] != [] %>
+                    <td colspan="2">
+                      <textarea class="form-control" rows="3" name='ejecutada<%= actdoc.id.to_s%>' ><%= @actividadesaotrejec[i].descripcion%></textarea>
+                    </td>
+                  <% else %>
+                    <td colspan="2">
+                      <textarea class="form-control" rows="3" name='ejecutada<%= actdoc.id.to_s%>' ></textarea>
+                    </td>
+                  <% end %>
                   <input type="hidden" name="otra<%=i.to_s%>" value='<%= actdoc.id %>'>
                 </tr>
               <% end %>

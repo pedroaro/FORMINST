@@ -15,7 +15,7 @@ class InformesController < ApplicationController
           @adecuacion= Adecuacion.find(session[:adecuacion_id])
           esta = EstatusAdecuacion.where(adecuacion_id: session[:adecuacion_id], actual: 1).take
           if esta.estatus_id == 6 
-            flash[:danger]= "La adecuación debe ser enviada/aproabada para poder crear algun informe"
+            flash[:danger]= "La adecuación debe ser enviada/aprobada para poder crear algun informe"
             redirect_to controller:"informes", action: "listar_informes"
           end
           @actividadesa= []
@@ -25,6 +25,11 @@ class InformesController < ApplicationController
           @actividadesafor= []
           @actividadesaotr= []
           @actividadesaobli= []
+          @actividadesadocejec = []
+          @actividadesainvejec = []
+          @actividadesaextejec = []
+          @actividadesaforejec = []
+          @actividadesaotrejec = []
           @fecha_inicio1 = nil
           @fecha_fin1 = nil
           if params[:informe_id].to_i == 1
@@ -37,7 +42,7 @@ class InformesController < ApplicationController
               tipo= @act.tipo_actividad_id
               if tipo==1
                 @actividadesadoc.push(@act)
-              else
+              else []
                 if tipo==2
                   @actividadesainv.push(@act)
                 else
@@ -91,35 +96,38 @@ class InformesController < ApplicationController
                 @numero_informe=3
                 informe1 = Informe.where( planformacion_id: session[:plan_id], numero: 1).take
 		      	    informe2 = Informe.where( planformacion_id: session[:plan_id], numero: 2).take
-		      	if informe1.blank? || informe2.blank?
-		      		flash[:danger] = "Debe crear primero el primer y segundo informe semestral "
-                    redirect_to controller:"informes", action: "listar_informes"
-                    return 0
-		      	end
-			    @fecha_inicio1 = informe1.fecha_inicio
-			    @fecha_fin1 = informe2.fecha_fin 
+                if informe1.blank? || informe2.blank?
+                  flash[:danger] = "Debe crear primero el primer y segundo informe semestral "
+                  redirect_to controller:"informes", action: "listar_informes"
+                  return 0
+                end
+                @fecha_inicio1 = informe1.fecha_inicio
+                @fecha_fin1 = informe2.fecha_fin 
                 @actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: [1,2]).all
                 @actividadesa.each do |actade| 
                   @act= Actividad.find(actade.actividad_id)
+                  begin
+                    @actividadesi= InformeActividad.where(actividad_id: actade.actividad_id).take
+                    @actinf= ActividadEjecutada.where(informe_actividad_id: @actividadesi.id).take
+                  rescue => ex
+                    @actinf= []
+                  end
                   tipo= @act.tipo_actividad_id
                   if tipo==1
                     @actividadesadoc.push(@act)
-                  else
-                    if tipo==2
-                      @actividadesainv.push(@act)
-                    else
-                      if tipo==3
-                        @actividadesaext.push(@act)
-                      else
-                        if tipo==4
-                          @actividadesafor.push(@act)
-                        else
-                          if tipo==5
-                            @actividadesaotr.push(@act)
-                          end
-                        end
-                      end
-                    end
+                    @actividadesadocejec.push(@actinf)
+                  elsif tipo==2
+                    @actividadesainv.push(@act)
+                    @actividadesainvejec.push(@actinf)
+                  elsif tipo==3
+                    @actividadesaext.push(@act)
+                    @actividadesaextejec.push(@actinf)
+                  elsif tipo==4
+                    @actividadesafor.push(@act)
+                    @actividadesaforejec.push(@actinf)
+                  elsif tipo==5
+                    @actividadesaotr.push(@act)
+                    @actividadesaotrejec.push(@actinf)
                   end
                 end
               else
@@ -186,36 +194,40 @@ class InformesController < ApplicationController
                       @tipo_informe=6
                       @numero_informe=6
                       informe1 = Informe.where( planformacion_id: session[:plan_id], numero: 4).take
-			      	  informe2 = Informe.where( planformacion_id: session[:plan_id], numero: 5).take
-			      	  if informe1.blank? || informe2.blank?
-			      		flash[:danger] = "Debe crear primero el tercer y cuarto informe semestral "
-	                    redirect_to controller: "informes", action: "listar_informes"
-                      	return 0
-		      		  end
-				      @fecha_inicio1 = informe1.fecha_inicio
-				      @fecha_fin1 = informe2.fecha_fin 
+                      informe2 = Informe.where( planformacion_id: session[:plan_id], numero: 5).take
+                      if informe1.blank? || informe2.blank?
+                        flash[:danger] = "Debe crear primero el tercer y cuarto informe semestral "
+                        redirect_to controller: "informes", action: "listar_informes"
+                        return 0
+                      end
+                      @fecha_inicio1 = informe1.fecha_inicio
+                      @fecha_fin1 = informe2.fecha_fin 
                       @actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: [3,4]).all
                       @actividadesa.each do |actade| 
                         @act= Actividad.find(actade.actividad_id)
                         tipo= @act.tipo_actividad_id
+                        begin
+                          @actividadesi= InformeActividad.where(actividad_id: actade.actividad_id).take
+                          @actinf= ActividadEjecutada.where(informe_actividad_id: @actividadesi.id).take
+                        rescue => ex
+                          @actividadesi= []
+                          @actinf= []
+                        end
                         if tipo==1
                           @actividadesadoc.push(@act)
-                        else
-                          if tipo==2
-                            @actividadesainv.push(@act)
-                          else
-                            if tipo==3
-                              @actividadesaext.push(@act)
-                            else
-                              if tipo==4
-                                @actividadesafor.push(@act)
-                              else
-                                if tipo==5
-                                  @actividadesaotr.push(@act)
-                                end
-                              end
-                            end
-                          end
+                          @actividadesadocejec.push(@actinf)
+                        elsif tipo==2
+                          @actividadesainv.push(@act)
+                          @actividadesainvejec.push(@actinf)
+                        elsif tipo==3
+                          @actividadesaext.push(@act)
+                          @actividadesaextejec.push(@actinf)
+                        elsif tipo==4
+                          @actividadesafor.push(@act)
+                          @actividadesaforejec.push(@actinf)
+                        elsif tipo==5
+                          @actividadesaotr.push(@act)
+                          @actividadesaotrejec.push(@actinf)
                         end
                       end
                     else
@@ -227,35 +239,41 @@ class InformesController < ApplicationController
         				      	informe2 = Informe.where( planformacion_id: session[:plan_id], numero: 6).take
         				        if informe1.blank? || informe2.blank?
         				      		flash[:danger] = "Debe crear primero el primer y segundo informe anual "
-        		                    redirect_to controller: "informes", action: "listar_informes"
-        	                      	return 0
+                          redirect_to controller: "informes", action: "listar_informes"
+                          return 0
         		      		  end
           					    @fecha_inicio1 = informe1.fecha_inicio
-          					    @fecha_fin1 = informe2.fecha_fin 
-                        @actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: [1,2,3,4,5]).all
+                        @fecha_fin1 = informe2.fecha_fin 
+                        puts @adecuacion.id
+                        @actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: [1,2,3,4]).all
                         @actividadesa.each do |actade| 
                           @act= Actividad.find(actade.actividad_id)
                           tipo= @act.tipo_actividad_id
+                          puts actade.actividad_id
+                          begin
+                            @actividadesi= InformeActividad.where(actividad_id: actade.actividad_id).take
+                            @actinf= ActividadEjecutada.where(informe_actividad_id: @actividadesi.id).take
+                          rescue => ex
+                            @actividadesi= []
+                            @actinf= []
+                          end
                           if tipo==1
                             @actividadesadoc.push(@act)
-                          else
-                            if tipo==2
-                              @actividadesainv.push(@act)
-                            else
-                              if tipo==3
-                                @actividadesaext.push(@act)
-                              else
-                                if tipo==4
-                                  @actividadesafor.push(@act)
-                                else
-                                  if tipo==5
-                                    @actividadesaotr.push(@act)
-                                  elsif tipo==7
-                                  	@actividadesaobli.push(@act)
-                                  end
-                                end
-                              end
-                            end
+                            @actividadesadocejec.push(@actinf)
+                          elsif tipo==2
+                            @actividadesainv.push(@act)
+                            @actividadesainvejec.push(@actinf)
+                          elsif tipo==3
+                            @actividadesaext.push(@act)
+                            @actividadesaextejec.push(@actinf)
+                          elsif tipo==4
+                            @actividadesafor.push(@act)
+                            @actividadesaforejec.push(@actinf)
+                          elsif tipo==5
+                            @actividadesaotr.push(@act)
+                            @actividadesaotrejec.push(@actinf)
+                          elsif tipo==7
+                            @actividadesaobli.push(@act)
                           end
                         end
                       else
@@ -1064,23 +1082,45 @@ end
 
         #Anual
         if @informe.numero ==3
-          @informe.fecha_inicio = Informe.where( planformacion_id: session[:plan_id], numero: 1).take.fecha_inicio
-          @informe.fecha_fin = Informe.where( planformacion_id: session[:plan_id], numero: 2).take.fecha_fin
-          @informe.save
+          begin
+            @informe.fecha_inicio = Informe.where( planformacion_id: session[:plan_id], numero: 1).take.fecha_inicio
+            @informe.fecha_fin = Informe.where( planformacion_id: session[:plan_id], numero: 2).take.fecha_fin
+            @informe.save
+          rescue => ex
+            @informe.fecha_inicio = "-"
+            @informe.fecha_fin = "-"
+            @informe.save
+            flash[:danger]= "Usted ha eliminado un informe utilizado por este, por favor proceda a eliminar este"
+          end
+         
         end
 
         #Anual
         if @informe.numero ==6
-          @informe.fecha_inicio = Informe.where( planformacion_id: session[:plan_id], numero: 4).take.fecha_inicio
-          @informe.fecha_fin = Informe.where( planformacion_id: session[:plan_id], numero: 5).take.fecha_fin
-          @informe.save
+          begin
+            @informe.fecha_inicio = Informe.where( planformacion_id: session[:plan_id], numero: 4).take.fecha_inicio
+            @informe.fecha_fin = Informe.where( planformacion_id: session[:plan_id], numero: 5).take.fecha_fin
+            @informe.save
+          rescue => ex
+            @informe.fecha_inicio = "-"
+            @informe.fecha_fin = "-"
+            @informe.save
+            flash[:danger]= "Usted ha eliminado un informe utilizado por este, por favor proceda a eliminar este"
+          end
         end
 
         #Anual
         if @informe.numero ==7
-          @informe.fecha_inicio = Informe.where( planformacion_id: session[:plan_id], numero: 1).take.fecha_inicio
-          @informe.fecha_fin = Informe.where( planformacion_id: session[:plan_id], numero: 4).take.fecha_fin
-          @informe.save
+          begin
+            @informe.fecha_inicio = Informe.where( planformacion_id: session[:plan_id], numero: 1).take.fecha_inicio
+            @informe.fecha_fin = Informe.where( planformacion_id: session[:plan_id], numero: 4).take.fecha_fin
+            @informe.save
+          rescue => ex
+            @informe.fecha_inicio = "-"
+            @informe.fecha_fin = "-"
+            @informe.save
+            flash[:danger]= "Usted ha eliminado un informe utilizado por este, por favor proceda a eliminar este"
+          end
         end
 
         @periodo = @informe.fecha_inicio.to_s + " al " + @informe.fecha_fin.to_s
