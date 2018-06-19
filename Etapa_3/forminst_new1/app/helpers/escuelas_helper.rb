@@ -1,2 +1,0 @@
-module EscuelasHelper
-end
