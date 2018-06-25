@@ -85,7 +85,7 @@ class Pdf
 			point = [pdf.bounds.right-525, pdf.bounds.bottom+35]
 			pdf.lazy_bounding_box(point, :width => 500) do
 				pdf.text " Universidad Central de Venezuela - Facultad de Ciencias \n", :size=>9 , :align=>:center, :style => :bold
-				pdf.text "Av. Los Ilustres, Ciudad Universitaria de Caracas, Facultad de Ciencias, \n Edificio del Decanato, Planta Baja, Los Chaguaramos, Caracas-Venezuela\n Teléfono/Fax: 58-212-605.11.65 / 605.11.63 / E-mail: duberly.medina@ciens.ucv.ve",  :size=>7 , :align=>:center
+				pdf.text "Av. Los Ilustres, Ciudad Universitaria de Caracas, Facultad de Ciencias, \n Edificio del Decanato, Planta Baja, Los Chaguaramos, Caracas-Venezuela\n Teléfono/Fax: 58-212-605.11.65 / 605.11.63 / E-mail: consejofacultadcienciasucv@gmail.com",  :size=>7 , :align=>:center
 			end.draw
 		end
 		#######
@@ -1474,7 +1474,7 @@ class Pdf
 			point = [pdf.bounds.right-525, pdf.bounds.bottom+35]
 			pdf.lazy_bounding_box(point, :width => 500) do
 				pdf.text " Universidad Central de Venezuela - Facultad de Ciencias \n", :size=>9 , :align=>:center, :style => :bold
-				pdf.text "Av. Los Ilustres, Ciudad Universitaria de Caracas, Facultad de Ciencias, \n Edificio del Decanato, Planta Baja, Los Chaguaramos, Caracas-Venezuela\n Teléfono/Fax: 58-212-605.11.65 / 605.11.63 / E-mail: duberly.medina@ciens.ucv.ve",  :size=>7 , :align=>:center
+				pdf.text "Av. Los Ilustres, Ciudad Universitaria de Caracas, Facultad de Ciencias, \n Edificio del Decanato, Planta Baja, Los Chaguaramos, Caracas-Venezuela\n Teléfono/Fax: 58-212-605.11.65 / 605.11.63 / E-mail: consejofacultadcienciasucv@gmail.com",  :size=>7 , :align=>:center
 			end.draw
 		end
 		

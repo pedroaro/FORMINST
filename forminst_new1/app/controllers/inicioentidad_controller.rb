@@ -3134,6 +3134,7 @@ end
 			ActionCorreo.envio_informe(remitente2, notific2.mensaje,1,linkTeI,@document).deliver
 			remitente = Usuario.where(id: uentidad.usuario_id).take
 			ActionCorreo.envio_informe(remitente, notific3.mensaje,0,linkE,@document).deliver
+			ActionCorreo.envio_informe("consejofacultadcienciasucv@gmail.com", notific3.mensaje,0, linkE,@document).deliver
 			flash[:success]="El informe se ha envíado a consejo de facultad"
 		elsif (session[:entidad_id] == 13)
 			#Consejo de facultad
@@ -3621,6 +3622,7 @@ end
 			ActionCorreo.envio_adecuacion(remitente2, notific2.mensaje,1,linkI,@document).deliver
 			remitente = Usuario.where(id: uentidad.usuario_id).take
 			ActionCorreo.envio_adecuacion(remitente, notific3.mensaje,0,linkE,@document).deliver
+			ActionCorreo.envio_adecuacion("consejofacultadcienciasucv@gmail.com", notific3.mensaje,0, linkE,@document).deliver
 
 			flash[:success]="La adecuación se ha envíado a consejo de facultad"
 		elsif (session[:entidad_id] == 13)

@@ -3027,6 +3027,10 @@ def generar_pdf() # es función permite generar el documento pdf de la adecuaci�
           ActionCorreo.envio_informe(remitente2, notific2.mensaje,1,linkTeI,@document).deliver
           remitente = Usuario.where(id: uentidad.usuario_id).take
           ActionCorreo.envio_informe(remitente, notific3.mensaje,0,linkE,@document).deliver
+          if (cambio_act.estatus_id == 5)
+            ActionCorreo.envio_informe("consejofacultadcienciasucv@gmail.com", notific3.mensaje,0, linkE,@document).deliver
+          end
+          
           flash[:success]="El informe se ha envíado a comision de investigacion"
         else
             flash[:warning]="Debe enviar los informes en orden"
