@@ -4,11 +4,12 @@ class ActionCorreo < ActionMailer::Base
   	def envio_informe(remitente, mensaje, id, link,document) ##ID :: 0 = ENTIDAD, 1 = INSTRUCTOR, 2 T= TUTOR
   		@id = id
   		@mensaje = mensaje
-		  if remitente.to_s.include? "@gmail.com"
+  		if remitente.to_s.include? "@gmail.com"
 			email = remitente
 		else
 			email = remitente.user + "@ciens.ucv.ve"
-		end  		@email= email
+		end
+  		@email= email
 		@user_email = 'forminst.ciens@gmail.com'
 		@link = link
 		attachments[document.filename] = document.file_contents		

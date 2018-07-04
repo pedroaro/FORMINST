@@ -2127,7 +2127,7 @@ class IniciotutorController < ApplicationController
 						ActionCorreo.envio_adecuacion(remitente, notific3.mensaje,0, linkE,@document).deliver
 						ActionCorreo.envio_adecuacion("consejofacultadcienciasucv@gmail.com", notific3.mensaje,0, linkE,@document).deliver
 
-					end
+			        end
 
 			        if(cambio_act.estatus_id == 5)
 			        	flash[:success]="La adecuación se ha enviado a consejo de facultad"
