@@ -19,7 +19,7 @@
       <button type="button" class="btn btn-default" onclick = " location.href = 'javascript:history.back(-1);'">Volver</button>
       <%if @bool_enviado == 0 %>
         <%if session[:entidad_id]==13 %>
-           <button type="button" data-toggle="modal" data-target="#myModal4" class="btn btn-default">Aprobar/Rechazar</button>
+           <button type="button" data-toggle="modal" data-target="#myModal4" class="btn btn-default">Avalar/Rechazar</button>
         <%else%>
           <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-default">Enviar</button>
         <%end%>

@@ -92,8 +92,8 @@
         <h5>Seleccione la acción que desea realizar sobre el informe.</h5>
       </div>
       <div class="modal-footer">
-      <%= link_to "Aprobar", {controller: "inicioentidad", action: "cambiar_estatusI", :informe_id => @informe.id, :rechazar => 0 }, class: "btn btn-default" %>
-      <%= link_to "Aprobar con Observaciones", {controller: "inicioentidad", action: "cambiar_estatusI", :informe_id => @informe.id, :rechazar => 2 }, class: "btn btn-default" %>
+      <%= link_to "Avalar", {controller: "inicioentidad", action: "cambiar_estatusI", :informe_id => @informe.id, :rechazar => 0 }, class: "btn btn-default" %>
+      <%= link_to "Avalar con Observaciones", {controller: "inicioentidad", action: "cambiar_estatusI", :informe_id => @informe.id, :rechazar => 2 }, class: "btn btn-default" %>
       <%= link_to "Rechazar", {controller: "inicioentidad", action: "cambiar_estatusI", :informe_id => @informe.id, :rechazar => 1 }, class: "btn btn-default" %>
       
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
@@ -110,7 +110,7 @@
        <button type="button" class="btn btn-default" onclick = " location.href = 'javascript:history.back(-1);'">Volver</button>  
        <%if @bool_enviado == 0 && @cjpTipo=="Institucional"%>
           <%if session[:entidad_id]==13 %>
-             <button type="button" data-toggle="modal" data-target="#myModal4" class="btn btn-default">Aprobar/Rechazar</button>
+             <button type="button" data-toggle="modal" data-target="#myModal4" class="btn btn-default">Avalar/Rechazar</button>
           <%else%>
             <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-default">Enviar</button>
           <%end%>

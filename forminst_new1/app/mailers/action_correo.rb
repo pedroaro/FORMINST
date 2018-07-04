@@ -4,12 +4,15 @@ class ActionCorreo < ActionMailer::Base
   	def envio_informe(remitente, mensaje, id, link,document) ##ID :: 0 = ENTIDAD, 1 = INSTRUCTOR, 2 T= TUTOR
   		@id = id
   		@mensaje = mensaje
-  		email = remitente.user + "@ciens.ucv.ve"
-  		@email= email
+		  if remitente.to_s.include? "@gmail.com"
+			email = remitente
+		else
+			email = remitente.user + "@ciens.ucv.ve"
+		end  		@email= email
 		@user_email = 'forminst.ciens@gmail.com'
 		@link = link
 		attachments[document.filename] = document.file_contents		
-		if id == 0		##ENTIDAD
+		if (id == 0	&& !(remitente.to_s.include? "@gmail.com"))	##ENTIDAD
 			uEntidad = Usuarioentidad.where(usuario_id: remitente.id).take
 			pertenecientes = Aenviar.where(entidad_id: uEntidad.entidad_id)
 			nombreEntidad = Entidad.find(uEntidad.entidad_id).nombre
@@ -24,13 +27,17 @@ class ActionCorreo < ActionMailer::Base
 
 	def envio_adecuacion(remitente, mensaje, id, link,document)
   		@id = id
-  		@mensaje = mensaje
-  		email = remitente.user + "@ciens.ucv.ve"
+		@mensaje = mensaje
+		if remitente.to_s.include? "@gmail.com"
+			email = remitente
+		else
+			email = remitente.user + "@ciens.ucv.ve"
+		end
   		@email= email
 		@user_email = 'forminst.ciens@gmail.com'
 		@link = link
 		attachments[document.filename] = document.file_contents				
-		if id == 0		##ENTIDAD
+		if (id == 0	&& !(remitente.to_s.include? "@gmail.com"))		##ENTIDAD
 			uEntidad = Usuarioentidad.where(usuario_id: remitente.id).take
 			pertenecientes = Aenviar.where(entidad_id: uEntidad.entidad_id)
 			nombreEntidad = Entidad.find(uEntidad.entidad_id).nombre
