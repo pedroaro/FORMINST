@@ -247,7 +247,7 @@
             
                     </td>
                     <td>
-                      <% if @bool_enviado == 0 && @cjpTipo=="Institucional"%>
+                      <% if @bool_enviado == 0 %>
                         <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' ><%=@observaciont[@j] %></textarea>
                       <% else %>
                         <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' disabled><%=@observaciont[@j] %></textarea>
@@ -298,7 +298,7 @@
                       <%end%>
                     </td>
                     <td>
-                      <% if @bool_enviado == 0 && @cjpTipo=="Institucional"%>
+                      <% if @bool_enviado == 0 %>
                         <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' ><%=@observaciont[@j] %></textarea>
                       <% else %>
                         <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' disabled><%=@observaciont[@j] %></textarea>
@@ -377,7 +377,7 @@
                       <%end%>
                     </td>
                     <td>
-                      <% if @bool_enviado == 0 && @cjpTipo=="Institucional" %>
+                      <% if @bool_enviado == 0  %>
                         <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' ><%=@observaciont[@j] %></textarea>
                       <% else %>
                         <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' disabled><%=@observaciont[@j] %></textarea>
@@ -426,7 +426,7 @@
                       <%end%>
                     </td>
                     <td>
-                      <% if @bool_enviado == 0 && @cjpTipo=="Institucional" %>
+                      <% if @bool_enviado == 0  %>
                         <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' ><%=@observaciont[@j] %></textarea>
                       <% else %>
                         <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' disabled><%=@observaciont[@j] %></textarea>
@@ -468,7 +468,7 @@
                         <textarea class="form-control" rows="3" name='ejecutada<%= actdoc.id.to_s%>' disabled><%=  @actividadese[@j].descripcion %></textarea>
                       </td>
                       <td>
-                        <% if @bool_enviado == 0 && @cjpTipo=="Institucional" %>
+                        <% if @bool_enviado == 0  %>
                         <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' ><%=@observaciont[@j] %></textarea>
                       <% else %>
                         <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' disabled><%=@observaciont[@j] %></textarea>
@@ -550,7 +550,7 @@
             <%= link_to "<< Volver", {controller: "inicioentidad", action: "ver_detalles_informe"}, class: "btn btn-forminst" %>
         </div>
         <div class = 'col-xs-4 col-md-4 col-lg-4'>
-          <%if @bool_enviado == 0 && @cjpTipo=="Institucional" %>
+          <%if @bool_enviado == 0  %>
             <center><button type="submit" class="btn btn-forminst btn-lg">Guardar</button></center>
           <%end%>   
         </div>
