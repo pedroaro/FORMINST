@@ -169,7 +169,19 @@ class ForminstController < ApplicationController
 								session[:instructor]= false
 								session[:entidad]= true
 								session[:entidad_id] = @entidad.id
-								session[:nombre_usuario] = @entidad.nombre
+								if(@entidad.nombre == "Comisión de Investigación de Biología")
+									@depto = Departamento.where(id: @usuarioe.departamento_id).take
+									if(@depto.blank?)
+										puts "qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq"
+										puts @entidad.nombre
+										session[:nombre_usuario] = @entidad.nombre
+									else
+										puts "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+										session[:nombre_usuario] = @depto.nombre
+									end
+								else
+									session[:nombre_usuario] = @entidad.nombre
+								end
 
 								if params[:accion] == "mostrar adecuacion"
 									ea = EstatusAdecuacion.where(adecuacion_id: params[:param3], actual: 1).take.estatus_id
@@ -343,7 +355,19 @@ class ForminstController < ApplicationController
 									session[:instructor]= false
 									session[:entidad]= true
 									session[:entidad_id] = @entidad.id
-									session[:nombre_usuario] = @entidad.nombre
+									if(@entidad.nombre == "Comisión de Investigación de Biología")
+										@depto = Departamento.where(id: @usuarioe.departamento_id).take
+										if(@depto.blank?)
+											puts "qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq"
+											puts @entidad.nombre
+											session[:nombre_usuario] = @entidad.nombre
+										else
+											puts "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+											session[:nombre_usuario] = @depto.nombre
+										end
+									else
+										session[:nombre_usuario] = @entidad.nombre
+									end
 
 									if params[:accion] == "mostrar adecuacion"
 										ea = EstatusAdecuacion.where(adecuacion_id: params[:param3], actual: 1).take.estatus_id

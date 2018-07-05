@@ -2049,8 +2049,12 @@ class IniciotutorController < ApplicationController
 			        notific3.tutor_id = session[:usuario_id]
 			        notific3.adecuacion_id = session[:adecuacion_id]
 			        notific3.informe_id = nil
-
+					userr= Usuario.where(id: session[:usuario_id]).take
+					usernoti =Usuarioentidad.where(usuario_id: userr.id).take
 					if (cambio_act.estatus_id == 6)
+						if(usernoti.escuela_id == 1)
+							notific3.departamento_id = usernoti.departamento_id
+						end
 			       		notific3.actual = 3		#Comisión de investigación
 			        	notific3.mensaje = "[" + notificacionfecha + "] Se ha recibido una nueva Adecuación: "+ person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + ", favor revisar y enviar a la siguiente entidad."
 			   		elsif (cambio_act.estatus_id == 5)
@@ -2093,7 +2097,7 @@ class IniciotutorController < ApplicationController
 					@document = Respaldo.where(id: respaldo.id).take											
 			        if (cambio_act.estatus_id == 6)
 			          	userr= Usuario.where(id: session[:usuario_id]).take
-			         	 user =Usuarioentidad.where(usuario_id: userr.id).take
+			         	user =Usuarioentidad.where(usuario_id: userr.id).take
 			         	if(user.escuela_id == 1)
 			         		uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 7).take
 			          	elsif(user.escuela_id == 2)

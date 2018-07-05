@@ -2966,7 +2966,8 @@ def generar_pdf() # es funci√≥n permite generar el documento pdf de la adecuaci√
           elsif (cambio_act.estatus_id == 5)
             notific.mensaje = "[" + notificacionfecha + "] El " + session[:nombre_informe] + " de " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + " se ha enviado a Consejo de Facultad."
           end
-         
+          userr= Usuario.where(id: session[:usuario_id]).take
+          user =Usuarioentidad.where(usuario_id: userr.id).take
           notific.save
           notific2 = Notificacion.new
           notific2.instructor_id = plan.instructor_id
@@ -2986,6 +2987,9 @@ def generar_pdf() # es funci√≥n permite generar el documento pdf de la adecuaci√
           notific3.adecuacion_id = session[:adecuacion_id]
           notific3.informe_id = @informe_id
           if (cambio_act.estatus_id == 6)
+            if(user.escuela_id == 1)
+              notific3.departamento_id = user.departamento_id
+            end
             notific3.actual = 3   #Comisi√≥n de investigaci√≥n
             notific3.mensaje = "[" + notificacionfecha + "] Ha recibido un nuevo Informe: ' " + session[:nombre_informe]+ " ' de " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + ", favor aprobar y enviar a la siguiente entidad."
           elsif (cambio_act.estatus_id == 5)
@@ -2993,8 +2997,7 @@ def generar_pdf() # es funci√≥n permite generar el documento pdf de la adecuaci√
             notific3.mensaje = "[" + notificacionfecha + "] Ha recibido un nuevo Informe: ' " + session[:nombre_informe]+ " ' de " + person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + ", favor revisar."
           end
           notific3.save
-          userr= Usuario.where(id: session[:usuario_id]).take
-          user =Usuarioentidad.where(usuario_id: userr.id).take
+          
           if(user.escuela_id == 1)
             uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 7).take
           else
