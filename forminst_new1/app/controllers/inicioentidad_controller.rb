@@ -7,13 +7,21 @@ class InicioentidadController < ApplicationController
 			session[:plan_id] = nil
 			session[:instructorName] = nil
 			session[:informe_id]=nil
-			@cjpTipo=Usuario.find(session[:usuario_id]).tipo
+			@usuarioAux=Usuario.find(session[:usuario_id])
+			@cjpTipo=@usuarioAux.tipo
 			@nombre = session[:nombre_usuario]
-			@usu=Usuarioentidad.where(entidad_id: session[:entidad_id]).take
+			@usu=Usuarioentidad.where(usuario_id: @usuarioAux.id).take
 			@entidad_escuela_id= @usu.escuela_id
 			@notificaciones1= []
-		    if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12)#Caso de Comision de Investigación
-		    	@notificaciones = Notificacion.where(actual: 3).all
+			puts @usu.departamento_id
+			puts "aaaaaaaaaaaaaaaaaaaaaaaaaaa"
+			puts @entidad_escuela_id
+			if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12)#Caso de Comision de Investigación
+				if(@entidad_escuela_id == 1)
+					@notificaciones = Notificacion.where(actual: 3, departamento_id: @usu.departamento_id).all
+				else
+					@notificaciones = Notificacion.where(actual: 3).all
+				end
 		    	@notificaciones.each do |notificaciones|
 			    	@tutor_escuela = Usuarioentidad.where(usuario_id: notificaciones.tutor_id).take
 			    	if (@tutor_escuela.escuela_id == @entidad_escuela_id) #Caso de notificaciones del Comision de investigación 
