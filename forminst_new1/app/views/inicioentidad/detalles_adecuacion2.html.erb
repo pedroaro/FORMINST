@@ -198,7 +198,15 @@
                   <input id="presentacionId" type="hidden" name="presentacionId" value="<%=@presentacionId%>">
   	              <td class="text-left"><textarea name="presentacion" class="form-control" rows="2" id="presentacion" disabled><%= @presentacion %></textarea></td>  
                   <td >
+<<<<<<< HEAD
                     <%if @bool_enviado==0 %>
+=======
+<<<<<<< HEAD
+                    <%if @bool_enviado==0 && @cjpTipo=="Institucional"%>
+=======
+                    <%if @bool_enviado==0 %>
+>>>>>>> master
+>>>>>>> 83ec98e67a033cddeb12d743078a5064abf062c7
                       <textarea class="form-control" rows="3" name='obsPresentacion' ><%=@obsPresentacion %></textarea>
                     <%else%>
                       <textarea class="form-control" rows="3" name='obsPresentacion' disabled><%=@obsPresentacion %></textarea>
@@ -221,7 +229,15 @@
                   <input id="descripcionId" type="hidden" name="descripcionId" value="<%=@descripcionId%>">
   	              <td class="text-left"><textarea name="descripcion" class="form-control" rows="2" id="descripcion" disabled><%= @descripcion %></textarea></td>  
                   <td >
+<<<<<<< HEAD
                     <%if @bool_enviado==0 %>
+=======
+<<<<<<< HEAD
+                    <%if @bool_enviado==0 && @cjpTipo=="Institucional"%>
+=======
+                    <%if @bool_enviado==0 %>
+>>>>>>> master
+>>>>>>> 83ec98e67a033cddeb12d743078a5064abf062c7
                       <textarea class="form-control" rows="3" name='obsDescripcion' ><%=@obsDescripcion %></textarea>
                     <%else%>
                       <textarea class="form-control" rows="3" name='obsDescripcion' disabled><%=@obsDescripcion %></textarea>
@@ -247,7 +263,15 @@
                         <input type="hidden" name="<%= @iddoc+i.to_s%> " value='<%= actdoc.id %>'>
                       </td>
                       <td >
+<<<<<<< HEAD
                         <%if @bool_enviado==0 %>
+=======
+<<<<<<< HEAD
+                        <%if @bool_enviado==0 && @cjpTipo=="Institucional"%>
+=======
+                        <%if @bool_enviado==0 %>
+>>>>>>> master
+>>>>>>> 83ec98e67a033cddeb12d743078a5064abf062c7
                           <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' ><%=@observaciont[actdoc.id] %></textarea>
                         <%else%>
                           <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' disabled><%=@observaciont[actdoc.id] %></textarea>
@@ -276,7 +300,15 @@
                       <textarea class="form-control" rows="2"  name='<%= @investigacion+actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
                     </td>
                     <td >
+<<<<<<< HEAD
                         <%if @bool_enviado==0 %>
+=======
+<<<<<<< HEAD
+                        <%if @bool_enviado==0 && @cjpTipo=="Institucional"%>
+=======
+                        <%if @bool_enviado==0 %>
+>>>>>>> master
+>>>>>>> 83ec98e67a033cddeb12d743078a5064abf062c7
                           <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' ><%=@observaciont[actdoc.id] %></textarea>
                         <%else%>
                           <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' disabled><%=@observaciont[actdoc.id] %></textarea>
@@ -305,7 +337,15 @@
                       <textarea class="form-control" rows="2"  name='<%= @formacion+actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
                     </td>
                     <td>
+<<<<<<< HEAD
                         <%if @bool_enviado==0 %>
+=======
+<<<<<<< HEAD
+                        <%if @bool_enviado==0 && @cjpTipo=="Institucional"%>
+=======
+                        <%if @bool_enviado==0 %>
+>>>>>>> master
+>>>>>>> 83ec98e67a033cddeb12d743078a5064abf062c7
                           <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' ><%=@observaciont[actdoc.id] %></textarea>
                         <%else%>
                           <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' disabled><%=@observaciont[actdoc.id] %></textarea>
@@ -334,7 +374,15 @@
                       <textarea class="form-control" rows="2"  name='<%= @extension+actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
                     </td>
                     <td >
+<<<<<<< HEAD
                         <%if @bool_enviado==0 %>
+=======
+<<<<<<< HEAD
+                        <%if @bool_enviado==0 && @cjpTipo=="Institucional"%>
+=======
+                        <%if @bool_enviado==0 %>
+>>>>>>> master
+>>>>>>> 83ec98e67a033cddeb12d743078a5064abf062c7
                           <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' ><%=@observaciont[actdoc.id] %></textarea>
                         <%else%>
                           <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' disabled><%=@observaciont[actdoc.id] %></textarea>
@@ -364,7 +412,15 @@
                       <textarea class="form-control" rows="2"  name='<%= @otra+actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
                     </td>
                     <td >
+<<<<<<< HEAD
                         <%if @bool_enviado==0 %>
+=======
+<<<<<<< HEAD
+                        <%if @bool_enviado==0 && @cjpTipo=="Institucional"%>
+=======
+                        <%if @bool_enviado==0 %>
+>>>>>>> master
+>>>>>>> 83ec98e67a033cddeb12d743078a5064abf062c7
                           <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' ><%=@observaciont[actdoc.id] %></textarea>
                         <%else%>
                           <textarea class="form-control" rows="3" name='observacion<%= actdoc.id.to_s%>' disabled><%=@observaciont[actdoc.id] %></textarea>
@@ -392,7 +448,15 @@
       <button type="button" class="btn btn-forminst" onclick = " location.href = 'javascript:history.back(-1);'">&lt;&lt; Volver</button>
     </div>
     <div class = 'col-xs-4 col-md-4 col-lg-4'>
+<<<<<<< HEAD
       <%if @bool_enviado==0 %> 
+=======
+<<<<<<< HEAD
+      <%if @bool_enviado==0 && @cjpTipo=="Institucional"%> 
+=======
+      <%if @bool_enviado==0 %> 
+>>>>>>> master
+>>>>>>> 83ec98e67a033cddeb12d743078a5064abf062c7
             <%if @bool_enviado == 0 %>
                <center><button type="submit" class="btn btn-forminst btn-lg">Guardar Cambios</button></center>
             <%else%>
