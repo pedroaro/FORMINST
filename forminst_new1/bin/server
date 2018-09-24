@@ -106,11 +106,11 @@ while true
 				    linkI = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar%20adecuacion"
 				    linkE = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar%20adecuacion&param3="+plan.id.to_s				
 				    remitente3 = Usuario.where(id: plan.tutor_id).take
-					ActionCorreo.envio_adecuacion(remitente3, notific.mensaje,2,linkT).deliver
+					ActionCorreo.envio_adecuacion(remitente3, notific.mensaje,2,linkT, @document).deliver
 					remitente2 = Usuario.where(id: plan.instructor_id).take
-					ActionCorreo.envio_adecuacion(remitente2, notific2.mensaje,1,linkI).deliver
+					ActionCorreo.envio_adecuacion(remitente2, notific2.mensaje,1,linkI, @document).deliver
 					remitente = Usuario.where(id: uentidad.usuario_id).take
-					ActionCorreo.envio_adecuacion(remitente, notific3.mensaje,0,linkE).deliver
+					ActionCorreo.envio_adecuacion(remitente, notific3.mensaje,0,linkE, @document).deliver
 
 			elsif (status.estatus_id == 8 || status.estatus_id == 18)
 			#Consejo de escuela
@@ -172,13 +172,14 @@ while true
 			    linkI = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar%20adecuacion"
 			    linkE = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar%20adecuacion&param3="+plan.id.to_s
 				remitente3 = Usuario.where(id: plan.tutor_id).take
-				ActionCorreo.envio_adecuacion(remitente3, notific.mensaje,2,linkT).deliver
+				ActionCorreo.envio_adecuacion(remitente3, notific.mensaje,2,linkT, @document).deliver
 				remitente2 = Usuario.where(id: plan.instructor_id).take
-				ActionCorreo.envio_adecuacion(remitente2, notific2.mensaje,1,linkI).deliver
+				ActionCorreo.envio_adecuacion(remitente2, notific2.mensaje,1,linkI, @document).deliver
 				remitente = Usuario.where(id: uentidad.usuario_id).take
-				ActionCorreo.envio_adecuacion(remitente, notific3.mensaje,0,linkI).deliver
+				ActionCorreo.envio_adecuacion(remitente, notific3.mensaje,0,linkI, @document).deliver
 			end	
 		end
+	end
 	#FIN clualizar los estatus de las adecuaciones luego de haber pasado dos semana---------------------------------------------
 
 	#Aclualizar los estatus de los informes luego de haber pasado dos semana-----------------------------------------------
@@ -273,16 +274,15 @@ while true
 			    linkI = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar%20informe&param1="+plan.id.to_s+"&param2="+@informe_id
 			    linkE = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar%20informe&param1="+plan.id.to_s+"&param2="+@informe_id+"&param3="+adecuacion_id
 		          remitente3 = Usuario.where(id: informeAct.tutor_id).take
-			      ActionCorreo.envio_informe(remitente3, notific.mensaje,2,linkT).deliver
+			      ActionCorreo.envio_informe(remitente3, notific.mensaje,2,linkT, @document).deliver
 			      remitente2 = Usuario.where(id: plan.instructor_id).take
-			      ActionCorreo.envio_informe(remitente2, notific2.mensaje,1,linkI).deliver
+			      ActionCorreo.envio_informe(remitente2, notific2.mensaje,1,linkI, @document).deliver
 			      remitente = Usuario.where(id: uentidad.usuario_id).take
-			      ActionCorreo.envio_informe(remitente, notific3.mensaje,0,linkI).deliver
+			      ActionCorreo.envio_informe(remitente, notific3.mensaje,0,linkI, @document).deliver
 		          flash[:success]="El informe se ha envíado a consejo de escuela"
 			elsif (session[:entidad_id] >= 1 && session[:entidad_id] <= 6)
 				#Consejo de escuela
-				@documentere little bit older, both sprung
-				I g = Respaldo.where(adecuacion_id: adecuacion_id, informe_id: @informe_id, actual: 1).take
+				@document = Respaldo.where(adecuacion_id: adecuacion_id, informe_id: @informe_id, actual: 1).take
 				@document.estatus = "Enviado a Consejo de Facultad Sin Revisión"
 				@document.save
 				cambio_act = EstatusInforme.where(informe_id: @informe_id, actual: 1).take
@@ -350,11 +350,11 @@ while true
 	          	linkT = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar%20informe&param1="+plan.id.to_s+"&param2="+@informe_id
 			    linkI = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar%20informe&param1="+plan.id.to_s+"&param2="+@informe_id
 			    linkE = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar%20informe&param1="+plan.id.to_s+"&param2="+@informe_id+"&param3="+adecuacion_id
-				ActionCorreo.envio_informe(remitente3, notific.mensaje,2,linkT).deliver
+				ActionCorreo.envio_informe(remitente3, notific.mensaje,2,linkT, @document).deliver
 				remitente2 = Usuario.where(id: plan.instructor_id).take
-				ActionCorreo.envio_informe(remitente2, notific2.mensaje,1,linkI).deliver
+				ActionCorreo.envio_informe(remitente2, notific2.mensaje,1,linkI, @document).deliver
 				remitente = Usuario.where(id: uentidad.usuario_id).take
-				ActionCorreo.envio_informe(remitente, notific3.mensaje,0,linkI).deliver
+				ActionCorreo.envio_informe(remitente, notific3.mensaje,0,linkI, @document).deliver
 			end
 		end
 
@@ -390,6 +390,7 @@ while true
 			notificacionfecha = Date.current.to_s 
 			notific2.mensaje = "[" + notificacionfecha + "] " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') + " su tutor " + person2.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person2.apellidos.to_s.split.map(&:capitalize).join(' ') +" dispone de un mes para enviar el primer informe semestral."
 			notific2.save
+
 			linkTeI = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar informe"
 			remitente4 = Usuario.where(id: plan.instructor_id).take
 			ActionCorreo.retraso_informe(remitente4, notific2.mensaje,linkTeI).deliver
