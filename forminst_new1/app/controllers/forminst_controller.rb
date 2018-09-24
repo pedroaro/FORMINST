@@ -70,57 +70,6 @@ class ForminstController < ApplicationController
 						elsif tipo == "Docente"
 							if @entidad.nombre=="tutor"
 								session[:usuario_id]= @usuario.id
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-								@persona = Persona.where(usuario_id: session[:usuario_id]).take
-								session[:nombre_usuario] = @persona.nombres.titleize+' '+@persona.apellidos.titleize
-								session[:administrador] = false
-								session[:tutor]= true
-								session[:instructor]= false
-								session[:entidad]= false
-								if params[:accion] == "mostrar adecuacion"
-									plan = Planformacion.where(id: params[:param1].to_i).take
-									if session[:usuario_id] == plan.tutor_id
-										session[:plan_id] = plan.id
-										@inst = Persona.where(usuario_id: plan.instructor_id).take
-										@instructorName = @inst.nombres.to_s.split.map(&:capitalize).join(' ') + " " + @inst.apellidos.to_s.split.map(&:capitalize).join(' ')
-										session[:instructorName] = @instructorName
-										@instructorName = session[:instructorName]
-										session[:adecuacion_id] = Adecuacion.where(planformacion_id: session[:plan_id]).take.id
-										flash[:success]= "Bienvenido! " + session[:nombre_usuario] = @persona.nombres.titleize+' '+@persona.apellidos.titleize
-										redirect_to controller:"iniciotutor", action: "ver_detalles_adecuacion", plan_id: params[:param1], editar: params[:param2]
-									else
-										flash[:success]= "Bienvenido! " + session[:nombre_usuario] = @persona.nombres.titleize+' '+@persona.apellidos.titleize
-										redirect_to controller:"iniciotutor", action: "index"
-									end
-								elsif params[:accion] == "mostrar informe"
-									@inform = Informe.where(id: params[:param2].to_i).take
-									if session[:usuario_id] == @inform.tutor_id
-										session[:plan_id] = params[:param1].to_i
-										session[:informe_id] = @inform.id
-										plan = Planformacion.where(id: session[:plan_id]).take
-										@inst = Persona.where(usuario_id: plan.instructor_id).take
-										@instructorName = @inst.nombres.to_s.split.map(&:capitalize).join(' ') + " " + @inst.apellidos.to_s.split.map(&:capitalize).join(' ')
-										session[:instructorName] = @instructorName
-										@instructorName = session[:instructorName]
-										puts session[:instructorName]
-										session[:adecuacion_id] = Adecuacion.where(planformacion_id: session[:plan_id]).take.id
-										flash[:success]= "Bienvenido! " + session[:nombre_usuario] = @persona.nombres.titleize+' '+@persona.apellidos.titleize
-										redirect_to controller:"informes", action: "ver_detalles_informe", informe_id: params[:param2]
-									else
-										flash[:success]= "Bienvenido! " + session[:nombre_usuario] = @persona.nombres.titleize+' '+@persona.apellidos.titleize
-										redirect_to controller:"iniciotutor", action: "index"
-									end
-								elsif params[:accion] == "listar informes"
-									flash[:success]= "Bienvenido! " + session[:nombre_usuario] = @persona.nombres.titleize+' '+@persona.apellidos.titleize
-									redirect_to controller:"inicioinstructor", action: "listar_informes"
-								else
-									flash[:success]= "Bienvenido! " + session[:nombre_usuario] = @persona.nombres.titleize+' '+@persona.apellidos.titleize
-									redirect_to controller:"iniciotutor", action: "index"
-								end
-=======
->>>>>>> 83ec98e67a033cddeb12d743078a5064abf062c7
 										@persona = Persona.where(usuario_id: session[:usuario_id]).take
 										session[:nombre_usuario] = @persona.nombres.titleize+' '+@persona.apellidos.titleize
 										session[:administrador] = false
@@ -167,10 +116,6 @@ class ForminstController < ApplicationController
 											flash[:success]= "Bienvenido! " + session[:nombre_usuario] = @persona.nombres.titleize+' '+@persona.apellidos.titleize
 											redirect_to controller:"iniciotutor", action: "index"
 										end
-<<<<<<< HEAD
-=======
->>>>>>> master
->>>>>>> 83ec98e67a033cddeb12d743078a5064abf062c7
 
 							elsif @entidad.nombre=="instructor"
 								session[:usuario_id] = @usuario.id
@@ -204,11 +149,6 @@ class ForminstController < ApplicationController
 									flash[:success]= "Bienvenido! " + session[:nombre_usuario] = @persona.nombres.titleize+' '+@persona.apellidos.titleize
 									redirect_to controller:"inicioinstructor", action: "index"
 								end
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
->>>>>>> 83ec98e67a033cddeb12d743078a5064abf062c7
 							else
 								session[:usuario_id]= @usuario.id
 								@persona = Persona.where(usuario_id: session[:usuario_id]).take
@@ -220,10 +160,6 @@ class ForminstController < ApplicationController
 								flash[:success]= "Bienvenido! " + session[:nombre_usuario] = @persona.nombres.titleize+' '+@persona.apellidos.titleize
 
 								redirect_to controller:"forminst", action: "index"
-<<<<<<< HEAD
-=======
->>>>>>> master
->>>>>>> 83ec98e67a033cddeb12d743078a5064abf062c7
 							end
 						else
 							if tipo=="Institucional" || tipo=="Vista"
@@ -233,7 +169,6 @@ class ForminstController < ApplicationController
 								session[:instructor]= false
 								session[:entidad]= true
 								session[:entidad_id] = @entidad.id
-<<<<<<< HEAD
 								if(@entidad.nombre == "Comisión de Investigación de Biología")
 									@depto = Departamento.where(id: @usuarioe.departamento_id).take
 									if(@depto.blank?)
@@ -248,14 +183,6 @@ class ForminstController < ApplicationController
 									session[:nombre_usuario] = @entidad.nombre
 								end
 
-=======
-								session[:nombre_usuario] = @entidad.nombre
-<<<<<<< HEAD
-								
-=======
-
->>>>>>> master
->>>>>>> 83ec98e67a033cddeb12d743078a5064abf062c7
 								if params[:accion] == "mostrar adecuacion"
 									ea = EstatusAdecuacion.where(adecuacion_id: params[:param3], actual: 1).take.estatus_id
 									a = [3,2,8,4,1,5,9]
@@ -304,13 +231,6 @@ class ForminstController < ApplicationController
 									flash[:success]= "Bienvenido al " + @entidad.nombre
 									redirect_to controller:"inicioentidad", action: "index"
 								end
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-								redirect_to controller:"forminst", action: "index"
-=======
->>>>>>> master
->>>>>>> 83ec98e67a033cddeb12d743078a5064abf062c7
 							else
 								flash.now[:mensaje] = 'Su contraseña o correo electrónico es incorrecto.'
 								redirect_to controller:"forminst", action: "index"

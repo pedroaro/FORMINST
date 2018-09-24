@@ -608,14 +608,6 @@ end
 	            @st = "[" + si.fecha.to_s  + "]: ENVIADO A CONSEJO DE ESCUELA"
 	          elsif(si.estatus_id==9)
 	            @st = "[" + si.fecha.to_s  + "]: RECHAZADO POR CONSEJO DE FACULTAD"
-            elsif(si.estatus_id==12)
-              @st = "[" + si.fecha.to_s  + "]: ENVIADO A CONSEJO TÉCNICO SIN REVISIÓN"
-            elsif(si.estatus_id==13)
-              @st = "[" + si.fecha.to_s  + "]: ENVIADO A COMISIÓN DE INVESTIGACIÓN SIN REVISIÓN"
-            elsif(si.estatus_id==14)
-              @st = "[" + si.fecha.to_s  + "]: ENVIADO A CONSEJO DE FACULTAD SIN REVISIÓN"
-            elsif(si.estatus_id==18)
-              @st = "[" + si.fecha.to_s  + "]: ENVIADO A CONSEJO DE ESCUELA SIN REVISIÓN"
 	          end
 	          #Tipo de los informes
 	          @status.push(@st)
