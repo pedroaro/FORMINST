@@ -152,20 +152,20 @@ class InicioentidadController < ApplicationController
 				@nombre_instructor = []
 			if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12)
 			#Usuario comision
-				@status_inv = EstatusAdecuacion.where(actual: 1,  estatus_id: [3,2,8,4,1,5,9]) #Estatus enviado a comision de investigacion
+				@status_inv = EstatusAdecuacion.where(actual: 1,  estatus_id: [3,2,8,4,1,5,9,12,13,14,18]) #Estatus enviado a comision de investigacion
 	
 			else
 				if (session[:entidad_id] >= 14 && session[:entidad_id] <= 17)
 				#Consejo tecnico
-					@status_inv = EstatusAdecuacion.where(actual: 1, estatus_id: [2,8,4,1,5,9]) #Estatus enviado a consejo tecnico
+					@status_inv = EstatusAdecuacion.where(actual: 1, estatus_id: [2,8,4,1,5,9,12,18,14]) #Estatus enviado a consejo tecnico
 				else
 					if (session[:entidad_id] >= 1 && session[:entidad_id] <= 6)
 					#Consejo de escuela
-						@status_inv = EstatusAdecuacion.where(actual: 1, estatus_id: [8,4,1,5,9]) #Estatus enviado a consejo escuela
+						@status_inv = EstatusAdecuacion.where(actual: 1, estatus_id: [8,4,1,5,9,18,14]) #Estatus enviado a consejo escuela
 					else
 						if (session[:entidad_id] == 13)
 						#Consejo de facultad
-							@status_inv = EstatusAdecuacion.where(actual: 1, estatus_id: [4,1,5,9]) #Estatus enviado a consejo de facultad
+							@status_inv = EstatusAdecuacion.where(actual: 1, estatus_id: [4,1,5,9,14]) #Estatus enviado a consejo de facultad
 							@entidad_escuela_id=nil
 						
 						end	
@@ -194,6 +194,14 @@ class InicioentidadController < ApplicationController
 						@st = "ENVIADO A CONSEJO DE ESCUELA"
 					elsif(si.estatus_id==9)
 						@st = "RECHAZADO POR CONSEJO DE FACULTAD"
+			        elsif(si.estatus_id==12)
+			            @st = "ENVIADO A CONSEJO TÉCNICO SIN REVISIÓN"
+			        elsif(si.estatus_id==13)
+			            @st = "ENVIADO A COMISIÓN DE INVESTIGACIÓN SIN REVISIÓN"
+			        elsif(si.estatus_id==14)
+			            @st = "ENVIADO A CONSEJO DE FACULTAD SIN REVISIÓN"
+			        elsif(si.estatus_id==18)
+			            @st = "ENVIADO A CONSEJO DE ESCUELA SIN REVISIÓN"
 					end
 					@status.push(@st)
 					@nombre_tutor.push(Persona.where(usuario_id: @pf.tutor_id).take.nombres)
@@ -219,6 +227,14 @@ class InicioentidadController < ApplicationController
 							@st = "ENVIADO A CONSEJO DE ESCUELA"
 						elsif(si.estatus_id==9)
 							@st = "RECHAZADO POR CONSEJO DE FACULTAD"
+				        elsif(si.estatus_id==12)
+				            @st = "ENVIADO A CONSEJO TÉCNICO SIN REVISIÓN"
+				        elsif(si.estatus_id==13)
+				            @st = "ENVIADO A COMISIÓN DE INVESTIGACIÓN SIN REVISIÓN"
+				        elsif(si.estatus_id==14)
+				            @st = "ENVIADO A CONSEJO DE FACULTAD SIN REVISIÓN"
+				        elsif(si.estatus_id==18)
+				            @st = "ENVIADO A CONSEJO DE ESCUELA SIN REVISIÓN"
 						end
 
 						@status.push(@st)
@@ -248,25 +264,25 @@ def ver_soporte
 		if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12)
 		#Usuario comision
 			estatusI = EstatusInforme.where(informe_id: session[:informe_id], actual: 1).take #Estatus enviado a comision de investigacioni
-			if(estatusI.estatus_id != 3)
+			if(estatusI.estatus_id != 3 && estatusI.estatus_id != 13)
 				@bool_enviado = 1
 			end
 		elsif (session[:entidad_id] >= 14 && session[:entidad_id] <= 17)
 			#Consejo tecnico
 			estatusI = EstatusInforme.where(informe_id: session[:informe_id], actual: 1).take
-			if(estatusI.estatus_id != 2)
+			if(estatusI.estatus_id != 2 && estatusI.estatus_id != 12)
 				@bool_enviado = 1
 			end
 		elsif (session[:entidad_id] >= 1 && session[:entidad_id] <= 6)
 			#Consejo de escuela
 			estatusI = EstatusInforme.where(informe_id: session[:informe_id], actual: 1).take 
-			if(estatusI.estatus_id != 8)
+			if(estatusI.estatus_id != 8 && estatusI.estatus_id != 18)
 				@bool_enviado = 1 #Estatus enviado a consejo escuela
 			end
 		elsif (session[:entidad_id] == 13)
 			#Consejo de facultad
 			estatusI = EstatusInforme.where(informe_id: session[:informe_id], actual: 1).take
-			if(estatusI.estatus_id != 4)
+			if(estatusI.estatus_id != 4 && estatusI.estatus_id != 14)
 				@bool_enviado = 1
 			end
 		end		    
@@ -276,25 +292,25 @@ def ver_soporte
 		if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12)
 		#Usuario comision
 			estatusI = EstatusAdecuacion.where(adecuacion_id: session[:adecuacion_id], actual: 1).take #Estatus enviado a comision de investigacioni
-			if(estatusI.estatus_id != 3)
+			if(estatusI.estatus_id != 3 && estatusI.estatus_id != 13)
 				@bool_enviado = 1
 			end
 		elsif (session[:entidad_id] >= 14 && session[:entidad_id] <= 17)
 		#Consejo tecnico
 			estatusI = EstatusAdecuacion.where(adecuacion_id: session[:adecuacion_id], actual: 1).take
-			if(estatusI.estatus_id != 2)
+			if(estatusI.estatus_id != 2 && estatusI.estatus_id != 12)
 				@bool_enviado = 1
 			end
 		elsif (session[:entidad_id] >= 1 && session[:entidad_id] <= 6)
 		#Consejo de escuela
 			estatusI = EstatusAdecuacion.where(adecuacion_id: session[:adecuacion_id], actual: 1).take 
-			if(estatusI.estatus_id != 8)
+			if(estatusI.estatus_id != 8 && estatusI.estatus_id != 18)
 				@bool_enviado = 1 #Estatus enviado a consejo escuela
 			end
 		elsif (session[:entidad_id] == 13)
 		#Consejo de facultad
 			estatusI = EstatusAdecuacion.where(adecuacion_id: session[:adecuacion_id], actual: 1).take
-			if(estatusI.estatus_id != 4)
+			if(estatusI.estatus_id != 4 && estatusI.estatus_id != 14)
 				@bool_enviado = 1
 			end
 		end	
@@ -340,25 +356,25 @@ end
 				if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12)
 				#Usuario comision
 					estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take #Estatus enviado a comision de investigacioni
-					if(estatusI.estatus_id != 3)
+					if(estatusI.estatus_id != 3 && estatusI.estatus_id != 13)
 						@bool_enviado = 1
 					end
 				elsif (session[:entidad_id] >= 14 && session[:entidad_id] <= 17)
 					#Consejo tecnico
 					estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
-					if(estatusI.estatus_id != 2)
+					if(estatusI.estatus_id != 2 && estatusI.estatus_id != 12)
 						@bool_enviado = 1
 					end
 				elsif (session[:entidad_id] >= 1 && session[:entidad_id] <= 6)
 					#Consejo de escuela
 					estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take 
-					if(estatusI.estatus_id != 8)
+					if(estatusI.estatus_id != 8 && estatusI.estatus_id != 18)
 						@bool_enviado = 1 #Estatus enviado a consejo escuela
 					end
 				elsif (session[:entidad_id] == 13)
 				#Consejo de facultad
 					estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
-					if(estatusI.estatus_id != 4)
+					if(estatusI.estatus_id != 4 && estatusI.estatus_id != 14)
 						@bool_enviado = 1
 					end
 				end	
@@ -383,25 +399,25 @@ end
 				if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12)
 				#Usuario comision
 					estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take #Estatus enviado a comision de investigacioni
-					if(estatusI.estatus_id != 3)
+					if(estatusI.estatus_id != 3 && estatusI.estatus_id != 13)
 						@bool_enviado = 1
 					end
 				elsif (session[:entidad_id] >= 14 && session[:entidad_id] <= 17)
 					#Consejo tecnico
 					estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
-					if(estatusI.estatus_id != 2)
+					if(estatusI.estatus_id != 2 && estatusI.estatus_id != 12)
 						@bool_enviado = 1
 					end
 				elsif (session[:entidad_id] >= 1 && session[:entidad_id] <= 6)
 					#Consejo de escuela
 					estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take 
-					if(estatusI.estatus_id != 8)
+					if(estatusI.estatus_id != 8 && estatusI.estatus_id != 18)
 						@bool_enviado = 1 #Estatus enviado a consejo escuela
 					end
 				elsif (session[:entidad_id] == 13)
 					#Consejo de facultad
 					estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
-					if(estatusI.estatus_id != 4)
+					if(estatusI.estatus_id != 4 && estatusI.estatus_id != 14)
 						@bool_enviado = 1
 					end
 				end
@@ -564,25 +580,25 @@ end
 				if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12)
 				#Usuario comision
 					estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take #Estatus enviado a comision de investigacioni
-					if(estatusI.estatus_id != 3)
+					if(estatusI.estatus_id != 3 && estatusI.estatus_id != 13)
 						@bool_enviado = 1
 					end
 				elsif (session[:entidad_id] >= 14 && session[:entidad_id] <= 17)
 				#Consejo tecnico
 					estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
-					if(estatusI.estatus_id != 2)
+					if(estatusI.estatus_id != 2 && estatusI.estatus_id != 12)
 						@bool_enviado = 1
 					end
 				elsif (session[:entidad_id] >= 1 && session[:entidad_id] <= 6)
 					#Consejo de escuela
 					estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take 
-					if(estatusI.estatus_id != 8)
+					if(estatusI.estatus_id != 8 && estatusI.estatus_id != 18)
 						@bool_enviado = 1 #Estatus enviado a consejo escuela
 					end
 				elsif (session[:entidad_id] == 13)
 					#Consejo de facultad
 					estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
-					if(estatusI.estatus_id != 4)
+					if(estatusI.estatus_id != 4 && estatusI.estatus_id != 14)
 						@bool_enviado = 1
 					end
 				end	
@@ -700,25 +716,25 @@ end
 				if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12)
 				#Usuario comision
 					estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take #Estatus enviado a comision de investigacioni
-					if(estatusI.estatus_id != 3)
+					if(estatusI.estatus_id != 3 && estatusI.estatus_id != 13)
 						@bool_enviado = 1
 					end
 				elsif (session[:entidad_id] >= 14 && session[:entidad_id] <= 17)
 					#Consejo tecnico
 					estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
-					if(estatusI.estatus_id != 2)
+					if(estatusI.estatus_id != 2 && estatusI.estatus_id != 12)
 						@bool_enviado = 1
 					end
 				elsif (session[:entidad_id] >= 1 && session[:entidad_id] <= 6)
 				#Consejo de escuela
 					estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take 
-					if(estatusI.estatus_id != 8)
+					if(estatusI.estatus_id != 8 && estatusI.estatus_id != 18)
 						@bool_enviado = 1 #Estatus enviado a consejo escuela
 					end
 				elsif (session[:entidad_id] == 13)
 				#Consejo de facultad
 					estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
-					if(estatusI.estatus_id != 4)
+					if(estatusI.estatus_id != 4 && estatusI.estatus_id != 14)
 						@bool_enviado = 1
 					end
 				end	
@@ -817,25 +833,25 @@ end
 				if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12)
 				#Usuario comision
 					estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take #Estatus enviado a comision de investigacioni
-					if(estatusI.estatus_id != 3)
+					if(estatusI.estatus_id != 3 && estatusI.estatus_id != 13)
 						@bool_enviado = 1
 					end
 				elsif (session[:entidad_id] >= 14 && session[:entidad_id] <= 17)
 					#Consejo tecnico
 					estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
-					if(estatusI.estatus_id != 2)
+					if(estatusI.estatus_id != 2 && estatusI.estatus_id != 12)
 						@bool_enviado = 1
 					end
 				elsif (session[:entidad_id] >= 1 && session[:entidad_id] <= 6)
 					#Consejo de escuela
 					estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take 
-					if(estatusI.estatus_id != 8)
+					if(estatusI.estatus_id != 8 && estatusI.estatus_id != 18)
 						@bool_enviado = 1 #Estatus enviado a consejo escuela
 					end
 				elsif (session[:entidad_id] == 13)
 					#Consejo de facultad
 					estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
-					if(estatusI.estatus_id != 4)
+					if(estatusI.estatus_id != 4 && estatusI.estatus_id != 14)
 						@bool_enviado = 1
 					end
 				end	
@@ -934,25 +950,25 @@ end
 				if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12)
 				#Usuario comision
 					estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take #Estatus enviado a comision de investigacioni
-					if(estatusI.estatus_id != 3)
+					if(estatusI.estatus_id != 3 && estatusI.estatus_id != 13)
 						@bool_enviado = 1
 					end
 				elsif (session[:entidad_id] >= 14 && session[:entidad_id] <= 17)
 					#Consejo tecnico
 					estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
-					if(estatusI.estatus_id != 2)
+					if(estatusI.estatus_id != 2 && estatusI.estatus_id != 12)
 						@bool_enviado = 1
 					end
 				elsif (session[:entidad_id] >= 1 && session[:entidad_id] <= 6)
 					#Consejo de escuela
 					estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take 
-					if(estatusI.estatus_id != 8)
+					if(estatusI.estatus_id != 8 && estatusI.estatus_id != 18)
 						@bool_enviado = 1 #Estatus enviado a consejo escuela
 					end
 				elsif (session[:entidad_id] == 13)
 					#Consejo de facultad
 					estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
-					if(estatusI.estatus_id != 4)
+					if(estatusI.estatus_id != 4 && estatusI.estatus_id != 14)
 						@bool_enviado = 1
 					end
 				end	
@@ -1050,25 +1066,25 @@ end
 				if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12)
 				#Usuario comision
 					estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take #Estatus enviado a comision de investigacioni
-					if(estatusI.estatus_id != 3)
+					if(estatusI.estatus_id != 3 && estatusI.estatus_id != 13)
 						@bool_enviado = 1
 					end
 				elsif (session[:entidad_id] >= 14 && session[:entidad_id] <= 17)
 					#Consejo tecnico
 					estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
-					if(estatusI.estatus_id != 2)
+					if(estatusI.estatus_id != 2 && estatusI.estatus_id != 12)
 						@bool_enviado = 1
 					end
 				elsif (session[:entidad_id] >= 1 && session[:entidad_id] <= 6)
 					#Consejo de escuela
 					estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take 
-					if(estatusI.estatus_id != 8)
+					if(estatusI.estatus_id != 8 && estatusI.estatus_id != 18)
 						@bool_enviado = 1 #Estatus enviado a consejo escuela
 					end
 				elsif (session[:entidad_id] == 13)
 					#Consejo de facultad
 					estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
-					if(estatusI.estatus_id != 4)
+					if(estatusI.estatus_id != 4 && estatusI.estatus_id != 14)
 						@bool_enviado = 1
 					end
 				end
@@ -1165,25 +1181,25 @@ end
 				if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12)
 				#Usuario comision
 					estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take #Estatus enviado a comision de investigacioni
-					if(estatusI.estatus_id != 3)
+					if(estatusI.estatus_id != 3 && estatusI.estatus_id != 13)
 						@bool_enviado = 1
 					end
 				elsif (session[:entidad_id] >= 14 && session[:entidad_id] <= 17)
 					#Consejo tecnico
 					estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
-					if(estatusI.estatus_id != 2)
+					if(estatusI.estatus_id != 2 && estatusI.estatus_id != 12)
 						@bool_enviado = 1
 					end
 				elsif (session[:entidad_id] >= 1 && session[:entidad_id] <= 6)
 					#Consejo de escuela
 					estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take 
-					if(estatusI.estatus_id != 8)
+					if(estatusI.estatus_id != 8 && estatusI.estatus_id != 18)
 						@bool_enviado = 1 #Estatus enviado a consejo escuela
 					end
 				elsif (session[:entidad_id] == 13)
 					#Consejo de facultad
 					estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
-					if(estatusI.estatus_id != 4)
+					if(estatusI.estatus_id != 4 && estatusI.estatus_id != 14)
 						@bool_enviado = 1
 					end
 				end	
@@ -1213,16 +1229,16 @@ end
 			@nombre_instructor = []
 			if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12)
 			#Usuario comision
-				@status_inv = EstatusInforme.where(actual: 1,  estatus_id: [3,2,8,4,1,5,9]) #Estatus enviado a comision de investigacion
+				@status_inv = EstatusInforme.where(actual: 1,  estatus_id: [3,2,8,4,1,5,9,13,12,18,14]) #Estatus enviado a comision de investigacion
 			elsif (session[:entidad_id] >= 14 && session[:entidad_id] <= 17)
 			#Consejo tecnico
-				@status_inv = EstatusInforme.where(actual: 1, estatus_id: [2,8,4,1,5,9]) #Estatus enviado a consejo tecnico
+				@status_inv = EstatusInforme.where(actual: 1, estatus_id: [2,8,4,1,5,9,12,18,14]) #Estatus enviado a consejo tecnico
 			elsif (session[:entidad_id] >= 1 && session[:entidad_id] <= 6)
 			#Consejo de escuela
-				@status_inv = EstatusInforme.where(actual: 1, estatus_id: [8,4,1,5,9]) #Estatus enviado a consejo escuela
+				@status_inv = EstatusInforme.where(actual: 1, estatus_id: [8,4,1,5,9,18,14]) #Estatus enviado a consejo escuela
 			elsif (session[:entidad_id] == 13)
 			#Consejo de facultad
-				@status_inv = EstatusInforme.where(actual: 1, estatus_id: [4,1,5,9]) #Estatus enviado a consejo de facultad
+				@status_inv = EstatusInforme.where(actual: 1, estatus_id: [4,1,5,9,14]) #Estatus enviado a consejo de facultad
 				@entidad_escuela_id=nil
 			end
 			@status_inv.each do |si|
@@ -1248,6 +1264,14 @@ end
 						@st = "ENVIADO A CONSEJO DE ESCUELA"
 					elsif(si.estatus_id==9)
 						@st = "RECHAZADO POR CONSEJO DE FACULTAD"
+			        elsif(si.estatus_id==12)
+			            @st = "ENVIADO A CONSEJO TÉCNICO SIN REVISIÓN"
+			        elsif(si.estatus_id==13)
+			            @st = "ENVIADO A COMISIÓN DE INVESTIGACIÓN SIN REVISIÓN"
+			        elsif(si.estatus_id==14)
+			            @st = "ENVIADO A CONSEJO DE FACULTAD SIN REVISIÓN"
+			        elsif(si.estatus_id==18)
+			            @st = "ENVIADO A CONSEJO DE ESCUELA SIN REVISIÓN"
 					end
 					if @inf.tipo_id == 1
 			          	@tipos.push('Semestral')
@@ -1289,6 +1313,14 @@ end
 							@st = "ENVIADO A CONSEJO DE ESCUELA"
 						elsif(si.estatus_id==9)
 							@st = "RECHAZADO POR CONSEJO DE FACULTAD"
+				        elsif(si.estatus_id==12)
+				            @st = "ENVIADO A CONSEJO TÉCNICO SIN REVISIÓN"
+				        elsif(si.estatus_id==13)
+				            @st = "ENVIADO A COMISIÓN DE INVESTIGACIÓN SIN REVISIÓN"
+				        elsif(si.estatus_id==14)
+				            @st = "ENVIADO A CONSEJO DE FACULTAD SIN REVISIÓN"
+				        elsif(si.estatus_id==18)
+				            @st = "ENVIADO A CONSEJO DE ESCUELA SIN REVISIÓN"
 						end
 						@status.push(@st)
 						@nombre_tutor.push(Persona.where(usuario_id: @pf.tutor_id).take.nombres)
@@ -1359,25 +1391,25 @@ end
 		if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12)
 		#Usuario comision
 			estatusI = EstatusInforme.where(informe_id: @informe.id, actual: 1).take #Estatus enviado a comision de investigacioni
-			if(estatusI.estatus_id != 3)
+			if(estatusI.estatus_id != 3 && estatusI.estatus_id != 13)
 				@bool_enviado = 1
 			end
 		elsif (session[:entidad_id] >= 14 && session[:entidad_id] <= 17)
 		#Consejo tecnico
 			estatusI = EstatusInforme.where(informe_id: @informe.id, actual: 1).take
-			if(estatusI.estatus_id != 2)
+			if(estatusI.estatus_id != 2 && estatusI.estatus_id != 12)
 				@bool_enviado = 1
 			end
 		elsif (session[:entidad_id] >= 1 && session[:entidad_id] <= 6)
 		#Consejo de escuela
 			estatusI = EstatusInforme.where(informe_id: @informe.id, actual: 1).take 
-			if(estatusI.estatus_id != 8)
+			if(estatusI.estatus_id != 8 && estatusI.estatus_id != 18)
 				@bool_enviado = 1 #Estatus enviado a consejo escuela
 			end
 		elsif (session[:entidad_id] == 13)
 			#Consejo de facultad
 			estatusI = EstatusInforme.where(informe_id: @informe.id, actual: 1).take
-			if(estatusI.estatus_id != 4)
+			if(estatusI.estatus_id != 4 && estatusI.estatus_id != 14)
 				@bool_enviado = 1
 			end
 		end	
@@ -1686,25 +1718,25 @@ end
 			if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12)
 				#Usuario comision
 				estatusI = EstatusInforme.where(informe_id: @informe.id, actual: 1).take #Estatus enviado a comision de investigacioni
-				if(estatusI.estatus_id != 3)
+				if(estatusI.estatus_id != 3 && estatusI.estatus_id != 13)
 					@bool_enviado = 1
 				end
 			elsif (session[:entidad_id] >= 14 && session[:entidad_id] <= 17)
 				#Consejo tecnico
 				estatusI = EstatusInforme.where(informe_id: @informe.id, actual: 1).take
-				if(estatusI.estatus_id != 2)
+				if(estatusI.estatus_id != 2 && estatusI.estatus_id != 12)
 					@bool_enviado = 1
 				end
 			elsif (session[:entidad_id] >= 1 && session[:entidad_id] <= 6)
 				#Consejo de escuela
 				estatusI = EstatusInforme.where(informe_id: @informe.id, actual: 1).take 
-				if(estatusI.estatus_id != 8)
+				if(estatusI.estatus_id != 8 && estatusI.estatus_id != 18)
 					@bool_enviado = 1 #Estatus enviado a consejo escuela
 				end
 			elsif (session[:entidad_id] == 13)
 				#Consejo de facultad
 				estatusI = EstatusInforme.where(informe_id: @informe.id, actual: 1).take
-				if(estatusI.estatus_id != 4)
+				if(estatusI.estatus_id != 4 && estatusI.estatus_id != 14)
 					@bool_enviado = 1
 				end
 			end
@@ -2123,25 +2155,25 @@ end
 		if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12)
 		#Usuario comision
 			estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take #Estatus enviado a comision de investigacioni
-			if(estatusI.estatus_id != 3)
+			if(estatusI.estatus_id != 3 && estatusI.estatus_id != 13)
 				@bool_enviado = 1
 			end
 		elsif (session[:entidad_id] >= 14 && session[:entidad_id] <= 17)
 		#Consejo tecnico
 			estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
-			if(estatusI.estatus_id != 2)
+			if(estatusI.estatus_id != 2 && estatusI.estatus_id != 12)
 				@bool_enviado = 1
 			end
 		elsif (session[:entidad_id] >= 1 && session[:entidad_id] <= 6)
 		#Consejo de escuela
 			estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take 
-			if(estatusI.estatus_id != 8)
+			if(estatusI.estatus_id != 8 && estatusI.estatus_id != 18)
 				@bool_enviado = 1 #Estatus enviado a consejo escuela
 			end
 		elsif (session[:entidad_id] == 13)
 		#Consejo de facultad
 			estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
-			if(estatusI.estatus_id != 4)
+			if(estatusI.estatus_id != 4 && estatusI.estatus_id != 14)
 				@bool_enviado = 1
 			end
 		end
@@ -2446,25 +2478,25 @@ end
 		if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12)
 		#Usuario comision
 			estatusI = EstatusInforme.where(informe_id: @informe_id, actual: 1).take #Estatus enviado a comision de investigacioni
-			if(estatusI.estatus_id != 3)
+			if(estatusI.estatus_id != 3 && estatusI.estatus_id != 13)
 				@bool_enviado = 1
 			end
 		elsif (session[:entidad_id] >= 14 && session[:entidad_id] <= 17)
 		#Consejo tecnico
 			estatusI = EstatusInforme.where(informe_id: @informe_id, actual: 1).take
-			if(estatusI.estatus_id != 2)
+			if(estatusI.estatus_id != 2 && estatusI.estatus_id != 12)
 				@bool_enviado = 1
 			end
 		elsif (session[:entidad_id] >= 1 && session[:entidad_id] <= 6)
 			#Consejo de escuela
 			estatusI = EstatusInforme.where(informe_id: @informe_id, actual: 1).take 
-			if(estatusI.estatus_id != 8)
+			if(estatusI.estatus_id != 8 && estatusI.estatus_id != 18)
 				@bool_enviado = 1 #Estatus enviado a consejo escuela
 			end
 		elsif (session[:entidad_id] == 13)
 		#Consejo de facultad
 			estatusI = EstatusInforme.where(informe_id: @informe_id, actual: 1).take
-			if(estatusI.estatus_id != 4)
+			if(estatusI.estatus_id != 4 && estatusI.estatus_id != 14)
 				@bool_enviado = 1
 			end
 		end	
@@ -2520,25 +2552,25 @@ end
 		if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12)
 		#Usuario comision
 			estatusI = EstatusInforme.where(informe_id: @informe_id, actual: 1).take #Estatus enviado a comision de investigacioni
-			if(estatusI.estatus_id != 3)
+			if(estatusI.estatus_id != 3 && estatusI.estatus_id != 13)
 				@bool_enviado = 1
-			end
+ 			end
 		elsif (session[:entidad_id] >= 14 && session[:entidad_id] <= 17)
 		#Consejo tecnico
 			estatusI = EstatusInforme.where(informe_id: @informe_id, actual: 1).take
-			if(estatusI.estatus_id != 2)
+			if(estatusI.estatus_id != 2 && estatusI.estatus_id != 12)
 				@bool_enviado = 1
 			end
 		elsif (session[:entidad_id] >= 1 && session[:entidad_id] <= 6)
 			#Consejo de escuela
 			estatusI = EstatusInforme.where(informe_id: @informe_id, actual: 1).take 
-			if(estatusI.estatus_id != 8)
+			if(estatusI.estatus_id != 8 && estatusI.estatus_id != 18)
 				@bool_enviado = 1 #Estatus enviado a consejo escuela
 			end
 		elsif (session[:entidad_id] == 13)
 		#Consejo de facultad
 			estatusI = EstatusInforme.where(informe_id: @informe_id, actual: 1).take
-			if(estatusI.estatus_id != 4)
+			if(estatusI.estatus_id != 4 && estatusI.estatus_id != 14)
 				@bool_enviado = 1
 			end
 		end
@@ -2992,25 +3024,25 @@ end
 		if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12)
 		#Usuario comision
 			estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take #Estatus enviado a comision de investigacioni
-			if(estatusI.estatus_id != 3)
+			if(estatusI.estatus_id != 3 && estatusI.estatus_id != 13)
 				@bool_enviado = 1
 			end
 		elsif (session[:entidad_id] >= 14 && session[:entidad_id] <= 17)
 		#Consejo tecnico
 			estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
-			if(estatusI.estatus_id != 2)
+			if(estatusI.estatus_id != 2 && estatusI.estatus_id != 12)
 				@bool_enviado = 1
 			end
 		elsif (session[:entidad_id] >= 1 && session[:entidad_id] <= 6)
 		#Consejo de escuela
 			estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take 
-			if(estatusI.estatus_id != 8)
+			if(estatusI.estatus_id != 8 && estatusI.estatus_id != 18)
 				@bool_enviado = 1 #Estatus enviado a consejo escuela
 			end
 		elsif (session[:entidad_id] == 13)
 		#Consejo de facultad
 			estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
-			if(estatusI.estatus_id != 4)
+			if(estatusI.estatus_id != 4 && estatusI.estatus_id != 14)
 				@bool_enviado = 1
 			end
 		end
@@ -3446,26 +3478,26 @@ end
 		if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12)
 		#Usuario comision
 			estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take #Estatus enviado a comision de investigacioni
-			if(estatusI.estatus_id != 3)
+			if(estatusI.estatus_id != 3 && estatusI.estatus_id != 13)
 				@bool_enviado = 1
 			end
 		elsif (session[:entidad_id] >= 14 && session[:entidad_id] <= 17)
 		#Consejo tecnico
 			estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
-			if(estatusI.estatus_id != 2)
+			if(estatusI.estatus_id != 2 && estatusI.estatus_id != 12)
 				@bool_enviado = 1
 			end
 		elsif (session[:entidad_id] >= 1 && session[:entidad_id] <= 6)
 		#Consejo de escuela
 			estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take 
-			if(estatusI.estatus_id != 8)
+			if(estatusI.estatus_id != 8 && estatusI.estatus_id != 18)
 				@bool_enviado = 1 #Estatus enviado a consejo escuela
 			
 			end
 		elsif (session[:entidad_id] == 13)
 		#Consejo de facultad
 			estatusI = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
-			if(estatusI.estatus_id != 4)
+			if(estatusI.estatus_id != 4 && estatusI.estatus_id != 14)
 				@bool_enviado = 1
 			end
 		end	

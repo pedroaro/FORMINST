@@ -367,8 +367,15 @@ while true
 	fecha2 = Time.now
 	puts "inicio"
 	planFormacion.each do |plan|
-		puts plan.fecha_inicio
+		puts plan.fecha_inicio + 5.month
+		puts fecha2
+		puts plan.fecha_inicio + 11.month
+		puts plan.fecha_inicio + 5.month <= fecha2
+		puts plan.fecha_inicio + 11.month >= fecha2
+		puts plan.mensaje
+		puts plan.mensaje.blank?
 		if plan.fecha_inicio + 5.month <= fecha2 && plan.fecha_inicio + 11.month >= fecha2 && plan.mensaje.blank?
+			puts "entro!"
 			puts plan.fecha_inicio
 			adecuacion = Adecuacion.where(planformacion_id: plan.id).take
 			notific = Notificacion.new
