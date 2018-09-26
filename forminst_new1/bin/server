@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
 ENV['RAILS_ENV'] = ARGV.first || ENV['RAILS_ENV'] || 'development'
 require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
+require 'daemons'
+Daemons.daemonize
 
 # Change the following to reflect your database settings
 ActiveRecord::Base.establish_connection(
@@ -280,7 +282,7 @@ while true
 			      remitente = Usuario.where(id: uentidad.usuario_id).take
 			      ActionCorreo.envio_informe(remitente, notific3.mensaje,0,linkI, @document).deliver
 		          flash[:success]="El informe se ha envíado a consejo de escuela"
-			elsif (session[:entidad_id] >= 1 && session[:entidad_id] <= 6)
+			elsif (status.estatus_id == 8 || status.estatus_id == 18)
 				#Consejo de escuela
 				@document = Respaldo.where(adecuacion_id: adecuacion_id, informe_id: @informe_id, actual: 1).take
 				@document.estatus = "Enviado a Consejo de Facultad Sin Revisión"

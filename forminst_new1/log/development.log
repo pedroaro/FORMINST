@@ -2,3 +2,11 @@ DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecate
 DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /forminst/forminst_new1/config/routes.rb:5)
 DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /forminst/forminst_new1/config/routes.rb:6)
 DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /forminst/forminst_new1/config/routes.rb:6)
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/Desktop/forminst servidor/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/Desktop/forminst servidor/FORMINST/forminst_new1/config/routes.rb:5)
+DEPRECATION WARNING: Using a dynamic :controller segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/Desktop/forminst servidor/FORMINST/forminst_new1/config/routes.rb:6)
+DEPRECATION WARNING: Using a dynamic :action segment in a route is deprecated and will be removed in Rails 5.2. (called from block in <top (required)> at /home/administrador/Desktop/forminst servidor/FORMINST/forminst_new1/config/routes.rb:6)
+  [1m[36mEstatusAdecuacion Load (0.3ms)[0m  [1m[34mSELECT `estatus_adecuacion`.* FROM `estatus_adecuacion` WHERE `estatus_adecuacion`.`actual` = 1[0m
+  [1m[36mEstatusInforme Load (0.4ms)[0m  [1m[34mSELECT `estatus_informe`.* FROM `estatus_informe` WHERE `estatus_informe`.`actual` = 1[0m
+  [1m[36mPlanformacion Load (0.4ms)[0m  [1m[34mSELECT `planformacion`.* FROM `planformacion`[0m
+  [1m[36mInforme Load (0.4ms)[0m  [1m[34mSELECT `informe`.* FROM `informe` WHERE `informe`.`planformacion_id` = 1[0m
