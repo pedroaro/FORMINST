@@ -535,6 +535,7 @@ CREATE TABLE `notificacion` (
   `informe_id` int(11) DEFAULT NULL,
   `actual` int(11) DEFAULT NULL,
   `mensaje` longtext,
+  `departamento_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `notificacioninstructor` (`instructor_id`),
   KEY `notificaciontutor` (`tutor_id`),
