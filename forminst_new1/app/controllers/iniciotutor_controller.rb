@@ -45,7 +45,7 @@ class IniciotutorController < ApplicationController
 		if session[:usuario_id] && session[:tutor]
 			session[:adecuacion_id] = nil
 			@persona = Persona.where(usuario_id: session[:usuario_id]).take
-    		@planformacions = Planformacion.where(tutor_id: session[:usuario_id])
+    		@planformacions = Planformacion.where(tutor_id: session[:usuario_id]).order(fecha_modificacion: :desc)
     		@nombreinstructor = []
 			@status = []
 			@cpenviado = []
@@ -1754,163 +1754,50 @@ class IniciotutorController < ApplicationController
 			if (cambio_act.estatus_id != 6 && cambio_act.estatus_id != 5)
 		    	flash[:info]="Esta adecuación ya habia sido enviada"
 		   	   	redirect_to controller:"iniciotutor", action: "planformacions"
-		   	else
-				@actividades1= AdecuacionActividad.where(adecuacion_id: @adecuacion_id, semestre: 1).all
-				if @actividades1.blank?
-			       	g = g + 1
-				end
-				a= false
-				b= false
-				c= false
-				d= false
-				e= false
-				@actividades1.each do |actade| 
-					@act= Actividad.find(actade.actividad_id)
-					tipo= @act.tipo_actividad_id
-					if tipo==1
-						a = true
-					elsif tipo==2
-						b = true
-					elsif tipo==3
-						c = true
-					elsif tipo==4
-						d = true
-					elsif tipo==5
-						e = true
-					end
-				end
-				if (a == true && b== true && c== true && d== true  && e== true)
-				elsif ( a == true && b== true && c== true && d== true  && e== false)
-					a = Actividad.new
-					a.tipo_actividad_id = 5
-					a.actividad = "Ninguna"
-					a.save
-
-					adac = AdecuacionActividad.new
-					adac.adecuacion_id = @adecuacion_id
-					adac.actividad_id = a.id
-					adac.semestre = 1
-					adac.save
-				else 
-					g = g + 1
-				end
-
-				@actividades2= AdecuacionActividad.where(adecuacion_id: @adecuacion_id, semestre: 2).all
-				if @actividades2.blank?
-					g = g + 1
-				end
-				a= false
-				b= false
-				c= false
-				d= false
-				e= false
-				@actividades2.each do |actade| 
-					@act= Actividad.find(actade.actividad_id)
-					tipo= @act.tipo_actividad_id
-					if tipo==1
-						a = true
-					elsif tipo==2
-						b = true
-					elsif tipo==3
-						c = true
-					elsif tipo==4
-						d = true
-					elsif tipo==5
-						e = true
-					end
-				end
-				if (a == true && b== true && c== true && d== true  && e== true)
-				elsif ( a == true && b== true && c== true && d== true  && e== false)
-					a = Actividad.new
-					a.tipo_actividad_id = 5
-					a.actividad = "Ninguna"
-					a.save
-
-					adac = AdecuacionActividad.new
-					adac.adecuacion_id = @adecuacion_id
-					adac.actividad_id = a.id
-					adac.semestre = 2
-					adac.save
-				else 
-					g = g + 1
-				end
-				@actividades3= AdecuacionActividad.where(adecuacion_id: @adecuacion_id, semestre: 3).all
-				if @actividades3.blank?
-			        g = g + 1
-				end
-				a= false
-				b= false
-				c= false
-				d= false
-				e= false
-				@actividades3.each do |actade| 
-					@act= Actividad.find(actade.actividad_id)
-					tipo= @act.tipo_actividad_id
-					if tipo==1
-						a = true
-					elsif tipo==2
-						b = true
-					elsif tipo==3
-						c = true
-					elsif tipo==4
-						d = true
-					elsif tipo==5
-						e = true
-					end
-				end
-				if (a == true && b== true && c== true && d== true  && e== true)
-				elsif ( a == true && b== true && c== true && d== true  && e== false)
-					a = Actividad.new
-					a.tipo_actividad_id = 5
-					a.actividad = "Ninguna"
-					a.save
-
-					adac = AdecuacionActividad.new
-					adac.adecuacion_id = @adecuacion_id
-					adac.actividad_id = a.id
-					adac.semestre = 3
-					adac.save
-				else 
-					g = g + 1
-				end
-				@actividades4= AdecuacionActividad.where(adecuacion_id: @adecuacion_id, semestre: 4).all
-				if @actividades4.blank?
-			        g = g + 1
-				end
-				a= false
-				b= false
-				c= false
-				d= false
-				e= false
-				@actividades4.each do |actade| 
-					@act= Actividad.find(actade.actividad_id)
-					tipo= @act.tipo_actividad_id
-					if tipo==1
-						a = true
-					elsif tipo==2
-						b = true
-					elsif tipo==3
-						c = true
-					elsif tipo==4
-						d = true
-					elsif tipo==5
-						e = true
-					end
-				end
-				if (a == true && b== true && c== true && d== true  && e== true)
-				elsif ( a == true && b== true && c== true && d== true  && e== false)
-					a = Actividad.new
-					a.tipo_actividad_id = 5
-					a.actividad = "Ninguna"
-					a.save
-
-					adac = AdecuacionActividad.new
-					adac.adecuacion_id = @adecuacion_id
-					adac.actividad_id = a.id
-					adac.semestre = 4
-					adac.save
-				else 
+			   else
+				for semestreN in 1..4
+					@actividades1= AdecuacionActividad.where(adecuacion_id: @adecuacion_id, semestre: semestreN).all
+					if @actividades1.blank?
 						g = g + 1
+					else 
+						a= false
+						b= false
+						c= false
+						d= false
+						e= false
+						@actividades1.each do |actade| 
+							@act= Actividad.find(actade.actividad_id)
+							tipo= @act.tipo_actividad_id
+							if tipo==1
+								a = true
+							elsif tipo==2
+								b = true
+							elsif tipo==3
+								c = true
+							elsif tipo==4
+								d = true
+							elsif tipo==5
+								e = true
+							end
+						end
+						if (a && b && c && d && e)
+							#Si todas las actividades de el semestre semestreN tienen algo escrito
+						elsif ( a && b && c && d && !e)
+							#Si todas las actividades de el semestre semestreN tienen algo escrito menos "otras actividades" que es opcional
+							a = Actividad.new
+							a.tipo_actividad_id = 5
+							a.actividad = "Ninguna"
+							a.save
+
+							adac = AdecuacionActividad.new
+							adac.adecuacion_id = @adecuacion_id
+							adac.actividad_id = a.id
+							adac.semestre = semestreN
+							adac.save
+						else 
+							g = g + 1
+						end
+					end
 				end
 				aob = 0
 				a= false
@@ -1918,8 +1805,8 @@ class IniciotutorController < ApplicationController
 				c= false
 				d= false
 				e= false
-				@actividades4= AdecuacionActividad.where(adecuacion_id: @adecuacion_id, semestre: 5).all
-				@actividades4.each do |actade| 
+				@actividades5= AdecuacionActividad.where(adecuacion_id: @adecuacion_id, semestre: 5).all
+				@actividades5.each do |actade| 
 					@act= Actividad.find(actade.actividad_id)
 					tipo= @act.tipo_actividad_id
 					if tipo==1
@@ -1970,8 +1857,8 @@ class IniciotutorController < ApplicationController
 				are5 = 0
 				are6 = 0
 				are7 = 0
-				@actividades4= AdecuacionActividad.where(adecuacion_id: @adecuacion_id, semestre: 0).all
-				@actividades4.each do |cpActividadAdecuacion|
+				@actividades0= AdecuacionActividad.where(adecuacion_id: @adecuacion_id, semestre: 0).all
+				@actividades0.each do |cpActividadAdecuacion|
 					cpActividad = Actividad.find(cpActividadAdecuacion.actividad_id)
 					if cpActividad.tipo_actividad_id == 9 && !cpActividad.actividad.blank?
 						are1+=1
@@ -2138,7 +2025,6 @@ class IniciotutorController < ApplicationController
 			        else
 			        	flash[:success]="La adecuación se ha enviado a comision de investigacion"
 			        end
-
 
 			   		redirect_to controller:"iniciotutor", action: "planformacions"
 			   end

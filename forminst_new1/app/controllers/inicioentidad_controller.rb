@@ -135,7 +135,7 @@ class InicioentidadController < ApplicationController
 		end
 	end
 
-	#Lista las adecuaciones, independientemente si fueron ya enviadas a entidades mayores
+	#Lista las adecuaciones,  independientemente si fueron ya enviadas a entidades mayores
 
 	def listar_adecuaciones
 		if session[:usuario_id] && session[:entidad]== true
@@ -152,31 +152,33 @@ class InicioentidadController < ApplicationController
 				@nombre_instructor = []
 			if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12)
 			#Usuario comision
-				@status_inv = EstatusAdecuacion.where(actual: 1,  estatus_id: [3,2,8,4,1,5,9,12,13,14,18]) #Estatus enviado a comision de investigacion
-	
+				@status_inv = EstatusAdecuacion.where(actual: 1,  estatus_id: [3,2,8,4,1,5,9,12,13,14,18]).order(fecha: :desc) #Estatus enviado a comision de investigacion
+				#.order(fecha: :desc) para ordenar el arreglo poniendo los mas nuevos primero
 			else
 				if (session[:entidad_id] >= 14 && session[:entidad_id] <= 17)
 				#Consejo tecnico
-					@status_inv = EstatusAdecuacion.where(actual: 1, estatus_id: [2,8,4,1,5,9,12,18,14]) #Estatus enviado a consejo tecnico
+					@status_inv = EstatusAdecuacion.where(actual: 1, estatus_id: [2,8,4,1,5,9,12,18,14]).order(fecha: :desc) #Estatus enviado a consejo tecnico
 				else
 					if (session[:entidad_id] >= 1 && session[:entidad_id] <= 6)
 					#Consejo de escuela
-						@status_inv = EstatusAdecuacion.where(actual: 1, estatus_id: [8,4,1,5,9,18,14]) #Estatus enviado a consejo escuela
+						@status_inv = EstatusAdecuacion.where(actual: 1, estatus_id: [8,4,1,5,9,18,14]).order(fecha: :desc) #Estatus enviado a consejo escuela
 					else
 						if (session[:entidad_id] == 13)
 						#Consejo de facultad
-							@status_inv = EstatusAdecuacion.where(actual: 1, estatus_id: [4,1,5,9,14]) #Estatus enviado a consejo de facultad
+							@status_inv = EstatusAdecuacion.where(actual: 1, estatus_id: [4,1,5,9,14]).order(fecha: :desc) #Estatus enviado a consejo de facultad
 							@entidad_escuela_id=nil
-						
 						end	
 					end
 				end
 			end
 
 			@status_inv.each do |si|
-
 				@adec= Adecuacion.find(si.adecuacion_id)
 				@pf = Planformacion.find(@adec.planformacion_id)
+				tutor_aux= Persona.where(usuario_id: @pf.tutor_id)
+				instructor_aux= Persona.where(usuario_id: @pf.instructor_id)
+				@nombre_tutor.push(tutor_aux.take.nombres.split.map(&:capitalize).join(' ') + " " + tutor_aux.take.apellidos.split.map(&:capitalize).join(' '))
+				@nombre_instructor.push(instructor_aux.take.nombres.split.map(&:capitalize).join(' ') + " " + instructor_aux.take.apellidos.split.map(&:capitalize).join(' '))
 				if (session[:entidad_id] == 13)
 					@adecuacion = true
 					@adecuaciones.push(@adec)
@@ -204,8 +206,7 @@ class InicioentidadController < ApplicationController
 			            @st = "ENVIADO A CONSEJO DE ESCUELA SIN REVISIÓN"
 					end
 					@status.push(@st)
-					@nombre_tutor.push(Persona.where(usuario_id: @pf.tutor_id).take.nombres)
-					@nombre_instructor.push(Persona.where(usuario_id: @pf.instructor_id).take.nombres)
+					
 				else
 					#Para que salgan las adecuaciones correspondientes a la escuela y al departamento
 					@tutor_escuela = Usuarioentidad.where(usuario_id: @adec.tutor_id).take
@@ -238,8 +239,6 @@ class InicioentidadController < ApplicationController
 						end
 
 						@status.push(@st)
-						@nombre_tutor.push(Persona.where(usuario_id: @pf.tutor_id).take.nombres)
-						@nombre_instructor.push(Persona.where(usuario_id: @pf.instructor_id).take.nombres)
 					end
 				end
 			end			
@@ -1229,22 +1228,27 @@ end
 			@nombre_instructor = []
 			if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12)
 			#Usuario comision
-				@status_inv = EstatusInforme.where(actual: 1,  estatus_id: [3,2,8,4,1,5,9,13,12,18,14]) #Estatus enviado a comision de investigacion
+				@status_inv = EstatusInforme.where(actual: 1,  estatus_id: [3,2,8,4,1,5,9,13,12,18,14]).order(fecha: :desc) #Estatus enviado a comision de investigacion
+				#.order(fecha: :desc) para ordenar el arreglo poniendo los mas nuevos primero
 			elsif (session[:entidad_id] >= 14 && session[:entidad_id] <= 17)
 			#Consejo tecnico
-				@status_inv = EstatusInforme.where(actual: 1, estatus_id: [2,8,4,1,5,9,12,18,14]) #Estatus enviado a consejo tecnico
+				@status_inv = EstatusInforme.where(actual: 1, estatus_id: [2,8,4,1,5,9,12,18,14]).order(fecha: :desc) #Estatus enviado a consejo tecnico
 			elsif (session[:entidad_id] >= 1 && session[:entidad_id] <= 6)
 			#Consejo de escuela
-				@status_inv = EstatusInforme.where(actual: 1, estatus_id: [8,4,1,5,9,18,14]) #Estatus enviado a consejo escuela
+				@status_inv = EstatusInforme.where(actual: 1, estatus_id: [8,4,1,5,9,18,14]).order(fecha: :desc) #Estatus enviado a consejo escuela
 			elsif (session[:entidad_id] == 13)
 			#Consejo de facultad
-				@status_inv = EstatusInforme.where(actual: 1, estatus_id: [4,1,5,9,14]) #Estatus enviado a consejo de facultad
+				@status_inv = EstatusInforme.where(actual: 1, estatus_id: [4,1,5,9,14]).order(fecha: :desc) #Estatus enviado a consejo de facultad
 				@entidad_escuela_id=nil
 			end
 			@status_inv.each do |si|
 				@inf= Informe.find(si.informe_id)
 				@pf = Planformacion.find(@inf.planformacion_id)
 				@ppp = Persona.where(usuario_id: @pf.instructor_id).take.nombres
+				tutor_aux= Persona.where(usuario_id: @pf.tutor_id)
+				instructor_aux= Persona.where(usuario_id: @pf.instructor_id)
+				@nombre_tutor.push(tutor_aux.take.nombres.split.map(&:capitalize).join(' ') + " " + tutor_aux.take.apellidos.split.map(&:capitalize).join(' '))
+				@nombre_instructor.push(instructor_aux.take.nombres.split.map(&:capitalize).join(' ') + " " + instructor_aux.take.apellidos.split.map(&:capitalize).join(' '))
 				if (session[:entidad_id] == 13)			#Si es consejo de facultad, listar todos los informes enviados a CF sin importar la escuela
 					@informe = true
 					@informes.push(@inf)
@@ -1283,8 +1287,6 @@ end
 			          	@tipos.push('')
 			        end
 					@status.push(@st)
-					@nombre_tutor.push(Persona.where(usuario_id: @pf.tutor_id).take.nombres)
-					@nombre_instructor.push(Persona.where(usuario_id: @pf.instructor_id).take.nombres)
 				else
 					@tutor_escuela = Usuarioentidad.where(usuario_id: @inf.tutor_id).take
 					if @tutor_escuela.escuela_id == @entidad_escuela_id && (@tutor_escuela.departamento_id == @depto || @depto == nil)
@@ -1323,12 +1325,14 @@ end
 				            @st = "ENVIADO A CONSEJO DE ESCUELA SIN REVISIÓN"
 						end
 						@status.push(@st)
-						@nombre_tutor.push(Persona.where(usuario_id: @pf.tutor_id).take.nombres)
-						@nombre_instructor.push(Persona.where(usuario_id: @pf.instructor_id).take.nombres)
 					end
 				end
 			end	
-
+			@status.reverse!
+			@tipos.reverse!
+			@informes.reverse!
+			@nombre_tutor.reverse!
+			@nombre_instructor.reverse!
 	    else
       		redirect_to controller:"forminst", action: "index"
     	end
@@ -3536,7 +3540,8 @@ end
 			@document = Respaldo.where(adecuacion_id: session[:adecuacion_id], informe_id: nil, actual: 1).take
 			@document.estatus = "Enviado a Consejo de Escuela"
 			@document.save
-
+			
+			#Carga de Notificaciones y Correos
 	        notific.instructor_id = plan.instructor_id
 	        notific.tutor_id = plan.tutor_id
 	        notific.adecuacion_id = session[:adecuacion_id]
@@ -3562,40 +3567,31 @@ end
 	        notific3.actual = 4		#Consejo de Escuela
 	    	notific3.mensaje = "[" + notificacionfecha + "] Se ha recibido una nueva Adecuación: "+ person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + ", favor aprobar y enviar a la siguiente entidad."
 	    	notific3.save
+			#\Carga de Notificaciones y Correos
 
-			 user =Usuarioentidad.where(entidad_id: session[:entidad_id]).take
-	          if(user.escuela_id == 1)
+			user =Usuarioentidad.where(entidad_id: session[:entidad_id]).take
+	        if(user.escuela_id == 1)
 	            uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 1).take
-	          else
-	            if(user.escuela_id == 2)
-	              uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 2).take
-	            else
-	              if(user.escuela_id == 3)
-	                uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 3).take
-	              else
-	                if(user.escuela_id == 4)
-	                uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 4).take
-	                else
-	                  if(user.escuela_id == 9)
-	                    uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 5).take
-	                  else
-	                    if(user.escuela_id == 10)
-	                      uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 6).take
-	                    end
-	                  end
-	                end
-	              end
-	            end  
-	          end
-				linkT = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar adecuacion&param1=" + plan.id.to_s + "&param2=no"
-			    linkI = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar adecuacion"			
-				linkE = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar adecuacion&param3=" + @adecuacion_id.to_s  
-			    remitente3 = Usuario.where(id: plan.tutor_id).take
-				ActionCorreo.envio_adecuacion(remitente3, notific.mensaje,2,linkT,@document).deliver
-				remitente2 = Usuario.where(id: plan.instructor_id).take
-				ActionCorreo.envio_adecuacion(remitente2, notific2.mensaje,1,linkI,@document).deliver
-				remitente = Usuario.where(id: uentidad.usuario_id).take
-				ActionCorreo.envio_adecuacion(remitente, notific3.mensaje,0,linkE,@document).deliver
+	        elsif(user.escuela_id == 2)
+	            uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 2).take
+	        elsif(user.escuela_id == 3)
+	            uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 3).take
+	        elsif(user.escuela_id == 4)
+	        	uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 4).take
+	        elsif(user.escuela_id == 9)
+	            uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 5).take
+	        elsif(user.escuela_id == 10)
+	            uentidad = Usuarioentidad.where(escuela_id: user.escuela_id, entidad_id: 6).take
+	        end
+			linkT = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar adecuacion&param1=" + plan.id.to_s + "&param2=no"
+			linkI = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar adecuacion"			
+			linkE = "http://formacion.ciens.ucv.ve/forminst?accion=mostrar adecuacion&param3=" + @adecuacion_id.to_s  
+			remitente3 = Usuario.where(id: plan.tutor_id).take
+			ActionCorreo.envio_adecuacion(remitente3, notific.mensaje,2,linkT,@document).deliver
+			remitente2 = Usuario.where(id: plan.instructor_id).take
+			ActionCorreo.envio_adecuacion(remitente2, notific2.mensaje,1,linkI,@document).deliver
+			remitente = Usuario.where(id: uentidad.usuario_id).take
+			ActionCorreo.envio_adecuacion(remitente, notific3.mensaje,0,linkE,@document).deliver
 
 			flash[:success]="La adecuación se ha envíado a consejo de escuela"
 		elsif (session[:entidad_id] >= 14 && session[:entidad_id] <= 17)
@@ -3626,6 +3622,7 @@ end
 			cambio_est.save
 			cambio_est.fecha = Time.now 
 			plan= Planformacion.find(session[:plan_id])
+			#Carga de Notificaciones y Correos
 			notific = Notificacion.new
 	        notific.instructor_id = plan.instructor_id
 	        notific.tutor_id = plan.tutor_id
@@ -3663,6 +3660,7 @@ end
 			remitente = Usuario.where(id: uentidad.usuario_id).take
 			ActionCorreo.envio_adecuacion(remitente, notific3.mensaje,0,linkE,@document).deliver
 			ActionCorreo.envio_adecuacion("consejofacultadcienciasucv@gmail.com", notific3.mensaje,0, linkE,@document).deliver
+			#\Carga de Notificaciones y Correos
 
 			flash[:success]="La adecuación se ha envíado a consejo de facultad"
 		elsif (session[:entidad_id] == 13)
@@ -3703,6 +3701,7 @@ end
 				@document.actual = 0
 				@document.save
 				flash[:info]="La adecuación ha sido rechazada por consejo de facultad"
+				#Carga de Notificaciones y Correos
 				notific = Notificacion.new
 		        notific.instructor_id = plan.instructor_id
 		        notific.tutor_id = plan.tutor_id
@@ -3725,12 +3724,14 @@ end
 				ActionCorreo.envio_adecuacion(remitente3, notific.mensaje,2,linkT,@document).deliver		##CORREO AL TUTOR
 				remitente2 = Usuario.where(id: plan.instructor_id).take
 				ActionCorreo.envio_adecuacion(remitente2, notific2.mensaje,1,linkI,@document).deliver		##CORREO AL INSTRUCTOR
+				#\Carga de Notificaciones y Correos
 			elsif bool_observaciones == 1 
 				@document = Respaldo.where(adecuacion_id: session[:adecuacion_id], informe_id: nil, actual: 1).take
 				@document.estatus = "Aprobado por Consejo de Facultad con Observaciones"
 				@document.actual = 0
 				@document.save
 				flash[:info]="La adecuación ha sido aprobada con observaciones por consejo de facultad"
+				#Carga de Notificaciones y Correos
 				notific = Notificacion.new
 		        notific.instructor_id = plan.instructor_id
 		        notific.tutor_id = plan.tutor_id
@@ -3753,12 +3754,14 @@ end
 				ActionCorreo.envio_adecuacion(remitente3, notific.mensaje,2,linkT,@document).deliver		##CORREO AL TUTOR
 				remitente2 = Usuario.where(id: plan.instructor_id).take
 				ActionCorreo.envio_adecuacion(remitente2, notific2.mensaje,1,linkI,@document).deliver		##CORREO AL INSTRUCTOR
+				#\Carga de Notificaciones y Correos
 			else
 				@document = Respaldo.where(adecuacion_id: session[:adecuacion_id], informe_id: nil, actual: 1).take
 				@document.estatus = "Aprobado por Consejo de Facultad"
 				@document.actual = 0
 				@document.save
 				flash[:info]="La adecuación ha sido aprobado por consejo de facultad"
+				#Carga de Notificaciones y Correos
 				notific = Notificacion.new
 		        notific.instructor_id = plan.instructor_id
 		        notific.tutor_id = plan.tutor_id
@@ -3781,6 +3784,7 @@ end
 				ActionCorreo.envio_adecuacion(remitente3, notific.mensaje,2,linkT,@document).deliver		##CORREO AL TUTOR
 				remitente2 = Usuario.where(id: plan.instructor_id).take
 				ActionCorreo.envio_adecuacion(remitente2, notific2.mensaje,1,linkI,@document).deliver		##CORREO AL INSTRUCTOR
+				#\Carga de Notificaciones y Correos
 			end
 			adac = AdecuacionActividad.where(adecuacion_id: @adecuacion_id).all
 			adac.each do |adaa|

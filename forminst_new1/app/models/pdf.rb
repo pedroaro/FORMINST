@@ -16,7 +16,7 @@ class Pdf
 		extension = []
 		culminacion = []
 		if !actividades.blank?
-			puts "entroooo"
+			puts "Generando PDF.........."
 			actividades.each do |actividadAde|
 				if actividadAde.tipo_actividad_id == 9
 					if actividadAde.actividad.blank?
@@ -1383,7 +1383,7 @@ class Pdf
 		extension = []
 
 		if !actividades.blank?
-			puts "entroooo"
+			puts "Generando PDF.........."
 			actividades.each do |actividadAde|
 				if actividadAde.tipo_actividad_id == 9
 					if actividadAde.actividad.blank?
@@ -1456,8 +1456,6 @@ class Pdf
 				res_dctsc.push(resultado)
 			end
 		end
-
-		puts "PDFFF"
 
 		# se invocan la bibliotecas
 		require "prawn"

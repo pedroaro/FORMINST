@@ -32,259 +32,182 @@ class InformesController < ApplicationController
           @actividadesaotrejec = []
           @fecha_inicio1 = nil
           @fecha_fin1 = nil
-          if params[:informe_id].to_i == 1
-            @nombre_informe = "PRIMER SEMESTRAL"
-            @tipo_informe=1 
-            @numero_informe=1
-            @actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 1).all
+          numero_informe = params[:informe_id].to_i
+          if numero_informe == 1 || numero_informe == 2 || numero_informe == 4 || numero_informe == 5
+            # Si el informe es alguno semestral
+            if(numero_informe == 1)
+              @nombre_informe = "PRIMER SEMESTRAL"
+              @tipo_informe=1 
+              @numero_informe=1
+              @actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 1).all
+            elsif(numero_informe == 2)
+              @nombre_informe = "SEGUNDO SEMESTRAL"
+              @tipo_informe=2
+              @numero_informe=2
+              @actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 2).all
+            elsif(numero_informe == 4)
+              @nombre_informe = "TERCER SEMESTRAL"
+              @tipo_informe=4
+              @numero_informe=4
+              @actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 3).all
+            elsif(numero_informe == 5)
+              @nombre_informe = "CUARTO SEMESTRAL"
+              @tipo_informe=5
+              @numero_informe=5
+              @actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 4).all
+            end
             @actividadesa.each do |actade| 
               @act= Actividad.find(actade.actividad_id)
               tipo= @act.tipo_actividad_id
               if tipo==1
                 @actividadesadoc.push(@act)
-              else []
-                if tipo==2
-                  @actividadesainv.push(@act)
-                else
-                  if tipo==3
-                    @actividadesaext.push(@act)
-                  else
-                    if tipo==4
-                      @actividadesafor.push(@act)
-                    else
-                      if tipo==5
-                        @actividadesaotr.push(@act)
-                      end
-                    end
-                  end
+              elsif tipo==2
+                @actividadesainv.push(@act)
+              elsif tipo==3
+                @actividadesaext.push(@act)
+              elsif tipo==4
+                @actividadesafor.push(@act)
+              elsif tipo==5
+                @actividadesaotr.push(@act)
+              end
+            end
+          elsif params[:informe_id].to_i ==3
+            # Si el informe es el primer anual
+            puts "HELLLOOOOOO"
+            @nombre_informe = "PRIMER ANUAL"
+            @tipo_informe=3
+            @numero_informe=3
+            informe1 = Informe.where( planformacion_id: session[:plan_id], numero: 1).take
+            informe2 = Informe.where( planformacion_id: session[:plan_id], numero: 2).take
+            if informe1.blank? || informe2.blank?
+              flash[:danger] = "Debe crear primero el primer y segundo informe semestral "
+              redirect_to controller:"informes", action: "listar_informes"
+              return 0
+            end
+            @fecha_inicio1 = informe1.fecha_inicio
+            @fecha_fin1 = informe2.fecha_fin 
+            @actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: [1,2]).all
+            @actividadesa.each do |actade| 
+              @act= Actividad.find(actade.actividad_id)
+              begin
+                @actividadesi= InformeActividad.where(actividad_id: actade.actividad_id).take
+                @actinf= ActividadEjecutada.where(informe_actividad_id: @actividadesi.id).take
+              rescue => ex
+                @actinf= []
+              end
+              tipo= @act.tipo_actividad_id
+              if tipo==1
+                @actividadesadoc.push(@act)
+                @actividadesadocejec.push(@actinf)
+              elsif tipo==2
+                @actividadesainv.push(@act)
+                @actividadesainvejec.push(@actinf)
+              elsif tipo==3
+                @actividadesaext.push(@act)
+                @actividadesaextejec.push(@actinf)
+              elsif tipo==4
+                @actividadesafor.push(@act)
+                @actividadesaforejec.push(@actinf)
+              elsif tipo==5
+                @actividadesaotr.push(@act)
+                if(@actinf.blank?)
+                  @actividadesaotrejec.push([])
                 end
+              end
+            end
+          elsif params[:informe_id].to_i ==6
+            # Si el informe es el segundo anual
+            @nombre_informe = "SEGUNDO ANUAL"
+            @tipo_informe=6
+            @numero_informe=6
+            informe1 = Informe.where( planformacion_id: session[:plan_id], numero: 4).take
+            informe2 = Informe.where( planformacion_id: session[:plan_id], numero: 5).take
+            if informe1.blank? || informe2.blank?
+              flash[:danger] = "Debe crear primero el tercer y cuarto informe semestral "
+              redirect_to controller: "informes", action: "listar_informes"
+              return 0
+            end
+            @fecha_inicio1 = informe1.fecha_inicio
+            @fecha_fin1 = informe2.fecha_fin 
+            @actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: [3,4]).all
+            @actividadesa.each do |actade| 
+              @act= Actividad.find(actade.actividad_id)
+              tipo= @act.tipo_actividad_id
+              begin
+                @actividadesi= InformeActividad.where(actividad_id: actade.actividad_id).take
+                @actinf= ActividadEjecutada.where(informe_actividad_id: @actividadesi.id).take
+              rescue => ex
+                @actividadesi= []
+                @actinf= []
+              end
+              if tipo==1
+                @actividadesadoc.push(@act)
+                @actividadesadocejec.push(@actinf)
+              elsif tipo==2
+                @actividadesainv.push(@act)
+                @actividadesainvejec.push(@actinf)
+              elsif tipo==3
+                @actividadesaext.push(@act)
+                @actividadesaextejec.push(@actinf)
+              elsif tipo==4
+                @actividadesafor.push(@act)
+                @actividadesaforejec.push(@actinf)
+              elsif tipo==5
+                @actividadesaotr.push(@act)
+                if(@actinf.blank?)
+                  @actividadesaotrejec.push([])
+                end
+              end
+            end
+          elsif params[:informe_id].to_i ==7
+            # Si el informe es el final
+            @nombre_informe = "PRIMER FINAL"
+            @tipo_informe=7
+            @numero_informe=7
+            informe1 = Informe.where( planformacion_id: session[:plan_id], numero: 3).take
+            informe2 = Informe.where( planformacion_id: session[:plan_id], numero: 6).take
+            if informe1.blank? || informe2.blank?
+              flash[:danger] = "Debe crear primero el primer y segundo informe anual "
+              redirect_to controller: "informes", action: "listar_informes"
+              return 0
+            end
+            @fecha_inicio1 = informe1.fecha_inicio
+            @fecha_fin1 = informe2.fecha_fin 
+            puts @adecuacion.id
+            @actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: [1,2,3,4]).all
+            @actividadesa.each do |actade| 
+              @act= Actividad.find(actade.actividad_id)
+              tipo= @act.tipo_actividad_id
+              puts actade.actividad_id
+              begin
+                @actividadesi= InformeActividad.where(actividad_id: actade.actividad_id).take
+                @actinf= ActividadEjecutada.where(informe_actividad_id: @actividadesi.id).take
+              rescue => ex
+                @actividadesi= []
+                @actinf= []
+              end
+              if tipo==1
+                @actividadesadoc.push(@act)
+                @actividadesadocejec.push(@actinf)
+              elsif tipo==2
+                @actividadesainv.push(@act)
+                @actividadesainvejec.push(@actinf)
+              elsif tipo==3
+                @actividadesaext.push(@act)
+                @actividadesaextejec.push(@actinf)
+              elsif tipo==4
+                @actividadesafor.push(@act)
+                @actividadesaforejec.push(@actinf)
+              elsif tipo==5
+                @actividadesaotr.push(@act)
+                @actividadesaotrejec.push(@actinf)
+              elsif tipo==7
+                @actividadesaobli.push(@act)
               end
             end
           else
-            if params[:informe_id].to_i ==2
-              @nombre_informe = "SEGUNDO SEMESTRAL"
-              @tipo_informe=2
-              @numero_informe=2
-              @actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 2).all
-              @actividadesa.each do |actade| 
-                @act= Actividad.find(actade.actividad_id)
-                tipo= @act.tipo_actividad_id
-                if tipo==1
-                  @actividadesadoc.push(@act)
-                else
-                  if tipo==2
-                    @actividadesainv.push(@act)
-                  else
-                    if tipo==3
-                      @actividadesaext.push(@act)
-                    else
-                      if tipo==4
-                        @actividadesafor.push(@act)
-                      else
-                        if tipo==5
-                          @actividadesaotr.push(@act)
-                        end
-                      end
-                    end
-                  end
-                end
-              end
-            else
-              if params[:informe_id].to_i ==3
-                @nombre_informe = "PRIMER ANUAL"
-                @tipo_informe=3
-                @numero_informe=3
-                informe1 = Informe.where( planformacion_id: session[:plan_id], numero: 1).take
-		      	    informe2 = Informe.where( planformacion_id: session[:plan_id], numero: 2).take
-                if informe1.blank? || informe2.blank?
-                  flash[:danger] = "Debe crear primero el primer y segundo informe semestral "
-                  redirect_to controller:"informes", action: "listar_informes"
-                  return 0
-                end
-                @fecha_inicio1 = informe1.fecha_inicio
-                @fecha_fin1 = informe2.fecha_fin 
-                @actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: [1,2]).all
-                @actividadesa.each do |actade| 
-                  @act= Actividad.find(actade.actividad_id)
-                  begin
-                    @actividadesi= InformeActividad.where(actividad_id: actade.actividad_id).take
-                    @actinf= ActividadEjecutada.where(informe_actividad_id: @actividadesi.id).take
-                  rescue => ex
-                    @actinf= []
-                  end
-                  tipo= @act.tipo_actividad_id
-                  if tipo==1
-                    @actividadesadoc.push(@act)
-                    @actividadesadocejec.push(@actinf)
-                  elsif tipo==2
-                    @actividadesainv.push(@act)
-                    @actividadesainvejec.push(@actinf)
-                  elsif tipo==3
-                    @actividadesaext.push(@act)
-                    @actividadesaextejec.push(@actinf)
-                  elsif tipo==4
-                    @actividadesafor.push(@act)
-                    @actividadesaforejec.push(@actinf)
-                  elsif tipo==5
-                    @actividadesaotr.push(@act)
-                    @actividadesaotrejec.push(@actinf)
-                  end
-                end
-              else
-                if params[:informe_id].to_i ==4
-                  @nombre_informe = "TERCER SEMESTRAL"
-                  @tipo_informe=4
-                  @numero_informe=4
-                  @actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 3).all
-                  @actividadesa.each do |actade| 
-                    @act= Actividad.find(actade.actividad_id)
-                    tipo= @act.tipo_actividad_id
-                    if tipo==1
-                      @actividadesadoc.push(@act)
-                    else
-                      if tipo==2
-                        @actividadesainv.push(@act)
-                      else
-                        if tipo==3
-                          @actividadesaext.push(@act)
-                        else
-                          if tipo==4
-                            @actividadesafor.push(@act)
-                          else
-                            if tipo==5
-                              @actividadesaotr.push(@act)
-                            end
-                          end
-                        end
-                      end
-                    end
-                  end
-                else
-                  if params[:informe_id].to_i ==5
-                    @nombre_informe = "CUARTO SEMESTRAL"
-                    @tipo_informe=5
-                    @numero_informe=5
-                    @actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 4).all
-                    @actividadesa.each do |actade| 
-                      @act= Actividad.find(actade.actividad_id)
-                      tipo= @act.tipo_actividad_id
-                      if tipo==1
-                        @actividadesadoc.push(@act)
-                      else
-                        if tipo==2
-                          @actividadesainv.push(@act)
-                        else
-                          if tipo==3
-                            @actividadesaext.push(@act)
-                          else
-                            if tipo==4
-                              @actividadesafor.push(@act)
-                            else
-                              if tipo==5
-                                @actividadesaotr.push(@act)
-                              end
-                            end
-                          end
-                        end
-                      end
-                    end
-                  else
-                    if params[:informe_id].to_i ==6
-                      @nombre_informe = "SEGUNDO ANUAL"
-                      @tipo_informe=6
-                      @numero_informe=6
-                      informe1 = Informe.where( planformacion_id: session[:plan_id], numero: 4).take
-                      informe2 = Informe.where( planformacion_id: session[:plan_id], numero: 5).take
-                      if informe1.blank? || informe2.blank?
-                        flash[:danger] = "Debe crear primero el tercer y cuarto informe semestral "
-                        redirect_to controller: "informes", action: "listar_informes"
-                        return 0
-                      end
-                      @fecha_inicio1 = informe1.fecha_inicio
-                      @fecha_fin1 = informe2.fecha_fin 
-                      @actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: [3,4]).all
-                      @actividadesa.each do |actade| 
-                        @act= Actividad.find(actade.actividad_id)
-                        tipo= @act.tipo_actividad_id
-                        begin
-                          @actividadesi= InformeActividad.where(actividad_id: actade.actividad_id).take
-                          @actinf= ActividadEjecutada.where(informe_actividad_id: @actividadesi.id).take
-                        rescue => ex
-                          @actividadesi= []
-                          @actinf= []
-                        end
-                        if tipo==1
-                          @actividadesadoc.push(@act)
-                          @actividadesadocejec.push(@actinf)
-                        elsif tipo==2
-                          @actividadesainv.push(@act)
-                          @actividadesainvejec.push(@actinf)
-                        elsif tipo==3
-                          @actividadesaext.push(@act)
-                          @actividadesaextejec.push(@actinf)
-                        elsif tipo==4
-                          @actividadesafor.push(@act)
-                          @actividadesaforejec.push(@actinf)
-                        elsif tipo==5
-                          @actividadesaotr.push(@act)
-                          @actividadesaotrejec.push(@actinf)
-                        end
-                      end
-                    else
-                      if params[:informe_id].to_i ==7
-                        @nombre_informe = "PRIMER FINAL"
-                        @tipo_informe=7
-                        @numero_informe=7
-                       	informe1 = Informe.where( planformacion_id: session[:plan_id], numero: 3).take
-        				      	informe2 = Informe.where( planformacion_id: session[:plan_id], numero: 6).take
-        				        if informe1.blank? || informe2.blank?
-        				      		flash[:danger] = "Debe crear primero el primer y segundo informe anual "
-                          redirect_to controller: "informes", action: "listar_informes"
-                          return 0
-        		      		  end
-          					    @fecha_inicio1 = informe1.fecha_inicio
-                        @fecha_fin1 = informe2.fecha_fin 
-                        puts @adecuacion.id
-                        @actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: [1,2,3,4]).all
-                        @actividadesa.each do |actade| 
-                          @act= Actividad.find(actade.actividad_id)
-                          tipo= @act.tipo_actividad_id
-                          puts actade.actividad_id
-                          begin
-                            @actividadesi= InformeActividad.where(actividad_id: actade.actividad_id).take
-                            @actinf= ActividadEjecutada.where(informe_actividad_id: @actividadesi.id).take
-                          rescue => ex
-                            @actividadesi= []
-                            @actinf= []
-                          end
-                          if tipo==1
-                            @actividadesadoc.push(@act)
-                            @actividadesadocejec.push(@actinf)
-                          elsif tipo==2
-                            @actividadesainv.push(@act)
-                            @actividadesainvejec.push(@actinf)
-                          elsif tipo==3
-                            @actividadesaext.push(@act)
-                            @actividadesaextejec.push(@actinf)
-                          elsif tipo==4
-                            @actividadesafor.push(@act)
-                            @actividadesaforejec.push(@actinf)
-                          elsif tipo==5
-                            @actividadesaotr.push(@act)
-                            @actividadesaotrejec.push(@actinf)
-                          elsif tipo==7
-                            @actividadesaobli.push(@act)
-                          end
-                        end
-                      else
-                        flash[:danger]= "Ya completo el numero de informes, no puede crear más"
-                        redirect_to controller:"informes", action: "listar_informes"
-                      end
-                    end
-                  end
-                end
-              end
-            end
+            flash[:danger]= "Ya completo el numero de informes, no puede crear más"
+            redirect_to controller:"informes", action: "listar_informes"
           end
 
           @mes= ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre']
@@ -2802,7 +2725,7 @@ def generar_pdf() # es función permite generar el documento pdf de la adecuaci�
       @nombre = session[:nombre_usuario]
       @planformacion = session[:plan_id]
       @instructorName = session[:instructorName]
-      @informes = Informe.where(planformacion_id: @planformacion)
+      @informes = Informe.where(planformacion_id: @planformacion).order(fecha_modificacion: :desc)
       @informe = Informe.where(planformacion_id: @planformacion).take
       @status = []
 
