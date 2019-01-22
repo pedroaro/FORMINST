@@ -1,7 +1,9 @@
 class IniciotutorController < ApplicationController
-	layout 'ly_inicio_tutor'
+	include ForminstHelper
+	layout :resolve_layout
 
 	def index
+
 		session[:tutor]
 		if session[:usuario_id] && session[:tutor]
 			session[:adecuacion_id] = nil
@@ -42,6 +44,7 @@ class IniciotutorController < ApplicationController
 	end
 
 	def planformacions
+
 		if session[:usuario_id] && session[:tutor]
 			session[:adecuacion_id] = nil
 			@persona = Persona.where(usuario_id: session[:usuario_id]).take
@@ -2140,7 +2143,7 @@ class IniciotutorController < ApplicationController
 	              filename: @document.filename)
   	end
 
-	def borrar_notificaciones #mas obs de actividades del informe
+	def borrar_notificaciones #
 		if session[:usuario_id] && session[:tutor]
 			@noti= params[:noti]
     		notaeliminar = Notificacion.where(id: @noti ).take
@@ -2155,7 +2158,7 @@ class IniciotutorController < ApplicationController
 		end
 	end
 
-	def borrar_notificaciones1 #mas obs de actividades del informe
+	def borrar_notificaciones1 #
 		if session[:usuario_id] && session[:tutor]
 			@noti= params[:noti]
     		notaeliminar = Notificacion.where(id: @noti ).take
@@ -2170,7 +2173,8 @@ class IniciotutorController < ApplicationController
 		end
 	end
 
-	def notificaciones #mas obs de actividades del informe
+	def notificaciones #Ver todas las notificaciones
+
 		if session[:usuario_id] && session[:tutor]
     		@planformacions = Planformacion.where(tutor_id: session[:usuario_id])
     		@notificaciones1= []

@@ -1,6 +1,7 @@
 class InformesController < ApplicationController
-  layout 'ly_inicio_tutor'
-  
+  include ForminstHelper
+  layout :resolve_layout
+    
   def ver_crear_informe
     @ejecutada = 'ejecutada'
     @observacion = 'observacion'

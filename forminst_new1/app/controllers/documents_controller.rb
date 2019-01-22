@@ -1,5 +1,6 @@
 class DocumentsController < ApplicationController
-  layout 'ly_inicio_tutor'
+  include ForminstHelper
+	layout :resolve_layout
   before_action :set_document, only: [:show, :edit, :update, :destroy]
 
   # GET /documents

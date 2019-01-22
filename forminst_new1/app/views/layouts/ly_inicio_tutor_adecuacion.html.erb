@@ -23,19 +23,43 @@
 
 <div class = 'row'>
   <div class="col-xs-12 col-md-12">
-			<ul class="nav nav-tabs">
+      <ul class="nav nav-tabs">
 				<li><%= link_to "Inicio", {controller: "iniciotutor", action: "index"}, :class => ('active' if (controller_name== "iniciotutor") &&
-					(action_name== "index")
-					) %>
+				(action_name== "index")
+				) %>
 				<li><%= link_to "Plan de Formación", {controller: "iniciotutor", action: "planformacions"}, :class => ('active' if (controller_name== "iniciotutor") &&
-				(action_name== "planformacions")
+				(action_name== "ver_detalles_adecuacion") ||
+				(action_name== "detalles_adecuacion2") ||
+				(action_name== "detalles_adecuacion3") ||
+				(action_name== "detalles_adecuacion4") ||
+				(action_name== "detalles_adecuacion5") ||
+				(action_name== "detalles_adecuacion6") ||
+				(action_name== "detalles_adecuacion7") ||
+				(action_name== "vista_previa") ||
+				(action_name== "ver_respaldos") ||
+				(action_name== "mas_observaciones3") 
 				) %></li>
-				<li><%= link_to "Notificaciones", {controller: "iniciotutor", action: "notificaciones"}, :class => ('active' if (controller_name== "iniciotutor") &&
-				(action_name== "notificaciones")
-				) %></li>
-				<li><%= link_to "Cerrar Sesión", {controller: "iniciotutor", action: "logout"}, :class => ('active' if (controller_name== "iniciotutor") &&
-				(action_name== "logout")
-				) %></li>
+
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Informes <span class="caret"></span></a>
+            <ul class="dropdown-menu nav" role="menu">
+              <li></li>
+                            
+              <%if @cpBloquear%>
+                <li><a href="#" style="color:gray">Crear Informe</a></li>
+              <%else%>
+              <li><a href="#" data-toggle="modal" data-target="#selectInforme">
+                Crear Informe
+              </a></li>
+              <%end%>
+
+              <li><%= link_to 'Listar Informes', :controller => 'informes', :action => 'listar_informes' %></li>
+            </ul>
+				</li>
+				<li><%= link_to "Prórroga", {controller: "iniciotutor", action: "prorroga"}, :class => ('active' if (controller_name== "iniciotutor") &&
+				(action_name== "prorroga")
+				) %>
+        <li><a href="../iniciotutor/logout">Cerrar Sesión</a></li>
       </ul>
   </div>
 </div>

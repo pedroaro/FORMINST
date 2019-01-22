@@ -21,25 +21,6 @@
 	</div>
 <br>
 
-<div class = 'row'>
-  <div class="col-xs-12 col-md-12">
-			<ul class="nav nav-tabs">
-				<li><%= link_to "Inicio", {controller: "iniciotutor", action: "index"}, :class => ('active' if (controller_name== "iniciotutor") &&
-					(action_name== "index")
-					) %>
-				<li><%= link_to "Plan de Formación", {controller: "iniciotutor", action: "planformacions"}, :class => ('active' if (controller_name== "iniciotutor") &&
-				(action_name== "planformacions")
-				) %></li>
-				<li><%= link_to "Notificaciones", {controller: "iniciotutor", action: "notificaciones"}, :class => ('active' if (controller_name== "iniciotutor") &&
-				(action_name== "notificaciones")
-				) %></li>
-				<li><%= link_to "Cerrar Sesión", {controller: "iniciotutor", action: "logout"}, :class => ('active' if (controller_name== "iniciotutor") &&
-				(action_name== "logout")
-				) %></li>
-      </ul>
-  </div>
-</div>
-
 <div id="wrap">
 
 	<% flash.each do |name,value| %>
