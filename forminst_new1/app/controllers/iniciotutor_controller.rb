@@ -380,28 +380,20 @@ class IniciotutorController < ApplicationController
 				tipo= @act.tipo_actividad_id
 				if tipo==1
 					@actividadesadoc.push(@act)
-				else
-					if tipo==2
-						@actividadesainv.push(@act)
-					else
-						if tipo==3
-							@actividadesaext.push(@act)
-						else
-							if tipo==4
-								@actividadesafor.push(@act)
-							else
-								if tipo==5
-									@actividadesaotr.push(@act)
-								elsif tipo==8
-									@descripcion=@act.actividad
-									@descripcionId=@act.id
-								elsif tipo==9
-									@presentacion=@act.actividad
-									@presentacionId=@act.id
-								end
-							end
-						end
-					end
+				elsif tipo==2
+					@actividadesainv.push(@act)
+				elsif tipo==3
+					@actividadesaext.push(@act)
+				elsif tipo==4
+					@actividadesafor.push(@act)
+				elsif tipo==5
+					@actividadesaotr.push(@act)
+				elsif tipo==8
+					@descripcion=@act.actividad
+					@descripcionId=@act.id
+				elsif tipo==9
+					@presentacion=@act.actividad
+					@presentacionId=@act.id
 				end
 			end
 			@actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 0).all
@@ -492,23 +484,16 @@ class IniciotutorController < ApplicationController
 				tipo= @act.tipo_actividad_id
 				if tipo==1
 					@actividadesadoc.push(@act)
-				else
-					if tipo==2
-						@actividadesainv.push(@act)
-					else
-						if tipo==3
-							@actividadesaext.push(@act)
-						else
-							if tipo==4
-								@actividadesafor.push(@act)
-							else
-								if tipo==5
-									@actividadesaotr.push(@act)
-								end
-							end
-						end
-					end
+				elsif tipo==2
+					@actividadesainv.push(@act)
+				elsif tipo==3
+					@actividadesaext.push(@act)
+				elsif tipo==4
+					@actividadesafor.push(@act)
+				elsif tipo==5
+					@actividadesaotr.push(@act)
 				end
+
 			end
 			@actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 1).all
 			@actividadesa.each do |actade| 
@@ -583,22 +568,14 @@ class IniciotutorController < ApplicationController
 				tipo= @act.tipo_actividad_id
 				if tipo==1
 					@actividadesadoc.push(@act)
-				else
-					if tipo==2
-						@actividadesainv.push(@act)
-					else
-						if tipo==3
-							@actividadesaext.push(@act)
-						else
-							if tipo==4
-								@actividadesafor.push(@act)
-							else
-								if tipo==5
-									@actividadesaotr.push(@act)
-								end
-							end
-						end
-					end
+				elsif tipo==2
+					@actividadesainv.push(@act)
+				elsif tipo==3
+					@actividadesaext.push(@act)
+				elsif tipo==4
+					@actividadesafor.push(@act)
+				elsif tipo==5
+					@actividadesaotr.push(@act)
 				end
 			end
 			@actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 2).all
@@ -682,26 +659,18 @@ class IniciotutorController < ApplicationController
 				if tipo==1
 					@actividadesadoc.push(@act)
 					a = true
-				else
-					if tipo==2
-						@actividadesainv.push(@act)
-						b = true
-					else
-						if tipo==3
-							@actividadesaext.push(@act)
-							c = true
-						else
-							if tipo==4
-								@actividadesafor.push(@act)
-								d = true
-							else
-								if tipo==5
-									@actividadesaotr.push(@act)
-									e = true
-								end
-							end
-						end
-					end
+				elsif tipo==2
+					@actividadesainv.push(@act)
+					b = true
+				elsif tipo==3
+					@actividadesaext.push(@act)
+					c = true
+				elsif tipo==4
+					@actividadesafor.push(@act)
+					d = true
+				elsif tipo==5
+					@actividadesaotr.push(@act)
+					e = true
 				end
 			end
 			@actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 3).all
@@ -783,22 +752,14 @@ class IniciotutorController < ApplicationController
 				tipo= @act.tipo_actividad_id
 				if tipo==1
 					@actividadesadoc.push(@act)
-				else
-					if tipo==2
-						@actividadesainv.push(@act)
-					else
-						if tipo==3
-							@actividadesaext.push(@act)
-						else
-							if tipo==4
-								@actividadesafor.push(@act)
-							else
-								if tipo==5
-									@actividadesaotr.push(@act)
-								end
-							end
-						end
-					end
+				elsif tipo==2
+					@actividadesainv.push(@act)
+				elsif tipo==3
+					@actividadesaext.push(@act)
+				elsif tipo==4
+					@actividadesafor.push(@act)
+				elsif tipo==5
+					@actividadesaotr.push(@act)
 				end
 			end
 			@actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 4).all
@@ -877,22 +838,14 @@ class IniciotutorController < ApplicationController
 				tipo= @act.tipo_actividad_id
 				if tipo==1
 					@actividadesadoc.push(@act)
-				else
-					if tipo==2
-						@actividadesainv.push(@act)
-					else
-						if tipo==3
-							@actividadesaext.push(@act)
-						else
-							if tipo==4
-								@actividadesafor.push(@act)
-							else
-								if tipo==5
-									@actividadesaotr.push(@act)
-								end
-							end
-						end
-					end
+				elsif tipo==2
+					@actividadesainv.push(@act)
+				elsif tipo==3
+					@actividadesaext.push(@act)
+				elsif tipo==4
+					@actividadesafor.push(@act)
+				elsif tipo==5
+					@actividadesaotr.push(@act)
 				end
 			end
 			@actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 5).all
@@ -926,6 +879,18 @@ class IniciotutorController < ApplicationController
 		else
 			redirect_to controller:"forminst", action: "index"
 		end
+	end
+
+	def crear_actividad(tipo_id, descripcion, semestre, adecuacion_id)
+		cpActividad = Actividad.new
+		cpActividad.tipo_actividad_id = tipo_id
+		cpActividad.actividad = descripcion
+		cpActividad.save
+		cpActividadAdecuacion = AdecuacionActividad.new
+		cpActividadAdecuacion.adecuacion_id = adecuacion_id
+		cpActividadAdecuacion.actividad_id = cpActividad.id
+		cpActividadAdecuacion.semestre = semestre
+		cpActividadAdecuacion.save
 	end
 
 	def guardar_adecuacion
@@ -1004,28 +969,13 @@ class IniciotutorController < ApplicationController
 			if params[:primera_parte] == "si"
 				#Presentacion
 				if params[:presentacionId].blank?
-					cpActividad = Actividad.new
-					cpActividad.tipo_actividad_id = 9
-					cpActividad.actividad = params[:presentacion]
-					cpActividad.save
-					cpActividadAdecuacion = AdecuacionActividad.new
-					cpActividadAdecuacion.adecuacion_id = session[:adecuacion_id]
-					cpActividadAdecuacion.actividad_id = cpActividad.id
-					cpActividadAdecuacion.semestre = 0
-					cpActividadAdecuacion.save
+					puts "hello"
+					crear_actividad(9, params[:presentacion], 0, session[:adecuacion_id])
 				end
 
 				# Descripción del Perfil del Ganador del concurso
 				if params[:descripcionId].blank?
-					cpActividad = Actividad.new
-					cpActividad.tipo_actividad_id = 8
-					cpActividad.actividad = params[:descripcion]
-					cpActividad.save
-					cpActividadAdecuacion = AdecuacionActividad.new
-					cpActividadAdecuacion.adecuacion_id = session[:adecuacion_id]
-					cpActividadAdecuacion.actividad_id = cpActividad.id
-					cpActividadAdecuacion.semestre = 0
-					cpActividadAdecuacion.save
+					crear_actividad(8, params[:descripcion], 0, session[:adecuacion_id])
 				end
 
 
@@ -1392,15 +1342,15 @@ class IniciotutorController < ApplicationController
 				tipo= @act.tipo_actividad_id
 				if tipo==1
 					@actividades0doc.push(@act)
-					elsif tipo==2
+				elsif tipo==2
 					@actividades0inv.push(@act)
-					elsif tipo==3
+				elsif tipo==3
 					@actividades0ext.push(@act)
-					elsif tipo==4
+				elsif tipo==4
 					@actividades0for.push(@act)
-					elsif tipo==5
+				elsif tipo==5
 					@actividades0otr.push(@act)
-					end
+				end
 			end
 
 			@actividades1doc= []
@@ -1414,22 +1364,14 @@ class IniciotutorController < ApplicationController
 				tipo= @act.tipo_actividad_id
 				if tipo==1
 					@actividades1doc.push(@act)
-				else
-					if tipo==2
-						@actividades1inv.push(@act)
-					else
-						if tipo==3
-							@actividades1ext.push(@act)
-						else
-							if tipo==4
-								@actividades1for.push(@act)
-							else
-								if tipo==5
-									@actividades1otr.push(@act)
-								end
-							end
-						end
-					end
+				elsif tipo==2
+					@actividades1inv.push(@act)
+				elsif tipo==3
+					@actividades1ext.push(@act)
+				elsif tipo==4
+					@actividades1for.push(@act)
+				elsif tipo==5
+					@actividades1otr.push(@act)
 				end
 			end
 
@@ -1444,22 +1386,14 @@ class IniciotutorController < ApplicationController
 				tipo= @act.tipo_actividad_id
 				if tipo==1
 					@actividades2doc.push(@act)
-				else
-					if tipo==2
-						@actividades2inv.push(@act)
-					else
-						if tipo==3
-							@actividades2ext.push(@act)
-						else
-							if tipo==4
-								@actividades2for.push(@act)
-							else
-								if tipo==5
-									@actividades2otr.push(@act)
-								end
-							end
-						end
-					end
+				elsif tipo==2
+					@actividades2inv.push(@act)
+				elsif tipo==3
+					@actividades2ext.push(@act)
+				elsif tipo==4
+					@actividades2for.push(@act)
+				elsif tipo==5
+					@actividades2otr.push(@act)
 				end
 			end
 
@@ -1474,22 +1408,14 @@ class IniciotutorController < ApplicationController
 				tipo= @act.tipo_actividad_id
 				if tipo==1
 					@actividades3doc.push(@act)
-				else
-					if tipo==2
-						@actividades3inv.push(@act)
-					else
-						if tipo==3
-							@actividades3ext.push(@act)
-						else
-							if tipo==4
-								@actividades3for.push(@act)
-							else
-								if tipo==5
-									@actividades3otr.push(@act)
-								end
-							end
-						end
-					end
+				elsif tipo==2
+					@actividades3inv.push(@act)
+				elsif tipo==3
+					@actividades3ext.push(@act)
+				elsif tipo==4
+					@actividades3for.push(@act)
+				elsif tipo==5
+					@actividades3otr.push(@act)
 				end
 			end
 
@@ -1504,22 +1430,14 @@ class IniciotutorController < ApplicationController
 				tipo= @act.tipo_actividad_id
 				if tipo==1
 					@actividades4doc.push(@act)
-				else
-					if tipo==2
-						@actividades4inv.push(@act)
-					else
-						if tipo==3
-							@actividades4ext.push(@act)
-						else
-							if tipo==4
-								@actividades4for.push(@act)
-							else
-								if tipo==5
-									@actividades4otr.push(@act)
-								end
-							end
-						end
-					end
+				elsif tipo==2
+					@actividades4inv.push(@act)
+				elsif tipo==3
+					@actividades4ext.push(@act)
+				elsif tipo==4
+					@actividades4for.push(@act)
+				elsif tipo==5
+					@actividades4otr.push(@act)
 				end
 			end
 
@@ -1537,24 +1455,18 @@ class IniciotutorController < ApplicationController
 					puts "soy una actividad de docencia"
 					puts @act.actividad
 					@actividades5doc.push(@act)
-				else
-					if tipo==2
-						puts "soy una actividad de investigacion"
-						puts @act.actividad
-						@actividades5inv.push(@act)
-					else
-						if tipo==3
-							puts "soy una actividad de extension"
-							puts @act.actividad
-							@actividades5ext.push(@act)
-						else
-							if tipo==4
-								puts "soy una actividad de formacion"
-								puts @act.actividad
-								@actividades5for.push(@act)
-							end
-						end
-					end
+				elsif tipo==2
+					puts "soy una actividad de investigacion"
+					puts @act.actividad
+					@actividades5inv.push(@act)
+				elsif tipo==3
+					puts "soy una actividad de extension"
+					puts @act.actividad
+					@actividades5ext.push(@act)
+				elsif tipo==4
+					puts "soy una actividad de formacion"
+					puts @act.actividad
+					@actividades5for.push(@act)
 				end
 			end
 		else 
@@ -1908,123 +1820,85 @@ class IniciotutorController < ApplicationController
 
     @actividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 1).all
     @actividadesa.each do |actade| 
-      @act= Actividad.find(actade.actividad_id)
-      tipo= @act.tipo_actividad_id
-      if tipo==1
-        @pactv_docencia.push(@act)
-      else
-        if tipo==2
-          @pactv_investigacion.push(@act)
-        else
-          if tipo==3
-            @pactv_extension.push(@act)
-          else
-            if tipo==4
-              @pactv_formacion.push(@act)
-            else
-              if tipo==5
-                @pactv_otras.push(@act)
-              end
-            end
-          end
-        end
-      end
+		@act= Actividad.find(actade.actividad_id)
+		tipo= @act.tipo_actividad_id
+		if tipo==1
+			@pactv_docencia.push(@act)
+		elsif tipo==2
+			@pactv_investigacion.push(@act)
+		elsif tipo==3
+			@pactv_extension.push(@act)
+		elsif tipo==4
+			@pactv_formacion.push(@act)
+		elsif tipo==5
+			@pactv_otras.push(@act)
+		end
     end
 
     @sactividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 2).all
     @sactividadesa.each do |actade| 
-      @act= Actividad.find(actade.actividad_id)
-      tipo= @act.tipo_actividad_id
-      if tipo==1
-        @sactv_docencia.push(@act)
-      else
-        if tipo==2
-          @sactv_investigacion.push(@act)
-        else
-          if tipo==3
-            @sactv_extension.push(@act)
-          else
-            if tipo==4
-              @sactv_formacion.push(@act)
-            else
-              if tipo==5
-                @sactv_otras.push(@act)
-              end
-            end
-          end
-        end
-      end
+		@act= Actividad.find(actade.actividad_id)
+		tipo= @act.tipo_actividad_id
+		if tipo==1
+			@sactv_docencia.push(@act)
+		elsif tipo==2
+			@sactv_investigacion.push(@act)
+		elsif tipo==3
+			@sactv_extension.push(@act)
+		elsif tipo==4
+			@sactv_formacion.push(@act)
+		elsif tipo==5
+			@sactv_otras.push(@act)
+		end
     end
 
     @tactividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 3).all
     @tactividadesa.each do |actade| 
-      @act= Actividad.find(actade.actividad_id)
-      tipo= @act.tipo_actividad_id
-      if tipo==1
-        @tactv_docencia.push(@act)
-      else
-        if tipo==2
-          @tactv_investigacion.push(@act)
-        else
-          if tipo==3
-            @tactv_extension.push(@act)
-          else
-            if tipo==4
-              @tactv_formacion.push(@act)
-            else
-              if tipo==5
-                @tactv_otras.push(@act)
-              end
-            end
-          end
-        end
-      end
+		@act= Actividad.find(actade.actividad_id)
+		tipo= @act.tipo_actividad_id
+		if tipo==1
+			@tactv_docencia.push(@act)
+		elsif tipo==2
+			@tactv_investigacion.push(@act)
+		elsif tipo==3
+			@tactv_extension.push(@act)
+		elsif tipo==4
+			@tactv_formacion.push(@act)
+		elsif tipo==5
+			@tactv_otras.push(@act)
+		end
     end
 
     @cactividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 4).all
     @cactividadesa.each do |actade| 
-      @act= Actividad.find(actade.actividad_id)
-      tipo= @act.tipo_actividad_id
-      if tipo==1
-        @cactv_docencia.push(@act)
-      else
-        if tipo==2
-          @cactv_investigacion.push(@act)
-        else
-          if tipo==3
-            @cactv_extension.push(@act)
-          else
-            if tipo==4
-              @cactv_formacion.push(@act)
-            else
-              if tipo==5
-                @cactv_otras.push(@act)
-              end
-            end
-          end
-        end
-      end
+		@act= Actividad.find(actade.actividad_id)
+		tipo= @act.tipo_actividad_id
+		if tipo==1
+			@cactv_docencia.push(@act)
+		elsif tipo==2
+			@cactv_investigacion.push(@act)
+		elsif tipo==3
+			@cactv_extension.push(@act)
+		elsif tipo==4
+			@cactv_formacion.push(@act)
+		elsif tipo==5
+			@cactv_otras.push(@act)
+		end
     end
 
     @cactividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 5).all
     @cactividadesa.each do |actade| 
-      @act= Actividad.find(actade.actividad_id)
-      tipo= @act.tipo_actividad_id
-      if tipo==1
-        @dactv_docencia.push(@act)
-      else
-        if tipo==2
-          @dactv_investigacion.push(@act)
-        else
-          if tipo==3
-            @dactv_extension.push(@act)
-          else
-            if tipo==4
-              @dactv_formacion.push(@act)
-            end
-          end
-        end
-      end
+		@act= Actividad.find(actade.actividad_id)
+		tipo= @act.tipo_actividad_id
+		if tipo==1
+			@dactv_docencia.push(@act)
+		elsif tipo==2
+			@dactv_investigacion.push(@act)
+		elsif tipo==3
+			@dactv_extension.push(@act)
+		elsif tipo==4
+			@dactv_formacion.push(@act)
+		end
     end
     @documents = []
     @documents = Document.where(adecuacion_id: @adecuacion.id, informe_id: nil).all
@@ -2083,26 +1957,19 @@ class IniciotutorController < ApplicationController
 
 			
 			if (entidad.entidad_id  >= 7 && entidad.entidad_id  <= 12)
-			#comision investigacion		
-					@obs_inv = obs.observaciones  #Estatus enviado a comision de investigacion
-					
-			else
-				if (entidad.entidad_id  >= 14 && entidad.entidad_id  <= 17)
+				#comision investigacion		
+				@obs_inv = obs.observaciones  #Estatus enviado a comision de investigacion
+			elsif (entidad.entidad_id  >= 14 && entidad.entidad_id  <= 17)
 				#Consejo tecnico
-					@obs_consejoT = obs.observaciones
-				else
-					if (entidad.entidad_id  >= 1 && entidad.entidad_id  <= 6)
-					#Consejo de escuela
-						@obs_consejoE = obs.observaciones
-					else
-						if (entidad.entidad_id  == 13)
-						#Consejo de facultad
-							@obs_consejoF =  obs.observaciones
+				@obs_consejoT = obs.observaciones
+			elsif (entidad.entidad_id  >= 1 && entidad.entidad_id  <= 6)
+				#Consejo de escuela
+				@obs_consejoE = obs.observaciones
+			elsif (entidad.entidad_id  == 13)
+				#Consejo de facultad
+				@obs_consejoF =  obs.observaciones
+			end	
 
-						end	
-					end
-				end
-			end
 		end
 			
 	end
