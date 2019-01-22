@@ -118,75 +118,6 @@ class IniciotutorController < ApplicationController
 			redirect_to controller:"forminst", action: "index"
 		end
 	end
-	
-
-	def crear_adecuacion
-		if session[:usuario_id] && session[:tutor]
-			@planformacion = Planformacion.find(session[:plan_id])
-
-			@ade= Adecuacion.where(planformacion_id: @planformacion.id).take
-
-			if @ade == nil
-				@persona = Persona.where(usuario_id: session[:usuario_id]).take
-				@nombre = session[:nombre_usuario]
-				@planformacion = session[:plan_id]
-				@instructorName = session[:instructorName]
-							
-				if not @nombre
-					print "NO HAY USUARIO"
-				end
-			else
-				flash[:danger]= "No puede crear la adecuación porque ya posee una asociada para este plan de formación"
-				redirect_to controller:"iniciotutor", action: "ver_detalles_adecuacion"
-			end
-		else
-			redirect_to controller:"forminst", action: "index"
-		end
-	end
-	def crear_adecuacion_semestre2
-		if session[:usuario_id] && session[:tutor]
-			@persona = Persona.where(usuario_id: session[:usuario_id]).take
-			@nombre = session[:nombre_usuario]
-			@planformacion = session[:plan_id]
-			@instructorName = session[:instructorName]
-						
-			if not @nombre
-				print "NO HAY USUARIO"
-			end
-		else
-			redirect_to controller:"forminst", action: "index"
-		end
-	end
-
-	def crear_adecuacion_semestre3
-		if session[:usuario_id] && session[:tutor]
-			@persona = Persona.where(usuario_id: session[:usuario_id]).take
-			@nombre = session[:nombre_usuario]
-			@planformacion = session[:plan_id]
-			@instructorName = session[:instructorName]
-						
-			if not @nombre
-				print "NO HAY USUARIO"
-			end
-		else
-			redirect_to controller:"forminst", action: "index"
-		end
-	end
-
-	def crear_adecuacion_semestre4
-		if session[:usuario_id] && session[:tutor]
-			@persona = Persona.where(usuario_id: session[:usuario_id]).take
-			@nombre = session[:nombre_usuario]
-			@planformacion = session[:plan_id]
-			@instructorName = session[:instructorName]
-						
-			if not @nombre
-				print "NO HAY USUARIO"
-			end
-		else
-			redirect_to controller:"forminst", action: "index"
-		end
-	end
 
 	def ver_detalles_adecuacion
 		if session[:usuario_id] && session[:tutor]
@@ -200,11 +131,11 @@ class IniciotutorController < ApplicationController
 			end
 			@tutoresAnteriores = Instructortutor.where(instructor_id: session[:usuario_id], actual: 0)
 			@nombre = session[:nombre_usuario]
-			@planformacion = Planformacion.find(session[:plan_id])
+			@plan= Planformacion.find(session[:plan_id])
 
-			if !@planformacion.blank?
+			if !@plan.blank?
 				#Ver si el informe fue rachazado
-				cpInstructor = Usuario.find(@planformacion.instructor_id)
+				cpInstructor = Usuario.find(@plan.instructor_id)
 				if (cpInstructor.activo == false)
 					@cpBloquear = true
 				else
@@ -213,20 +144,10 @@ class IniciotutorController < ApplicationController
 				#fin
 			end
 
-			@inst = Persona.where(usuario_id: @planformacion.instructor_id).take
+			@inst = Persona.where(usuario_id: @plan.instructor_id).take
 			@instructorName = @inst.nombres.to_s.split.map(&:capitalize).join(' ') + " " + @inst.apellidos.to_s.split.map(&:capitalize).join(' ')
 			session[:instructorName] = @instructorName
 			@instructorName = session[:instructorName]
-			@modifique=false
-			@cant_delete= params[:cant_delete]
-			@cant_edit= params[:cant_edit]
-			@cant_doc= params[:cant_docencia]
-			@cant_obli= params[:cant_obligatoria]
-			@cant_inv= params[:cant_investigacion]
-			@cant_for= params[:cant_formacion]
-			@cant_ext= params[:cant_extension]
-			@cant_otr= params[:cant_otra]
-			@nombre = session[:nombre_usuario]
 			@instructorName = session[:instructorName]
 			@plan= Planformacion.find(session[:plan_id])
 			@userentidad= Usuarioentidad.where(usuario_id: @plan.instructor_id).take
@@ -255,307 +176,6 @@ class IniciotutorController < ApplicationController
 			end
 			@instructor= Persona.where(usuario_id: @plan.instructor_id).take
 
-			@actividadesadoc= []
-			@actividadesainv= []
-			@actividadesaext= []
-			@actividadesafor= []
-			@actividadesaotr= []
-			j=0
-			if params[:primera_parte] == "si"
-				#Presentacion
-				if params[:presentacionId].blank?
-					cpActividad = Actividad.new
-					cpActividad.tipo_actividad_id = 9
-					cpActividad.actividad = params[:presentacion]
-					cpActividad.save
-					cpActividadAdecuacion = AdecuacionActividad.new
-					cpActividadAdecuacion.adecuacion_id = session[:adecuacion_id]
-					cpActividadAdecuacion.actividad_id = cpActividad.id
-					cpActividadAdecuacion.semestre = 0
-					cpActividadAdecuacion.save
-				end
-
-				# Descripción del Perfil del Ganador del concurso
-				if params[:descripcionId].blank?
-					cpActividad = Actividad.new
-					cpActividad.tipo_actividad_id = 8
-					cpActividad.actividad = params[:descripcion]
-					cpActividad.save
-					cpActividadAdecuacion = AdecuacionActividad.new
-					cpActividadAdecuacion.adecuacion_id = session[:adecuacion_id]
-					cpActividadAdecuacion.actividad_id = cpActividad.id
-					cpActividadAdecuacion.semestre = 0
-					cpActividadAdecuacion.save
-				end
-
-
-				j=0
-				@modifique= true
-				i=:edit.to_s+j.to_s
-				@edit= params[i].to_s
-
-				if @edit == "presentacion" || @edit == "descripcion"
-					while j < params[:cant_edit].to_i
-						if @edit == "presentacion"
-							if !params[:presentacionId].blank?
-								cpActividad = Actividad.find(params[:presentacionId])
-								cpActividad.actividad = params[:presentacion]
-								cpActividad.save
-							end
-						elsif @edit == "descripcion"
-							if !params[:presentacionId].blank?
-								cpActividad = Actividad.find(params[:descripcionId])
-								cpActividad.actividad = params[:descripcion]
-								cpActividad.save
-							end
-						end
-						j+=1
-						i=:edit.to_s+j.to_s
-						@edit= params[i].to_s
-					end
-				end
-			end
-
-			if @cant_edit.to_i > 0
-				if params[:primera_parte] != "si"
-					j=0
-					@modifique= true
-					i=:edit.to_s+j.to_s
-					@edit= params[i].to_s
-				end
-
-				while j < @cant_edit.to_i
-					@modifique= true
-					i=:edit.to_s+j.to_s
-					@edit= params[i]
-					@act= Actividad.find(@edit)
-					tipo= @act.tipo_actividad_id
-
-					if tipo==1
-						m=:docencia.to_s+@edit.to_s
-						text= params[m]
-					elsif tipo==2
-						m=:investigacion.to_s+@edit.to_s
-						text= params[m]
-					elsif tipo==3
-						m=:extension.to_s+@edit.to_s
-						text= params[m]
-					elsif tipo==4
-						m=:formacion.to_s+@edit.to_s
-						text= params[m]
-					elsif tipo==5
-						m=:otra.to_s+@edit.to_s
-						text= params[m]
-					elsif tipo==7
-						m=:obligatoria.to_s+@edit.to_s
-						text= params[m]
-					end
-					@act.actividad= text
-					@adecuacion.fecha_modificacion = Time.now
-					@plan.fecha_modificacion = Time.now
-					@plan.save
-					@adecuacion.save
-					@act.save
-					j= j+1
-					i=:edit.to_s+j.to_s
-					@edit= params[i].to_i
-				end
-			end
-
-			if @cant_delete.to_i > 0
-				@modifique= true
-				j= 0
-				i=:delete.to_s+j.to_s;
-				@delete = params[i].to_i
-				while j < @cant_delete.to_i
-					AdecuacionActividad.where(actividad_id: @delete).destroy_all
-					Actividad.find(@delete).destroy
-					j = j + 1
-					i=:delete.to_s+j.to_s;
-					@delete = params[i]
-				end
-			end
-
-			j=0
-			i=:nuevadoc.to_s+j.to_s
-			@docencias = params[i]
-
-			while j < @cant_doc.to_i
-				@modifique= true
-				if  @docencias!=nil && @docencias!=""
-					a = Actividad.new
-					a.tipo_actividad_id = 1
-					a.actividad = @docencias
-					a.save
-					adac = AdecuacionActividad.new
-					adac.adecuacion_id = @adecuacion.id
-					adac.actividad_id = a.id
-					adac.semestre = semestre
-					@plan.fecha_modificacion = Time.now
-					@plan.save
-					@adecuacion.fecha_modificacion = Time.now
-					@adecuacion.save
-					adac.save
-				end
-				j = j + 1
-				i=:nuevadoc.to_s+j.to_s;
-				@docencias = params[i]
-			end
-
-			j=0
-			i=:nuevaobli.to_s+j.to_s
-			@obliga = params[i]
-
-			#obligatorias
-			while j < @cant_obli.to_i
-				@modifique= true
-				if  @obliga!=nil && @obliga!=""
-					a = Actividad.new
-					a.tipo_actividad_id = 7
-					a.actividad = @obliga
-					a.save
-					adac = AdecuacionActividad.new
-					adac.adecuacion_id = @adecuacion.id
-					adac.actividad_id = a.id
-					adac.semestre = semestre
-					@plan.fecha_modificacion = Time.now
-					@plan.save
-					@adecuacion.fecha_modificacion = Time.now
-					@adecuacion.save
-					adac.save
-				end
-				j = j + 1
-				i=:nuevaobli.to_s+j.to_s;
-				@obliga = params[i]
-			end
-
-			j=0
-			i=:nuevainv.to_s+j.to_s
-			@invest = params[i]
-
-			while j < @cant_inv.to_i
-				@modifique= true
-				if  @invest!=nil && @invest!=""
-					a = Actividad.new
-					a.tipo_actividad_id = 2
-					a.actividad = @invest
-					a.save
-					adac = AdecuacionActividad.new
-					adac.adecuacion_id = @adecuacion.id
-					adac.actividad_id = a.id
-					adac.semestre = semestre
-					@plan.fecha_modificacion = Time.now
-					@plan.save
-					@adecuacion.fecha_modificacion = Time.now
-					@adecuacion.save
-					adac.save
-				end
-				j = j + 1
-				i=:nuevainv.to_s+j.to_s;
-				@invest = params[i]
-			end
-
-			j=0
-			i=:nuevafor.to_s+j.to_s
-			@formacion = params[i]
-
-			while j < @cant_for.to_i
-				@modifique= true
-				if  @formacion!=nil && @formacion!=""
-					a = Actividad.new
-					a.tipo_actividad_id = 4
-					a.actividad = @formacion
-					a.save
-					adac = AdecuacionActividad.new
-					adac.adecuacion_id = @adecuacion.id
-					adac.actividad_id = a.id
-					adac.semestre = semestre
-					@plan.fecha_modificacion = Time.now
-					@plan.save
-					@adecuacion.fecha_modificacion = Time.now
-					@adecuacion.save
-					adac.save
-				end
-				j = j + 1
-				i=:nuevafor.to_s+j.to_s;
-				@formacion = params[i]
-			end
-
-			j=0
-			i=:nuevaext.to_s+j.to_s
-			@extension = params[i]
-
-			while j < @cant_ext.to_i
-				@modifique= true
-				if  @extension!=nil && @extension!=""
-					a = Actividad.new
-					a.tipo_actividad_id = 3
-					a.actividad = @extension
-					a.save
-					adac = AdecuacionActividad.new
-					adac.adecuacion_id = @adecuacion.id
-					adac.actividad_id = a.id
-					adac.semestre = semestre
-					@plan.fecha_modificacion = Time.now
-					@plan.save
-					@adecuacion.fecha_modificacion = Time.now
-					@adecuacion.save
-					adac.save
-				end
-				j = j + 1
-				i=:nuevaext.to_s+j.to_s;
-				@extension = params[i]
-			end
-
-			j=0
-			i=:nuevaotr.to_s+j.to_s
-			@otra = params[i]
-
-			while j < @cant_otr.to_i
-				@modifique= true
-				if  @otra!=nil && @otra!=""
-					a = Actividad.new
-					a.tipo_actividad_id = 5
-					a.actividad = @otra
-					a.save
-					adac = AdecuacionActividad.new
-					adac.adecuacion_id = @adecuacion.id
-					adac.actividad_id = a.id
-					adac.semestre = semestre
-					@plan.fecha_modificacion = Time.now
-					@plan.save
-					@adecuacion.fecha_modificacion = Time.now
-					@adecuacion.save
-					adac.save
-				end
-				j = j + 1
-				i=:nuevaotr.to_s+j.to_s;
-				@otra = params[i]
-			end
-
-			if @modifique == true
-				if semestre == 1
-					flash[:success]= "La adecuación fue modificada y guardada correctamente"
-					redirect_to controller:"iniciotutor", action: "detalles_adecuacion3"
-				elsif semestre == 2
-					flash[:success]= "La adecuación fue modificada y guardada correctamente"
-					redirect_to controller:"iniciotutor", action: "detalles_adecuacion4"
-				elsif semestre == 3
-					flash[:success]= "La adecuación fue modificada y guardada correctamente"
-					redirect_to controller:"iniciotutor", action: "detalles_adecuacion5"
-				elsif semestre == 4
-					flash[:success]= "La adecuación fue modificada y guardada correctamente"
-					redirect_to controller:"iniciotutor", action: "detalles_adecuacion6"
-				elsif semestre == 5
-					flash[:success]= "La adecuación fue modificada y guardada correctamente"
-					redirect_to controller:"iniciotutor", action: "detalles_adecuacion7"
-				elsif semestre == 0
-					flash[:success]= "La adecuación fue modificada y guardada correctamente"
-					redirect_to controller:"iniciotutor", action: "detalles_adecuacion2"
-				end
-						
-			end
-			
 		else
 			redirect_to controller:"forminst", action: "index"
 		end
@@ -694,7 +314,6 @@ class IniciotutorController < ApplicationController
 					@edit= params[i].to_s
 				end
 			end
-			redirect_to controller:"iniciotutor", action: "detalles_adecuacion2"
 		else
 			redirect_to controller:"forminst", action: "index"
 		end
@@ -1308,172 +927,373 @@ class IniciotutorController < ApplicationController
 
 	def guardar_adecuacion
 		if session[:usuario_id] && session[:tutor]
-			semestre = params[:semestre].to_i
-			cant_docencia = params[:cant_docencia]
-			cant_investigacion = params[:cant_investigacion]
-			cant_formacion = params[:cant_formacion]
-			cant_extension = params[:cant_extension]
-			cant_otra = params[:cant_otra]
-			
-			@persona = Persona.where(usuario_id: session[:usuario_id]).take
-			@nombre = session[:nombre_usuario]
-			@idtutor = session[:usuario_id]
-			@planformacion = Planformacion.find(session[:plan_id])
-			@ade= Adecuacion.where(planformacion_id: @planformacion.id).take
-			cambio_act = EstatusAdecuacion.where(adecuacion_id: @ade.id, actual: 1).take
-			if cambio_act.estatus_id != 6
-				flash[:danger]= "La adecuación no puede ser modificada"
-				redirect_to controller:"iniciotutor", action: "ver_detalles_adecuacion"
-			elsif @ade == nil
-
-				ad= Adecuacion.new
-				ad.planformacion_id = @planformacion.id
-				ad.tutor_id = @idtutor
-				ad.fecha_creacion= Time.now
-				ad.fecha_modificacion= Time.now
-				ad.save
-
-				est=EstatusAdecuacion.new
-				est.adecuacion_id = ad.id
-				est.fecha = Time.now
-				est.estatus_id = 6
-				est.actual = 1
-				est.save
-				h = 0
-				
-				j= 0
-				i=:docencia.to_s+j.to_s;
-				@docencias = params[i]
-
-				while j < cant_docencia.to_i
-
-					if  @docencias!=nil && @docencias!=""
-						if @docencias!=nil && @docencias!=""
-						end
-
-						a = Actividad.new
-						a.tipo_actividad_id = 1
-						a.actividad = @docencias
-						a.save
-
-						adac = AdecuacionActividad.new
-						adac.adecuacion_id = ad.id
-						adac.actividad_id = a.id
-						adac.semestre = semestre
-						adac.save
-					end
-					j = j + 1
-					i=:docencia.to_s+j.to_s;
-					@docencias = params[i]
-				end
-
-				j= 0
-				i=:investigacion.to_s+j.to_s;
-				investigacion = params[i]
-				while j < cant_investigacion.to_i
-					if  investigacion!=nil && investigacion!=""
-							
-						a = Actividad.new
-						a.tipo_actividad_id = 2
-						a.actividad = investigacion
-						a.save
-
-
-						adac = AdecuacionActividad.new
-						adac.adecuacion_id = ad.id
-						adac.actividad_id = a.id
-						adac.semestre = semestre
-						adac.save
-
-					end
-					j = j + 1
-					i=:investigacion.to_s+j.to_s;
-					investigacion = params[i]
-				end
-				
-
-				j = 0
-				i=:extension.to_s+j.to_s;
-				extension = params[i]
-				while j < cant_extension.to_i
-					if  extension!=nil && extension!=""
-
-						a = Actividad.new
-						a.tipo_actividad_id = 3
-						a.actividad = extension
-						a.save
-
-						adac = AdecuacionActividad.new
-						adac.adecuacion_id = ad.id
-						adac.actividad_id = a.id
-						adac.semestre = semestre
-						adac.save
-
-
-					end
-					j = j + 1
-					i=:extension.to_s+j.to_s;
-					extension = params[i]
-				end
-
-
-				j = 0
-				i=:formacion.to_s+j.to_s;
-				formacion = params[i]
-				while j < cant_formacion.to_i
-					if  formacion!=nil && formacion!=""
-						
-						a = Actividad.new
-						a.tipo_actividad_id = 4
-						a.actividad = formacion
-						a.save
-
-						adac = AdecuacionActividad.new
-						adac.adecuacion_id = ad.id
-						adac.actividad_id = a.id
-						adac.semestre = 1
-						adac.save
-
-					
-					end
-					j = j + 1
-					i=:formacion.to_s+j.to_s;
-					formacion = params[i]
-				end
-
-				j = 0
-				i=:otra.to_s+j.to_s;
-				otra = params[i]
-				while j < cant_otra.to_i
-					if  otra!=nil && otra!=""
-						
-						a = Actividad.new
-						a.tipo_actividad_id = 5
-						a.actividad = otra
-						a.save
-
-						adac = AdecuacionActividad.new
-						adac.adecuacion_id = ad.id
-						adac.actividad_id = a.id
-						adac.semestre = semestre
-						adac.save
-
-					end
-					j = j + 1
-					i=:otra.to_s+j.to_s;
-					otra = params[i]
-				end
-
-					flash[:success]= "La adecuación fue creada y guardada correctamente"
-					redirect_to controller:"iniciotutor", action: "detalles_adecuacion3"
-
-
-
+			if !params[:plan_id].blank?
+				session[:plan_id] = params[:plan_id]
+			end
+			if params[:editar] == 'no' 
+				session[:editar]= false
 			else
-				flash[:danger]= "La adecuación no fue creada porque ya posee una asociada para este plan de formación"
-				redirect_to controller:"iniciotutor", action: "ver_detalles_adecuacion"
+				session[:editar]= true
+			end
+			@tutoresAnteriores = Instructortutor.where(instructor_id: session[:usuario_id], actual: 0)
+			@nombre = session[:nombre_usuario]
+			@plan= Planformacion.find(session[:plan_id])
+
+			if !@plan.blank?
+				#Ver si el informe fue rachazado
+				cpInstructor = Usuario.find(@plan.instructor_id)
+				if (cpInstructor.activo == false)
+					@cpBloquear = true
+				else
+					@cpBloquear = false
+				end
+				#fin
 			end
 
+			@inst = Persona.where(usuario_id: @plan.instructor_id).take
+			@instructorName = @inst.nombres.to_s.split.map(&:capitalize).join(' ') + " " + @inst.apellidos.to_s.split.map(&:capitalize).join(' ')
+			session[:instructorName] = @instructorName
+			@instructorName = session[:instructorName]
+			@userentidad= Usuarioentidad.where(usuario_id: @plan.instructor_id).take
+			@escuela= Escuela.where(id: @userentidad.escuela_id).take
+			@persona= Persona.where(usuario_id: @plan.instructor_id).take
+			@usuario= Usuario.find(@plan.instructor_id)
+			@cpTutor= Persona.where(usuario_id: @plan.tutor_id).take
+			@cpTutorEmail= Usuario.find(@plan.tutor_id).email
+
+			semestre= params[:semestre].to_i
+			if !params[:adecuacion_id].blank?
+				session[:adecuacion_id]= params[:adecuacion_id]
+				@adecuacion= Adecuacion.find(session[:adecuacion_id])
+			else
+				@adecuacion= Adecuacion.where(planformacion_id: session[:plan_id]).take
+				session[:adecuacion_id]= @adecuacion.id
+			end
+
+			@userentidad= Usuarioentidad.where(usuario_id: @plan.instructor_id).take
+			if @userentidad.escuela_id == nil
+				@userentidad.escuela_id=12
+				@userentidad.save
+				@escuela= Escuela.where(id: @userentidad.escuela_id).take
+			else
+				@escuela= Escuela.where(id: @userentidad.escuela_id).take
+			end
+			@instructor= Persona.where(usuario_id: @plan.instructor_id).take
+
+			@modifique=false
+			@cant_delete= params[:cant_delete]
+			@cant_edit= params[:cant_edit]
+			@cant_doc= params[:cant_docencia]
+			@cant_obli= params[:cant_obligatoria]
+			@cant_inv= params[:cant_investigacion]
+			@cant_for= params[:cant_formacion]
+			@cant_ext= params[:cant_extension]
+			@cant_otr= params[:cant_otra]
+			@nombre = session[:nombre_usuario]
+			semestre= params[:semestre].to_i
+
+			@actividadesadoc= []
+			@actividadesainv= []
+			@actividadesaext= []
+			@actividadesafor= []
+			@actividadesaotr= []
+			j=0
+			if params[:primera_parte] == "si"
+				#Presentacion
+				if params[:presentacionId].blank?
+					cpActividad = Actividad.new
+					cpActividad.tipo_actividad_id = 9
+					cpActividad.actividad = params[:presentacion]
+					cpActividad.save
+					cpActividadAdecuacion = AdecuacionActividad.new
+					cpActividadAdecuacion.adecuacion_id = session[:adecuacion_id]
+					cpActividadAdecuacion.actividad_id = cpActividad.id
+					cpActividadAdecuacion.semestre = 0
+					cpActividadAdecuacion.save
+				end
+
+				# Descripción del Perfil del Ganador del concurso
+				if params[:descripcionId].blank?
+					cpActividad = Actividad.new
+					cpActividad.tipo_actividad_id = 8
+					cpActividad.actividad = params[:descripcion]
+					cpActividad.save
+					cpActividadAdecuacion = AdecuacionActividad.new
+					cpActividadAdecuacion.adecuacion_id = session[:adecuacion_id]
+					cpActividadAdecuacion.actividad_id = cpActividad.id
+					cpActividadAdecuacion.semestre = 0
+					cpActividadAdecuacion.save
+				end
+
+
+				j=0
+				@modifique= true
+				i=:edit.to_s+j.to_s
+				@edit= params[i].to_s
+
+				if @edit == "presentacion" || @edit == "descripcion"
+					while j < params[:cant_edit].to_i
+						if @edit == "presentacion"
+							if !params[:presentacionId].blank?
+								cpActividad = Actividad.find(params[:presentacionId])
+								cpActividad.actividad = params[:presentacion]
+								cpActividad.save
+							end
+						elsif @edit == "descripcion"
+							if !params[:presentacionId].blank?
+								cpActividad = Actividad.find(params[:descripcionId])
+								cpActividad.actividad = params[:descripcion]
+								cpActividad.save
+							end
+						end
+						j+=1
+						i=:edit.to_s+j.to_s
+						@edit= params[i].to_s
+					end
+				end
+			end
+
+			if @cant_edit.to_i > 0
+				if params[:primera_parte] != "si"
+					j=0
+					@modifique= true
+					i=:edit.to_s+j.to_s
+					@edit= params[i].to_s
+
+					while j < @cant_edit.to_i
+						@modifique= true
+						i=:edit.to_s+j.to_s
+						@edit= params[i]
+						@act= Actividad.find(@edit)
+						tipo= @act.tipo_actividad_id
+
+						if tipo==1
+							m=:docencia.to_s+@edit.to_s
+							text= params[m]
+						elsif tipo==2
+							m=:investigacion.to_s+@edit.to_s
+							text= params[m]
+						elsif tipo==3
+							m=:extension.to_s+@edit.to_s
+							text= params[m]
+						elsif tipo==4
+							m=:formacion.to_s+@edit.to_s
+							text= params[m]
+						elsif tipo==5
+							m=:otra.to_s+@edit.to_s
+							text= params[m]
+						elsif tipo==7
+							m=:obligatoria.to_s+@edit.to_s
+							text= params[m]
+						end
+						@act.actividad= text
+						@adecuacion.fecha_modificacion = Time.now
+						@plan.fecha_modificacion = Time.now
+						@plan.save
+						@adecuacion.save
+						@act.save
+						j= j+1
+						i=:edit.to_s+j.to_s
+						@edit= params[i].to_i
+					end
+				else
+					guardar_primera_parte()
+				end
+			end
+
+			if @cant_delete.to_i > 0
+				@modifique= true
+				j= 0
+				i=:delete.to_s+j.to_s;
+				@delete = params[i].to_i
+				while j < @cant_delete.to_i
+					AdecuacionActividad.where(actividad_id: @delete).destroy_all
+					Actividad.find(@delete).destroy
+					j = j + 1
+					i=:delete.to_s+j.to_s;
+					@delete = params[i]
+				end
+			end
+
+			j=0
+			i=:nuevadoc.to_s+j.to_s
+			@docencias = params[i]
+
+			while j < @cant_doc.to_i
+				@modifique= true
+				if  @docencias!=nil && @docencias!=""
+					a = Actividad.new
+					a.tipo_actividad_id = 1
+					a.actividad = @docencias
+					a.save
+					adac = AdecuacionActividad.new
+					adac.adecuacion_id = @adecuacion.id
+					adac.actividad_id = a.id
+					adac.semestre = semestre
+					@plan.fecha_modificacion = Time.now
+					@plan.save
+					@adecuacion.fecha_modificacion = Time.now
+					@adecuacion.save
+					adac.save
+				end
+				j = j + 1
+				i=:nuevadoc.to_s+j.to_s;
+				@docencias = params[i]
+			end
+
+			j=0
+			i=:nuevaobli.to_s+j.to_s
+			@obliga = params[i]
+
+			#obligatorias
+			while j < @cant_obli.to_i
+				@modifique= true
+				if  @obliga!=nil && @obliga!=""
+					a = Actividad.new
+					a.tipo_actividad_id = 7
+					a.actividad = @obliga
+					a.save
+					adac = AdecuacionActividad.new
+					adac.adecuacion_id = @adecuacion.id
+					adac.actividad_id = a.id
+					adac.semestre = semestre
+					@plan.fecha_modificacion = Time.now
+					@plan.save
+					@adecuacion.fecha_modificacion = Time.now
+					@adecuacion.save
+					adac.save
+				end
+				j = j + 1
+				i=:nuevaobli.to_s+j.to_s;
+				@obliga = params[i]
+			end
+
+			j=0
+			i=:nuevainv.to_s+j.to_s
+			@invest = params[i]
+
+			while j < @cant_inv.to_i
+				@modifique= true
+				if  @invest!=nil && @invest!=""
+					a = Actividad.new
+					a.tipo_actividad_id = 2
+					a.actividad = @invest
+					a.save
+					adac = AdecuacionActividad.new
+					adac.adecuacion_id = @adecuacion.id
+					adac.actividad_id = a.id
+					adac.semestre = semestre
+					@plan.fecha_modificacion = Time.now
+					@plan.save
+					@adecuacion.fecha_modificacion = Time.now
+					@adecuacion.save
+					adac.save
+				end
+				j = j + 1
+				i=:nuevainv.to_s+j.to_s;
+				@invest = params[i]
+			end
+
+			j=0
+			i=:nuevafor.to_s+j.to_s
+			@formacion = params[i]
+
+			while j < @cant_for.to_i
+				@modifique= true
+				if  @formacion!=nil && @formacion!=""
+					a = Actividad.new
+					a.tipo_actividad_id = 4
+					a.actividad = @formacion
+					a.save
+					adac = AdecuacionActividad.new
+					adac.adecuacion_id = @adecuacion.id
+					adac.actividad_id = a.id
+					adac.semestre = semestre
+					@plan.fecha_modificacion = Time.now
+					@plan.save
+					@adecuacion.fecha_modificacion = Time.now
+					@adecuacion.save
+					adac.save
+				end
+				j = j + 1
+				i=:nuevafor.to_s+j.to_s;
+				@formacion = params[i]
+			end
+
+			j=0
+			i=:nuevaext.to_s+j.to_s
+			@extension = params[i]
+
+			while j < @cant_ext.to_i
+				@modifique= true
+				if  @extension!=nil && @extension!=""
+					a = Actividad.new
+					a.tipo_actividad_id = 3
+					a.actividad = @extension
+					a.save
+					adac = AdecuacionActividad.new
+					adac.adecuacion_id = @adecuacion.id
+					adac.actividad_id = a.id
+					adac.semestre = semestre
+					@plan.fecha_modificacion = Time.now
+					@plan.save
+					@adecuacion.fecha_modificacion = Time.now
+					@adecuacion.save
+					adac.save
+				end
+				j = j + 1
+				i=:nuevaext.to_s+j.to_s;
+				@extension = params[i]
+			end
+
+			j=0
+			i=:nuevaotr.to_s+j.to_s
+			@otra = params[i]
+
+			while j < @cant_otr.to_i
+				@modifique= true
+				if  @otra!=nil && @otra!=""
+					a = Actividad.new
+					a.tipo_actividad_id = 5
+					a.actividad = @otra
+					a.save
+					adac = AdecuacionActividad.new
+					adac.adecuacion_id = @adecuacion.id
+					adac.actividad_id = a.id
+					adac.semestre = semestre
+					@plan.fecha_modificacion = Time.now
+					@plan.save
+					@adecuacion.fecha_modificacion = Time.now
+					@adecuacion.save
+					adac.save
+				end
+				j = j + 1
+				i=:nuevaotr.to_s+j.to_s;
+				@otra = params[i]
+			end
+
+			if @modifique == true
+				if semestre == 1
+					flash[:success]= "La adecuación fue modificada y guardada correctamente"
+					redirect_to controller:"iniciotutor", action: "detalles_adecuacion3"
+				elsif semestre == 2
+					flash[:success]= "La adecuación fue modificada y guardada correctamente"
+					redirect_to controller:"iniciotutor", action: "detalles_adecuacion4"
+				elsif semestre == 3
+					flash[:success]= "La adecuación fue modificada y guardada correctamente"
+					redirect_to controller:"iniciotutor", action: "detalles_adecuacion5"
+				elsif semestre == 4
+					flash[:success]= "La adecuación fue modificada y guardada correctamente"
+					redirect_to controller:"iniciotutor", action: "detalles_adecuacion6"
+				elsif semestre == 5
+					flash[:success]= "La adecuación fue modificada y guardada correctamente"
+					redirect_to controller:"iniciotutor", action: "detalles_adecuacion7"
+				elsif semestre == 0
+					flash[:success]= "La adecuación fue modificada y guardada correctamente"
+					redirect_to controller:"iniciotutor", action: "detalles_adecuacion2"
+				end
+						
+			end
 		else
 			redirect_to controller:"forminst", action: "index"
 		end
