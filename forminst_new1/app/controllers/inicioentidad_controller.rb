@@ -175,10 +175,6 @@ class InicioentidadController < ApplicationController
 			@status_inv.each do |si|
 				@adec= Adecuacion.find(si.adecuacion_id)
 				@pf = Planformacion.find(@adec.planformacion_id)
-				tutor_aux= Persona.where(usuario_id: @pf.tutor_id)
-				instructor_aux= Persona.where(usuario_id: @pf.instructor_id)
-				@nombre_tutor.push(tutor_aux.take.nombres.split.map(&:capitalize).join(' ') + " " + tutor_aux.take.apellidos.split.map(&:capitalize).join(' '))
-				@nombre_instructor.push(instructor_aux.take.nombres.split.map(&:capitalize).join(' ') + " " + instructor_aux.take.apellidos.split.map(&:capitalize).join(' '))
 				if (session[:entidad_id] == 13)
 					@adecuacion = true
 					@adecuaciones.push(@adec)
@@ -205,8 +201,11 @@ class InicioentidadController < ApplicationController
 			        elsif(si.estatus_id==18)
 			            @st = "ENVIADO A CONSEJO DE ESCUELA SIN REVISIÓN"
 					end
+					tutor_aux= Persona.where(usuario_id: @pf.tutor_id)
+					instructor_aux= Persona.where(usuario_id: @pf.instructor_id)
+					@nombre_tutor.push(tutor_aux.take.nombres.split.map(&:capitalize).join(' ') + " " + tutor_aux.take.apellidos.split.map(&:capitalize).join(' '))
+					@nombre_instructor.push(instructor_aux.take.nombres.split.map(&:capitalize).join(' ') + " " + instructor_aux.take.apellidos.split.map(&:capitalize).join(' '))
 					@status.push(@st)
-					
 				else
 					#Para que salgan las adecuaciones correspondientes a la escuela y al departamento
 					@tutor_escuela = Usuarioentidad.where(usuario_id: @adec.tutor_id).take
@@ -237,7 +236,10 @@ class InicioentidadController < ApplicationController
 				        elsif(si.estatus_id==18)
 				            @st = "ENVIADO A CONSEJO DE ESCUELA SIN REVISIÓN"
 						end
-
+						tutor_aux= Persona.where(usuario_id: @pf.tutor_id)
+						instructor_aux= Persona.where(usuario_id: @pf.instructor_id)
+						@nombre_tutor.push(tutor_aux.take.nombres.split.map(&:capitalize).join(' ') + " " + tutor_aux.take.apellidos.split.map(&:capitalize).join(' '))
+						@nombre_instructor.push(instructor_aux.take.nombres.split.map(&:capitalize).join(' ') + " " + instructor_aux.take.apellidos.split.map(&:capitalize).join(' '))
 						@status.push(@st)
 					end
 				end
@@ -1245,10 +1247,6 @@ end
 				@inf= Informe.find(si.informe_id)
 				@pf = Planformacion.find(@inf.planformacion_id)
 				@ppp = Persona.where(usuario_id: @pf.instructor_id).take.nombres
-				tutor_aux= Persona.where(usuario_id: @pf.tutor_id)
-				instructor_aux= Persona.where(usuario_id: @pf.instructor_id)
-				@nombre_tutor.push(tutor_aux.take.nombres.split.map(&:capitalize).join(' ') + " " + tutor_aux.take.apellidos.split.map(&:capitalize).join(' '))
-				@nombre_instructor.push(instructor_aux.take.nombres.split.map(&:capitalize).join(' ') + " " + instructor_aux.take.apellidos.split.map(&:capitalize).join(' '))
 				if (session[:entidad_id] == 13)			#Si es consejo de facultad, listar todos los informes enviados a CF sin importar la escuela
 					@informe = true
 					@informes.push(@inf)
@@ -1286,6 +1284,10 @@ end
 			        else
 			          	@tipos.push('')
 			        end
+			        tutor_aux= Persona.where(usuario_id: @pf.tutor_id)
+					instructor_aux= Persona.where(usuario_id: @pf.instructor_id)
+					@nombre_tutor.push(tutor_aux.take.nombres.split.map(&:capitalize).join(' ') + " " + tutor_aux.take.apellidos.split.map(&:capitalize).join(' '))
+					@nombre_instructor.push(instructor_aux.take.nombres.split.map(&:capitalize).join(' ') + " " + instructor_aux.take.apellidos.split.map(&:capitalize).join(' '))
 					@status.push(@st)
 				else
 					@tutor_escuela = Usuarioentidad.where(usuario_id: @inf.tutor_id).take
@@ -1324,6 +1326,10 @@ end
 				        elsif(si.estatus_id==18)
 				            @st = "ENVIADO A CONSEJO DE ESCUELA SIN REVISIÓN"
 						end
+						tutor_aux= Persona.where(usuario_id: @pf.tutor_id)
+						instructor_aux= Persona.where(usuario_id: @pf.instructor_id)
+						@nombre_tutor.push(tutor_aux.take.nombres.split.map(&:capitalize).join(' ') + " " + tutor_aux.take.apellidos.split.map(&:capitalize).join(' '))
+						@nombre_instructor.push(instructor_aux.take.nombres.split.map(&:capitalize).join(' ') + " " + instructor_aux.take.apellidos.split.map(&:capitalize).join(' '))
 						@status.push(@st)
 					end
 				end
