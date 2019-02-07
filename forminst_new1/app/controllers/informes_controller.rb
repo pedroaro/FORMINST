@@ -489,24 +489,16 @@ class InformesController < ApplicationController
             @semestres[@act.id]=semestre
             if tipo==1
               @actividadesadoc.push(@act)
-            else
-              if tipo==2
-                @actividadesainv.push(@act)
-              else
-                if tipo==3
-                  @actividadesaext.push(@act)
-                else
-                  if tipo==4
-                    @actividadesafor.push(@act)
-                  else
-                    if tipo==5
-                      @actividadesaotr.push(@act)
-                    elsif tipo==7
-                      @actividadesaobli.push(@act)
-                    end
-                  end
-                end
-              end
+            elsif tipo==2
+              @actividadesainv.push(@act)
+            elsif tipo==3
+              @actividadesaext.push(@act)
+            elsif tipo==4
+              @actividadesafor.push(@act)
+            elsif tipo==5
+              @actividadesaotr.push(@act)
+            elsif tipo==7
+              @actividadesaobli.push(@act)
             end
           end
         end
@@ -1743,36 +1735,28 @@ def generar_pdf() # es funciÃ³n permite generar el documento pdf de la adecuaciÃ
           @aactv_docencia.push(@act)
         end
         @pactv_docencia.push(@act)
-      else
-        if tipo==2
-          if @informe.numero == 1
-            @resActi= InformeActividad.where(informe_id: @informe.id, actividad_id: @act.id).take
-            @res= Resultado.where(informe_actividad_id: @resActi.id).all
-            @aactv_investigacion.push(@act)
-          end
-          @pactv_investigacion.push(@act)
-        else
-          if tipo==3
-            if @informe.numero == 1
-              @aactv_formacion.push(@act)
-            end
-            @pactv_extension.push(@act)
-          else
-            if tipo==4
-              if @informe.numero == 1
-                @aactv_extension.push(@act)
-              end
-              @pactv_formacion.push(@act)
-            else
-              if tipo==5
-                if @informe.numero == 1
-                  @aactv_otras.push(@act)
-                end
-                @pactv_otras.push(@act)
-              end
-            end
-          end
+      elsif tipo==2
+        if @informe.numero == 1
+          @resActi= InformeActividad.where(informe_id: @informe.id, actividad_id: @act.id).take
+          @res= Resultado.where(informe_actividad_id: @resActi.id).all
+          @aactv_investigacion.push(@act)
         end
+        @pactv_investigacion.push(@act)
+      elsif tipo==3
+        if @informe.numero == 1
+          @aactv_formacion.push(@act)
+        end
+        @pactv_extension.push(@act)
+      elsif tipo==4
+        if @informe.numero == 1
+          @aactv_extension.push(@act)
+        end
+        @pactv_formacion.push(@act)
+      elsif tipo==5
+        if @informe.numero == 1
+          @aactv_otras.push(@act)
+        end
+        @pactv_otras.push(@act)
       end
     end
 
@@ -1785,36 +1769,28 @@ def generar_pdf() # es funciÃ³n permite generar el documento pdf de la adecuaciÃ
           @aactv_docencia.push(@act)
         end
         @sactv_docencia.push(@act)
-      else
-        if tipo==2
-          if @informe.numero == 2
-            @resActi= InformeActividad.where(informe_id: @informe.id, actividad_id: @act.id).take
-            @res= Resultado.where(informe_actividad_id: @resActi.id).all
-            @aactv_investigacion.push(@act)
-          end
-          @sactv_investigacion.push(@act)
-        else
-          if tipo==3
-            if @informe.numero == 2
-              @aactv_formacion.push(@act)
-            end
-            @sactv_extension.push(@act)
-          else
-            if tipo==4
-              if @informe.numero == 2
-                @aactv_extension.push(@act)
-              end
-              @sactv_formacion.push(@act)
-            else
-              if tipo==5
-                if @informe.numero == 2
-                  @aactv_otras.push(@act)
-                end
-                @sactv_otras.push(@act)
-              end
-            end
-          end
+      elsif tipo==2
+        if @informe.numero == 2
+          @resActi= InformeActividad.where(informe_id: @informe.id, actividad_id: @act.id).take
+          @res= Resultado.where(informe_actividad_id: @resActi.id).all
+          @aactv_investigacion.push(@act)
         end
+        @sactv_investigacion.push(@act)
+      elsif tipo==3
+        if @informe.numero == 2
+          @aactv_formacion.push(@act)
+        end
+        @sactv_extension.push(@act)
+      elsif tipo==4
+        if @informe.numero == 2
+          @aactv_extension.push(@act)
+        end
+        @sactv_formacion.push(@act)
+      elsif tipo==5
+        if @informe.numero == 2
+          @aactv_otras.push(@act)
+        end
+        @sactv_otras.push(@act)
       end
     end
 
@@ -1827,36 +1803,28 @@ def generar_pdf() # es funciÃ³n permite generar el documento pdf de la adecuaciÃ
           @aactv_docencia.push(@act)
         end
         @tactv_docencia.push(@act)
-      else
-        if tipo==2
-          if @informe.numero == 4
-            @resActi= InformeActividad.where(informe_id: @informe.id, actividad_id: @act.id).take
-            @res= Resultado.where(informe_actividad_id: @resActi.id).all
-            @aactv_investigacion.push(@act)
-          end
-          @tactv_investigacion.push(@act)
-        else
-          if tipo==3
-            if @informe.numero == 4
-              @aactv_formacion.push(@act)
-            end
-            @tactv_extension.push(@act)
-          else
-            if tipo==4
-              if @informe.numero == 4
-                @aactv_extension.push(@act)
-              end
-              @tactv_formacion.push(@act)
-            else
-              if tipo==5
-                if @informe.numero == 4
-                  @aactv_otras.push(@act)
-                end
-                @tactv_otras.push(@act)
-              end
-            end
-          end
+      elsif tipo==2
+        if @informe.numero == 4
+          @resActi= InformeActividad.where(informe_id: @informe.id, actividad_id: @act.id).take
+          @res= Resultado.where(informe_actividad_id: @resActi.id).all
+          @aactv_investigacion.push(@act)
         end
+        @tactv_investigacion.push(@act)
+      elsif tipo==3
+        if @informe.numero == 4
+          @aactv_formacion.push(@act)
+        end
+        @tactv_extension.push(@act)
+      elsif tipo==4
+        if @informe.numero == 4
+          @aactv_extension.push(@act)
+        end
+        @tactv_formacion.push(@act)
+      elsif tipo==5
+        if @informe.numero == 4
+          @aactv_otras.push(@act)
+        end
+        @tactv_otras.push(@act)
       end
     end
 
@@ -1869,106 +1837,42 @@ def generar_pdf() # es funciÃ³n permite generar el documento pdf de la adecuaciÃ
           @aactv_docencia.push(@act)
         end
         @cactv_docencia.push(@act)
-      else
-        if tipo==2
-          if @informe.numero == 5
-            @resActi= InformeActividad.where(informe_id: @informe.id, actividad_id: @act.id).take
-            @res= Resultado.where(informe_actividad_id: @resActi.id).all
-            if !@cparray.blank?
-              @noemptyarray = @cparray - ["", nil]
-              if !@resultados2
-                @noemptyarray = @cparray - ["", nil]
-                if !@noemptyarray.join(',').blank?
-                  @resultados2 = "* " + @noemptyarray
-                end
-              else
-                @noemptyarray = @cparray - ["", nil]
-                if !@noemptyarray.join(',').blank?
-                  @resultados2 = @resultados2 + "\n" + "* " + @noemptyarray.join(',')
-                end
-              end
-            end
-            @aactv_investigacion.push(@act)
-          end
-          @cactv_investigacion.push(@act)
-        else
-          if tipo==3
-            if @informe.numero == 5
-              @aactv_formacion.push(@act)
-            end
-            @cactv_extension.push(@act)
-          else
-            if tipo==4
-              if @informe.numero == 5
-                @aactv_extension.push(@act)
-              end
-              @cactv_formacion.push(@act)
-            else
-              if tipo==5
-                if @informe.numero == 5
-                  @aactv_otras.push(@act)
-                end
-                @cactv_otras.push(@act)
-              end
-            end
-          end
-        end
-      end
-    end
-
-    @cactividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 5).all
-    @cactividadesa.each do |actade| 
-      @act= Actividad.find(actade.actividad_id)
-      tipo= @act.tipo_actividad_id
-      if tipo==1
+      elsif tipo==2
         if @informe.numero == 5
-          @aactv_docencia.push(@act)
-        end
-        @dactv_docencia.push(@act)
-      else
-        if tipo==2
-          if @informe.numero == 5
-            @resActi= InformeActividad.where(informe_id: @informe.id, actividad_id: @act.id).take
-            @res= Resultado.where(informe_actividad_id: @resActi.id).all
-            if !@cparray.blank?
+          @resActi= InformeActividad.where(informe_id: @informe.id, actividad_id: @act.id).take
+          @res= Resultado.where(informe_actividad_id: @resActi.id).all
+          if !@cparray.blank?
+            @noemptyarray = @cparray - ["", nil]
+            if !@resultados2
               @noemptyarray = @cparray - ["", nil]
-              if !@resultados2
-                @noemptyarray = @cparray - ["", nil]
-                if !@noemptyarray.join(',').blank?
-                  @resultados2 = "* " + @noemptyarray
-                end
-              else
-                @noemptyarray = @cparray - ["", nil]
-                if !@noemptyarray.join(',').blank?
-                  @resultados2 = @resultados2 + "\n" + "* " + @noemptyarray.join(',')
-                end
+              if !@noemptyarray.join(',').blank?
+                @resultados2 = "* " + @noemptyarray
               end
-            end
-            @aactv_investigacion.push(@act)
-          end
-          @dactv_investigacion.push(@act)
-        else
-          if tipo==3
-            if @informe.numero == 5
-              @aactv_formacion.push(@act)
-            end
-            @dactv_extension.push(@act)
-          else
-            if tipo==4
-              if @informe.numero == 5
-                @aactv_extension.push(@act)
-              end
-              @dactv_formacion.push(@act)
             else
-              if tipo==5
-                if @informe.numero == 5
-                  @aactv_otras.push(@act)
-                end
-                @dactv_otras.push(@act)
+              @noemptyarray = @cparray - ["", nil]
+              if !@noemptyarray.join(',').blank?
+                @resultados2 = @resultados2 + "\n" + "* " + @noemptyarray.join(',')
               end
             end
           end
+          @aactv_investigacion.push(@act)
         end
+        @cactv_investigacion.push(@act)
+      elsif tipo==3
+        if @informe.numero == 5
+          @aactv_formacion.push(@act)
+        end
+        @cactv_extension.push(@act)
+      elsif tipo==4
+        if @informe.numero == 5
+          @aactv_extension.push(@act)
+        end
+        @cactv_formacion.push(@act)
+      elsif tipo==5
+        if @informe.numero == 5
+          @aactv_otras.push(@act)
+        end
+        @cactv_otras.push(@act)
       end
     end
 
