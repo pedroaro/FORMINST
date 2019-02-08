@@ -1992,62 +1992,6 @@ def generar_pdf() # es función permite generar el documento pdf de la adecuaci�
       end
     end
 
-    @cactividadesa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 5).all
-    @cactividadesa.each do |actade| 
-      @act= Actividad.find(actade.actividad_id)
-      tipo= @act.tipo_actividad_id
-      if tipo==1
-        if @informe.numero == 5
-          @aactv_docencia.push(@act)
-        end
-        @dactv_docencia.push(@act)
-      else
-        if tipo==2
-          if @informe.numero == 5
-            @resActi= InformeActividad.where(informe_id: @informe.id, actividad_id: @act.id).take
-            @res= Resultado.where(informe_actividad_id: @resActi.id).all
-            if !@cparray.blank?
-              @noemptyarray = @cparray - ["", nil]
-              if !@resultados2
-                @noemptyarray = @cparray - ["", nil]
-                if !@noemptyarray.join(',').blank?
-                  @resultados2 = "* " + @noemptyarray
-                end
-              else
-                @noemptyarray = @cparray - ["", nil]
-                if !@noemptyarray.join(',').blank?
-                  @resultados2 = @resultados2 + "\n" + "* " + @noemptyarray.join(',')
-                end
-              end
-            end
-            @aactv_investigacion.push(@act)
-          end
-          @dactv_investigacion.push(@act)
-        else
-          if tipo==3
-            if @informe.numero == 5
-              @aactv_formacion.push(@act)
-            end
-            @dactv_extension.push(@act)
-          else
-            if tipo==4
-              if @informe.numero == 5
-                @aactv_extension.push(@act)
-              end
-              @dactv_formacion.push(@act)
-            else
-              if tipo==5
-                if @informe.numero == 5
-                  @aactv_otras.push(@act)
-                end
-                @dactv_otras.push(@act)
-              end
-            end
-          end
-        end
-      end
-    end
-
     @actividadesa= InformeActividad.where(informe_id: @informe.id).all
     @actividadesadoc= []
     @actividadesainv= []
@@ -2826,6 +2770,14 @@ def generar_pdf() # es función permite generar el documento pdf de la adecuaci�
           @st = "[" + si.fecha.to_s  + "]: ENVIADO A CONSEJO DE ESCUELA"
         elsif(si.estatus_id==9)
           @st = "[" + si.fecha.to_s  + "]: RECHAZADO POR CONSEJO DE FACULTAD"
+        elsif(si.estatus_id==12)
+          @st = "[" + si.fecha.to_s  + "]: ENVIADO A CONSEJO TÉCNICO SIN REVISIÓN"
+        elsif(si.estatus_id==13)
+          @st = "[" + si.fecha.to_s  + "]: ENVIADO A COMISIÓN DE INVESTIGACIÓN SIN REVISIÓN"
+        elsif(si.estatus_id==14)
+          @st = "[" + si.fecha.to_s  + "]: ENVIADO A CONSEJO DE FACULTAD SIN REVISIÓN"
+        elsif(si.estatus_id==18)
+          @st = "[" + si.fecha.to_s  + "]: ENVIADO A CONSEJO DE ESCUELA SIN REVISIÓN"
         end
         @status.push(@st)
 
