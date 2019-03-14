@@ -1,6 +1,5 @@
 class InformesController < ApplicationController
-  include ForminstHelper
-  layout :resolve_layout
+  layout 'ly_inicio_tutor'
     
   def ver_crear_informe
     @ejecutada = 'ejecutada'
@@ -512,452 +511,457 @@ class InformesController < ApplicationController
   end
 
 def vista_previa
-  if session[:informe_id] && session[:tutor]
-    @informe= Informe.find(session[:informe_id])
-    @TipoSemestre=TipoInforme.where(id: @informe.tipo_id).take
-    @fechaActual = Date.current.to_s
-    @plan= Planformacion.find(session[:plan_id])
-    
-
-      if !@plan.blank?
-        #Ver si el informe fue rachazado
-        cpInstructor = Usuario.find(@plan.instructor_id)
-        if (cpInstructor.activo == 0)
-          @cpBloquear = true
-        else
-          @cpBloquear = false
-        end
-        #fin
-      end
+  if (session[:informe_id] && session[:tutor] && session[:informe_id])
+    if(!session[:plan_id].blank?)
+      @informe= Informe.find(session[:informe_id])
+      @TipoSemestre=TipoInforme.where(id: @informe.tipo_id).take
+      @fechaActual = Date.current.to_s
+      @plan= Planformacion.find(session[:plan_id])
       
-      @fechaConcurso = @plan.fecha_inicio
-    @usere= Usuarioentidad.where(usuario_id: @plan.instructor_id).take
-    @escuela= Escuela.find(@usere.escuela_id)
-    @adecuacion= Adecuacion.where(planformacion_id: @plan.id).take
-    @adscripcion_docencia= @plan.adscripcion_docencia
-    @adscripcion_investigacion= @plan.adscripcion_investigacion
-    @persona= Persona.where(usuario_id: @plan.instructor_id).take
-    @cpinstruccion = @persona.grado_instruccion
-    @user = Usuario.find(@plan.instructor_id)
-    @tutor = Persona.where(usuario_id: session[:usuario_id]).take
-    @docencia='docencia'
-    @investigacion= 'investigacion'
-    @obligatoria= 'obligatoria'
-    @formacion= 'formacion'
-    @extension= 'extension'
-    @otra= 'otra' 
 
-    @nombre = session[:nombre_usuario]
-    @instructorName = session[:instructorName]
-    actividades = AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 0)
-    actividades1 = []
-    if !actividades.blank?
-      actividades.each do |actividadAde|
-        actividad = Actividad.find(actividadAde.actividad_id)
-        actividades1.push(actividad)
+        if !@plan.blank?
+          #Ver si el informe fue rachazado
+          cpInstructor = Usuario.find(@plan.instructor_id)
+          if (cpInstructor.activo == 0)
+            @cpBloquear = true
+          else
+            @cpBloquear = false
+          end
+          #fin
+        end
+        
+        @fechaConcurso = @plan.fecha_inicio
+      @usere= Usuarioentidad.where(usuario_id: @plan.instructor_id).take
+      @escuela= Escuela.find(@usere.escuela_id)
+      @adecuacion= Adecuacion.where(planformacion_id: @plan.id).take
+      @adscripcion_docencia= @plan.adscripcion_docencia
+      @adscripcion_investigacion= @plan.adscripcion_investigacion
+      @persona= Persona.where(usuario_id: @plan.instructor_id).take
+      @cpinstruccion = @persona.grado_instruccion
+      @user = Usuario.find(@plan.instructor_id)
+      @tutor = Persona.where(usuario_id: session[:usuario_id]).take
+      @docencia='docencia'
+      @investigacion= 'investigacion'
+      @obligatoria= 'obligatoria'
+      @formacion= 'formacion'
+      @extension= 'extension'
+      @otra= 'otra' 
+
+      @nombre = session[:nombre_usuario]
+      @instructorName = session[:instructorName]
+      actividades = AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 0)
+      actividades1 = []
+      if !actividades.blank?
+        actividades.each do |actividadAde|
+          actividad = Actividad.find(actividadAde.actividad_id)
+          actividades1.push(actividad)
+        end
       end
-    end
-    @presentacion = ""
-    @descripcion = ""
-    @docencia = [] 
-    @investigacion = []
-    @formacion = []  
-    @extension = []
+      @presentacion = ""
+      @descripcion = ""
+      @docencia = [] 
+      @investigacion = []
+      @formacion = []  
+      @extension = []
 
-    if !actividades1.blank?
-      puts "entroooo"
-      actividades1.each do |actividadAde|
-        if actividadAde.tipo_actividad_id == 9
-          if actividadAde.actividad.blank?
-            @presentacion = " "
-          else
-            @presentacion = actividadAde.actividad 
+      if !actividades1.blank?
+        puts "entroooo"
+        actividades1.each do |actividadAde|
+          if actividadAde.tipo_actividad_id == 9
+            if actividadAde.actividad.blank?
+              @presentacion = " "
+            else
+              @presentacion = actividadAde.actividad 
+            end
+          elsif actividadAde.tipo_actividad_id == 8
+            if actividadAde.actividad.blank?
+              @descripcion = " "
+            else
+              @descripcion = actividadAde.actividad  
+            end
+          elsif actividadAde.tipo_actividad_id == 1
+            if actividadAde.actividad.blank?
+              @docencia.push(" ")
+            else
+              @docencia.push(actividadAde)
+            end
+          elsif actividadAde.tipo_actividad_id == 2
+            if actividadAde.actividad.blank?
+              @investigacion.push(" ")
+            else
+              @investigacion.push(actividadAde)
+            end
+          elsif actividadAde.tipo_actividad_id == 4
+            if actividadAde.actividad.blank?
+              @formacion.push(" ")
+            else
+              @formacion.push(actividadAde)  
+            end
+          elsif actividadAde.tipo_actividad_id == 3
+            if actividadAde.actividad.blank?
+              @extension.push(" ")
+            else
+              @extension.push(actividadAde)
+            end
           end
-        elsif actividadAde.tipo_actividad_id == 8
-          if actividadAde.actividad.blank?
-            @descripcion = " "
+        end
+      else
+        @presentacion = " "
+        @descripcion = " "
+        @docencia = [" "]  
+        @investigacion = [" "]
+        @formacion = [" "] 
+        @extension = [" "] 
+      end
+
+      @periodo = @informe.fecha_inicio.to_s + " al " + @informe.fecha_fin.to_s
+      @actividades1doc= []
+      @actividades1inv= []
+      @actividades1ext= []
+      @actividades1for= []
+      @actividades1otr= []
+
+      @actividades1= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 1).all
+      @actividades1.each do |actade| 
+        @act= Actividad.find(actade.actividad_id)
+        tipo= @act.tipo_actividad_id
+        if tipo==1
+          @actividades1doc.push(@act)
+        else
+          if tipo==2
+            if @informe.numero == 1
+              @resActi= InformeActividad.where(informe_id: @informe.id, actividad_id: @act.id).take
+              @res= Resultado.where(informe_actividad_id: @resActi.id).all
+            end
+            @actividades1inv.push(@act)
           else
-            @descripcion = actividadAde.actividad  
+            if tipo==3
+              @actividades1ext.push(@act)
+            else
+              if tipo==4
+                @actividades1for.push(@act)
+              else
+                if tipo==5
+                  @actividades1otr.push(@act)
+                end
+              end
+            end
           end
-        elsif actividadAde.tipo_actividad_id == 1
-          if actividadAde.actividad.blank?
-            @docencia.push(" ")
+        end
+      end
+      @actividades2doc= []
+      @actividades2inv= []
+      @actividades2ext= []
+      @actividades2for= []
+      @actividades2otr= []
+      @actividades2= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 2).all
+      @actividades2.each do |actade| 
+      @act= Actividad.find(actade.actividad_id)
+      tipo= @act.tipo_actividad_id
+        if tipo==1
+          @actividades2doc.push(@act)
+        else
+          if tipo==2
+            @actividades2inv.push(@act)
           else
-            @docencia.push(actividadAde)
+            if tipo==3
+              @actividades2ext.push(@act)
+            else
+              if tipo==4
+                @actividades2for.push(@act)
+              else
+                if tipo==5
+                  @actividades2otr.push(@act)
+                end
+              end
+            end
           end
-        elsif actividadAde.tipo_actividad_id == 2
-          if actividadAde.actividad.blank?
-            @investigacion.push(" ")
+        end
+      end
+
+
+      @actividades3doc= []
+      @actividades3inv= []
+      @actividades3ext= []
+      @actividades3for= []
+      @actividades3otr= []
+      @actividades3= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 3).all
+      @actividades3.each do |actade| 
+        @act= Actividad.find(actade.actividad_id)
+        tipo= @act.tipo_actividad_id
+        if tipo==1
+          @actividades3doc.push(@act)
+        else
+          if tipo==2
+            @actividades3inv.push(@act)
           else
-            @investigacion.push(actividadAde)
+            if tipo==3
+              @actividades3ext.push(@act)
+            else
+              if tipo==4
+                @actividades3for.push(@act)
+              else
+                if tipo==5
+                  @actividades3otr.push(@act)
+                end
+              end
+            end
           end
-        elsif actividadAde.tipo_actividad_id == 4
-          if actividadAde.actividad.blank?
-            @formacion.push(" ")
+        end
+      end
+
+
+      @actividades4doc= []
+      @actividades4inv= []
+      @actividades4ext= []
+      @actividades4for= []
+      @actividades4otr= []
+      @actividades4= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 4).all
+      @actividades4.each do |actade| 
+        @act= Actividad.find(actade.actividad_id)
+        tipo= @act.tipo_actividad_id
+        if tipo==1
+          @actividades4doc.push(@act)
+        else
+          if tipo==2
+            @actividades4inv.push(@act)
           else
-            @formacion.push(actividadAde)  
+            if tipo==3
+              @actividades4ext.push(@act)
+            else
+              if tipo==4
+                @actividades4for.push(@act)
+              else
+                if tipo==5
+                  @actividades4otr.push(@act)
+                end
+              end
+            end
           end
-        elsif actividadAde.tipo_actividad_id == 3
-          if actividadAde.actividad.blank?
-            @extension.push(" ")
-          else
-            @extension.push(actividadAde)
+        end
+      end
+
+
+      @actividades5doc= []
+      @actividades5inv= []
+      @actividades5ext= []
+      @actividades5for= []
+      @actividades5otr= []
+      @actividades5= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 5).all
+      @actividades5.each do |actade| 
+        @act= Actividad.find(actade.actividad_id)
+        tipo= @act.tipo_actividad_id
+        if tipo==1
+          @actividades5doc.push(@act)
+        elsif tipo==2
+          @actividades5inv.push(@act)
+        elsif tipo==3
+          @actividades5ext.push(@act)
+        elsif tipo==4
+          @actividades5for.push(@act)
+        elsif tipo==5
+          @actividades5otr.push(@act)
+        end
+      end
+
+
+      @bool_enviado = 0
+      estatus_informe = EstatusInforme.where(informe_id: @informe.id, actual: 1).take
+      if (estatus_informe.estatus_id != 6 && estatus_informe.estatus_id != 5)
+        @bool_enviado = 1
+      end
+      @j = 0
+      @i = 0
+      @actividadesa= InformeActividad.where(informe_id: @informe.id).all
+      @actividadesadoc= []
+      @actividadesainv= []
+      @actividadesaext= []
+      @actividadesafor= []
+      @actividadesaobli= []
+      @actividadesaotr= []
+      @resultados= []
+      @semestres= []
+      @CJagregado=["no","no","no","no"]
+      @actividadese= []
+      @observaciont= []
+      @resultTP = []
+      @resultPP = []
+      @resultPIT = []
+      @resultO = []
+      @resultAEC = []
+      @resultOEC = []
+      @resultDCS = []
+      @actividadesa.each do |actade| 
+        @resultados2 = ""
+        @res= Resultado.where(informe_actividad_id: actade.id).all
+        if actade.actividad_id == nil #Es el caso que es un resultado no contemplado en el plan de formacion o un avancwe de postgrado
+          if !@res.blank?
+            @res.each do |res|
+              @resultados2 = ""
+              @cparray = ["a", "a", "a", "a", "a", "a", "a", "a", "a","a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a"]
+              @cparray[0] = res.titulo.capitalize
+              @cparray[1] = res.autor.capitalize
+              @cparray[2] = res.nombre_capitulo.to_s.capitalize
+              @cparray[3] = res.autor_capitulo.to_s.capitalize
+              @cparray[4] = res.dia
+              @cparray[5] = res.mes
+              @cparray[6] = res.ano
+              @cparray[7] = res.ciudad.to_s.capitalize
+              @cparray[8] = res.estado.to_s.capitalize
+              @cparray[9] = res.pais.to_s.capitalize
+              @cparray[10] = res.organizador.to_s.capitalize
+              @cparray[11] = res.duracion.to_s.capitalize
+              @cparray[12] = res.editor.to_s.capitalize
+              @cparray[13] = res.titulo_libro.to_s.capitalize
+              @cparray[14] = res.autor_libro.to_s.capitalize
+              @cparray[15] = res.nombre_revista.to_s.capitalize
+              @cparray[16] = res.nombre_periodico.to_s.capitalize
+              @cparray[17] = res.nombre_acto.to_s.capitalize
+              @cparray[18] = res.paginas
+              @cparray[19] = res.nombre_paginaw.to_s.capitalize
+              @cparray[20] = res.sitio_paginaw
+              @cparray[21] = res.infoafiliaion.to_s.capitalize
+              @cparray[22] = res.cptipo.to_s.capitalize
+              @cparray[23] = res.nombre.to_s.capitalize
+              @cparray[24] = res.ISSN_impreso.to_s.capitalize
+              @cparray[25] = res.ISSN_electro.to_s.capitalize
+              @cparray[26] = res.volumen.to_s.capitalize
+              @cparray[27] = res.edicion.to_s.capitalize
+              @cparray[28] = res.DOI
+              @cparray[29] = res.ISBN
+              @cparray[30] = res.universidad.to_s.capitalize
+              @cparray[31] = res.url
+              if !@cparray.blank?
+                @noemptyarray = @cparray - ["", nil]
+                if !@resultados2
+                  @noemptyarray = @cparray - ["", nil]
+                  if !@noemptyarray.join(',').blank?
+                    @resultados2 = "* " + @noemptyarray
+                  end
+                else
+                  @noemptyarray = @cparray - ["", nil]
+                  if !@noemptyarray.join(',').blank?
+                    @resultados2 = @resultados2 + @noemptyarray.join(', ')
+                  end
+                end
+              end
+              if res.tipo_resultado_id == 1
+                @resultTP.push(@resultados2)
+              elsif res.tipo_resultado_id == 2
+                @resultPP.push(@resultados2)
+              elsif res.tipo_resultado_id == 3
+                @resultPIT.push(@resultados2)
+              elsif res.tipo_resultado_id == 4
+                @resultO.push(@resultados2)
+              elsif res.tipo_resultado_id == 5
+                @resultAEC.push(@resultados2)
+              elsif res.tipo_resultado_id == 6
+                @resultOEC.push(@resultados2)
+              elsif res.tipo_resultado_id == 7
+                @resultDCS.push(@resultados2)
+              end
+              @resultados.push(res)
+            end
           end
+        else
+          @act= Actividad.find(actade.actividad_id)
+          tipo= @act.tipo_actividad_id
+          if !@res.blank?
+            @res.each do |res|
+              @resultados2 = ""
+              @cparray = ["a", "a", "a", "a", "a", "a", "a", "a", "a","a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a"]
+              @cparray[0] = res.titulo.capitalize
+              @cparray[1] = res.autor.capitalize
+              @cparray[2] = res.nombre_capitulo.to_s.capitalize
+              @cparray[3] = res.autor_capitulo.to_s.capitalize
+              @cparray[4] = res.dia
+              @cparray[5] = res.mes
+              @cparray[6] = res.ano
+              @cparray[7] = res.ciudad.to_s.capitalize
+              @cparray[8] = res.estado.to_s.capitalize
+              @cparray[9] = res.pais.to_s.capitalize
+              @cparray[10] = res.organizador.to_s.capitalize
+              @cparray[11] = res.duracion.to_s.capitalize
+              @cparray[12] = res.editor.to_s.capitalize
+              @cparray[13] = res.titulo_libro.to_s.capitalize
+              @cparray[14] = res.autor_libro.to_s.capitalize
+              @cparray[15] = res.nombre_revista.to_s.capitalize
+              @cparray[16] = res.nombre_periodico.to_s.capitalize
+              @cparray[17] = res.nombre_acto.to_s.capitalize
+              @cparray[18] = res.paginas
+              @cparray[19] = res.nombre_paginaw.to_s.capitalize
+              @cparray[20] = res.sitio_paginaw
+              @cparray[21] = res.infoafiliaion.to_s.capitalize
+              @cparray[22] = res.cptipo.to_s.capitalize
+              @cparray[23] = res.nombre.to_s.capitalize
+              @cparray[24] = res.ISSN_impreso.to_s.capitalize
+              @cparray[25] = res.ISSN_electro.to_s.capitalize
+              @cparray[26] = res.volumen.to_s.capitalize
+              @cparray[27] = res.edicion.to_s.capitalize
+              @cparray[28] = res.DOI
+              @cparray[29] = res.ISBN
+              @cparray[30] = res.universidad.to_s.capitalize
+              @cparray[31] = res.url
+              if !@cparray.blank?
+                @noemptyarray = @cparray - ["", nil]
+                if !@resultados2
+                  @noemptyarray = @cparray - ["", nil]
+                  if !@noemptyarray.join(',').blank?
+                    @resultados2 = "* " + @noemptyarray
+                  end
+                else
+                  @noemptyarray = @cparray - ["", nil]
+                  if !@noemptyarray.join(',').blank?
+                    @resultados2 = @resultados2 + @noemptyarray.join(', ')
+                  end
+                end
+              end
+              if res.tipo_resultado_id == 1
+                @resultTP.push(@resultados2)
+              elsif res.tipo_resultado_id == 2
+                @resultPP.push(@resultados2)
+              elsif res.tipo_resultado_id == 3
+                @resultPIT.push(@resultados2)
+              elsif res.tipo_resultado_id == 4
+                @resultO.push(@resultados2)
+              elsif res.tipo_resultado_id == 5
+                @resultAEC.push(@resultados2)
+              elsif res.tipo_resultado_id == 6
+                @resultOEC.push(@resultados2)
+              elsif res.tipo_resultado_id == 7
+                @resultDCS.push(@resultados2)
+              end
+              @resultados.push(res)
+            end
+          end
+        end
+        @ae= ActividadEjecutada.where(informe_actividad_id: actade.id).take
+        @actividadese.push(@ae)
+        @obs= ObservacionTutor.where(informe_actividad_id: actade.id).take
+        if @obs==nil
+          @observaciont.push("")
+        else
+          @observaciont.push(@obs.observaciones)
+        end
+      semestre = AdecuacionActividad.where(actividad_id: @act.id).take.semestre
+      @semestres[@act.id]=semestre
+        if tipo==1
+          @actividadesadoc.push(@act)
+        elsif tipo==2
+          @actividadesainv.push(@act)
+        elsif tipo==3
+          @actividadesaext.push(@act)
+        elsif tipo==4
+          @actividadesafor.push(@act)
+        elsif tipo==5
+          @actividadesaotr.push(@act)
+        elsif tipo==7
+          @actividadesaobli.push(@act)
         end
       end
     else
-      @presentacion = " "
-      @descripcion = " "
-      @docencia = [" "]  
-      @investigacion = [" "]
-      @formacion = [" "] 
-      @extension = [" "] 
-    end
-
-    @periodo = @informe.fecha_inicio.to_s + " al " + @informe.fecha_fin.to_s
-    @actividades1doc= []
-    @actividades1inv= []
-    @actividades1ext= []
-    @actividades1for= []
-    @actividades1otr= []
-
-    @actividades1= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 1).all
-    @actividades1.each do |actade| 
-      @act= Actividad.find(actade.actividad_id)
-      tipo= @act.tipo_actividad_id
-      if tipo==1
-        @actividades1doc.push(@act)
-      else
-        if tipo==2
-          if @informe.numero == 1
-            @resActi= InformeActividad.where(informe_id: @informe.id, actividad_id: @act.id).take
-            @res= Resultado.where(informe_actividad_id: @resActi.id).all
-          end
-          @actividades1inv.push(@act)
-        else
-          if tipo==3
-            @actividades1ext.push(@act)
-          else
-            if tipo==4
-              @actividades1for.push(@act)
-            else
-              if tipo==5
-                @actividades1otr.push(@act)
-              end
-            end
-          end
-        end
-      end
-    end
-    @actividades2doc= []
-    @actividades2inv= []
-    @actividades2ext= []
-    @actividades2for= []
-    @actividades2otr= []
-    @actividades2= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 2).all
-    @actividades2.each do |actade| 
-    @act= Actividad.find(actade.actividad_id)
-    tipo= @act.tipo_actividad_id
-      if tipo==1
-        @actividades2doc.push(@act)
-      else
-        if tipo==2
-          @actividades2inv.push(@act)
-        else
-          if tipo==3
-            @actividades2ext.push(@act)
-          else
-            if tipo==4
-              @actividades2for.push(@act)
-            else
-              if tipo==5
-                @actividades2otr.push(@act)
-              end
-            end
-          end
-        end
-      end
-    end
-
-
-    @actividades3doc= []
-    @actividades3inv= []
-    @actividades3ext= []
-    @actividades3for= []
-    @actividades3otr= []
-    @actividades3= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 3).all
-    @actividades3.each do |actade| 
-      @act= Actividad.find(actade.actividad_id)
-      tipo= @act.tipo_actividad_id
-      if tipo==1
-        @actividades3doc.push(@act)
-      else
-        if tipo==2
-          @actividades3inv.push(@act)
-        else
-          if tipo==3
-            @actividades3ext.push(@act)
-          else
-            if tipo==4
-              @actividades3for.push(@act)
-            else
-              if tipo==5
-                @actividades3otr.push(@act)
-              end
-            end
-          end
-        end
-      end
-    end
-
-
-    @actividades4doc= []
-    @actividades4inv= []
-    @actividades4ext= []
-    @actividades4for= []
-    @actividades4otr= []
-    @actividades4= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 4).all
-    @actividades4.each do |actade| 
-      @act= Actividad.find(actade.actividad_id)
-      tipo= @act.tipo_actividad_id
-      if tipo==1
-        @actividades4doc.push(@act)
-      else
-        if tipo==2
-          @actividades4inv.push(@act)
-        else
-          if tipo==3
-            @actividades4ext.push(@act)
-          else
-            if tipo==4
-              @actividades4for.push(@act)
-            else
-              if tipo==5
-                @actividades4otr.push(@act)
-              end
-            end
-          end
-        end
-      end
-    end
-
-
-    @actividades5doc= []
-    @actividades5inv= []
-    @actividades5ext= []
-    @actividades5for= []
-    @actividades5otr= []
-    @actividades5= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 5).all
-    @actividades5.each do |actade| 
-      @act= Actividad.find(actade.actividad_id)
-      tipo= @act.tipo_actividad_id
-      if tipo==1
-        @actividades5doc.push(@act)
-      elsif tipo==2
-        @actividades5inv.push(@act)
-      elsif tipo==3
-        @actividades5ext.push(@act)
-      elsif tipo==4
-        @actividades5for.push(@act)
-      elsif tipo==5
-        @actividades5otr.push(@act)
-      end
-    end
-
-
-    @bool_enviado = 0
-    estatus_informe = EstatusInforme.where(informe_id: @informe.id, actual: 1).take
-    if (estatus_informe.estatus_id != 6 && estatus_informe.estatus_id != 5)
-      @bool_enviado = 1
-    end
-    @j = 0
-    @i = 0
-    @actividadesa= InformeActividad.where(informe_id: @informe.id).all
-    @actividadesadoc= []
-    @actividadesainv= []
-    @actividadesaext= []
-    @actividadesafor= []
-    @actividadesaobli= []
-    @actividadesaotr= []
-    @resultados= []
-    @semestres= []
-    @CJagregado=["no","no","no","no"]
-    @actividadese= []
-    @observaciont= []
-    @resultTP = []
-    @resultPP = []
-    @resultPIT = []
-    @resultO = []
-    @resultAEC = []
-    @resultOEC = []
-    @resultDCS = []
-    @actividadesa.each do |actade| 
-      @resultados2 = ""
-      @res= Resultado.where(informe_actividad_id: actade.id).all
-      if actade.actividad_id == nil #Es el caso que es un resultado no contemplado en el plan de formacion o un avancwe de postgrado
-        if !@res.blank?
-          @res.each do |res|
-            @resultados2 = ""
-            @cparray = ["a", "a", "a", "a", "a", "a", "a", "a", "a","a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a"]
-            @cparray[0] = res.titulo.capitalize
-            @cparray[1] = res.autor.capitalize
-            @cparray[2] = res.nombre_capitulo.to_s.capitalize
-            @cparray[3] = res.autor_capitulo.to_s.capitalize
-            @cparray[4] = res.dia
-            @cparray[5] = res.mes
-            @cparray[6] = res.ano
-            @cparray[7] = res.ciudad.to_s.capitalize
-            @cparray[8] = res.estado.to_s.capitalize
-            @cparray[9] = res.pais.to_s.capitalize
-            @cparray[10] = res.organizador.to_s.capitalize
-            @cparray[11] = res.duracion.to_s.capitalize
-            @cparray[12] = res.editor.to_s.capitalize
-            @cparray[13] = res.titulo_libro.to_s.capitalize
-            @cparray[14] = res.autor_libro.to_s.capitalize
-            @cparray[15] = res.nombre_revista.to_s.capitalize
-            @cparray[16] = res.nombre_periodico.to_s.capitalize
-            @cparray[17] = res.nombre_acto.to_s.capitalize
-            @cparray[18] = res.paginas
-            @cparray[19] = res.nombre_paginaw.to_s.capitalize
-            @cparray[20] = res.sitio_paginaw
-            @cparray[21] = res.infoafiliaion.to_s.capitalize
-            @cparray[22] = res.cptipo.to_s.capitalize
-            @cparray[23] = res.nombre.to_s.capitalize
-            @cparray[24] = res.ISSN_impreso.to_s.capitalize
-            @cparray[25] = res.ISSN_electro.to_s.capitalize
-            @cparray[26] = res.volumen.to_s.capitalize
-            @cparray[27] = res.edicion.to_s.capitalize
-            @cparray[28] = res.DOI
-            @cparray[29] = res.ISBN
-            @cparray[30] = res.universidad.to_s.capitalize
-            @cparray[31] = res.url
-            if !@cparray.blank?
-              @noemptyarray = @cparray - ["", nil]
-              if !@resultados2
-                @noemptyarray = @cparray - ["", nil]
-                if !@noemptyarray.join(',').blank?
-                  @resultados2 = "* " + @noemptyarray
-                end
-              else
-                @noemptyarray = @cparray - ["", nil]
-                if !@noemptyarray.join(',').blank?
-                  @resultados2 = @resultados2 + @noemptyarray.join(', ')
-                end
-              end
-            end
-            if res.tipo_resultado_id == 1
-              @resultTP.push(@resultados2)
-            elsif res.tipo_resultado_id == 2
-              @resultPP.push(@resultados2)
-            elsif res.tipo_resultado_id == 3
-              @resultPIT.push(@resultados2)
-            elsif res.tipo_resultado_id == 4
-              @resultO.push(@resultados2)
-            elsif res.tipo_resultado_id == 5
-              @resultAEC.push(@resultados2)
-            elsif res.tipo_resultado_id == 6
-              @resultOEC.push(@resultados2)
-            elsif res.tipo_resultado_id == 7
-              @resultDCS.push(@resultados2)
-            end
-            @resultados.push(res)
-          end
-        end
-      else
-        @act= Actividad.find(actade.actividad_id)
-        tipo= @act.tipo_actividad_id
-        if !@res.blank?
-          @res.each do |res|
-            @resultados2 = ""
-            @cparray = ["a", "a", "a", "a", "a", "a", "a", "a", "a","a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a", "a"]
-            @cparray[0] = res.titulo.capitalize
-            @cparray[1] = res.autor.capitalize
-            @cparray[2] = res.nombre_capitulo.to_s.capitalize
-            @cparray[3] = res.autor_capitulo.to_s.capitalize
-            @cparray[4] = res.dia
-            @cparray[5] = res.mes
-            @cparray[6] = res.ano
-            @cparray[7] = res.ciudad.to_s.capitalize
-            @cparray[8] = res.estado.to_s.capitalize
-            @cparray[9] = res.pais.to_s.capitalize
-            @cparray[10] = res.organizador.to_s.capitalize
-            @cparray[11] = res.duracion.to_s.capitalize
-            @cparray[12] = res.editor.to_s.capitalize
-            @cparray[13] = res.titulo_libro.to_s.capitalize
-            @cparray[14] = res.autor_libro.to_s.capitalize
-            @cparray[15] = res.nombre_revista.to_s.capitalize
-            @cparray[16] = res.nombre_periodico.to_s.capitalize
-            @cparray[17] = res.nombre_acto.to_s.capitalize
-            @cparray[18] = res.paginas
-            @cparray[19] = res.nombre_paginaw.to_s.capitalize
-            @cparray[20] = res.sitio_paginaw
-            @cparray[21] = res.infoafiliaion.to_s.capitalize
-            @cparray[22] = res.cptipo.to_s.capitalize
-            @cparray[23] = res.nombre.to_s.capitalize
-            @cparray[24] = res.ISSN_impreso.to_s.capitalize
-            @cparray[25] = res.ISSN_electro.to_s.capitalize
-            @cparray[26] = res.volumen.to_s.capitalize
-            @cparray[27] = res.edicion.to_s.capitalize
-            @cparray[28] = res.DOI
-            @cparray[29] = res.ISBN
-            @cparray[30] = res.universidad.to_s.capitalize
-            @cparray[31] = res.url
-            if !@cparray.blank?
-              @noemptyarray = @cparray - ["", nil]
-              if !@resultados2
-                @noemptyarray = @cparray - ["", nil]
-                if !@noemptyarray.join(',').blank?
-                  @resultados2 = "* " + @noemptyarray
-                end
-              else
-                @noemptyarray = @cparray - ["", nil]
-                if !@noemptyarray.join(',').blank?
-                  @resultados2 = @resultados2 + @noemptyarray.join(', ')
-                end
-              end
-            end
-            if res.tipo_resultado_id == 1
-              @resultTP.push(@resultados2)
-            elsif res.tipo_resultado_id == 2
-              @resultPP.push(@resultados2)
-            elsif res.tipo_resultado_id == 3
-              @resultPIT.push(@resultados2)
-            elsif res.tipo_resultado_id == 4
-              @resultO.push(@resultados2)
-            elsif res.tipo_resultado_id == 5
-              @resultAEC.push(@resultados2)
-            elsif res.tipo_resultado_id == 6
-              @resultOEC.push(@resultados2)
-            elsif res.tipo_resultado_id == 7
-              @resultDCS.push(@resultados2)
-            end
-            @resultados.push(res)
-          end
-        end
-      end
-      @ae= ActividadEjecutada.where(informe_actividad_id: actade.id).take
-      @actividadese.push(@ae)
-      @obs= ObservacionTutor.where(informe_actividad_id: actade.id).take
-      if @obs==nil
-        @observaciont.push("")
-      else
-        @observaciont.push(@obs.observaciones)
-      end
-	  semestre = AdecuacionActividad.where(actividad_id: @act.id).take.semestre
-	  @semestres[@act.id]=semestre
-      if tipo==1
-        @actividadesadoc.push(@act)
-      elsif tipo==2
-        @actividadesainv.push(@act)
-      elsif tipo==3
-        @actividadesaext.push(@act)
-      elsif tipo==4
-        @actividadesafor.push(@act)
-      elsif tipo==5
-        @actividadesaotr.push(@act)
-      elsif tipo==7
-        @actividadesaobli.push(@act)
-      end
+      flash[:info]="Seleccione una adecuación"
+      redirect_to controller:"iniciotutor", action: "planformacions"
     end
   else
     flash[:info]= "Seleccione un informe"
@@ -968,120 +972,125 @@ end
   def ver_detalles_informe
 
     if session[:usuario_id] && session[:tutor]
-      @nombre = session[:nombre_usuario]   
-      @persona = Persona.where(usuario_id: session[:usuario_id]).take
-      if session[:plan_id]
-        @planformacion = Planformacion.find(session[:plan_id])
-      else
-        @planformacion = Planformacion.find(session[:plan_id])
-      end
-
-      if !@planformacion.blank?
-        #Ver si el informe fue rachazado
-        cpInstructor = Usuario.find(@planformacion.instructor_id)
-        if (cpInstructor.activo == 0)
-          @cpBloquear = true
+      if(!session[:plan_id].blank?)
+        @nombre = session[:nombre_usuario]   
+        @persona = Persona.where(usuario_id: session[:usuario_id]).take
+        if session[:plan_id]
+          @planformacion = Planformacion.find(session[:plan_id])
         else
-          @cpBloquear = false
-        end
-        #fin
-      end
-          
-      if params[:informe_id]
-        session[:informe_id] = params[:informe_id]
-      end
-
-      if session[:informe_id]
-
-        @instructor = Persona.where(usuario_id: @planformacion.instructor_id).take
-        @informe= Informe.find(session[:informe_id])
-
-        #Anual
-        if @informe.numero ==3
-          begin
-            @informe.fecha_inicio = Informe.where( planformacion_id: session[:plan_id], numero: 1).take.fecha_inicio
-            @informe.fecha_fin = Informe.where( planformacion_id: session[:plan_id], numero: 2).take.fecha_fin
-            @informe.save
-          rescue => ex
-            @informe.fecha_inicio = "-"
-            @informe.fecha_fin = "-"
-            @informe.save
-            flash[:danger]= "Usted ha eliminado un informe utilizado por este, por favor proceda a eliminar este"
-          end
-         
+          @planformacion = Planformacion.find(session[:plan_id])
         end
 
-        #Anual
-        if @informe.numero ==6
-          begin
-            @informe.fecha_inicio = Informe.where( planformacion_id: session[:plan_id], numero: 4).take.fecha_inicio
-            @informe.fecha_fin = Informe.where( planformacion_id: session[:plan_id], numero: 5).take.fecha_fin
-            @informe.save
-          rescue => ex
-            @informe.fecha_inicio = "-"
-            @informe.fecha_fin = "-"
-            @informe.save
-            flash[:danger]= "Usted ha eliminado un informe utilizado por este, por favor proceda a eliminar este"
-          end
-        end
-
-        #Anual
-        if @informe.numero ==7
-          begin
-            @informe.fecha_inicio = Informe.where( planformacion_id: session[:plan_id], numero: 1).take.fecha_inicio
-            @informe.fecha_fin = Informe.where( planformacion_id: session[:plan_id], numero: 4).take.fecha_fin
-            @informe.save
-          rescue => ex
-            @informe.fecha_inicio = "-"
-            @informe.fecha_fin = "-"
-            @informe.save
-            flash[:danger]= "Usted ha eliminado un informe utilizado por este, por favor proceda a eliminar este"
-          end
-        end
-
-        @periodo = @informe.fecha_inicio.to_s + " al " + @informe.fecha_fin.to_s
-        @estatus= EstatusInforme.where(informe_id: @informe.id, actual: 1).take
-        @status= TipoEstatus.find(@estatus.estatus_id)
-        if (@informe.numero == 1 || @informe.numero == 3)
-          @nombre_informe= "Primer Informe "
-          session[:numero_informe]=1
-        elsif (@informe.numero == 2 || @informe.numero == 6)
-          @nombre_informe= "Segundo Informe "
-          session[:numero_informe]=2
-        elsif @informe.numero == 4
-          @nombre_informe= "Tercer Informe "
-          session[:numero_informe]=4
-        elsif @informe.numero == 5                                                                                                                                                                                                                                                                    
-          @nombre_informe= "Cuarto Informe "
-          session[:numero_informe]=5
-        end
-
-
-        if @informe.tipo_id == 1
-          @nombre_informe= @nombre_informe+"Semestral"
-        else
-          if @informe.tipo_id == 2
-            @nombre_informe= @nombre_informe+"Anual"
+        if !@planformacion.blank?
+          #Ver si el informe fue rachazado
+          cpInstructor = Usuario.find(@planformacion.instructor_id)
+          if (cpInstructor.activo == 0)
+            @cpBloquear = true
           else
-            @nombre_informe= "Informe Final"
+            @cpBloquear = false
           end
+          #fin
+        end
+            
+        if params[:informe_id]
+          session[:informe_id] = params[:informe_id]
         end
 
-        @userentidad= Usuarioentidad.where(usuario_id: @planformacion.instructor_id).take
-        @entidad= Entidad.find(@userentidad.entidad_id)
-        @escuela= Escuela.find(@userentidad.escuela_id)
-        session[:nombre_informe] = @nombre_informe
-        session[:status_informe] = @status.concepto
+        if session[:informe_id]
 
-        @bool_enviado = 0
-        estatus_informe = EstatusInforme.where(informe_id: @informe.id, actual: 1).take
+          @instructor = Persona.where(usuario_id: @planformacion.instructor_id).take
+          @informe= Informe.find(session[:informe_id])
 
-        if (estatus_informe.estatus_id != 6 && estatus_informe.estatus_id != 5)
-          @bool_enviado = 1
+          #Anual
+          if @informe.numero ==3
+            begin
+              @informe.fecha_inicio = Informe.where( planformacion_id: session[:plan_id], numero: 1).take.fecha_inicio
+              @informe.fecha_fin = Informe.where( planformacion_id: session[:plan_id], numero: 2).take.fecha_fin
+              @informe.save
+            rescue => ex
+              @informe.fecha_inicio = "-"
+              @informe.fecha_fin = "-"
+              @informe.save
+              flash[:danger]= "Usted ha eliminado un informe utilizado por este, por favor proceda a eliminar este"
+            end
+          
+          end
+
+          #Anual
+          if @informe.numero ==6
+            begin
+              @informe.fecha_inicio = Informe.where( planformacion_id: session[:plan_id], numero: 4).take.fecha_inicio
+              @informe.fecha_fin = Informe.where( planformacion_id: session[:plan_id], numero: 5).take.fecha_fin
+              @informe.save
+            rescue => ex
+              @informe.fecha_inicio = "-"
+              @informe.fecha_fin = "-"
+              @informe.save
+              flash[:danger]= "Usted ha eliminado un informe utilizado por este, por favor proceda a eliminar este"
+            end
+          end
+
+          #Anual
+          if @informe.numero ==7
+            begin
+              @informe.fecha_inicio = Informe.where( planformacion_id: session[:plan_id], numero: 1).take.fecha_inicio
+              @informe.fecha_fin = Informe.where( planformacion_id: session[:plan_id], numero: 4).take.fecha_fin
+              @informe.save
+            rescue => ex
+              @informe.fecha_inicio = "-"
+              @informe.fecha_fin = "-"
+              @informe.save
+              flash[:danger]= "Usted ha eliminado un informe utilizado por este, por favor proceda a eliminar este"
+            end
+          end
+
+          @periodo = @informe.fecha_inicio.to_s + " al " + @informe.fecha_fin.to_s
+          @estatus= EstatusInforme.where(informe_id: @informe.id, actual: 1).take
+          @status= TipoEstatus.find(@estatus.estatus_id)
+          if (@informe.numero == 1 || @informe.numero == 3)
+            @nombre_informe= "Primer Informe "
+            session[:numero_informe]=1
+          elsif (@informe.numero == 2 || @informe.numero == 6)
+            @nombre_informe= "Segundo Informe "
+            session[:numero_informe]=2
+          elsif @informe.numero == 4
+            @nombre_informe= "Tercer Informe "
+            session[:numero_informe]=4
+          elsif @informe.numero == 5                                                                                                                                                                                                                                                                    
+            @nombre_informe= "Cuarto Informe "
+            session[:numero_informe]=5
+          end
+
+
+          if @informe.tipo_id == 1
+            @nombre_informe= @nombre_informe+"Semestral"
+          else
+            if @informe.tipo_id == 2
+              @nombre_informe= @nombre_informe+"Anual"
+            else
+              @nombre_informe= "Informe Final"
+            end
+          end
+
+          @userentidad= Usuarioentidad.where(usuario_id: @planformacion.instructor_id).take
+          @entidad= Entidad.find(@userentidad.entidad_id)
+          @escuela= Escuela.find(@userentidad.escuela_id)
+          session[:nombre_informe] = @nombre_informe
+          session[:status_informe] = @status.concepto
+
+          @bool_enviado = 0
+          estatus_informe = EstatusInforme.where(informe_id: @informe.id, actual: 1).take
+
+          if (estatus_informe.estatus_id != 6 && estatus_informe.estatus_id != 5)
+            @bool_enviado = 1
+          end
+        else
+          flash[:info]= "Seleccione un informe"
+          redirect_to controller:"informes", action: "listar_informes"
         end
       else
-        flash[:info]= "Seleccione un informe"
-        redirect_to controller:"informes", action: "listar_informes"
+        flash[:info]="Seleccione una adecuación"
+        redirect_to controller:"iniciotutor", action: "planformacions"
       end
     else
       redirect_to controller:"forminst", action: "index"
@@ -1091,572 +1100,578 @@ end
   def crear_informe
 
     if session[:usuario_id] && session[:tutor]
-      nombre = session[:nombre_usuario]   
-      if not @nombre
-        print "NO HAY USUARIO"
-      end
-      @persona = Persona.where(usuario_id: session[:usuario_id]).take
+      if(!session[:plan_id].blank?)
 
-      if session[:plan_id]
-        @planformacion = Planformacion.find(session[:plan_id])
-      else
-        @planformacion = Planformacion.find(session[:plan_id])
-      end
+        nombre = session[:nombre_usuario]   
+        if not @nombre
+          print "NO HAY USUARIO"
+        end
+        @persona = Persona.where(usuario_id: session[:usuario_id]).take
 
-      @fecha_inicio = params[:fechaIni]
-      @fecha_fin = params[:fechaFin]
-
-      @cant_doc= params[:cant_docencia].to_i
-      @cant_inv= params[:cant_investigacion].to_i
-      @cant_for= params[:cant_formacion].to_i
-      @cant_ext= params[:cant_extension].to_i
-      @cant_obli= params[:cant_obligatoria].to_i
-      @cant_otr= params[:cant_otra].to_i
-
-      @tipo_informe = params[:tipoinf].to_i
-      @numero_informe= params[:numero_informe].to_i
-      if @tipo_informe == 1 || @tipo_informe==2 || @tipo_informe==4 || @tipo_informe==5
-        @tipo= 1
-        @nombre_inf= 'Semestral'
-      else
-        if @tipo_informe== 3 || @tipo_informe==6
-          @tipo=2
-          @nombre_inf= 'Anual'
+        if session[:plan_id]
+          @planformacion = Planformacion.find(session[:plan_id])
         else
-          @tipo=3
-          @nombre_inf= 'Final'
+          @planformacion = Planformacion.find(session[:plan_id])
         end
-      end
-      informe = Informe.new
-      informe.planformacion_id = session[:plan_id]
-      informe.tutor_id = session[:usuario_id]
-      informe.opinion_tutor = params[:opinion]
-      informe.conclusiones = params[:conclusiones]
-      informe.justificaciones = params[:justi]
-      informe.tipo_id = @tipo
-      informe.numero = @numero_informe
-      informe.fecha_creacion = Time.now
-      informe.fecha_modificacion = Time.now
-      if (@tipo_informe == 1 || @tipo_informe== 2 || @tipo_informe==4 || @tipo_informe==5)
-	      if !params[:fechaIni].blank?
-          informe.fecha_inicio = @fecha_inicio
-        end
-        if !params[:fechaFin].blank?
-          informe.fecha_fin = @fecha_fin
-        end
-      elsif (@tipo_informe == 3) #TIPO SEMESTRAL
-      	informe1 = Informe.where( planformacion_id: session[:plan_id], numero: 1).take
-      	informe2 = Informe.where( planformacion_id: session[:plan_id], numero: 2).take
-  	    informe.fecha_inicio = informe1.fecha_inicio
-  	    informe.fecha_fin = informe2.fecha_fin 
-  	  elsif(@tipo_informe == 6)	#TIPO ANUAL
-  	  	informe1 = Informe.where( planformacion_id: session[:plan_id], numero: 4).take
-        informe2 = Informe.where( planformacion_id: session[:plan_id], numero: 5).take
-  	    informe.fecha_inicio = informe1.fecha_inicio
-  	    informe.fecha_fin = informe2.fecha_fin 
-  	  elsif(@tipo_informe == 7)	#TIPO FINAL
-  	  	informe1 = Informe.where( planformacion_id: session[:plan_id], numero: 1).take
-        informe2 = Informe.where( planformacion_id: session[:plan_id], numero: 5).take
-  	    informe.fecha_inicio = informe1.fecha_inicio
-  	    informe.fecha_fin = informe2.fecha_fin 
-  	  end
-      informe.save
 
-      ei = EstatusInforme.new
-      ei.informe_id = informe.id
-      ei.fecha = Time.now
-      ei.estatus_id = 6
-      ei.actual = 1
-      ei.save
-      
+        @fecha_inicio = params[:fechaIni]
+        @fecha_fin = params[:fechaFin]
 
-      @estado =EstatusInforme.where(informe_id: informe.id, actual: 1).take
-      informe.estado = @estado.id
-      informe.save
+        @cant_doc= params[:cant_docencia].to_i
+        @cant_inv= params[:cant_investigacion].to_i
+        @cant_for= params[:cant_formacion].to_i
+        @cant_ext= params[:cant_extension].to_i
+        @cant_obli= params[:cant_obligatoria].to_i
+        @cant_otr= params[:cant_otra].to_i
 
-
-      #Comienza actividades de docencia
-      j=0
-      i=:doc.to_s+j.to_s
-      @act = params[i].to_i
-      while j <  @cant_doc
-        ia = InformeActividad.new
-        ia.informe_id = informe.id
-        ia.actividad_id = @act
-        ia.save
-
-        ejecutada =:ejecutada.to_s+@act.to_s
-        ae = ActividadEjecutada.new
-        ae.descripcion = params[ejecutada]
-        ae.fecha = Time.now
-        ae.actual = 1
-        ae.informe_actividad_id = ia.id
-        ae.save
-
-        observacion =:observacion.to_s+@act.to_s
-        if params[observacion]!=nil && params[observacion]!=""
-          oa = ObservacionTutor.new
-          oa.observaciones = params[observacion]
-          oa.fecha = Time.now
-          oa.actual = 1
-          oa.informe_actividad_id = ia.id
-          oa.save
-        end
-        
-
-        j= j+1
-        i=:doc.to_s+j.to_s
-        @act= params[i].to_i
-      end
-
-      #Comienza actividades de investigacion
-      j=0
-      i=:inv.to_s+j.to_s
-      @act = params[i].to_i
-      while j <  @cant_inv
-        ia = InformeActividad.new
-        ia.informe_id = informe.id
-        ia.actividad_id = @act
-        ia.save
-
-        ejecutada =:ejecutada.to_s+@act.to_s
-        ae = ActividadEjecutada.new
-        ae.descripcion = params[ejecutada]
-        ae.fecha = Time.now
-        ae.actual = 1
-        ae.informe_actividad_id = ia.id
-        ae.save
-
-        observacion =:observacion.to_s+@act.to_s
-        if params[observacion]!=nil && params[observacion]!=""
-          oa = ObservacionTutor.new
-          oa.observaciones = params[observacion]
-          oa.fecha = Time.now
-          oa.actual = 1
-          oa.informe_actividad_id = ia.id
-          oa.save
-        end
-        
-        #Guardo los resultados de la actividad
-
-        cpi = 1
-
-        while (!params[:tipo.to_s+cpi.to_s+j.to_s].blank?)
-
-          @tipo = params[:tipo.to_s+cpi.to_s+j.to_s].to_i
-          @tipo_publicacion = nil
-          @titulo = nil
-          @autor = nil
-          @nombre_capitulo = nil
-          @autor_capitulo = nil
-          @dia = nil
-          @mes = nil
-          @ano = nil
-          @ciudad = nil
-          @estado = nil
-          @pais = nil
-          @organizador = nil
-          @duracion = nil
-          @editor = nil
-          @titulo_libro = nil
-          @autor_libro = nil
-          @nombre_revista = nil
-          @nombre_periodico = nil
-          @paginas = nil
-          @nombre_acto = nil
-          @nombre_paginaw = nil
-          @sitio_paginaw = nil
-          @url = nil
-          @isbm = nil
-          @volumen = nil
-          @edicion = nil
-          @issni = nil
-          @issne = nil
-          @doi = nil
-          @nombre = nil 
-          @infoafiliaion = nil
-          @universidad = nil
-          @cptipo = nil
-
-          # trabajos publicados
-          if (@tipo == 1) 
-            @tipo_publicacion = params[:resultado_tipos.to_s+cpi.to_s+j.to_s].to_i
-
-            # libro
-            if (@tipo_publicacion == 1) 
-              @titulo = params[:atitulo.to_s+cpi.to_s+j.to_s]
-              @ciudad = params[:aciudad.to_s+cpi.to_s+j.to_s]
-              @url = params[:aURL.to_s+cpi.to_s+j.to_s]
-              @autor = params[:aautor.to_s+cpi.to_s+j.to_s]
-              @pais = params[:apais.to_s+cpi.to_s+j.to_s]
-              @isbm = params[:aISBM.to_s+cpi.to_s+j.to_s]
-              @editor = params[:aeditor.to_s+cpi.to_s+j.to_s]
-              @ano = params[:aano.to_s+cpi.to_s+j.to_s]
-
-            # articulo de revista o journals
-            elsif (@tipo_publicacion == 2)
-              @titulo = params[:btitulo.to_s+cpi.to_s+j.to_s]
-              @autor = params[:bautor.to_s+cpi.to_s+j.to_s]
-              @mes = params[:bmes.to_s+cpi.to_s+j.to_s]
-              @ano = params[:bano.to_s+cpi.to_s+j.to_s]
-              @ciudad = params[:bciudad.to_s+cpi.to_s+j.to_s]
-              @estado = params[:bestado.to_s+cpi.to_s+j.to_s]
-              @pais = params[:bpais.to_s+cpi.to_s+j.to_s]
-              @paginas = params[:bnumpaginas.to_s+cpi.to_s+j.to_s]
-              @url = params[:burl.to_s+cpi.to_s+j.to_s]
-              @volumen = params[:bvolumen.to_s+cpi.to_s+j.to_s]
-              @edicion = params[:bnedicion.to_s+cpi.to_s+j.to_s]
-              @issni = params[:bissnimpre.to_s+cpi.to_s+j.to_s]
-              @nombre_revista = params[:brevista.to_s+cpi.to_s+j.to_s]
-              @issne = params[:bissnelec.to_s+cpi.to_s+j.to_s]
-              @doi = params[:bdoi.to_s+cpi.to_s+j.to_s]
-
-            # articulo de prensa
-            elsif (@tipo_publicacion == 3)
-              @titulo = params[:ctitulo.to_s+cpi.to_s+j.to_s]
-              @autor = params[:cautor.to_s+cpi.to_s+j.to_s]
-              @dia = params[:cdia.to_s+cpi.to_s+j.to_s]
-              @mes = params[:cmes.to_s+cpi.to_s+j.to_s]
-              @ano = params[:cano.to_s+cpi.to_s+j.to_s]
-              @pais = params[:cpais.to_s+cpi.to_s+j.to_s]
-              @nombre_periodico = params[:cnomperi.to_s+cpi.to_s+j.to_s]
-              @paginas = params[:cnumpag.to_s+cpi.to_s+j.to_s]
-              @url = params[:curl.to_s+cpi.to_s+j.to_s]
-
-            # cd
-            elsif (@tipo_publicacion == 4)
-              @titulo = params[:dtitulo.to_s+cpi.to_s+j.to_s]
-              @autor = params[:dautor.to_s+cpi.to_s+j.to_s]
-              @ano = params[:daño.to_s+cpi.to_s+j.to_s]
-              @ciudad = params[:dciudad.to_s+cpi.to_s+j.to_s]
-              @pais = params[:dpais.to_s+cpi.to_s+j.to_s]
-              @editor = params[:deditor.to_s+cpi.to_s+j.to_s]
-
-            #manuales
-            elsif (@tipo_publicacion == 5)
-              @titulo = params[:etitulo.to_s+cpi.to_s+j.to_s]
-              @autor = params[:eautor.to_s+cpi.to_s+j.to_s]
-              @mes = params[:emes.to_s+cpi.to_s+j.to_s]
-              @ano = params[:eano.to_s+cpi.to_s+j.to_s]
-              @ciudad = params[:eciudad.to_s+cpi.to_s+j.to_s]
-              @pais = params[:epais.to_s+cpi.to_s+j.to_s]
-              @editor = params[:eeditor.to_s+cpi.to_s+j.to_s]
-
-            #publicaciones electronicas
-            elsif (@tipo_publicacion == 6)
-              @titulo = params[:ftitulo.to_s+cpi.to_s+j.to_s]
-              @autor = params[:fautor.to_s+cpi.to_s+j.to_s]
-              @nombre = params[:fnombre.to_s+cpi.to_s+j.to_s]
-              @mes = params[:fmes.to_s+cpi.to_s+j.to_s]
-              @ano = params[:fano.to_s+cpi.to_s+j.to_s]
-              @nombre_paginaw = params[:fnompagweb.to_s+cpi.to_s+j.to_s]
-              @sitio_paginaw = params[:fsitioweb.to_s+cpi.to_s+j.to_s]
-              @url = params[:furl.to_s+cpi.to_s+j.to_s]
-              @isbm = params[:fisbn.to_s+cpi.to_s+j.to_s]
-              @doi = params[:fdoi.to_s+cpi.to_s+j.to_s]
-
-            #tesis
-            elsif (@tipo_publicacion == 7)
-              @titulo = params[:gtitulo.to_s+cpi.to_s+j.to_s]
-              @autor = params[:gautor.to_s+cpi.to_s+j.to_s]
-              @mes = params[:gmes.to_s+cpi.to_s+j.to_s]
-              @ano = params[:gano.to_s+cpi.to_s+j.to_s]
-              @ciudad = params[:gciudad.to_s+cpi.to_s+j.to_s]
-              @pais = params[:gpais.to_s+cpi.to_s+j.to_s]
-              @infoafiliaion = params[:ginfoafiliacion.to_s+cpi.to_s+j.to_s]
-              @universidad = params[:guniversidad.to_s+cpi.to_s+j.to_s]
-              @cptipo = params[:gtipotesis.to_s+cpi.to_s+j.to_s]
-
-            #acta de conferencia
-            elsif  (@tipo_publicacion == 8)
-              @titulo = params[:htitulo.to_s+cpi.to_s+j.to_s]
-              @autor = params[:hautor.to_s+cpi.to_s+j.to_s]
-              @mes = params[:hmes.to_s+cpi.to_s+j.to_s]
-              @ano = params[:hano.to_s+cpi.to_s+j.to_s]
-              @paginas = params[:hpaginas.to_s+cpi.to_s+j.to_s]
-              @isbm = params[:hisbm.to_s+cpi.to_s+j.to_s]
-              @issni = params[:hissn.to_s+cpi.to_s+j.to_s]
-              @doi = params[:hdoi.to_s+cpi.to_s+j.to_s]
-              @nombre = params[:hnombreconf.to_s+cpi.to_s+j.to_s] 
-
-            #capitulo de un libro
-            elsif  (@tipo_publicacion == 9)
-              @nombre_capitulo = params[:ititulocapitulo.to_s+cpi.to_s+j.to_s]
-              @autor = params[:iautor.to_s+cpi.to_s+j.to_s]
-              @ano = params[:iano.to_s+cpi.to_s+j.to_s]
-              @titulo_libro = params[:ititulolibro.to_s+cpi.to_s+j.to_s]
-              @paginas = params[:ipaginas.to_s+cpi.to_s+j.to_s]
-              @isbm = params[:iisbn.to_s+cpi.to_s+j.to_s]
-
-            end
-
-          #presentación de potencias
-          elsif (@tipo == 2)
-            @titulo = params[:jtitulo.to_s+cpi.to_s+j.to_s]
-            @autor = params[:jautordoc.to_s+cpi.to_s+j.to_s]
-            @nombre_capitulo = params[:jtitulocapitulo.to_s+cpi.to_s+j.to_s]
-            @autor_capitulo = params[:jautorcap.to_s+cpi.to_s+j.to_s]
-            @dia = params[:jdia.to_s+cpi.to_s+j.to_s]
-            @mes = params[:jmes.to_s+cpi.to_s+j.to_s]
-            @ano = params[:jano.to_s+cpi.to_s+j.to_s]
-            @ciudad = params[:jciudad.to_s+cpi.to_s+j.to_s]
-            @editor = params[:jeditor.to_s+cpi.to_s+j.to_s]
-            @paginas = params[:jnumpag.to_s+cpi.to_s+j.to_s]
-            @nombre = params[:jnombreact.to_s+cpi.to_s+j.to_s]
-
-          #presentación informes tecnicos
-          elsif (@tipo == 3)
-            @titulo = params[:ktitulo.to_s+cpi.to_s+j.to_s]
-            @autor = params[:kautordoc.to_s+cpi.to_s+j.to_s]
-            @nombre_capitulo = params[:ktitulocapitulo.to_s+cpi.to_s+j.to_s]
-            @autor_capitulo = params[:kautorcap.to_s+cpi.to_s+j.to_s]
-            @dia = params[:kdia.to_s+cpi.to_s+j.to_s]
-            @mes = params[:kmes.to_s+cpi.to_s+j.to_s]
-            @ano = params[:kano.to_s+cpi.to_s+j.to_s]
-            @ciudad = params[:kciudad.to_s+cpi.to_s+j.to_s]
-            @estado = params[:kestado.to_s+cpi.to_s+j.to_s]
-            @pais = params[:kpais.to_s+cpi.to_s+j.to_s]
-            @organizador = params[:kentidadorg.to_s+cpi.to_s+j.to_s]
-            @editor = params[:keditor.to_s+cpi.to_s+j.to_s]
-            @paginas = params[:knumpag.to_s+cpi.to_s+j.to_s]
-            @nombre_acto = params[:knombreact.to_s+cpi.to_s+j.to_s]
-
-          #otro
-          elsif (@tipo == 4)
-            @titulo = params[:ltitulo.to_s+cpi.to_s+j.to_s]
-            @autor = params[:lautor.to_s+cpi.to_s+j.to_s]
-            @dia = params[:ldia.to_s+cpi.to_s+j.to_s]
-            @mes = params[:lmes.to_s+cpi.to_s+j.to_s]
-            @ano = params[:laño.to_s+cpi.to_s+j.to_s]
-            @ciudad = params[:lciudad.to_s+cpi.to_s+j.to_s]
-            @editor = params[:leditor.to_s+cpi.to_s+j.to_s]
-            @paginas = params[:lnumpag.to_s+cpi.to_s+j.to_s]
-            @nombre_acto = params[:lnomacto.to_s+cpi.to_s+j.to_s]
-          
-          #asistencia y organización de eventos cientificos
-          elsif (@tipo == 5 || @tipo == 6)
-            @titulo = params[:ntitulo.to_s+cpi.to_s+j.to_s]
-            @autor = params[:nautordoc.to_s+cpi.to_s+j.to_s]
-            @nombre_capitulo = params[:ntitulocapitulo.to_s+cpi.to_s+j.to_s]
-            @autor_capitulo = params[:nnombreautor.to_s+cpi.to_s+j.to_s]
-            @dia = params[:ndia.to_s+cpi.to_s+j.to_s]
-            @mes = params[:nmes.to_s+cpi.to_s+j.to_s]
-            @ano = params[:nano.to_s+cpi.to_s+j.to_s]
-            @ciudad = params[:nciudad.to_s+cpi.to_s+j.to_s]
-            @estado = params[:nestado.to_s+cpi.to_s+j.to_s]
-            @pais = params[:npais.to_s+cpi.to_s+j.to_s]
-            @nombre_acto = params[:nnombreacto.to_s+cpi.to_s+j.to_s]
-          
-          #dictado de cursos, talleres, etc
-          elsif (@tipo == 7)
-            @titulo = params[:otitulo.to_s+cpi.to_s+j.to_s]
-            @autor = params[:oautordoc.to_s+cpi.to_s+j.to_s]
-            @nombre_capitulo = params[:otitulocap.to_s+cpi.to_s+j.to_s]
-            @autor_capitulo = params[:oautorcap.to_s+cpi.to_s+j.to_s]
-            @dia = params[:odia.to_s+cpi.to_s+j.to_s]
-            @mes = params[:omes.to_s+cpi.to_s+j.to_s]
-            @ano = params[:oano.to_s+cpi.to_s+j.to_s]
-            @ciudad = params[:ociudad.to_s+cpi.to_s+j.to_s]
-            @estado = params[:oestado.to_s+cpi.to_s+j.to_s]
-            @pais = params[:opais.to_s+cpi.to_s+j.to_s]
-            @organizador = params[:oentidadorg.to_s+cpi.to_s+j.to_s]
-            @duracion = params[:oduracion.to_s+cpi.to_s+j.to_s]
-            @editor = params[:oeditor.to_s+cpi.to_s+j.to_s]
-            @titulo_libro = params[:otitulolib.to_s+cpi.to_s+j.to_s]
-            @autor_libro = params[:oautorref.to_s+cpi.to_s+j.to_s]
-            @paginas = params[:onumpag.to_s+cpi.to_s+j.to_s]
-
-
+        @tipo_informe = params[:tipoinf].to_i
+        @numero_informe= params[:numero_informe].to_i
+        if @tipo_informe == 1 || @tipo_informe==2 || @tipo_informe==4 || @tipo_informe==5
+          @tipo= 1
+          @nombre_inf= 'Semestral'
+        else
+          if @tipo_informe== 3 || @tipo_informe==6
+            @tipo=2
+            @nombre_inf= 'Anual'
+          else
+            @tipo=3
+            @nombre_inf= 'Final'
           end
-
-
-            r = Resultado.new 
-            r.tipo_resultado_id = @tipo
-            r.tipo_publicacion = @tipo_publicacion
-            r.titulo = @titulo
-            r.autor = @autor
-            r.nombre_capitulo = @nombre_capitulo
-            r.autor_capitulo = @autor_capitulo
-            r.dia = @dia
-            r.mes =@mes
-            r.ano = @ano
-            r.ciudad = @ciudad
-            r.estado = @estado
-            r.pais = @pais
-            r.organizador = @organizador
-            r.duracion = @duracion
-            r.editor = @editor
-            r.titulo_libro = @titulo_libro
-            r.autor_libro = @autor_libro
-            r.nombre_revista = @nombre_revista
-            r.nombre_periodico = @nombre_periodico
-            r.paginas = @paginas
-            r.nombre_acto = @nombre_acto
-            r.nombre_paginaw = @nombre_paginaw
-            r.sitio_paginaw = @sitio_paginaw
-            r.infoafiliaion = @infoafiliaion
-            r.cptipo = @cptipo
-            r.nombre = @nombre
-            r.ISSN_impreso = @issni
-            r.ISSN_electro = @issne
-            r.volumen = @volumen
-            r.edicion = @edicion
-            r.DOI = @doi
-            r.ISBN = @isbm
-            r.universidad = @universidad
-            r.url = @url
-            r.informe_actividad_id = ia.id
-            r.save
-
-          cpi = cpi+1
-
         end
-        ia.save
-        j= j+1
-        i=:inv.to_s+j.to_s
-        @act= params[i].to_i
-      end
-
-
-
-
-
-      #Comienza actividades de formacion
-      j=0
-      i=:for.to_s+j.to_s
-      @act = params[i].to_i
-      while j <  @cant_for
-        ia = InformeActividad.new
-        ia.informe_id = informe.id
-        ia.actividad_id = @act
-        ia.save
-
-        ejecutada =:ejecutada.to_s+@act.to_s
-        ae = ActividadEjecutada.new
-        ae.descripcion = params[ejecutada]
-        ae.fecha = Time.now
-        ae.actual = 1
-        ae.informe_actividad_id = ia.id
-        ae.save
-
-        observacion =:observacion.to_s+@act.to_s
-        if params[observacion]!=nil && params[observacion]!=""
-          oa = ObservacionTutor.new
-          oa.observaciones = params[observacion]
-          oa.fecha = Time.now
-          oa.actual = 1
-          oa.informe_actividad_id = ia.id
-          oa.save
+        informe = Informe.new
+        informe.planformacion_id = session[:plan_id]
+        informe.tutor_id = session[:usuario_id]
+        informe.opinion_tutor = params[:opinion]
+        informe.conclusiones = params[:conclusiones]
+        informe.justificaciones = params[:justi]
+        informe.tipo_id = @tipo
+        informe.numero = @numero_informe
+        informe.fecha_creacion = Time.now
+        informe.fecha_modificacion = Time.now
+        if (@tipo_informe == 1 || @tipo_informe== 2 || @tipo_informe==4 || @tipo_informe==5)
+          if !params[:fechaIni].blank?
+            informe.fecha_inicio = @fecha_inicio
+          end
+          if !params[:fechaFin].blank?
+            informe.fecha_fin = @fecha_fin
+          end
+        elsif (@tipo_informe == 3) #TIPO SEMESTRAL
+          informe1 = Informe.where( planformacion_id: session[:plan_id], numero: 1).take
+          informe2 = Informe.where( planformacion_id: session[:plan_id], numero: 2).take
+          informe.fecha_inicio = informe1.fecha_inicio
+          informe.fecha_fin = informe2.fecha_fin 
+        elsif(@tipo_informe == 6)	#TIPO ANUAL
+          informe1 = Informe.where( planformacion_id: session[:plan_id], numero: 4).take
+          informe2 = Informe.where( planformacion_id: session[:plan_id], numero: 5).take
+          informe.fecha_inicio = informe1.fecha_inicio
+          informe.fecha_fin = informe2.fecha_fin 
+        elsif(@tipo_informe == 7)	#TIPO FINAL
+          informe1 = Informe.where( planformacion_id: session[:plan_id], numero: 1).take
+          informe2 = Informe.where( planformacion_id: session[:plan_id], numero: 5).take
+          informe.fecha_inicio = informe1.fecha_inicio
+          informe.fecha_fin = informe2.fecha_fin 
         end
+        informe.save
 
-        j= j+1
-        i=:for.to_s+j.to_s
-        @act= params[i].to_i
-      end
-
-      if params[:postgrado]!=nil && params[:postgrado]!=""
-        rp = Resultado.new
-        rp.tipo_resultado_id = 8
-        rp.concepto = params[:postgrado]
-        rp.save
-        ia = InformeActividad.new
-        ia.informe_id = informe.id
-        ia.resultado_id = rp.id
-        ia.save
-      end
-
-      #Comienza actividades de extension
-      j=0
-      i=:ext.to_s+j.to_s
-      @act = params[i].to_i
-      while j <  @cant_ext
-        ia = InformeActividad.new
-        ia.informe_id = informe.id
-        ia.actividad_id = @act
-        ia.save
-
-        ejecutada =:ejecutada.to_s+@act.to_s
-        ae = ActividadEjecutada.new
-        ae.descripcion = params[ejecutada]
-        ae.fecha = Time.now
-        ae.actual = 1
-        ae.informe_actividad_id = ia.id
-        ae.save
-
-        observacion =:observacion.to_s+@act.to_s
-        if params[observacion]!=nil && params[observacion]!=""
-          oa = ObservacionTutor.new
-          oa.observaciones = params[observacion]
-          oa.fecha = Time.now
-          oa.actual = 1
-          oa.informe_actividad_id = ia.id
-          oa.save
-        end
-
-        j= j+1
-        i=:ext.to_s+j.to_s
-        @act= params[i].to_i
-      end
-
-      #Comienza actividades obligatorias
-      j=0
-      i=:obli.to_s+j.to_s
-      @act = params[i].to_i
-      while j <  @cant_obli
-        ia = InformeActividad.new
-        ia.informe_id = informe.id
-        ia.actividad_id = @act
-        ia.save
-
-        ejecutada =:ejecutada.to_s+@act.to_s
-        ae = ActividadEjecutada.new
-        ae.descripcion = params[ejecutada]
-        ae.fecha = Time.now
-        ae.actual = 1
-        ae.informe_actividad_id = ia.id
-        ae.save
-
-        observacion =:observacion.to_s+@act.to_s
-        if params[observacion]!=nil && params[observacion]!=""
-          oa = ObservacionTutor.new
-          oa.observaciones = params[observacion]
-          oa.fecha = Time.now
-          oa.actual = 1
-          oa.informe_actividad_id = ia.id
-          oa.save
-        end
+        ei = EstatusInforme.new
+        ei.informe_id = informe.id
+        ei.fecha = Time.now
+        ei.estatus_id = 6
+        ei.actual = 1
+        ei.save
         
 
-        j= j+1
-        i=:obli.to_s+j.to_s
-        @act= params[i].to_i
-      end
+        @estado =EstatusInforme.where(informe_id: informe.id, actual: 1).take
+        informe.estado = @estado.id
+        informe.save
 
-      #Comienzan otras actividades contempladas en el plan
-      j=0
-      i=:otra.to_s+j.to_s
-      @act = params[i].to_i
-      while j <  @cant_otr
-        ia = InformeActividad.new
-        ia.informe_id = informe.id
-        ia.actividad_id = @act
-        ia.save
-        ejecutada =:ejecutada.to_s+@act.to_s
-        if params[ejecutada]!=nil && params[ejecutada]!=""
+
+        #Comienza actividades de docencia
+        j=0
+        i=:doc.to_s+j.to_s
+        @act = params[i].to_i
+        while j <  @cant_doc
+          ia = InformeActividad.new
+          ia.informe_id = informe.id
+          ia.actividad_id = @act
+          ia.save
+
+          ejecutada =:ejecutada.to_s+@act.to_s
           ae = ActividadEjecutada.new
           ae.descripcion = params[ejecutada]
           ae.fecha = Time.now
           ae.actual = 1
           ae.informe_actividad_id = ia.id
           ae.save
-        end
-        j= j+1
-        i=:otra.to_s+j.to_s
-        @act= params[i].to_i
-      end
 
-      redirect_to controller:"informes", action: "listar_informes"
-      flash[:success]= "El informe fue creado y guardado correctamente"
+          observacion =:observacion.to_s+@act.to_s
+          if params[observacion]!=nil && params[observacion]!=""
+            oa = ObservacionTutor.new
+            oa.observaciones = params[observacion]
+            oa.fecha = Time.now
+            oa.actual = 1
+            oa.informe_actividad_id = ia.id
+            oa.save
+          end
+          
+
+          j= j+1
+          i=:doc.to_s+j.to_s
+          @act= params[i].to_i
+        end
+
+        #Comienza actividades de investigacion
+        j=0
+        i=:inv.to_s+j.to_s
+        @act = params[i].to_i
+        while j <  @cant_inv
+          ia = InformeActividad.new
+          ia.informe_id = informe.id
+          ia.actividad_id = @act
+          ia.save
+
+          ejecutada =:ejecutada.to_s+@act.to_s
+          ae = ActividadEjecutada.new
+          ae.descripcion = params[ejecutada]
+          ae.fecha = Time.now
+          ae.actual = 1
+          ae.informe_actividad_id = ia.id
+          ae.save
+
+          observacion =:observacion.to_s+@act.to_s
+          if params[observacion]!=nil && params[observacion]!=""
+            oa = ObservacionTutor.new
+            oa.observaciones = params[observacion]
+            oa.fecha = Time.now
+            oa.actual = 1
+            oa.informe_actividad_id = ia.id
+            oa.save
+          end
+          
+          #Guardo los resultados de la actividad
+
+          cpi = 1
+
+          while (!params[:tipo.to_s+cpi.to_s+j.to_s].blank?)
+
+            @tipo = params[:tipo.to_s+cpi.to_s+j.to_s].to_i
+            @tipo_publicacion = nil
+            @titulo = nil
+            @autor = nil
+            @nombre_capitulo = nil
+            @autor_capitulo = nil
+            @dia = nil
+            @mes = nil
+            @ano = nil
+            @ciudad = nil
+            @estado = nil
+            @pais = nil
+            @organizador = nil
+            @duracion = nil
+            @editor = nil
+            @titulo_libro = nil
+            @autor_libro = nil
+            @nombre_revista = nil
+            @nombre_periodico = nil
+            @paginas = nil
+            @nombre_acto = nil
+            @nombre_paginaw = nil
+            @sitio_paginaw = nil
+            @url = nil
+            @isbm = nil
+            @volumen = nil
+            @edicion = nil
+            @issni = nil
+            @issne = nil
+            @doi = nil
+            @nombre = nil 
+            @infoafiliaion = nil
+            @universidad = nil
+            @cptipo = nil
+
+            # trabajos publicados
+            if (@tipo == 1) 
+              @tipo_publicacion = params[:resultado_tipos.to_s+cpi.to_s+j.to_s].to_i
+
+              # libro
+              if (@tipo_publicacion == 1) 
+                @titulo = params[:atitulo.to_s+cpi.to_s+j.to_s]
+                @ciudad = params[:aciudad.to_s+cpi.to_s+j.to_s]
+                @url = params[:aURL.to_s+cpi.to_s+j.to_s]
+                @autor = params[:aautor.to_s+cpi.to_s+j.to_s]
+                @pais = params[:apais.to_s+cpi.to_s+j.to_s]
+                @isbm = params[:aISBM.to_s+cpi.to_s+j.to_s]
+                @editor = params[:aeditor.to_s+cpi.to_s+j.to_s]
+                @ano = params[:aano.to_s+cpi.to_s+j.to_s]
+
+              # articulo de revista o journals
+              elsif (@tipo_publicacion == 2)
+                @titulo = params[:btitulo.to_s+cpi.to_s+j.to_s]
+                @autor = params[:bautor.to_s+cpi.to_s+j.to_s]
+                @mes = params[:bmes.to_s+cpi.to_s+j.to_s]
+                @ano = params[:bano.to_s+cpi.to_s+j.to_s]
+                @ciudad = params[:bciudad.to_s+cpi.to_s+j.to_s]
+                @estado = params[:bestado.to_s+cpi.to_s+j.to_s]
+                @pais = params[:bpais.to_s+cpi.to_s+j.to_s]
+                @paginas = params[:bnumpaginas.to_s+cpi.to_s+j.to_s]
+                @url = params[:burl.to_s+cpi.to_s+j.to_s]
+                @volumen = params[:bvolumen.to_s+cpi.to_s+j.to_s]
+                @edicion = params[:bnedicion.to_s+cpi.to_s+j.to_s]
+                @issni = params[:bissnimpre.to_s+cpi.to_s+j.to_s]
+                @nombre_revista = params[:brevista.to_s+cpi.to_s+j.to_s]
+                @issne = params[:bissnelec.to_s+cpi.to_s+j.to_s]
+                @doi = params[:bdoi.to_s+cpi.to_s+j.to_s]
+
+              # articulo de prensa
+              elsif (@tipo_publicacion == 3)
+                @titulo = params[:ctitulo.to_s+cpi.to_s+j.to_s]
+                @autor = params[:cautor.to_s+cpi.to_s+j.to_s]
+                @dia = params[:cdia.to_s+cpi.to_s+j.to_s]
+                @mes = params[:cmes.to_s+cpi.to_s+j.to_s]
+                @ano = params[:cano.to_s+cpi.to_s+j.to_s]
+                @pais = params[:cpais.to_s+cpi.to_s+j.to_s]
+                @nombre_periodico = params[:cnomperi.to_s+cpi.to_s+j.to_s]
+                @paginas = params[:cnumpag.to_s+cpi.to_s+j.to_s]
+                @url = params[:curl.to_s+cpi.to_s+j.to_s]
+
+              # cd
+              elsif (@tipo_publicacion == 4)
+                @titulo = params[:dtitulo.to_s+cpi.to_s+j.to_s]
+                @autor = params[:dautor.to_s+cpi.to_s+j.to_s]
+                @ano = params[:daño.to_s+cpi.to_s+j.to_s]
+                @ciudad = params[:dciudad.to_s+cpi.to_s+j.to_s]
+                @pais = params[:dpais.to_s+cpi.to_s+j.to_s]
+                @editor = params[:deditor.to_s+cpi.to_s+j.to_s]
+
+              #manuales
+              elsif (@tipo_publicacion == 5)
+                @titulo = params[:etitulo.to_s+cpi.to_s+j.to_s]
+                @autor = params[:eautor.to_s+cpi.to_s+j.to_s]
+                @mes = params[:emes.to_s+cpi.to_s+j.to_s]
+                @ano = params[:eano.to_s+cpi.to_s+j.to_s]
+                @ciudad = params[:eciudad.to_s+cpi.to_s+j.to_s]
+                @pais = params[:epais.to_s+cpi.to_s+j.to_s]
+                @editor = params[:eeditor.to_s+cpi.to_s+j.to_s]
+
+              #publicaciones electronicas
+              elsif (@tipo_publicacion == 6)
+                @titulo = params[:ftitulo.to_s+cpi.to_s+j.to_s]
+                @autor = params[:fautor.to_s+cpi.to_s+j.to_s]
+                @nombre = params[:fnombre.to_s+cpi.to_s+j.to_s]
+                @mes = params[:fmes.to_s+cpi.to_s+j.to_s]
+                @ano = params[:fano.to_s+cpi.to_s+j.to_s]
+                @nombre_paginaw = params[:fnompagweb.to_s+cpi.to_s+j.to_s]
+                @sitio_paginaw = params[:fsitioweb.to_s+cpi.to_s+j.to_s]
+                @url = params[:furl.to_s+cpi.to_s+j.to_s]
+                @isbm = params[:fisbn.to_s+cpi.to_s+j.to_s]
+                @doi = params[:fdoi.to_s+cpi.to_s+j.to_s]
+
+              #tesis
+              elsif (@tipo_publicacion == 7)
+                @titulo = params[:gtitulo.to_s+cpi.to_s+j.to_s]
+                @autor = params[:gautor.to_s+cpi.to_s+j.to_s]
+                @mes = params[:gmes.to_s+cpi.to_s+j.to_s]
+                @ano = params[:gano.to_s+cpi.to_s+j.to_s]
+                @ciudad = params[:gciudad.to_s+cpi.to_s+j.to_s]
+                @pais = params[:gpais.to_s+cpi.to_s+j.to_s]
+                @infoafiliaion = params[:ginfoafiliacion.to_s+cpi.to_s+j.to_s]
+                @universidad = params[:guniversidad.to_s+cpi.to_s+j.to_s]
+                @cptipo = params[:gtipotesis.to_s+cpi.to_s+j.to_s]
+
+              #acta de conferencia
+              elsif  (@tipo_publicacion == 8)
+                @titulo = params[:htitulo.to_s+cpi.to_s+j.to_s]
+                @autor = params[:hautor.to_s+cpi.to_s+j.to_s]
+                @mes = params[:hmes.to_s+cpi.to_s+j.to_s]
+                @ano = params[:hano.to_s+cpi.to_s+j.to_s]
+                @paginas = params[:hpaginas.to_s+cpi.to_s+j.to_s]
+                @isbm = params[:hisbm.to_s+cpi.to_s+j.to_s]
+                @issni = params[:hissn.to_s+cpi.to_s+j.to_s]
+                @doi = params[:hdoi.to_s+cpi.to_s+j.to_s]
+                @nombre = params[:hnombreconf.to_s+cpi.to_s+j.to_s] 
+
+              #capitulo de un libro
+              elsif  (@tipo_publicacion == 9)
+                @nombre_capitulo = params[:ititulocapitulo.to_s+cpi.to_s+j.to_s]
+                @autor = params[:iautor.to_s+cpi.to_s+j.to_s]
+                @ano = params[:iano.to_s+cpi.to_s+j.to_s]
+                @titulo_libro = params[:ititulolibro.to_s+cpi.to_s+j.to_s]
+                @paginas = params[:ipaginas.to_s+cpi.to_s+j.to_s]
+                @isbm = params[:iisbn.to_s+cpi.to_s+j.to_s]
+
+              end
+
+            #presentación de potencias
+            elsif (@tipo == 2)
+              @titulo = params[:jtitulo.to_s+cpi.to_s+j.to_s]
+              @autor = params[:jautordoc.to_s+cpi.to_s+j.to_s]
+              @nombre_capitulo = params[:jtitulocapitulo.to_s+cpi.to_s+j.to_s]
+              @autor_capitulo = params[:jautorcap.to_s+cpi.to_s+j.to_s]
+              @dia = params[:jdia.to_s+cpi.to_s+j.to_s]
+              @mes = params[:jmes.to_s+cpi.to_s+j.to_s]
+              @ano = params[:jano.to_s+cpi.to_s+j.to_s]
+              @ciudad = params[:jciudad.to_s+cpi.to_s+j.to_s]
+              @editor = params[:jeditor.to_s+cpi.to_s+j.to_s]
+              @paginas = params[:jnumpag.to_s+cpi.to_s+j.to_s]
+              @nombre = params[:jnombreact.to_s+cpi.to_s+j.to_s]
+
+            #presentación informes tecnicos
+            elsif (@tipo == 3)
+              @titulo = params[:ktitulo.to_s+cpi.to_s+j.to_s]
+              @autor = params[:kautordoc.to_s+cpi.to_s+j.to_s]
+              @nombre_capitulo = params[:ktitulocapitulo.to_s+cpi.to_s+j.to_s]
+              @autor_capitulo = params[:kautorcap.to_s+cpi.to_s+j.to_s]
+              @dia = params[:kdia.to_s+cpi.to_s+j.to_s]
+              @mes = params[:kmes.to_s+cpi.to_s+j.to_s]
+              @ano = params[:kano.to_s+cpi.to_s+j.to_s]
+              @ciudad = params[:kciudad.to_s+cpi.to_s+j.to_s]
+              @estado = params[:kestado.to_s+cpi.to_s+j.to_s]
+              @pais = params[:kpais.to_s+cpi.to_s+j.to_s]
+              @organizador = params[:kentidadorg.to_s+cpi.to_s+j.to_s]
+              @editor = params[:keditor.to_s+cpi.to_s+j.to_s]
+              @paginas = params[:knumpag.to_s+cpi.to_s+j.to_s]
+              @nombre_acto = params[:knombreact.to_s+cpi.to_s+j.to_s]
+
+            #otro
+            elsif (@tipo == 4)
+              @titulo = params[:ltitulo.to_s+cpi.to_s+j.to_s]
+              @autor = params[:lautor.to_s+cpi.to_s+j.to_s]
+              @dia = params[:ldia.to_s+cpi.to_s+j.to_s]
+              @mes = params[:lmes.to_s+cpi.to_s+j.to_s]
+              @ano = params[:laño.to_s+cpi.to_s+j.to_s]
+              @ciudad = params[:lciudad.to_s+cpi.to_s+j.to_s]
+              @editor = params[:leditor.to_s+cpi.to_s+j.to_s]
+              @paginas = params[:lnumpag.to_s+cpi.to_s+j.to_s]
+              @nombre_acto = params[:lnomacto.to_s+cpi.to_s+j.to_s]
+            
+            #asistencia y organización de eventos cientificos
+            elsif (@tipo == 5 || @tipo == 6)
+              @titulo = params[:ntitulo.to_s+cpi.to_s+j.to_s]
+              @autor = params[:nautordoc.to_s+cpi.to_s+j.to_s]
+              @nombre_capitulo = params[:ntitulocapitulo.to_s+cpi.to_s+j.to_s]
+              @autor_capitulo = params[:nnombreautor.to_s+cpi.to_s+j.to_s]
+              @dia = params[:ndia.to_s+cpi.to_s+j.to_s]
+              @mes = params[:nmes.to_s+cpi.to_s+j.to_s]
+              @ano = params[:nano.to_s+cpi.to_s+j.to_s]
+              @ciudad = params[:nciudad.to_s+cpi.to_s+j.to_s]
+              @estado = params[:nestado.to_s+cpi.to_s+j.to_s]
+              @pais = params[:npais.to_s+cpi.to_s+j.to_s]
+              @nombre_acto = params[:nnombreacto.to_s+cpi.to_s+j.to_s]
+            
+            #dictado de cursos, talleres, etc
+            elsif (@tipo == 7)
+              @titulo = params[:otitulo.to_s+cpi.to_s+j.to_s]
+              @autor = params[:oautordoc.to_s+cpi.to_s+j.to_s]
+              @nombre_capitulo = params[:otitulocap.to_s+cpi.to_s+j.to_s]
+              @autor_capitulo = params[:oautorcap.to_s+cpi.to_s+j.to_s]
+              @dia = params[:odia.to_s+cpi.to_s+j.to_s]
+              @mes = params[:omes.to_s+cpi.to_s+j.to_s]
+              @ano = params[:oano.to_s+cpi.to_s+j.to_s]
+              @ciudad = params[:ociudad.to_s+cpi.to_s+j.to_s]
+              @estado = params[:oestado.to_s+cpi.to_s+j.to_s]
+              @pais = params[:opais.to_s+cpi.to_s+j.to_s]
+              @organizador = params[:oentidadorg.to_s+cpi.to_s+j.to_s]
+              @duracion = params[:oduracion.to_s+cpi.to_s+j.to_s]
+              @editor = params[:oeditor.to_s+cpi.to_s+j.to_s]
+              @titulo_libro = params[:otitulolib.to_s+cpi.to_s+j.to_s]
+              @autor_libro = params[:oautorref.to_s+cpi.to_s+j.to_s]
+              @paginas = params[:onumpag.to_s+cpi.to_s+j.to_s]
+
+
+            end
+
+
+              r = Resultado.new 
+              r.tipo_resultado_id = @tipo
+              r.tipo_publicacion = @tipo_publicacion
+              r.titulo = @titulo
+              r.autor = @autor
+              r.nombre_capitulo = @nombre_capitulo
+              r.autor_capitulo = @autor_capitulo
+              r.dia = @dia
+              r.mes =@mes
+              r.ano = @ano
+              r.ciudad = @ciudad
+              r.estado = @estado
+              r.pais = @pais
+              r.organizador = @organizador
+              r.duracion = @duracion
+              r.editor = @editor
+              r.titulo_libro = @titulo_libro
+              r.autor_libro = @autor_libro
+              r.nombre_revista = @nombre_revista
+              r.nombre_periodico = @nombre_periodico
+              r.paginas = @paginas
+              r.nombre_acto = @nombre_acto
+              r.nombre_paginaw = @nombre_paginaw
+              r.sitio_paginaw = @sitio_paginaw
+              r.infoafiliaion = @infoafiliaion
+              r.cptipo = @cptipo
+              r.nombre = @nombre
+              r.ISSN_impreso = @issni
+              r.ISSN_electro = @issne
+              r.volumen = @volumen
+              r.edicion = @edicion
+              r.DOI = @doi
+              r.ISBN = @isbm
+              r.universidad = @universidad
+              r.url = @url
+              r.informe_actividad_id = ia.id
+              r.save
+
+            cpi = cpi+1
+
+          end
+          ia.save
+          j= j+1
+          i=:inv.to_s+j.to_s
+          @act= params[i].to_i
+        end
+
+
+
+
+
+        #Comienza actividades de formacion
+        j=0
+        i=:for.to_s+j.to_s
+        @act = params[i].to_i
+        while j <  @cant_for
+          ia = InformeActividad.new
+          ia.informe_id = informe.id
+          ia.actividad_id = @act
+          ia.save
+
+          ejecutada =:ejecutada.to_s+@act.to_s
+          ae = ActividadEjecutada.new
+          ae.descripcion = params[ejecutada]
+          ae.fecha = Time.now
+          ae.actual = 1
+          ae.informe_actividad_id = ia.id
+          ae.save
+
+          observacion =:observacion.to_s+@act.to_s
+          if params[observacion]!=nil && params[observacion]!=""
+            oa = ObservacionTutor.new
+            oa.observaciones = params[observacion]
+            oa.fecha = Time.now
+            oa.actual = 1
+            oa.informe_actividad_id = ia.id
+            oa.save
+          end
+
+          j= j+1
+          i=:for.to_s+j.to_s
+          @act= params[i].to_i
+        end
+
+        if params[:postgrado]!=nil && params[:postgrado]!=""
+          rp = Resultado.new
+          rp.tipo_resultado_id = 8
+          rp.concepto = params[:postgrado]
+          rp.save
+          ia = InformeActividad.new
+          ia.informe_id = informe.id
+          ia.resultado_id = rp.id
+          ia.save
+        end
+
+        #Comienza actividades de extension
+        j=0
+        i=:ext.to_s+j.to_s
+        @act = params[i].to_i
+        while j <  @cant_ext
+          ia = InformeActividad.new
+          ia.informe_id = informe.id
+          ia.actividad_id = @act
+          ia.save
+
+          ejecutada =:ejecutada.to_s+@act.to_s
+          ae = ActividadEjecutada.new
+          ae.descripcion = params[ejecutada]
+          ae.fecha = Time.now
+          ae.actual = 1
+          ae.informe_actividad_id = ia.id
+          ae.save
+
+          observacion =:observacion.to_s+@act.to_s
+          if params[observacion]!=nil && params[observacion]!=""
+            oa = ObservacionTutor.new
+            oa.observaciones = params[observacion]
+            oa.fecha = Time.now
+            oa.actual = 1
+            oa.informe_actividad_id = ia.id
+            oa.save
+          end
+
+          j= j+1
+          i=:ext.to_s+j.to_s
+          @act= params[i].to_i
+        end
+
+        #Comienza actividades obligatorias
+        j=0
+        i=:obli.to_s+j.to_s
+        @act = params[i].to_i
+        while j <  @cant_obli
+          ia = InformeActividad.new
+          ia.informe_id = informe.id
+          ia.actividad_id = @act
+          ia.save
+
+          ejecutada =:ejecutada.to_s+@act.to_s
+          ae = ActividadEjecutada.new
+          ae.descripcion = params[ejecutada]
+          ae.fecha = Time.now
+          ae.actual = 1
+          ae.informe_actividad_id = ia.id
+          ae.save
+
+          observacion =:observacion.to_s+@act.to_s
+          if params[observacion]!=nil && params[observacion]!=""
+            oa = ObservacionTutor.new
+            oa.observaciones = params[observacion]
+            oa.fecha = Time.now
+            oa.actual = 1
+            oa.informe_actividad_id = ia.id
+            oa.save
+          end
+          
+
+          j= j+1
+          i=:obli.to_s+j.to_s
+          @act= params[i].to_i
+        end
+
+        #Comienzan otras actividades contempladas en el plan
+        j=0
+        i=:otra.to_s+j.to_s
+        @act = params[i].to_i
+        while j <  @cant_otr
+          ia = InformeActividad.new
+          ia.informe_id = informe.id
+          ia.actividad_id = @act
+          ia.save
+          ejecutada =:ejecutada.to_s+@act.to_s
+          if params[ejecutada]!=nil && params[ejecutada]!=""
+            ae = ActividadEjecutada.new
+            ae.descripcion = params[ejecutada]
+            ae.fecha = Time.now
+            ae.actual = 1
+            ae.informe_actividad_id = ia.id
+            ae.save
+          end
+          j= j+1
+          i=:otra.to_s+j.to_s
+          @act= params[i].to_i
+        end
+
+        redirect_to controller:"informes", action: "listar_informes"
+        flash[:success]= "El informe fue creado y guardado correctamente"
+      else
+				flash[:info]="Seleccione una adecuación"
+				redirect_to controller:"iniciotutor", action: "planformacions"
+			end
     else
       redirect_to controller:"forminst", action: "index"
     end

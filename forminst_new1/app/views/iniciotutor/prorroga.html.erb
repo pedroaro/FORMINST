@@ -1,4 +1,27 @@
-
+<div class = 'row'>
+  <div class="col-xs-5 col-md-12">
+    <div class="container">
+      <ul class="nav nav-tabs">
+        <li><a href="../iniciotutor/index">Inicio</a></li>
+        <% if @planformacion %>
+          <li><%= link_to 'Plan de Adecuación', :controller => 'iniciotutor', :action => 'listar_adecuaciones' %></li>
+        <% else %>
+              <li><%= link_to 'Crear Adecuación', :controller => 'iniciotutor', :action => 'crear_adecuacion' %></li>
+        <% end %>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Informes <span class="caret"></span></a>
+            <ul class="dropdown-menu nav" role="menu">
+              <li></li>
+              <li><%= link_to 'Crear Informe', :controller => 'informes', :action => 'ver_crear_informe'%></li>
+              <li><%= link_to 'Listar Informes', :controller => 'informes', :action => 'listar_informes'%></li>
+            </ul>
+        </li>
+        <li><a href="#" class = 'active'>Prórroga</a></li>
+        <li><a href="../iniciotutor/logout">Cerrar Sesión</a></li>
+      </ul>
+    </div>
+  </div>
+</div>
 <div class="row">
   <div class="col-xs-12 col-md-12">
     <div class= "text-left">

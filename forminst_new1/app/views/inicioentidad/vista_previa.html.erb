@@ -226,7 +226,7 @@
           </tr>
           <tr>
             <td class="text-left"><b>Apellidos y Nombres:</b></td>
-            <td class="text-left"><%= @persona.apellidos + " " + @persona.nombres%></td>
+            <td class="text-left"><%= @persona.apellidos.to_s.split.map(&:capitalize).join(' ') + " " + @persona.nombres.to_s.split.map(&:capitalize).join(' ')%></td>
           </tr>
           <tr>
             <td class="text-left"><b>Cédula de Identidad:</b></td>

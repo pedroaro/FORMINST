@@ -1,6 +1,6 @@
 class DocumentsController < ApplicationController
-  include ForminstHelper
-	layout :resolve_layout
+  layout 'ly_inicio_tutor'
+
   before_action :set_document, only: [:show, :edit, :update, :destroy]
 
   # GET /documents
@@ -8,44 +8,47 @@ class DocumentsController < ApplicationController
   def index
     #pdf_filename = File.join(Rails.root, "tmp/PDFs/18810993-2017-07-02-adecuacion.pdf")
     #send_file(pdf_filename, :filename => "18810993-2017-07-02-adecuacion.pdf", :disposition => 'inline', :type => "application/pdf")
-
-
     #validar si se envio la adecuacion
-    @bool_enviado = 0
-    @adecuacion = Adecuacion.where(planformacion_id: session[:plan_id]).take
-    if session[:informe_id].blank?
-      estatus_x = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
-    else
-      estatus_x = EstatusInforme.where(informe_id: session[:informe_id], actual: 1).take
-    end
-    if (estatus_x.estatus_id != 6 && estatus_x.estatus_id != 5)
-      @bool_enviado = 1
-    end
+      if session[:usuario_id] && session[:tutor]
+        if(!session[:plan_id].blank?)
 
-    if session[:usuario_id] && session[:tutor]
-      @plan = Planformacion.where(id: session[:plan_id]).take
+          @bool_enviado = 0
+          @adecuacion = Adecuacion.where(planformacion_id: session[:plan_id]).take
+          if session[:informe_id].blank?
+            estatus_x = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
+          else
+            estatus_x = EstatusInforme.where(informe_id: session[:informe_id], actual: 1).take
+          end
+          if (estatus_x.estatus_id != 6 && estatus_x.estatus_id != 5)
+            @bool_enviado = 1
+          end
+          @plan = Planformacion.where(id: session[:plan_id]).take
 
-      if !@plan.blank?
-      #Ver si el informe fue rachazado
-      cpInstructor = Usuario.find(@plan.instructor_id)
-      if (cpInstructor.activo == false)
-        @cpBloquear = true
+          if !@plan.blank?
+            #Ver si el informe fue rachazado
+            cpInstructor = Usuario.find(@plan.instructor_id)
+            if (cpInstructor.activo == false)
+              @cpBloquear = true
+            else
+              @cpBloquear = false
+            end
+            #fin
+          end
+
+          $actividad = params[:actividad_id].to_i
+          @documents = []
+          if !session[:informe_id].blank?
+            @documents = Document.where(adecuacion_id: session[:adecuacion_id], informe_id: session[:informe_id], actividad_id: $actividad).all
+          else
+            @documents = Document.where(adecuacion_id: session[:adecuacion_id], informe_id: nil).all
+          end
+        else
+          flash.now[:info]="Seleccione una adecuación"
+          redirect_to controller:"iniciotutor", action: "planformacions"
+        end
       else
-        @cpBloquear = false
+        redirect_to controller:"forminst", action: "index"
       end
-      #fin
-    end
-
-      $actividad = params[:actividad_id].to_i
-      @documents = []
-      if !session[:informe_id].blank?
-        @documents = Document.where(adecuacion_id: session[:adecuacion_id], informe_id: session[:informe_id], actividad_id: $actividad).all
-      else
-        @documents = Document.where(adecuacion_id: session[:adecuacion_id], informe_id: nil).all
-      end
-    else
-      redirect_to controller:"forminst", action: "index"
-    end
   end
 
   # GET /documents/1.json
@@ -62,19 +65,24 @@ class DocumentsController < ApplicationController
   # GET /documents/new
   def new
     @bool_enviado = 0
-    @adecuacion = Adecuacion.where(planformacion_id: session[:plan_id]).take
-    if session[:informe_id].blank?
-      estatus_x = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
+    if(!session[:plan_id].blank?)
+      @adecuacion = Adecuacion.where(planformacion_id: session[:plan_id]).take
+      if session[:informe_id].blank?
+        estatus_x = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
+      else
+        estatus_x = EstatusInforme.where(informe_id: session[:informe_id], actual: 1).take
+      end
+      if (estatus_x.estatus_id != 6 && estatus_x.estatus_id != 5)
+        @bool_enviado = 1
+      end
+      if ( @bool_enviado == 1)
+        flash.now[:info]="No puede añadir soportes, ya ha enviado la adecuación"
+      else
+        @document = Document.new
+      end
     else
-      estatus_x = EstatusInforme.where(informe_id: session[:informe_id], actual: 1).take
-    end
-    if (estatus_x.estatus_id != 6 && estatus_x.estatus_id != 5)
-      @bool_enviado = 1
-    end
-    if ( @bool_enviado == 1)
-      flash.now[:info]="No puede añadir soportes, ya ha enviado la adecuación"
-    else
-      @document = Document.new
+      flash.now[:info]="Seleccione una adecuación"
+      redirect_to controller:"iniciotutor", action: "planformacions"
     end
   end
 

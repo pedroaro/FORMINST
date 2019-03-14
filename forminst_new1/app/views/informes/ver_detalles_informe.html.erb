@@ -1,3 +1,32 @@
+<div class = 'row'>
+  <div class="col-xs-12 col-md-12">
+      <ul class="nav nav-tabs">
+        <li><a href="../iniciotutor/index">Inicio</a></li>
+        <% if @planformacion %>
+          <li><%= link_to 'Plan de Formación', :controller => 'iniciotutor', :action => 'planformacions' %></li>
+        <% else %>
+              <li><%= link_to 'Crear Adecuación', :controller => 'iniciotutor', :action => 'crear_adecuacion' %></li>
+        <% end %>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle active" data-toggle="dropdown" role="button" aria-expanded="false">Informes <span class="caret"></span></a>
+            <ul class="dropdown-menu nav" role="menu">
+              <li></li>
+              <%if @cpBloquear%>
+                <li><a href="#" style="color:gray">Crear Informe</a></li>
+              <%else%>
+              <li><a href="#" data-toggle="modal" data-target="#selectInforme">
+                Crear Informe
+              </a></li>
+              <%end%>
+              <li><a href="#" class = 'active'>Listar Informes</a></li>
+            </ul>
+        </li>
+        <li><%= link_to 'Prórroga', :controller => 'iniciotutor', :action => 'prorroga' %></li>
+        <li><a href="../iniciotutor/logout">Cerrar Sesión</a></li>
+      </ul>
+
+  </div>
+</div>
 
 <div class="modal fade" id="selectInforme" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">

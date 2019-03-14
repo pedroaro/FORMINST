@@ -162,7 +162,7 @@ class Pdf
 			pdf.text("2.- DATOS DEL INSTRUCTOR EN FORMACIÓN:", :style => :bold, :size  => 10)
 			dataa2 = [
 			[{:text=>"Fecha del Concurso de Oposición:", :font_style=>:bold},{:text => fechaConcurso.to_s, :align=>:left}],
-			[{:text=>"Apellidos y Nombres:", :font_style => :bold}, {:text => instructor.nombres.to_s.split.map(&:capitalize).join(' ') + " " + instructor.apellidos.to_s.split.map(&:capitalize).join(' '), :align=>:left}],
+			[{:text=>"Apellidos y Nombres:", :font_style => :bold}, {:text => instructor.apellidos.to_s.split.map(&:capitalize).join(' ') + " " + instructor.nombres.to_s.split.map(&:capitalize).join(' '), :align=>:left}],
 			[{:text=>"Cédula de Identidad:", :font_style => :bold}, {:text => instructor.ci.to_s, :align=>:left}],
 			[{:text=>"Correo Electrónico:", :font_style => :bold},{:text => correoi,  :align=>:left}],
 			[{:text=>"Teléfono Celular:", :font_style => :bold},{:text => instructor.telefono1, :align=>:left}],

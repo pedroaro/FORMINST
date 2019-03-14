@@ -203,7 +203,7 @@
 
             <tr>
               <td class="text-left"><%= @plan.fecha_inicio %></td>
-              <td class="text-left"><%= @persona.nombres %></td>
+              <td class="text-left"><%= @persona.nombres.to_s.split.map(&:capitalize).join(' ') %></td>
             </tr>
 
 
@@ -213,7 +213,7 @@
             </tr>
 
             <tr>
-              <td class="text-left"><%= @persona.apellidos %></td>
+              <td class="text-left"><%= @persona.apellidos.to_s.split.map(&:capitalize).join(' ') %></td>
               <td class="text-left"><%= @persona.ci %></td>
             </tr>
 

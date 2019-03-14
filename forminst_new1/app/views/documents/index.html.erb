@@ -203,11 +203,6 @@
     <div class="btn-group" role="group">
       <button type="button" class="btn btn-default" onclick = " location.href = 'javascript:history.back(-1);'">Volver</button>
       <%if session[:informe_id]%> 
-        <button type="button" data-toggle="modal" data-target="#myModal1" class="btn btn-default">Enviar</button>
-      <%else%> 
-        <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-default">Enviar</button>
-      <%end%> 
-      <%if session[:informe_id]%> 
         <%= link_to "Vista Previa", {controller: "informes", action: "vista_previa"}, class: "btn btn-default" %>
       <%else%> 
         <%= link_to "Vista Previa", {controller: "iniciotutor", action: "vista_previa"}, class: "btn btn-default" %>

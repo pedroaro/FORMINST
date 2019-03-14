@@ -63,6 +63,33 @@
   </div>
 </div>
 
+<div class = 'row'>
+  <div class="col-xs-12 col-md-12">
+      <ul class="nav nav-tabs">
+        <li><a href="../iniciotutor/index">Inicio</a></li>
+        <li><a href="../iniciotutor/planformacions" class='active'>Plan de Formación</a></li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Informes <span class="caret"></span></a>
+            <ul class="dropdown-menu nav" role="menu">
+              <li></li>
+
+              <%if @cpBloquear == true%>
+                <li><a href="#" style="color:gray">Crear Informe</a></li>
+              <%else%>
+              <li><a href="#" data-toggle="modal" data-target="#selectInforme">
+                Crear Informe
+              </a></li>
+              <%end%>
+
+              <li><%= link_to 'Listar Informes', :controller => 'informes', :action => 'listar_informes' %></li>
+            </ul>
+        </li>
+        <li><%= link_to 'Prórroga', :controller => 'iniciotutor', :action => 'prorroga' %></li>
+        <li><a href="../iniciotutor/logout">Cerrar Sesión</a></li>
+      </ul>
+  </div>
+</div>
+
 <div class="modal fade" id="selectInforme" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -105,8 +132,6 @@
        <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-default">Enviar</button>
        <%= link_to "Vista Previa", {controller: "iniciotutor", action: "vista_previa"}, class: "btn btn-default" %>
        <%= link_to "Generar PDF", {controller: "adecuacions", action: "generar_pdf"},target: :_blank, class: "btn btn-default" %>
-       <%= link_to "Agregar Soporte", {controller: "documents", action: "new"}, class: "btn btn-default" %>
-       <%= link_to "Ver Soporte", {controller: "documents", action: "index"}, class: "btn btn-default" %>
        <%= link_to "Versiones Anteriores", {controller: "iniciotutor", action: "ver_respaldos"}, class: "btn btn-default" %>
       <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModalEliminar">Eliminar Adecuación</button>
     </div>

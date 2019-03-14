@@ -27,33 +27,32 @@
         <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
         <h3 class="modal-title" id="myModalLabel">Iniciar Sesión</h3>
       </div>
-      <div class="modal-body">
-          <%= form_tag({controller: 'forminst', action: 'autenticar'}) do%>            
-            <input type="hidden" name="accion" class="form-control" value="<%= @accion %>">
-            <input type="hidden" name="param1" class="form-control" value="<%= @param1 %>">
-            <input type="hidden" name="param2" class="form-control" value="<%= @param2 %>">
-            <input type="hidden" name="param3" class="form-control" value="<%= @param3 %>">
-            <div class="form-group">
-              <label>
-              Usuario:</label>
-              <div class="input-group">
-              <input type="text" name="correo" class="form-control" required>
-              <div class="input-group-addon">@ciens.ucv.ve</div>
+      <%= form_tag({controller: 'forminst', action: 'autenticar'}) do%>            
+        <div class="modal-body">
+              <input type="hidden" name="accion" class="form-control" value="<%= @accion %>">
+              <input type="hidden" name="param1" class="form-control" value="<%= @param1 %>">
+              <input type="hidden" name="param2" class="form-control" value="<%= @param2 %>">
+              <input type="hidden" name="param3" class="form-control" value="<%= @param3 %>">
+              <div class="form-group">
+                <label>
+                Usuario:</label>
+                <div class="input-group">
+                <input type="text" name="correo" class="form-control" required>
+                <div class="input-group-addon">@ciens.ucv.ve</div>
+                </div>
               </div>
-            </div>
-            <div class="form-group">
-              <label>Contraseña:</label>
-                <input type="password" name="password" class="form-control" required>
-            </div>
-                <br/>  
-            <a href="#" data-toggle="modal" data-target="#ModalO"> ¿Olvidó su contraseña? </a>
-            <button type="submit" class="btn btn-forminst">Iniciar Sesión</button>
-          <%end%>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-      </div>
-          
+              <div class="form-group">
+                <label>Contraseña:</label>
+                  <input type="password" name="password" class="form-control" required>
+              </div>
+                  <br/>  
+              <a href="#" data-toggle="modal" data-target="#ModalO"> ¿Olvidó su contraseña? </a>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+          <button type="submit" class="btn login-btn">Iniciar Sesión</button>
+        </div>
+      <%end%>
     </div>
   </div>
 </div>

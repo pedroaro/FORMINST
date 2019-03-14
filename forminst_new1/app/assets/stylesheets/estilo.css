@@ -42,6 +42,13 @@ margin: 0 auto;
 width: 1150px;
 }*/
 
+.login-btn{
+	margin-bottom: 1% !important;
+	color: #333;
+    background-color: #EEEEE2;
+    border-color: #CACA97;
+}
+
 #notice {
   color: #FFFFFF;
   border:solid #000066;
