@@ -319,7 +319,7 @@ def ver_soporte
 		end
 	else
 		flash[:info]="Seleccione una adecuación"
-		redirect_to controller:"inicioentidad", action: "listar_adecuacion"
+		redirect_to controller:"inicioentidad", action: "listar_adecuaciones"
 	end
 end
 
@@ -1368,6 +1368,8 @@ end
 				@planformacion = Planformacion.find(@informe.planformacion_id)
 				@persona = Persona.where(usuario_id: @planformacion.tutor_id).take
 				@instructor = Persona.where(usuario_id: @planformacion.instructor_id).take
+				@instructorName = @instructor.nombres.to_s.split.map(&:capitalize).join(' ') + " " + @instructor.apellidos.to_s.split.map(&:capitalize).join(' ')
+				session[:instructorName] = @instructorName
 				@periodo = @informe.fecha_inicio.to_s + " al " + @informe.fecha_fin.to_s
 
 				if (@informe.numero == 1 || @informe.numero == 3)
@@ -1386,10 +1388,13 @@ end
 
 				if @informe.tipo_id == 1
 					@nombre_informe= @nombre_informe+"SEMESTRAL"
+					session[:nombre_informe] = @nombre_informe
 				elsif @informe.tipo_id == 2
 					@nombre_informe= @nombre_informe+"ANUAL"
+					session[:nombre_informe] = @nombre_informe
 				else
 					@nombre_informe= "INFORME "+"FINAL"
+					session[:nombre_informe] = @nombre_informe
 				end
 
 				@estatus= EstatusInforme.where(informe_id: @informe.id, actual: 1).take
@@ -1406,33 +1411,6 @@ end
 	    else
 	      redirect_to controller:"forminst", action: "index"
 	    end
-
-	    @bool_enviado = 0
-		if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12)
-		#Usuario comision
-			estatusI = EstatusInforme.where(informe_id: @informe.id, actual: 1).take #Estatus enviado a comision de investigacioni
-			if(estatusI.estatus_id != 3 && estatusI.estatus_id != 13)
-				@bool_enviado = 1
-			end
-		elsif (session[:entidad_id] >= 14 && session[:entidad_id] <= 17)
-		#Consejo tecnico
-			estatusI = EstatusInforme.where(informe_id: @informe.id, actual: 1).take
-			if(estatusI.estatus_id != 2 && estatusI.estatus_id != 12)
-				@bool_enviado = 1
-			end
-		elsif (session[:entidad_id] >= 1 && session[:entidad_id] <= 6)
-		#Consejo de escuela
-			estatusI = EstatusInforme.where(informe_id: @informe.id, actual: 1).take 
-			if(estatusI.estatus_id != 8 && estatusI.estatus_id != 18)
-				@bool_enviado = 1 #Estatus enviado a consejo escuela
-			end
-		elsif (session[:entidad_id] == 13)
-			#Consejo de facultad
-			estatusI = EstatusInforme.where(informe_id: @informe.id, actual: 1).take
-			if(estatusI.estatus_id != 4 && estatusI.estatus_id != 14)
-				@bool_enviado = 1
-			end
-		end	
 	end
 
 
@@ -1447,8 +1425,34 @@ end
 	    	@modificar= false
 	    	if @est.estatus_id == 6
 	    	  @modificar=true
-	    	end
-	    	@docencia= "docencia"
+			end
+			@nombre_informe = ""
+			if (@informe.numero == 1 || @informe.numero == 3)
+				@nombre_informe= "PRIMER INFORME "
+				session[:numero_informe]=1
+			elsif (@informe.numero == 2 || @informe.numero == 6)
+				@nombre_informe= "SEGUNDO INFORME "
+				session[:numero_informe]=2
+			elsif @informe.numero == 4
+				@nombre_informe= "TERCER INFORME "
+				session[:numero_informe]=4
+			elsif @informe.numero == 5
+				@nombre_informe= "CUARTO INFORME "
+				session[:numero_informe]=5
+			end
+
+			if @informe.tipo_id == 1
+				@nombre_informe= @nombre_informe+"SEMESTRAL"
+				session[:nombre_informe] = @nombre_informe
+			elsif @informe.tipo_id == 2
+				@nombre_informe= @nombre_informe+"ANUAL"
+				session[:nombre_informe] = @nombre_informe
+			else
+				@nombre_informe= "INFORME "+"FINAL"
+				session[:nombre_informe] = @nombre_informe
+			end
+
+			@docencia= "docencia"
 	    	@cp=0
 	    	@j= 0
 	    	@k=0
@@ -1785,6 +1789,29 @@ end
 				@user = Usuario.find(@plan.instructor_id)
 				@tutor = Persona.where(usuario_id: @plan.tutor_id).take
 				@periodo = @informe.fecha_inicio.to_s + " al " + @informe.fecha_fin.to_s
+				
+				@nombre_informe = ""
+				if (@informe.numero == 1 || @informe.numero == 3)
+					@nombre_informe= "PRIMER INFORME "
+					session[:numero_informe]=1
+				elsif (@informe.numero == 2 || @informe.numero == 6)
+					@nombre_informe= "SEGUNDO INFORME "
+					session[:numero_informe]=2
+				elsif @informe.numero == 4
+					@nombre_informe= "TERCER INFORME "
+					session[:numero_informe]=4
+				elsif @informe.numero == 5
+					@nombre_informe= "CUARTO INFORME "
+					session[:numero_informe]=5
+				end
+	
+				if @informe.tipo_id == 1
+					@nombre_informe= @nombre_informe+"SEMESTRAL"
+				elsif @informe.tipo_id == 2
+					@nombre_informe= @nombre_informe+"ANUAL"
+				else
+					@nombre_informe= "INFORME "+"FINAL"
+				end
 
 				@docencia='docencia'
 				@investigacion= 'investigacion'

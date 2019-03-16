@@ -214,8 +214,6 @@
         <%= link_to "Agregar Soporte", {controller: "documents", action: "new"}, class: "btn btn-default" %>
       <%end%> 
       <%= link_to "Ver Soporte", {controller: "documents", action: "index", :actividad_id => $actividad }, class: "btn btn-default active" %>
-
-
       <%if session[:informe_id]%> 
         <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModalEliminar1">Eliminar Informe</button>
       <%else %>

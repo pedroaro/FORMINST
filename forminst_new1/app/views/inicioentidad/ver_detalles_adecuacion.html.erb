@@ -114,6 +114,16 @@
 
 <div class="row">
   <div class="col-xs-12 col-md-12 col-md-offset-0">
+    <div class= "text-left">
+      <%if @nombre%>
+        <div>
+          <span><%= link_to 'Plan Formación', :controller => 'inicioentidad', :action => 'listar_adecuaciones' %></span>
+            <p style="display:inline"> / </p>
+            <span><%= link_to session[:instructorName] , :controller => 'inicioentidad', :action => 'ver_detalles_adecuacion' %></span>
+            <p style="display:inline"> /   Detalles </p>
+        </div>
+      <%end%>
+    </div>
     <div class="text-right">
       <div id = "fechamuestra">
         <h3> <%= Time.now.strftime("%d") %>

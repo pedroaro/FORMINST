@@ -117,6 +117,15 @@
 
 <div class="row">
   <div class="col-xs-12 col-md-12 col-md-offset-0">
+    <div class= "text-left">
+      <%if session[:instructorName]%>
+        <div>
+          <span><%= link_to 'Plan Formación', :controller => 'inicioentidad', :action => 'listar_adecuaciones' %></span>
+          <p style="display:inline"> / <%=session[:instructorName]%> </p>
+          <p style="display:inline"> /  <%=@nombre_informe.to_s.split.map(&:capitalize).join(' ') %> </p>
+        </div>
+      <%end%>
+    </div>
     <div class="text-right">
       <div id = "fechamuestra">
         <h3> <%= Time.now.strftime("%d") %>
@@ -166,19 +175,21 @@
 <div class = 'row'>
   <div class="col-xs-11 col-xs-offset-1 col-md-12 col-md-offset-0 text-justify">
     <h1 class="text-left">Detalles del Informe</h1>
+    <h4><b> Instructor :  <%=session[:instructorName]%></b></h4>
   </div>
 </div>
+<br>
 <div class = 'row'>
-  <div class="col-xs-11 col-xs-offset-1 col-md-12 col-md-offset-0 text-center">
-    <h5><strong><%=@nombre_informe%> DE ACTIVIDADES REALIZADAS POR EL INSTRUCTOR DURANTE LA EJECUCIÓN DE SU PLAN DE FORMACIÓN Y CAPACITACIÓN</strong></h5>
+  <div class="col-xs-11 col-xs-offset-1 col-md-12 col-md-offset-0 text-left">
+    <h5><strong><%=@nombre_informe.to_s.split.map(&:capitalize).join(' ')%> de actividades realizadas por el instructor durante la ejecución de su plan de formación y capacitación</strong></h5>
   </div>
 </div>
 <div class = 'row'>
   <div class="col-xs-11 col-xs-offset-1 col-md-12 col-md-offset-0 text-left">
-    <h5><strong>Estado del Documento: <%=@status.concepto%></strong></h5>
+    <h5>Estado del Documento: <strong><%=@status.concepto%></strong></h5>
   </div>
 </div>
-<br/>
+<br>
 <div class= "row">
   <div class="col-xs-10 col-xs-offset-1 col-md-12 col-md-offset-0">
     <div class="table-responsive">

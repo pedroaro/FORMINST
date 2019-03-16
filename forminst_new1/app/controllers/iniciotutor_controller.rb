@@ -62,7 +62,7 @@ class IniciotutorController < ApplicationController
 						@status.push("[" + @est.fecha.to_s  + "]: APROBADO POR CONSEJO DE FACULTAD")
 						@cpenviado.push(1)
 					elsif @est.estatus_id == 2
-						@status.push("[" + @est.fecha.to_s  + "]: ENVIADO A CONSEJO TECNICO")
+						@status.push("[" + @est.fecha.to_s  + "]: ENVIADO A CONSEJO TÉCNICO")
 						@cpenviado.push(1)
 					elsif @est.estatus_id == 3
 						@status.push("[" + @est.fecha.to_s  + "]: ENVIADO A COMISIÓN DE INVESTIGACIÓN")
@@ -1727,7 +1727,7 @@ class IniciotutorController < ApplicationController
 							notific3.actual = 3		#Comisión de investigación
 							notific3.mensaje = "[" + notificacionfecha + "] Se ha recibido una nueva Adecuación: "+ person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + ", favor revisar y enviar a la siguiente entidad."
 						elsif (cambio_act.estatus_id == 5)
-							notific3.actual = 5	 #Enviado a consejo de facultad
+							notific3.actual = 5	 #Enviado a Consejo de Facultad
 							notific3.mensaje = "[" + notificacionfecha + "] Se ha recibido una nueva Adecuación: "+ person.nombres.to_s.split.map(&:capitalize).join(' ') + " " + person.apellidos.to_s.split.map(&:capitalize).join(' ') + ", favor revisar."
 						end
 						notific3.save
@@ -1753,10 +1753,10 @@ class IniciotutorController < ApplicationController
 						respaldo.informe_id = nil
 						respaldo.actual = 1
 						if (cambio_act.estatus_id == 6)
-							cambio_est.estatus_id = 3 #Enviado a comision de investigacion
+							cambio_est.estatus_id = 3 #Enviado a Comisión de Investigación
 							respaldo.estatus = "Enviado a Comisión de Investigación"
 						elsif (cambio_act.estatus_id == 5)
-							cambio_est.estatus_id = 4 #Enviado a consejo de facultad
+							cambio_est.estatus_id = 4 #Enviado a Consejo de Facultad
 							respaldo.estatus = "Enviado a Consejo de Facultad"
 						end
 						respaldo.save
@@ -1803,9 +1803,9 @@ class IniciotutorController < ApplicationController
 						end
 
 						if(cambio_act.estatus_id == 5)
-							flash[:success]="La adecuación se ha enviado a consejo de facultad"
+							flash[:success]="La adecuación se ha enviado a Consejo de Facultad"
 						else
-							flash[:success]="La adecuación se ha enviado a comision de investigacion"
+							flash[:success]="La adecuación se ha enviado a Comisión de Investigación"
 						end
 
 						redirect_to controller:"iniciotutor", action: "planformacions"
@@ -2015,7 +2015,7 @@ class IniciotutorController < ApplicationController
 				
 				if (entidad.entidad_id  >= 7 && entidad.entidad_id  <= 12)
 					#comision investigacion		
-					@obs_inv = obs.observaciones  #Estatus enviado a comision de investigacion
+					@obs_inv = obs.observaciones  #Estatus enviado a Comisión de Investigación
 				elsif (entidad.entidad_id  >= 14 && entidad.entidad_id  <= 17)
 					#Consejo tecnico
 					@obs_consejoT = obs.observaciones
@@ -2023,7 +2023,7 @@ class IniciotutorController < ApplicationController
 					#Consejo de escuela
 					@obs_consejoE = obs.observaciones
 				elsif (entidad.entidad_id  == 13)
-					#Consejo de facultad
+					#Consejo de Facultad
 					@obs_consejoF =  obs.observaciones
 				end	
 
@@ -2095,7 +2095,7 @@ class IniciotutorController < ApplicationController
 			@noti= params[:noti]
     		notaeliminar = Notificacion.where(id: @noti ).take
     		if notaeliminar.blank?
-    			flash[:danger] = "Ha ocurrido un error al eliminar (notificacion no existente)"
+    			flash[:danger] = "Ha ocurrido un error al eliminar (notificación no existente)"
     		else
     			notaeliminar.destroy
     		end

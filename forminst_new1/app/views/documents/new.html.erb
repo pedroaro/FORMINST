@@ -199,10 +199,8 @@
       <button type="button" class="btn btn-default" onclick = " location.href = 'javascript:history.back(-1);'">Volver</button>
       <%if session[:informe_id]%> 
         <%= link_to "Volver al Informe", {controller: "informes", action: "detalles_informe2" }, class: "btn btn-default" %>
-        <button type="button" data-toggle="modal" data-target="#myModal1" class="btn btn-default">Enviar</button>
       <%else%> 
         <%= link_to "Volver a la Adecuación", {controller: "iniciotutor", action: "ver_detalles_adecuacion" }, class: "btn btn-default" %>
-        <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-default">Enviar</button>
       <%end%> 
       <%if session[:informe_id]%> 
         <%= link_to "Vista Previa", {controller: "informes", action: "vista_previa"}, class: "btn btn-default" %>

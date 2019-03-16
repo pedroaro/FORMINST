@@ -84,27 +84,18 @@
 <div class="row">
   <div class="col-xs-12 col-md-12">
     <div class="btn-group" role="group">
-       <button type="button" class="btn btn-default" onclick = " location.href = 'javascript:history.back(-1);'">Volver</button>
-        <%if @bool_enviado == 0 %>
-          <%if session[:entidad_id]==13 %>
-             <button type="button" data-toggle="modal" data-target="#myModal4" class="btn btn-default">Avalar/Rechazar</button>
-          <%else%>
-            <button type="button" data-toggle="modal" data-target="#myModal" class="btn btn-default">Enviar</button>
-          <%end%>
-
-        <%else%>
-            <%if session[:entidad_id]==13 %>
-                <button type="button" data-toggle="modal" data-target="#myModal2" class="btn btn-default">Avalar/Rechazar</button>
-            <%else%>
-                <button type="button" data-toggle="modal" data-target="#myModal2" class="btn btn-default">Enviar</button>
-            <%end%>
-       
-        <%end%>
-      <%= link_to "Vista Previa", {controller: "iniciotutor", action: "vista_previa"}, class: "btn btn-default" %>
-      <%= link_to "Generar PDF", {controller: "adecuacions", action: "descargar_pdf"}, class: "btn btn-default" %>
-      <button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">
-        Eliminar Informe
-      </button>
+      <button type="button" class="btn btn-default" onclick = " location.href = 'javascript:history.back(-1);'">Volver</button>  
+      <%if session[:informe_id]%> 
+        <%= link_to "Vista Previa", {controller: "inicioentidad", action: "vista_previa1"}, class: "btn btn-default" %>
+      <%else%> 
+        <%= link_to "Vista Previa", {controller: "inicioentidad", action: "vista_previa"}, class: "btn btn-default" %>
+      <%end%> 
+      <%if session[:informe_id]%> 
+        <%= link_to "Generar PDF", {controller: "informes", action: "generar_pdf"},target: :_blank, class: "btn btn-default" %>
+      <%else%> 
+        <%= link_to "Generar PDF", {controller: "adecuacions", action: "generar_pdf"},target: :_blank, class: "btn btn-default" %>
+      <%end%> 
+      <%= link_to "Versiones Anteriores", {controller: "inicioentidad", action: "ver_respaldos"}, class: "btn btn-default" %>
     </div>
   </div>
 </div>
@@ -123,6 +114,23 @@
 
 <div class="row">
   <div class="col-xs-12 col-md-12 col-md-offset-0">
+    <div class= "text-left">
+      <%if session[:instructorName]%>
+        <div>
+          <%if !session[:informe_id]%> 
+            <span><%= link_to 'Plan Formación', :controller => 'inicioentidad', :action => 'listar_adecuaciones' %></span>
+            <p style="display:inline"> / </p>
+            <span><%= link_to session[:instructorName] , :controller => 'inicioentidad', :action => 'ver_detalles_adecuacion' %></span>
+            <p style="display:inline"> / Más Observaciones </p>
+          <%else%> 
+            <span><%= link_to 'Plan Formación', :controller => 'inicioentidad', :action => 'listar_adecuaciones' %></span>
+            <p style="display:inline"> / <%=session[:instructorName]%> / </p>
+            <span><%= link_to session[:nombre_informe].to_s.split.map(&:capitalize).join(' ') , :controller => 'inicioentidad', :action => 'ver_detalles_informe' %></span>
+            <p style="display:inline"> / Más Observaciones </p>
+          <%end%> 
+        </div>
+      <%end%>
+    </div>
     <div class="text-right">
       <div id = "fechamuestra">
         <h3> <%= Time.now.strftime("%d") %>
