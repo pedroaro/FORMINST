@@ -261,7 +261,7 @@ def ver_soporte
 			$actividad = params[:actividad_id].to_i
 			adec = Adecuacion.where(planformacion_id: session[:plan_id]).take
 			session[:adecuacion_id] = adec.id
-			@documents = Document.where(adecuacion_id: session[:adecuacion_id], informe_id: session[:informe_id], actividad_id: $actividad).all
+			@documents = Document.where("informe_id <= ? AND adecuacion_id = ? AND actividad_id = ?",session[:informe_id] , session[:adecuacion_id],  $actividad).all
 			@bool_enviado = 0
 			if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12)
 			#Usuario comision

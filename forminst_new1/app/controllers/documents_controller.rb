@@ -38,7 +38,7 @@ class DocumentsController < ApplicationController
           $actividad = params[:actividad_id].to_i
           @documents = []
           if !session[:informe_id].blank?
-            @documents = Document.where(adecuacion_id: session[:adecuacion_id], informe_id: session[:informe_id], actividad_id: $actividad).all
+            @documents = Document.where("informe_id <= ? AND adecuacion_id = ? AND actividad_id = ?",session[:informe_id].to_i , session[:adecuacion_id],  $actividad).all
           else
             @documents = Document.where(adecuacion_id: session[:adecuacion_id], informe_id: nil).all
           end
@@ -95,25 +95,25 @@ class DocumentsController < ApplicationController
   def create
     if session[:usuario_id] && session[:tutor]
 	    if params[:document].present?
-			@document = Document.new(document_params)
-			@planformacion = Planformacion.find(session[:plan_id])
-			@adecuacion = Adecuacion.where(planformacion_id: session[:plan_id]).take
-			@document.instructor_id = @planformacion.instructor_id
-			@document.tutor_id = session[:usuario_id]
-			@document.adecuacion_id = @adecuacion.id
-			@document.informe_id = session[:informe_id]
-      @document.actividad_id = $actividad
-			if @document.save
-			flash[:success]="El documento se ha subido con exito"
-			redirect_to controller:"documents", action: "index", :actividad_id => $actividad
-			else
-			flash[:danger]="Error: Recuerde que el documento debe ser un pdf que ocupe menos de 1MB"
-			redirect_to controller:"documents", action: "new"
-			end
-		else
-		flash[:info]="Debe seleccionar un archivo antes de cargar"
-		redirect_to controller:"documents", action: "new"
-		end
+        @document = Document.new(document_params)
+        @planformacion = Planformacion.find(session[:plan_id])
+        @adecuacion = Adecuacion.where(planformacion_id: session[:plan_id]).take
+        @document.instructor_id = @planformacion.instructor_id
+        @document.tutor_id = session[:usuario_id]
+        @document.adecuacion_id = @adecuacion.id
+        @document.informe_id = session[:informe_id]
+        @document.actividad_id = $actividad
+        if @document.save
+          flash[:success]="El documento se ha subido con exito"
+          redirect_to controller:"documents", action: "index", :actividad_id => $actividad
+        else
+          flash[:danger]="Error: Recuerde que el documento debe ser un pdf que ocupe menos de 1MB"
+          redirect_to controller:"documents", action: "new"
+        end
+      else
+        flash[:info]="Debe seleccionar un archivo antes de cargar"
+        redirect_to controller:"documents", action: "new"
+      end
     else
       redirect_to controller:"forminst", action: "index"
     end

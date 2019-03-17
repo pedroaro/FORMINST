@@ -380,7 +380,11 @@
                       <textarea class="form-control" rows="3" name='investigacion<%= actdoc.id.to_s %>' id ='<%= actdoc.id %>' disabled><%= actdoc.actividad %></textarea>
                     </td>
                     <td>
-                      <textarea class="form-control" rows="3" name='ejecutada<%= actdoc.id.to_s%>' ><%= @actividadese[@j].descripcion %></textarea>
+                      <% if @bool_enviado == 0 %>
+                       <textarea class="form-control" rows="3" name='ejecutada<%= actdoc.id.to_s%>' ><%= @actividadese[@j].descripcion %></textarea>
+                      <% else %>
+                        <textarea class="form-control" rows="3" name='ejecutada<%= actdoc.id.to_s%>' disabled ><%= @actividadese[@j].descripcion %></textarea>
+                      <% end %>
                     </td>
                     <td>
                       <% if @bool_enviado == 0 %>

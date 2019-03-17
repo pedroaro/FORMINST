@@ -294,9 +294,7 @@
         <tr>
           <th class="text-center">Nombre del Archivo</th>
           <th class="text-center">Mostrar</th>
-          <% if @bool_enviado == 0 %>
-            <th class="text-center">Borrar</th>
-          <% end %>
+          <th class="text-center">Borrar</th>
         </tr>
       </thead>
       <tbody>
@@ -308,8 +306,10 @@
             	<input type="submit" class="btn btn-info" value="Mostrar">
             	</form>
             </td>
-            <% if @bool_enviado == 0 %>
+            <% if (@bool_enviado == 0 && document.informe_id.to_s == session[:informe_id].to_s) %>
               <td class = "text-center"><%= button_to 'Borrar', document, method: :delete, data: { confirm: '¿Estás seguro?' }, class: "btn btn-danger" %></td>
+            <% else %>
+              <td class = "text-center" ><button class="btn btn-danger" disabled>Borrar</button></td>
             <% end %>
           </tr>
         <% end %>

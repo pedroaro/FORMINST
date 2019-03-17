@@ -112,6 +112,8 @@ class InformesController < ApplicationController
                 @actividadesaotr.push(@act)
                 if(@actinf.blank?)
                   @actividadesaotrejec.push([])
+                else
+                  @actividadesaotrejec.push(@actinf)
                 end
               end
             end
@@ -156,6 +158,8 @@ class InformesController < ApplicationController
                 @actividadesaotr.push(@act)
                 if(@actinf.blank?)
                   @actividadesaotrejec.push([])
+                else
+                  @actividadesaotrejec.push(@actinf)
                 end
               end
             end
@@ -200,7 +204,11 @@ class InformesController < ApplicationController
                 @actividadesaforejec.push(@actinf)
               elsif tipo==5
                 @actividadesaotr.push(@act)
-                @actividadesaotrejec.push(@actinf)
+                if(@actinf.blank?)
+                  @actividadesaotrejec.push([])
+                else
+                  @actividadesaotrejec.push(@actinf)
+                end
               elsif tipo==7
                 @actividadesaobli.push(@act)
               end
