@@ -77,10 +77,9 @@
       adec = Adecuacion.where(planformacion_id: session[:plan_id]).take
       #si se desea saber el respaldo de los informes
       if !session[:informe_id].blank?
-        @documents = Respaldo.where(adecuacion_id: adec.id, informe_id: session[:informe_id]).all
-      #si se desea saber el respaldo de las adecuaciones
+        @documents = Respaldo.where(adecuacion_id: adec.id, informe_id: session[:informe_id], actual: 0).all
       else
-        @documents = Respaldo.where(adecuacion_id: adec.id, informe_id: nil).all
+        @documents = Respaldo.where(adecuacion_id: adec.id, informe_id: nil, actual: 0).all
       end
     #si intenta ingresar mediante el link
     else

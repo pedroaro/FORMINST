@@ -2643,7 +2643,7 @@ def generar_pdf() # es función permite generar el documento pdf de la adecuaci�
 
 
       flash[:success]="Su informe fue editado exitosamente"
-      redirect_to controller:"informes", action: "listar_informes"
+      redirect_to controller:"informes", action: "ver_detalles_informe"
 
   end
 
@@ -2781,6 +2781,7 @@ def generar_pdf() # es función permite generar el documento pdf de la adecuaci�
 
           respaldos = []
           respaldos = Respaldo.where(adecuacion_id: session[:adecuacion_id], informe_id: @informe_id).all
+          Respaldo.where(adecuacion_id: session[:adecuacion_id], informe_id: @informe_id).update_all(actual: 0)
           numeroDeVersion = respaldos.size + 1
           nombre = generar_pdf()
           nameofthefile = "#{Rails.root}/tmp/PDFs/" + nombre 
@@ -2800,9 +2801,11 @@ def generar_pdf() # es función permite generar el documento pdf de la adecuaci�
           respaldo.actual = 1
           if (cambio_act.estatus_id == 6)
             cambio_est.estatus_id = 3 #Enviado a comision de investigacion
+            flash[:success]="El informe se ha enviado a Comision de Investigación"
             respaldo.estatus = "Enviado a Comisión de Investigación"
           elsif (cambio_act.estatus_id == 5)
             cambio_est.estatus_id = 4 #Enviado a consejo de facultad
+            flash[:success]="El informe se ha envíado a Consejo de Facultad"
             respaldo.estatus = "Enviado a Consejo de Facultad"
           end
           respaldo.save
@@ -2893,7 +2896,6 @@ def generar_pdf() # es función permite generar el documento pdf de la adecuaci�
             ActionCorreo.envio_informe("consejofacultadcienciasucv@gmail.com", notific3.mensaje,0, linkE,@document).deliver
           end
           
-          flash[:success]="El informe se ha envíado a comision de investigacion"
         else
             flash[:warning]="Debe enviar los informes en orden"
         end

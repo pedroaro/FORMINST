@@ -2050,9 +2050,9 @@ class IniciotutorController < ApplicationController
 				end
 				@documents = []
 				if !session[:informe_id].blank?
-					@documents = Respaldo.where(adecuacion_id: session[:adecuacion_id], informe_id: session[:informe_id]).all
+					@documents = Respaldo.where(adecuacion_id: session[:adecuacion_id], informe_id: session[:informe_id], actual: 0).all
 				else
-					@documents = Respaldo.where(adecuacion_id: session[:adecuacion_id], informe_id: nil).all
+					@documents = Respaldo.where(adecuacion_id: session[:adecuacion_id], informe_id: nil, actual: 0).all
 				end
 			else
 				flash[:info]="Seleccione una adecuación"
