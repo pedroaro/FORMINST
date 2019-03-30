@@ -18,29 +18,29 @@
       <div id = "fechamuestra">
         <h3> <%= Time.now.strftime("%d") %>
               <% if Time.now.strftime("%m").to_i == 1 %>
-                de Enero del
+                de enero del
               <% elsif Time.now.strftime("%m").to_i == 2 %>
-                de Febrero del
+                de febrero del
               <% elsif Time.now.strftime("%m").to_i == 3 %>
-                de Marzo del
+                de marzo del
               <% elsif Time.now.strftime("%m").to_i == 4 %>
-                de Abril del
+                de abril del
               <% elsif Time.now.strftime("%m").to_i == 5 %>
-                de Mayo del
+                de mayo del
               <% elsif Time.now.strftime("%m").to_i == 6 %>
-                de Junio del
+                de junio del
               <% elsif Time.now.strftime("%m").to_i == 7 %>
-                de Julio del
+                de julio del
               <% elsif Time.now.strftime("%m").to_i == 8 %>
-                de Agosto del
+                de agosto del
               <% elsif Time.now.strftime("%m").to_i == 9 %>
-                de Septiembre del
+                de septiembre del
               <% elsif Time.now.strftime("%m").to_i == 10 %>
-                de Octubre del
+                de octubre del
               <% elsif Time.now.strftime("%m").to_i == 11 %>
-                de Noviembre del
+                de noviembre del
               <% elsif Time.now.strftime("%m").to_i == 12 %>
-                de Diciembre del
+                de diciembre del
               <% end %>
               <%= Time.now.strftime("%Y") %> 
             </h3>

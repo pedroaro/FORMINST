@@ -32,6 +32,6 @@ function fecha(){
 	if (diaS<10)
 	diaS="0"+diaS
 	var diassemana=new Array("Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sabado")
-	var meses=new Array("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre")
+	var meses=new Array("enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre")
 	$('#fechamuestra').append("<h4>"+diassemana[dia]+", "+diaS+" de "+meses[mes]+" de "+ano+"</h4>")
 }

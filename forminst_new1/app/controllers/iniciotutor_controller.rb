@@ -177,6 +177,12 @@ class IniciotutorController < ApplicationController
 					@escuela= Escuela.where(id: @userentidad.escuela_id).take
 				end
 				@instructor= Persona.where(usuario_id: @plan.instructor_id).take
+				@bool_enviado = 0
+				estatus_adecuacion = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
+
+				if (estatus_adecuacion.estatus_id != 6 && estatus_adecuacion.estatus_id != 5 && estatus_adecuacion.estatus_id != 9)
+					@bool_enviado = 1
+				end
 			else
 				flash[:info]="Seleccione una adecuación"
 				redirect_to controller:"iniciotutor", action: "planformacions"
@@ -190,8 +196,8 @@ class IniciotutorController < ApplicationController
 
 		if session[:usuario_id] && session[:tutor]
 			#Guardar primera parte del informe
-			if !params[:firtsPart].blank?
 
+			if !params[:firtsPart].blank?
 				#Presentacion
 				if params[:presentacionId].blank?
 					cpActividad = Actividad.new
@@ -1039,50 +1045,46 @@ class IniciotutorController < ApplicationController
 				end
 
 				if @cant_edit.to_i > 0
-					if params[:primera_parte] != "si"
-						j=0
+					j=0
+					@modifique= true
+					i=:edit.to_s+j.to_s
+					@edit= params[i].to_s
+
+					while j < @cant_edit.to_i
 						@modifique= true
 						i=:edit.to_s+j.to_s
-						@edit= params[i].to_s
+						@edit= params[i]
+						@act= Actividad.find(@edit)
+						tipo= @act.tipo_actividad_id
 
-						while j < @cant_edit.to_i
-							@modifique= true
-							i=:edit.to_s+j.to_s
-							@edit= params[i]
-							@act= Actividad.find(@edit)
-							tipo= @act.tipo_actividad_id
-
-							if tipo==1
-								m=:docencia.to_s+@edit.to_s
-								text= params[m]
-							elsif tipo==2
-								m=:investigacion.to_s+@edit.to_s
-								text= params[m]
-							elsif tipo==3
-								m=:extension.to_s+@edit.to_s
-								text= params[m]
-							elsif tipo==4
-								m=:formacion.to_s+@edit.to_s
-								text= params[m]
-							elsif tipo==5
-								m=:otra.to_s+@edit.to_s
-								text= params[m]
-							elsif tipo==7
-								m=:obligatoria.to_s+@edit.to_s
-								text= params[m]
-							end
-							@act.actividad= text
-							@adecuacion.fecha_modificacion = Time.now
-							@plan.fecha_modificacion = Time.now
-							@plan.save
-							@adecuacion.save
-							@act.save
-							j= j+1
-							i=:edit.to_s+j.to_s
-							@edit= params[i].to_i
+						if tipo==1
+							m=:docencia.to_s+@edit.to_s
+							text= params[m]
+						elsif tipo==2
+							m=:investigacion.to_s+@edit.to_s
+							text= params[m]
+						elsif tipo==3
+							m=:extension.to_s+@edit.to_s
+							text= params[m]
+						elsif tipo==4
+							m=:formacion.to_s+@edit.to_s
+							text= params[m]
+						elsif tipo==5
+							m=:otra.to_s+@edit.to_s
+							text= params[m]
+						elsif tipo==7
+							m=:obligatoria.to_s+@edit.to_s
+							text= params[m]
 						end
-					else
-						guardar_primera_parte()
+						@act.actividad= text
+						@adecuacion.fecha_modificacion = Time.now
+						@plan.fecha_modificacion = Time.now
+						@plan.save
+						@adecuacion.save
+						@act.save
+						j= j+1
+						i=:edit.to_s+j.to_s
+						@edit= params[i].to_i
 					end
 				end
 
@@ -1349,7 +1351,13 @@ class IniciotutorController < ApplicationController
 				@user = Usuario.find(@plan.instructor_id)
 				@cpTutor= Persona.where(usuario_id: @plan.tutor_id).take
 				@cpTutorEmail= Usuario.find(@plan.tutor_id).email
+				
+				@bool_enviado = 0
+				estatus_adecuacion = EstatusAdecuacion.where(adecuacion_id: @adecuacion.id, actual: 1).take
 
+				if (estatus_adecuacion.estatus_id != 6 && estatus_adecuacion.estatus_id != 5 && estatus_adecuacion.estatus_id != 9)
+					@bool_enviado = 1
+				end
 				@docencia='docencia'
 				@investigacion= 'investigacion'
 				@formacion= 'formacion'
