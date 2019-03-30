@@ -137,14 +137,14 @@
           </tr>
           <tr>
             <td class="text-left"><%= @periodo%></td>
-            <td class="text-left"><%= @persona.nombres.to_s.split.map(&:capitalize).join(' ') + " " + @persona.apellidos.to_s.split.map(&:capitalize).join(' ')%></td>
+            <td class="text-left"><%= @tutor.nombres.to_s.split.map(&:capitalize).join(' ') + " " + @persona.apellidos.to_s.split.map(&:capitalize).join(' ')%></td>
           </tr>
            <tr>
             <td style='width:50%;' class="text-left"><strong>Cédula de Identidad del Tutor:</strong></td>
             <td style='width:50%;' class="text-left"><strong>Escuela o Instituto de Adscripción:</strong></td>
           </tr>
           <tr>
-            <td class="text-left"><%= @persona.ci%></td>
+            <td class="text-left"><%= @tutor.ci%></td>
             <td class="text-left"><%= @escuela.nombre%></td>
           </tr>
         </tbody>

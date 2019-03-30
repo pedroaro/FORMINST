@@ -1825,6 +1825,9 @@ end
       @semestre = params[:semestre].to_i
       @actividad_id = params[:actividad_id].to_i
       
+      puts @adecuacion.id
+      puts @semestre
+      puts @actividad_id
       aa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: @semestre, actividad_id: @actividad_id).take
       
       @observaciones = ObservacionActividadAdecuacion.where(adecuacionactividad_id: aa.id)

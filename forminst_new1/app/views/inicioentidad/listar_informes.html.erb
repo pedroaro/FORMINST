@@ -88,11 +88,11 @@
           <tr>
             <th class="text-center">Tipo de Informe</th>
             <th class="text-center">Número de Informe</th>
-            <th class="text-center">Fecha de Creación</th>
+            <th class="text-center">Última Modificación</th>
             <th class="text-center">Instructor de Formación</th>
             <th class="text-center">Estado</th>
-            <th class="text-center">Ultima Modificación</th>
-            <th></th>
+            <th class="text-center">Fecha de Cambio de Estado</th>
+            <th class="text-center">Detalles</th>
           </tr>
         </thead>
 
@@ -101,10 +101,10 @@
             <tr>
               <td class = "text-center"><%=@tipos[i]%></td>
               <td class = "text-center"><%= informe.numero %></td>
-              <td class = "text-center"><%= informe.fecha_creacion %></td>
-              <td class = "text-center"><%= @nombre_instructor[i] %></td>
-               <td class="text-center"><%= @status[i]%></td>
               <td class = "text-center"><%= informe.fecha_modificacion %></td>
+              <td class = "text-center"><%= @nombre_instructor[i] %></td>
+              <td class="text-center"><%= @status[i]%></td>
+              <td class="text-center"><%= @fecha_status[i] %></td>
               <td class = "text-center">
               <%= form_tag({controller: 'inicioentidad', action: 'ver_detalles_informe'}) do%>
                 <input type="hidden" name="informe_id" value='<%= informe.id %>'>

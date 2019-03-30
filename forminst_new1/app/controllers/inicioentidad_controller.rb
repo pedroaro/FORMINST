@@ -148,6 +148,7 @@ class InicioentidadController < ApplicationController
 				@entidad_departamento= @usu.departamento_id
 				@adecuaciones = []
 				@status = []
+				@fecha_status = []
 				@nombre_tutor = []
 				@nombre_instructor = []
 			if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12)
@@ -205,6 +206,7 @@ class InicioentidadController < ApplicationController
 					instructor_aux= Persona.where(usuario_id: @pf.instructor_id)
 					@nombre_tutor.push(tutor_aux.take.nombres.split.map(&:capitalize).join(' ') + " " + tutor_aux.take.apellidos.split.map(&:capitalize).join(' '))
 					@nombre_instructor.push(instructor_aux.take.nombres.split.map(&:capitalize).join(' ') + " " + instructor_aux.take.apellidos.split.map(&:capitalize).join(' '))
+					@fecha_status.push(si.fecha)
 					@status.push(@st)
 				else
 					#Para que salgan las adecuaciones correspondientes a la escuela y al departamento
@@ -240,6 +242,7 @@ class InicioentidadController < ApplicationController
 						instructor_aux= Persona.where(usuario_id: @pf.instructor_id)
 						@nombre_tutor.push(tutor_aux.take.nombres.split.map(&:capitalize).join(' ') + " " + tutor_aux.take.apellidos.split.map(&:capitalize).join(' '))
 						@nombre_instructor.push(instructor_aux.take.nombres.split.map(&:capitalize).join(' ') + " " + instructor_aux.take.apellidos.split.map(&:capitalize).join(' '))
+						@fecha_status.push(si.fecha)
 						@status.push(@st)
 					end
 				end
@@ -683,9 +686,13 @@ end
 				        end
 
 				        @cpObs= ObservacionActividadAdecuacion.where(adecuacionactividad_id: actade.id).where.not(revision_id: @revision.id).all
-					    if @cpObs.blank?
+						
+						if @cpObs.blank?
 					    	@observacionesExtras[@act.id]="no"
-					    else
+						else
+							puts @act.actividad
+							puts @act.id
+							puts "aaaaaaaaaaaaaaaaaaaaaaaaa"
 					    	@observacionesExtras[@act.id]="si"
 					    end
 					else 
@@ -1236,6 +1243,7 @@ end
 			@informes = []
 			@tipos= []
 			@status = []
+			@fecha_status = []
 			@nombre_tutor = []
 			@nombre_instructor = []
 			if (session[:entidad_id] >= 7 && session[:entidad_id] <= 12)
@@ -1298,6 +1306,7 @@ end
 					instructor_aux= Persona.where(usuario_id: @pf.instructor_id)
 					@nombre_tutor.push(tutor_aux.take.nombres.split.map(&:capitalize).join(' ') + " " + tutor_aux.take.apellidos.split.map(&:capitalize).join(' '))
 					@nombre_instructor.push(instructor_aux.take.nombres.split.map(&:capitalize).join(' ') + " " + instructor_aux.take.apellidos.split.map(&:capitalize).join(' '))
+					@fecha_status.push(si.fecha)
 					@status.push(@st)
 				else
 					@tutor_escuela = Usuarioentidad.where(usuario_id: @inf.tutor_id).take
@@ -1340,6 +1349,7 @@ end
 						instructor_aux= Persona.where(usuario_id: @pf.instructor_id)
 						@nombre_tutor.push(tutor_aux.take.nombres.split.map(&:capitalize).join(' ') + " " + tutor_aux.take.apellidos.split.map(&:capitalize).join(' '))
 						@nombre_instructor.push(instructor_aux.take.nombres.split.map(&:capitalize).join(' ') + " " + instructor_aux.take.apellidos.split.map(&:capitalize).join(' '))
+						@fecha_status.push(si.fecha)
 						@status.push(@st)
 					end
 				end
@@ -2278,16 +2288,18 @@ end
 		        	observacion =:observacion.to_s+@act.to_s
 		        	
 		          		oa = ObservacionActividadInforme.where(informe_actividad_id: ia, revision_id: revision.id).take
-		          		if(oa == nil || oa =="")
-				          	oa = ObservacionActividadInforme.new
-				          	oa.informe_actividad_id = ia.id
-				          	oa.revision_id =  revision.id
-				          	oa.observaciones = params[observacion]
-				          	oa.save
-				        else
-				       		oa.observaciones = params[observacion]
-				       		oa.save
-				       	end
+						if(!params[observacion].blank?)
+							if(oa == nil || oa =="")
+								oa = ObservacionActividadInforme.new
+								oa.informe_actividad_id = ia.id
+								oa.revision_id =  revision.id
+								oa.observaciones = params[observacion]
+								oa.save
+							else
+								oa.observaciones = params[observacion]
+								oa.save
+							end
+						end
 		        	  j= j+1
 			        i=:doc.to_s+j.to_s
 			        @act= params[i].to_i
@@ -2304,17 +2316,18 @@ end
 					observacion =:observacion.to_s+@act.to_s				
 	        
 	          		oa = ObservacionActividadInforme.where(informe_actividad_id: ia, revision_id: revision.id).take
-		   	       	if(oa == nil || oa =="")
-			          	oa = ObservacionActividadInforme.new
-			          	oa.informe_actividad_id = ia.id
-			          	oa.revision_id =  revision.id
-			          	oa.observaciones = params[observacion]
-			          	oa.save
-			       	else
-			       		 oa.observaciones = params[observacion]
-			       		 oa.save
-			       	end
-		        
+					if(!params[observacion].blank?)	  
+						if(oa == nil || oa =="")
+							oa = ObservacionActividadInforme.new
+							oa.informe_actividad_id = ia.id
+							oa.revision_id =  revision.id
+							oa.observaciones = params[observacion]
+							oa.save
+						else
+							oa.observaciones = params[observacion]
+							oa.save
+						end
+					end
 
 
 			        j=j+1
@@ -2332,21 +2345,21 @@ end
 
 		      
 		          	oa = ObservacionActividadInforme.where(informe_actividad_id: ia, revision_id: revision.id).take
-
-		          	if(oa == nil || oa== "")
-		          		oa = ObservacionActividadInforme.new
-		          		oa.informe_actividad_id = ia.id
-		          		oa.revision_id =  revision.id
-		          		oa.observaciones = params[observacion]
-		          		oa.save
-		          		
-		       		else
-			       		
-			       		oa.observaciones = params[observacion]
-			       		oa.save
-			       		
-			       	end
-			  
+					if(!params[observacion].blank?)
+		          		if(oa == nil || oa== "")
+							oa = ObservacionActividadInforme.new
+							oa.informe_actividad_id = ia.id
+							oa.revision_id =  revision.id
+							oa.observaciones = params[observacion]
+							oa.save
+							
+						else
+							
+							oa.observaciones = params[observacion]
+							oa.save
+							
+						end
+					end
 		        	j= j+1
 		        	i=:for.to_s+j.to_s
 		        	@act= params[i].to_i
@@ -2362,16 +2375,18 @@ end
 			        ia = InformeActividad.where(informe_id: @informe.id, resultado_id:  @id_resultado).take     
 
 		          	oa = ObservacionActividadInforme.where(informe_actividad_id: ia.id, revision_id: revision.id).take
-		          	if(oa == nil || oa =="")
-			          	oa = ObservacionActividadInforme.new
-			          	oa.informe_actividad_id = ia.id
-			          	oa.revision_id =  revision.id
-			          	oa.observaciones = params[:observacionPost].to_s
-			          	oa.save	
-			       	else
-			       		oa.observaciones = params[:observacionPost].to_s
-			       		oa.save
-			       	end
+					if(!params[:observacionPost].blank?) 
+						if(oa == nil || oa =="")
+							oa = ObservacionActividadInforme.new
+							oa.informe_actividad_id = ia.id
+							oa.revision_id =  revision.id
+							oa.observaciones = params[:observacionPost].to_s
+							oa.save	
+						else
+							oa.observaciones = params[:observacionPost].to_s
+							oa.save
+						end
+					end
 			    end
 	        
 		    #Comienzan actividades de extensión
@@ -2384,17 +2399,18 @@ end
 		        	observacion =:observacion.to_s+@act.to_s
 		        	
 		          		oa = ObservacionActividadInforme.where(informe_actividad_id: ia, revision_id: revision.id).take
-			          	if(oa == nil || oa =="")
-			          		oa = ObservacionActividadInforme.new
-			          		oa.informe_actividad_id = ia.id
-			          		oa.revision_id =  revision.id
-			          		oa.observaciones = params[observacion]
-			          		oa.save
-			       		else
-				       		oa.observaciones = params[observacion]
-				       		oa.save
-				       	end
-		        	
+						if(!params[observacion].blank?)  
+							if(oa == nil || oa =="")
+								oa = ObservacionActividadInforme.new
+								oa.informe_actividad_id = ia.id
+								oa.revision_id =  revision.id
+								oa.observaciones = params[observacion]
+								oa.save
+							else
+								oa.observaciones = params[observacion]
+								oa.save
+							end
+						end
 			        j= j+1
 			        i=:ext.to_s+j.to_s
 			        @act= params[i].to_i
@@ -2409,16 +2425,18 @@ end
 		        	observacion =:observacion.to_s+@act.to_s
 		        	
 		          		oa = ObservacionActividadInforme.where(informe_actividad_id: ia, revision_id: revision.id).take
-		          		if(oa == nil || oa =="")
-				          	oa = ObservacionActividadInforme.new
-				          	oa.informe_actividad_id = ia.id
-				          	oa.revision_id =  revision.id
-				          	oa.observaciones = params[observacion]
-				          	oa.save
-				        else
-				       		oa.observaciones = params[observacion]
-				       		oa.save
-				       	end
+						if(!params[observacion].blank?)
+							if(oa == nil || oa =="")
+								oa = ObservacionActividadInforme.new
+								oa.informe_actividad_id = ia.id
+								oa.revision_id =  revision.id
+								oa.observaciones = params[observacion]
+								oa.save
+							else
+								oa.observaciones = params[observacion]
+								oa.save
+							end
+						end
 		        	j= j+1
 			        i=:obli.to_s+j.to_s
 			        @act= params[i].to_i
@@ -2435,17 +2453,18 @@ end
 		        	observacion =:observacion.to_s+@act.to_s
 		        
 		          		oa = ObservacionActividadInforme.where(informe_actividad_id: ia, revision_id: revision.id).take
-			          	if(oa == nil || oa =="")
-			          		oa = ObservacionActividadInforme.new
-			          		oa.informe_actividad_id = ia.id
-			          		oa.revision_id =  revision.id
-			          		oa.observaciones = params[observacion]
-			          		oa.save
-			       		else
-				       		oa.observaciones = params[observacion]
-				       		oa.save
-				       	end
-		        	
+						if(!params[observacion].blank?)
+							if(oa == nil || oa =="")
+								oa = ObservacionActividadInforme.new
+								oa.informe_actividad_id = ia.id
+								oa.revision_id =  revision.id
+								oa.observaciones = params[observacion]
+								oa.save
+							else
+								oa.observaciones = params[observacion]
+								oa.save
+							end
+						end
 			        j= j+1
 			        i=:otr.to_s+j.to_s
 			        @act= params[i].to_i
@@ -2457,16 +2476,18 @@ end
 		       	if @id_resultado !=0 && @id_resultado != nil
 			        ia = InformeActividad.where(informe_id: @informe.id, resultado_id:  @id_resultado).take
 		          	oa = ObservacionActividadInforme.where(informe_actividad_id: ia.id, revision_id: revision.id).take
-		          	if(oa == nil || oa =="")
-			          	oa = ObservacionActividadInforme.new
-			          	oa.informe_actividad_id = ia.id
-			          	oa.revision_id =  revision.id
-			          	oa.observaciones = params[:observacionNoCon].to_s
-			          	oa.save	
-			       	else
-			       		oa.observaciones = params[:observacionNoCon].to_s
-			       		oa.save
-			       	end
+					if(!params[:observacionNoCon].blank?)  
+						if(oa == nil || oa =="")
+							oa = ObservacionActividadInforme.new
+							oa.informe_actividad_id = ia.id
+							oa.revision_id =  revision.id
+							oa.observaciones = params[:observacionNoCon].to_s
+							oa.save	
+						else
+							oa.observaciones = params[:observacionNoCon].to_s
+							oa.save
+						end
+					end
 			    end
 
 	      	flash[:success]="Se han creado y/o modificado las observaciones satisfactoriamente"
@@ -2690,97 +2711,109 @@ end
 				#presentacion
 				aa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 0, actividad_id: params[:presentacionId]).take
 					oa= ObservacionActividadAdecuacion.where(adecuacionactividad_id: aa.id, revision_id: revision.id).take
-
-				if(oa == nil || oa =="")
-					oa = ObservacionActividadAdecuacion.new
-					oa.adecuacionactividad_id = aa.id
-					oa.revision_id =  revision.id
-					oa.observaciones = params[:obsPresentacion]
-					oa.actual = 1
-					oa.save
-				else
-					oa.observaciones = params[:obsPresentacion]
-					oa.save
+				
+				if(!params[:obsPresentacion].blank?)
+					if(oa == nil || oa =="")
+						oa = ObservacionActividadAdecuacion.new
+						oa.adecuacionactividad_id = aa.id
+						oa.revision_id =  revision.id
+						oa.observaciones = params[:obsPresentacion]
+						oa.actual = 1
+						oa.save
+					else
+						oa.observaciones = params[:obsPresentacion]
+						oa.save
+					end
 				end
 
 				#Descripcion
 				aa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 0, actividad_id: params[:descripcionId]).take
 					oa= ObservacionActividadAdecuacion.where(adecuacionactividad_id: aa, revision_id: revision.id).take
 
-				if(oa == nil || oa =="")
-					oa = ObservacionActividadAdecuacion.new
-					oa.adecuacionactividad_id = aa.id
-					oa.revision_id =  revision.id
-					oa.observaciones = params[:obsDescripcion]
-					oa.actual = 1
-					oa.save
-				else
-					oa.observaciones = params[:obsDescripcion]
-					oa.save
+				if(!params[:obsDescripcion].blank?)
+					if(oa == nil || oa =="")
+						oa = ObservacionActividadAdecuacion.new
+						oa.adecuacionactividad_id = aa.id
+						oa.revision_id =  revision.id
+						oa.observaciones = params[:obsDescripcion]
+						oa.actual = 1
+						oa.save
+					else
+						oa.observaciones = params[:obsDescripcion]
+						oa.save
+					end
 				end
 
 				#Docencia
 				aa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 0, actividad_id: params[:docenciaId]).take
 					oa= ObservacionActividadAdecuacion.where(adecuacionactividad_id: aa, revision_id: revision.id).take
-
-				if(oa == nil || oa =="")
-					oa = ObservacionActividadAdecuacion.new
-					oa.adecuacionactividad_id = aa.id
-					oa.revision_id =  revision.id
-					oa.observaciones = params[:obsDocencia]
-					oa.actual = 1
-					oa.save
-				else
-					oa.observaciones = params[:obsDocencia]
-					oa.save
+				
+				if(!params[:obsDocencia].blank?)
+					if(oa == nil || oa =="")
+						oa = ObservacionActividadAdecuacion.new
+						oa.adecuacionactividad_id = aa.id
+						oa.revision_id =  revision.id
+						oa.observaciones = params[:obsDocencia]
+						oa.actual = 1
+						oa.save
+					else
+						oa.observaciones = params[:obsDocencia]
+						oa.save
+					end
 				end
 
 				#Investigacion
 				aa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 0, actividad_id: params[:investigacionId]).take
 					oa= ObservacionActividadAdecuacion.where(adecuacionactividad_id: aa, revision_id: revision.id).take
 
-				if(oa == nil || oa =="")
-					oa = ObservacionActividadAdecuacion.new
-					oa.adecuacionactividad_id = aa.id
-					oa.revision_id =  revision.id
-					oa.observaciones = params[:obsInvestigacion]
-					oa.actual = 1
-					oa.save
-				else
-					oa.observaciones = params[:obsInvestigacion]
-					oa.save
+				if(!params[:obsInvestigacion].blank?)
+					if(oa == nil || oa =="")
+						oa = ObservacionActividadAdecuacion.new
+						oa.adecuacionactividad_id = aa.id
+						oa.revision_id =  revision.id
+						oa.observaciones = params[:obsInvestigacion]
+						oa.actual = 1
+						oa.save
+					else
+						oa.observaciones = params[:obsInvestigacion]
+						oa.save
+					end
 				end
 
 				#Formacion
 				aa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 0, actividad_id: params[:formacionId]).take
 					oa= ObservacionActividadAdecuacion.where(adecuacionactividad_id: aa, revision_id: revision.id).take
 
-				if(oa == nil || oa =="")
-					oa = ObservacionActividadAdecuacion.new
-					oa.adecuacionactividad_id = aa.id
-					oa.revision_id =  revision.id
-					oa.observaciones = params[:obsFormacion]
-					oa.actual = 1
-					oa.save
-				else
-					oa.observaciones = params[:obsFormacion]
-					oa.save
+				if(!params[:obsFormacion].blank?)
+					if(oa == nil || oa =="")
+						oa = ObservacionActividadAdecuacion.new
+						oa.adecuacionactividad_id = aa.id
+						oa.revision_id =  revision.id
+						oa.observaciones = params[:obsFormacion]
+						oa.actual = 1
+						oa.save
+					else
+						oa.observaciones = params[:obsFormacion]
+						oa.save
+					end
 				end
 
 				#Extension
 				aa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 0, actividad_id: params[:extensionId]).take
 					oa= ObservacionActividadAdecuacion.where(adecuacionactividad_id: aa, revision_id: revision.id).take
 
-				if(oa == nil || oa =="")
-					oa = ObservacionActividadAdecuacion.new
-					oa.adecuacionactividad_id = aa.id
-					oa.revision_id =  revision.id
-					oa.observaciones = params[:obsExtension]
-					oa.actual = 1
-					oa.save
-				else
-					oa.observaciones = params[:obsExtension]
-					oa.save
+				if(!params[:obsExtension].blank?)
+					if(oa == nil || oa =="")
+						oa = ObservacionActividadAdecuacion.new
+						oa.adecuacionactividad_id = aa.id
+						oa.revision_id =  revision.id
+						oa.observaciones = params[:obsExtension]
+						oa.actual = 1
+						oa.save
+					else
+						oa.observaciones = params[:obsExtension]
+						oa.save
+					end
 				end
 
 			
@@ -2835,33 +2868,35 @@ end
 					#presentacion
 					aa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 0, actividad_id: params[:presentacionId]).take
 						oa= ObservacionActividadAdecuacion.where(adecuacionactividad_id: aa.id, revision_id: revision.id).take
-
-					if(oa == nil || oa =="")
-						oa = ObservacionActividadAdecuacion.new
-						oa.adecuacionactividad_id = aa.id
-						oa.revision_id =  revision.id
-						oa.observaciones = params[:obsPresentacion]
-						oa.actual = 1
-						oa.save
-					else
-						oa.observaciones = params[:obsPresentacion]
-						oa.save
+					if(!params[:obsPresentacion].blank?)
+						if(oa == nil || oa =="")
+							oa = ObservacionActividadAdecuacion.new
+							oa.adecuacionactividad_id = aa.id
+							oa.revision_id =  revision.id
+							oa.observaciones = params[:obsPresentacion]
+							oa.actual = 1
+							oa.save
+						else
+							oa.observaciones = params[:obsPresentacion]
+							oa.save
+						end
 					end
 
 					#Descripcion
 					aa= AdecuacionActividad.where(adecuacion_id: @adecuacion.id, semestre: 0, actividad_id: params[:descripcionId]).take
 						oa= ObservacionActividadAdecuacion.where(adecuacionactividad_id: aa, revision_id: revision.id).take
-
-					if(oa == nil || oa =="")
-						oa = ObservacionActividadAdecuacion.new
-						oa.adecuacionactividad_id = aa.id
-						oa.revision_id =  revision.id
-						oa.observaciones = params[:obsDescripcion]
-						oa.actual = 1
-						oa.save
-					else
-						oa.observaciones = params[:obsDescripcion]
-						oa.save
+					if(!params[:obsDescripcion].blank?)
+						if(oa == nil || oa =="")
+							oa = ObservacionActividadAdecuacion.new
+							oa.adecuacionactividad_id = aa.id
+							oa.revision_id =  revision.id
+							oa.observaciones = params[:obsDescripcion]
+							oa.actual = 1
+							oa.save
+						else
+							oa.observaciones = params[:obsDescripcion]
+							oa.save
+						end
 					end
 				end
 
@@ -2876,17 +2911,18 @@ end
 						observacion =:observacion.to_s+@act.to_s
 					
 							oa= ObservacionActividadAdecuacion.where(adecuacionactividad_id: aa, revision_id: revision.id).take
-
-							if(oa == nil || oa =="")
-								oa = ObservacionActividadAdecuacion.new
-								oa.adecuacionactividad_id = aa.id
-								oa.revision_id =  revision.id
-								oa.observaciones = params[observacion]
-								oa.actual = 1
-								oa.save
-							else
-								oa.observaciones = params[observacion]
-								oa.save
+							if(!params[observacion].blank?)
+								if(oa == nil || oa =="")
+									oa = ObservacionActividadAdecuacion.new
+									oa.adecuacionactividad_id = aa.id
+									oa.revision_id =  revision.id
+									oa.observaciones = params[observacion]
+									oa.actual = 1
+									oa.save
+								else
+									oa.observaciones = params[observacion]
+									oa.save
+								end
 							end
 						j= j+1
 						i=:doc.to_s+j.to_s
@@ -2906,17 +2942,18 @@ end
 						observacion =:observacion.to_s+@act.to_s
 					
 							oa= ObservacionActividadAdecuacion.where(adecuacionactividad_id: aa, revision_id: revision.id).take
-
-							if(oa == nil || oa =="")
-								oa = ObservacionActividadAdecuacion.new
-								oa.adecuacionactividad_id = aa.id
-								oa.revision_id =  revision.id
-								oa.observaciones = params[observacion]
-								oa.actual = 1
-								oa.save
-							else
-								oa.observaciones = params[observacion]
-								oa.save
+							if(!params[observacion].blank?)
+								if(oa == nil || oa =="")
+									oa = ObservacionActividadAdecuacion.new
+									oa.adecuacionactividad_id = aa.id
+									oa.revision_id =  revision.id
+									oa.observaciones = params[observacion]
+									oa.actual = 1
+									oa.save
+								else
+									oa.observaciones = params[observacion]
+									oa.save
+								end
 							end
 						j=j+1
 						i=:inv.to_s+j.to_s
@@ -2933,17 +2970,18 @@ end
 						observacion =:observacion.to_s+@act.to_s
 					
 							oa= ObservacionActividadAdecuacion.where(adecuacionactividad_id: aa, revision_id: revision.id).take
-
-							if(oa == nil || oa =="")
-								oa = ObservacionActividadAdecuacion.new
-								oa.adecuacionactividad_id = aa.id
-								oa.revision_id =  revision.id
-								oa.observaciones = params[observacion]
-								oa.actual = 1
-								oa.save
-							else
-								oa.observaciones = params[observacion]
-								oa.save
+							if(!params[observacion].blank?)
+								if(oa == nil || oa =="")
+									oa = ObservacionActividadAdecuacion.new
+									oa.adecuacionactividad_id = aa.id
+									oa.revision_id =  revision.id
+									oa.observaciones = params[observacion]
+									oa.actual = 1
+									oa.save
+								else
+									oa.observaciones = params[observacion]
+									oa.save
+								end
 							end
 				
 						j= j+1
@@ -2964,17 +3002,18 @@ end
 						observacion =:observacion.to_s+@act.to_s
 
 							oa= ObservacionActividadAdecuacion.where(adecuacionactividad_id: aa, revision_id: revision.id).take
-
-							if(oa == nil || oa =="")
-								oa = ObservacionActividadAdecuacion.new
-								oa.adecuacionactividad_id = aa.id
-								oa.revision_id =  revision.id
-								oa.observaciones = params[observacion]
-								oa.actual = 1
-								oa.save
-							else
-								oa.observaciones = params[observacion]
-								oa.save
+							if(!params[observacion].blank?)
+								if(oa == nil || oa =="")
+									oa = ObservacionActividadAdecuacion.new
+									oa.adecuacionactividad_id = aa.id
+									oa.revision_id =  revision.id
+									oa.observaciones = params[observacion]
+									oa.actual = 1
+									oa.save
+								else
+									oa.observaciones = params[observacion]
+									oa.save
+								end
 							end
 						
 						j= j+1
@@ -2995,19 +3034,19 @@ end
 						observacion =:observacion.to_s+@act.to_s
 					
 							oa= ObservacionActividadAdecuacion.where(adecuacionactividad_id: aa, revision_id: revision.id).take
-
-							if(oa == nil || oa =="")
-								oa = ObservacionActividadAdecuacion.new
-								oa.adecuacionactividad_id = aa.id
-								oa.revision_id =  revision.id
-								oa.observaciones = params[observacion]
-								oa.actual = 1
-								oa.save
-							else
-								oa.observaciones = params[observacion]
-								oa.save
+							if(!params[observacion].blank?)
+								if(oa == nil || oa =="")
+									oa = ObservacionActividadAdecuacion.new
+									oa.adecuacionactividad_id = aa.id
+									oa.revision_id =  revision.id
+									oa.observaciones = params[observacion]
+									oa.actual = 1
+									oa.save
+								else
+									oa.observaciones = params[observacion]
+									oa.save
+								end
 							end
-						
 						j= j+1
 						i=:otr.to_s+j.to_s
 						@act= params[i].to_i

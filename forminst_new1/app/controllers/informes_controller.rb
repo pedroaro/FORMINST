@@ -1213,7 +1213,7 @@ end
           ae.save
 
           observacion =:observacion.to_s+@act.to_s
-          if params[observacion]!=nil && params[observacion]!=""
+          if params[observacion]!=nil && params[observacion]!="" && !params[observacion].blank?
             oa = ObservacionTutor.new
             oa.observaciones = params[observacion]
             oa.fecha = Time.now
@@ -1247,7 +1247,7 @@ end
           ae.save
 
           observacion =:observacion.to_s+@act.to_s
-          if params[observacion]!=nil && params[observacion]!=""
+          if params[observacion]!=nil && params[observacion]!="" && !params[observacion].blank?
             oa = ObservacionTutor.new
             oa.observaciones = params[observacion]
             oa.fecha = Time.now
@@ -1559,7 +1559,7 @@ end
           ae.save
 
           observacion =:observacion.to_s+@act.to_s
-          if params[observacion]!=nil && params[observacion]!=""
+          if params[observacion]!=nil && params[observacion]!="" && !params[observacion].blank?
             oa = ObservacionTutor.new
             oa.observaciones = params[observacion]
             oa.fecha = Time.now
@@ -1603,7 +1603,7 @@ end
           ae.save
 
           observacion =:observacion.to_s+@act.to_s
-          if params[observacion]!=nil && params[observacion]!=""
+          if params[observacion]!=nil && params[observacion]!="" && !params[observacion].blank?
             oa = ObservacionTutor.new
             oa.observaciones = params[observacion]
             oa.fecha = Time.now
@@ -1636,7 +1636,7 @@ end
           ae.save
 
           observacion =:observacion.to_s+@act.to_s
-          if params[observacion]!=nil && params[observacion]!=""
+          if params[observacion]!=nil && params[observacion]!="" && !params[observacion].blank?
             oa = ObservacionTutor.new
             oa.observaciones = params[observacion]
             oa.fecha = Time.now
@@ -2153,6 +2153,7 @@ def generar_pdf() # es funci√≥n permite generar el documento pdf de la adecuaci√
         observacion =:observacion.to_s+@act.to_s
       
           oa = ObservacionTutor.where(informe_actividad_id: ia.id).take
+          if !params[observacion].blank?
             if(oa == nil || oa =="")
               oa = ObservacionTutor.new
               oa.observaciones = params[observacion]
@@ -2163,7 +2164,7 @@ def generar_pdf() # es funci√≥n permite generar el documento pdf de la adecuaci√
                oa.observaciones = params[observacion]
                   oa.save
             end
-     
+          end
         
         j= j+1
         i=:doc.to_s+j.to_s
@@ -2189,6 +2190,7 @@ def generar_pdf() # es funci√≥n permite generar el documento pdf de la adecuaci√
          observacion =:observacion.to_s+@act.to_s
        
           oa = ObservacionTutor.where(informe_actividad_id: ia.id).take
+          if !params[observacion].blank?
             if(oa == nil || oa =="")
               oa = ObservacionTutor.new
               oa.observaciones = params[observacion]
@@ -2199,7 +2201,7 @@ def generar_pdf() # es funci√≥n permite generar el documento pdf de la adecuaci√
                oa.observaciones = params[observacion]
                   oa.save
             end
-
+          end
           ia.save
      
         
@@ -2509,6 +2511,7 @@ def generar_pdf() # es funci√≥n permite generar el documento pdf de la adecuaci√
          observacion =:observacion.to_s+@act.to_s
       
           oa = ObservacionTutor.where(informe_actividad_id: ia.id).take
+          if !params[observacion].blank?
             if(oa == nil || oa =="")
               oa = ObservacionTutor.new
               oa.observaciones = params[observacion]
@@ -2519,7 +2522,7 @@ def generar_pdf() # es funci√≥n permite generar el documento pdf de la adecuaci√
                oa.observaciones = params[observacion]
                   oa.save
             end
-     
+          end
         
         
         j= j+1
@@ -2562,6 +2565,7 @@ def generar_pdf() # es funci√≥n permite generar el documento pdf de la adecuaci√
         observacion =:observacion.to_s+@act.to_s
     
           oa = ObservacionTutor.where(informe_actividad_id: ia.id).take
+          if !params[observacion].blank?  
             if(oa == nil || oa =="")
               oa = ObservacionTutor.new
               oa.observaciones = params[observacion]
@@ -2572,7 +2576,7 @@ def generar_pdf() # es funci√≥n permite generar el documento pdf de la adecuaci√
                oa.observaciones = params[observacion]
                   oa.save
             end
-     
+          end
         
         
         j= j+1
@@ -2597,6 +2601,7 @@ def generar_pdf() # es funci√≥n permite generar el documento pdf de la adecuaci√
          observacion =:observacion.to_s+@act.to_s
       
           oa = ObservacionTutor.where(informe_actividad_id: ia.id).take
+          if !params[observacion].blank?
             if(oa == nil || oa =="")
               oa = ObservacionTutor.new
               oa.observaciones = params[observacion]
@@ -2607,7 +2612,7 @@ def generar_pdf() # es funci√≥n permite generar el documento pdf de la adecuaci√
                oa.observaciones = params[observacion]
                   oa.save
             end
-     
+          end
         
         
         j= j+1
