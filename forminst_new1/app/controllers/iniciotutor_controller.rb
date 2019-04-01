@@ -1005,6 +1005,7 @@ class IniciotutorController < ApplicationController
 				@actividadesaotr= []
 				j=0
 				if params[:primera_parte] == "si"
+					puts "HELLOOOOOOOOOOOOOOOOOOOOOOO"
 					#Presentacion
 					if params[:presentacionId].blank?
 						puts "hello"
@@ -1043,45 +1044,46 @@ class IniciotutorController < ApplicationController
 						end
 					end
 				end
-
 				if @cant_edit.to_i > 0
 					j=0
 					@modifique= true
 					i=:edit.to_s+j.to_s
 					@edit= params[i].to_s
-
+					puts "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
 					while j < @cant_edit.to_i
 						@modifique= true
 						i=:edit.to_s+j.to_s
 						@edit= params[i]
-						@act= Actividad.find(@edit)
-						tipo= @act.tipo_actividad_id
+						if @edit != "presentacion" && @edit != "descripcion"
+							@act= Actividad.find(@edit)
+							tipo= @act.tipo_actividad_id
 
-						if tipo==1
-							m=:docencia.to_s+@edit.to_s
-							text= params[m]
-						elsif tipo==2
-							m=:investigacion.to_s+@edit.to_s
-							text= params[m]
-						elsif tipo==3
-							m=:extension.to_s+@edit.to_s
-							text= params[m]
-						elsif tipo==4
-							m=:formacion.to_s+@edit.to_s
-							text= params[m]
-						elsif tipo==5
-							m=:otra.to_s+@edit.to_s
-							text= params[m]
-						elsif tipo==7
-							m=:obligatoria.to_s+@edit.to_s
-							text= params[m]
+							if tipo==1
+								m=:docencia.to_s+@edit.to_s
+								text= params[m]
+							elsif tipo==2
+								m=:investigacion.to_s+@edit.to_s
+								text= params[m]
+							elsif tipo==3
+								m=:extension.to_s+@edit.to_s
+								text= params[m]
+							elsif tipo==4
+								m=:formacion.to_s+@edit.to_s
+								text= params[m]
+							elsif tipo==5
+								m=:otra.to_s+@edit.to_s
+								text= params[m]
+							elsif tipo==7
+								m=:obligatoria.to_s+@edit.to_s
+								text= params[m]
+							end
+							@act.actividad= text
+							@adecuacion.fecha_modificacion = Time.now
+							@plan.fecha_modificacion = Time.now
+							@plan.save
+							@adecuacion.save
+							@act.save
 						end
-						@act.actividad= text
-						@adecuacion.fecha_modificacion = Time.now
-						@plan.fecha_modificacion = Time.now
-						@plan.save
-						@adecuacion.save
-						@act.save
 						j= j+1
 						i=:edit.to_s+j.to_s
 						@edit= params[i].to_i
