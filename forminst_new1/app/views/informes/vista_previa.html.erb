@@ -189,7 +189,7 @@
 <br>
 
 
-<p class="text-center"><b>INFORME <%= @TipoSemestre.tipo.upcase %> DE ACTIVIDADES REALIZADAS POR EL INSTRUCTOR DURANTE LA EJECUCIÓN DE SU PLAN DE FORMACIÓN Y CAPACITACIÓN</b></p>
+<p class="text-center"><b><%= @nombre_informe %> DE ACTIVIDADES REALIZADAS POR EL INSTRUCTOR DURANTE LA EJECUCIÓN DE SU PLAN DE FORMACIÓN Y CAPACITACIÓN</b></p>
 <br>
 
 <div class= "row">
@@ -200,7 +200,7 @@
         <tbody>
           <tr>
             <td style="width:25%;" class="text-left"><b>N° del informe</b></td>
-            <td class="text-left"><%= @informe.numero %></td>
+            <td class="text-left"><%= @nombre_informe.capitalize %></td>
           </tr>
           <tr>
             <td class="text-left"><b>Fecha de realización del informe:</b></td>

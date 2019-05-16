@@ -1475,10 +1475,29 @@ class Pdf
 				pdf.text "Av. Los Ilustres, Ciudad Universitaria de Caracas, Facultad de Ciencias, \n Edificio del Decanato, Planta Baja, Los Chaguaramos, Caracas-Venezuela\n Teléfono/Fax: 58-212-605.11.65 / 605.11.63 / E-mail: consejofacultadcienciasucv@gmail.com",  :size=>7 , :align=>:center
 			end.draw
 		end
+
+		nombre_informe = ""
+		if (informe.numero == 1 || informe.numero == 3)
+			nombre_informe= "PRIMER INFORME "
+		elsif (informe.numero == 2 || informe.numero == 6)
+			nombre_informe= "SEGUNDO INFORME "
+		elsif informe.numero == 4
+			nombre_informe= "TERCER INFORME "
+		elsif informe.numero == 5
+			nombre_informe= "CUARTO INFORME "
+		end
+
+		if informe.tipo_id == 1
+			nombre_informe= nombre_informe+"SEMESTRAL"
+		elsif informe.tipo_id == 2
+			nombre_informe= nombre_informe+"ANUAL"
+		else
+			nombre_informe= "INFORME "+"FINAL"
+		end
 		
 		#titulo del documento
 		ati = tipo_informe.tipo.upcase
-		pdf.text("INFORME #{ati} DE ACTIVIDADES REALIZADAS POR EL INSTRUCTOR DURANTE LA EJECUCIÓN DE SU PLAN DE FORMACIÓN Y CAPACITACIÓN\n\n", :align=>:center, :style => :bold) # titulo del documento
+		pdf.text("#{nombre_informe} DE ACTIVIDADES REALIZADAS POR EL INSTRUCTOR DURANTE LA EJECUCIÓN DE SU PLAN DE FORMACIÓN Y CAPACITACIÓN\n\n", :align=>:center, :style => :bold) # titulo del documento
 		
 		################
 		pdf.bounding_box([0,pdf.bounds.top], :width=>350, :height=>675) do # permite establecer el espacio en donde se puede escribir en el docuemnto
@@ -1489,7 +1508,7 @@ class Pdf
 			blanco=' '
 			data1 = [
 			#[{:text=>"N° del informe", :font_style => :bold}, {:text => informe.numero_informe.to_s, :align=>:left}],
-			[{:text=>"N° del informe", :font_style => :bold}, {:text => informe.numero.to_s, :align=>:left}],
+			[{:text=>"N° del informe", :font_style => :bold}, {:text => nombre_informe.capitalize, :align=>:left}],
 			#[{:text=>"Fecha de realización del informe:", :font_style => :bold}, {:text => informe.fecha_informe.to_s, :align=>:left}],
 			[{:text=>"Fecha de realización del informe:", :font_style => :bold}, {:text => informe.fecha_creacion.to_s, :align=>:left}],
 			#[{:text=>"Apellidos y Nombres del Instructor:", :font_style => :bold},{:text => instructor.apellidos+blanco+instructor.nombres, :align=>:left}],

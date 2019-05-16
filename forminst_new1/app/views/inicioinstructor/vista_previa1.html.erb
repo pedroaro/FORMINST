@@ -81,7 +81,7 @@
 <br>
 
 
-<p class="text-center"><b>INFORME <%= @TipoSemestre.tipo.upcase %> DE ACTIVIDADES REALIZADAS POR EL INSTRUCTOR DURANTE LA EJECUCIÓN DE SU PLAN DE FORMACIÓN Y CAPACITACIÓN</b></p>
+<p class="text-center"><b><%= @nombre_informe %> DE ACTIVIDADES REALIZADAS POR EL INSTRUCTOR DURANTE LA EJECUCIÓN DE SU PLAN DE FORMACIÓN Y CAPACITACIÓN</b></p>
 <br>
 
 <div class= "row">
@@ -92,7 +92,7 @@
         <tbody>
           <tr>
             <td style="width:25%;" class="text-left"><b>N° del informe</b></td>
-            <td class="text-left"><%= @informe.numero %></td>
+            <td class="text-left"><%= @nombre_informe.capitalize %></td>
           </tr>
           <tr>
             <td class="text-left"><b>Fecha de realización del informe:</b></td>
@@ -100,7 +100,7 @@
           </tr>
           <tr>
             <td class="text-left"><b>Apellidos y Nombres del Instructor:</b></td>
-            <td class="text-left"> <%=  @persona.apellidos%> <%= @persona.nombres %></td>
+            <td class="text-left"> <%=  @persona.nombres.to_s.split.map(&:capitalize).join(' ')%> <%= @persona.apellidos.to_s.split.map(&:capitalize).join(' ') %></td>
           </tr>
           <tr>
             <td class="text-left"><b>Cédula de Identidad del Instructor:</b></td>
@@ -111,7 +111,7 @@
             <td class="text-left"><%= @periodo %></td>
           </tr>          <tr>
             <td class="text-left"><b>Apellidos y Nombre del Tutor:</b></td>
-            <td class="text-left"> <%=  @tutor.apellidos%> <%= @tutor.nombres %></td>
+            <td class="text-left"> <%=  @tutor.nombres%> <%= @tutor.apellidos %></td>
           </tr>
           <tr>
             <td class="text-left"><b>Cédula de Identidad del Tutor:</b></td>

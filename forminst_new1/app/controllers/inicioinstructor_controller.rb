@@ -158,6 +158,25 @@ def vista_previa1
     @tutor = Persona.where(usuario_id: @plan.tutor_id).take
     @periodo = @informe.fecha_inicio.to_s + " al " + @informe.fecha_fin.to_s
 
+    @nombre_informe = ""
+    if (@informe.numero == 1 || @informe.numero == 3)
+      @nombre_informe= "PRIMER INFORME "
+    elsif (@informe.numero == 2 || @informe.numero == 6)
+      @nombre_informe= "SEGUNDO INFORME "
+    elsif @informe.numero == 4
+      @nombre_informe= "TERCER INFORME "
+    elsif @informe.numero == 5
+      @nombre_informe= "CUARTO INFORME "
+    end
+
+    if @informe.tipo_id == 1
+      @nombre_informe= @nombre_informe+"SEMESTRAL"
+    elsif @informe.tipo_id == 2
+      @nombre_informe= @nombre_informe+"ANUAL"
+    else
+      @nombre_informe= "INFORME "+"FINAL"
+    end
+
     @docencia='docencia'
     @investigacion= 'investigacion'
     @obligatoria= 'obligatoria'
@@ -584,8 +603,8 @@ end
 
 	      @nombre = session[:nombre_usuario]
 	      @planformacion = Planformacion.where(instructor_id: session[:usuario_id]).take
-	      @informes = Informe.where(planformacion_id: @planformacion)
-          @status = []
+        @informes = Informe.where(planformacion_id: @planformacion).order(fecha_modificacion: :desc)
+        @status = []
 	      session[:informe_id] = nil
 	      @tipos= []
 	      @informes.each do |inf|

@@ -1354,11 +1354,6 @@ end
 					end
 				end
 			end	
-			@status.reverse!
-			@tipos.reverse!
-			@informes.reverse!
-			@nombre_tutor.reverse!
-			@nombre_instructor.reverse!
 	    else
       		redirect_to controller:"forminst", action: "index"
     	end

@@ -525,20 +525,37 @@ def vista_previa
       @TipoSemestre=TipoInforme.where(id: @informe.tipo_id).take
       @fechaActual = Date.current.to_s
       @plan= Planformacion.find(session[:plan_id])
-      
+      @nombre_informe = ""
+      if (@informe.numero == 1 || @informe.numero == 3)
+        @nombre_informe= "PRIMER INFORME "
+      elsif (@informe.numero == 2 || @informe.numero == 6)
+        @nombre_informe= "SEGUNDO INFORME "
+      elsif @informe.numero == 4
+        @nombre_informe= "TERCER INFORME "
+      elsif @informe.numero == 5
+        @nombre_informe= "CUARTO INFORME "
+      end
 
-        if !@plan.blank?
-          #Ver si el informe fue rachazado
-          cpInstructor = Usuario.find(@plan.instructor_id)
-          if (cpInstructor.activo == 0)
-            @cpBloquear = true
-          else
-            @cpBloquear = false
-          end
-          #fin
+      if @informe.tipo_id == 1
+        @nombre_informe= @nombre_informe+"SEMESTRAL"
+      elsif @informe.tipo_id == 2
+        @nombre_informe= @nombre_informe+"ANUAL"
+      else
+        @nombre_informe= "INFORME "+"FINAL"
+      end
+
+      if !@plan.blank?
+        #Ver si el informe fue rachazado
+        cpInstructor = Usuario.find(@plan.instructor_id)
+        if (cpInstructor.activo == 0)
+          @cpBloquear = true
+        else
+          @cpBloquear = false
         end
-        
-        @fechaConcurso = @plan.fecha_inicio
+        #fin
+      end
+      
+      @fechaConcurso = @plan.fecha_inicio
       @usere= Usuarioentidad.where(usuario_id: @plan.instructor_id).take
       @escuela= Escuela.find(@usere.escuela_id)
       @adecuacion= Adecuacion.where(planformacion_id: @plan.id).take
