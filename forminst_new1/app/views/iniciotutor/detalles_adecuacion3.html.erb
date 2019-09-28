@@ -12,7 +12,7 @@
       </center>
       </div>
       <div class="modal-footer">
-        <%= link_to "Aceptar", {controller: "iniciotutor", action: "cambiar_estatusA", :adecuacion_id => @adecuacion.id }, class: "btn btn-default" %>
+        <%= link_to "Aceptar", {controller: "iniciotutor", action: "cambiar_estatusA", :adecuacion_id => @adecuacion.id }, class: "btn btn-default", id: 'boton_enviar' %>
       
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
       </div>

@@ -13,7 +13,7 @@
       </center>
       </div>
       <div class="modal-footer">
-        <%= link_to "Aceptar", {controller: "iniciotutor", action: "cambiar_estatusA", :adecuacion_id => @adecuacion.id }, class: "btn btn-default" %>
+        <%= link_to "Aceptar", {controller: "iniciotutor", action: "cambiar_estatusA", :adecuacion_id => @adecuacion.id }, class: "btn btn-default", id: 'boton_enviar' %>
       
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
       </div>
@@ -304,10 +304,12 @@
                       </td>
                   <%end%>
                   <td>
-                    <% if @observacionesExtras[@presentacionId] == "si" %>
-                      <center><%= link_to "Ver observaciones ", {:controller => "iniciotutor", :action => "mas_observaciones3", :actividad_id => @presentacionId, :semestre => 0, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-warning" %></center>
-                    <% else %>
-                      <center><%= link_to "Ver observaciones ", {:controller => "iniciotutor", :action => "mas_observaciones3", :actividad_id => @presentacionId, :semestre => 0, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-default" %></center>
+                    <% if @presentacionId.present? %>
+                      <% if @observacionesExtras[@presentacionId] == "si" %>
+                        <center><%= link_to "Ver observaciones ", {:controller => "iniciotutor", :action => "mas_observaciones3", :actividad_id => @presentacionId, :semestre => 0, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-warning" %></center>
+                      <% else %>
+                        <center><%= link_to "Ver observaciones ", {:controller => "iniciotutor", :action => "mas_observaciones3", :actividad_id => @presentacionId, :semestre => 0, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-default" %></center>
+                      <% end %>
                     <% end %>
                   </td>
   	            </tr>
@@ -332,10 +334,12 @@
                       </td>
                   <%end%>
                   <td>
-                    <% if @observacionesExtras[@descripcionId] == "si" %>
-                      <center><%= link_to "Ver observaciones ", {:controller => "iniciotutor", :action => "mas_observaciones3", :actividad_id => @descripcionId, :semestre => 0, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-warning" %></center>
-                    <% else %>
-                      <center><%= link_to "Ver observaciones ", {:controller => "iniciotutor", :action => "mas_observaciones3", :actividad_id => @descripcionId, :semestre => 0, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-default" %></center>
+                    <% if @descripcionId.present? %>
+                      <% if @observacionesExtras[@descripcionId] == "si" %>
+                        <center><%= link_to "Ver observaciones ", {:controller => "iniciotutor", :action => "mas_observaciones3", :actividad_id => @descripcionId, :semestre => 0, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-warning" %></center>
+                      <% else %>
+                        <center><%= link_to "Ver observaciones ", {:controller => "iniciotutor", :action => "mas_observaciones3", :actividad_id => @descripcionId, :semestre => 0, :adecuacion_id => @adecuacion.id }, class: "pad add btn btn-default" %></center>
+                      <% end %>
                     <% end %>
                   </td>
   	            </tr>

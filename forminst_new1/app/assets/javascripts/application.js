@@ -35,3 +35,10 @@ function fecha(){
 	var meses=new Array("enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre")
 	$('#fechamuestra').append("<h4>"+diassemana[dia]+", "+diaS+" de "+meses[mes]+" de "+ano+"</h4>")
 }
+
+
+$('#boton_enviar').click(function(e) {
+	$(this).prop('disabled', true);
+	$(this).addClass('disabled');
+    //do other stuff when a click happens
+});

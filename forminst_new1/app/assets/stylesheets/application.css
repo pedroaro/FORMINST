@@ -15,3 +15,9 @@
  *= require_self
  *= require bootstrap-datepicker
  */
+
+ #boton_enviar.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+    cursor: default;
+  }

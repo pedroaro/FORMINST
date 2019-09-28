@@ -12,7 +12,7 @@
         <h5>Está seguro que desea enviar el informe?.</h5>
       </div>
       <div class="modal-footer">
-        <%= link_to "Aceptar", {controller: "inicioentidad", action: "cambiar_estatusI", :informe_id => @informe_id }, class: "btn btn-default" %>
+        <%= link_to "Aceptar", {controller: "inicioentidad", action: "cambiar_estatusI", :informe_id => @informe_id }, class: "btn btn-default", id: 'boton_enviar' %>
       
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
       </div>
