@@ -29,7 +29,7 @@ gem 'paperclip', '~> 5.0.0'
 gem 'prawn', '0.8.4'
 gem 'prawn-layout'
 
-gem 'carrierwave', '~> 0.9'
+gem 'carrierwave', '~> 2.1'
 gem 'bootstrap-sass', '~> 2.3.2'
 
 gem 'pry-rails', :group => :development
